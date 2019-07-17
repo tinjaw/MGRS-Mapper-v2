@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Material Starter Kit</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- import Material Icons from Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- import the Material stylesheet -->
+    <link rel="stylesheet" href="bundle.css" />
+    <link rel="icon" href="data:," />
+  </head>
+  <body class="mdc-typography">
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell">
+          <h1>Hello, Material Starter Kit!</h1>
+          <p>A starter kit to get you up and running with Material Components for the Web. <a href="https://glitch.com/~material-starter-kit">Remix and start theming.</a></p>
+          <br />
+          <button class="mdc-button mdc-button--raised">
+            Hello World!!!
+          </button>
+        </div>
+        <div class="mdc-layout-grid__cell">
+          <div class="mdc-select demo-width-class">
+            <input type="hidden" name="enhanced-select" />
+            <i class="mdc-select__dropdown-icon"></i>
+            <div class="mdc-select__selected-text"></div>
+            <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
+              <ul class="mdc-list">
+                <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true"></li>
+                <li class="mdc-list-item liOne" data-value="grains">
+                  Bread, Cereal, Rice, and Pasta
+                </li>
+                <li class="mdc-list-item" data-value="vegetables">
+                  <figure>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAArCAYAAADPGFBSAAAA0klEQVRoQ+3asREBQRSH8e8K0MAVIBMhkUpRgNyRC+V6QAEKoAsksgukN2NGpgGzczNHoIJ333bw3/f2/fZuNgM6QJ/2rTIDBsClfdlZNuG74wl5L34DvJ8Vt+Mh1fobfrrd0Z8X4Rugul/Zz4aGb9reytv2sY+9Z96BJ3X1Dc9p77R32ofdAamTOqmTOp33Z0ZY5OpgUid1Uid1Uid1Uhd3B3Re53Ve53Ve5+Mq5yetzuv8j/OjxZr0Iiv6ej1KzptVilm0/h1ennYhesX/5Dt9ACMwJdxbjScMAAAAAElFTkSuQmCC" />
+                  </figure>
+                  Vegetables
+                </li>
+                <li class="mdc-list-item" data-value="fruit">
+                  <figure>
+                    <img
+                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAD8AAAArCAYAAADPGFBSAAAFAklEQVRoQ+Waf0zUZRzH3wcmoHfgzWCcc3UmKSoIQbqzH3pYCadAOFkCa3XSUtbcOIertZaBrR8sti76AyEibAZUrpE/imwhOads8ksUUosgQyAiRRAFJl37PHXX3cFx973v93t3HM922+173+/n+bye9/N8Pp/nua8EgAxALGZfuywB8DCAc7OPHbtM8MueSMSiSO+dAIPdXbh04muMDg0adf4fPuntYsRm7HTJBBjouIwzJe/hWus5+M2XYen6eDzyYg7uCZgneP/jt0fw/Tsvo+FQEaQhCjya9Qpq8rKpH9fDdzfXo3TrOgYZqFiMod5u9n35k0lILz0iKHxXfR2q9+4AqR6d+jwS9ulxvesXlCSvcQ98cWIsei82YVthBVZteQZ3R++gSBOFG1d/xe4ffsK9S8N5D4C12sn5pXhQrWF2e1ob3AN/Z/A68qMXQhERg13HGk2Qt2/8BX9ZEHzmzOENPpXa/oELTHbdBt/b1oziLTFYEb8V24u/4g1qbmA6tc3vcxs8rT39Y0tw/9rHseOLUyafBrt/Q0CQHH6yQKcGxJ7aHgH/98QE8qPkGLs1jOxTHZDf9wDoWlHCavz5czte+u4CQpZHODwAjqrtEfDkRGPlRzj66r8pNWb7C+i/0gbKABFJaUj9sNJhcC5qewy8wWBAU1UpTryVw2aAn1TGwNV78iALUdiFd0Ztj4E3d2RkoB8B8oXw8fW1C003OKu2R8I7RAyAr9ougaeofeFIJSbGx1h/VFUtWKx0lHHSfVSH1xa8jtbqQ6wmD1NrkFpYAfO8zdW4KKmOnCtYo8DdsVELf5SqOChVG6BUqRG6Msqu4zS1+9rP4/eGM2j79kvAYLCwl/VNM0JXRnNlFrfIqS/To2b/HrtOkeP0Cd+UgvBNT6OvvQUthw+y9Uzf7TWaTSkF5fZus/m7KMrX6XNRp8+z6lQCpWo9c9YIR4Bd9T9Oco5mRfCyVbjV34fOsycxd54U4yPDU9rTVtXNBHgwddNKqk3O0gyhQaJl4h8YhNGhm//FBy06z9bi5rWrLFZIg0Nxuih/EqS1Pa6jIIryxtKVnJFIJKB8Tk1bdZKtd4ItT4tjU5tUpu0lXafK7tNnn8LwHz2Q+PhCk6vH2ud2s20olcK27HGFNt4vCjwZJzBSlhyniKzK1E0CT9j3PrtOzTxvL1kXh56LjZBIfNiAUVywZc9ZcHpONHhbTh3YTCDnkVLwCaJTtTbzNsGWp6lp7oCiOp80acsXl8IbA6FRcXtVGg3Agc0PsXXPJ6q7HZ7WOa1bWuMZZcctztLMT1esHa3eq2Xpzxgv+Exz62ddpnzL4XJ2hrYx5000ff6xxVnadFUaDdq7q+VQZWazwChkcxl8RWYirtQeZ9GfTk6nU9sakOIEpUHd6U4h2V0T8GhtH0zfyFKe8eSUS01es1+H+rIPGLyQgU9U5c13YAQemZKBbfrPOKtnXDJCr3vR4M0jeWRyOtvhqXVvQK3L5QxPtqgo8nj4qfbbwWErQOpRFUcfro0KJXqeNkB8dnGiRnt7eZsrtNj3CzLthTxdERvY3D5v+JmmtiDwM1Vt3vAzWW2n4b1BbafgvUVtTvDeprbD8N6otl14TW4hBjoumd5d4bIDc2We5tvXlHme/hsfGx5C2IZ4doA4d76Ubz8e+Ty9DHXstSzybeesfw9vEY0CAH8Alv81eaR2gjl19B/pqqf6o/ZVTgAAAABJRU5ErkJggg=="
+                    />
+                  </figure>
+                  Fruit
+                </li>
+              </ul>
+            </div>
+            <span class="mdc-floating-label">Pick a Food Group</span>
+            <div class="mdc-line-ripple"></div>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell">
+          <div class="newSVG"></div>
+
+          <select class="affiliationDropdown">
+            <option value="friendly">friendly</option>
+            <option value="hostile">hostile</option>
+            <option value="neutral">neutral</option>
+            <option value="unknown">unknown</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="shit"></div>
+
+    <!-- Apply Material headline3 style to this <h1> element -->
+
+    <!-- import the Material javascript file -->
+    <script src="bundle.js" async></script>
+  </body>
+</html>
