@@ -9,25 +9,22 @@ const affiliationOutline = {
   }
 };
 
-
-
+//example - matchPaths('chemicalRecon', '.newSVG');
 function matchPaths(symbol, symbolLocation) {
   const affiliationValue = document.querySelector('.affiliationDropdown').value;
   var symbol = testObj[symbol].affiliation[affiliationValue];
   var symbolLocation = document.querySelector(symbolLocation);
   //Create the SVG
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-
   //Create the group that will contain the Symbol affiliation outline
   const outlineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   outlineGroup.classList.add('outline');
-  const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path'); //friendly
+  const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path');
   outline.setAttributeNS(null, 'd', `${affiliationOutline[affiliationValue].d}`);
   outline.setAttributeNS(null, 'fill', `${affiliationOutline[affiliationValue].fill}`);
   outline.setAttributeNS(null, 'stroke', 'black');
   outline.setAttributeNS(null, 'stroke-width', '4');
   outlineGroup.append(outline);
-
   //Create the group that will contain all the symbol decorator elements
   const decoratorGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   decoratorGroup.classList.add('decorator');
@@ -204,7 +201,11 @@ var testObj = {
           stroke: 'none',
           fill: 'black'
         }
-      }
+      },
+      //https://stackoverflow.com/questions/2787245/how-can-a-javascript-object-refer-to-values-in-itself
+      get neutral() {
+        return this.friendly;
+      },
     }
   },
   infantry: {
@@ -255,7 +256,6 @@ var testObj = {
 window.testObj = testObj;
 window.matchPaths = matchPaths;
 
-
 //Add symbol thumbnails to the dropdown menu
 Object.keys(testObj).forEach(e => {
   const mdcList = document.querySelector('.mdc-list');
@@ -263,7 +263,6 @@ Object.keys(testObj).forEach(e => {
   newli.setAttribute('class', 'mdc-list-item');
   newli.setAttribute('data-value', e);
   newli.textContent = testObj[e].fullName;
-
   mdcList.append(newli);
   const newFigure = document.createElement('figure');
   newFigure.setAttribute('class', `newFigure ${e}`); //add the symbol key to the classlist so they can match up with the list item
