@@ -12,3 +12,11 @@
 - the "demo-width-class" class in the html file needs to be changed to something less stupid
 - code split your symbol object and affiliation object out into their own files
 - yolo
+
+### DEFAULT VALUES
+
+Path: d: REQUIRED fill: black stroke: black strokeWidth: 4
+
+Circle: cx: REQUIRED cy: REQUIRED r: REQUIRED fill: Black stroke: Black strokeWidth: 4
+
+Text: symbolText: REQUIRED x: REQUIRED y: REQUIRED text-anchor: REQUIRED font-size: REQUIRED fontFamily: Arial fontWeight: 30 stroke: none strokeWidth: 4 fill: black

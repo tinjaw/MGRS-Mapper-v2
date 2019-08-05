@@ -20,14 +20,18 @@
     "sass-loader": "^7.1.0",
     "webpack": "^4.0.0",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.11"
+    "webpack-dev-server": "^3.1.11",
+    "webpack-monitor": "^1.0.14"
   },
   "dependencies": {
     "@material/button": "^1.0.0",
     "@material/layout-grid": "^3.0.0",
     "@material/ripple": "^1.0.0",
     "@material/select": "^3.0.0",
-    "@material/typography": "^1.0.0"
+    "@material/typography": "^1.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2"
   },
   "engines": {
     "node": "10.x"

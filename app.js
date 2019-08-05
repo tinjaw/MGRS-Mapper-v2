@@ -1,52 +1,116 @@
+import { selectAffiliation } from './mdcComponents';
+
 const affiliationOutline = {
   friendly: {
+    templated: false,
     d: 'M25,50 l150,0 0,100 -150,0 z',
-    fill: 'rgb(128,224,255)'
+    fill: 'rgb(128,224,255)',
+  },
+  friendlyTemplated: {
+    templated: true,
+    d: 'M25,50 l150,0 0,100 -150,0 z',
+    fill: 'rgb(128,224,255)',
+    fill_2: 'none',
+    stroke_2: 'rgb(239, 239, 239)',
+    strokeWidth_2: '5',
+    strokeDashArray_2: '4,4',
   },
   hostile: {
+    templated: false,
     d: 'M 100,28 L172,100 100,172 28,100 100,28 Z',
-    fill: 'rgb(255,128,128)'
-  }
+    fill: 'rgb(255,128,128)',
+  },
+  hostileTemplated: {
+    templated: true,
+    d: 'M 100,28 L172,100 100,172 28,100 100,28 Z',
+    fill: 'rgb(255,128,128)',
+    fill_2: 'none',
+    stroke_2: 'rgb(239, 239, 239)',
+    strokeWidth_2: '5',
+    strokeDashArray_2: '4,4',
+  },
+  unknown: {
+    templated: false,
+    d: 'M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z',
+    fill: 'rgb(255,255,128)',
+  },
+  pending: {
+    templated: true,
+    d: 'M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z',
+    fill: 'rgb(255,255,128)',
+    fill_2: 'none',
+    stroke_2: 'rgb(239, 239, 239)',
+    strokeWidth_2: '5',
+    strokeDashArray_2: '4,4',
+  },
+  neutral: {
+    templated: false,
+    d: 'M45,45 l110,0 0,110 -110,0 z',
+    fill: 'rgb(170, 255, 170)',
+  },
 };
 
-//example - matchPaths('chemicalRecon', '.newSVG');
+// example - matchPaths('chemicalRecon', '.newSVG');
 function matchPaths(symbol, symbolLocation) {
-  const affiliationValue = document.querySelector('.affiliationDropdown').value;
-  var symbol = testObj[symbol].affiliation[affiliationValue];
+  // eslint-disable-next-line no-var
+  var symbol = militarySymbolsObject[symbol].affiliation[selectAffiliation.value];
+  // eslint-disable-next-line no-var
   var symbolLocation = document.querySelector(symbolLocation);
-  //Create the SVG
+  // Create the SVG
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  //Create the group that will contain the Symbol affiliation outline
+  // Create the group that will contain the Symbol affiliation outline
   const outlineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   outlineGroup.classList.add('outline');
-  const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  outline.setAttributeNS(null, 'd', `${affiliationOutline[affiliationValue].d}`);
-  outline.setAttributeNS(null, 'fill', `${affiliationOutline[affiliationValue].fill}`);
-  outline.setAttributeNS(null, 'stroke', 'black');
-  outline.setAttributeNS(null, 'stroke-width', '4');
-  outlineGroup.append(outline);
-  //Create the group that will contain all the symbol decorator elements
+
+  // If the symbol affiliation is templated, then add the second path overlay. Otherwise only add 1
+  switch (affiliationOutline[selectAffiliation.value].templated) {
+    case true:
+      const outline1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      outline1.setAttributeNS(null, 'd', `${affiliationOutline[selectAffiliation.value].d}`);
+      outline1.setAttributeNS(null, 'fill', `${affiliationOutline[selectAffiliation.value].fill}`);
+      outline1.setAttributeNS(null, 'stroke', 'black');
+      outline1.setAttributeNS(null, 'stroke-width', '4');
+      const outline2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      outline2.setAttributeNS(null, 'd', `${affiliationOutline[selectAffiliation.value].d}`);
+      outline2.setAttributeNS(null, 'fill', `${affiliationOutline[selectAffiliation.value].fill_2}`);
+      outline2.setAttributeNS(null, 'stroke', `${affiliationOutline[selectAffiliation.value].stroke_2}`);
+      outline2.setAttributeNS(null, 'stroke-width', `${affiliationOutline[selectAffiliation.value].strokeWidth_2}`);
+      outline2.setAttributeNS(null, 'stroke-dasharray', `${affiliationOutline[selectAffiliation.value].strokeDashArray_2}`);
+      outlineGroup.append(outline1, outline2);
+      break;
+    default: {
+      const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      outline.setAttributeNS(null, 'd', `${affiliationOutline[selectAffiliation.value].d}`);
+      outline.setAttributeNS(null, 'fill', `${affiliationOutline[selectAffiliation.value].fill}`);
+      outline.setAttributeNS(null, 'stroke', 'black');
+      outline.setAttributeNS(null, 'stroke-width', '4');
+      outlineGroup.append(outline);
+      break;
+    }
+  }
+
+  // Create the group that will contain all the symbol decorator elements
   const decoratorGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   decoratorGroup.classList.add('decorator');
-  //this.symbol = testObj[symbol].affiliation[affiliationValue];
-  for (var key in symbol) {
+  // this.symbol = militarySymbolsObject[symbol].affiliation[affiliationValue];
+  Object.keys(symbol).forEach((key) => {
     if (key.indexOf('path') == 0) {
       const element = symbol[key];
       const decorator = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       decorator.setAttributeNS(null, 'd', `${element.d}`);
-      //If the default decorator fill is missing, default to black
+      // If the default decorator fill is missing, default to black
       if (!element.fill) {
         decorator.setAttributeNS(null, 'fill', 'black');
       } else {
         decorator.setAttributeNS(null, 'fill', `${element.fill}`);
       }
-      //If the default decorator stroke is missing, default to black
+      // If the default decorator stroke is missing, default to black
       if (!element.stroke) {
         decorator.setAttributeNS(null, 'stroke', 'black');
       } else {
         decorator.setAttributeNS(null, 'stroke', `${element.stroke}`);
       }
-      //If the default decorator stroke is missing, default to 4
+      // If the default decorator stroke-width is missing, default to 4
       if (!element.strokeWidth) {
         decorator.setAttributeNS(null, 'stroke-width', '4');
       } else {
@@ -60,19 +124,19 @@ function matchPaths(symbol, symbolLocation) {
       circle.setAttributeNS(null, 'cx', `${element.cx}`);
       circle.setAttributeNS(null, 'cy', `${element.cy}`);
       circle.setAttributeNS(null, 'r', `${element.r}`);
-      //Default circle decorator stroke to black
+      // Default circle decorator stroke to black
       if (!element.stroke) {
         circle.setAttributeNS(null, 'stroke', 'black');
       } else {
         circle.setAttributeNS(null, 'stroke', `${element.stroke}`);
       }
-      //Default circle decorator stroke width to 4
+      // Default circle decorator stroke width to 4
       if (!element.strokeWidth) {
         circle.setAttributeNS(null, 'stroke-width', '4');
       } else {
         circle.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
       }
-      //Default circle decorator fill to black
+      // Default circle decorator fill to black
       if (!element.fill) {
         circle.setAttributeNS(null, 'fill', 'black');
       } else {
@@ -88,31 +152,31 @@ function matchPaths(symbol, symbolLocation) {
       text.setAttributeNS(null, 'y', `${element.y}`);
       text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
       text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
-      //Default decorator font family to Arial
+      // Default decorator font family to Arial
       if (!element.fontFamily) {
         text.setAttributeNS(null, 'font-family', 'Arial');
       } else {
         text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
       }
-      //Default decorator font weight to 30
+      // Default decorator font weight to 30
       if (!element.fontWeight) {
         text.setAttributeNS(null, 'font-weight', '30');
       } else {
         text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
       }
-      //Default decorator font stroke to none
+      // Default decorator font stroke to none
       if (!element.stroke) {
         text.setAttributeNS(null, 'stroke', 'none');
       } else {
         text.setAttributeNS(null, 'stroke', `${element.stroke}`);
       }
-      //Default decorator font stroke width to 4
+      // Default decorator font stroke width to 4
       if (!element.strokeWidth) {
         text.setAttributeNS(null, 'stroke-width', '4');
       } else {
         text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
       }
-      //Default decorator font fill to black
+      // Default decorator font fill to black
       if (!element.fill) {
         text.setAttributeNS(null, 'fill', 'black');
       } else {
@@ -120,9 +184,10 @@ function matchPaths(symbol, symbolLocation) {
       }
       decoratorGroup.append(text);
     }
-  }
+  });
+
   svg.append(outlineGroup, decoratorGroup);
-  //document.querySelector('.newSVG').append(svg);
+  // document.querySelector('.newSVG').append(svg);
   symbolLocation.append(svg);
   svg.setAttributeNS(null, 'preserveAspectRatio', 'none');
   svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x} ${svg.getBBox().y} ${svg.getBBox().width} ${svg.getBBox().height}`);
@@ -130,64 +195,58 @@ function matchPaths(symbol, symbolLocation) {
   svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
 }
 
-var testObj = {
+
+const militarySymbolsObject = {
+  default: {
+    fullName: 'Default Land Unit',
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: '',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   chemicalRecon: {
     fullName: 'CBRN Chemical Recon',
+    type: 'Land Unit',
     affiliation: {
       friendly: {
         path_1: {
           d: 'm 80,120 c 0,-20 10,-32 50,-35 m -10,35 C 120,100 110,88 70,85',
-          fill: 'none'
+          fill: 'none',
         },
         path_2: {
-          d: 'M25,150L175,50'
-        },
-        circle_1: {
-          cx: '75',
-          cy: '90',
-          r: '6'
-        },
-        circle_2: {
-          cx: '125',
-          cy: '90',
-          r: '6'
-        },
-        text: {
-          symbolText: 'C',
-          x: '100',
-          y: '77',
-          textAnchor: 'middle',
-          fontSize: '30'
-        }
-      },
-      hostile: {
-        path_1: {
-          d: 'm 80,120 c 0,-20 10,-32 50,-35 m -10,35 C 120,100 110,88 70,85',
-          strokeWidth: '4',
-          stroke: 'black',
-          fill: 'none'
-        },
-        path_2: {
-          d: 'M60,130L140,70',
-          strokeWidth: '4',
-          stroke: 'black',
-          fill: 'black'
+          d: 'M25,150L175,50',
         },
         circle_1: {
           cx: '75',
           cy: '90',
           r: '6',
-          strokeWidth: '4',
-          stroke: 'black',
-          fill: 'black'
         },
         circle_2: {
           cx: '125',
           cy: '90',
           r: '6',
-          strokeWidth: '4',
-          stroke: 'black',
-          fill: 'black'
         },
         text: {
           symbolText: 'C',
@@ -195,89 +254,188 @@ var testObj = {
           y: '77',
           textAnchor: 'middle',
           fontSize: '30',
-          fontFamily: 'Arial',
-          fontWeight: 'bold',
-          strokeWidth: '4',
-          stroke: 'none',
-          fill: 'black'
-        }
+        },
       },
-      //https://stackoverflow.com/questions/2787245/how-can-a-javascript-object-refer-to-values-in-itself
-      get neutral() {
+      get friendlyTemplated() {
         return this.friendly;
       },
-    }
+      get hostile() {
+        const propertyToModify = {
+          path_2: {
+            d: 'M65,137L137,65',
+            fill: 'none',
+          },
+        };
+        // There has to be a better way to do this instead of spamming this const in every affiliation...
+        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        return modifiedTarget;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        const propertyToModify = {
+          path_2: {
+            d: 'M50,135L150,65',
+            fill: 'none',
+          },
+        };
+        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        return modifiedTarget;
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        // https://stackoverflow.com/questions/37932434/how-to-change-a-property-on-an-object-without-mutating-it
+        const propertyToModify = {
+          path_2: {
+            d: 'M45,155L155,45',
+            fill: 'none',
+          },
+        };
+        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        return modifiedTarget;
+      },
+    },
   },
   infantry: {
     fullName: 'Infantry',
+    type: 'Land Unit',
     affiliation: {
       friendly: {
         path: {
           d: 'M25,50 L175,150 M25,150 L175,50',
-          stroke: 'pink'
-        }
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
       },
       hostile: {
         path: {
-          d: 'M60,70L140,130M60,130L140,70'
-        }
-      }
-    }
+          d: 'M65,65 L137,137 M65, 137 L137, 65',
+        },
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      unknown: {
+        path: {
+          d: 'M50,65L150,135M50,135L150,65',
+        },
+      },
+      get pending() {
+        return this.unknown;
+      },
+      neutral: {
+        path: {
+          d: 'M45,45L155,155M45,155L155,45',
+        },
+      },
+    },
   },
   uas: {
-    fullName: 'UAS',
+    fullName: 'Unmanned Aerial Surveillance',
+    type: 'Land Unit',
     affiliation: {
       friendly: {
         path: {
           d: 'm 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z',
-          fill: 'black',
-          stroke: 'black',
-          strokeWidth: 4
-        }
-      }
-    }
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
   },
-  ada: {
-    fullName: 'Air Defense',
+  airDefenseArtillery: {
+    fullName: 'Air Defense Artillery',
+    type: 'Land Unit',
     affiliation: {
       friendly: {
         path: {
           d: 'M25,150 C25,110 175,110 175,150',
           fill: 'none',
-          stroke: 'black',
-          strokeWidth: 4
-        }
-      }
-    }
-  }
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      hostile: {
+        path: {
+          d: 'M70,142 C70,115 130,115 130,142',
+          fill: 'none',
+        },
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      unknown: {
+        path: {
+          d: 'm 55,135 c 10,-20 80,-20 90,0',
+          fill: 'none',
+        },
+      },
+      get pending() {
+        return this.unknown;
+      },
+      neutral: {
+        path: {
+          d: 'M45,150 C45,110 155,110 155,150',
+          fill: 'none',
+        },
+      },
+    },
+  },
 };
 
-//This exposes the testObj and matchPaths function to the window so you can access them via console. Remove on production
-window.testObj = testObj;
+// This exposes the militarySymbolsObject and matchPaths function to the window so you can access them via console. Remove on production
+window.militarySymbolsObject = militarySymbolsObject;
 window.matchPaths = matchPaths;
 
-//Add symbol thumbnails to the dropdown menu
-Object.keys(testObj).forEach(e => {
-  const mdcList = document.querySelector('.mdc-list');
+// Add symbol thumbnails to the dropdown menu
+Object.keys(militarySymbolsObject).forEach((e) => {
+  const mdcList = document.querySelector('.mdc-list.symbol-list');
+  // Prepend the symbol type to the list
+  const symbolTypeInfo = document.createElement('em');
+  symbolTypeInfo.setAttribute('class', 'symbol-type-info');
+  symbolTypeInfo.textContent = militarySymbolsObject[e].type.padEnd(15, '.');
+  // Append the sybol to the list
   const newli = document.createElement('li');
   newli.setAttribute('class', 'mdc-list-item');
   newli.setAttribute('data-value', e);
-  newli.textContent = testObj[e].fullName;
+  newli.textContent = militarySymbolsObject[e].fullName;
+  newli.prepend(symbolTypeInfo);
   mdcList.append(newli);
   const newFigure = document.createElement('figure');
-  newFigure.setAttribute('class', `newFigure ${e}`); //add the symbol key to the classlist so they can match up with the list item
+  newFigure.setAttribute('class', `newFigure ${e}`); // add the symbol key to the classlist so they can match up with the list item
   newli.prepend(newFigure);
-  //This will add the icons to the dropdown list
+  // This will add the icons to the dropdown list
   const str = e.toString();
   if (newFigure.classList.contains(str)) {
     matchPaths(e, `.newFigure.${str}`);
-    //Now set the viewBox and dimensions for the thumbnails
-    document.querySelectorAll('.newFigure svg').forEach(e => {
+    // Now set the viewBox and dimensions for the thumbnails
+    document.querySelectorAll('.newFigure svg').forEach((e) => {
       e.setAttribute('viewBox', '21 46 158 108');
       e.setAttribute('width', '63');
       e.setAttribute('height', '43');
     });
   } else {
-    console.log('There is no match between the li class and symbol class')
+    console.log('There is no match between the li class and symbol class');
   }
 });

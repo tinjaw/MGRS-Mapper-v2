@@ -1,3 +1,5 @@
+const WebpackMonitor = require('webpack-monitor');
+
 module.exports = [{
   entry: ['./app.scss', './app.js', './mdcComponents.js'],
   output: {
@@ -38,4 +40,11 @@ module.exports = [{
     //This just hides the file size warnings in the console
     hints: false
   },
+  // plugins: [
+  //   new WebpackMonitor({
+  //     capture: true,
+  //     launch: true,
+  //     port: 39875,
+  //   }),
+  // ],
 }];

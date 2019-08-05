@@ -30,6 +30,10 @@ p {
   @include mdc-typography(body1);
 }
 
+em {
+  @include mdc-typography(caption);
+}
+
 svg {
   overflow: visible;
 }
