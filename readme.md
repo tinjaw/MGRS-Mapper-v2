@@ -20,3 +20,5 @@ Path: d: REQUIRED fill: black stroke: black strokeWidth: 4
 Circle: cx: REQUIRED cy: REQUIRED r: REQUIRED fill: Black stroke: Black strokeWidth: 4
 
 Text: symbolText: REQUIRED x: REQUIRED y: REQUIRED text-anchor: REQUIRED font-size: REQUIRED fontFamily: Arial fontWeight: 30 stroke: none strokeWidth: 4 fill: black
+
+const obj = { a: 'b', c: 'd', e: 'f', g: 'h', }

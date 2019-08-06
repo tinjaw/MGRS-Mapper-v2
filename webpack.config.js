@@ -21,24 +21,24 @@ module.exports = [{
           {
             loader: 'sass-loader',
             options: {
-              includePaths: ['./node_modules']
-            }
-          }
-        ]
+              includePaths: ['./node_modules'],
+            },
+          },
+        ],
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
           presets: ['es2015'],
-          plugins: ['transform-object-assign']
+          plugins: ['transform-object-assign'],
         },
-      }
-    ]
+      },
+    ],
   },
   performance: {
-    //This just hides the file size warnings in the console
-    hints: false
+    // ! This just hides the file size warnings in the console
+    hints: false,
   },
   // plugins: [
   //   new WebpackMonitor({

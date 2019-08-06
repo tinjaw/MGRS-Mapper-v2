@@ -1,16 +1,7 @@
-/******************************************************************************************************
- ******************************************************************************************************
- ****         IMPORTS - IMPORTS                                                                   *****
- ******************************************************************************************************
- **************************************************************************************************** */
+// * IMPORTS * //
 import { selectAffiliation } from './mdcComponents';
 
-/** ****************************************************************************************************
- ******************************************************************************************************
- ****         UNIT AFFILIATION - OBJECT                                                           *****
- ******************************************************************************************************
- *****************************************************************************************************/
-
+// * UNIT AFFILIATION OBJECT * //
 const affiliationOutline = {
   friendly: {
     templated: false,
@@ -61,11 +52,7 @@ const affiliationOutline = {
   },
 };
 
-/** ****************************************************************************************************
- ******************************************************************************************************
- ****         MILITARY SYMBOLS - OBJECT                                                            ****
- ******************************************************************************************************
- *****************************************************************************************************/
+// * MILITARY SYMBOLS OBJECT * //
 const militarySymbolsObject = {
   default: {
     fullName: 'Default Land Unit',
@@ -275,9 +262,11 @@ const militarySymbolsObject = {
   },
 };
 
+// * SYMBOL GENERATOR FUNCTION * //
+// TODO: Why on God's earth is this function 143 lines long? There has GOT to be a better way
 // example - matchPaths('chemicalRecon', '.newSVG');
 function matchPaths(symbol, symbolLocation) {
-  // I cant change these 2 fucking vars to let/const and it's driving me insane
+  // ! I cant change these 2 fucking vars to let/const and it's driving me insane
   // eslint-disable-next-line no-var
   var symbol = militarySymbolsObject[symbol].affiliation[selectAffiliation.value];
   // eslint-disable-next-line no-var
@@ -421,7 +410,7 @@ function matchPaths(symbol, symbolLocation) {
   svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
 }
 
-// Add symbol thumbnails to the dropdown menu
+// * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
 Object.keys(militarySymbolsObject).forEach((e) => {
   const mdcList = document.querySelector('.mdc-list.symbol-list');
   // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
@@ -456,6 +445,6 @@ Object.keys(militarySymbolsObject).forEach((e) => {
   }
 });
 
-// This exposes the militarySymbolsObject and matchPaths function to the window so you can access them via console. Remove on production
+// ! This exposes the militarySymbolsObject and matchPaths function to the window so you can access them via console. Remove on production
 window.militarySymbolsObject = militarySymbolsObject;
 window.matchPaths = matchPaths;
