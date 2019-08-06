@@ -1,4 +1,15 @@
+/******************************************************************************************************
+ ******************************************************************************************************
+ ****         IMPORTS - IMPORTS                                                                   *****
+ ******************************************************************************************************
+ **************************************************************************************************** */
 import { selectAffiliation } from './mdcComponents';
+
+/** ****************************************************************************************************
+ ******************************************************************************************************
+ ****         UNIT AFFILIATION - OBJECT                                                           *****
+ ******************************************************************************************************
+ *****************************************************************************************************/
 
 const affiliationOutline = {
   friendly: {
@@ -50,8 +61,223 @@ const affiliationOutline = {
   },
 };
 
+/** ****************************************************************************************************
+ ******************************************************************************************************
+ ****         MILITARY SYMBOLS - OBJECT                                                            ****
+ ******************************************************************************************************
+ *****************************************************************************************************/
+const militarySymbolsObject = {
+  default: {
+    fullName: 'Default Land Unit',
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: '',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  chemicalRecon: {
+    fullName: 'CBRN Chemical Recon',
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 80,120 c 0,-20 10,-32 50,-35 m -10,35 C 120,100 110,88 70,85',
+          fill: 'none',
+        },
+        path_2: {
+          d: 'M25,150L175,50',
+        },
+        circle_1: {
+          cx: '75',
+          cy: '90',
+          r: '6',
+        },
+        circle_2: {
+          cx: '125',
+          cy: '90',
+          r: '6',
+        },
+        text: {
+          symbolText: 'C',
+          x: '100',
+          y: '77',
+          textAnchor: 'middle',
+          fontSize: '30',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = {
+          path_2: {
+            d: 'M65,137L137,65',
+            fill: 'none',
+          },
+        };
+        // There has to be a better way to do this instead of spamming this const in every affiliation...
+        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        return modifiedTarget;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        const propertyToModify = {
+          path_2: {
+            d: 'M50,135L150,65',
+            fill: 'none',
+          },
+        };
+        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        return modifiedTarget;
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        // https://stackoverflow.com/questions/37932434/how-to-change-a-property-on-an-object-without-mutating-it
+        const propertyToModify = {
+          path_2: {
+            d: 'M45,155L155,45',
+            fill: 'none',
+          },
+        };
+        // So basically all modifiedTarget does is copy the properties of the friendly key. propertyToModify then edits the path_2 key with new data
+        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        return modifiedTarget;
+      },
+    },
+  },
+  infantry: {
+    fullName: 'Infantry',
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path: {
+          d: 'M25,50 L175,150 M25,150 L175,50',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      hostile: {
+        path: {
+          d: 'M65,65 L137,137 M65, 137 L137, 65',
+        },
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      unknown: {
+        path: {
+          d: 'M50,65L150,135M50,135L150,65',
+        },
+      },
+      get pending() {
+        return this.unknown;
+      },
+      neutral: {
+        path: {
+          d: 'M45,45L155,155M45,155L155,45',
+        },
+      },
+    },
+  },
+  uas: {
+    fullName: 'Unmanned Aerial Surveillance',
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path: {
+          d: 'm 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  airDefenseArtillery: {
+    fullName: 'Air Defense Artillery (radar dome)',
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path: {
+          d: 'M25,150 C25,110 175,110 175,150',
+          fill: 'none',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      hostile: {
+        path: {
+          d: 'M70,142 C70,115 130,115 130,142',
+          fill: 'none',
+        },
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      unknown: {
+        path: {
+          d: 'm 55,135 c 10,-20 80,-20 90,0',
+          fill: 'none',
+        },
+      },
+      get pending() {
+        return this.unknown;
+      },
+      neutral: {
+        path: {
+          d: 'M45,150 C45,110 155,110 155,150',
+          fill: 'none',
+        },
+      },
+    },
+  },
+};
+
 // example - matchPaths('chemicalRecon', '.newSVG');
 function matchPaths(symbol, symbolLocation) {
+  // I cant change these 2 fucking vars to let/const and it's driving me insane
   // eslint-disable-next-line no-var
   var symbol = militarySymbolsObject[symbol].affiliation[selectAffiliation.value];
   // eslint-disable-next-line no-var
@@ -195,247 +421,41 @@ function matchPaths(symbol, symbolLocation) {
   svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
 }
 
-
-const militarySymbolsObject = {
-  default: {
-    fullName: 'Default Land Unit',
-    type: 'Land Unit',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: '',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  chemicalRecon: {
-    fullName: 'CBRN Chemical Recon',
-    type: 'Land Unit',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 80,120 c 0,-20 10,-32 50,-35 m -10,35 C 120,100 110,88 70,85',
-          fill: 'none',
-        },
-        path_2: {
-          d: 'M25,150L175,50',
-        },
-        circle_1: {
-          cx: '75',
-          cy: '90',
-          r: '6',
-        },
-        circle_2: {
-          cx: '125',
-          cy: '90',
-          r: '6',
-        },
-        text: {
-          symbolText: 'C',
-          x: '100',
-          y: '77',
-          textAnchor: 'middle',
-          fontSize: '30',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        const propertyToModify = {
-          path_2: {
-            d: 'M65,137L137,65',
-            fill: 'none',
-          },
-        };
-        // There has to be a better way to do this instead of spamming this const in every affiliation...
-        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
-        return modifiedTarget;
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        const propertyToModify = {
-          path_2: {
-            d: 'M50,135L150,65',
-            fill: 'none',
-          },
-        };
-        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
-        return modifiedTarget;
-      },
-      get pending() {
-        return this.unknown;
-      },
-      get neutral() {
-        // https://stackoverflow.com/questions/37932434/how-to-change-a-property-on-an-object-without-mutating-it
-        const propertyToModify = {
-          path_2: {
-            d: 'M45,155L155,45',
-            fill: 'none',
-          },
-        };
-        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
-        return modifiedTarget;
-      },
-    },
-  },
-  infantry: {
-    fullName: 'Infantry',
-    type: 'Land Unit',
-    affiliation: {
-      friendly: {
-        path: {
-          d: 'M25,50 L175,150 M25,150 L175,50',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        path: {
-          d: 'M65,65 L137,137 M65, 137 L137, 65',
-        },
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      unknown: {
-        path: {
-          d: 'M50,65L150,135M50,135L150,65',
-        },
-      },
-      get pending() {
-        return this.unknown;
-      },
-      neutral: {
-        path: {
-          d: 'M45,45L155,155M45,155L155,45',
-        },
-      },
-    },
-  },
-  uas: {
-    fullName: 'Unmanned Aerial Surveillance',
-    type: 'Land Unit',
-    affiliation: {
-      friendly: {
-        path: {
-          d: 'm 60,84 40,20 40,-20 0,8 -40,25 -40,-25 z',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  airDefenseArtillery: {
-    fullName: 'Air Defense Artillery',
-    type: 'Land Unit',
-    affiliation: {
-      friendly: {
-        path: {
-          d: 'M25,150 C25,110 175,110 175,150',
-          fill: 'none',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        path: {
-          d: 'M70,142 C70,115 130,115 130,142',
-          fill: 'none',
-        },
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      unknown: {
-        path: {
-          d: 'm 55,135 c 10,-20 80,-20 90,0',
-          fill: 'none',
-        },
-      },
-      get pending() {
-        return this.unknown;
-      },
-      neutral: {
-        path: {
-          d: 'M45,150 C45,110 155,110 155,150',
-          fill: 'none',
-        },
-      },
-    },
-  },
-};
-
-// This exposes the militarySymbolsObject and matchPaths function to the window so you can access them via console. Remove on production
-window.militarySymbolsObject = militarySymbolsObject;
-window.matchPaths = matchPaths;
-
 // Add symbol thumbnails to the dropdown menu
 Object.keys(militarySymbolsObject).forEach((e) => {
   const mdcList = document.querySelector('.mdc-list.symbol-list');
-  // Prepend the symbol type to the list
+  // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
   const symbolTypeInfo = document.createElement('em');
   symbolTypeInfo.setAttribute('class', 'symbol-type-info');
   symbolTypeInfo.textContent = militarySymbolsObject[e].type.padEnd(15, '.');
-  // Append the sybol to the list
+  // Append the symbol DESCRIPTION to the list (eg- "Infantry")
   const newli = document.createElement('li');
   newli.setAttribute('class', 'mdc-list-item');
   newli.setAttribute('data-value', e);
   newli.textContent = militarySymbolsObject[e].fullName;
   newli.prepend(symbolTypeInfo);
   mdcList.append(newli);
-  const newFigure = document.createElement('figure');
-  newFigure.setAttribute('class', `newFigure ${e}`); // add the symbol key to the classlist so they can match up with the list item
-  newli.prepend(newFigure);
+  const figureElement = document.createElement('figure');
+  figureElement.setAttribute('class', `symbolFigure ${e}`); // add the symbol key to the classlist so they can match up with the list item
+  newli.prepend(figureElement);
   // This will add the icons to the dropdown list
   const str = e.toString();
-  if (newFigure.classList.contains(str)) {
-    matchPaths(e, `.newFigure.${str}`);
+  if (figureElement.classList.contains(str)) {
+    matchPaths(e, `.symbolFigure.${str}`);
     // Now set the viewBox and dimensions for the thumbnails
-    document.querySelectorAll('.newFigure svg').forEach((e) => {
-      e.setAttribute('viewBox', '21 46 158 108');
-      e.setAttribute('width', '63');
-      e.setAttribute('height', '43');
+    document.querySelectorAll('.symbolFigure svg').forEach((e) => {
+      // This just removes the animation on the symbol on the dropdown list
+      e.classList.contains('animateSymbol') ? e.classList.remove('animateSymbol') : null;
+      e.setAttributeNS(null, 'preserveAspectRatio', 'none');
+      e.setAttributeNS(null, 'viewBox', '21 46 158 108');
+      e.setAttributeNS(null, 'width', '63');
+      e.setAttributeNS(null, 'height', '43');
     });
   } else {
     console.log('There is no match between the li class and symbol class');
   }
 });
+
+// This exposes the militarySymbolsObject and matchPaths function to the window so you can access them via console. Remove on production
+window.militarySymbolsObject = militarySymbolsObject;
+window.matchPaths = matchPaths;

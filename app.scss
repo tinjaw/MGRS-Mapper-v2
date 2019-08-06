@@ -9,6 +9,23 @@
 @import '@material/menu/mdc-menu';
 @import '@material/select/mdc-select';
 @import '@material/layout-grid/mdc-layout-grid';
+@import '@material/animation/functions';
+
+@keyframes fade-in {
+  from {
+    transform: translateY(-280px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(100);
+    opacity: 1;
+  }
+}
+
+.animateSymbol {
+  animation: mdc-animation-enter(/* $name: */ fade-in, /* $duration: */ 300ms);
+}
 
 // .demo-width-class {
 //   width: 400px;
