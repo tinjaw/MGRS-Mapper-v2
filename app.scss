@@ -10,6 +10,7 @@
 @import '@material/select/mdc-select';
 @import '@material/layout-grid/mdc-layout-grid';
 @import '@material/animation/functions';
+@import '@material/textfield/mdc-text-field';
 
 @keyframes fade-in {
   from {
@@ -78,6 +79,10 @@
   // font-size: x-small;
   // overflow: hidden;
   // text-overflow: ellipsis;
+}
+
+.searchSymbols {
+  width: 100%;
 }
 
 // Import your components for your application
