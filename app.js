@@ -5,10 +5,10 @@ import militarySymbolsObject from './militarySymbolsObject';
 
 // * SYMBOL GENERATOR FUNCTION * //
 // TODO: Why on God's earth is this function 143 lines long? There has GOT to be a better way
-// example - generateSymbol('chemicalRecon', '.newSVG');
+// example - generateSymbol('chemicalRecon', 'newSVG');
 function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   const symbol = militarySymbolsObject[symbolToGenerate].affiliation[selectAffiliation.value];
-  const symbolLocation = document.querySelector(whereToPlaceSymbol);
+  const symbolLocation = document.querySelector(`[data-symbol-name="${whereToPlaceSymbol}"]`);
 
   // Create the SVG
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -149,7 +149,6 @@ function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
 }
 
-
 // * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
 const addSymbolsToDropdownList = Object.keys(militarySymbolsObject).forEach((e) => {
   const mdcList = document.querySelector('.mdc-list.symbol-list');
@@ -161,24 +160,25 @@ const addSymbolsToDropdownList = Object.keys(militarySymbolsObject).forEach((e) 
   const newli = document.createElement('li');
   newli.setAttribute('class', 'mdc-list-item');
   newli.setAttribute('data-value', e);
-  newli.textContent = militarySymbolsObject[e].fullName;
+  newli.textContent = e.toString();
+
   newli.prepend(symbolTypeInfo);
   mdcList.append(newli);
   const figureElement = document.createElement('figure');
-  figureElement.setAttribute('class', `symbolFigure ${e}`); // add the symbol key to the classlist so they can match up with the list item
+  figureElement.setAttribute('class', 'symbolFigure');
+  figureElement.setAttribute('data-symbol-name', `${e}`); // add the symbol key to the data-attr so they can match up with the list item
   newli.prepend(figureElement);
   // This will add the icons to the dropdown list
-  const str = e.toString();
-  if (figureElement.classList.contains(str)) {
-    generateSymbol(e, `.symbolFigure.${str}`);
+  if (figureElement.dataset.symbolName === e.toString()) {
+    generateSymbol(e, e.toString());
     // Now set the viewBox and dimensions for the thumbnails
-    document.querySelectorAll('.symbolFigure svg').forEach((e) => {
+    newli.querySelectorAll('.symbolFigure svg').forEach((e2) => {
       // This just removes the animation on the symbol on the dropdown list
-      e.classList.contains('animateSymbol') ? e.classList.remove('animateSymbol') : null;
-      e.setAttributeNS(null, 'preserveAspectRatio', 'none');
-      e.setAttributeNS(null, 'viewBox', '21 46 158 108');
-      e.setAttributeNS(null, 'width', '63');
-      e.setAttributeNS(null, 'height', '43');
+      e2.classList.contains('animateSymbol') ? e.classList.remove('animateSymbol') : null;
+      e2.setAttributeNS(null, 'preserveAspectRatio', 'none');
+      e2.setAttributeNS(null, 'viewBox', '21 46 158 108');
+      e2.setAttributeNS(null, 'width', '63');
+      e2.setAttributeNS(null, 'height', '43');
     });
   } else {
     console.error('There is no match between the li class and symbol class...Restarting');

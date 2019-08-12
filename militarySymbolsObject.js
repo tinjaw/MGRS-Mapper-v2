@@ -1,7 +1,6 @@
 // * MILITARY SYMBOLS OBJECT * //
 const militarySymbolsObject = {
-  default: {
-    fullName: 'Default Land Unit',
+  'Default Land Unit': {
     type: 'Land Unit',
     affiliation: {
       friendly: {
@@ -29,8 +28,7 @@ const militarySymbolsObject = {
       },
     },
   },
-  chemicalRecon: {
-    fullName: 'CBRN Chemical Recon',
+  'CBRN Chemical Recon': {
     type: 'Land Unit',
     affiliation: {
       friendly: {
@@ -103,8 +101,7 @@ const militarySymbolsObject = {
       },
     },
   },
-  infantry: {
-    fullName: 'Infantry',
+  Infantry: {
     type: 'Land Unit',
     affiliation: {
       friendly: {
@@ -138,8 +135,7 @@ const militarySymbolsObject = {
       },
     },
   },
-  uas: {
-    fullName: 'Unmanned Aerial Surveillance',
+  'Unammed Aerial Surveillance': {
     type: 'Land Unit',
     affiliation: {
       friendly: {
@@ -167,8 +163,7 @@ const militarySymbolsObject = {
       },
     },
   },
-  airDefenseArtillery: {
-    fullName: 'Air Defense Artillery (radar dome)',
+  'Air Defense Artillery (Radar Dome)': {
     type: 'Land Unit',
     affiliation: {
       friendly: {

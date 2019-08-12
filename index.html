@@ -16,7 +16,7 @@
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
           <div class="mdc-layout-grid__cell--span-12">
-            <div class="newSVG"></div>
+            <div class="newSVG" data-symbol-name="newSVG"></div>
           </div>
         </div>
       </div>
@@ -136,7 +136,24 @@
         </div>
       </div>
     </div>
-    <div class="test"></div>
+    <div class="test">
+      <div class="mdc-layout-grid ">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell--span-3">
+            <div class="mdc-select  symbol-searcher">
+              <input type="hidden" name="enhanced-select" />
+              <i class="mdc-select__dropdown-icon"></i>
+              <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
+              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                <ul class="mdc-list symbol-search-results"></ul>
+              </div>
+              <span class="mdc-floating-label">Symbol Search Results</span>
+              <div class="mdc-line-ripple"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="bundle.js" async></script>
   </body>
