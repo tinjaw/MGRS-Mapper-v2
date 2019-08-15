@@ -106,13 +106,13 @@ const searchResults = debounce(() => {
       }
     });
     // set the first result as the symbol value on the "Select a Symbol" dropdown
-    result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null;
+    result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null; //! throws console errors but works
   } else {
     // If there is no text in the search field:
     // Remove all search results
     selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
     // Close the select menu
-    selectSymbol.foundation_.adapter_.closeMenu();
+    // selectSymbol.foundation_.adapter_.closeMenu();
     // Rerun the function to add the symbols to the list
     addSymbolsToDropdownList();
     // Set the selected item to the one in the symbol panel
@@ -148,7 +148,8 @@ const observer = new MutationObserver(() => {
     });
   } else {
     selectAffiliation.disabled = false;
-    textField.value = ''; // delete search field text when the search menu is closed.
+    textField.foundation_.setValue(''); // delete search field text when the search menu is closed.
+    searchResults(); // reset the dropdown symbols
   }
 });
 
