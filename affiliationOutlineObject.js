@@ -1,4 +1,6 @@
 // * UNIT AFFILIATION OBJECT * //
+import { function1 } from './app';
+
 const affiliationOutlineObject = {
   friendly: {
     templated: false,

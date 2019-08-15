@@ -9,9 +9,9 @@ import militarySymbolsObject from './militarySymbolsObject';
 function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   const symbol = militarySymbolsObject[symbolToGenerate].affiliation[selectAffiliation.value];
   const symbolLocation = document.querySelector(`[data-symbol-name="${whereToPlaceSymbol}"]`);
-
   // Create the SVG
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
   // Create the group that will contain the Symbol affiliation outline
   const outlineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   outlineGroup.classList.add('outline');
@@ -147,10 +147,12 @@ function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x} ${svg.getBBox().y} ${svg.getBBox().width} ${svg.getBBox().height}`);
   svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
   svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
+  svg.setAttributeNS(null, 'data-symbol-desc', `${symbolToGenerate}`);
 }
 
+
 // * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
-const addSymbolsToDropdownList = Object.keys(militarySymbolsObject).forEach((e) => {
+const addSymbolsToDropdownList = () => Object.keys(militarySymbolsObject).forEach((e) => {
   const mdcList = document.querySelector('.mdc-list.symbol-list');
   // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
   const symbolTypeInfo = document.createElement('em');
@@ -159,7 +161,7 @@ const addSymbolsToDropdownList = Object.keys(militarySymbolsObject).forEach((e) 
   // Append the symbol DESCRIPTION to the list (eg- "Infantry")
   const newli = document.createElement('li');
   newli.setAttribute('class', 'mdc-list-item');
-  newli.setAttribute('data-value', e);
+  newli.setAttributeNS(null, 'data-value', e);
   newli.textContent = e.toString();
 
   newli.prepend(symbolTypeInfo);
@@ -174,17 +176,16 @@ const addSymbolsToDropdownList = Object.keys(militarySymbolsObject).forEach((e) 
     // Now set the viewBox and dimensions for the thumbnails
     newli.querySelectorAll('.symbolFigure svg').forEach((e2) => {
       // This just removes the animation on the symbol on the dropdown list
-      e2.classList.contains('animateSymbol') ? e.classList.remove('animateSymbol') : null;
-      e2.setAttributeNS(null, 'preserveAspectRatio', 'none');
-      e2.setAttributeNS(null, 'viewBox', '21 46 158 108');
+      e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
+      e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+      // e2.setAttributeNS(null, 'viewBox', '21 46 158 108'); // ! viewBox is now set in the mutation observer in mdcComponents.js
       e2.setAttributeNS(null, 'width', '63');
       e2.setAttributeNS(null, 'height', '43');
     });
   } else {
     console.error('There is no match between the li class and symbol class...Restarting');
     setTimeout(() => {
-      // eslint-disable-next-line no-unused-expressions
-      addSymbolsToDropdownList;
+      addSymbolsToDropdownList();
     }, 300);
   }
 });
@@ -192,3 +193,5 @@ const addSymbolsToDropdownList = Object.keys(militarySymbolsObject).forEach((e) 
 // ! This exposes the militarySymbolsObject and generateSymbol function to the window so you can access them via console. Remove on production
 window.militarySymbolsObject = militarySymbolsObject;
 window.generateSymbol = generateSymbol;
+
+export default addSymbolsToDropdownList;

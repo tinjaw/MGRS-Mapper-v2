@@ -40,6 +40,7 @@ module.exports = [{
     // ! This just hides the file size warnings in the console
     hints: false,
   },
+  devtool: 'inline-source-map',
   // plugins: [
   //   new WebpackMonitor({
   //     capture: true,
