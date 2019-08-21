@@ -205,7 +205,6 @@ const militarySymbolsObject = {
     type: 'Equipment',
     affiliation: {
       friendly: {
-
         path_1: {
           d: 'm 100,60 0,80 M 85,75 100,60 115,75',
           fill: 'none',

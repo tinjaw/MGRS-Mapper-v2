@@ -2,63 +2,22 @@
 import { selectAffiliation } from './mdcComponents';
 import affiliationOutlineObject from './affiliationOutlineObject';
 import militarySymbolsObject from './militarySymbolsObject';
+import unitSizeObject from './unitSizeObject';
 
 // * SYMBOL GENERATOR FUNCTION * //
-// TODO: Why on God's earth is this function 143 lines long? There has GOT to be a better way
+// TODO: Why on God's earth is this function 182 lines long? There has GOT to be a better way
 // example - generateSymbol('chemicalRecon', 'newSVG');
-async function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
+function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   const symbol = militarySymbolsObject[symbolToGenerate].affiliation[selectAffiliation.value];
   const symbolLocation = document.querySelector(`[data-symbol-name="${whereToPlaceSymbol}"]`);
+
+
   // Create the SVG
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-
   // Create the group that will contain the Symbol affiliation outline
   const outlineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   outlineGroup.classList.add('outline');
 
-
-  // if (militarySymbolsObject[symbolToGenerate].type === 'Equipment') {
-  // symbolLocation.querySelectorAll('.outline > path').forEach((e) => {
-  //   e.remove();
-  // });
-
-  //   try {
-  // const outline = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-  // outline.setAttributeNS(null, 'cx', '100');
-  // outline.setAttributeNS(null, 'cy', '100');
-  // outline.setAttributeNS(null, 'r', '60');
-  // outline.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
-  // outline.setAttributeNS(null, 'stroke', 'black');
-  // outline.setAttributeNS(null, 'stroke-width', '4');
-  // outlineGroup.append(outline);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-
-  // switch (militarySymbolsObject[symbolToGenerate].type === 'Equipment') {
-  //   case true:
-  //     const outline = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-  //     outline.setAttributeNS(null, 'cx', '100');
-  //     outline.setAttributeNS(null, 'cy', '100');
-  //     outline.setAttributeNS(null, 'r', '60');
-  //     outline.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
-  //     outline.setAttributeNS(null, 'stroke', 'black');
-  //     outline.setAttributeNS(null, 'stroke-width', '4');
-  //     outlineGroup.append(outline);
-  //     break;
-
-  //   default: {
-  //     const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  //     outline.setAttributeNS(null, 'd', `${affiliationOutlineObject[selectAffiliation.value].d}`);
-  //     outline.setAttributeNS(null, 'fill', `${affiliationOutlineObject[selectAffiliation.value].fill}`);
-  //     outline.setAttributeNS(null, 'stroke', 'black');
-  //     outline.setAttributeNS(null, 'stroke-width', '4');
-  //     outlineGroup.append(outline);
-  //     break;
-  //   }
-  // }
 
   // If the symbol affiliation is templated, then add the second path overlay. Otherwise only add 1
   switch (affiliationOutlineObject[selectAffiliation.value].templated) {
@@ -183,14 +142,11 @@ async function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
       decoratorGroup.append(text);
     }
   });
-
   svg.append(outlineGroup, decoratorGroup);
-
-
   // document.querySelector('.newSVG').append(svg);
   symbolLocation.append(svg);
 
-
+  // This will look to see if the symbol is a piece of equipment. If it is a piece of equipment AND the affiliation is either Friendly or Friendly-Templated it will remove the old outline and add a new one.
   if (militarySymbolsObject[symbolToGenerate].type === 'Equipment') {
     switch (selectAffiliation.value) {
       case 'friendly':
@@ -231,14 +187,58 @@ async function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
         break;
     }
   }
-
-
   svg.setAttributeNS(null, 'preserveAspectRatio', 'none');
   svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x} ${svg.getBBox().y} ${svg.getBBox().width} ${svg.getBBox().height}`);
   svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
   svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
   svg.setAttributeNS(null, 'data-symbol-desc', `${symbolToGenerate}`);
 }
+
+
+// * ADD UNIT SIZE TO THE DROPDOWN LIST * //
+const addUnitSizesToDropdownList = () => Object.keys(unitSizeObject).forEach((e) => {
+  const mdcList = document.querySelector('.mdc-list.unit-size-list');
+  // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
+  // const symbolTypeInfo = document.createElement('em');
+  // symbolTypeInfo.setAttribute('class', 'symbol-type-info');
+  // symbolTypeInfo.textContent = unitSizeObject[e].type.padEnd(15, '.');
+  // Append the symbol DESCRIPTION to the list (eg- "Infantry")
+  const newli = document.createElement('li');
+  newli.setAttribute('class', 'mdc-list-item');
+  newli.setAttributeNS(null, 'data-value', e);
+  newli.textContent = e.toString();
+
+  // newli.prepend(symbolTypeInfo);
+  mdcList.append(newli);
+  const figureElement = document.createElement('figure');
+  figureElement.setAttribute('class', 'symbolFigure');
+  figureElement.setAttribute('data-symbol-name', `${e}`); // add the symbol key to the data-attr so they can match up with the list item
+  newli.prepend(figureElement);
+  // This will add the icons to the dropdown list
+
+  if (figureElement.dataset.symbolName === e.toString()) {
+    generateSymbol(selectSymbol.value, e.toString());
+    // Now set the viewBox and dimensions for the thumbnails
+
+    newli.querySelectorAll('.symbolFigure svg').forEach((e2) => {
+      const usGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      usGroup.classList.add('unitsize');
+      const us = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      us.setAttributeNS(null, 'd', 'M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0');
+      usGroup.append(us);
+      e2.append(usGroup);
+      console.log(us);
+
+      // This just removes the animation on the symbol on the dropdown list
+      e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
+      e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+      // e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x - 4} ${e2.getBBox().y - 4} ${e2.getBBox().width + 8} ${e2.getBBox().height + 8}`);
+      e2.setAttributeNS(null, 'viewBox', '21 18.5 158 135.5');
+      e2.setAttributeNS(null, 'width', '63');
+      e2.setAttributeNS(null, 'height', '43');
+    });
+  }
+});
 
 
 // * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
@@ -283,5 +283,6 @@ const addSymbolsToDropdownList = () => Object.keys(militarySymbolsObject).forEac
 // ! This exposes the militarySymbolsObject and generateSymbol function to the window so you can access them via console. Remove on production
 window.militarySymbolsObject = militarySymbolsObject;
 window.generateSymbol = generateSymbol;
+window.unitSizeObject = unitSizeObject;
 
 export default addSymbolsToDropdownList;

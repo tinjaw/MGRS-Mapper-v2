@@ -5,6 +5,8 @@ import { MDCTextField } from '@material/textfield';
 import Fuse from 'fuse.js';
 import militarySymbolsObject from './militarySymbolsObject';
 import addSymbolsToDropdownList from './app';
+import affiliationOutlineObject from './affiliationOutlineObject';
+import unitSizeObject from './unitSizeObject';
 
 
 const textField = new MDCTextField(document.querySelector('.searchSymbols'));
@@ -12,7 +14,7 @@ const textField = new MDCTextField(document.querySelector('.searchSymbols'));
 // //const ripple = new MDCRipple(document.querySelector('.mdc-button'));
 const selectSymbol = new MDCSelect(document.querySelector('.symbol-select'));
 export const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
-
+const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select'));
 
 selectSymbol.listen('MDCSelect:change', () => {
   // If there is an SVG in the symbol panel, remove it
@@ -35,7 +37,49 @@ selectAffiliation.listen('MDCSelect:change', () => {
   searchResults(); // This will change the unit affiliation on the "Select a Symbol" dropdown
   generateSymbol(selectSymbol.value, 'newSVG');
   selectSymbol.foundation_.adapter_.closeMenu();
+
+  // document.querySelectorAll('.unit-size-outline').forEach((e) => {
+  //   // console.log(affiliationOutlineObject[selectAffiliation.value]);
+  // e.setAttributeNS(null, 'd', affiliationOutlineObject[selectAffiliation.value].d);
+  // e.setAttributeNS(null, 'fill', affiliationOutlineObject[selectAffiliation.value].fill);
+  // e.setAttributeNS(null, 'stroke-width', '5');
+  // e.parentElement.setAttributeNS(null, 'viewBox', `${e.parentElement.getBBox().x - 4} ${e.parentElement.getBBox().y - 4} ${e.parentElement.getBBox().width + 8} ${e.parentElement.getBBox().height + 8}`);
+  //   setTimeout(() => {
+  //     console.log(affiliationOutlineObject[selectAffiliation.value].d);
+  //   }, 300);
+  // });
+
+  //! Calling it here... I am trying to get the Unit Size dropdown symbols to dynamically change depending on the selected unit affiliation. Everything works fine but the viewBox cannot be set for some reason.
+  document.querySelectorAll('.unit-size-list .mdc-list-item figure svg path').forEach((e) => {
+    // const usp = e.className.baseVal = 'unit-size-path';
+    // const uso = e.classList.contains('unit-size-outline');
+
+
+    e.parentElement.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+    if (e.classList.contains('unit-size-outline')) {
+      e.setAttributeNS(null, 'd', affiliationOutlineObject[selectAffiliation.value].d);
+      e.setAttributeNS(null, 'fill', affiliationOutlineObject[selectAffiliation.value].fill);
+      e.setAttributeNS(null, 'stroke-width', '5');
+      console.log(e.getBBox());
+    } else {
+      e.setAttributeNS(null, 'd', unitSizeObject.squad[selectAffiliation.value].d);
+      e.setAttributeNS(null, 'stroke-width', '5');
+    }
+    // uso.setAttributeNS(null, 'd', affiliationOutlineObject[selectAffiliation.value].d);
+    // uso.setAttributeNS(null, 'fill', affiliationOutlineObject[selectAffiliation.value].fill);
+    // uso.setAttributeNS(null, 'stroke-width', '5');
+  });
 });
+
+
+// selectUnitSize.listen('MDCSelect:change', () => {
+//   if (document.querySelector('.newSVG svg')) {
+//     document.querySelector('.newSVG svg').remove();
+//   }
+//   searchResults(); // This will change the unit affiliation on the "Select a Symbol" dropdown
+//   generateSymbol(selectSymbol.value, 'newSVG');
+//   selectSymbol.foundation_.adapter_.closeMenu();
+// });
 
 
 const options = {
@@ -128,7 +172,7 @@ const searchResults = debounce(() => {
 
 textField.input_.addEventListener('input', searchResults);
 
-
+// ! GLOBAL VARS - remove on production
 window.textField = textField;
 window.selectSymbol = selectSymbol;
 
