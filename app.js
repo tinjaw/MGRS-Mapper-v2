@@ -6,7 +6,7 @@ import militarySymbolsObject from './militarySymbolsObject';
 // * SYMBOL GENERATOR FUNCTION * //
 // TODO: Why on God's earth is this function 143 lines long? There has GOT to be a better way
 // example - generateSymbol('chemicalRecon', 'newSVG');
-function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
+async function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   const symbol = militarySymbolsObject[symbolToGenerate].affiliation[selectAffiliation.value];
   const symbolLocation = document.querySelector(`[data-symbol-name="${whereToPlaceSymbol}"]`);
   // Create the SVG
@@ -15,6 +15,50 @@ function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   // Create the group that will contain the Symbol affiliation outline
   const outlineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   outlineGroup.classList.add('outline');
+
+
+  // if (militarySymbolsObject[symbolToGenerate].type === 'Equipment') {
+  // symbolLocation.querySelectorAll('.outline > path').forEach((e) => {
+  //   e.remove();
+  // });
+
+  //   try {
+  // const outline = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  // outline.setAttributeNS(null, 'cx', '100');
+  // outline.setAttributeNS(null, 'cy', '100');
+  // outline.setAttributeNS(null, 'r', '60');
+  // outline.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
+  // outline.setAttributeNS(null, 'stroke', 'black');
+  // outline.setAttributeNS(null, 'stroke-width', '4');
+  // outlineGroup.append(outline);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+
+  // switch (militarySymbolsObject[symbolToGenerate].type === 'Equipment') {
+  //   case true:
+  //     const outline = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  //     outline.setAttributeNS(null, 'cx', '100');
+  //     outline.setAttributeNS(null, 'cy', '100');
+  //     outline.setAttributeNS(null, 'r', '60');
+  //     outline.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
+  //     outline.setAttributeNS(null, 'stroke', 'black');
+  //     outline.setAttributeNS(null, 'stroke-width', '4');
+  //     outlineGroup.append(outline);
+  //     break;
+
+  //   default: {
+  //     const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  //     outline.setAttributeNS(null, 'd', `${affiliationOutlineObject[selectAffiliation.value].d}`);
+  //     outline.setAttributeNS(null, 'fill', `${affiliationOutlineObject[selectAffiliation.value].fill}`);
+  //     outline.setAttributeNS(null, 'stroke', 'black');
+  //     outline.setAttributeNS(null, 'stroke-width', '4');
+  //     outlineGroup.append(outline);
+  //     break;
+  //   }
+  // }
 
   // If the symbol affiliation is templated, then add the second path overlay. Otherwise only add 1
   switch (affiliationOutlineObject[selectAffiliation.value].templated) {
@@ -141,8 +185,54 @@ function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   });
 
   svg.append(outlineGroup, decoratorGroup);
+
+
   // document.querySelector('.newSVG').append(svg);
   symbolLocation.append(svg);
+
+
+  if (militarySymbolsObject[symbolToGenerate].type === 'Equipment') {
+    switch (selectAffiliation.value) {
+      case 'friendly':
+        symbolLocation.querySelectorAll('.outline > path').forEach((e) => {
+          e.remove();
+        });
+        const outline = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        outline.setAttributeNS(null, 'cx', '100');
+        outline.setAttributeNS(null, 'cy', '100');
+        outline.setAttributeNS(null, 'r', '60');
+        outline.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
+        outline.setAttributeNS(null, 'stroke', 'black');
+        outline.setAttributeNS(null, 'stroke-width', '4');
+        outlineGroup.append(outline);
+        break;
+      case 'friendlyTemplated':
+        symbolLocation.querySelectorAll('.outline > path').forEach((e) => {
+          e.remove();
+        });
+        const outline1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        outline1.setAttributeNS(null, 'cx', '100');
+        outline1.setAttributeNS(null, 'cy', '100');
+        outline1.setAttributeNS(null, 'r', '60');
+        outline1.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
+        outline1.setAttributeNS(null, 'stroke', 'black');
+        outline1.setAttributeNS(null, 'stroke-width', '4');
+        const outline2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        outline2.setAttributeNS(null, 'cx', '100');
+        outline2.setAttributeNS(null, 'cy', '100');
+        outline2.setAttributeNS(null, 'r', '60');
+        outline2.setAttributeNS(null, 'fill', 'none');
+        outline2.setAttributeNS(null, 'stroke', 'rgb(239, 239, 239)');
+        outline2.setAttributeNS(null, 'stroke-width', '5');
+        outline2.setAttributeNS(null, 'stroke-dasharray', '4,4');
+        outlineGroup.append(outline1, outline2);
+        break;
+      default:
+        break;
+    }
+  }
+
+
   svg.setAttributeNS(null, 'preserveAspectRatio', 'none');
   svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x} ${svg.getBBox().y} ${svg.getBBox().width} ${svg.getBBox().height}`);
   svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
@@ -178,7 +268,7 @@ const addSymbolsToDropdownList = () => Object.keys(militarySymbolsObject).forEac
       // This just removes the animation on the symbol on the dropdown list
       e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
       e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-      // e2.setAttributeNS(null, 'viewBox', '21 46 158 108'); // ! viewBox is now set in the mutation observer in mdcComponents.js
+      e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x - 4} ${e2.getBBox().y - 4} ${e2.getBBox().width + 8} ${e2.getBBox().height + 8}`);
       e2.setAttributeNS(null, 'width', '63');
       e2.setAttributeNS(null, 'height', '43');
     });

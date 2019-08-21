@@ -201,6 +201,46 @@ const militarySymbolsObject = {
       },
     },
   },
+  'Weapon System - Grenade Launcher - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75',
+          fill: 'none',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '90',
+          r: '15',
+          fill: 'none',
+        },
+        path_2: {
+          d: 'm 85,125 30,0 m -30,-10 30,0',
+          fill: 'none',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
 };
 
 export default militarySymbolsObject;

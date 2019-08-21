@@ -98,15 +98,18 @@ const searchResults = debounce(() => {
             // This just removes the animation on the symbol on the dropdown list
             e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
             e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-            e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x} ${e2.getBBox().y} ${e2.getBBox().width} ${e2.getBBox().height}`);
+            // e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x} ${e2.getBBox().y} ${e2.getBBox().width} ${e2.getBBox().height}`);
+            //! viewBox is set in the mutation observer
             e2.setAttributeNS(null, 'width', '63');
             e2.setAttributeNS(null, 'height', '43');
           });
         }
       }
     });
-    // set the first result as the symbol value on the "Select a Symbol" dropdown
-    result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null; //! throws console errors but works
+    if (textField.value.length >= 3) {
+      // set the first result as the symbol value on the "Select a Symbol" dropdown
+      result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null;
+    }
   } else {
     // If there is no text in the search field:
     // Remove all search results
@@ -143,7 +146,7 @@ const observer = new MutationObserver(() => {
     selectAffiliation.disabled = true;
     // When the symbol select menu is open, set the viewbox for all elements in dropdown
     document.querySelectorAll('.symbolFigure svg .outline').forEach((svg) => {
-      const svgbox = `${svg.getBBox().x} ${svg.getBBox().y} ${svg.getBBox().width} ${svg.getBBox().height}`;
+      const svgbox = `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`;
       svg.parentNode.setAttributeNS(null, 'viewBox', svgbox);
     });
   } else {
