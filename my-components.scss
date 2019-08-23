@@ -37,3 +37,17 @@ em {
 svg {
   overflow: visible;
 }
+
+li.mdc-list-item {
+  height: 64px;
+  /* padding: 3px 10px 3px 0px; */
+  padding: 0.2rem 1rem 0.2rem 0rem;
+  font-size: 1.15rem;
+}
+
+li.mdc-list-item svg {
+  height: fit-content;
+  width: fit-content;
+  max-height: 64px;
+  max-width: 93px;
+}

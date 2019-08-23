@@ -10,15 +10,11 @@ import unitSizeObject from './unitSizeObject';
 function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
   const symbol = militarySymbolsObject[symbolToGenerate].affiliation[selectAffiliation.value];
   const symbolLocation = document.querySelector(`[data-symbol-name="${whereToPlaceSymbol}"]`);
-
-
   // Create the SVG
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   // Create the group that will contain the Symbol affiliation outline
   const outlineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
   outlineGroup.classList.add('outline');
-
-
   // If the symbol affiliation is templated, then add the second path overlay. Otherwise only add 1
   switch (affiliationOutlineObject[selectAffiliation.value].templated) {
     case true:
@@ -187,56 +183,125 @@ function generateSymbol(symbolToGenerate, whereToPlaceSymbol) {
         break;
     }
   }
-  svg.setAttributeNS(null, 'preserveAspectRatio', 'none');
+  svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
   svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x} ${svg.getBBox().y} ${svg.getBBox().width} ${svg.getBBox().height}`);
   svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
   svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
   svg.setAttributeNS(null, 'data-symbol-desc', `${symbolToGenerate}`);
 }
 
-
 // * ADD UNIT SIZE TO THE DROPDOWN LIST * //
-const addUnitSizesToDropdownList = () => Object.keys(unitSizeObject).forEach((e) => {
+const addUnitSizesToDropdownList = () => Object.keys(unitSizeObject).forEach((elem) => {
   const mdcList = document.querySelector('.mdc-list.unit-size-list');
-  // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
-  // const symbolTypeInfo = document.createElement('em');
-  // symbolTypeInfo.setAttribute('class', 'symbol-type-info');
-  // symbolTypeInfo.textContent = unitSizeObject[e].type.padEnd(15, '.');
-  // Append the symbol DESCRIPTION to the list (eg- "Infantry")
+  // Create a new list element
   const newli = document.createElement('li');
   newli.setAttribute('class', 'mdc-list-item');
-  newli.setAttributeNS(null, 'data-value', e);
-  newli.textContent = e.toString();
-
-  // newli.prepend(symbolTypeInfo);
+  newli.setAttributeNS(null, 'data-value', elem);
+  newli.textContent = elem.charAt(0).toUpperCase() + elem.slice(1);
   mdcList.append(newli);
+  // Create a new figure element
   const figureElement = document.createElement('figure');
   figureElement.setAttribute('class', 'symbolFigure');
-  figureElement.setAttribute('data-symbol-name', `${e}`); // add the symbol key to the data-attr so they can match up with the list item
+  figureElement.setAttribute('data-symbol-name', `${elem}`);
   newli.prepend(figureElement);
-  // This will add the icons to the dropdown list
+  // Now match the figure element to the right symbol
+  if (figureElement.dataset.symbolName === elem.toString()) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('data-unit-size', `${elem}`);
 
-  if (figureElement.dataset.symbolName === e.toString()) {
-    generateSymbol(selectSymbol.value, e.toString());
-    // Now set the viewBox and dimensions for the thumbnails
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const linearGradientOutline = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    const stopOutline1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    const stopOutline2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    const stopOutline3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    linearGradientOutline.setAttributeNS(null, 'id', `transparentOutline_${elem}`);
+    linearGradientOutline.setAttributeNS(null, 'gradientUnits', 'objectBoundingBox');
+    linearGradientOutline.setAttributeNS(null, 'x1', '0');
+    linearGradientOutline.setAttributeNS(null, 'y1', '0');
+    linearGradientOutline.setAttributeNS(null, 'x2', '0');
+    linearGradientOutline.setAttributeNS(null, 'y2', '1');
+    stopOutline1.setAttributeNS(null, 'stop-color', affiliationOutlineObject[selectAffiliation.value].fill);
+    stopOutline1.setAttributeNS(null, 'stop-opacity', '1');
+    stopOutline1.setAttributeNS(null, 'offset', '0');
+    stopOutline2.setAttributeNS(null, 'stop-color', affiliationOutlineObject[selectAffiliation.value].fill);
+    stopOutline2.setAttributeNS(null, 'stop-opacity', '0');
+    stopOutline2.setAttributeNS(null, 'offset', '0.45');
+    stopOutline3.setAttributeNS(null, 'stop-color', 'transparent');
+    stopOutline3.setAttributeNS(null, 'stop-opacity', '0');
+    stopOutline3.setAttributeNS(null, 'offset', '1');
+    linearGradientOutline.append(stopOutline1, stopOutline2, stopOutline3);
 
-    newli.querySelectorAll('.symbolFigure svg').forEach((e2) => {
-      const usGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      usGroup.classList.add('unitsize');
-      const us = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      us.setAttributeNS(null, 'd', 'M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0');
-      usGroup.append(us);
-      e2.append(usGroup);
-      console.log(us);
+    const linearGradientStroke = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+    const stopStroke1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    const stopStroke2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    const stopStroke3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    linearGradientStroke.setAttributeNS(null, 'id', `transparentStroke_${elem}`);
+    linearGradientStroke.setAttributeNS(null, 'gradientUnits', 'objectBoundingBox');
+    linearGradientStroke.setAttributeNS(null, 'x1', '0');
+    linearGradientStroke.setAttributeNS(null, 'y1', '0');
+    linearGradientStroke.setAttributeNS(null, 'x2', '0');
+    linearGradientStroke.setAttributeNS(null, 'y2', '1');
+    stopStroke1.setAttributeNS(null, 'stop-color', 'black');
+    stopStroke1.setAttributeNS(null, 'stop-opacity', '1');
+    stopStroke1.setAttributeNS(null, 'offset', '0');
+    stopStroke2.setAttributeNS(null, 'stop-color', 'black');
+    stopStroke2.setAttributeNS(null, 'stop-opacity', '0');
+    stopStroke2.setAttributeNS(null, 'offset', '0.45');
+    stopStroke3.setAttributeNS(null, 'stop-color', 'transparent');
+    stopStroke3.setAttributeNS(null, 'stop-opacity', '0');
+    stopStroke3.setAttributeNS(null, 'offset', '1');
+    linearGradientStroke.append(stopStroke1, stopStroke2, stopStroke3);
+    defs.append(linearGradientOutline, linearGradientStroke);
 
-      // This just removes the animation on the symbol on the dropdown list
-      e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
-      e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-      // e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x - 4} ${e2.getBBox().y - 4} ${e2.getBBox().width + 8} ${e2.getBBox().height + 8}`);
-      e2.setAttributeNS(null, 'viewBox', '21 18.5 158 135.5');
-      e2.setAttributeNS(null, 'width', '63');
-      e2.setAttributeNS(null, 'height', '43');
-    });
+    const outlinePathGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    outlinePathGroup.classList.add('outline-group');
+    const unitSizePathGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    unitSizePathGroup.classList.add('unit-size-group');
+    const unitSizePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    unitSizePath.classList.add('unit-size-path');
+
+    // Add the stroke-dasharray to the unit size symbol if its templated
+    switch (affiliationOutlineObject[selectAffiliation.value].templated) {
+      case true:
+        const outline1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        outline1.classList.add('unit-size-outline');
+        outline1.setAttributeNS(null, 'd', `${affiliationOutlineObject[selectAffiliation.value].d}`);
+        outline1.setAttributeNS(null, 'fill', `url(#transparentOutline_${elem})`);
+        outline1.setAttributeNS(null, 'stroke', `url(#transparentStroke_${elem})`);
+        outline1.setAttributeNS(null, 'stroke-width', '5');
+        const outline2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        outline2.setAttributeNS(null, 'd', `${affiliationOutlineObject[selectAffiliation.value].d}`);
+        outline2.setAttributeNS(null, 'fill', `${affiliationOutlineObject[selectAffiliation.value].fill_2}`);
+        outline2.setAttributeNS(null, 'stroke', `${affiliationOutlineObject[selectAffiliation.value].stroke_2}`);
+        outline2.setAttributeNS(null, 'stroke-width', `${affiliationOutlineObject[selectAffiliation.value].strokeWidth_2}`);
+        outline2.setAttributeNS(null, 'stroke-dasharray', `${affiliationOutlineObject[selectAffiliation.value].strokeDashArray_2}`);
+        outlinePathGroup.append(outline1, outline2);
+        break;
+      default: {
+        const outline = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        outline.classList.add('unit-size-outline');
+        outline.setAttributeNS(null, 'd', `${affiliationOutlineObject[selectAffiliation.value].d}`);
+        outline.setAttributeNS(null, 'fill', `url(#transparentOutline_${elem})`);
+        outline.setAttributeNS(null, 'stroke', `url(#transparentStroke_${elem})`);
+        outline.setAttributeNS(null, 'stroke-width', '5');
+        outlinePathGroup.append(outline);
+        break;
+      }
+    }
+
+    unitSizePath.setAttributeNS(null, 'd', unitSizeObject[elem][selectAffiliation.value].d);
+    unitSizePath.setAttributeNS(null, 'stroke-width', '8');
+    unitSizePath.setAttributeNS(null, 'stroke', 'black');
+    unitSizePathGroup.append(unitSizePath);
+
+    svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+    svg.setAttributeNS(null, 'viewBox', '90 -30 20 110');
+    svg.setAttributeNS(null, 'width', '93');
+    svg.setAttributeNS(null, 'height', '64');
+
+    svg.append(defs, outlinePathGroup, unitSizePathGroup);
+
+    figureElement.append(svg);
   }
 });
 
@@ -284,5 +349,7 @@ const addSymbolsToDropdownList = () => Object.keys(militarySymbolsObject).forEac
 window.militarySymbolsObject = militarySymbolsObject;
 window.generateSymbol = generateSymbol;
 window.unitSizeObject = unitSizeObject;
+window.affiliationOutlineObject = affiliationOutlineObject;
+window.selectAffiliation = selectAffiliation;
 
-export default addSymbolsToDropdownList;
+export { addSymbolsToDropdownList, addUnitSizesToDropdownList };

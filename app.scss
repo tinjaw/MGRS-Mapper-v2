@@ -65,10 +65,16 @@
 }
 
 .newSVG {
-  height: 100px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+//This makes the SVG in the panel very large.
+.newSVG svg {
+  height: fit-content;
+  width: fit-content;
 }
 
 .symbol-list em {
