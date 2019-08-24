@@ -58,7 +58,21 @@ selectUnitSize.listen('MDCSelect:change', () => {
   // searchResults(); // This will change the unit affiliation on the "Select a Symbol" dropdown
   // generateSymbol(selectSymbol.value, 'newSVG');
   // selectSymbol.foundation_.adapter_.closeMenu();
+  //! this shit below is garbage. but it shows the most basic functionality. I think your main problem lies within the generateSymbol() function. We should be looking into using classes to make object templates or something like that. As of right now this is completely unsustainable and it will only get worse as I start adding in more functionality like Mod1,2 etc etc....
+  const svg = document.querySelector('.newSVG svg');
+  const unitSizeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  unitSizeGroup.classList.add('unit-size-group');
+  const unitSizePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  unitSizePath.classList.add('unit-size-path');
+  unitSizePath.setAttributeNS(null, 'd', unitSizeObject[selectUnitSize.value][selectAffiliation.value].d);
+  // unitSizePath.setAttributeNS(null, 'd', 'M0,40l25,-25m0,25l-25,-25M35,40l25,-25m0,25l-25,-25M70,40l25,-25m0,25l-25,-25M105,40l25,-25m0,25l-25,-25M140,40l25,-25m0,25l-25,-25M175,40l25,-25m0,25l-25,-25');
+  unitSizePath.setAttributeNS(null, 'stroke-width', '4');
+  unitSizePath.setAttributeNS(null, 'stroke', 'black');
+  unitSizeGroup.append(unitSizePath);
 
+  svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+  svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
+  svg.append(unitSizeGroup);
 });
 
 
@@ -120,12 +134,12 @@ const searchResults = debounce(() => {
           // Now set the viewBox and dimensions for the thumbnails
           newli.querySelectorAll('.symbolFigure svg').forEach((e2) => {
             // This just removes the animation on the symbol on the dropdown list
-            e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
-            e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+            // e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
+            // e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
             // e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x} ${e2.getBBox().y} ${e2.getBBox().width} ${e2.getBBox().height}`);
             //! viewBox is set in the mutation observer
-            e2.setAttributeNS(null, 'width', '63');
-            e2.setAttributeNS(null, 'height', '43');
+            // e2.setAttributeNS(null, 'width', '63');
+            // e2.setAttributeNS(null, 'height', '43');
           });
         }
       }
