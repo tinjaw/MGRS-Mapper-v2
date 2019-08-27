@@ -23,6 +23,32 @@ const unitSizeObject = {
       return this.friendly;
     },
   },
+
+  team: {
+    friendly: {
+      d: 'M85,30a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,40L120,20',
+    },
+    get friendlyTemplated() {
+      return this.friendly;
+    },
+    hostile: {
+      d: 'M85,8a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,18L120,-2',
+    },
+    get hostileTemplated() {
+      return this.hostile;
+    },
+    get unknown() {
+      return this.hostile;
+    },
+    get pending() {
+      return this.hostile;
+    },
+    neutral: {
+      d: 'M85,25a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,35L120,15',
+    },
+  },
+
+
   squad: {
     friendly: {
       d: 'M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0',
