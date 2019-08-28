@@ -53,15 +53,19 @@
         <li>Installation conversion</li>
       </ul>
       <pre>
-        friendlyTemplated: {
-          templated: true,
-          d: 'M25,50 l150,0 0,100 -150,0 z',
-          fill: 'rgb(128,224,255)',
-          fill_2: 'none',
-          stroke_2: 'rgb(239, 239, 239)',
-          strokeWidth_2: '5',
-          strokeDashArray_2: '4,4',
-        },
+          equipment_friendlyTemplated: {
+            d: '',
+            cx: '100',
+            cy: '100',
+            r: '60',
+            fill: 'rgb(128,224,255)',
+            stroke: 'black',
+            strokeWidth: '4',
+            fill_2: 'none',
+            stroke_2: 'rgb(239, 239, 239)',
+            strokeWidth_2: '5',
+            strokeDashArray_2: '4,4'
+          }
       </pre>
     </div>
 
@@ -72,24 +76,82 @@
     <div class="container box5"></div>
     <div class="container box6"></div>
 
-    <!-- SELECT AFFILIATION -->
-    <div class="mdc-select affiliation demo-width-class">
-      <input type="hidden" name="enhanced-select" />
-      <i class="mdc-select__dropdown-icon"></i>
-      <div class="mdc-select__selected-text"></div>
-      <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
-        <ul class="mdc-list affiliation">
-          <li class="mdc-list-item xbox1 mdc-list-item--selected" data-value="friendly" aria-selected="true">friendly</li>
-          <li class="mdc-list-item xbox2" data-value="hostile">hostile</li>
-          <li class="mdc-list-item xbox3" data-value="friendlyTemplated">Friendly Templated</li>
-          <li class="mdc-list-item xbox4" data-value="hostileTemplated">Hostile Templated</li>
-          <li class="mdc-list-item xbox5" data-value="neutral">neutral</li>
-          <li class="mdc-list-item xbox6" data-value="pending">pending</li>
-          <li class="mdc-list-item xbox6" data-value="unknown">unknown</li>
-        </ul>
+    <!-- Affiliation List -->
+    <div class="mdc-layout-grid ">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell--span-3">
+          <div class="mdc-select  affiliation-select">
+            <input type="hidden" name="enhanced-select" />
+            <i class="mdc-select__dropdown-icon"></i>
+            <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
+            <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+              <ul class="mdc-list affiliation-list">
+                <li class="mdc-list-item mdc-list-item--selected" data-value="friendly" aria-selected="true">
+                  <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="63" height="43" viewBox="21 46 158 108">
+                      <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="5" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                    </svg>
+                  </figure>
+                  Friendly
+                </li>
+                <li class="mdc-list-item" data-value="friendlyTemplated">
+                  <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="63" height="43" viewBox="21 46 158 108">
+                      <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="8" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                      <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
+                    </svg>
+                  </figure>
+                  Assumed Friendly
+                </li>
+                <li class="mdc-list-item" data-value="hostile">
+                  <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="63" height="43" viewBox="24 24 152 152">
+                      <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="5" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
+                    </svg>
+                  </figure>
+                  Hostile
+                </li>
+                <li class="mdc-list-item" data-value="hostileTemplated">
+                  <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="63" height="43" viewBox="24 24 152 152">
+                      <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="8" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
+                      <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
+                    </svg>
+                  </figure>
+                  Suspect
+                </li>
+                <li class="mdc-list-item" data-value="unknown">
+                  <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="63" height="43" viewBox="26.75 26.75 146.5 146.5">
+                      <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="5" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
+                    </svg>
+                  </figure>
+                  Unknown
+                </li>
+                <li class="mdc-list-item" data-value="pending">
+                  <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="63" height="43" viewBox="26.75 26.75 146.5 146.5">
+                      <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="8" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
+                      <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
+                    </svg>
+                  </figure>
+                  Pending
+                </li>
+                <li class="mdc-list-item" data-value="neutral">
+                  <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="63" height="43" viewBox="41 41 118 118">
+                      <path d="M45,45 l110,0 0,110 -110,0 z" stroke-width="5" stroke="black" fill="rgb(170,255,170)" fill-opacity="1"></path>
+                    </svg>
+                  </figure>
+                  Neutral
+                </li>
+              </ul>
+            </div>
+            <span class="mdc-floating-label">Select an Affiliation</span>
+            <div class="mdc-line-ripple"></div>
+          </div>
+        </div>
       </div>
-      <span class="mdc-floating-label">Select Affiliation</span>
-      <div class="mdc-line-ripple"></div>
     </div>
     <!-- SELECT UNIT -->
     <div class="mdc-select select-unit demo-width-class">
@@ -419,6 +481,29 @@
           templated: false,
           d: 'M45,45 l110,0 0,110 -110,0 z',
           fill: 'rgb(170, 255, 170)'
+        },
+        equipment_friendly: {
+          templated: false,
+          d: '',
+          cx: '100',
+          cy: '100',
+          r: '60',
+          fill: 'rgb(128,224,255)',
+          stroke: 'black',
+          strokeWidth: '4'
+        },
+        equipment_friendlyTemplated: {
+          d: '',
+          cx: '100',
+          cy: '100',
+          r: '60',
+          fill: 'rgb(128,224,255)',
+          stroke: 'black',
+          strokeWidth: '4',
+          fill_2: 'none',
+          stroke_2: 'rgb(239, 239, 239)',
+          strokeWidth_2: '5',
+          strokeDashArray_2: '4,4'
         }
       };
 
@@ -527,6 +612,7 @@
           this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
           this.affiliation = affiliationOutlineObject[affiliation];
           this.echelon = unitSizeObject[echelon][affiliation];
+          this.type = militarySymbolsObject[symbol].type;
           this.data = {
             location,
             symbol,
@@ -539,10 +625,11 @@
           this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
           const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
           // This will find any symbols that have nothing in the echelon path data. You can use this later to exclude them from being inserted into the DOM
-          console.dir(this.echelonData.firstChild.attributes['d'].textContent.length);
+          //console.dir(this.echelonData.firstChild.attributes['d'].textContent.length);
 
           svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
           this.location.append(svg);
+          svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
           svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); //this should probably be split into separate data-attrs
           svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
           svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
@@ -557,30 +644,115 @@
           outline.setAttributeNS(null, 'stroke', 'black');
           outline.setAttributeNS(null, 'stroke-width', '4');
           const outlineTemplated = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          Object.keys(this.affiliation).forEach(key => {
-            const value = this.affiliation[key];
-            //console.log(key, value);
-            if (key.indexOf('templated') === 0 && value === true) {
-              outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
-              outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
-              outlineTemplated.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
-              outlineTemplated.setAttributeNS(null, 'fill', `${this.affiliation['fill_2']}`);
-              outlineTemplated.setAttributeNS(null, 'stroke', `${this.affiliation['stroke_2']}`);
-              outlineTemplated.setAttributeNS(null, 'stroke-width', `${this.affiliation['strokeWidth_2']}`);
-              outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation['strokeDashArray_2']}`);
-              // Had to put this in an async function because the templated outline was popping up ahead of the regular outline
-              (async () => {
-                await outlineGroup.append(outlineTemplated);
-                outlineGroup.prepend(outline);
-              })().catch(err => {
-                console.error(err);
-              });
-            } else {
-              outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
-              outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
-              outlineGroup.append(outline);
-            }
-          });
+
+          const generateOutline = () =>
+            Object.keys(this.affiliation).forEach(key => {
+              const value = this.affiliation[key];
+              //console.log(key, value);
+              if (key.indexOf('templated') === 0 && value === true) {
+                outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
+                outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
+                outlineTemplated.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
+                outlineTemplated.setAttributeNS(null, 'fill', `${this.affiliation['fill_2']}`);
+                outlineTemplated.setAttributeNS(null, 'stroke', `${this.affiliation['stroke_2']}`);
+                outlineTemplated.setAttributeNS(null, 'stroke-width', `${this.affiliation['strokeWidth_2']}`);
+                outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation['strokeDashArray_2']}`);
+                // Had to put this in an async function because the templated outline was popping up ahead of the regular outline
+                (async () => {
+                  await outlineGroup.append(outlineTemplated);
+                  outlineGroup.prepend(outline);
+                })().catch(err => {
+                  console.error(err);
+                });
+              } else {
+                outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
+                outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
+                outlineGroup.append(outline);
+              }
+            });
+
+          // Check if the symbol is a piece of equipment
+          switch (this.type) {
+            case 'Equipment':
+              //If the symbol is a friendly piece of equipment, then we need to adjust the outline
+              switch (selectAffiliation.value) {
+                case 'friendly':
+                  const outline0 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                  outline0.setAttributeNS(null, 'cx', '100');
+                  outline0.setAttributeNS(null, 'cy', '100');
+                  outline0.setAttributeNS(null, 'r', '60');
+                  outline0.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
+                  outline0.setAttributeNS(null, 'stroke', 'black');
+                  outline0.setAttributeNS(null, 'stroke-width', '4');
+                  outlineGroup.append(outline0);
+                  break;
+                case 'friendlyTemplated':
+                  const outline1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                  outline1.setAttributeNS(null, 'cx', '100');
+                  outline1.setAttributeNS(null, 'cy', '100');
+                  outline1.setAttributeNS(null, 'r', '60');
+                  outline1.setAttributeNS(null, 'fill', 'rgb(128,224,255)');
+                  outline1.setAttributeNS(null, 'stroke', 'black');
+                  outline1.setAttributeNS(null, 'stroke-width', '4');
+                  const outline2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                  outline2.setAttributeNS(null, 'cx', '100');
+                  outline2.setAttributeNS(null, 'cy', '100');
+                  outline2.setAttributeNS(null, 'r', '60');
+                  outline2.setAttributeNS(null, 'fill', 'none');
+                  outline2.setAttributeNS(null, 'stroke', 'rgb(239, 239, 239)');
+                  outline2.setAttributeNS(null, 'stroke-width', '5');
+                  outline2.setAttributeNS(null, 'stroke-dasharray', '4,4');
+                  outlineGroup.append(outline1, outline2);
+                  break;
+                default:
+                  // If the equipment is anything BUT friendly, we can use the normal outlines for Land Units.
+                  generateOutline();
+                  break;
+              }
+              break;
+            default:
+              generateOutline();
+              break;
+          }
+
+          // if (this.type === 'Equipment') {
+          //   if (selectAffiliation.value === 'friendly') {
+          //     this.affiliation = affiliationOutlineObject.equipment_friendly;
+          //     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          //     circle.setAttributeNS(null, 'cx', `${this.affiliation.cx}`);
+          //     circle.setAttributeNS(null, 'cy', `${this.affiliation.cy}`);
+          //     circle.setAttributeNS(null, 'r', `${this.affiliation.r}`);
+          //     circle.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
+          //     circle.setAttributeNS(null, 'stroke', `${this.affiliation.stroke}`);
+          //     circle.setAttributeNS(null, 'stroke-width', `${this.affiliation.strokeWidth}`);
+          //     outlineGroup.append(circle);
+          //   }
+          // }
+          //   Object.keys(this.affiliation).forEach(key => {
+          //     const value = this.affiliation[key];
+          //     //console.log(key, value);
+          //     if (key.indexOf('templated') === 0 && value === true) {
+          //       outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
+          //       outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
+          //       outlineTemplated.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
+          //       outlineTemplated.setAttributeNS(null, 'fill', `${this.affiliation['fill_2']}`);
+          //       outlineTemplated.setAttributeNS(null, 'stroke', `${this.affiliation['stroke_2']}`);
+          //       outlineTemplated.setAttributeNS(null, 'stroke-width', `${this.affiliation['strokeWidth_2']}`);
+          //       outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation['strokeDashArray_2']}`);
+          //       // Had to put this in an async function because the templated outline was popping up ahead of the regular outline
+          //       (async () => {
+          //         await outlineGroup.append(outlineTemplated);
+          //         outlineGroup.prepend(outline);
+          //       })().catch(err => {
+          //         console.error(err);
+          //       });
+          //     } else {
+          //       outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
+          //       outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
+          //       outlineGroup.append(outline);
+          //     }
+          //   });
+
           return outlineGroup;
         }
         get decoratorData() {
@@ -702,9 +874,6 @@
         }
       }
 
-      const mso = new MilSym('.box1', 'CBRN Chemical Recon', 'hostile', 'squad');
-      console.log(mso);
-
       // function placeLotsOfSymbols(container) {
       //   this.container = document.querySelectorAll(container);
       //   const symbolArray = Array.from(Object.keys(militarySymbolsObject));
@@ -717,9 +886,7 @@
 
       // Loads Material Design
       window.onload = () => {
-        mso.placeSymbol();
-
-        const selectAffiliation = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select.affiliation'));
+        const selectAffiliation = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select.affiliation-select'));
         selectAffiliation.listen('MDCSelect:change', () => {
           new MilSym('.box1', `${selectSymbol.value}`, `${selectAffiliation.value}`, 'squad').placeSymbol();
           Object.keys(militarySymbolsObject).forEach(key => {
@@ -730,7 +897,6 @@
 
         const selectSymbol = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select.select-unit'));
         selectSymbol.listen('MDCSelect:change', () => {
-          console.log(selectSymbol.value);
           selectSymbol.selectedText_.textContent = selectSymbol.value;
           new MilSym('.box1', `${selectSymbol.value}`, `${selectAffiliation.value}`, 'squad').placeSymbol();
         });
@@ -746,6 +912,9 @@
             selectSymbol.foundation_.adapter_.isMenuOpen() ? resize('.symbolFigure svg') : null;
           });
         }
+
+        const mso = new MilSym('.box1', `${selectSymbol.value}`, `${selectAffiliation.value}`, 'squad');
+        mso.placeSymbol();
       };
 
       //ex- resize('.symbolFigure svg');  (default parameters set for thumbnails)
@@ -754,14 +923,14 @@
         this.width = width;
         this.height = height;
 
-        this.symbolElement.forEach(e2 => {
+        this.symbolElement.forEach(key => {
           // This just removes the animation on the symbol on the dropdown list
-          //e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
-          e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); //this is a default value I believe
-          e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x - 4} ${e2.getBBox().y - 4} ${e2.getBBox().width + 8} ${e2.getBBox().height + 8}`);
-          //e2.setAttributeNS(null, 'viewBox', '24 24 152 152');
-          e2.setAttributeNS(null, 'width', `${this.width}`);
-          e2.setAttributeNS(null, 'height', `${this.height}`);
+          //key.classList.contains('animateSymbol') ? key.classList.remove('animateSymbol') : null;
+          key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); //this is a default value I believe
+          key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
+          //key.setAttributeNS(null, 'viewBox', '24 24 152 152');
+          key.setAttributeNS(null, 'width', `${this.width}`);
+          key.setAttributeNS(null, 'height', `${this.height}`);
         });
       }
 
