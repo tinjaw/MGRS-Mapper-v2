@@ -106,26 +106,25 @@
     <script>
       // * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
       const addSymbolsToDropdownList = () =>
-        Object.keys(militarySymbolsObject).forEach(e => {
+        Object.keys(militarySymbolsObject).forEach(key => {
           const mdcList = document.querySelector('.mdc-list.symbol-list');
           // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
           const symbolTypeInfo = document.createElement('em');
           symbolTypeInfo.setAttribute('class', 'symbol-type-info');
-          symbolTypeInfo.textContent = militarySymbolsObject[e].type.padEnd(15, '.');
+          symbolTypeInfo.textContent = militarySymbolsObject[key].type.padEnd(15, '.');
           // Append the symbol DESCRIPTION to the list (eg- "Infantry")
           const newli = document.createElement('li');
           newli.setAttribute('class', 'mdc-list-item');
-          newli.setAttributeNS(null, 'data-value', e);
-          newli.textContent = e.toString();
-
+          newli.setAttributeNS(null, 'data-value', key);
+          newli.textContent = key.toString();
           newli.prepend(symbolTypeInfo);
           mdcList.append(newli);
           const figureElement = document.createElement('figure');
           figureElement.setAttribute('class', 'symbolFigure');
-          figureElement.setAttribute('data-symbol-name', `${e}`); // add the symbol key to the data-attr so they can match up with the list item
+          figureElement.setAttribute('data-symbol-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
           newli.prepend(figureElement);
           //This will add the icons to the dropdown list
-          new MilSym(`.symbolFigure[data-symbol-name="${e}"]`, `${e}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+          new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
         });
 
       // * MILITARY SYMBOLS OBJECT * //
@@ -539,6 +538,8 @@
         placeSymbol() {
           this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
           const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          // This will find any symbols that have nothing in the echelon path data. You can use this later to exclude them from being inserted into the DOM
+          console.dir(this.echelonData.firstChild.attributes['d'].textContent.length);
 
           svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
           this.location.append(svg);
@@ -688,7 +689,7 @@
           element.setAttributeNS(null, 'stroke', 'black');
           element.setAttributeNS(null, 'stroke-width', '4');
 
-          Object.keys(this.echelon).forEach(keys => {
+          Object.keys(this.echelon).forEach(key => {
             element.setAttributeNS(null, 'fill', `${this.echelon['fill']}`);
           });
 
@@ -721,8 +722,8 @@
         const selectAffiliation = mdc.select.MDCSelect.attachTo(document.querySelector('.mdc-select.affiliation'));
         selectAffiliation.listen('MDCSelect:change', () => {
           new MilSym('.box1', `${selectSymbol.value}`, `${selectAffiliation.value}`, 'squad').placeSymbol();
-          Object.keys(militarySymbolsObject).forEach(e => {
-            new MilSym(`.symbolFigure[data-symbol-name="${e}"]`, `${e}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+          Object.keys(militarySymbolsObject).forEach(key => {
+            new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
           });
         });
         window.selectAffiliation = selectAffiliation;
@@ -740,24 +741,27 @@
 
         const selectMenus = document.querySelectorAll('.mdc-select');
         for (const iterator of selectMenus) {
-          iterator.addEventListener('click', function(event) {
+          iterator.addEventListener('click', () => {
             //If the selectSymbol menu is open, then resize the icons
             selectSymbol.foundation_.adapter_.isMenuOpen() ? resize('.symbolFigure svg') : null;
           });
         }
       };
 
-      //ex- resize('.symbolFigure svg');
-      function resize(container) {
-        this.container = document.querySelectorAll(container);
-        this.container.forEach(e2 => {
+      //ex- resize('.symbolFigure svg');  (default parameters set for thumbnails)
+      function resize(symbolElement, width = 63, height = 43) {
+        this.symbolElement = document.querySelectorAll(symbolElement);
+        this.width = width;
+        this.height = height;
+
+        this.symbolElement.forEach(e2 => {
           // This just removes the animation on the symbol on the dropdown list
           //e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
           e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); //this is a default value I believe
           e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x - 4} ${e2.getBBox().y - 4} ${e2.getBBox().width + 8} ${e2.getBBox().height + 8}`);
           //e2.setAttributeNS(null, 'viewBox', '24 24 152 152');
-          e2.setAttributeNS(null, 'width', '63');
-          e2.setAttributeNS(null, 'height', '43');
+          e2.setAttributeNS(null, 'width', `${this.width}`);
+          e2.setAttributeNS(null, 'height', `${this.height}`);
         });
       }
 
@@ -765,7 +769,8 @@
       // 0- Add in the Affiliation icons to the dropdown
       // 1- Add in the echelon dropdown
       // 2- Ditch the CDN and use imports
-      // 3- Equipment icon needs to be configured as a circle
+      // 4- Equipment icon needs to be configured as a circle
+      // 5- There is an issue that might need to be addressed in the future. 3 groups so far are automatically being appended - outline, decorator and echelon. This ins't so bad since Outline/Decorator are pretty much mandatory but echelon gets appended even if there is no echelon selected.
     </script>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
   </body>
