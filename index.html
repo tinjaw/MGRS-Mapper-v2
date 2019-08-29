@@ -69,7 +69,7 @@
               <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
                 <ul class="mdc-list affiliation-list">
                   <li class="mdc-list-item mdc-list-item--selected" data-value="friendly" aria-selected="true">
-                    <figure>
+                    <figure class="affiliationFigure">
                       <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 46 158 108">
                         <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="5" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
                       </svg>
@@ -77,7 +77,7 @@
                     Friendly
                   </li>
                   <li class="mdc-list-item" data-value="friendlyTemplated">
-                    <figure>
+                    <figure class="affiliationFigure">
                       <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 46 158 108">
                         <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="8" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
                         <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
@@ -86,7 +86,7 @@
                     Assumed Friendly
                   </li>
                   <li class="mdc-list-item" data-value="hostile">
-                    <figure>
+                    <figure class="affiliationFigure">
                       <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="24 24 152 152">
                         <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="5" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
                       </svg>
@@ -94,7 +94,7 @@
                     Hostile
                   </li>
                   <li class="mdc-list-item" data-value="hostileTemplated">
-                    <figure>
+                    <figure class="affiliationFigure">
                       <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="24 24 152 152">
                         <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="8" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
                         <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
@@ -103,7 +103,7 @@
                     Suspect
                   </li>
                   <li class="mdc-list-item" data-value="unknown">
-                    <figure>
+                    <figure class="affiliationFigure">
                       <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="26.75 26.75 146.5 146.5">
                         <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="5" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
                       </svg>
@@ -111,7 +111,7 @@
                     Unknown
                   </li>
                   <li class="mdc-list-item" data-value="pending">
-                    <figure>
+                    <figure class="affiliationFigure">
                       <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="26.75 26.75 146.5 146.5">
                         <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="8" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
                         <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
@@ -120,7 +120,7 @@
                     Pending
                   </li>
                   <li class="mdc-list-item" data-value="neutral">
-                    <figure>
+                    <figure class="affiliationFigure">
                       <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="41 41 118 118">
                         <path d="M45,45 l110,0 0,110 -110,0 z" stroke-width="5" stroke="black" fill="rgb(170,255,170)" fill-opacity="1"></path>
                       </svg>
@@ -144,7 +144,39 @@
               <i class="mdc-select__dropdown-icon"></i>
               <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
               <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list unit-size-list"></ul>
+                <ul class="mdc-list unit-size-list">
+                  <li class="mdc-list-item mdc-list-item--selected" data-value="none" aria-selected="true">
+                    <figure class="unitSizeFigure">
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143"></svg>
+                    </figure>
+                    None
+                  </li>
+                  <li class="mdc-list-item" data-value="team" aria-selected="true">
+                    <figure class="unitSizeFigure">
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                        <path d="M85,30a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,40L120,20" fill="none" stroke="black" stroke-width="4"></path>
+                      </svg>
+                    </figure>
+                    Team
+                  </li>
+                  <li class="mdc-list-item" data-value="squad" aria-selected="true">
+                    <figure class="unitSizeFigure">
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                        <path d="M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0" fill="black" stroke="black" stroke-width="4"></path>
+                      </svg>
+                    </figure>
+                    Squad
+                  </li>
+
+                  <li class="mdc-list-item" data-value="region" aria-selected="true">
+                    <figure class="unitSizeFigure">
+                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                        <path d="M0,40l25,-25m0,25l-25,-25M35,40l25,-25m0,25l-25,-25M70,40l25,-25m0,25l-25,-25M105,40l25,-25m0,25l-25,-25M140,40l25,-25m0,25l-25,-25M175,40l25,-25m0,25l-25,-25" fill="none" stroke="black" stroke-width="4"></path>
+                      </svg>
+                    </figure>
+                    Region
+                  </li>
+                </ul>
               </div>
               <span class="mdc-floating-label">Select a Unit Size</span>
               <div class="mdc-line-ripple"></div>

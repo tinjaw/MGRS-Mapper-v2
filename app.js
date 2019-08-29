@@ -28,29 +28,29 @@ const addSymbolsToDropdownList = () => {
   });
 };
 
-const addUnitSizesToDropdownList = () => {
-  Object.keys(unitSizeObject).forEach((key) => {
-    const mdcList = document.querySelector('.mdc-list.unit-size-list');
-    // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
-    // const symbolTypeInfo = document.createElement('em');
-    // symbolTypeInfo.setAttribute('class', 'symbol-type-info');
-    // symbolTypeInfo.textContent = militarySymbolsObject[key].type.padEnd(15, '.');
-    // Append the symbol DESCRIPTION to the list (eg- "Infantry")
-    const newli = document.createElement('li');
-    newli.setAttribute('class', 'mdc-list-item');
-    newli.setAttributeNS(null, 'data-value', key);
-    newli.textContent = key.toString();
-    // newli.prepend(symbolTypeInfo);
-    mdcList.append(newli);
-    const figureElement = document.createElement('figure');
-    figureElement.setAttribute('class', 'unitSizeFigure');
-    figureElement.setAttribute('data-unit-size-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
-    newli.prepend(figureElement);
-    // This will add the icons to the dropdown list
-    // new GenerateUnitSizes(`.unitSizeFigure[data-unit-size-name="${key}"]`, 'Default Land Unit', `${selectAffiliation.value}`, `${key}`).placeSymbol();
-    new MilSym(`.unitSizeFigure[data-unit-size-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, `${key}`).placeSymbol();
-  });
-};
+// const addUnitSizesToDropdownList = () => {
+//   Object.keys(unitSizeObject).forEach((key) => {
+//     const mdcList = document.querySelector('.mdc-list.unit-size-list');
+//     // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
+//     // const symbolTypeInfo = document.createElement('em');
+//     // symbolTypeInfo.setAttribute('class', 'symbol-type-info');
+//     // symbolTypeInfo.textContent = militarySymbolsObject[key].type.padEnd(15, '.');
+//     // Append the symbol DESCRIPTION to the list (eg- "Infantry")
+//     const newli = document.createElement('li');
+//     newli.setAttribute('class', 'mdc-list-item');
+//     newli.setAttributeNS(null, 'data-value', key);
+//     newli.textContent = key.toString();
+//     // newli.prepend(symbolTypeInfo);
+//     mdcList.append(newli);
+//     const figureElement = document.createElement('figure');
+//     figureElement.setAttribute('class', 'unitSizeFigure');
+//     figureElement.setAttribute('data-unit-size-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+//     newli.prepend(figureElement);
+//     // This will add the icons to the dropdown list
+//     // new GenerateUnitSizes(`.unitSizeFigure[data-unit-size-name="${key}"]`, 'Default Land Unit', `${selectAffiliation.value}`, `${key}`).placeSymbol();
+//     new MilSym(`.unitSizeFigure[data-unit-size-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, `${key}`).placeSymbol();
+//   });
+// };
 
 
 class MilSym {
@@ -65,6 +65,7 @@ class MilSym {
       symbol,
       affiliation,
       echelon,
+      type: this.type,
     };
   }
 
@@ -78,6 +79,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
+
 
     svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     this.location.append(svg);
@@ -651,4 +653,4 @@ window.selectAffiliation = selectAffiliation;
 
 // export { addSymbolsToDropdownList, addUnitSizesToDropdownList };
 
-export { addSymbolsToDropdownList, addUnitSizesToDropdownList, MilSym };
+export { addSymbolsToDropdownList, MilSym };

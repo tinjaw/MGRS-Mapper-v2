@@ -7,7 +7,7 @@ import militarySymbolsObject from './militarySymbolsObject';
 // import { addSymbolsToDropdownList, addUnitSizesToDropdownList } from './app';
 import affiliationOutlineObject from './affiliationOutlineObject';
 import unitSizeObject from './unitSizeObject';
-import { addSymbolsToDropdownList, addUnitSizesToDropdownList, MilSym } from './app';
+import { addSymbolsToDropdownList, MilSym } from './app';
 
 
 const textField = new MDCTextField(document.querySelector('.searchSymbols'));
@@ -20,11 +20,19 @@ const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select')
 
 selectSymbol.listen('MDCSelect:change', () => {
   selectSymbol.selectedText_.textContent = selectSymbol.value;
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, 'squad').placeSymbol();
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
+  document.querySelector('.newSVG svg').setAttributeNS(null, 'class', 'animateSymbol');
+  // This will disable the selectUnitSize dropdown if the chosen symbol is a piece of equipment
+  if (JSON.parse(document.querySelector('.newSVG svg').dataset.symbolInfo).type === 'Equipment') {
+    selectUnitSize.disabled = true;
+  } else {
+    selectUnitSize.disabled = false;
+  }
 });
 
 selectAffiliation.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, 'squad').placeSymbol();
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
+  // If the affiliation is changed, then change all the symbols outlines in the dropdown to match it
   Object.keys(militarySymbolsObject).forEach((key) => {
     new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
   });
@@ -34,13 +42,14 @@ const selectMenus = document.querySelectorAll('.mdc-select');
 selectMenus.forEach((key) => {
   key.addEventListener('click', () => {
     // If any menu dropdown is clicked then change all the Echelon symbols to reflect current symbol and affiliation
-    Object.keys(unitSizeObject).forEach((key) => {
-      new MilSym(`.unitSizeFigure[data-unit-size-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, `${key}`).placeSymbol();
-    });
+    // Object.keys(unitSizeObject).forEach((key) => {
+    //   new MilSym(`.unitSizeFigure[data-unit-size-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, `${key}`).placeSymbol();
+    // });
     // If the selectSymbol menu is open, then resize all the symbols
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+    selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
     // If the selectUnitSize menu is open, then resize all the symbols
-    selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg') : null;
+    // selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg') : null;
   });
 });
 
@@ -100,6 +109,8 @@ window.Resizer = Resizer;
 // //! Add elevation animation to symbols when you hover over them
 // //! Mutation Observer is the only thing that sets viewbox I think.. Look into that
 selectUnitSize.listen('MDCSelect:change', () => {
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
+
   // if (document.querySelector('.newSVG svg')) {
   //   document.querySelector('.newSVG svg').remove();
   // }
@@ -124,34 +135,45 @@ selectUnitSize.listen('MDCSelect:change', () => {
 });
 
 
-// const options = {
-//   shouldSort: true,
-//   // tokenize: true,
-//   // matchAllTokens: true,
-//   includeScore: true,
-//   findAllMatches: true,
-//   includeMatches: true,
-//   threshold: 0.6,
-//   location: 0,
-//   distance: 100,
-//   maxPatternLength: 32,
-//   minMatchCharLength: 3,
-//   keys: [Object.keys(militarySymbolsObject)],
-// };
+const options = {
+  shouldSort: true,
+  // tokenize: true,
+  // matchAllTokens: true,
+  includeScore: true,
+  findAllMatches: true,
+  includeMatches: true,
+  threshold: 0.6,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 3,
+  keys: [Object.keys(militarySymbolsObject)],
+};
 
-// function debounce(func, interval) {
-//   let timeout;
-//   return () => {
-//     const context = this;
-//     const args = arguments;
-//     const later = () => {
-//       timeout = null;
-//       func.apply(context, args);
-//     };
-//     clearTimeout(timeout);
-//     timeout = setTimeout(later, interval || 200);
-//   };
-// }
+function debounce(func, interval) {
+  let timeout;
+  return () => {
+    const context = this;
+    const args = arguments;
+    const later = () => {
+      timeout = null;
+      func.apply(context, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, interval || 200);
+  };
+}
+
+const searchResults = debounce(() => {
+  const fuse = new Fuse(options.keys, options); // "list" is the item array
+  const result = fuse.search(textField.value);
+  console.log(result.matches);
+  // result.forEach((key) => {
+  //   console.log(key);
+  // });
+});
+
+textField.input_.addEventListener('input', searchResults);
 
 // const searchResults = debounce(() => {
 //   if (textField.input_.value !== '') {
@@ -212,25 +234,19 @@ selectUnitSize.listen('MDCSelect:change', () => {
 //   }
 // }, 250);
 
-// textField.input_.addEventListener('input', searchResults);
 
 // ! GLOBAL VARS - remove on production
 window.textField = textField;
 window.selectSymbol = selectSymbol;
 window.selectUnitSize = selectUnitSize;
 
+
 // Load the default symbol into the panel when the page loads
 window.onload = () => {
   addSymbolsToDropdownList();
   selectSymbol.foundation_.setSelectedIndex(0);
-  addUnitSizesToDropdownList();
-  selectUnitSize.foundation_.setSelectedIndex(0);
-
-
-  const mso = new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, 'squad');
-  mso.placeSymbol();
-  // new Resize('.symbolFigure svg');
 };
+
 
 // ! Mutatation Observer will disable all dropdowns except "Select a Symbol" when the menu is open
 // const mutationTarget = document.querySelector('.symbol-select');
