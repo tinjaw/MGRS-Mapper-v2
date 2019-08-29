@@ -1,22 +1,16 @@
 /* eslint-disable no-underscore-dangle */
-// //import { MDCRipple } from '@material/ripple/index';
 import { MDCSelect } from '@material/select';
 import { MDCTextField } from '@material/textfield';
 import Fuse from 'fuse.js';
 import militarySymbolsObject from './militarySymbolsObject';
-// import { addSymbolsToDropdownList, addUnitSizesToDropdownList } from './app';
 import affiliationOutlineObject from './affiliationOutlineObject';
 import unitSizeObject from './unitSizeObject';
 import { addSymbolsToDropdownList, MilSym } from './app';
 
-
 const textField = new MDCTextField(document.querySelector('.searchSymbols'));
-
-// //const ripple = new MDCRipple(document.querySelector('.mdc-button'));
 const selectSymbol = new MDCSelect(document.querySelector('.symbol-select'));
 export const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
 const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select'));
-
 
 selectSymbol.listen('MDCSelect:change', () => {
   selectSymbol.selectedText_.textContent = selectSymbol.value;
@@ -38,21 +32,18 @@ selectAffiliation.listen('MDCSelect:change', () => {
   });
 });
 
+selectUnitSize.listen('MDCSelect:change', () => {
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
+});
+
 const selectMenus = document.querySelectorAll('.mdc-select');
 selectMenus.forEach((key) => {
   key.addEventListener('click', () => {
-    // If any menu dropdown is clicked then change all the Echelon symbols to reflect current symbol and affiliation
-    // Object.keys(unitSizeObject).forEach((key) => {
-    //   new MilSym(`.unitSizeFigure[data-unit-size-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, `${key}`).placeSymbol();
-    // });
     // If the selectSymbol menu is open, then resize all the symbols
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
     selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
-    // If the selectUnitSize menu is open, then resize all the symbols
-    // selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg') : null;
   });
 });
-
 
 // ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
 class Resizer {
@@ -62,80 +53,15 @@ class Resizer {
     this.height = height;
     this.symbolElement.forEach((key) => {
       // This just removes the animation on the symbol on the dropdown list
-      // key.classList.contains('animateSymbol') ? key.classList.remove('animateSymbol') : null;
       key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
       key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
-      // key.setAttributeNS(null, 'viewBox', '24 24 152 152');
       key.setAttributeNS(null, 'width', `${this.width}`);
       key.setAttributeNS(null, 'height', `${this.height}`);
     });
   }
 }
-window.Resizer = Resizer;
 
-// window.resize = resize();
-// selectSymbol.listen('MDCSelect:change', () => {
-//   // If there is an SVG in the symbol panel, remove it
-//   if (document.querySelector('.newSVG svg')) {
-//     document.querySelector('.newSVG svg').remove();
-//   }
-//   // generateSymbol(selectSymbol.foundation_.adapter_.getValue(), 'newSVG');
-//   generateSymbol(selectSymbol.value, 'newSVG');
-//   // ! Had to add this because the selected textbox was throwing some weird errors by adding an extra letter to the beginning of the symbols description
-//   document.querySelector('.mdc-select__selected-text.mainSymbolSelectedText').textContent = selectSymbol.value;
-//   // ! This adds the animation to the symbol in the symbol panel. I had to put it here because if it were in generateSymbol() it would run every time someone changed the affiliation and it would get really annoying real quickly
-//   document.querySelector('.newSVG svg').setAttributeNS(null, 'class', 'animateSymbol');
-// });
-
-// selectAffiliation.listen('MDCSelect:change', () => {
-//   if (document.querySelector('.newSVG svg')) {
-//     document.querySelector('.newSVG svg').remove();
-//   }
-//   searchResults(); // This will change the unit affiliation on the "Select a Symbol" dropdown
-//   generateSymbol(selectSymbol.value, 'newSVG');
-//   selectSymbol.foundation_.adapter_.closeMenu();
-
-//   // Get the index of the last selected unit size symbol
-//   const lastUnitSizeSelected = selectUnitSize.selectedIndex;
-//   // Remove all unit size symbols if a new affiliation is chosen
-//   selectUnitSize.menu_.items ? selectUnitSize.menu_.items.forEach(e => e.remove()) : null;
-//   // Re-add the symbols with the updated properties
-//   addUnitSizesToDropdownList();
-//   // Keep the last selected index for the Unit Size on the select menu
-//   selectUnitSize.foundation_.setSelectedIndex(lastUnitSizeSelected);
-// });
-
-// //! TODO: now that the unit size dropdown is working, its time to link up the logic so it updates the symbol panel
-// //! Add elevation animation to symbols when you hover over them
-// //! Mutation Observer is the only thing that sets viewbox I think.. Look into that
-selectUnitSize.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
-
-  // if (document.querySelector('.newSVG svg')) {
-  //   document.querySelector('.newSVG svg').remove();
-  // }
-  // searchResults(); // This will change the unit affiliation on the "Select a Symbol" dropdown
-  // generateSymbol(selectSymbol.value, 'newSVG');
-  // selectSymbol.foundation_.adapter_.closeMenu();
-  //! this shit below is garbage. but it shows the most basic functionality. I think your main problem lies within the generateSymbol() function. We should be looking into using classes to make object templates or something like that. As of right now this is completely unsustainable and it will only get worse as I start adding in more functionality like Mod1,2 etc etc....
-  // const svg = document.querySelector('.newSVG svg');
-  // const unitSizeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-  // unitSizeGroup.classList.add('unit-size-group');
-  // const unitSizePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  // unitSizePath.classList.add('unit-size-path');
-  // unitSizePath.setAttributeNS(null, 'd', unitSizeObject[selectUnitSize.value].affiliation[selectAffiliation.value].d);
-  // // unitSizePath.setAttributeNS(null, 'd', 'M0,40l25,-25m0,25l-25,-25M35,40l25,-25m0,25l-25,-25M70,40l25,-25m0,25l-25,-25M105,40l25,-25m0,25l-25,-25M140,40l25,-25m0,25l-25,-25M175,40l25,-25m0,25l-25,-25');
-  // unitSizePath.setAttributeNS(null, 'stroke-width', '4');
-  // unitSizePath.setAttributeNS(null, 'stroke', 'black');
-  // unitSizeGroup.append(unitSizePath);
-
-  // svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-  // svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
-  // svg.append(unitSizeGroup);
-});
-
-
-const options = {
+const searchOptions = {
   shouldSort: true,
   // tokenize: true,
   // matchAllTokens: true,
@@ -164,82 +90,59 @@ function debounce(func, interval) {
   };
 }
 
+//! 29AUG19 -- Calling it here. There has to be a more elegant way to do this.
+// TODO: Clean up searchResults function. It looks like shit
+// TODO: Add in the rest of the unit sizes.
+// TODO: The Symbol Panel has a sudden resize when you add shit like echelon size. This is most likely a CSS issue
+// TODO: Mod1, Mod2, etc...
 const searchResults = debounce(() => {
-  const fuse = new Fuse(options.keys, options); // "list" is the item array
-  const result = fuse.search(textField.value);
-  console.log(result.matches);
-  // result.forEach((key) => {
-  //   console.log(key);
-  // });
-});
+  if (textField.input_.value !== '') {
+    const fuse = new Fuse(searchOptions.keys, searchOptions); // "list" is the item array
+    const result = fuse.search(textField.value);
+    selectSymbol.menu_.items.length === 0 ? selectSymbol.foundation_.adapter_.closeMenu() : null;
+    selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
+
+    result.forEach((e) => {
+      const elem = [...new Set(e.matches)];
+      for (let index = 0; index < elem.length; index++) {
+        const element = elem[index].value;
+        selectSymbol.foundation_.adapter_.setValue();
+        selectSymbol.foundation_.adapter_.openMenu();
+        const mdcList = document.querySelector('.mdc-list.symbol-list');
+        const newli = document.createElement('li');
+        newli.setAttribute('class', 'mdc-list-item');
+        newli.setAttribute('data-value', element);
+        newli.textContent = element;
+        mdcList.append(newli);
+        const figureElement = document.createElement('figure');
+        figureElement.setAttribute('class', 'symbolFigure');
+        figureElement.setAttribute('data-symbol-name', `${element}`); // add the symbol key to the data-attr so they can match up with the list item
+        newli.prepend(figureElement);
+        new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+      }
+    });
+    if (textField.value.length >= 3) {
+      // set the first result as the symbol value on the "Select a Symbol" dropdown
+      result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null;
+    }
+  } else {
+    // selectSymbol.foundation_.adapter_.closeMenu();
+    // If there is no text in the search field remove all search results
+    selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
+    // Rerun the function to add the symbols to the list
+    addSymbolsToDropdownList();
+    // Set the selected item to the one in the symbol panel
+    selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
+  }
+}, 250);
 
 textField.input_.addEventListener('input', searchResults);
-
-// const searchResults = debounce(() => {
-//   if (textField.input_.value !== '') {
-//     const fuse = new Fuse(options.keys, options); // "list" is the item array
-//     const result = fuse.search(textField.value);
-//     selectSymbol.menu_.items.length === 0 ? selectSymbol.foundation_.adapter_.closeMenu() : null;
-//     selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
-
-//     result.forEach((e) => {
-//       const elem = [...new Set(e.matches)];
-//       for (let index = 0; index < elem.length; index++) {
-//         const element = elem[index].value;
-//         selectSymbol.foundation_.adapter_.setValue();
-//         selectSymbol.foundation_.adapter_.openMenu();
-//         const mdcList = document.querySelector('.mdc-list.symbol-list');
-//         const newli = document.createElement('li');
-//         newli.setAttribute('class', 'mdc-list-item');
-//         newli.setAttribute('data-value', element);
-//         newli.textContent = element;
-//         mdcList.append(newli);
-//         const figureElement = document.createElement('figure');
-//         figureElement.setAttribute('class', 'symbolFigure');
-//         figureElement.setAttribute('data-symbol-name', `${element}`); // add the symbol key to the data-attr so they can match up with the list item
-//         newli.prepend(figureElement);
-
-//         if (figureElement.dataset.symbolName === `${element}`) {
-//           generateSymbol(element, `${element}`);
-//           // Now set the viewBox and dimensions for the thumbnails
-//           newli.querySelectorAll('.symbolFigure svg').forEach((e2) => {
-//             // This just removes the animation on the symbol on the dropdown list
-//             // e2.classList.contains('animateSymbol') ? e2.classList.remove('animateSymbol') : null;
-//             // e2.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-//             // e2.setAttributeNS(null, 'viewBox', `${e2.getBBox().x} ${e2.getBBox().y} ${e2.getBBox().width} ${e2.getBBox().height}`);
-//             //! viewBox is set in the mutation observer
-//             // e2.setAttributeNS(null, 'width', '63');
-//             // e2.setAttributeNS(null, 'height', '43');
-//           });
-//         }
-//       }
-//     });
-//     if (textField.value.length >= 3) {
-//       // set the first result as the symbol value on the "Select a Symbol" dropdown
-//       result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null;
-//     }
-//   } else {
-//     // If there is no text in the search field:
-//     // Remove all search results
-//     selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
-//     // Close the select menu
-//     // selectSymbol.foundation_.adapter_.closeMenu();
-//     // Rerun the function to add the symbols to the list
-//     addSymbolsToDropdownList();
-//     // Set the selected item to the one in the symbol panel
-//     selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolDesc;
-//     document.querySelector('.newSVG svg').classList.remove('animateSymbol');
-//     // selectSymbol.foundation_.adapter_.setValue(selectSymbol.value);
-//     // selectSymbol.value = selectSymbol.foundation_.adapter_.getValue();
-//   }
-// }, 250);
-
 
 // ! GLOBAL VARS - remove on production
 window.textField = textField;
 window.selectSymbol = selectSymbol;
 window.selectUnitSize = selectUnitSize;
-
+window.Resizer = Resizer;
 
 // Load the default symbol into the panel when the page loads
 window.onload = () => {
@@ -247,62 +150,4 @@ window.onload = () => {
   selectSymbol.foundation_.setSelectedIndex(0);
 };
 
-
-// ! Mutatation Observer will disable all dropdowns except "Select a Symbol" when the menu is open
-// const mutationTarget = document.querySelector('.symbol-select');
-// const mutationTarget2 = document.querySelector('.unit-size-select');
-
-// OLD MUTATION OBSERVER
-// const observer = new MutationObserver(() => {
-//   if (selectSymbol.foundation_.adapter_.isMenuOpen()) {
-//     selectAffiliation.disabled = true;
-//     // When the symbol select menu is open, set the viewbox for all elements in dropdown
-//     document.querySelectorAll('.symbolFigure svg .outline').forEach((svg) => {
-//       const svgbox = `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`;
-//       svg.parentNode.setAttributeNS(null, 'viewBox', svgbox);
-//     });
-//   } else {
-//     selectAffiliation.disabled = false;
-//     textField.foundation_.setValue(''); // delete search field text when the search menu is closed.
-//     searchResults(); // reset the dropdown symbols
-//   }
-//   if (selectUnitSize.foundation_.adapter_.isMenuOpen()) {
-//     console.log('Im opened');
-//   }
-// });
-
-// observer.observe(mutationTarget, {
-//   attributes: true,
-//   childList: true,
-//   characterData: true,
-// });
-
-
-// const observer = new MutationObserver(((mutations) => {
-//   mutations.forEach((e) => {
-//     if (selectSymbol.foundation_.adapter_.isMenuOpen()) {
-//       selectAffiliation.disabled = true;
-//       // When the symbol select menu is open, set the viewbox for all elements in dropdown
-//       document.querySelectorAll('.symbolFigure svg .outline').forEach((svg) => {
-//         const svgbox = `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`;
-//         svg.parentNode.setAttributeNS(null, 'viewBox', svgbox);
-//       });
-//     } else {
-//       selectAffiliation.disabled = false;
-//       textField.foundation_.setValue(''); // delete search field text when the search menu is closed.
-//       searchResults(); // reset the dropdown symbols
-//     }
-//     // This will set the viewBox on all the symbols in the Unit Size dropdown. This is important because whenever someone changes the affiliation it will fuck up the viewBox and hide the unit size amplifiers
-//     // if (selectUnitSize.foundation_.adapter_.isMenuOpen()) {
-//     //   document.querySelectorAll('.selectUnitSizeIcon').forEach((svg) => {
-//     //     svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
-//     //   });
-//     // }
-//   });
-// }));
-
-// const config = { attributes: true, childList: true, characterData: true };
-
-// observer.observe(mutationTarget, config);
-
-// observer.observe(mutationTarget2, config);
+//! I deleted the mutation observer shit but you can check the repo if you still think it's worth something

@@ -24,19 +24,19 @@ const unitSizeObject = {
         return this.friendly;
       },
     },
-
   },
-
   team: {
     affiliation: {
       friendly: {
         d: 'M85,30a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,40L120,20',
+        fill: 'none',
       },
       get friendlyTemplated() {
         return this.friendly;
       },
       hostile: {
         d: 'M85,8a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,18L120,-2',
+        fill: 'none',
       },
       get hostileTemplated() {
         return this.hostile;
@@ -49,12 +49,10 @@ const unitSizeObject = {
       },
       neutral: {
         d: 'M85,25a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,35L120,15',
+        fill: 'none',
       },
     },
-
   },
-
-
   squad: {
     affiliation: {
       friendly: {
@@ -79,7 +77,6 @@ const unitSizeObject = {
         d: 'M92.5,25a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0',
       },
     },
-
   },
   region: {
     affiliation: {
@@ -106,7 +103,6 @@ const unitSizeObject = {
       },
     },
   },
-
 };
 
 export default unitSizeObject;
