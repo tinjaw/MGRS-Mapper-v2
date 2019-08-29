@@ -481,29 +481,6 @@
           templated: false,
           d: 'M45,45 l110,0 0,110 -110,0 z',
           fill: 'rgb(170, 255, 170)'
-        },
-        equipment_friendly: {
-          templated: false,
-          d: '',
-          cx: '100',
-          cy: '100',
-          r: '60',
-          fill: 'rgb(128,224,255)',
-          stroke: 'black',
-          strokeWidth: '4'
-        },
-        equipment_friendlyTemplated: {
-          d: '',
-          cx: '100',
-          cy: '100',
-          r: '60',
-          fill: 'rgb(128,224,255)',
-          stroke: 'black',
-          strokeWidth: '4',
-          fill_2: 'none',
-          stroke_2: 'rgb(239, 239, 239)',
-          strokeWidth_2: '5',
-          strokeDashArray_2: '4,4'
         }
       };
 
@@ -626,7 +603,11 @@
           const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
           // This will find any symbols that have nothing in the echelon path data. You can use this later to exclude them from being inserted into the DOM
           //console.dir(this.echelonData.firstChild.attributes['d'].textContent.length);
-
+          // if (this.echelon.d === '') {
+          //   svg.append(this.affiliationOutlineData, this.decoratorData);
+          // } else {
+          //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
+          // }
           svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
           this.location.append(svg);
           svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
@@ -674,6 +655,8 @@
           // Check if the symbol is a piece of equipment
           switch (this.type) {
             case 'Equipment':
+              //This will remove the echelon data above the Equipment symbol.
+              this.echelon = unitSizeObject.none[this.data.affiliation];
               //If the symbol is a friendly piece of equipment, then we need to adjust the outline
               switch (selectAffiliation.value) {
                 case 'friendly':
@@ -714,47 +697,9 @@
               generateOutline();
               break;
           }
-
-          // if (this.type === 'Equipment') {
-          //   if (selectAffiliation.value === 'friendly') {
-          //     this.affiliation = affiliationOutlineObject.equipment_friendly;
-          //     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-          //     circle.setAttributeNS(null, 'cx', `${this.affiliation.cx}`);
-          //     circle.setAttributeNS(null, 'cy', `${this.affiliation.cy}`);
-          //     circle.setAttributeNS(null, 'r', `${this.affiliation.r}`);
-          //     circle.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
-          //     circle.setAttributeNS(null, 'stroke', `${this.affiliation.stroke}`);
-          //     circle.setAttributeNS(null, 'stroke-width', `${this.affiliation.strokeWidth}`);
-          //     outlineGroup.append(circle);
-          //   }
-          // }
-          //   Object.keys(this.affiliation).forEach(key => {
-          //     const value = this.affiliation[key];
-          //     //console.log(key, value);
-          //     if (key.indexOf('templated') === 0 && value === true) {
-          //       outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
-          //       outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
-          //       outlineTemplated.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
-          //       outlineTemplated.setAttributeNS(null, 'fill', `${this.affiliation['fill_2']}`);
-          //       outlineTemplated.setAttributeNS(null, 'stroke', `${this.affiliation['stroke_2']}`);
-          //       outlineTemplated.setAttributeNS(null, 'stroke-width', `${this.affiliation['strokeWidth_2']}`);
-          //       outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation['strokeDashArray_2']}`);
-          //       // Had to put this in an async function because the templated outline was popping up ahead of the regular outline
-          //       (async () => {
-          //         await outlineGroup.append(outlineTemplated);
-          //         outlineGroup.prepend(outline);
-          //       })().catch(err => {
-          //         console.error(err);
-          //       });
-          //     } else {
-          //       outline.setAttributeNS(null, 'd', `${this.affiliation['d']}`);
-          //       outline.setAttributeNS(null, 'fill', `${this.affiliation['fill']}`);
-          //       outlineGroup.append(outline);
-          //     }
-          //   });
-
           return outlineGroup;
         }
+
         get decoratorData() {
           const decoratorGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
           decoratorGroup.classList.add('decorator');
@@ -852,6 +797,7 @@
           });
           return decoratorGroup;
         }
+
         get echelonData() {
           const echelonGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
           echelonGroup.setAttributeNS(null, 'class', 'echelon');
@@ -935,10 +881,10 @@
       }
 
       // ! TODO:
-      // 0- Add in the Affiliation icons to the dropdown
+      // X- Add in the Affiliation icons to the dropdown
       // 1- Add in the echelon dropdown
       // 2- Ditch the CDN and use imports
-      // 4- Equipment icon needs to be configured as a circle
+      // X- Equipment icon needs to be configured as a circle
       // 5- There is an issue that might need to be addressed in the future. 3 groups so far are automatically being appended - outline, decorator and echelon. This ins't so bad since Outline/Decorator are pretty much mandatory but echelon gets appended even if there is no echelon selected.
     </script>
     <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
