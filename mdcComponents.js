@@ -95,6 +95,7 @@ function debounce(func, interval) {
 // TODO: Add in the rest of the unit sizes.
 // TODO: The Symbol Panel has a sudden resize when you add shit like echelon size. This is most likely a CSS issue
 // TODO: Mod1, Mod2, etc...
+// TODO: ternary operators on get decoratorData()? Might clean up some of the garbage.
 const searchResults = debounce(() => {
   if (textField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions); // "list" is the item array

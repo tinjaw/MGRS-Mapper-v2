@@ -242,18 +242,18 @@ const addSymbolsToDropdownList = () => {
     const mdcList = document.querySelector('.mdc-list.symbol-list');
     // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
     const symbolTypeInfo = document.createElement('em');
-    symbolTypeInfo.setAttribute('class', 'symbol-type-info');
+    symbolTypeInfo.setAttributeNS(null, 'class', 'symbol-type-info');
     symbolTypeInfo.textContent = militarySymbolsObject[key].type.padEnd(15, '.');
     // Append the symbol DESCRIPTION to the list (eg- "Infantry")
     const newli = document.createElement('li');
-    newli.setAttribute('class', 'mdc-list-item');
+    newli.setAttributeNS(null, 'class', 'mdc-list-item');
     newli.setAttributeNS(null, 'data-value', key);
     newli.textContent = key.toString();
     newli.prepend(symbolTypeInfo);
     mdcList.append(newli);
     const figureElement = document.createElement('figure');
-    figureElement.setAttribute('class', 'symbolFigure');
-    figureElement.setAttribute('data-symbol-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+    figureElement.setAttributeNS(null, 'class', 'symbolFigure');
+    figureElement.setAttributeNS(null, 'data-symbol-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
     newli.prepend(figureElement);
     // This will add the icons to the dropdown list
     new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
