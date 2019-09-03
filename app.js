@@ -4,16 +4,18 @@ import { selectAffiliation } from './mdcComponents';
 import affiliationOutlineObject from './affiliationOutlineObject';
 import militarySymbolsObject from './militarySymbolsObject';
 import unitSizeObject from './unitSizeObject';
+import mod1Object from './mod1Object';
 
 // * The star of the show * //
 // ex- new MilSym('.test', 'Infantry', 'friendly', 'team').placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation, echelon) {
+  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None') {
     this.location = document.querySelector(location);
     this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
     this.affiliation = affiliationOutlineObject[affiliation];
     this.echelon = unitSizeObject[echelon].affiliation[affiliation];
     this.type = militarySymbolsObject[symbol].type;
+    this.mod1 = mod1Object[mod1].affiliation[affiliation];
     this.data = {
       location,
       symbol,
@@ -32,7 +34,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -188,10 +190,53 @@ class MilSym {
     element.setAttributeNS(null, 'stroke', 'black');
     element.setAttributeNS(null, 'stroke-width', '4');
     Object.keys(this.echelon).forEach((key) => {
+      // ! The only echelon with a fill OTHER THAN black is 'team'. Probably don't need a loop for this.
       element.setAttributeNS(null, 'fill', `${this.echelon.fill}`);
     });
     echelonGroup.append(element);
     return echelonGroup;
+  }
+
+  get mod1Data() {
+    const mod1Group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    mod1Group.classList.add('mod1');
+    Object.keys(this.mod1).forEach((key) => {
+      if (key.indexOf('path') === 0) {
+        const element = this.mod1[key];
+        const mod1Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        mod1Path.setAttributeNS(null, 'd', `${element.d}`);
+        // If the default mod1Path fill is missing, default to black
+        !element.fill ? mod1Path.setAttributeNS(null, 'fill', 'black') : mod1Path.setAttributeNS(null, 'fill', `${element.fill}`);
+        // If the default mod1Path stroke is missing, default to black
+        !element.stroke ? mod1Path.setAttributeNS(null, 'stroke', 'black') : mod1Path.setAttributeNS(null, 'stroke', `${element.stroke}`);
+        // If the default mod1Path stroke-width is missing, default to 4
+        !element.strokeWidth ? mod1Path.setAttributeNS(null, 'stroke-width', '4') : mod1Path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+        // If the mod1 element is missing a transform property, do nothing, else set the transform value
+        !element.transform ? null : mod1Path.setAttributeNS(null, 'transform', `${element.transform}`);
+        mod1Group.append(mod1Path);
+      }
+      if (key.indexOf('text') === 0) {
+        const element = this.mod1[key];
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.textContent = element.symbolText;
+        text.setAttributeNS(null, 'x', `${element.x}`);
+        text.setAttributeNS(null, 'y', `${element.y}`);
+        text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
+        text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
+        // Default decorator font family to Arial
+        !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
+        // Default decorator font weight to 30
+        !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
+        // Default decorator font stroke to none
+        !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
+        // Default decorator font stroke width to 4
+        !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+        // Default decorator font fill to black
+        !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
+        mod1Group.append(text);
+      }
+    });
+    return mod1Group;
   }
 }
 
@@ -219,9 +264,28 @@ const addSymbolsToDropdownList = () => {
   });
 };
 
+// * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
+const addMod1ToDropdownList = () => {
+  Object.keys(mod1Object).forEach((key) => {
+    const mdcList = document.querySelector('.mdc-list.mod1-list');
+    const newli = document.createElement('li');
+    newli.setAttributeNS(null, 'class', 'mdc-list-item');
+    newli.setAttributeNS(null, 'data-value', key);
+    newli.textContent = key.toString();
+    mdcList.append(newli);
+    const figureElement = document.createElement('figure');
+    figureElement.setAttributeNS(null, 'class', 'mod1Figure');
+    figureElement.setAttributeNS(null, 'data-mod1-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+    newli.prepend(figureElement);
+    // This will add the icons to the dropdown list
+    new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', `${key}`).placeSymbol();
+  });
+};
+
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
 window.selectAffiliation = selectAffiliation;
+window.mod1Object = mod1Object;
 
-export { addSymbolsToDropdownList, MilSym };
+export { addSymbolsToDropdownList, addMod1ToDropdownList, MilSym };

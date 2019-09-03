@@ -1,26 +1,28 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
 import Fuse from 'fuse.js';
+import { addSymbolsToDropdownList, addMod1ToDropdownList, MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import affiliationOutlineObject from './affiliationOutlineObject';
 import unitSizeObject from './unitSizeObject';
-import { addSymbolsToDropdownList, MilSym } from './app';
 
 const textField = new MDCTextField(document.querySelector('.searchSymbols'));
 const selectSymbol = new MDCSelect(document.querySelector('.symbol-select'));
-export const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
+const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
 const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select'));
+const selectMod1 = new MDCSelect(document.querySelector('.mod1-select'));
 
 const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
 const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
 
-
 selectSymbol.listen('MDCSelect:change', () => {
-  selectSymbol.selectedText_.textContent = selectSymbol.value;
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
+  // For some reason I had to add "|| 'None" to the selectMod1 argument. It will throw errors otherwise
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value || 'None'}`).placeSymbol();
   document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
+  selectSymbol.selectedText_.textContent = selectSymbol.value;
   // This will disable the selectUnitSize dropdown if the chosen symbol is a piece of equipment
   if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
     selectUnitSize.disabled = true;
@@ -30,7 +32,7 @@ selectSymbol.listen('MDCSelect:change', () => {
 });
 
 selectAffiliation.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value}`).placeSymbol();
   // If the affiliation is changed, then change all the symbols outlines in the dropdown to match it
   // Note: I am not using Object.keys() because I am only iterating on symbols that are in the dropdown list. (eg- what if the dropdown list only contains search results?)
   selectSymbol.menu_.items.map((key) => {
@@ -39,7 +41,11 @@ selectAffiliation.listen('MDCSelect:change', () => {
 });
 
 selectUnitSize.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value}`).placeSymbol();
+});
+
+selectMod1.listen('MDCSelect:change', () => {
+  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value}`).placeSymbol();
 });
 
 const selectMenus = document.querySelectorAll('.mdc-select');
@@ -48,6 +54,7 @@ selectMenus.forEach((key) => {
     // If the selectSymbol menu is open, then resize all the symbols
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
     selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
+    selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
   });
 });
 
@@ -96,12 +103,13 @@ function debounce(func, interval) {
   };
 }
 
-//! 29AUG19 -- Calling it here. There has to be a more elegant way to do this.
-// TODO: Clean up searchResults function. It looks like shit
-// TODO: Add in the rest of the unit sizes.
-// TODO: The Symbol Panel has a sudden resize when you add shit like echelon size. This is most likely a CSS issue
-// TODO: Mod1, Mod2, etc...
-// TODO: ternary operators on get decoratorData()? Might clean up some of the garbage.
+//! 3SEPT2019 -- Calling it here
+// TODO: Add a few more examples to Mod1. Preferably one with text and another with 2 path elements
+// TODO: Mod1 disabled for equipment
+// TODO: All the dropdown lists might benefit from mutatation observers. If I had a M.O. on each of the dropdowns I could easily call the Resizer class
+// TODO: addMod1ToDropdownList and addSymbolsToDropdownList are very similar and could be combined into 1 function (I think)
+// TODO: If you change the MilSym class to accept an object, then you can instantiate it like this: "new MilSym({location: '.test', symbol: 'Infantry', affiliation: 'friendly', echelon: 'team', mod1: 'Foraging'}).placeSymbol();". The only value I can see from this is making it easier to call this class since you can indent object keys on new lines.
+// TODO: Hovering over list items should increase the z-elevation of the item.
 const searchResults = debounce(() => {
   if (textField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);
@@ -129,6 +137,7 @@ const searchResults = debounce(() => {
           figureElement.setAttribute('data-symbol-name', `${element}`); // add the symbol key to the data-attr so they can match up with the list item
           newli.prepend(figureElement);
           new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+          selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null; // Resize symbols in search results so they fit
         }
         // set the first result as the symbol value on the "Select a Symbol" dropdown
         selectSymbol.foundation_.setValue(result[0].matches[0].value);
@@ -156,9 +165,10 @@ const searchResults = debounce(() => {
     if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
       document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
     }
+    //! All these Resizer classes can probably be put into a mutation observer.
+    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null; // Resize symbols in search results so they fit
   }
 }, 100);
-
 
 deleteTextFieldButton.root_.addEventListener('click', clearTextField);
 
@@ -188,11 +198,14 @@ window.selectUnitSize = selectUnitSize;
 window.Resizer = Resizer;
 window.deleteTextFieldButton = deleteTextFieldButton;
 
+
 // Load the default symbol into the panel when the page loads
 window.onload = () => {
   addSymbolsToDropdownList();
   selectSymbol.foundation_.setSelectedIndex(0);
+  addMod1ToDropdownList();
+  selectMod1.foundation_.setSelectedIndex(0);
   deleteTextFieldButton.root_.style.display = 'none';
 };
 
-//! I deleted the mutation observer shit but you can check the repo if you still think it's worth something
+export { selectAffiliation };

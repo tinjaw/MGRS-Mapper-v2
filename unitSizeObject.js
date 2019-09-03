@@ -78,7 +78,6 @@ const unitSizeObject = {
       },
     },
   },
-
   section: {
     affiliation: {
       friendly: {
@@ -104,7 +103,6 @@ const unitSizeObject = {
       },
     },
   },
-
   platoon: {
     affiliation: {
       friendly: {
@@ -130,7 +128,6 @@ const unitSizeObject = {
       },
     },
   },
-
   troop: {
     affiliation: {
       friendly: {
@@ -156,7 +153,6 @@ const unitSizeObject = {
       },
     },
   },
-
   squadron: {
     affiliation: {
       friendly: {
@@ -182,7 +178,6 @@ const unitSizeObject = {
       },
     },
   },
-
   regiment: {
     affiliation: {
       friendly: {
@@ -208,7 +203,6 @@ const unitSizeObject = {
       },
     },
   },
-
   brigade: {
     affiliation: {
       friendly: {
@@ -234,7 +228,6 @@ const unitSizeObject = {
       },
     },
   },
-
   division: {
     affiliation: {
       friendly: {
@@ -260,7 +253,6 @@ const unitSizeObject = {
       },
     },
   },
-
   corps: {
     affiliation: {
       friendly: {
@@ -286,7 +278,6 @@ const unitSizeObject = {
       },
     },
   },
-
   army: {
     affiliation: {
       friendly: {
@@ -312,7 +303,6 @@ const unitSizeObject = {
       },
     },
   },
-
   armyGroup: {
     affiliation: {
       friendly: {
@@ -338,7 +328,6 @@ const unitSizeObject = {
       },
     },
   },
-
   region: {
     affiliation: {
       friendly: {
@@ -364,7 +353,6 @@ const unitSizeObject = {
       },
     },
   },
-
   command: {
     affiliation: {
       friendly: {
