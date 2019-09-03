@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { MDCSelect } from '@material/select';
-import { MDCTextField } from '@material/textfield';
+import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
+import { MDCRipple } from '@material/ripple';
 import Fuse from 'fuse.js';
 import militarySymbolsObject from './militarySymbolsObject';
 import affiliationOutlineObject from './affiliationOutlineObject';
@@ -11,6 +12,10 @@ const textField = new MDCTextField(document.querySelector('.searchSymbols'));
 const selectSymbol = new MDCSelect(document.querySelector('.symbol-select'));
 export const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
 const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select'));
+
+const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
+const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
+deleteTextFieldButton.root_.style.display = 'none';
 
 selectSymbol.listen('MDCSelect:change', () => {
   selectSymbol.selectedText_.textContent = selectSymbol.value;
@@ -27,8 +32,8 @@ selectSymbol.listen('MDCSelect:change', () => {
 selectAffiliation.listen('MDCSelect:change', () => {
   new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
   // If the affiliation is changed, then change all the symbols outlines in the dropdown to match it
-  Object.keys(militarySymbolsObject).forEach((key) => {
-    new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+  selectSymbol.menu_.items.map((key) => {
+    new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
   });
 });
 
@@ -74,6 +79,7 @@ const searchOptions = {
   maxPatternLength: 32,
   minMatchCharLength: 3,
   keys: [Object.keys(militarySymbolsObject)],
+  // keys: selectSymbol.menu_.items.map(e => e.dataset.value),
 };
 
 function debounce(func, interval) {
@@ -122,9 +128,14 @@ const searchResults = debounce(() => {
         new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, 'none').placeSymbol();
       }
     });
+
     if (textField.value.length >= 3) {
       // set the first result as the symbol value on the "Select a Symbol" dropdown
       result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null;
+      deleteTextFieldButton.root_.style.display = 'initial';
+      // deleteTextFieldButton.root_.style.right = '-379px';
+      // deleteTextFieldButton.root_.style.position = 'inherit';
+      // deleteTextFieldButton.root_.style.top = '-15px';
     }
   } else {
     // selectSymbol.foundation_.adapter_.closeMenu();
@@ -137,6 +148,16 @@ const searchResults = debounce(() => {
   }
 }, 250);
 
+// const icon = new MDCTextFieldIcon(document.querySelector('.searchFieldDeleteIcon'));
+
+
+deleteTextFieldButton.root_.addEventListener('click', fuck);
+
+function fuck(e) {
+  e.preventDefault();
+  console.log('Fucking clicked');
+}
+
 textField.input_.addEventListener('input', searchResults);
 
 // ! GLOBAL VARS - remove on production
@@ -144,6 +165,7 @@ window.textField = textField;
 window.selectSymbol = selectSymbol;
 window.selectUnitSize = selectUnitSize;
 window.Resizer = Resizer;
+window.deleteTextFieldButton = deleteTextFieldButton;
 
 // Load the default symbol into the panel when the page loads
 window.onload = () => {
