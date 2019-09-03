@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 // * IMPORTS * //
 import { selectAffiliation } from './mdcComponents';
 import affiliationOutlineObject from './affiliationOutlineObject';
@@ -133,52 +134,28 @@ class MilSym {
         const decorator = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         decorator.setAttributeNS(null, 'd', `${element.d}`);
         // If the default decorator fill is missing, default to black
-        if (!element.fill) {
-          decorator.setAttributeNS(null, 'fill', 'black');
-        } else {
-          decorator.setAttributeNS(null, 'fill', `${element.fill}`);
-        }
+        !element.fill ? decorator.setAttributeNS(null, 'fill', 'black') : decorator.setAttributeNS(null, 'fill', `${element.fill}`);
         // If the default decorator stroke is missing, default to black
-        if (!element.stroke) {
-          decorator.setAttributeNS(null, 'stroke', 'black');
-        } else {
-          decorator.setAttributeNS(null, 'stroke', `${element.stroke}`);
-        }
+        !element.stroke ? decorator.setAttributeNS(null, 'stroke', 'black') : decorator.setAttributeNS(null, 'stroke', `${element.stroke}`);
         // If the default decorator stroke-width is missing, default to 4
-        if (!element.strokeWidth) {
-          decorator.setAttributeNS(null, 'stroke-width', '4');
-        } else {
-          decorator.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-        }
+        !element.strokeWidth ? decorator.setAttributeNS(null, 'stroke-width', '4') : decorator.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
         decoratorGroup.append(decorator);
       }
-      if (key.indexOf('circle') == 0) {
+      if (key.indexOf('circle') === 0) {
         const element = this.symbol[key];
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         circle.setAttributeNS(null, 'cx', `${element.cx}`);
         circle.setAttributeNS(null, 'cy', `${element.cy}`);
         circle.setAttributeNS(null, 'r', `${element.r}`);
         // Default circle decorator stroke to black
-        if (!element.stroke) {
-          circle.setAttributeNS(null, 'stroke', 'black');
-        } else {
-          circle.setAttributeNS(null, 'stroke', `${element.stroke}`);
-        }
+        !element.stroke ? circle.setAttributeNS(null, 'stroke', 'black') : circle.setAttributeNS(null, 'stroke', `${element.stroke}`);
         // Default circle decorator stroke width to 4
-        if (!element.strokeWidth) {
-          circle.setAttributeNS(null, 'stroke-width', '4');
-        } else {
-          circle.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-        }
+        !element.strokeWidth ? circle.setAttributeNS(null, 'stroke-width', '4') : circle.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
         // Default circle decorator fill to black
-        if (!element.fill) {
-          circle.setAttributeNS(null, 'fill', 'black');
-        } else {
-          circle.setAttributeNS(null, 'fill', `${element.fill}`);
-        }
+        !element.fill ? circle.setAttributeNS(null, 'fill', 'black') : circle.setAttributeNS(null, 'fill', `${element.fill}`);
         decoratorGroup.append(circle);
       }
-      if (key.indexOf('text') == 0) {
+      if (key.indexOf('text') === 0) {
         const element = this.symbol[key];
         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
         text.textContent = element.symbolText;
@@ -187,35 +164,15 @@ class MilSym {
         text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
         text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
         // Default decorator font family to Arial
-        if (!element.fontFamily) {
-          text.setAttributeNS(null, 'font-family', 'Arial');
-        } else {
-          text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
-        }
+        !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
         // Default decorator font weight to 30
-        if (!element.fontWeight) {
-          text.setAttributeNS(null, 'font-weight', '30');
-        } else {
-          text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
-        }
+        !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
         // Default decorator font stroke to none
-        if (!element.stroke) {
-          text.setAttributeNS(null, 'stroke', 'none');
-        } else {
-          text.setAttributeNS(null, 'stroke', `${element.stroke}`);
-        }
+        !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
         // Default decorator font stroke width to 4
-        if (!element.strokeWidth) {
-          text.setAttributeNS(null, 'stroke-width', '4');
-        } else {
-          text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-        }
+        !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
         // Default decorator font fill to black
-        if (!element.fill) {
-          text.setAttributeNS(null, 'fill', 'black');
-        } else {
-          text.setAttributeNS(null, 'fill', `${element.fill}`);
-        }
+        !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
         decoratorGroup.append(text);
       }
     });
