@@ -15,14 +15,14 @@ const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select')
 
 const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
 const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
-deleteTextFieldButton.root_.style.display = 'none'; // Hide on page load
+
 
 selectSymbol.listen('MDCSelect:change', () => {
   selectSymbol.selectedText_.textContent = selectSymbol.value;
   new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
-  document.querySelector('.newSVG svg').setAttributeNS(null, 'class', 'animateSymbol');
+  document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
   // This will disable the selectUnitSize dropdown if the chosen symbol is a piece of equipment
-  if (JSON.parse(document.querySelector('.newSVG svg').dataset.symbolInfo).type === 'Equipment') {
+  if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
     selectUnitSize.disabled = true;
   } else {
     selectUnitSize.disabled = false;
@@ -32,6 +32,7 @@ selectSymbol.listen('MDCSelect:change', () => {
 selectAffiliation.listen('MDCSelect:change', () => {
   new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`).placeSymbol();
   // If the affiliation is changed, then change all the symbols outlines in the dropdown to match it
+  // Note: I am not using Object.keys() because I am only iterating on symbols that are in the dropdown list. (eg- what if the dropdown list only contains search results?)
   selectSymbol.menu_.items.map((key) => {
     new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
   });
@@ -103,49 +104,60 @@ function debounce(func, interval) {
 // TODO: ternary operators on get decoratorData()? Might clean up some of the garbage.
 const searchResults = debounce(() => {
   if (textField.input_.value !== '') {
-    const fuse = new Fuse(searchOptions.keys, searchOptions); // "list" is the item array
+    const fuse = new Fuse(searchOptions.keys, searchOptions);
     const result = fuse.search(textField.value);
-    selectSymbol.menu_.items.length === 0 ? selectSymbol.foundation_.adapter_.closeMenu() : null;
-    selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
-    deleteTextFieldButton.root_.style.display = 'initial';
+    deleteTextFieldButton.root_.style.display = 'initial'; // Show the trash icon when there is any text in the search field
     deleteTextFieldButton.root_.style.right = '0';
     deleteTextFieldButton.root_.style.position = 'fixed';
     deleteTextFieldButton.root_.style.top = '10px';
-    deleteTextFieldButton.root_.style.zIndex = '10';
+    deleteTextFieldButton.root_.style.zIndex = '10'; // setting z-index on trash icon makes it clickable
     result.forEach((e) => {
-      const elem = [...new Set(e.matches)];
-      for (let index = 0; index < elem.length; index++) {
-        const element = elem[index].value;
-        selectSymbol.foundation_.adapter_.setValue();
-        selectSymbol.foundation_.adapter_.openMenu();
-        const mdcList = document.querySelector('.mdc-list.symbol-list');
+      const matchSet = [...new Set(e.matches)];
+      const mdcList = document.querySelector('.mdc-list.symbol-list');
+      selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
+      if (matchSet.length >= 1) {
+        for (let index = 0; index < matchSet.length; index++) {
+          const element = matchSet[index].value;
+          selectSymbol.foundation_.adapter_.openMenu();
+          const newli = document.createElement('li');
+          newli.setAttribute('class', 'mdc-list-item');
+          newli.setAttribute('data-value', element);
+          newli.textContent = element;
+          mdcList.append(newli);
+          const figureElement = document.createElement('figure');
+          figureElement.setAttribute('class', 'symbolFigure');
+          figureElement.setAttribute('data-symbol-name', `${element}`); // add the symbol key to the data-attr so they can match up with the list item
+          newli.prepend(figureElement);
+          new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+        }
+        // set the first result as the symbol value on the "Select a Symbol" dropdown
+        selectSymbol.foundation_.setValue(result[0].matches[0].value);
+      } else {
         const newli = document.createElement('li');
         newli.setAttribute('class', 'mdc-list-item');
-        newli.setAttribute('data-value', element);
-        newli.textContent = element;
+        newli.textContent = 'No Results Found';
         mdcList.append(newli);
-        const figureElement = document.createElement('figure');
-        figureElement.setAttribute('class', 'symbolFigure');
-        figureElement.setAttribute('data-symbol-name', `${element}`); // add the symbol key to the data-attr so they can match up with the list item
-        newli.prepend(figureElement);
-        new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+        newli.addEventListener('click', clearTextField); // When "No Results Found" is clicked, clearTextField and re-add symbols
+        selectSymbol.foundation_.adapter_.openMenu();
+        // If there is no result, then clear the selected symbol in the dropdown
+        document.querySelector('.mainSymbolSelectedText').textContent = '';
       }
     });
-
-    if (textField.value.length >= 3) {
-      // set the first result as the symbol value on the "Select a Symbol" dropdown
-      result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null;
-    }
   } else {
-    // selectSymbol.foundation_.adapter_.closeMenu();
     // If there is no text in the search field remove all search results
-    selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
+    selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
+    // Hide the trashcan icon
+    deleteTextFieldButton.root_.style.display = 'none';
     // Rerun the function to add the symbols to the list
     addSymbolsToDropdownList();
     // Set the selected item to the one in the symbol panel
     selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
+    // Do not animate the symbol panel if there is no text in the textField
+    if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
+      document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
+    }
   }
-}, 250);
+}, 100);
 
 
 deleteTextFieldButton.root_.addEventListener('click', clearTextField);
@@ -156,13 +168,15 @@ function clearTextField() {
   // Hide the trash button
   deleteTextFieldButton.root_.style.display = 'none';
   // Remove all items in the selectSymbol menu
-  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
+  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
   // Re-add them
   addSymbolsToDropdownList();
   // Set the selectSymbol value to the last matched item
   selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
   // Do not animate the symbol panel
-  document.querySelector('.newSVG > svg').classList.contains('animateSymbol') ? document.querySelector('.newSVG > svg').classList.remove('animateSymbol') : null;
+  if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
+    document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
+  }
 }
 
 textField.input_.addEventListener('input', searchResults);
@@ -178,6 +192,7 @@ window.deleteTextFieldButton = deleteTextFieldButton;
 window.onload = () => {
   addSymbolsToDropdownList();
   selectSymbol.foundation_.setSelectedIndex(0);
+  deleteTextFieldButton.root_.style.display = 'none';
 };
 
 //! I deleted the mutation observer shit but you can check the repo if you still think it's worth something
