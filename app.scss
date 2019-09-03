@@ -66,9 +66,11 @@
 }
 
 .newSVG {
-  height: 150px;
+  // height: 150px;
+  height: 200px;
   display: flex;
-  align-items: center;
+  // align-items: center;
+  align-items: flex-end;
   justify-content: center;
 }
 

@@ -38,7 +38,9 @@ class MilSym {
     svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
     svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-    svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
+    // svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
+    // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon. This might not be the best way to do things.
+    svg.setAttributeNS(null, 'viewBox', '21 46 158 108');
   }
 
   get affiliationOutlineData() {
