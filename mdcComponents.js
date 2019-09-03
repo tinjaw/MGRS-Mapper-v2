@@ -15,7 +15,7 @@ const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select')
 
 const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
 const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
-deleteTextFieldButton.root_.style.display = 'none';
+deleteTextFieldButton.root_.style.display = 'none'; // Hide on page load
 
 selectSymbol.listen('MDCSelect:change', () => {
   selectSymbol.selectedText_.textContent = selectSymbol.value;
@@ -79,7 +79,6 @@ const searchOptions = {
   maxPatternLength: 32,
   minMatchCharLength: 3,
   keys: [Object.keys(militarySymbolsObject)],
-  // keys: selectSymbol.menu_.items.map(e => e.dataset.value),
 };
 
 function debounce(func, interval) {
@@ -108,7 +107,11 @@ const searchResults = debounce(() => {
     const result = fuse.search(textField.value);
     selectSymbol.menu_.items.length === 0 ? selectSymbol.foundation_.adapter_.closeMenu() : null;
     selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
-
+    deleteTextFieldButton.root_.style.display = 'initial';
+    deleteTextFieldButton.root_.style.right = '0';
+    deleteTextFieldButton.root_.style.position = 'fixed';
+    deleteTextFieldButton.root_.style.top = '10px';
+    deleteTextFieldButton.root_.style.zIndex = '10';
     result.forEach((e) => {
       const elem = [...new Set(e.matches)];
       for (let index = 0; index < elem.length; index++) {
@@ -132,10 +135,6 @@ const searchResults = debounce(() => {
     if (textField.value.length >= 3) {
       // set the first result as the symbol value on the "Select a Symbol" dropdown
       result[0].matches[0].value ? selectSymbol.foundation_.setValue(result[0].matches[0].value) : null;
-      deleteTextFieldButton.root_.style.display = 'initial';
-      // deleteTextFieldButton.root_.style.right = '-379px';
-      // deleteTextFieldButton.root_.style.position = 'inherit';
-      // deleteTextFieldButton.root_.style.top = '-15px';
     }
   } else {
     // selectSymbol.foundation_.adapter_.closeMenu();
@@ -148,14 +147,22 @@ const searchResults = debounce(() => {
   }
 }, 250);
 
-// const icon = new MDCTextFieldIcon(document.querySelector('.searchFieldDeleteIcon'));
 
+deleteTextFieldButton.root_.addEventListener('click', clearTextField);
 
-deleteTextFieldButton.root_.addEventListener('click', fuck);
-
-function fuck(e) {
-  e.preventDefault();
-  console.log('Fucking clicked');
+function clearTextField() {
+  // Clear the text field
+  textField.value = '';
+  // Hide the trash button
+  deleteTextFieldButton.root_.style.display = 'none';
+  // Remove all items in the selectSymbol menu
+  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(e => e.remove()) : null;
+  // Re-add them
+  addSymbolsToDropdownList();
+  // Set the selectSymbol value to the last matched item
+  selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
+  // Do not animate the symbol panel
+  document.querySelector('.newSVG > svg').classList.contains('animateSymbol') ? document.querySelector('.newSVG > svg').classList.remove('animateSymbol') : null;
 }
 
 textField.input_.addEventListener('input', searchResults);
