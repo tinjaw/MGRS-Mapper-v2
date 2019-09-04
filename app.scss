@@ -13,54 +13,6 @@
 @import '@material/textfield/mdc-text-field';
 @import '@material/elevation/mdc-elevation';
 
-@keyframes fade-in {
-  from {
-    transform: translateY(-280px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(100);
-    opacity: 1;
-  }
-}
-
-.animateSymbol {
-  animation: mdc-animation-enter(/* $name: */ fade-in, /* $duration: */ 300ms);
-}
-
-// ! Not using this animation but it looks good
-@keyframes bounceOut {
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translate3d(0, 0, 0);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.1);
-  }
-  80% {
-    opacity: 1;
-    transform: scale(0.89);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-}
-
-.bounceOut {
-  animation: mdc-animation-exit-permanent(/* $name: */ bounceOut, /* $duration: */ 350ms);
-}
-
-// .demo-width-class {
-//   width: 400px;
-// }
-
-.mdc-select {
-  width: 400px;
-}
-
 .sidebar500pix {
   width: 500px;
 }

@@ -20,7 +20,8 @@ const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
 
 selectSymbol.listen('MDCSelect:change', () => {
   // For some reason I had to add "|| 'None" to the selectMod1 argument. It will throw errors otherwise
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value || 'None'}`).placeSymbol();
+  // new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value || 'None'}`).placeSymbol();
+  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`).placeSymbol();
   document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
   selectSymbol.selectedText_.textContent = selectSymbol.value;
   // This will disable the selectUnitSize dropdown if the chosen symbol is a piece of equipment
@@ -74,6 +75,23 @@ class Resizer {
   }
 }
 
+function clearTextField() {
+  // Clear the text field
+  textField.value = '';
+  // Hide the trash button
+  deleteTextFieldButton.root_.style.display = 'none';
+  // Remove all items in the selectSymbol menu
+  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
+  // Re-add them
+  addSymbolsToDropdownList();
+  // Set the selectSymbol value to the last matched item
+  selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
+  // Do not animate the symbol panel
+  if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
+    document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
+  }
+}
+
 const searchOptions = {
   shouldSort: true,
   // tokenize: true,
@@ -106,10 +124,11 @@ function debounce(func, interval) {
 //! 3SEPT2019 -- Calling it here
 // TODO: Add a few more examples to Mod1. Preferably one with text and another with 2 path elements
 // TODO: Mod1 disabled for equipment
-// TODO: All the dropdown lists might benefit from mutatation observers. If I had a M.O. on each of the dropdowns I could easily call the Resizer class
+// TODO: All the dropdown lists might benefit from mutation observers. If I had a M.O. on each of the drop downs I could easily call the Resizer class
 // TODO: addMod1ToDropdownList and addSymbolsToDropdownList are very similar and could be combined into 1 function (I think)
 // TODO: If you change the MilSym class to accept an object, then you can instantiate it like this: "new MilSym({location: '.test', symbol: 'Infantry', affiliation: 'friendly', echelon: 'team', mod1: 'Foraging'}).placeSymbol();". The only value I can see from this is making it easier to call this class since you can indent object keys on new lines.
 // TODO: Hovering over list items should increase the z-elevation of the item.
+// TODO: Mod1 dropdown should probably lose the outlines and focus on the modifier symbol itself. (Also the outlines aren't updating on affiliation change)
 const searchResults = debounce(() => {
   if (textField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);
@@ -171,24 +190,6 @@ const searchResults = debounce(() => {
 }, 100);
 
 deleteTextFieldButton.root_.addEventListener('click', clearTextField);
-
-function clearTextField() {
-  // Clear the text field
-  textField.value = '';
-  // Hide the trash button
-  deleteTextFieldButton.root_.style.display = 'none';
-  // Remove all items in the selectSymbol menu
-  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
-  // Re-add them
-  addSymbolsToDropdownList();
-  // Set the selectSymbol value to the last matched item
-  selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
-  // Do not animate the symbol panel
-  if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
-    document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
-  }
-}
-
 textField.input_.addEventListener('input', searchResults);
 
 // ! GLOBAL VARS - remove on production
