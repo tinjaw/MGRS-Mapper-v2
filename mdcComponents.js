@@ -23,6 +23,7 @@ selectSymbol.listen('MDCSelect:change', () => {
   // new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value || 'None'}`).placeSymbol();
   new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`).placeSymbol();
   document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
+  // Forces select box to set its text content to the selected symbol value
   selectSymbol.selectedText_.textContent = selectSymbol.value;
   // This will disable the selectUnitSize dropdown if the chosen symbol is a piece of equipment
   if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
@@ -33,7 +34,7 @@ selectSymbol.listen('MDCSelect:change', () => {
 });
 
 selectAffiliation.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value}`).placeSymbol();
+  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value).placeSymbol();
   // If the affiliation is changed, then change all the symbols outlines in the dropdown to match it
   // Note: I am not using Object.keys() because I am only iterating on symbols that are in the dropdown list. (eg- what if the dropdown list only contains search results?)
   selectSymbol.menu_.items.map((key) => {
@@ -42,11 +43,13 @@ selectAffiliation.listen('MDCSelect:change', () => {
 });
 
 selectUnitSize.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value}`).placeSymbol();
+  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value).placeSymbol();
 });
 
 selectMod1.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value}`).placeSymbol();
+  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value).placeSymbol();
+  // Forces select box to set its text content to the selected Mod1 value
+  selectMod1.selectedText_.textContent = selectMod1.value;
 });
 
 const selectMenus = document.querySelectorAll('.mdc-select');
@@ -198,6 +201,7 @@ window.selectSymbol = selectSymbol;
 window.selectUnitSize = selectUnitSize;
 window.Resizer = Resizer;
 window.deleteTextFieldButton = deleteTextFieldButton;
+window.selectMod1 = selectMod1;
 
 
 // Load the default symbol into the panel when the page loads

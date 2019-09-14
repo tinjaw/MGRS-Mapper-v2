@@ -279,6 +279,24 @@ const addMod1ToDropdownList = () => {
     newli.prepend(figureElement);
     // This will add the icons to the dropdown list
     new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', `${key}`).placeSymbol();
+    // This will remove the affiliation container and focus solely on the Mod1 element
+    // ! Remember selectMod1 is a global var from mdcComponents.js -- Import it on production
+    selectMod1.menu_.items.map((key) => {
+      // This targets the Mod1 element (eg- the moon symbol for "foraging")
+      const mod1Element = key.querySelectorAll('li figure svg g.outline path')[0];
+      // This targets the SVG container for each Mod1 element
+      const mod1SVGContainer = mod1Element.parentElement.parentElement;
+      // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
+      mod1Element.setAttributeNS(null, 'fill', 'transparent');
+      // Set the affiliation outline stroke to 0
+      mod1Element.setAttributeNS(null, 'stroke-width', '0');
+      // Set the affiliation outline path to nothing
+      mod1Element.setAttributeNS(null, 'd', '');
+      // Set the SVG container viewBox to this value. (Note: Probably not needed)
+      // mod1SVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
+      // Scale the images down in the select box so they don't clip
+      mod1SVGContainer.style.transform = 'scale(0.75)';
+    });
   });
 };
 
