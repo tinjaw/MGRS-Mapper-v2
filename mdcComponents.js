@@ -8,8 +8,6 @@ import {
   addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
 } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
-// import affiliationOutlineObject from './affiliationOutlineObject';
-// import unitSizeObject from './unitSizeObject';
 
 const textField = new MDCTextField(document.querySelector('.searchSymbols'));
 const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -22,6 +20,7 @@ const selectMod1 = new MDCSelect(document.querySelector('.mod1-select'));
 const selectMod2 = new MDCSelect(document.querySelector('.mod2-select'));
 
 // ex- "new TransformModifiersOnEquipment('.newSVG > svg')"
+// This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
 class TransformModifiersOnEquipment {
   constructor(equipmentCircle) {
     this.equipmentCircle = document.querySelector(equipmentCircle); // The equipment SVG you want to readjust
@@ -39,11 +38,14 @@ class TransformModifiersOnEquipment {
 
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
+    // Set all the select box text content otherwise it throws weird errors
     key.selectedText_.textContent = key.value;
+    // Find all the selected values and place the symbol in the symbol panel
     new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`).placeSymbol();
 
     if (event.target.classList.contains('symbol-select')) {
-      document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
+      // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
+      !textField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
     }
 
     if (event.target.classList.contains('affiliation-select')) {
@@ -68,7 +70,7 @@ class TransformModifiersOnEquipment {
 const selectMenus = document.querySelectorAll('.mdc-select');
 selectMenus.forEach((key) => {
   key.addEventListener('click', () => {
-    // If the selectSymbol menu is open, then resize all the symbols
+    // If any of these menus are open, then resize all the symbols
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
     selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
     selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
@@ -138,14 +140,11 @@ function debounce(func, interval) {
   };
 }
 
-//! 3SEPT2019 -- Calling it here
-// // TODO: Add a few more examples to Mod1. Preferably one with text and another with 2 path elements
-// // TODO: Mod1 disabled for equipment
-// // TODO: All the dropdown lists might benefit from mutation observers. If I had a M.O. on each of the drop downs I could easily call the Resizer class
-// TODO: addMod1ToDropdownList and addSymbolsToDropdownList are very similar and could be combined into 1 function (I think)
+//! 15SEPT2019 -- Calling it here
+// TODO: addMod1ToDropdownList() and addMod2ToDropdownList() are almost identical, combine them into a class or function. Furthermore you could probably also combine addSymbolsToDropdownList() in that mix as well
+// TODO: get mod1Data() and get mod2Data() in  MilSym are almost identical, there should be a way to combine them
+// TODO: Check all Mod1 and Mod2 symbols that they fit inside for both Land Unit and Equipment symbols in every affiliation. For instance - Mod2 Rails on hostile outlines do not work. Needs a fix
 // TODO: If you change the MilSym class to accept an object, then you can instantiate it like this: "new MilSym({location: '.test', symbol: 'Infantry', affiliation: 'friendly', echelon: 'team', mod1: 'Foraging'}).placeSymbol();". The only value I can see from this is making it easier to call this class since you can indent object keys on new lines.
-// // TODO: Hovering over list items should increase the z-elevation of the item.
-// // TODO: Mod1 dropdown should probably lose the outlines and focus on the modifier symbol itself. (Also the outlines aren't updating on affiliation change)
 const searchResults = debounce(() => {
   if (textField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);

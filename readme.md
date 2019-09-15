@@ -12,6 +12,7 @@
 - [ ] Modifier 1
 - [ ] Modifier 2
 - [ ] Unit Size modifier
+- [ ] "In Flight" outline modifiers for aviation symbols
 - [ ] Symbol text for Unique Designation and Higher formation
 - [ ] Task Force amplifier
 - [ ] Reinforced/Reduced modifier

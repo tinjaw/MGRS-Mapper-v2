@@ -135,7 +135,7 @@ const militarySymbolsObject = {
       },
     },
   },
-  'Unammed Aerial Surveillance': {
+  'Unmanned Aerial Surveillance': {
     type: 'Land Unit',
     affiliation: {
       friendly: {
