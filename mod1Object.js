@@ -28,6 +28,35 @@ const mod1Object = {
       },
     },
   },
+  Armored: {
+    type: 'Armor',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 90,60 20,0 c 10,0 10,15 0,15 L 90,75 C 80,75 80,60 90,60',
+          fill: 'none',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   Foraging: {
     type: 'Activity',
     affiliation: {

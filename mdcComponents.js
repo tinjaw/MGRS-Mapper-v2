@@ -6,51 +6,55 @@ import { MDCRipple } from '@material/ripple';
 import Fuse from 'fuse.js';
 import { addSymbolsToDropdownList, addMod1ToDropdownList, MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
-import affiliationOutlineObject from './affiliationOutlineObject';
-import unitSizeObject from './unitSizeObject';
+// import affiliationOutlineObject from './affiliationOutlineObject';
+// import unitSizeObject from './unitSizeObject';
 
 const textField = new MDCTextField(document.querySelector('.searchSymbols'));
+const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
+const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
+
 const selectSymbol = new MDCSelect(document.querySelector('.symbol-select'));
 const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
 const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select'));
 const selectMod1 = new MDCSelect(document.querySelector('.mod1-select'));
 
-const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
-const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
+function transformMod1OnEquipment() {
+  const equipmentCircle = document.querySelector('.newSVG > svg');
+  const equipmentDecorator = equipmentCircle.querySelector('g.decorator');
+  equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center (cx, cy)
+  equipmentDecorator.style.transform = 'scale(0.75)';
+  const mod1 = equipmentCircle.querySelector('g.mod1');
+  // mod1.style.transform = `translateY(-${equipmentCircle.viewBox.baseVal.x / equipmentCircle.viewBox.baseVal.y * 21}px)`;
+  mod1.style.transform = 'translateY(-9%)';
+}
 
-selectSymbol.listen('MDCSelect:change', () => {
-  // For some reason I had to add "|| 'None" to the selectMod1 argument. It will throw errors otherwise
-  // new MilSym('.newSVG', `${selectSymbol.value}`, `${selectAffiliation.value}`, `${selectUnitSize.value}`, `${selectMod1.value || 'None'}`).placeSymbol();
-  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`).placeSymbol();
-  document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
-  // Forces select box to set its text content to the selected symbol value
-  selectSymbol.selectedText_.textContent = selectSymbol.value;
-  // This will disable the selectUnitSize dropdown if the chosen symbol is a piece of equipment
-  if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
-    selectUnitSize.disabled = true;
-  } else {
-    selectUnitSize.disabled = false;
-  }
-});
 
-selectAffiliation.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value).placeSymbol();
-  // If the affiliation is changed, then change all the symbols outlines in the dropdown to match it
-  // Note: I am not using Object.keys() because I am only iterating on symbols that are in the dropdown list. (eg- what if the dropdown list only contains search results?)
-  selectSymbol.menu_.items.map((key) => {
-    new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+[selectSymbol, selectAffiliation, selectUnitSize, selectMod1].forEach((key) => {
+  key.listen('MDCSelect:change', (event) => {
+    key.selectedText_.textContent = key.value;
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`).placeSymbol();
+
+    if (event.target.classList.contains('symbol-select')) {
+      document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
+    }
+
+    if (event.target.classList.contains('affiliation-select')) {
+      // When an affiliation is selected, change the outlines of all symbols in the dropdown
+      selectSymbol.menu_.items.map((key) => {
+        new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+      });
+    }
+
+    if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
+      // If Mod1 value is anything other than none, run the function that adjusts the equipment decorator and modifier
+      selectMod1.value != 'None' ? transformMod1OnEquipment() : null;
+      selectUnitSize.disabled = true;
+    } else {
+      selectUnitSize.disabled = false;
+    }
   });
 });
 
-selectUnitSize.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value).placeSymbol();
-});
-
-selectMod1.listen('MDCSelect:change', () => {
-  new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value).placeSymbol();
-  // Forces select box to set its text content to the selected Mod1 value
-  selectMod1.selectedText_.textContent = selectMod1.value;
-});
 
 const selectMenus = document.querySelectorAll('.mdc-select');
 selectMenus.forEach((key) => {
@@ -125,13 +129,13 @@ function debounce(func, interval) {
 }
 
 //! 3SEPT2019 -- Calling it here
-// TODO: Add a few more examples to Mod1. Preferably one with text and another with 2 path elements
-// TODO: Mod1 disabled for equipment
-// TODO: All the dropdown lists might benefit from mutation observers. If I had a M.O. on each of the drop downs I could easily call the Resizer class
+// // TODO: Add a few more examples to Mod1. Preferably one with text and another with 2 path elements
+// // TODO: Mod1 disabled for equipment
+// // TODO: All the dropdown lists might benefit from mutation observers. If I had a M.O. on each of the drop downs I could easily call the Resizer class
 // TODO: addMod1ToDropdownList and addSymbolsToDropdownList are very similar and could be combined into 1 function (I think)
 // TODO: If you change the MilSym class to accept an object, then you can instantiate it like this: "new MilSym({location: '.test', symbol: 'Infantry', affiliation: 'friendly', echelon: 'team', mod1: 'Foraging'}).placeSymbol();". The only value I can see from this is making it easier to call this class since you can indent object keys on new lines.
-// TODO: Hovering over list items should increase the z-elevation of the item.
-// TODO: Mod1 dropdown should probably lose the outlines and focus on the modifier symbol itself. (Also the outlines aren't updating on affiliation change)
+// // TODO: Hovering over list items should increase the z-elevation of the item.
+// // TODO: Mod1 dropdown should probably lose the outlines and focus on the modifier symbol itself. (Also the outlines aren't updating on affiliation change)
 const searchResults = debounce(() => {
   if (textField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);
@@ -166,6 +170,7 @@ const searchResults = debounce(() => {
       } else {
         const newli = document.createElement('li');
         newli.setAttribute('class', 'mdc-list-item');
+        newli.style.justifyContent = 'center';
         newli.textContent = 'No Results Found';
         mdcList.append(newli);
         newli.addEventListener('click', clearTextField); // When "No Results Found" is clicked, clearTextField and re-add symbols

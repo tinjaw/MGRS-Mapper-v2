@@ -28,6 +28,9 @@ class MilSym {
   placeSymbol() {
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const desc = document.createElementNS('http://www.w3.org/2000/svg', 'desc');
+    desc.textContent = `This ${this.data.symbol} graphic was created by CPT James Pistell for MGRS-Mapper.com`;
+    svg.prepend(desc);
     // This will find any symbols that have nothing in the echelon path data. You can use this later to exclude them from being inserted into the DOM
     // if (this.echelon.d === '') {
     //   svg.append(this.affiliationOutlineData, this.decoratorData);
@@ -273,14 +276,10 @@ const addMod1ToDropdownList = () => {
     mod1TypeInfo.setAttributeNS(null, 'class', 'mod1-type-info');
     // Add the type of the Modifier in the drop down box
     mod1TypeInfo.textContent = mod1Object[key].type.padEnd(15, '.');
-
     newli.setAttributeNS(null, 'class', 'mdc-list-item');
     newli.setAttributeNS(null, 'data-value', key);
-
     newli.textContent = key.toString();
     newli.prepend(mod1TypeInfo);
-
-
     mdcList.append(newli);
     const figureElement = document.createElement('figure');
     figureElement.setAttributeNS(null, 'class', 'mod1Figure');

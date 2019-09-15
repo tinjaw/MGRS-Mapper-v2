@@ -43,11 +43,6 @@ svg {
   width: 400px;
 }
 
-ul.mdc-list.symbol-list {
-  // ! This is the width of the Medium Grenade Launcher while hovered. Look to replace this programmatically
-  width: 686px;
-}
-
 ul.mdc-list {
   // min-width for the list items in the drop down match the select box width
   min-width: 400px;
@@ -58,7 +53,7 @@ ul.mdc-list {
 li.mdc-list-item {
   height: 64px;
   /* padding: 3px 10px 3px 0px; */
-  padding: 0.2rem 1rem 0.2rem 0rem;
+  padding: 0.2rem 2.1rem 0.2rem 0.2rem;
   font-size: 1.15rem;
   transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 175ms, /* $delay: */ 25ms);
   transform: scale(1);
