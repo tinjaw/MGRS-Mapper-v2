@@ -52,4 +52,17 @@
 - strokeWidth: 4
 - fill: black
 
-const obj = { a: 'b', c: 'd', e: 'f', g: 'h', }
+# Creating an object and integrating it:
+
+- create object and import to app.js
+- create HTML container for object
+- add to MilSym class params
+- add to MilSym constructor
+- create method in MilSym
+- create addXtoDropdownList() func
+- export addXtoDropdownList() to mdcComponents.js
+- import that shit
+- create new MDCSelect for your object
+- add your new MDCSelect to the forEach array to enabled the change event
+- add your new MDCSelect to the selectMenus event listener
+- add addXtoDropdownList() to the window.load function on mdcComponents.js

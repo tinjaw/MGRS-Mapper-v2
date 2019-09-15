@@ -84,7 +84,9 @@ const mod1Object = {
         return this.friendly;
       },
       get neutral() {
-        return this.friendly;
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(110,77.5) scale(-0.4,-0.4)';
+        return propertyToModify;
       },
     },
   },

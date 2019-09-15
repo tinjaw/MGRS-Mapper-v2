@@ -5,17 +5,19 @@ import affiliationOutlineObject from './affiliationOutlineObject';
 import militarySymbolsObject from './militarySymbolsObject';
 import unitSizeObject from './unitSizeObject';
 import mod1Object from './mod1Object';
+import mod2Object from './mod2Object';
 
 // * The star of the show * //
-// ex- new MilSym('.test', 'Infantry', 'friendly', 'team').placeSymbol();
+// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail').placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None') {
+  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None') {
     this.location = document.querySelector(location);
     this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
     this.affiliation = affiliationOutlineObject[affiliation];
     this.echelon = unitSizeObject[echelon].affiliation[affiliation];
     this.type = militarySymbolsObject[symbol].type;
     this.mod1 = mod1Object[mod1].affiliation[affiliation];
+    this.mod2 = mod2Object[mod2].affiliation[affiliation];
     this.data = {
       location,
       symbol,
@@ -37,7 +39,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data);
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -241,6 +243,48 @@ class MilSym {
     });
     return mod1Group;
   }
+
+  get mod2Data() {
+    const mod2Group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    mod2Group.classList.add('mod2');
+    Object.keys(this.mod2).forEach((key) => {
+      if (key.indexOf('path') === 0) {
+        const element = this.mod2[key];
+        const mod2Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        mod2Path.setAttributeNS(null, 'd', `${element.d}`);
+        // If the default mod2Path fill is missing, default to black
+        !element.fill ? mod2Path.setAttributeNS(null, 'fill', 'black') : mod2Path.setAttributeNS(null, 'fill', `${element.fill}`);
+        // If the default mod2Path stroke is missing, default to black
+        !element.stroke ? mod2Path.setAttributeNS(null, 'stroke', 'black') : mod2Path.setAttributeNS(null, 'stroke', `${element.stroke}`);
+        // If the default mod2Path stroke-width is missing, default to 4
+        !element.strokeWidth ? mod2Path.setAttributeNS(null, 'stroke-width', '4') : mod2Path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+        // If the mod2 element is missing a transform property, do nothing, else set the transform value
+        !element.transform ? null : mod2Path.setAttributeNS(null, 'transform', `${element.transform}`);
+        mod2Group.append(mod2Path);
+      }
+      if (key.indexOf('text') === 0) {
+        const element = this.mod2[key];
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.textContent = element.symbolText;
+        text.setAttributeNS(null, 'x', `${element.x}`);
+        text.setAttributeNS(null, 'y', `${element.y}`);
+        text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
+        text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
+        // Default decorator font family to Arial
+        !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
+        // Default decorator font weight to 30
+        !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
+        // Default decorator font stroke to none
+        !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
+        // Default decorator font stroke width to 4
+        !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+        // Default decorator font fill to black
+        !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
+        mod2Group.append(text);
+      }
+    });
+    return mod2Group;
+  }
 }
 
 // * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
@@ -267,7 +311,7 @@ const addSymbolsToDropdownList = () => {
   });
 };
 
-// * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
+// * ADD MOD 1 THUMBNAILS TO THE DROPDOWN LIST * //
 const addMod1ToDropdownList = () => {
   Object.keys(mod1Object).forEach((key) => {
     const mdcList = document.querySelector('.mdc-list.mod1-list');
@@ -308,10 +352,54 @@ const addMod1ToDropdownList = () => {
   });
 };
 
+// * ADD MOD 1 THUMBNAILS TO THE DROPDOWN LIST * //
+const addMod2ToDropdownList = () => {
+  Object.keys(mod2Object).forEach((key) => {
+    const mdcList = document.querySelector('.mdc-list.mod2-list');
+    const newli = document.createElement('li');
+    const mod2TypeInfo = document.createElement('em');
+    mod2TypeInfo.setAttributeNS(null, 'class', 'mod2-type-info');
+    // Add the type of the Modifier in the drop down box
+    mod2TypeInfo.textContent = mod2Object[key].type.padEnd(15, '.');
+    newli.setAttributeNS(null, 'class', 'mdc-list-item');
+    newli.setAttributeNS(null, 'data-value', key);
+    newli.textContent = key.toString();
+    newli.prepend(mod2TypeInfo);
+    mdcList.append(newli);
+    const figureElement = document.createElement('figure');
+    figureElement.setAttributeNS(null, 'class', 'mod2Figure');
+    figureElement.setAttributeNS(null, 'data-mod2-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+    newli.prepend(figureElement);
+    // This will add the icons to the dropdown list
+    new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', `${key}`).placeSymbol();
+    // This will remove the affiliation container and focus solely on the Mod2 element
+    // ! Remember selectMod2 is a global var from mdcComponents.js -- Import it on production
+    selectMod2.menu_.items.map((key) => {
+      // This targets the Mod2 element (eg- the moon symbol for "foraging")
+      const mod2Element = key.querySelectorAll('li figure svg g.outline path')[0];
+      // This targets the SVG container for each Mod2 element
+      const mod2SVGContainer = mod2Element.parentElement.parentElement;
+      // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
+      mod2Element.setAttributeNS(null, 'fill', 'transparent');
+      // Set the affiliation outline stroke to 0
+      mod2Element.setAttributeNS(null, 'stroke-width', '0');
+      // Set the affiliation outline path to nothing
+      mod2Element.setAttributeNS(null, 'd', '');
+      // Set the SVG container viewBox to this value. (Note: Probably not needed)
+      // mod2SVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
+      // Scale the Mod2 element down in the select box so they don't clip
+      mod2SVGContainer.style.transform = 'scale(0.75)';
+    });
+  });
+};
+
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
 window.selectAffiliation = selectAffiliation;
 window.mod1Object = mod1Object;
+window.mod2Object = mod2Object;
 
-export { addSymbolsToDropdownList, addMod1ToDropdownList, MilSym };
+export {
+  addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
+};

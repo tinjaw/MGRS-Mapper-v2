@@ -4,7 +4,9 @@ import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
 import Fuse from 'fuse.js';
-import { addSymbolsToDropdownList, addMod1ToDropdownList, MilSym } from './app';
+import {
+  addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
+} from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 // import affiliationOutlineObject from './affiliationOutlineObject';
 // import unitSizeObject from './unitSizeObject';
@@ -17,22 +19,28 @@ const selectSymbol = new MDCSelect(document.querySelector('.symbol-select'));
 const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
 const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select'));
 const selectMod1 = new MDCSelect(document.querySelector('.mod1-select'));
+const selectMod2 = new MDCSelect(document.querySelector('.mod2-select'));
 
-function transformMod1OnEquipment() {
-  const equipmentCircle = document.querySelector('.newSVG > svg');
-  const equipmentDecorator = equipmentCircle.querySelector('g.decorator');
-  equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center (cx, cy)
-  equipmentDecorator.style.transform = 'scale(0.75)';
-  const mod1 = equipmentCircle.querySelector('g.mod1');
-  // mod1.style.transform = `translateY(-${equipmentCircle.viewBox.baseVal.x / equipmentCircle.viewBox.baseVal.y * 21}px)`;
-  mod1.style.transform = 'translateY(-9%)';
+// ex- "new TransformModifiersOnEquipment('.newSVG > svg')"
+class TransformModifiersOnEquipment {
+  constructor(equipmentCircle) {
+    this.equipmentCircle = document.querySelector(equipmentCircle); // The equipment SVG you want to readjust
+    this.equipmentDecorator = this.equipmentCircle.querySelector('g.decorator');
+    this.mod1 = this.equipmentCircle.querySelector('g.mod1');
+    this.mod2 = this.equipmentCircle.querySelector('g.mod2');
+    this.equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+    this.equipmentDecorator.style.transform = 'scale(0.75)';
+    // mod1.style.transform = `translateY(-${equipmentCircle.viewBox.baseVal.x / equipmentCircle.viewBox.baseVal.y * 21}px)`;
+    this.mod1.style.transform = 'translateY(-9%)';
+    this.mod2.style.transformOrigin = '100px 140px';
+    this.mod2.style.transform = 'scale(0.75)';
+  }
 }
 
-
-[selectSymbol, selectAffiliation, selectUnitSize, selectMod1].forEach((key) => {
+[selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
     key.selectedText_.textContent = key.value;
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`).placeSymbol();
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`).placeSymbol();
 
     if (event.target.classList.contains('symbol-select')) {
       document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
@@ -46,8 +54,9 @@ function transformMod1OnEquipment() {
     }
 
     if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
-      // If Mod1 value is anything other than none, run the function that adjusts the equipment decorator and modifier
-      selectMod1.value != 'None' ? transformMod1OnEquipment() : null;
+      // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
+      selectMod1.value != 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+      selectMod2.value != 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectUnitSize.disabled = true;
     } else {
       selectUnitSize.disabled = false;
@@ -63,6 +72,7 @@ selectMenus.forEach((key) => {
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
     selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
     selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
+    selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
   });
 });
 
@@ -207,6 +217,8 @@ window.selectUnitSize = selectUnitSize;
 window.Resizer = Resizer;
 window.deleteTextFieldButton = deleteTextFieldButton;
 window.selectMod1 = selectMod1;
+window.selectMod2 = selectMod2;
+window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 
 
 // Load the default symbol into the panel when the page loads
@@ -215,6 +227,8 @@ window.onload = () => {
   selectSymbol.foundation_.setSelectedIndex(0);
   addMod1ToDropdownList();
   selectMod1.foundation_.setSelectedIndex(0);
+  addMod2ToDropdownList();
+  selectMod2.foundation_.setSelectedIndex(0);
   deleteTextFieldButton.root_.style.display = 'none';
 };
 
