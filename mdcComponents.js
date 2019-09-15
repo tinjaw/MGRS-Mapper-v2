@@ -19,6 +19,22 @@ const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select')
 const selectMod1 = new MDCSelect(document.querySelector('.mod1-select'));
 const selectMod2 = new MDCSelect(document.querySelector('.mod2-select'));
 
+// ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
+class Resizer {
+  constructor(symbolElement, width = 93, height = 64) {
+    this.symbolElement = document.querySelectorAll(symbolElement);
+    this.width = width;
+    this.height = height;
+    this.symbolElement.forEach((key) => {
+      // This just removes the animation on the symbol on the dropdown list
+      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
+      key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
+      key.setAttributeNS(null, 'width', `${this.width}`);
+      key.setAttributeNS(null, 'height', `${this.height}`);
+    });
+  }
+}
+
 // ex- "new TransformModifiersOnEquipment('.newSVG > svg')"
 // This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
 class TransformModifiersOnEquipment {
@@ -57,8 +73,8 @@ class TransformModifiersOnEquipment {
 
     if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
-      selectMod1.value != 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-      selectMod2.value != 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+      selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+      selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectUnitSize.disabled = true;
     } else {
       selectUnitSize.disabled = false;
@@ -78,21 +94,6 @@ selectMenus.forEach((key) => {
   });
 });
 
-// ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
-class Resizer {
-  constructor(symbolElement, width = 93, height = 64) {
-    this.symbolElement = document.querySelectorAll(symbolElement);
-    this.width = width;
-    this.height = height;
-    this.symbolElement.forEach((key) => {
-      // This just removes the animation on the symbol on the dropdown list
-      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
-      key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
-      key.setAttributeNS(null, 'width', `${this.width}`);
-      key.setAttributeNS(null, 'height', `${this.height}`);
-    });
-  }
-}
 
 function clearTextField() {
   // Clear the text field

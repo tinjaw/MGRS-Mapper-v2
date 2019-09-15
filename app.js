@@ -352,7 +352,7 @@ const addMod1ToDropdownList = () => {
   });
 };
 
-// * ADD MOD 1 THUMBNAILS TO THE DROPDOWN LIST * //
+// * ADD MOD 2 THUMBNAILS TO THE DROPDOWN LIST * //
 const addMod2ToDropdownList = () => {
   Object.keys(mod2Object).forEach((key) => {
     const mdcList = document.querySelector('.mdc-list.mod2-list');
