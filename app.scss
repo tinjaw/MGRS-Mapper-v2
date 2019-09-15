@@ -32,9 +32,10 @@
   width: fit-content;
 }
 
-.symbol-list em {
+.symbol-list em,
+.mod1-list em {
   pointer-events: none;
-  //color: var(--mdc-theme-text-icon-on-primary-light);
+  // color: var(--mdc-theme-text-icon-on-primary-light);
   color: rgba($color: #000000, $alpha: 0.38);
   font-style: italic;
   // font-size: x-small;

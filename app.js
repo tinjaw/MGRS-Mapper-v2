@@ -269,9 +269,18 @@ const addMod1ToDropdownList = () => {
   Object.keys(mod1Object).forEach((key) => {
     const mdcList = document.querySelector('.mdc-list.mod1-list');
     const newli = document.createElement('li');
+    const mod1TypeInfo = document.createElement('em');
+    mod1TypeInfo.setAttributeNS(null, 'class', 'mod1-type-info');
+    // Add the type of the Modifier in the drop down box
+    mod1TypeInfo.textContent = mod1Object[key].type.padEnd(15, '.');
+
     newli.setAttributeNS(null, 'class', 'mdc-list-item');
     newli.setAttributeNS(null, 'data-value', key);
+
     newli.textContent = key.toString();
+    newli.prepend(mod1TypeInfo);
+
+
     mdcList.append(newli);
     const figureElement = document.createElement('figure');
     figureElement.setAttributeNS(null, 'class', 'mod1Figure');
@@ -294,7 +303,7 @@ const addMod1ToDropdownList = () => {
       mod1Element.setAttributeNS(null, 'd', '');
       // Set the SVG container viewBox to this value. (Note: Probably not needed)
       // mod1SVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
-      // Scale the images down in the select box so they don't clip
+      // Scale the Mod1 element down in the select box so they don't clip
       mod1SVGContainer.style.transform = 'scale(0.75)';
     });
   });

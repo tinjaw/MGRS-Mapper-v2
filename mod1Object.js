@@ -35,7 +35,7 @@ const mod1Object = {
         path_1: {
           d: 'M 12.5,3.5 a 22.5,22.5 0 0,1 0,43 a 22.5,22.5 0 1,0 0,-43 z',
           fill: 'none',
-          strokeWidth: '4',
+          strokeWidth: '6',
           transform: 'translate(110,75) scale(-0.4,-0.4)',
         },
       },
