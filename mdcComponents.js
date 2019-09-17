@@ -43,15 +43,16 @@ class Resizer {
 // ex- "new TransformModifiersOnEquipment('.newSVG > svg')"
 // This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
 class TransformModifiersOnEquipment {
-  constructor(equipmentCircle) {
-    this.equipmentCircle = document.querySelector(equipmentCircle); // The equipment SVG you want to readjust
-    this.equipmentDecorator = this.equipmentCircle.querySelector('g.decorator');
-    this.mod1 = this.equipmentCircle.querySelector('g.mod1');
-    this.mod2 = this.equipmentCircle.querySelector('g.mod2');
+  constructor(equipmentOutline) {
+    this.equipmentOutline = document.querySelector(equipmentOutline); // The equipment SVG you want to readjust
+    this.equipmentDecorator = this.equipmentOutline.querySelector('g.decorator');
+    this.mod1 = this.equipmentOutline.querySelector('g.mod1');
+    this.mod2 = this.equipmentOutline.querySelector('g.mod2');
     this.equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
-    this.equipmentDecorator.style.transform = 'scale(0.75)';
-    // mod1.style.transform = `translateY(-${equipmentCircle.viewBox.baseVal.x / equipmentCircle.viewBox.baseVal.y * 21}px)`;
-    this.mod1.style.transform = 'translateY(-9%)';
+    this.equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+    // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
+    this.mod1.style.transformOrigin = '100px 100px';
+    this.mod1.style.transform = 'translateY(-11%) scale(0.85)';
     this.mod2.style.transformOrigin = '100px 140px';
     this.mod2.style.transform = 'scale(0.75)';
   }
@@ -59,8 +60,14 @@ class TransformModifiersOnEquipment {
 
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
-    // Set all the select box text content otherwise it throws weird errors
-    key.selectedText_.textContent = key.value;
+    // This replaces camel case for things like "friendlyTemplated" into "Friendly / Templated"
+    if (event.target.classList.contains('unit-size-select') || event.target.classList.contains('affiliation-select')) {
+      key.selectedText_.textContent = key.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
+    } else {
+      // Set all other select boxes text content otherwise it throws weird errors
+      key.selectedText_.textContent = key.value;
+    }
+
     // Find all the selected values and place the symbol in the symbol panel
     new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`).placeSymbol();
 
@@ -235,7 +242,6 @@ window.onload = () => {
   addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
-
   deleteTextFieldButton.root_.style.display = 'none';
 };
 

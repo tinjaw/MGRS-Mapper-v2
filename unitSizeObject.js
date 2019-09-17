@@ -128,7 +128,7 @@ const unitSizeObject = {
       },
     },
   },
-  troop: {
+  companyTroopBattery: {
     affiliation: {
       friendly: {
         d: 'M100,40L100,15',
@@ -153,7 +153,7 @@ const unitSizeObject = {
       },
     },
   },
-  squadron: {
+  battalionSquadron: {
     affiliation: {
       friendly: {
         d: 'M90,40L90,15 M110,40L110,15',
@@ -178,7 +178,7 @@ const unitSizeObject = {
       },
     },
   },
-  regiment: {
+  regimentGroup: {
     affiliation: {
       friendly: {
         d: 'M100,40L100,15 M120,40L120,15 M80,40L80,15',
@@ -328,7 +328,7 @@ const unitSizeObject = {
       },
     },
   },
-  region: {
+  regionTheatre: {
     affiliation: {
       friendly: {
         d: 'M0,40l25,-25m0,25l-25,-25M35,40l25,-25m0,25l-25,-25M70,40l25,-25m0,25l-25,-25M105,40l25,-25m0,25l-25,-25M140,40l25,-25m0,25l-25,-25M175,40l25,-25m0,25l-25,-25',

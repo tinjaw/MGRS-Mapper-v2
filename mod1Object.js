@@ -1,4 +1,15 @@
 // * MODIFIER 1 OBJECT * //
+const gay = (parentAffiliation, newVal) => {
+  const propertyToModify = JSON.parse(JSON.stringify(parentAffiliation));
+  // const rape = propertyToModify[path] = newVal;
+  // propertyToModify.text_1.fontSize = '9';
+  return propertyToModify.fontSize.value = newVal;
+  // console.log(propertyToModify);
+};
+
+
+// This works but now you need to add a param to edit things like text_1
+
 const mod1Object = {
   None: {
     type: 'Default',
@@ -108,7 +119,7 @@ const mod1Object = {
       get hostile() {
         // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
         const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
-        propertyToModify.text_1.fontSize = '9';
+        propertyToModify.text_1.fontSize = '19';
         return propertyToModify;
       },
       get hostileTemplated() {
@@ -121,7 +132,7 @@ const mod1Object = {
         return this.friendly;
       },
       get neutral() {
-        return this.friendly;
+        return this.hostile;
       },
     },
   },
