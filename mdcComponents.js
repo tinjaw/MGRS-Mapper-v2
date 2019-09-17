@@ -4,9 +4,14 @@ import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
 import Fuse from 'fuse.js';
-import {
-  addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
-} from './app';
+import mod1Object from './mod1Object';
+import mod2Object from './mod2Object';
+// import {
+//   addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
+// } from './app';
+
+import { addSymbolsAndModsToList, MilSym } from './app';
+
 import militarySymbolsObject from './militarySymbolsObject';
 
 const textField = new MDCTextField(document.querySelector('.searchSymbols'));
@@ -103,7 +108,8 @@ function clearTextField() {
   // Remove all items in the selectSymbol menu
   selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
   // Re-add them
-  addSymbolsToDropdownList();
+  // addSymbolsToDropdownList();
+  addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
   // Set the selectSymbol value to the last matched item
   selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
   // Do not animate the symbol panel
@@ -170,10 +176,12 @@ const searchResults = debounce(() => {
           mdcList.append(newli);
           const figureElement = document.createElement('figure');
           figureElement.setAttribute('class', 'symbolFigure');
-          figureElement.setAttribute('data-symbol-name', `${element}`); // add the symbol key to the data-attr so they can match up with the list item
+          // Add the symbol key to the data-attr so they can match up with the list item
+          figureElement.setAttribute('data-symbol-name', `${element}`);
           newli.prepend(figureElement);
           new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, 'none').placeSymbol();
-          selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null; // Resize symbols in search results so they fit
+          // Resize symbols in search results so they fit
+          selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
         }
         // set the first result as the symbol value on the "Select a Symbol" dropdown
         selectSymbol.foundation_.setValue(result[0].matches[0].value);
@@ -183,7 +191,8 @@ const searchResults = debounce(() => {
         newli.style.justifyContent = 'center';
         newli.textContent = 'No Results Found';
         mdcList.append(newli);
-        newli.addEventListener('click', clearTextField); // When "No Results Found" is clicked, clearTextField and re-add symbols
+        // When "No Results Found" is clicked, clearTextField and re-add symbols
+        newli.addEventListener('click', clearTextField);
         selectSymbol.foundation_.adapter_.openMenu();
         // If there is no result, then clear the selected symbol in the dropdown
         document.querySelector('.mainSymbolSelectedText').textContent = '';
@@ -195,15 +204,15 @@ const searchResults = debounce(() => {
     // Hide the trashcan icon
     deleteTextFieldButton.root_.style.display = 'none';
     // Rerun the function to add the symbols to the list
-    addSymbolsToDropdownList();
+    addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
     // Set the selected item to the one in the symbol panel
     selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
     // Do not animate the symbol panel if there is no text in the textField
     if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
       document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
     }
-    //! All these Resizer classes can probably be put into a mutation observer.
-    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null; // Resize symbols in search results so they fit
+    // Resize symbols in search results so they fit
+    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
   }
 }, 100);
 
@@ -221,14 +230,12 @@ window.selectMod2 = selectMod2;
 window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 
 
-// Load the default symbol into the panel when the page loads
+// Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {
-  addSymbolsToDropdownList();
-  selectSymbol.foundation_.setSelectedIndex(0);
-  addMod1ToDropdownList();
-  selectMod1.foundation_.setSelectedIndex(0);
-  addMod2ToDropdownList();
-  selectMod2.foundation_.setSelectedIndex(0);
+  addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
+  addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
+  addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
+
   deleteTextFieldButton.root_.style.display = 'none';
 };
 

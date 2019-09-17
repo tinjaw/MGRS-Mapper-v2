@@ -108,7 +108,7 @@ const mod1Object = {
       get hostile() {
         // https://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript
         const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
-        propertyToModify.text_1.fontSize = '19';
+        propertyToModify.text_1.fontSize = '9';
         return propertyToModify;
       },
       get hostileTemplated() {

@@ -43,20 +43,22 @@ const mod2Object = {
       },
       get hostile() {
         const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
-        propertyToModify.path_1.transform = 'translate(0,9)';
+        propertyToModify.path_1.transform = 'translate(31,49) scale(0.7)';
         return propertyToModify;
       },
       get hostileTemplated() {
         return this.hostile;
       },
       get unknown() {
-        return this.friendly;
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(25,50) scale(0.75)';
+        return propertyToModify;
       },
       get pending() {
-        return this.friendly;
+        return this.unknown;
       },
       get neutral() {
-        return this.friendly;
+        return this.unknown;
       },
     },
   },

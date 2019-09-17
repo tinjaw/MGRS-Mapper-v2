@@ -32,8 +32,7 @@
   width: fit-content;
 }
 
-.symbol-list em,
-.mod1-list em {
+.mdc-list-item em {
   pointer-events: none;
   // color: var(--mdc-theme-text-icon-on-primary-light);
   color: rgba($color: #000000, $alpha: 0.38);

@@ -287,119 +287,181 @@ class MilSym {
   }
 }
 
-// * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
-const addSymbolsToDropdownList = () => {
-  Object.keys(militarySymbolsObject).forEach((key) => {
-    const mdcList = document.querySelector('.mdc-list.symbol-list');
-    // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
-    const symbolTypeInfo = document.createElement('em');
-    symbolTypeInfo.setAttributeNS(null, 'class', 'symbol-type-info');
-    symbolTypeInfo.textContent = militarySymbolsObject[key].type.padEnd(15, '.');
-    // Append the symbol DESCRIPTION to the list (eg- "Infantry")
-    const newli = document.createElement('li');
-    newli.setAttributeNS(null, 'class', 'mdc-list-item');
-    newli.setAttributeNS(null, 'data-value', key);
-    newli.textContent = key.toString();
-    newli.prepend(symbolTypeInfo);
-    mdcList.append(newli);
-    const figureElement = document.createElement('figure');
-    figureElement.setAttributeNS(null, 'class', 'symbolFigure');
-    figureElement.setAttributeNS(null, 'data-symbol-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
-    newli.prepend(figureElement);
-    // This will add the icons to the dropdown list
-    new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
-  });
-};
+// // * ADD SYMBOL THUMBNAILS TO THE DROPDOWN LIST * //
+// const addSymbolsToDropdownList = () => {
+//   Object.keys(militarySymbolsObject).forEach((key) => {
+//     const mdcList = document.querySelector('.mdc-list.symbol-list');
+//     // Prepend the symbol TYPE information to the list (eg- "Land Unit...")
+//     const symbolTypeInfo = document.createElement('em');
+//     symbolTypeInfo.setAttributeNS(null, 'class', 'symbol-type-info');
+//     symbolTypeInfo.textContent = militarySymbolsObject[key].type.padEnd(15, '.');
+//     // Append the symbol DESCRIPTION to the list (eg- "Infantry")
+//     const newli = document.createElement('li');
+//     newli.setAttributeNS(null, 'class', 'mdc-list-item');
+//     newli.setAttributeNS(null, 'data-value', key);
+//     newli.textContent = key.toString();
+//     newli.prepend(symbolTypeInfo);
+//     mdcList.append(newli);
+//     const figureElement = document.createElement('figure');
+//     figureElement.setAttributeNS(null, 'class', 'symbolFigure');
+//     figureElement.setAttributeNS(null, 'data-symbol-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+//     newli.prepend(figureElement);
+//     // This will add the icons to the dropdown list
+//     new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+//   });
+// };
 
-// * ADD MOD 1 THUMBNAILS TO THE DROPDOWN LIST * //
-const addMod1ToDropdownList = () => {
-  Object.keys(mod1Object).forEach((key) => {
-    const mdcList = document.querySelector('.mdc-list.mod1-list');
+// // * ADD MOD 1 THUMBNAILS TO THE DROPDOWN LIST * //
+// const addMod1ToDropdownList = () => {
+//   Object.keys(mod1Object).forEach((key) => {
+//     const mdcList = document.querySelector('.mdc-list.mod1-list');
+//     const newli = document.createElement('li');
+//     const mod1TypeInfo = document.createElement('em');
+//     mod1TypeInfo.setAttributeNS(null, 'class', 'mod1-type-info');
+//     // Add the type of the Modifier in the drop down box
+//     mod1TypeInfo.textContent = mod1Object[key].type.padEnd(15, '.');
+//     newli.setAttributeNS(null, 'class', 'mdc-list-item');
+//     newli.setAttributeNS(null, 'data-value', key);
+//     newli.textContent = key.toString();
+//     newli.prepend(mod1TypeInfo);
+//     mdcList.append(newli);
+//     const figureElement = document.createElement('figure');
+//     figureElement.setAttributeNS(null, 'class', 'mod1Figure');
+//     figureElement.setAttributeNS(null, 'data-mod1-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+//     newli.prepend(figureElement);
+//     // This will add the icons to the dropdown list
+//     new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', `${key}`).placeSymbol();
+//     // This will remove the affiliation container and focus solely on the Mod1 element
+//     // ! Remember selectMod1 is a global var from mdcComponents.js -- Import it on production
+//     selectMod1.menu_.items.map((key) => {
+//       // This targets the Mod1 element (eg- the moon symbol for "foraging")
+//       const mod1Element = key.querySelectorAll('li figure svg g.outline path')[0];
+//       // This targets the SVG container for each Mod1 element
+//       const mod1SVGContainer = mod1Element.parentElement.parentElement;
+//       // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
+//       mod1Element.setAttributeNS(null, 'fill', 'transparent');
+//       // Set the affiliation outline stroke to 0
+//       mod1Element.setAttributeNS(null, 'stroke-width', '0');
+//       // Set the affiliation outline path to nothing
+//       mod1Element.setAttributeNS(null, 'd', '');
+//       // Set the SVG container viewBox to this value. (Note: Probably not needed)
+//       // mod1SVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
+//       // Scale the Mod1 element down in the select box so they don't clip
+//       mod1SVGContainer.style.transform = 'scale(0.75)';
+//     });
+//   });
+// };
+
+// // * ADD MOD 2 THUMBNAILS TO THE DROPDOWN LIST * //
+// const addMod2ToDropdownList = () => {
+//   Object.keys(mod2Object).forEach((key) => {
+//     const mdcList = document.querySelector('.mdc-list.mod2-list');
+//     const newli = document.createElement('li');
+//     const mod2TypeInfo = document.createElement('em');
+//     mod2TypeInfo.setAttributeNS(null, 'class', 'mod2-type-info');
+//     // Add the type of the Modifier in the drop down box
+//     mod2TypeInfo.textContent = mod2Object[key].type.padEnd(15, '.');
+//     newli.setAttributeNS(null, 'class', 'mdc-list-item');
+//     newli.setAttributeNS(null, 'data-value', key);
+//     newli.textContent = key.toString();
+//     newli.prepend(mod2TypeInfo);
+//     mdcList.append(newli);
+//     const figureElement = document.createElement('figure');
+//     figureElement.setAttributeNS(null, 'class', 'mod2Figure');
+//     figureElement.setAttributeNS(null, 'data-mod2-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+//     newli.prepend(figureElement);
+//     // This will add the icons to the dropdown list
+//     new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', `${key}`).placeSymbol();
+//     // This will remove the affiliation container and focus solely on the Mod2 element
+//     // ! Remember selectMod2 is a global var from mdcComponents.js -- Import it on production
+//     selectMod2.menu_.items.map((key) => {
+//       // This targets the Mod2 element (eg- the moon symbol for "foraging")
+//       const mod2Element = key.querySelectorAll('li figure svg g.outline path')[0];
+//       // This targets the SVG container for each Mod2 element
+//       const mod2SVGContainer = mod2Element.parentElement.parentElement;
+//       // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
+//       mod2Element.setAttributeNS(null, 'fill', 'transparent');
+//       // Set the affiliation outline stroke to 0
+//       mod2Element.setAttributeNS(null, 'stroke-width', '0');
+//       // Set the affiliation outline path to nothing
+//       mod2Element.setAttributeNS(null, 'd', '');
+//       // Set the SVG container viewBox to this value. (Note: Probably not needed)
+//       // mod2SVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
+//       // Scale the Mod2 element down in the select box so they don't clip
+//       mod2SVGContainer.style.transform = 'scale(0.75)';
+//     });
+//   });
+// };
+
+
+// ex- test(mod1Object, 'mod1', selectMod1);
+const addSymbolsAndModsToList = (obj, abv, menu = null) => {
+  Object.keys(obj).forEach((key) => {
+    const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
     const newli = document.createElement('li');
-    const mod1TypeInfo = document.createElement('em');
-    mod1TypeInfo.setAttributeNS(null, 'class', 'mod1-type-info');
+    const modTypeInfo = document.createElement('em');
+    modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info`);
     // Add the type of the Modifier in the drop down box
-    mod1TypeInfo.textContent = mod1Object[key].type.padEnd(15, '.');
+    modTypeInfo.textContent = obj[key].type.padEnd(15, '.');
     newli.setAttributeNS(null, 'class', 'mdc-list-item');
     newli.setAttributeNS(null, 'data-value', key);
     newli.textContent = key.toString();
-    newli.prepend(mod1TypeInfo);
+    newli.prepend(modTypeInfo);
     mdcList.append(newli);
     const figureElement = document.createElement('figure');
-    figureElement.setAttributeNS(null, 'class', 'mod1Figure');
-    figureElement.setAttributeNS(null, 'data-mod1-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
+    figureElement.setAttributeNS(null, 'class', `${abv}Figure`);
+    // add the symbol key to the data-attr so they can match up with the list item
+    figureElement.setAttributeNS(null, `data-${abv}-name`, `${key}`);
     newli.prepend(figureElement);
-    // This will add the icons to the dropdown list
-    new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', `${key}`).placeSymbol();
-    // This will remove the affiliation container and focus solely on the Mod1 element
+    // This will add the Symbols and Modifiers to the dropdown list
+    switch (abv) {
+      case 'mod1':
+        new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', `${key}`, 'None').placeSymbol();
+        break;
+      case 'mod2':
+        new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', `${key}`).placeSymbol();
+        break;
+      case 'symbol':
+        // Set the selected symbol to "Default Land Unit" on page load
+        selectSymbol.foundation_.setSelectedIndex(0);
+        // Returning 'symbol' since we need to keep the symbol affiliation outlines
+        return new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+      default:
+        break;
+    }
+    // This will remove the affiliation containers on the Modifier elements in the dropdown
     // ! Remember selectMod1 is a global var from mdcComponents.js -- Import it on production
-    selectMod1.menu_.items.map((key) => {
-      // This targets the Mod1 element (eg- the moon symbol for "foraging")
-      const mod1Element = key.querySelectorAll('li figure svg g.outline path')[0];
-      // This targets the SVG container for each Mod1 element
-      const mod1SVGContainer = mod1Element.parentElement.parentElement;
+    menu.menu_.items.map((key) => {
+      // This targets the Modifier element (eg- the moon symbol for "foraging")
+      const modElement = key.querySelectorAll('li figure svg g.outline path')[0];
+      // This targets the SVG container for each Modifier element
+      const modSVGContainer = modElement.parentElement.parentElement;
       // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
-      mod1Element.setAttributeNS(null, 'fill', 'transparent');
+      modElement.setAttributeNS(null, 'fill', 'transparent');
       // Set the affiliation outline stroke to 0
-      mod1Element.setAttributeNS(null, 'stroke-width', '0');
+      modElement.setAttributeNS(null, 'stroke-width', '0');
       // Set the affiliation outline path to nothing
-      mod1Element.setAttributeNS(null, 'd', '');
+      modElement.setAttributeNS(null, 'd', '');
       // Set the SVG container viewBox to this value. (Note: Probably not needed)
-      // mod1SVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
-      // Scale the Mod1 element down in the select box so they don't clip
-      mod1SVGContainer.style.transform = 'scale(0.75)';
+      // modSVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
+      // Scale the Modifier element down in the select box so they don't clip
+      modSVGContainer.style.transform = 'scale(0.75)';
+      // Set the selected index to the first item (usually this is "Default/None")
+      menu.foundation_.setSelectedIndex(0);
     });
   });
 };
 
-// * ADD MOD 2 THUMBNAILS TO THE DROPDOWN LIST * //
-const addMod2ToDropdownList = () => {
-  Object.keys(mod2Object).forEach((key) => {
-    const mdcList = document.querySelector('.mdc-list.mod2-list');
-    const newli = document.createElement('li');
-    const mod2TypeInfo = document.createElement('em');
-    mod2TypeInfo.setAttributeNS(null, 'class', 'mod2-type-info');
-    // Add the type of the Modifier in the drop down box
-    mod2TypeInfo.textContent = mod2Object[key].type.padEnd(15, '.');
-    newli.setAttributeNS(null, 'class', 'mdc-list-item');
-    newli.setAttributeNS(null, 'data-value', key);
-    newli.textContent = key.toString();
-    newli.prepend(mod2TypeInfo);
-    mdcList.append(newli);
-    const figureElement = document.createElement('figure');
-    figureElement.setAttributeNS(null, 'class', 'mod2Figure');
-    figureElement.setAttributeNS(null, 'data-mod2-name', `${key}`); // add the symbol key to the data-attr so they can match up with the list item
-    newli.prepend(figureElement);
-    // This will add the icons to the dropdown list
-    new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', `${key}`).placeSymbol();
-    // This will remove the affiliation container and focus solely on the Mod2 element
-    // ! Remember selectMod2 is a global var from mdcComponents.js -- Import it on production
-    selectMod2.menu_.items.map((key) => {
-      // This targets the Mod2 element (eg- the moon symbol for "foraging")
-      const mod2Element = key.querySelectorAll('li figure svg g.outline path')[0];
-      // This targets the SVG container for each Mod2 element
-      const mod2SVGContainer = mod2Element.parentElement.parentElement;
-      // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
-      mod2Element.setAttributeNS(null, 'fill', 'transparent');
-      // Set the affiliation outline stroke to 0
-      mod2Element.setAttributeNS(null, 'stroke-width', '0');
-      // Set the affiliation outline path to nothing
-      mod2Element.setAttributeNS(null, 'd', '');
-      // Set the SVG container viewBox to this value. (Note: Probably not needed)
-      // mod2SVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
-      // Scale the Mod2 element down in the select box so they don't clip
-      mod2SVGContainer.style.transform = 'scale(0.75)';
-    });
-  });
-};
 
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
 window.selectAffiliation = selectAffiliation;
-window.mod1Object = mod1Object;
-window.mod2Object = mod2Object;
+// window.mod1Object = mod1Object;
+// window.mod2Object = mod2Object;
 
-export {
-  addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
-};
+// export {
+//   addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
+// };
+
+export { addSymbolsAndModsToList, MilSym };
