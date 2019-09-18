@@ -155,10 +155,9 @@ function debounce(func, interval) {
 }
 
 //! 15SEPT2019 -- Calling it here
-// TODO: addMod1ToDropdownList() and addMod2ToDropdownList() are almost identical, combine them into a class or function. Furthermore you could probably also combine addSymbolsToDropdownList() in that mix as well
+// // TODO: addMod1ToDropdownList() and addMod2ToDropdownList() are almost identical, combine them into a class or function. Furthermore you could probably also combine addSymbolsToDropdownList() in that mix as well
 // TODO: get mod1Data() and get mod2Data() in  MilSym are almost identical, there should be a way to combine them
 // TODO: Check all Mod1 and Mod2 symbols that they fit inside for both Land Unit and Equipment symbols in every affiliation. For instance - Mod2 Rails on hostile outlines do not work. Needs a fix
-// TODO: If you change the MilSym class to accept an object, then you can instantiate it like this: "new MilSym({location: '.test', symbol: 'Infantry', affiliation: 'friendly', echelon: 'team', mod1: 'Foraging'}).placeSymbol();". The only value I can see from this is making it easier to call this class since you can indent object keys on new lines.
 const searchResults = debounce(() => {
   if (textField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);

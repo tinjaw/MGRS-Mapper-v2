@@ -23,6 +23,8 @@ class MilSym {
       symbol,
       affiliation,
       echelon,
+      mod1,
+      mod2,
       type: this.type,
     };
   }
@@ -31,7 +33,13 @@ class MilSym {
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const desc = document.createElementNS('http://www.w3.org/2000/svg', 'desc');
-    desc.textContent = `This ${this.data.symbol} graphic was created by CPT James Pistell for MGRS-Mapper.com`;
+    desc.textContent = `
+          Affiliation: ${this.data.affiliation.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+          Echelon: ${this.data.echelon.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase())}
+          Symbol: ${this.data.symbol}
+          Modifier 1: ${this.data.mod1}
+          Modifier 2: ${this.data.mod2}
+          About: This symbol was created by CPT James Pistell for MGRS-Mapper.com`;
     svg.prepend(desc);
     // This will find any symbols that have nothing in the echelon path data. You can use this later to exclude them from being inserted into the DOM
     // if (this.echelon.d === '') {
