@@ -1,15 +1,5 @@
 // * MODIFIER 1 OBJECT * //
-const gay = (parentAffiliation, newVal) => {
-  const propertyToModify = JSON.parse(JSON.stringify(parentAffiliation));
-  // const rape = propertyToModify[path] = newVal;
-  // propertyToModify.text_1.fontSize = '9';
-  return propertyToModify.fontSize.value = newVal;
-  // console.log(propertyToModify);
-};
-
-
-// This works but now you need to add a param to edit things like text_1
-
+// * Sector 1 Modifiers reflect the specific capability of a unit (Armored, Bridging, Sniper, etc) * //
 const mod1Object = {
   None: {
     type: 'Default',

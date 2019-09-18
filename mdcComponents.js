@@ -6,23 +6,27 @@ import { MDCRipple } from '@material/ripple';
 import Fuse from 'fuse.js';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
-// import {
-//   addSymbolsToDropdownList, addMod1ToDropdownList, addMod2ToDropdownList, MilSym,
-// } from './app';
-
 import { addSymbolsAndModsToList, MilSym } from './app';
-
 import militarySymbolsObject from './militarySymbolsObject';
 
-const textField = new MDCTextField(document.querySelector('.searchSymbols'));
-const icon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
-const deleteTextFieldButton = new MDCTextFieldIcon(icon.root_);
+const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
+const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
+const deleteTextFieldButton = new MDCTextFieldIcon(searchFieldIcon.root_);
 
 const selectSymbol = new MDCSelect(document.querySelector('.symbol-select'));
 const selectAffiliation = new MDCSelect(document.querySelector('.affiliation-select'));
 const selectUnitSize = new MDCSelect(document.querySelector('.unit-size-select'));
 const selectMod1 = new MDCSelect(document.querySelector('.mod1-select'));
 const selectMod2 = new MDCSelect(document.querySelector('.mod2-select'));
+
+const uniqueDesignationField = new MDCTextField(document.querySelector('.uniqueDesignation'));
+const uniqueDesignationIcon = new MDCRipple(document.querySelector('.mdc-button.uniqueDesignationDeleteIcon'));
+const deleteUniqueDesignationButton = new MDCTextFieldIcon(uniqueDesignationIcon.root_);
+
+const higherFormationField = new MDCTextField(document.querySelector('.higherFormation'));
+const higherFormationIcon = new MDCRipple(document.querySelector('.mdc-button.higherFormationDeleteIcon'));
+const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.root_);
+
 
 // ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
 class Resizer {
@@ -69,11 +73,11 @@ class TransformModifiersOnEquipment {
     }
 
     // Find all the selected values and place the symbol in the symbol panel
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`).placeSymbol();
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value).placeSymbol();
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
-      !textField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
+      !searchField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
     }
 
     if (event.target.classList.contains('affiliation-select')) {
@@ -107,15 +111,14 @@ selectMenus.forEach((key) => {
 });
 
 
-function clearTextField() {
+function clearSearchField() {
   // Clear the text field
-  textField.value = '';
+  searchField.value = '';
   // Hide the trash button
   deleteTextFieldButton.root_.style.display = 'none';
   // Remove all items in the selectSymbol menu
   selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
   // Re-add them
-  // addSymbolsToDropdownList();
   addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
   // Set the selectSymbol value to the last matched item
   selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
@@ -158,15 +161,18 @@ function debounce(func, interval) {
 // // TODO: addMod1ToDropdownList() and addMod2ToDropdownList() are almost identical, combine them into a class or function. Furthermore you could probably also combine addSymbolsToDropdownList() in that mix as well
 // TODO: get mod1Data() and get mod2Data() in  MilSym are almost identical, there should be a way to combine them
 // TODO: Check all Mod1 and Mod2 symbols that they fit inside for both Land Unit and Equipment symbols in every affiliation. For instance - Mod2 Rails on hostile outlines do not work. Needs a fix
+// TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
 const searchResults = debounce(() => {
-  if (textField.input_.value !== '') {
+  if (searchField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);
-    const result = fuse.search(textField.value);
-    deleteTextFieldButton.root_.style.display = 'initial'; // Show the trash icon when there is any text in the search field
+    const result = fuse.search(searchField.value);
+    // Show the trash icon when there is any text in the search field
+    deleteTextFieldButton.root_.style.display = 'initial';
     deleteTextFieldButton.root_.style.right = '0';
     deleteTextFieldButton.root_.style.position = 'fixed';
     deleteTextFieldButton.root_.style.top = '10px';
-    deleteTextFieldButton.root_.style.zIndex = '10'; // setting z-index on trash icon makes it clickable
+    // Setting z-index on trash icon makes it clickable
+    deleteTextFieldButton.root_.style.zIndex = '10';
     result.forEach((e) => {
       const matchSet = [...new Set(e.matches)];
       const mdcList = document.querySelector('.mdc-list.symbol-list');
@@ -197,8 +203,8 @@ const searchResults = debounce(() => {
         newli.style.justifyContent = 'center';
         newli.textContent = 'No Results Found';
         mdcList.append(newli);
-        // When "No Results Found" is clicked, clearTextField and re-add symbols
-        newli.addEventListener('click', clearTextField);
+        // When "No Results Found" is clicked, clearSearchField and re-add symbols
+        newli.addEventListener('click', clearSearchField);
         selectSymbol.foundation_.adapter_.openMenu();
         // If there is no result, then clear the selected symbol in the dropdown
         document.querySelector('.mainSymbolSelectedText').textContent = '';
@@ -220,13 +226,68 @@ const searchResults = debounce(() => {
     // Resize symbols in search results so they fit
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
   }
-}, 100);
+}, 200);
 
-deleteTextFieldButton.root_.addEventListener('click', clearTextField);
-textField.input_.addEventListener('input', searchResults);
+
+const uniqueDesignationInput = debounce(() => {
+  if (uniqueDesignationField.input_.value !== '') {
+    // Show the trash icon when there is any text in the search field
+    deleteUniqueDesignationButton.root_.style.display = 'initial';
+    deleteUniqueDesignationButton.root_.style.right = '0';
+    deleteUniqueDesignationButton.root_.style.position = 'fixed';
+    deleteUniqueDesignationButton.root_.style.top = '10px';
+    // Setting z-index on trash icon makes it clickable
+    deleteUniqueDesignationButton.root_.style.zIndex = '10';
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value).placeSymbol();
+    new Resizer('.symbolFigure svg');
+  } else {
+    document.querySelector('g.uniqueUnitDesignation').textContent = '';
+    deleteUniqueDesignationButton.root_.style.display = 'none';
+  }
+}, 200);
+
+const higherFormationInput = debounce(() => {
+  if (higherFormationField.input_.value !== '') {
+    // Show the trash icon when there is any text in the search field
+    deleteHigherFormationButton.root_.style.display = 'initial';
+    deleteHigherFormationButton.root_.style.right = '0';
+    deleteHigherFormationButton.root_.style.position = 'fixed';
+    deleteHigherFormationButton.root_.style.top = '10px';
+    // Setting z-index on trash icon makes it clickable
+    deleteHigherFormationButton.root_.style.zIndex = '10';
+    console.log(higherFormationField.value);
+  }
+}, 200);
+
+const clearDesignationFields = (event) => {
+  switch (event.target.parentElement.dataset.value) {
+    case 'uniqueDesignationField':
+      uniqueDesignationField.value = '';
+      deleteUniqueDesignationButton.root_.style.display = 'none';
+      document.querySelector('g.uniqueUnitDesignation').textContent = '';
+      break;
+    case 'higherFormationField':
+      higherFormationField.value = '';
+      deleteHigherFormationButton.root_.style.display = 'none';
+      break;
+    default:
+      break;
+  }
+};
+
+deleteTextFieldButton.root_.addEventListener('click', clearSearchField);
+searchField.input_.addEventListener('input', searchResults);
+
+uniqueDesignationField.input_.addEventListener('input', uniqueDesignationInput);
+higherFormationField.input_.addEventListener('input', higherFormationInput);
+
+[deleteHigherFormationButton, deleteUniqueDesignationButton].forEach((key) => {
+  key.root_.addEventListener('click', clearDesignationFields);
+});
+
 
 // ! GLOBAL VARS - remove on production
-window.textField = textField;
+window.searchField = searchField;
 window.selectSymbol = selectSymbol;
 window.selectUnitSize = selectUnitSize;
 window.Resizer = Resizer;
@@ -234,6 +295,7 @@ window.deleteTextFieldButton = deleteTextFieldButton;
 window.selectMod1 = selectMod1;
 window.selectMod2 = selectMod2;
 window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
+window.uniqueDesignationField = uniqueDesignationField;
 
 
 // Load the Symbols and Modifiers into the dropdowns on page load
@@ -242,6 +304,8 @@ window.onload = () => {
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
   deleteTextFieldButton.root_.style.display = 'none';
+  deleteUniqueDesignationButton.root_.style.display = 'none';
+  deleteHigherFormationButton.root_.style.display = 'none';
 };
 
 export { selectAffiliation };

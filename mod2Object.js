@@ -1,4 +1,5 @@
 // * MODIFIER 2 OBJECT * //
+// * Sector 2 Modifiers reflect the MOBILITY of a unit or SIZE/RANGE/ALTITUDE of unit equipment ex- Air Assault, Wheeled, Mountain, etc * //
 const mod2Object = {
   None: {
     type: 'Default',

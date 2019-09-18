@@ -10,7 +10,7 @@ import mod2Object from './mod2Object';
 // * The star of the show * //
 // ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail').placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None') {
+  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '') {
     this.location = document.querySelector(location);
     this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
     this.affiliation = affiliationOutlineObject[affiliation];
@@ -18,6 +18,7 @@ class MilSym {
     this.type = militarySymbolsObject[symbol].type;
     this.mod1 = mod1Object[mod1].affiliation[affiliation];
     this.mod2 = mod2Object[mod2].affiliation[affiliation];
+    this.uniqueDesignation = uniqueDesignation;
     this.data = {
       location,
       symbol,
@@ -33,6 +34,7 @@ class MilSym {
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const desc = document.createElementNS('http://www.w3.org/2000/svg', 'desc');
+    // Add a description attr to the SVG, remove camel case and add a space on Affiliation and Echelon
     desc.textContent = `
           Affiliation: ${this.data.affiliation.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
           Echelon: ${this.data.echelon.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase())}
@@ -47,7 +49,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data);
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -292,6 +294,22 @@ class MilSym {
       }
     });
     return mod2Group;
+  }
+
+  get uniqueDesignationData() {
+    const uniqueDesignationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    uniqueDesignationGroup.classList.add('uniqueUnitDesignation');
+    const uniqueDesignationText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    uniqueDesignationText.textContent = this.uniqueDesignation.toUpperCase();
+    uniqueDesignationText.setAttribute('x', '115%');
+    uniqueDesignationText.setAttribute('y', '100%');
+    uniqueDesignationText.setAttribute('fill', 'black');
+    uniqueDesignationText.setAttribute('font-weight', 'bold');
+    uniqueDesignationText.setAttribute('font-family', 'Arial');
+    uniqueDesignationText.setAttribute('font-size', '22');
+    uniqueDesignationText.setAttribute('text-anchor', 'start');
+    uniqueDesignationGroup.append(uniqueDesignationText);
+    return uniqueDesignationGroup;
   }
 }
 

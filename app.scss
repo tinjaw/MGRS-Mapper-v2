@@ -14,7 +14,7 @@
 @import '@material/elevation/mdc-elevation';
 
 .sidebar500pix {
-  width: 500px;
+  width: 550px;
 }
 
 .newSVG {
@@ -42,8 +42,11 @@
   // text-overflow: ellipsis;
 }
 
-.searchSymbols {
+.mdc-text-field.searchSymbols,
+.mdc-text-field.uniqueDesignation,
+.mdc-text-field.higherFormation {
   width: 100%;
+  text-transform: uppercase;
 }
 
 // Import your components for your application
