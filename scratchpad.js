@@ -45,11 +45,11 @@ selectSymbol.menu_.items.forEach((key) => {
 });
 
 
-let circ = document.querySelector('.newSVG > svg');
-let miss = circ.querySelector('g.decorator');
+const circ = document.querySelector('.newSVG > svg');
+const miss = circ.querySelector('g.decorator');
 miss.style.transformOrigin = '100px 100px'; // transform from center (cx, cy)
 miss.style.transform = 'scale(0.75)';
-let mod1 = circ.querySelector('g.mod1');
+const mod1 = circ.querySelector('g.mod1');
 mod1.style.transform = `translateY(-${circ.viewBox.baseVal.x / circ.viewBox.baseVal.y * 21}px)`
 // mod1.style.transform = 'translateY(-10%)';
 
@@ -59,3 +59,6 @@ mod1.style.transform = `translateY(-${circ.viewBox.baseVal.x / circ.viewBox.base
       new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`).placeSymbol();
     });
   });
+
+// TODO: If you change the MilSym class to accept an object, then you can instantiate it like this: "new MilSym({location: '.test', symbol: 'Infantry', affiliation: 'friendly', echelon: 'team', mod1: 'Foraging'}).placeSymbol();". The only value I can see from this is making it easier to call this class since you can indent object keys on new lines.
+// TODO: get mod1Data() and get mod2Data() in  MilSym are almost identical, there should be a way to combine them

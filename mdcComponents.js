@@ -73,7 +73,7 @@ class TransformModifiersOnEquipment {
     }
 
     // Find all the selected values and place the symbol in the symbol panel
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value).placeSymbol();
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
@@ -158,8 +158,6 @@ function debounce(func, interval) {
 }
 
 //! 15SEPT2019 -- Calling it here
-// // TODO: addMod1ToDropdownList() and addMod2ToDropdownList() are almost identical, combine them into a class or function. Furthermore you could probably also combine addSymbolsToDropdownList() in that mix as well
-// TODO: get mod1Data() and get mod2Data() in  MilSym are almost identical, there should be a way to combine them
 // TODO: Check all Mod1 and Mod2 symbols that they fit inside for both Land Unit and Equipment symbols in every affiliation. For instance - Mod2 Rails on hostile outlines do not work. Needs a fix
 // TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
 const searchResults = debounce(() => {
@@ -229,7 +227,7 @@ const searchResults = debounce(() => {
 }, 200);
 
 
-const uniqueDesignationInput = debounce(() => {
+const inputDesignationFields = debounce(() => {
   if (uniqueDesignationField.input_.value !== '') {
     // Show the trash icon when there is any text in the search field
     deleteUniqueDesignationButton.root_.style.display = 'initial';
@@ -238,15 +236,12 @@ const uniqueDesignationInput = debounce(() => {
     deleteUniqueDesignationButton.root_.style.top = '10px';
     // Setting z-index on trash icon makes it clickable
     deleteUniqueDesignationButton.root_.style.zIndex = '10';
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value).placeSymbol();
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
     new Resizer('.symbolFigure svg');
   } else {
     document.querySelector('g.uniqueUnitDesignation').textContent = '';
     deleteUniqueDesignationButton.root_.style.display = 'none';
   }
-}, 200);
-
-const higherFormationInput = debounce(() => {
   if (higherFormationField.input_.value !== '') {
     // Show the trash icon when there is any text in the search field
     deleteHigherFormationButton.root_.style.display = 'initial';
@@ -255,9 +250,14 @@ const higherFormationInput = debounce(() => {
     deleteHigherFormationButton.root_.style.top = '10px';
     // Setting z-index on trash icon makes it clickable
     deleteHigherFormationButton.root_.style.zIndex = '10';
-    console.log(higherFormationField.value);
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
+    new Resizer('.symbolFigure svg');
+  } else {
+    document.querySelector('g.higherUnitFormation').textContent = '';
+    deleteHigherFormationButton.root_.style.display = 'none';
   }
 }, 200);
+
 
 const clearDesignationFields = (event) => {
   switch (event.target.parentElement.dataset.value) {
@@ -269,6 +269,7 @@ const clearDesignationFields = (event) => {
     case 'higherFormationField':
       higherFormationField.value = '';
       deleteHigherFormationButton.root_.style.display = 'none';
+      document.querySelector('g.higherUnitFormation').textContent = '';
       break;
     default:
       break;
@@ -278,8 +279,10 @@ const clearDesignationFields = (event) => {
 deleteTextFieldButton.root_.addEventListener('click', clearSearchField);
 searchField.input_.addEventListener('input', searchResults);
 
-uniqueDesignationField.input_.addEventListener('input', uniqueDesignationInput);
-higherFormationField.input_.addEventListener('input', higherFormationInput);
+[uniqueDesignationField, higherFormationField].forEach((key) => {
+  key.input_.addEventListener('input', inputDesignationFields);
+});
+
 
 [deleteHigherFormationButton, deleteUniqueDesignationButton].forEach((key) => {
   key.root_.addEventListener('click', clearDesignationFields);
