@@ -277,7 +277,7 @@
       <!-- Modifier 1 List -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-3">
+          <div class="mdc-layout-grid__cell--span-12">
             <div class="mdc-select mod1-select">
               <input type="hidden" name="enhanced-select" />
               <i class="mdc-select__dropdown-icon"></i>
@@ -288,13 +288,16 @@
               <span class="mdc-floating-label">Symbol Modifier 1</span>
               <div class="mdc-line-ripple"></div>
             </div>
+            <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
+              Sector 1 Modifiers reflect the specific capability of a unit (e.g. - Armored, Bridging)
+            </p>
           </div>
         </div>
       </div>
       <!-- Modifier 2 List -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-3">
+          <div class="mdc-layout-grid__cell--span-12">
             <div class="mdc-select mod2-select">
               <input type="hidden" name="enhanced-select" />
               <i class="mdc-select__dropdown-icon"></i>
@@ -308,14 +311,12 @@
           </div>
         </div>
       </div>
-
       <!-- Unique Unit Designation Field -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
           <div class="mdc-layout-grid__cell--span-12">
             <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon uniqueDesignation">
               <i class="material-icons mdc-text-field__icon">swap_horiz</i>
-
               <button class="mdc-button uniqueDesignationDeleteIcon" data-value="uniqueDesignationField">
                 <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
               </button>
@@ -334,7 +335,6 @@
           </div>
         </div>
       </div>
-
       <!-- Higher Unit Formation Designation Field -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
@@ -356,6 +356,22 @@
             <div class="mdc-text-field-helper-line">
               <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-higherFormation-helper-text">Example: 27/42ID (27th IBCT, 42nd Infantry Division)</p>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- Reduced/Reinforced Switches -->
+      <div class="mdc-layout-grid ">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell--span-12">
+            <div class="mdc-switch">
+              <div class="mdc-switch__track"></div>
+              <div class="mdc-switch__thumb-underlay">
+                <div class="mdc-switch__thumb">
+                  <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" />
+                </div>
+              </div>
+            </div>
+            <label for="basic-switch">off/on</label>
           </div>
         </div>
       </div>

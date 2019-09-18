@@ -8,7 +8,7 @@ import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 
 // * The star of the show * //
-// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail').placeSymbol();
+// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID').placeSymbol();
 class MilSym {
   constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '') {
     this.location = document.querySelector(location);
@@ -389,10 +389,45 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
   });
 };
 
+// ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
+class Resizer {
+  constructor(symbolElement, width = 93, height = 64) {
+    this.symbolElement = document.querySelectorAll(symbolElement);
+    this.width = width;
+    this.height = height;
+    this.symbolElement.forEach((key) => {
+      // This just removes the animation on the symbol on the dropdown list
+      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
+      key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
+      key.setAttributeNS(null, 'width', `${this.width}`);
+      key.setAttributeNS(null, 'height', `${this.height}`);
+    });
+  }
+}
+
+// ex- "new TransformModifiersOnEquipment('.newSVG > svg')"
+// This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
+class TransformModifiersOnEquipment {
+  constructor(equipmentOutline) {
+    this.equipmentOutline = document.querySelector(equipmentOutline); // The equipment SVG you want to readjust
+    this.equipmentDecorator = this.equipmentOutline.querySelector('g.decorator');
+    this.mod1 = this.equipmentOutline.querySelector('g.mod1');
+    this.mod2 = this.equipmentOutline.querySelector('g.mod2');
+    this.equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+    this.equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+    // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
+    this.mod1.style.transformOrigin = '100px 100px';
+    this.mod1.style.transform = 'translateY(-11%) scale(0.85)';
+    this.mod2.style.transformOrigin = '100px 140px';
+    this.mod2.style.transform = 'scale(0.75)';
+  }
+}
 
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
 window.selectAffiliation = selectAffiliation;
 
-export { addSymbolsAndModsToList, MilSym };
+export {
+ addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym 
+};

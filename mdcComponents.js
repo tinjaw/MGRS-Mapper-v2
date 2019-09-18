@@ -3,10 +3,13 @@
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
+import { MDCSwitch } from '@material/switch';
 import Fuse from 'fuse.js';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
-import { addSymbolsAndModsToList, MilSym } from './app';
+import {
+  addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym,
+} from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
@@ -27,40 +30,9 @@ const higherFormationField = new MDCTextField(document.querySelector('.higherFor
 const higherFormationIcon = new MDCRipple(document.querySelector('.mdc-button.higherFormationDeleteIcon'));
 const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.root_);
 
+//! rename class to something more specific
+const switchControl = new MDCSwitch(document.querySelector('.mdc-switch'));
 
-// ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
-class Resizer {
-  constructor(symbolElement, width = 93, height = 64) {
-    this.symbolElement = document.querySelectorAll(symbolElement);
-    this.width = width;
-    this.height = height;
-    this.symbolElement.forEach((key) => {
-      // This just removes the animation on the symbol on the dropdown list
-      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
-      key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
-      key.setAttributeNS(null, 'width', `${this.width}`);
-      key.setAttributeNS(null, 'height', `${this.height}`);
-    });
-  }
-}
-
-// ex- "new TransformModifiersOnEquipment('.newSVG > svg')"
-// This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
-class TransformModifiersOnEquipment {
-  constructor(equipmentOutline) {
-    this.equipmentOutline = document.querySelector(equipmentOutline); // The equipment SVG you want to readjust
-    this.equipmentDecorator = this.equipmentOutline.querySelector('g.decorator');
-    this.mod1 = this.equipmentOutline.querySelector('g.mod1');
-    this.mod2 = this.equipmentOutline.querySelector('g.mod2');
-    this.equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
-    this.equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-    // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
-    this.mod1.style.transformOrigin = '100px 100px';
-    this.mod1.style.transform = 'translateY(-11%) scale(0.85)';
-    this.mod2.style.transformOrigin = '100px 140px';
-    this.mod2.style.transform = 'scale(0.75)';
-  }
-}
 
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
@@ -96,12 +68,7 @@ class TransformModifiersOnEquipment {
       selectUnitSize.disabled = false;
     }
   });
-});
-
-
-const selectMenus = document.querySelectorAll('.mdc-select');
-selectMenus.forEach((key) => {
-  key.addEventListener('click', () => {
+  key.listen('click', () => {
     // If any of these menus are open, then resize all the symbols
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
     selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
@@ -110,23 +77,14 @@ selectMenus.forEach((key) => {
   });
 });
 
-
-function clearSearchField() {
-  // Clear the text field
-  searchField.value = '';
-  // Hide the trash button
-  deleteTextFieldButton.root_.style.display = 'none';
-  // Remove all items in the selectSymbol menu
-  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
-  // Re-add them
-  addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
-  // Set the selectSymbol value to the last matched item
-  selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
-  // Do not animate the symbol panel
-  if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
-    document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
-  }
+//! REINFORCED AND REDUCED AMPS
+function reducedReinforced(event) {
+  console.log(event.target);
+  // switchControl.foundation_.setChecked(true);
 }
+
+switchControl.listen('change', reducedReinforced);
+
 
 const searchOptions = {
   shouldSort: true,
@@ -157,9 +115,29 @@ function debounce(func, interval) {
   };
 }
 
-//! 15SEPT2019 -- Calling it here
+function clearSearchField() {
+  // Clear the text field
+  searchField.value = '';
+  // Hide the trash button
+  deleteTextFieldButton.root_.style.display = 'none';
+  // Remove all items in the selectSymbol menu
+  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
+  // Re-add them
+  addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
+  // Set the selectSymbol value to the last matched item
+  selectSymbol.value = document.querySelector('.newSVG > svg').dataset.symbolName;
+  // Do not animate the symbol panel
+  if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
+    document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
+  }
+}
+
+//! 18SEPT2019 -- Calling it here
 // TODO: Check all Mod1 and Mod2 symbols that they fit inside for both Land Unit and Equipment symbols in every affiliation. For instance - Mod2 Rails on hostile outlines do not work. Needs a fix
 // TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
+// TODO: Reduced/Reinforced switches panel should be 6 columns wide and the "Convert to Activity" and "Convert to Installation" should take up the remaining 6 cols
+// TODO: Global vars need cleaning up. Use imports
+// TODO: Helper text on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
 const searchResults = debounce(() => {
   if (searchField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);
@@ -226,7 +204,25 @@ const searchResults = debounce(() => {
   }
 }, 200);
 
+// This removes the unique/higher formation text from the symbol and text field
+const clearDesignationFields = (event) => {
+  switch (event.target.parentElement.dataset.value) {
+    case 'uniqueDesignationField':
+      uniqueDesignationField.value = '';
+      deleteUniqueDesignationButton.root_.style.display = 'none';
+      document.querySelector('g.uniqueUnitDesignation').textContent = '';
+      break;
+    case 'higherFormationField':
+      higherFormationField.value = '';
+      deleteHigherFormationButton.root_.style.display = 'none';
+      document.querySelector('g.higherUnitFormation').textContent = '';
+      break;
+    default:
+      break;
+  }
+};
 
+// This adds the unique/higher formation text on the symbol
 const inputDesignationFields = debounce(() => {
   if (uniqueDesignationField.input_.value !== '') {
     // Show the trash icon when there is any text in the search field
@@ -258,24 +254,6 @@ const inputDesignationFields = debounce(() => {
   }
 }, 200);
 
-
-const clearDesignationFields = (event) => {
-  switch (event.target.parentElement.dataset.value) {
-    case 'uniqueDesignationField':
-      uniqueDesignationField.value = '';
-      deleteUniqueDesignationButton.root_.style.display = 'none';
-      document.querySelector('g.uniqueUnitDesignation').textContent = '';
-      break;
-    case 'higherFormationField':
-      higherFormationField.value = '';
-      deleteHigherFormationButton.root_.style.display = 'none';
-      document.querySelector('g.higherUnitFormation').textContent = '';
-      break;
-    default:
-      break;
-  }
-};
-
 deleteTextFieldButton.root_.addEventListener('click', clearSearchField);
 searchField.input_.addEventListener('input', searchResults);
 
@@ -293,12 +271,13 @@ searchField.input_.addEventListener('input', searchResults);
 window.searchField = searchField;
 window.selectSymbol = selectSymbol;
 window.selectUnitSize = selectUnitSize;
-window.Resizer = Resizer;
+// window.Resizer = Resizer;
 window.deleteTextFieldButton = deleteTextFieldButton;
 window.selectMod1 = selectMod1;
 window.selectMod2 = selectMod2;
-window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
+// window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 window.uniqueDesignationField = uniqueDesignationField;
+window.switchControl = switchControl;
 
 
 // Load the Symbols and Modifiers into the dropdowns on page load
