@@ -46,7 +46,9 @@ const switchControl = new MDCSwitch(document.querySelector('.mdc-switch'));
     }
 
     // Find all the selected values and place the symbol in the symbol panel
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value);
+    MainMS.placeSymbol();
+    window.MainMS = MainMS; //! Remove on production
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
@@ -281,7 +283,6 @@ window.selectMod2 = selectMod2;
 // window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 window.uniqueDesignationField = uniqueDesignationField;
 window.switchControl = switchControl;
-
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {

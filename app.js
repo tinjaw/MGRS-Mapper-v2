@@ -269,8 +269,33 @@ class MilSym {
         !element.stroke ? mod2Path.setAttributeNS(null, 'stroke', 'black') : mod2Path.setAttributeNS(null, 'stroke', `${element.stroke}`);
         // If the default mod2Path stroke-width is missing, default to 4
         !element.strokeWidth ? mod2Path.setAttributeNS(null, 'stroke-width', '4') : mod2Path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-        // If the mod2 element is missing a transform property, do nothing, else set the transform value
-        !element.transform ? null : mod2Path.setAttributeNS(null, 'transform', `${element.transform}`);
+        // If the symbol mod2 is a mobility modifier AND it's a piece of equipment, put Mod2 below the symbol
+        if (this.mod2.mobility && this.type === 'Equipment') {
+          // Now check the affiliation of the symbol and refine the Mod2 translation
+          switch (this.data.affiliation) {
+            case 'friendly':
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,47)');
+              break;
+            case 'friendlyTemplated':
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,47)');
+              break;
+            case 'neutral':
+              mod2Path.setAttributeNS(null, 'd', mod2Object[this.data.mod2].affiliation.friendly.path_1.d);
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,47)');
+              break;
+            default:
+              // This is important. This will remove the path data for the affiliation and set it to the friendly path data. Otherwise the Mod2 will be truncated
+              // For instance: set the symbol to a Land Unit and then to hostile and then Mod2 to "Amphibious". Notice how truncated the Mod2 is?
+              // This removes that truncation and sets it back to 'friendly' so Mod2 will be the full width of the symbol
+              mod2Path.setAttributeNS(null, 'd', mod2Object[this.data.mod2].affiliation.friendly.path_1.d);
+              // Handles Mod2 translate for hostile, hostileTemplated, unknown & pending
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,60)');
+              break;
+          }
+        } else {
+          // If the mod2 element is missing a transform property, do nothing, else set the transform value
+          !element.transform ? null : mod2Path.setAttributeNS(null, 'transform', `${element.transform}`);
+        }
         mod2Group.append(mod2Path);
       }
       if (key.indexOf('text') === 0) {
@@ -419,7 +444,7 @@ class TransformModifiersOnEquipment {
     this.mod1.style.transformOrigin = '100px 100px';
     this.mod1.style.transform = 'translateY(-11%) scale(0.85)';
     this.mod2.style.transformOrigin = '100px 140px';
-    this.mod2.style.transform = 'scale(0.75)';
+    this.mod2.style.transform = 'scale(0.85)';
   }
 }
 
