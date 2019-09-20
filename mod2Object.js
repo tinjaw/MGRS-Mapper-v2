@@ -1,5 +1,8 @@
 // * MODIFIER 2 OBJECT * //
 // * Sector 2 Modifiers reflect the MOBILITY of a unit or SIZE/RANGE/ALTITUDE of unit equipment ex- Air Assault, Wheeled, Mountain, etc * //
+// ! If any Mod2 object is a mobility indicator, then you MUST add in the key-value "mobility: true". Refer to "Amphibious" as a template
+// ! MOBILITY INDICATORS: These are only used for equipment and depicts the mobility feature that is NOT intrinsic to the piece of equipment itself. For example; a self propelled howitzer moving by train would get the "Rail" mobility indicator because the railway is not a part of a self propelled howitzer. These mobility indicators are put at the bottom of equipment symbols. An object like a heavy truck would have the wheeled indicator but since it is intrinsic to a truck it will not be placed below the symbol.
+// ! The following are the only mobility indicators: Wheeled (limited cross country), Wheeled (cross country), Tracked, Wheeled and Tracked Combination, Towed, Railway, Over-snow, Sled, Pack Animals, Barge and Amphibious.
 const mod2Object = {
   None: {
     type: 'Default',
@@ -62,6 +65,9 @@ const mod2Object = {
       },
       get neutral() {
         return this.unknown;
+      },
+      get mobility() {
+        return this.friendly;
       },
     },
   },
@@ -168,6 +174,49 @@ const mod2Object = {
           mobility: true,
           path_1: {
             d: 'M 45 125 C 61.7 125.9 44.2 145 62.6 145 C 81.4 145 62.6 125 81.4 125 C 100.2 125 81.4 145 100.2 145 C 119 145 100.2 125 119 125 C 137.8 125 119 145 137.8 145 C 155.9 145 138.9 126.2 154.8 125',
+          },
+        };
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  Sled: {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M115,125 C125,125 125,135 115,135 L85,135 C75,135 75,125 85,125',
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M150,120 c25,0,25,18,0,18H47c-25,0-25-18,0-18',
+            transform: 'translate(1,10)',
           },
         };
       },
