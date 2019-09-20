@@ -68,6 +68,7 @@ const switchControl = new MDCSwitch(document.querySelector('.mdc-switch'));
       selectUnitSize.disabled = false;
     }
   });
+
   key.listen('click', () => {
     // If any of these menus are open, then resize all the symbols
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
@@ -138,6 +139,7 @@ function clearSearchField() {
 // TODO: Reduced/Reinforced switches panel should be 6 columns wide and the "Convert to Activity" and "Convert to Installation" should take up the remaining 6 cols
 // TODO: Global vars need cleaning up. Use imports
 // TODO: Helper text on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
+// TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
 const searchResults = debounce(() => {
   if (searchField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);
