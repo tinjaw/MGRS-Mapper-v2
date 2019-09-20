@@ -151,8 +151,8 @@ class MilSym {
         const element = this.symbol[key];
         const decorator = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         decorator.setAttributeNS(null, 'd', `${element.d}`);
-        // If the default decorator fill is missing, default to black
-        !element.fill ? decorator.setAttributeNS(null, 'fill', 'black') : decorator.setAttributeNS(null, 'fill', `${element.fill}`);
+        // If the default decorator fill is missing, default to none
+        !element.fill ? decorator.setAttributeNS(null, 'fill', 'none') : decorator.setAttributeNS(null, 'fill', `${element.fill}`);
         // If the default decorator stroke is missing, default to black
         !element.stroke ? decorator.setAttributeNS(null, 'stroke', 'black') : decorator.setAttributeNS(null, 'stroke', `${element.stroke}`);
         // If the default decorator stroke-width is missing, default to 4
@@ -221,8 +221,8 @@ class MilSym {
         const element = this.mod1[key];
         const mod1Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         mod1Path.setAttributeNS(null, 'd', `${element.d}`);
-        // If the default mod1Path fill is missing, default to black
-        !element.fill ? mod1Path.setAttributeNS(null, 'fill', 'black') : mod1Path.setAttributeNS(null, 'fill', `${element.fill}`);
+        // If the default mod1Path fill is missing, default to none
+        !element.fill ? mod1Path.setAttributeNS(null, 'fill', 'none') : mod1Path.setAttributeNS(null, 'fill', `${element.fill}`);
         // If the default mod1Path stroke is missing, default to black
         !element.stroke ? mod1Path.setAttributeNS(null, 'stroke', 'black') : mod1Path.setAttributeNS(null, 'stroke', `${element.stroke}`);
         // If the default mod1Path stroke-width is missing, default to 4
@@ -263,8 +263,8 @@ class MilSym {
         const element = this.mod2[key];
         const mod2Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         mod2Path.setAttributeNS(null, 'd', `${element.d}`);
-        // If the default mod2Path fill is missing, default to black
-        !element.fill ? mod2Path.setAttributeNS(null, 'fill', 'black') : mod2Path.setAttributeNS(null, 'fill', `${element.fill}`);
+        // If the default mod2Path fill is missing, default to none
+        !element.fill ? mod2Path.setAttributeNS(null, 'fill', 'none') : mod2Path.setAttributeNS(null, 'fill', `${element.fill}`);
         // If the default mod2Path stroke is missing, default to black
         !element.stroke ? mod2Path.setAttributeNS(null, 'stroke', 'black') : mod2Path.setAttributeNS(null, 'stroke', `${element.stroke}`);
         // If the default mod2Path stroke-width is missing, default to 4
@@ -429,5 +429,5 @@ window.affiliationOutlineObject = affiliationOutlineObject;
 window.selectAffiliation = selectAffiliation;
 
 export {
- addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym 
+  addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym,
 };

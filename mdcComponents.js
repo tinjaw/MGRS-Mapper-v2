@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 import { MDCSelect } from '@material/select';
@@ -290,6 +291,7 @@ window.onload = () => {
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
+  console.log('%c MGRS-Mapper by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 };
 
 export { selectAffiliation };

@@ -35,7 +35,6 @@ const mod1Object = {
       friendly: {
         path_1: {
           d: 'm 90,60 20,0 c 10,0 10,15 0,15 L 90,75 C 80,75 80,60 90,60',
-          fill: 'none',
         },
       },
       get friendlyTemplated() {
@@ -64,7 +63,6 @@ const mod1Object = {
       friendly: {
         path_1: {
           d: 'M 12.5,3.5 a 22.5,22.5 0 0,1 0,43 a 22.5,22.5 0 1,0 0,-43 z',
-          fill: 'none',
           strokeWidth: '6',
           transform: 'translate(110,75) scale(-0.4,-0.4)',
         },
@@ -132,7 +130,6 @@ const mod1Object = {
       friendly: {
         path_1: {
           d: 'm 80,75 5,-5 30,0 5,5 m -40,-20 5,5 30,0 5,-5',
-          fill: 'none',
         },
       },
       get friendlyTemplated() {

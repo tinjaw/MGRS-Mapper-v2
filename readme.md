@@ -27,7 +27,7 @@
 # Path:
 
 - d: REQUIRED
-- fill: black
+- fill: none
 - stroke: black
 - strokeWidth: 4
 
