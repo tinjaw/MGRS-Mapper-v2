@@ -31,9 +31,8 @@ const higherFormationField = new MDCTextField(document.querySelector('.higherFor
 const higherFormationIcon = new MDCRipple(document.querySelector('.mdc-button.higherFormationDeleteIcon'));
 const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.root_);
 
-//! rename class to something more specific
-const switchControl = new MDCSwitch(document.querySelector('.mdc-switch'));
-
+const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinforcedSwitch'));
+const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
 
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
@@ -81,13 +80,37 @@ const switchControl = new MDCSwitch(document.querySelector('.mdc-switch'));
   });
 });
 
-//! REINFORCED AND REDUCED AMPS
-function reducedReinforced(event) {
-  console.log(event.target);
-  // switchControl.foundation_.setChecked(true);
+//! This is really gross. There has to be a better way to write this.
+function reducedReinforced() {
+  const c1 = reinforcedSwitch.checked;
+  const c2 = reducedSwitch.checked;
+  const c3 = c1 && c2;
+
+  if (c1 === true && c2 === false && c3 === false) {
+    stupid(reinforcedSwitch.root_.dataset.value = '+');
+  }
+
+  if (c1 === false && c2 === true && c3 === false) {
+    stupid(reducedSwitch.root_.dataset.value = '–');
+  }
+
+  if (c1 === true && c2 === true && c3 === true) {
+    stupid(reducedSwitch.root_.dataset.value = '±');
+  }
+
+  if (c1 === false && c2 === false && c3 === false) {
+    stupid(reducedSwitch.root_.dataset.value = '');
+    stupid(reinforcedSwitch.root_.dataset.value = '');
+  }
+
+  function stupid(val) {
+    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, val).placeSymbol();
+  }
 }
 
-switchControl.listen('change', reducedReinforced);
+[reducedSwitch, reinforcedSwitch].forEach((key) => {
+  key.listen('change', reducedReinforced);
+});
 
 
 const searchOptions = {
@@ -136,8 +159,8 @@ function clearSearchField() {
   }
 }
 
-//! 18SEPT2019 -- Calling it here
-// TODO: Check all Mod1 and Mod2 symbols that they fit inside for both Land Unit and Equipment symbols in every affiliation. For instance - Mod2 Rails on hostile outlines do not work. Needs a fix
+//! 20SEPT2019 -- Calling it here
+// TODO: FIX THE REINFORCED/REDUCED logic so its not so stupid!!!!!!
 // TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
 // TODO: Reduced/Reinforced switches panel should be 6 columns wide and the "Convert to Activity" and "Convert to Installation" should take up the remaining 6 cols
 // TODO: Global vars need cleaning up. Use imports
@@ -239,6 +262,9 @@ const inputDesignationFields = debounce(() => {
     deleteUniqueDesignationButton.root_.style.zIndex = '10';
     new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
     new Resizer('.symbolFigure svg');
+    // Prevents the equipment decorator from overlapping the Mod1/2 symbols when typing in Unit Information
+    selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
   } else {
     document.querySelector('g.uniqueUnitDesignation').textContent = '';
     deleteUniqueDesignationButton.root_.style.display = 'none';
@@ -253,6 +279,9 @@ const inputDesignationFields = debounce(() => {
     deleteHigherFormationButton.root_.style.zIndex = '10';
     new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
     new Resizer('.symbolFigure svg');
+    // Prevents the equipment decorator from overlapping the Mod1/2 symbols when typing in Unit Information
+    selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
   } else {
     document.querySelector('g.higherUnitFormation').textContent = '';
     deleteHigherFormationButton.root_.style.display = 'none';
@@ -282,7 +311,7 @@ window.selectMod1 = selectMod1;
 window.selectMod2 = selectMod2;
 // window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 window.uniqueDesignationField = uniqueDesignationField;
-window.switchControl = switchControl;
+window.reinforcedSwitch = reinforcedSwitch;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {

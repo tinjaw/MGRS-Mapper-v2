@@ -7,10 +7,11 @@ import unitSizeObject from './unitSizeObject';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 
+
 // * The star of the show * //
-// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID').placeSymbol();
+// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID', '+').placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '') {
+  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '', reinforcedReduced = '') {
     this.location = document.querySelector(location);
     this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
     this.affiliation = affiliationOutlineObject[affiliation];
@@ -20,6 +21,7 @@ class MilSym {
     this.mod2 = mod2Object[mod2].affiliation[affiliation];
     this.uniqueDesignation = uniqueDesignation;
     this.higherFormation = higherFormation;
+    this.reinforcedReduced = reinforcedReduced;
     this.data = {
       location,
       symbol,
@@ -50,7 +52,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData);
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -72,7 +74,6 @@ class MilSym {
 
     const generateOutline = () => Object.keys(this.affiliation).forEach((key) => {
       const value = this.affiliation[key];
-      // console.log(key, value);
       if (key.indexOf('templated') === 0 && value === true) {
         outline.setAttributeNS(null, 'd', `${this.affiliation.d}`);
         outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
@@ -286,9 +287,9 @@ class MilSym {
               mod2Path.setAttributeNS(null, 'transform', 'translate(0,47)');
               break;
             default:
-              // This is important. This will remove the path data for the affiliation and set it to the friendly path data. Otherwise the Mod2 will be truncated
+              // This is important. This will remove the path data for the affiliation and set it to the 'mobility' path data. Otherwise the Mod2 will be truncated
               // For instance: set the symbol to a Land Unit and then to hostile and then Mod2 to "Amphibious". Notice how truncated the Mod2 is?
-              // This removes that truncation and sets it back to 'friendly' so Mod2 will be the full width of the symbol
+              // This removes that truncation and sets it back to 'mobility' so Mod2 will be the full width of the symbol
               mod2Path.setAttributeNS(null, 'd', mod2Object[this.data.mod2].affiliation.mobility.path_1.d);
               // Handles Mod2 translate for hostile, hostileTemplated, unknown & pending
               mod2Path.setAttributeNS(null, 'transform', 'translate(0,60)');
@@ -354,6 +355,23 @@ class MilSym {
     higherFormationText.setAttribute('text-anchor', 'start');
     higherFormationGroup.append(higherFormationText);
     return higherFormationGroup;
+  }
+
+  get reinforcedReducedData() {
+    const reinforcedReducedGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    reinforcedReducedGroup.classList.add('reinforcedReduced');
+    const reinforcedReducedText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    reinforcedReducedText.setAttribute('x', '195');
+    reinforcedReducedText.setAttribute('y', '40');
+    reinforcedReducedText.setAttribute('text-anchor', 'start');
+    reinforcedReducedText.setAttribute('font-size', '40');
+    reinforcedReducedText.setAttribute('font-family', 'Arial');
+    reinforcedReducedText.setAttribute('font-weight', 'bold');
+    reinforcedReducedText.setAttribute('stroke-width', '4');
+    reinforcedReducedText.setAttribute('fill', 'black');
+    reinforcedReducedText.textContent = this.reinforcedReduced;
+    reinforcedReducedGroup.append(reinforcedReducedText);
+    return reinforcedReducedGroup;
   }
 }
 

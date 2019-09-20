@@ -362,16 +362,28 @@
       <!-- Reduced/Reinforced Switches -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-switch">
+          <div class="mdc-layout-grid__cell--span-6">
+            <div class="mdc-switch reinforcedSwitch" data-value="">
               <div class="mdc-switch__track"></div>
               <div class="mdc-switch__thumb-underlay">
                 <div class="mdc-switch__thumb">
-                  <input type="checkbox" id="basic-switch" class="mdc-switch__native-control" role="switch" />
+                  <input type="checkbox" id="reinforced-switch" class="mdc-switch__native-control " role="switch" />
                 </div>
               </div>
             </div>
-            <label for="basic-switch">off/on</label>
+            <label for="reinforced-switch">Reinforced</label>
+          </div>
+
+          <div class="mdc-layout-grid__cell--span-6">
+            <div class="mdc-switch reducedSwitch" data-value="">
+              <div class="mdc-switch__track"></div>
+              <div class="mdc-switch__thumb-underlay">
+                <div class="mdc-switch__thumb">
+                  <input type="checkbox" id="reduced-switch" class="mdc-switch__native-control " role="switch" />
+                </div>
+              </div>
+            </div>
+            <label for="reduced-switch">Reduced</label>
           </div>
         </div>
       </div>

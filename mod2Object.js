@@ -3,6 +3,7 @@
 // ! If any Mod2 object is a mobility indicator, then you MUST add in the key-value "mobility: true". Refer to "Amphibious" as a template
 // ! MOBILITY INDICATORS: These are only used for equipment and depicts the mobility feature that is NOT intrinsic to the piece of equipment itself. For example; a self propelled howitzer moving by train would get the "Rail" mobility indicator because the railway is not a part of a self propelled howitzer. These mobility indicators are put at the bottom of equipment symbols. An object like a heavy truck would have the wheeled indicator but since it is intrinsic to a truck it will not be placed below the symbol.
 // ! The following are the only mobility indicators: Wheeled (limited cross country), Wheeled (cross country), Tracked, Wheeled and Tracked Combination, Towed, Railway, Over-snow, Sled, Pack Animals, Barge and Amphibious.
+// ! Refer to 5-17 in ADRP 1-02 (AUG 2018)
 const mod2Object = {
   None: {
     type: 'Default',
