@@ -86,25 +86,23 @@ class MilSym {
         outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation.strokeDashArray_2}`);
         // Had to put this in an async function because the templated outline was popping up ahead of the regular outline
         (async () => {
+          // Don't listen to VS Code, await IS necessary for this
           await outlineGroup.append(outlineTemplated);
           outlineGroup.prepend(outline);
         })().catch((err) => {
           console.error(err);
+          setTimeout(() => {
+            outlineGroup.append(outlineTemplated);
+            outlineGroup.prepend(outline);
+          }, 30);
         });
-        // try {
-        //   outlineGroup.insertBefore(outline, outlineTemplated);
-        // } catch (error) {
-        //   console.log("The element isn't here so we will try again");
-        //   outlineGroup.insertBefore(outline, outlineTemplated);
-        // }
-        // outlineGroup.insertAdjacentElement('beforeend', outlineTemplated);
-        // outlineGroup.insertAdjacentElement('afterbegin', outline);
       } else {
         outline.setAttributeNS(null, 'd', `${this.affiliation.d}`);
         outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
         outlineGroup.append(outline);
       }
     });
+
 
     // Check if the symbol is a piece of equipment
     switch (this.type) {
@@ -451,7 +449,6 @@ class Resizer {
     this.width = width;
     this.height = height;
     this.symbolElement.forEach((key) => {
-      // This just removes the animation on the symbol on the dropdown list
       key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
       key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
       key.setAttributeNS(null, 'width', `${this.width}`);
@@ -482,6 +479,7 @@ window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
 window.selectAffiliation = selectAffiliation;
+window.militarySymbolsObject = militarySymbolsObject;
 
 export {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym,

@@ -12,6 +12,7 @@ import {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym,
 } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
+import affiliationOutlineObject from './affiliationOutlineObject';
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -33,6 +34,7 @@ const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.roo
 
 const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinforcedSwitch'));
 const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
+const reinforcedReducedValue = () => new RRSwitches().value;
 
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
@@ -45,9 +47,9 @@ const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedS
     }
 
     // Find all the selected values and place the symbol in the symbol panel
-    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value);
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`);
+    window.MainMS = MainMS;
     MainMS.placeSymbol();
-    window.MainMS = MainMS; //! Remove on production
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
@@ -80,36 +82,60 @@ const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedS
   });
 });
 
-//! This is really gross. There has to be a better way to write this.
-function reducedReinforced() {
-  const condition1 = reinforcedSwitch.checked;
-  const condition2 = reducedSwitch.checked;
-  const condition3 = condition1 && condition2;
 
-  function addReinforcedReducedToSymbol(val) {
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, val).placeSymbol();
+class RRSwitches {
+  constructor() {
+    this.reinforced = reinforcedSwitch.checked;
+    this.reduced = reducedSwitch.checked;
+    this.reinforcedAndReduced = this.reinforced && this.reduced;
+    this.value = '';
+    return this.checkSwitches();
   }
 
-  if (condition1 === true && condition2 === false && condition3 === false) {
-    addReinforcedReducedToSymbol(reinforcedSwitch.root_.dataset.value = '+');
-  }
-
-  if (condition1 === false && condition2 === true && condition3 === false) {
-    addReinforcedReducedToSymbol(reducedSwitch.root_.dataset.value = '–');
-  }
-
-  if (condition1 === true && condition2 === true && condition3 === true) {
-    addReinforcedReducedToSymbol(reducedSwitch.root_.dataset.value = '±');
-  }
-
-  if (condition1 === false && condition2 === false && condition3 === false) {
-    addReinforcedReducedToSymbol(reducedSwitch.root_.dataset.value = '');
-    addReinforcedReducedToSymbol(reinforcedSwitch.root_.dataset.value = '');
+  checkSwitches() {
+    switch (true) {
+      case this.reinforcedAndReduced:
+        reducedSwitch.root_.dataset.value = '±';
+        reinforcedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '±';
+        MainMS.placeSymbol();
+        this.value = '±';
+        break;
+      case this.reinforced:
+        reinforcedSwitch.root_.dataset.value = '+';
+        reducedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '+';
+        MainMS.placeSymbol();
+        this.value = '+';
+        break;
+      case this.reduced:
+        reducedSwitch.root_.dataset.value = '–';
+        reinforcedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '–';
+        MainMS.placeSymbol();
+        this.value = '–';
+        break;
+      default:
+        reducedSwitch.root_.dataset.value = '';
+        reinforcedSwitch.root_.dataset.value = '';
+        // Check if the MainMS variable is in the global window. If not wait 30 ms
+        if (window.hasOwnProperty('MainMS')) {
+          MainMS.reinforcedReduced = '';
+          MainMS.placeSymbol();
+        } else {
+          setTimeout(() => {
+            MainMS.reinforcedReduced = '';
+            MainMS.placeSymbol();
+          }, 30);
+        }
+        this.value = '';
+        break;
+    }
   }
 }
 
 [reducedSwitch, reinforcedSwitch].forEach((key) => {
-  key.listen('change', reducedReinforced);
+  key.listen('change', reinforcedReducedValue);
 });
 
 
@@ -312,6 +338,7 @@ window.selectMod2 = selectMod2;
 // window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 window.uniqueDesignationField = uniqueDesignationField;
 window.reinforcedSwitch = reinforcedSwitch;
+window.reducedSwitch = reducedSwitch;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {
