@@ -82,29 +82,29 @@ const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedS
 
 //! This is really gross. There has to be a better way to write this.
 function reducedReinforced() {
-  const c1 = reinforcedSwitch.checked;
-  const c2 = reducedSwitch.checked;
-  const c3 = c1 && c2;
+  const condition1 = reinforcedSwitch.checked;
+  const condition2 = reducedSwitch.checked;
+  const condition3 = condition1 && condition2;
 
-  if (c1 === true && c2 === false && c3 === false) {
-    stupid(reinforcedSwitch.root_.dataset.value = '+');
-  }
-
-  if (c1 === false && c2 === true && c3 === false) {
-    stupid(reducedSwitch.root_.dataset.value = '–');
-  }
-
-  if (c1 === true && c2 === true && c3 === true) {
-    stupid(reducedSwitch.root_.dataset.value = '±');
-  }
-
-  if (c1 === false && c2 === false && c3 === false) {
-    stupid(reducedSwitch.root_.dataset.value = '');
-    stupid(reinforcedSwitch.root_.dataset.value = '');
-  }
-
-  function stupid(val) {
+  function addReinforcedReducedToSymbol(val) {
     new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, val).placeSymbol();
+  }
+
+  if (condition1 === true && condition2 === false && condition3 === false) {
+    addReinforcedReducedToSymbol(reinforcedSwitch.root_.dataset.value = '+');
+  }
+
+  if (condition1 === false && condition2 === true && condition3 === false) {
+    addReinforcedReducedToSymbol(reducedSwitch.root_.dataset.value = '–');
+  }
+
+  if (condition1 === true && condition2 === true && condition3 === true) {
+    addReinforcedReducedToSymbol(reducedSwitch.root_.dataset.value = '±');
+  }
+
+  if (condition1 === false && condition2 === false && condition3 === false) {
+    addReinforcedReducedToSymbol(reducedSwitch.root_.dataset.value = '');
+    addReinforcedReducedToSymbol(reinforcedSwitch.root_.dataset.value = '');
   }
 }
 

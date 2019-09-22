@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-expressions */
 // * IMPORTS * //
 import { selectAffiliation } from './mdcComponents';
@@ -89,6 +91,14 @@ class MilSym {
         })().catch((err) => {
           console.error(err);
         });
+        // try {
+        //   outlineGroup.insertBefore(outline, outlineTemplated);
+        // } catch (error) {
+        //   console.log("The element isn't here so we will try again");
+        //   outlineGroup.insertBefore(outline, outlineTemplated);
+        // }
+        // outlineGroup.insertAdjacentElement('beforeend', outlineTemplated);
+        // outlineGroup.insertAdjacentElement('afterbegin', outline);
       } else {
         outline.setAttributeNS(null, 'd', `${this.affiliation.d}`);
         outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
@@ -413,9 +423,9 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
     }
     // This will remove the affiliation containers on the Modifier elements in the dropdown
     // ! Remember selectMod1 is a global var from mdcComponents.js -- Import it on production
-    menu.menu_.items.map((key) => {
+    menu.menu_.items.map((key2) => {
       // This targets the Modifier element (eg- the moon symbol for "foraging")
-      const modElement = key.querySelectorAll('li figure svg g.outline path')[0];
+      const modElement = key2.querySelectorAll('li figure svg g.outline path')[0];
       // This targets the SVG container for each Modifier element
       const modSVGContainer = modElement.parentElement.parentElement;
       // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
