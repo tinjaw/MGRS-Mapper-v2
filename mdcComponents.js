@@ -1,6 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
+//! 21SEPT2019 -- Calling it here
+// TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
+// TODO: Reduced/Reinforced switches panel should be 6 columns wide and the "Convert to Activity" and "Convert to Installation" should take up the remaining 6 cols
+// TODO: Global vars need cleaning up. Use imports
+// TODO: Helper info-window on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
+// TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
+// TODO: Equipment cannot be reinforced/reduced. So disable it out when selected
+// TODO: Select a hostile symbol and add any unit size. Notice how the symbol gets clipped. Need to fix that css issue
+// TODO: Mod1 helper text has word wrap. Fix it to 1 line
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -36,109 +45,10 @@ const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinf
 const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
 const reinforcedReducedValue = () => new RRSwitches().value;
 
-[selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
-  key.listen('MDCSelect:change', (event) => {
-    // This replaces camel case for things like "friendlyTemplated" into "Friendly / Templated"
-    if (event.target.classList.contains('unit-size-select') || event.target.classList.contains('affiliation-select')) {
-      key.selectedText_.textContent = key.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
-    } else {
-      // Set all other select boxes text content otherwise it throws weird errors
-      key.selectedText_.textContent = key.value;
-    }
 
-    // Find all the selected values and place the symbol in the symbol panel
-    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`);
-    window.MainMS = MainMS;
-    MainMS.placeSymbol();
-
-    if (event.target.classList.contains('symbol-select')) {
-      // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
-      !searchField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
-    }
-
-    if (event.target.classList.contains('affiliation-select')) {
-      // When an affiliation is selected, change the outlines of all symbols in the dropdown
-      selectSymbol.menu_.items.map((key) => {
-        new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
-      });
-    }
-
-    if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
-      // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
-      selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-      selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-      selectUnitSize.disabled = true;
-    } else {
-      selectUnitSize.disabled = false;
-    }
-  });
-
-  key.listen('click', () => {
-    // If any of these menus are open, then resize all the symbols
-    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
-    selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
-    selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
-    selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
-  });
-});
-
-
-class RRSwitches {
-  constructor() {
-    this.reinforced = reinforcedSwitch.checked;
-    this.reduced = reducedSwitch.checked;
-    this.reinforcedAndReduced = this.reinforced && this.reduced;
-    this.value = '';
-    return this.checkSwitches();
-  }
-
-  checkSwitches() {
-    switch (true) {
-      case this.reinforcedAndReduced:
-        reducedSwitch.root_.dataset.value = '±';
-        reinforcedSwitch.root_.dataset.value = '';
-        MainMS.reinforcedReduced = '±';
-        MainMS.placeSymbol();
-        this.value = '±';
-        break;
-      case this.reinforced:
-        reinforcedSwitch.root_.dataset.value = '+';
-        reducedSwitch.root_.dataset.value = '';
-        MainMS.reinforcedReduced = '+';
-        MainMS.placeSymbol();
-        this.value = '+';
-        break;
-      case this.reduced:
-        reducedSwitch.root_.dataset.value = '–';
-        reinforcedSwitch.root_.dataset.value = '';
-        MainMS.reinforcedReduced = '–';
-        MainMS.placeSymbol();
-        this.value = '–';
-        break;
-      default:
-        reducedSwitch.root_.dataset.value = '';
-        reinforcedSwitch.root_.dataset.value = '';
-        // Check if the MainMS variable is in the global window. If not wait 30 ms
-        if (window.hasOwnProperty('MainMS')) {
-          MainMS.reinforcedReduced = '';
-          MainMS.placeSymbol();
-        } else {
-          setTimeout(() => {
-            MainMS.reinforcedReduced = '';
-            MainMS.placeSymbol();
-          }, 30);
-        }
-        this.value = '';
-        break;
-    }
-  }
-}
-
-[reducedSwitch, reinforcedSwitch].forEach((key) => {
-  key.listen('change', reinforcedReducedValue);
-});
-
-
+// *********************************************************************************** //
+// * Search Field                                                                    * //
+// *********************************************************************************** //
 const searchOptions = {
   shouldSort: true,
   // tokenize: true,
@@ -185,13 +95,6 @@ function clearSearchField() {
   }
 }
 
-//! 20SEPT2019 -- Calling it here
-// TODO: FIX THE REINFORCED/REDUCED logic so its not so stupid!!!!!!
-// TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
-// TODO: Reduced/Reinforced switches panel should be 6 columns wide and the "Convert to Activity" and "Convert to Installation" should take up the remaining 6 cols
-// TODO: Global vars need cleaning up. Use imports
-// TODO: Helper text on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
-// TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
 const searchResults = debounce(() => {
   if (searchField.input_.value !== '') {
     const fuse = new Fuse(searchOptions.keys, searchOptions);
@@ -258,6 +161,63 @@ const searchResults = debounce(() => {
   }
 }, 200);
 
+deleteTextFieldButton.root_.addEventListener('click', clearSearchField);
+searchField.input_.addEventListener('input', searchResults);
+
+
+// *********************************************************************************** //
+// * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2 * //
+// *********************************************************************************** //
+[selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
+  key.listen('MDCSelect:change', (event) => {
+    // This replaces camel case for things like "friendlyTemplated" into "Friendly / Templated"
+    if (event.target.classList.contains('unit-size-select') || event.target.classList.contains('affiliation-select')) {
+      key.selectedText_.textContent = key.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
+    } else {
+      // Set all other select boxes text content otherwise it throws weird errors
+      key.selectedText_.textContent = key.value;
+    }
+
+    // Find all the selected values and place the symbol in the symbol panel
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`);
+    window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
+    MainMS.placeSymbol();
+
+    if (event.target.classList.contains('symbol-select')) {
+      // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
+      !searchField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
+    }
+
+    if (event.target.classList.contains('affiliation-select')) {
+      // When an affiliation is selected, change the outlines of all symbols in the dropdown
+      selectSymbol.menu_.items.map((key) => {
+        new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+      });
+    }
+
+    if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
+      // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
+      selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+      selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+      selectUnitSize.disabled = true;
+    } else {
+      selectUnitSize.disabled = false;
+    }
+  });
+
+  key.listen('click', () => {
+    // If any of these menus are open, then resize all the symbols
+    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+    selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
+    selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
+    selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
+  });
+});
+
+
+// *********************************************************************************** //
+// * Unique Unit Designation Field and Higher Unit Formation Field                   * //
+// *********************************************************************************** //
 // This removes the unique/higher formation text from the symbol and text field
 const clearDesignationFields = (event) => {
   switch (event.target.parentElement.dataset.value) {
@@ -286,7 +246,11 @@ const inputDesignationFields = debounce(() => {
     deleteUniqueDesignationButton.root_.style.top = '10px';
     // Setting z-index on trash icon makes it clickable
     deleteUniqueDesignationButton.root_.style.zIndex = '10';
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
+    // new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
+    // * Directly edit the MainMS class instance instead of creating a whole new class * //
+    MainMS.uniqueDesignation = uniqueDesignationField.value;
+    MainMS.higherFormation = higherFormationField.value;
+    MainMS.placeSymbol();
     new Resizer('.symbolFigure svg');
     // Prevents the equipment decorator from overlapping the Mod1/2 symbols when typing in Unit Information
     selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
@@ -303,7 +267,9 @@ const inputDesignationFields = debounce(() => {
     deleteHigherFormationButton.root_.style.top = '10px';
     // Setting z-index on trash icon makes it clickable
     deleteHigherFormationButton.root_.style.zIndex = '10';
-    new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
+    MainMS.uniqueDesignation = uniqueDesignationField.value;
+    MainMS.higherFormation = higherFormationField.value;
+    MainMS.placeSymbol();
     new Resizer('.symbolFigure svg');
     // Prevents the equipment decorator from overlapping the Mod1/2 symbols when typing in Unit Information
     selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
@@ -314,8 +280,6 @@ const inputDesignationFields = debounce(() => {
   }
 }, 200);
 
-deleteTextFieldButton.root_.addEventListener('click', clearSearchField);
-searchField.input_.addEventListener('input', searchResults);
 
 [uniqueDesignationField, higherFormationField].forEach((key) => {
   key.input_.addEventListener('input', inputDesignationFields);
@@ -324,6 +288,65 @@ searchField.input_.addEventListener('input', searchResults);
 
 [deleteHigherFormationButton, deleteUniqueDesignationButton].forEach((key) => {
   key.root_.addEventListener('click', clearDesignationFields);
+});
+
+
+// *********************************************************************************** //
+// * Reinforced and Reduced Switches                                                 * //
+// *********************************************************************************** //
+class RRSwitches {
+  constructor() {
+    this.reinforced = reinforcedSwitch.checked;
+    this.reduced = reducedSwitch.checked;
+    this.reinforcedAndReduced = this.reinforced && this.reduced;
+    this.value = '';
+    return this.checkSwitches();
+  }
+
+  checkSwitches() {
+    switch (true) {
+      case this.reinforcedAndReduced:
+        reducedSwitch.root_.dataset.value = '±';
+        reinforcedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '±';
+        MainMS.placeSymbol();
+        this.value = '±';
+        break;
+      case this.reinforced:
+        reinforcedSwitch.root_.dataset.value = '+';
+        reducedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '+';
+        MainMS.placeSymbol();
+        this.value = '+';
+        break;
+      case this.reduced:
+        reducedSwitch.root_.dataset.value = '–';
+        reinforcedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '–';
+        MainMS.placeSymbol();
+        this.value = '–';
+        break;
+      default:
+        reducedSwitch.root_.dataset.value = '';
+        reinforcedSwitch.root_.dataset.value = '';
+        // Check if the MainMS variable is in the global window. If not wait 30 ms
+        if (window.hasOwnProperty('MainMS')) {
+          MainMS.reinforcedReduced = '';
+          MainMS.placeSymbol();
+        } else {
+          setTimeout(() => {
+            MainMS.reinforcedReduced = '';
+            MainMS.placeSymbol();
+          }, 30);
+        }
+        this.value = '';
+        break;
+    }
+  }
+}
+
+[reducedSwitch, reinforcedSwitch].forEach((key) => {
+  key.listen('change', reinforcedReducedValue);
 });
 
 

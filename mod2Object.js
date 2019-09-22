@@ -198,19 +198,21 @@ const mod2Object = {
         return this.friendly;
       },
       get hostile() {
-        return this.friendly;
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(1,7)';
+        return propertyToModify;
       },
       get hostileTemplated() {
-        return this.friendly;
+        return this.hostile;
       },
       get unknown() {
-        return this.friendly;
+        return this.hostile;
       },
       get pending() {
-        return this.friendly;
+        return this.hostile;
       },
       get neutral() {
-        return this.friendly;
+        return this.hostile;
       },
       get mobility() {
         return {

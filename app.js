@@ -461,17 +461,20 @@ class Resizer {
 // This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
 class TransformModifiersOnEquipment {
   constructor(equipmentOutline) {
-    this.equipmentOutline = document.querySelector(equipmentOutline); // The equipment SVG you want to readjust
-    this.equipmentDecorator = this.equipmentOutline.querySelector('g.decorator');
-    this.mod1 = this.equipmentOutline.querySelector('g.mod1');
-    this.mod2 = this.equipmentOutline.querySelector('g.mod2');
-    this.equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
-    this.equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-    // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
-    this.mod1.style.transformOrigin = '100px 100px';
-    this.mod1.style.transform = 'translateY(-11%) scale(0.85)';
-    this.mod2.style.transformOrigin = '100px 140px';
-    this.mod2.style.transform = 'scale(0.85)';
+    if (MainMS.type === 'Equipment') {
+      console.log('Equipment found');
+      this.equipmentOutline = document.querySelector(equipmentOutline); // The equipment SVG you want to readjust
+      this.equipmentDecorator = this.equipmentOutline.querySelector('g.decorator');
+      this.mod1 = this.equipmentOutline.querySelector('g.mod1');
+      this.mod2 = this.equipmentOutline.querySelector('g.mod2');
+      this.equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+      this.equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+      // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
+      this.mod1.style.transformOrigin = '100px 100px';
+      this.mod1.style.transform = 'translateY(-11%) scale(0.85)';
+      this.mod2.style.transformOrigin = '100px 140px';
+      this.mod2.style.transform = 'scale(0.85)';
+    }
   }
 }
 

@@ -77,7 +77,7 @@ class RRSwitches {
     this.reduced = reducedSwitch.checked;
     this.reinforcedAndReduced = this.reinforced && this.reduced;
     this.value = '';
-    return this.checkSwitches();
+    return this.checkSwitches(); //! You could use this on MilSym instead of using .placeSymbol() every time
   }
 
   checkSwitches() {
