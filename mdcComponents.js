@@ -195,13 +195,23 @@ searchField.input_.addEventListener('input', searchResults);
       });
     }
 
-    if (JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo).type === 'Equipment') {
+    if (MainMS.type === 'Equipment') {
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
       selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+      // Disable these fields if the selected symbol is a piece of equipment
+      // While this just disables these buttons, in "get affiliationOutlineData()"" in the MilSym class I am removing the data
       selectUnitSize.disabled = true;
+      uniqueDesignationField.disabled = true;
+      higherFormationField.disabled = true;
+      reinforcedSwitch.disabled = true;
+      reducedSwitch.disabled = true;
     } else {
       selectUnitSize.disabled = false;
+      uniqueDesignationField.disabled = false;
+      higherFormationField.disabled = false;
+      reinforcedSwitch.disabled = false;
+      reducedSwitch.disabled = false;
     }
   });
 

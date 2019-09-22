@@ -85,6 +85,7 @@ class MilSym {
         outlineTemplated.setAttributeNS(null, 'stroke-width', `${this.affiliation.strokeWidth_2}`);
         outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation.strokeDashArray_2}`);
         // Had to put this in an async function because the templated outline was popping up ahead of the regular outline
+        // Can't use generator functions because of some dumbass babel error and I didn't feel like installing the @babel/runtime plugin
         (async () => {
           // Don't listen to VS Code, await IS necessary for this
           await outlineGroup.append(outlineTemplated);
@@ -96,6 +97,11 @@ class MilSym {
             outlineGroup.prepend(outline);
           }, 30);
         });
+        // This async function also works
+        // (async () => {
+        //   await outlineGroup.append(outline, outlineTemplated);
+        //   outline.insertAdjacentElement('afterend', outlineTemplated);
+        // })();
       } else {
         outline.setAttributeNS(null, 'd', `${this.affiliation.d}`);
         outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
@@ -103,12 +109,17 @@ class MilSym {
       }
     });
 
-
     // Check if the symbol is a piece of equipment
     switch (this.type) {
       case 'Equipment':
-        // This will remove the echelon data above the Equipment symbol.
+        // Removes the echelon data above the Equipment symbol.
         this.echelon = unitSizeObject.none.affiliation[this.data.affiliation];
+        // Removes the Unique Designation about the Equipment symbol
+        this.uniqueDesignation = '';
+        // Removes the Higher Formation about the Equipment symbol
+        this.higherFormation = '';
+        // Removes the Reinforced/Reduced above the Equipment symbol
+        this.reinforcedReduced = '';
         // If the symbol is a friendly piece of equipment, then we need to adjust the outline
         switch (selectAffiliation.value) {
           case 'friendly':
