@@ -198,6 +198,7 @@ searchField.input_.addEventListener('input', searchResults);
     // Toggle the bounceIn animation on the Mod1 element when selected... Might delete later idk
     if (event.target.classList.contains('mod1-select')) {
       const m1 = document.querySelector('.mod1');
+      // transformBox is crucial. Without this Mod1 will not scale from the center
       m1.style.transformBox = 'fill-box';
       m1.style.transformOrigin = 'center center';
       m1.classList.toggle('bounceIn');
@@ -211,18 +212,29 @@ searchField.input_.addEventListener('input', searchResults);
       m2.classList.toggle('bounceIn');
     }
 
-
+    // Since Equipment symbols are different than Land Unit symbols, we need to disable some options
     if (MainMS.type === 'Equipment') {
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
       selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       // Disable these fields if the selected symbol is a piece of equipment
       // While this just disables these buttons, in "get affiliationOutlineData()"" in the MilSym class I am removing the data
+      // Disable unit size dropdown and reset it to "None"
       selectUnitSize.disabled = true;
+      selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
+      // Disable Unique Designation field, delete any text content inside and remove the trashcan icon
       uniqueDesignationField.disabled = true;
+      uniqueDesignationField.value = '';
+      deleteUniqueDesignationButton.root_.style.display = 'none';
+      // Disable Higher Formation field, delete any text content inside and remove the trashcan icon
       higherFormationField.disabled = true;
+      higherFormationField.value = '';
+      deleteHigherFormationButton.root_.style.display = 'none';
+      // Disable Reinforced and Reduced switches and uncheck them
       reinforcedSwitch.disabled = true;
+      reinforcedSwitch.checked = false;
       reducedSwitch.disabled = true;
+      reducedSwitch.checked = false;
     } else {
       selectUnitSize.disabled = false;
       uniqueDesignationField.disabled = false;
