@@ -63,7 +63,7 @@ mod1.style.transform = `translateY(-${circ.viewBox.baseVal.x / circ.viewBox.base
 // TODO: If you change the MilSym class to accept an object, then you can instantiate it like this: "new MilSym({location: '.test', symbol: 'Infantry', affiliation: 'friendly', echelon: 'team', mod1: 'Foraging'}).placeSymbol();". The only value I can see from this is making it easier to call this class since you can indent object keys on new lines.
 // TODO: get mod1Data() and get mod2Data() in  MilSym are almost identical, there should be a way to combine them
 
-class Gay {
+class tttt {
   constructor() {
     this.reinforced = reinforcedSwitch.checked;
     this.reduced = reducedSwitch.checked;
@@ -234,3 +234,8 @@ async function lol(prop) {
 
 
 [reducedSwitch, reinforcedSwitch].forEach(e => e.root_.dataset.value.length > 0 ? e.root_.dataset.value : null)
+
+const m1 = document.querySelector('.mod1');
+m1.style.transformBox = 'fill-box';
+m1.style.transformOrigin = 'center center';
+m1.classList.toggle('bounceIn');

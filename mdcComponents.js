@@ -195,6 +195,23 @@ searchField.input_.addEventListener('input', searchResults);
       });
     }
 
+    // Toggle the bounceIn animation on the Mod1 element when selected... Might delete later idk
+    if (event.target.classList.contains('mod1-select')) {
+      const m1 = document.querySelector('.mod1');
+      m1.style.transformBox = 'fill-box';
+      m1.style.transformOrigin = 'center center';
+      m1.classList.toggle('bounceIn');
+    }
+
+    // Toggle the bounceIn animation on the Mod2 element when selected
+    if (event.target.classList.contains('mod2-select')) {
+      const m2 = document.querySelector('.mod2');
+      m2.style.transformBox = 'fill-box';
+      m2.style.transformOrigin = 'center center';
+      m2.classList.toggle('bounceIn');
+    }
+
+
     if (MainMS.type === 'Equipment') {
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
       selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
