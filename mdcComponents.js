@@ -23,6 +23,7 @@ import {
 import militarySymbolsObject from './militarySymbolsObject';
 import affiliationOutlineObject from './affiliationOutlineObject';
 
+
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
 const deleteTextFieldButton = new MDCTextFieldIcon(searchFieldIcon.root_);
@@ -170,13 +171,11 @@ searchField.input_.addEventListener('input', searchResults);
 // *********************************************************************************** //
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
+    // Set all other select boxes text content otherwise it fills them with nonsense
+    key.selectedText_.textContent = key.value;
     // This replaces camel case for things like "friendlyTemplated" into "Friendly / Templated"
-    if (event.target.classList.contains('unit-size-select') || event.target.classList.contains('affiliation-select')) {
-      key.selectedText_.textContent = key.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
-    } else {
-      // Set all other select boxes text content otherwise it throws weird errors
-      key.selectedText_.textContent = key.value;
-    }
+    selectUnitSize.selectedText_.textContent = selectUnitSize.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
+    selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
 
     // Find all the selected values and place the symbol in the symbol panel
     const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`);
@@ -193,6 +192,13 @@ searchField.input_.addEventListener('input', searchResults);
       selectSymbol.menu_.items.map((key) => {
         new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
       });
+    }
+
+    if (event.target.classList.contains('unit-size-select')) {
+      const uss = document.querySelector('.echelon');
+      uss.style.transformBox = 'fill-box';
+      uss.style.transformOrigin = 'center center';
+      uss.classList.toggle('bounceIn');
     }
 
     // Toggle the bounceIn animation on the Mod1 element when selected... Might delete later idk
@@ -264,11 +270,13 @@ const clearDesignationFields = (event) => {
       uniqueDesignationField.value = '';
       deleteUniqueDesignationButton.root_.style.display = 'none';
       document.querySelector('g.uniqueUnitDesignation').textContent = '';
+      MainMS.uniqueDesignation = '';
       break;
     case 'higherFormationField':
       higherFormationField.value = '';
       deleteHigherFormationButton.root_.style.display = 'none';
       document.querySelector('g.higherUnitFormation').textContent = '';
+      MainMS.higherFormation = '';
       break;
     default:
       break;
@@ -405,8 +413,11 @@ window.reducedSwitch = reducedSwitch;
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {
   addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
+
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
+
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
+
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
