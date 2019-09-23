@@ -203,19 +203,24 @@ searchField.input_.addEventListener('input', searchResults);
 
     // Toggle the bounceIn animation on the Mod1 element when selected... Might delete later idk
     if (event.target.classList.contains('mod1-select')) {
-      const m1 = document.querySelector('.mod1');
-      // transformBox is crucial. Without this Mod1 will not scale from the center
-      m1.style.transformBox = 'fill-box';
-      m1.style.transformOrigin = 'center center';
-      m1.classList.toggle('bounceIn');
+      // Do not run these animations on equipment. It will ruin everything
+      if (MainMS.type !== 'Equipment') {
+        const m1 = document.querySelector('.mod1');
+        // transformBox is crucial. Without this Mod1 will not scale from the center
+        m1.style.transformBox = 'fill-box';
+        m1.style.transformOrigin = 'center center';
+        m1.classList.toggle('bounceIn');
+      }
     }
 
     // Toggle the bounceIn animation on the Mod2 element when selected
     if (event.target.classList.contains('mod2-select')) {
-      const m2 = document.querySelector('.mod2');
-      m2.style.transformBox = 'fill-box';
-      m2.style.transformOrigin = 'center center';
-      m2.classList.toggle('bounceIn');
+      if (MainMS.type !== 'Equipment') {
+        const m2 = document.querySelector('.mod2');
+        m2.style.transformBox = 'fill-box';
+        m2.style.transformOrigin = 'center center';
+        m2.classList.toggle('bounceIn');
+      }
     }
 
     // Since Equipment symbols are different than Land Unit symbols, we need to disable some options
@@ -413,11 +418,8 @@ window.reducedSwitch = reducedSwitch;
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {
   addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
-
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
-
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
-
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';

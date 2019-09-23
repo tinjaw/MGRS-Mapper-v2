@@ -473,7 +473,6 @@ class Resizer {
 class TransformModifiersOnEquipment {
   constructor(equipmentOutline) {
     if (MainMS.type === 'Equipment') {
-      console.log('Equipment found');
       this.equipmentOutline = document.querySelector(equipmentOutline); // The equipment SVG you want to readjust
       this.equipmentDecorator = this.equipmentOutline.querySelector('g.decorator');
       this.mod1 = this.equipmentOutline.querySelector('g.mod1');
