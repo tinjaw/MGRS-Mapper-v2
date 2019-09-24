@@ -133,6 +133,7 @@ const militarySymbolsObject = {
   },
   'Unmanned Aerial Surveillance': {
     type: 'Land Unit',
+    flightCapable: true,
     affiliation: {
       friendly: {
         path: {

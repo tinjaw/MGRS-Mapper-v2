@@ -20,7 +20,7 @@ import {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, MilSym,
 } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
-import affiliationOutlineObject from './affiliationOutlineObject';
+// import affiliationOutlineObject from './affiliationOutlineObject';
 
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
@@ -44,6 +44,8 @@ const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.roo
 const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinforcedSwitch'));
 const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
 const reinforcedReducedValue = () => new RRSwitches().value;
+
+const flyingSwitch = new MDCSwitch(document.querySelector('.mdc-switch.flightSwitch'));
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -167,6 +169,44 @@ searchField.input_.addEventListener('input', searchResults);
 // *********************************************************************************** //
 // * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2 * //
 // *********************************************************************************** //
+
+function disableInputsOnEquipment(option) {
+  switch (option) {
+    case true:
+      // Disable these fields if the selected symbol is a piece of equipment
+      // While this just disables these buttons, in "get affiliationOutlineData()"" in the MilSym class I am removing the data
+      // Disable unit size dropdown and reset it to "None"
+      selectUnitSize.disabled = true;
+      selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
+      // Disable Unique Designation field, delete any text content inside and remove the trashcan icon
+      uniqueDesignationField.disabled = true;
+      uniqueDesignationField.value = '';
+      deleteUniqueDesignationButton.root_.style.display = 'none';
+      // Disable Higher Formation field, delete any text content inside and remove the trashcan icon
+      higherFormationField.disabled = true;
+      higherFormationField.value = '';
+      deleteHigherFormationButton.root_.style.display = 'none';
+      // Disable Reinforced and Reduced switches and uncheck them
+      reinforcedSwitch.disabled = true;
+      reinforcedSwitch.checked = false;
+      reducedSwitch.disabled = true;
+      reducedSwitch.checked = false;
+      // flyingSwitch.checked = false;
+      // flyingSwitch.disabled = true;
+      break;
+    case false:
+      selectUnitSize.disabled = false;
+      uniqueDesignationField.disabled = false;
+      higherFormationField.disabled = false;
+      reinforcedSwitch.disabled = false;
+      reducedSwitch.disabled = false;
+      // flyingSwitch.disabled = false;
+      break;
+    default:
+      break;
+  }
+}
+
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
     // Set all other select boxes text content otherwise it fills them with nonsense
@@ -179,6 +219,11 @@ searchField.input_.addEventListener('input', searchResults);
     const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`);
     window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
     MainMS.placeSymbol();
+
+    // If the selected symbol cannot fly, then disable the switch
+    MainMS.flightCapable ? flyingSwitch.disabled = false : flyingSwitch.disabled = true;
+    // Disable the flying outline on the symbol when any of these select boxes are changed
+    flyingSwitch.checked ? flyingSwitch.checked = false : null;
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
@@ -210,30 +255,9 @@ searchField.input_.addEventListener('input', searchResults);
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
       selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-      // Disable these fields if the selected symbol is a piece of equipment
-      // While this just disables these buttons, in "get affiliationOutlineData()"" in the MilSym class I am removing the data
-      // Disable unit size dropdown and reset it to "None"
-      selectUnitSize.disabled = true;
-      selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
-      // Disable Unique Designation field, delete any text content inside and remove the trashcan icon
-      uniqueDesignationField.disabled = true;
-      uniqueDesignationField.value = '';
-      deleteUniqueDesignationButton.root_.style.display = 'none';
-      // Disable Higher Formation field, delete any text content inside and remove the trashcan icon
-      higherFormationField.disabled = true;
-      higherFormationField.value = '';
-      deleteHigherFormationButton.root_.style.display = 'none';
-      // Disable Reinforced and Reduced switches and uncheck them
-      reinforcedSwitch.disabled = true;
-      reinforcedSwitch.checked = false;
-      reducedSwitch.disabled = true;
-      reducedSwitch.checked = false;
+      disableInputsOnEquipment(true);
     } else {
-      selectUnitSize.disabled = false;
-      uniqueDesignationField.disabled = false;
-      higherFormationField.disabled = false;
-      reinforcedSwitch.disabled = false;
-      reducedSwitch.disabled = false;
+      disableInputsOnEquipment(false);
     }
   });
 
@@ -385,6 +409,30 @@ class RRSwitches {
 [reducedSwitch, reinforcedSwitch].forEach((key) => {
   key.listen('change', reinforcedReducedValue);
 });
+
+
+function enableFlyingOutline() {
+  this.affiliation = selectAffiliation.value;
+
+  const flyingProperty = affiliationOutlineObject[selectAffiliation.value].flying;
+
+  function generateFlyingOutline(aff) {
+    const propertyToModify = { d: aff };
+    const modifiedTarget = Object.assign({}, affiliationOutlineObject[selectAffiliation.value].d, propertyToModify);
+    MainMS.affiliation.d = modifiedTarget.d;
+    MainMS.placeSymbol();
+  }
+
+  if (MainMS.flightCapable && flyingSwitch.checked) {
+    generateFlyingOutline(flyingProperty);
+  } else {
+    MainMS.affiliation.d = affiliationOutlineObject[selectAffiliation.value].d;
+    MainMS.placeSymbol();
+  }
+}
+
+
+flyingSwitch.listen('change', enableFlyingOutline);
 
 
 // ! GLOBAL VARS - remove on production

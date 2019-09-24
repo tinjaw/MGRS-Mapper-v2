@@ -24,6 +24,7 @@ class MilSym {
     this.uniqueDesignation = uniqueDesignation;
     this.higherFormation = higherFormation;
     this.reinforcedReduced = reinforcedReduced;
+    this.flightCapable = militarySymbolsObject[symbol].flightCapable;
     this.data = {
       location,
       symbol,
@@ -488,7 +489,7 @@ class TransformModifiersOnEquipment {
   }
 }
 
-// Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2. Disbaled for Equipment because TransformModifiersOnEquipment throws everything off
+// Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2. Disabled for Equipment because TransformModifiersOnEquipment throws everything off
 function bounceInAnimation(location) {
   if (MainMS.type !== 'Equipment') {
     const bounceIn = document.querySelector(location);
@@ -498,6 +499,7 @@ function bounceInAnimation(location) {
     bounceIn.classList.toggle('bounceIn');
   }
 }
+
 
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;

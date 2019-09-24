@@ -552,3 +552,11 @@ var HandleInputs = () => {
 
   return runFuncs()
 }
+//Friendly Flight Outline: M 155,150 C 155,50 115,30 100,30 85,30 45,50 45,150
+affiliationOutlineObject + selectAffiliation.value;
+
+function prop() {
+  const propertyToModify = {d: 'M 155,150 C 155,50 115,30 100,30 85,30 45,50 45,150',};
+  const modifiedTarget = Object.assign({}, affiliationOutlineObject[selectAffiliation.value].d, propertyToModify);
+  return modifiedTarget.d;
+}
