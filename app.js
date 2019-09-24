@@ -488,6 +488,17 @@ class TransformModifiersOnEquipment {
   }
 }
 
+// Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2. Disbaled for Equipment because TransformModifiersOnEquipment throws everything off
+function bounceInAnimation(location) {
+  if (MainMS.type !== 'Equipment') {
+    const bounceIn = document.querySelector(location);
+    // transformBox is crucial. Without this Mod1 will not scale from the center
+    bounceIn.style.transformBox = 'fill-box';
+    bounceIn.style.transformOrigin = 'center center';
+    bounceIn.classList.toggle('bounceIn');
+  }
+}
+
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
@@ -495,5 +506,5 @@ window.selectAffiliation = selectAffiliation;
 window.militarySymbolsObject = militarySymbolsObject;
 
 export {
-  addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym,
+  addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, MilSym,
 };

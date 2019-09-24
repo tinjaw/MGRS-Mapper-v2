@@ -17,7 +17,7 @@ import Fuse from 'fuse.js';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import {
-  addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, MilSym,
+  addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, MilSym,
 } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import affiliationOutlineObject from './affiliationOutlineObject';
@@ -44,7 +44,6 @@ const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.roo
 const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinforcedSwitch'));
 const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
 const reinforcedReducedValue = () => new RRSwitches().value;
-
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -168,7 +167,6 @@ searchField.input_.addEventListener('input', searchResults);
 // *********************************************************************************** //
 // * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2 * //
 // *********************************************************************************** //
-
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
     // Set all other select boxes text content otherwise it fills them with nonsense
@@ -195,36 +193,20 @@ searchField.input_.addEventListener('input', searchResults);
     }
 
     if (event.target.classList.contains('unit-size-select')) {
-      const uss = document.querySelector('.echelon');
-      uss.style.transformBox = 'fill-box';
-      uss.style.transformOrigin = 'center center';
-      uss.classList.toggle('bounceIn');
+      bounceInAnimation('g.echelon');
     }
 
-    // Toggle the bounceIn animation on the Mod1 element when selected... Might delete later idk
     if (event.target.classList.contains('mod1-select')) {
-      // Do not run these animations on equipment. It will ruin everything
-      if (MainMS.type !== 'Equipment') {
-        const m1 = document.querySelector('.mod1');
-        // transformBox is crucial. Without this Mod1 will not scale from the center
-        m1.style.transformBox = 'fill-box';
-        m1.style.transformOrigin = 'center center';
-        m1.classList.toggle('bounceIn');
-      }
+      bounceInAnimation('g.mod1');
     }
 
-    // Toggle the bounceIn animation on the Mod2 element when selected
     if (event.target.classList.contains('mod2-select')) {
-      if (MainMS.type !== 'Equipment') {
-        const m2 = document.querySelector('.mod2');
-        m2.style.transformBox = 'fill-box';
-        m2.style.transformOrigin = 'center center';
-        m2.classList.toggle('bounceIn');
-      }
+      bounceInAnimation('g.mod2');
     }
 
     // Since Equipment symbols are different than Land Unit symbols, we need to disable some options
     if (MainMS.type === 'Equipment') {
+      console.log('Running Equipment');
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
       selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
@@ -363,6 +345,7 @@ class RRSwitches {
         MainMS.reinforcedReduced = '±';
         MainMS.placeSymbol();
         this.value = '±';
+        bounceInAnimation('g.reinforcedReduced');
         break;
       case this.reinforced:
         reinforcedSwitch.root_.dataset.value = '+';
@@ -370,6 +353,7 @@ class RRSwitches {
         MainMS.reinforcedReduced = '+';
         MainMS.placeSymbol();
         this.value = '+';
+        bounceInAnimation('g.reinforcedReduced');
         break;
       case this.reduced:
         reducedSwitch.root_.dataset.value = '–';
@@ -377,6 +361,7 @@ class RRSwitches {
         MainMS.reinforcedReduced = '–';
         MainMS.placeSymbol();
         this.value = '–';
+        bounceInAnimation('g.reinforcedReduced');
         break;
       default:
         reducedSwitch.root_.dataset.value = '';
@@ -406,12 +391,13 @@ class RRSwitches {
 window.searchField = searchField;
 window.selectSymbol = selectSymbol;
 window.selectUnitSize = selectUnitSize;
-// window.Resizer = Resizer;
+window.Resizer = Resizer;
 window.deleteTextFieldButton = deleteTextFieldButton;
 window.selectMod1 = selectMod1;
 window.selectMod2 = selectMod2;
 // window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 window.uniqueDesignationField = uniqueDesignationField;
+window.higherFormationField = higherFormationField;
 window.reinforcedSwitch = reinforcedSwitch;
 window.reducedSwitch = reducedSwitch;
 
