@@ -169,7 +169,6 @@ searchField.input_.addEventListener('input', searchResults);
 // *********************************************************************************** //
 // * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2 * //
 // *********************************************************************************** //
-
 function disableInputsOnEquipment(option) {
   switch (option) {
     case true:
@@ -191,8 +190,6 @@ function disableInputsOnEquipment(option) {
       reinforcedSwitch.checked = false;
       reducedSwitch.disabled = true;
       reducedSwitch.checked = false;
-      // flyingSwitch.checked = false;
-      // flyingSwitch.disabled = true;
       break;
     case false:
       selectUnitSize.disabled = false;
@@ -200,7 +197,6 @@ function disableInputsOnEquipment(option) {
       higherFormationField.disabled = false;
       reinforcedSwitch.disabled = false;
       reducedSwitch.disabled = false;
-      // flyingSwitch.disabled = false;
       break;
     default:
       break;
@@ -221,9 +217,12 @@ function disableInputsOnEquipment(option) {
     MainMS.placeSymbol();
 
     // If the selected symbol cannot fly, then disable the switch
-    MainMS.flightCapable ? flyingSwitch.disabled = false : flyingSwitch.disabled = true;
-    // Disable the flying outline on the symbol when any of these select boxes are changed
-    flyingSwitch.checked ? flyingSwitch.checked = false : null;
+    if (MainMS.flightCapable) {
+      flyingSwitch.disabled = false;
+    } else {
+      flyingSwitch.disabled = true;
+      flyingSwitch.checked = false;
+    }
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
@@ -259,6 +258,9 @@ function disableInputsOnEquipment(option) {
     } else {
       disableInputsOnEquipment(false);
     }
+
+    // If a user changes unit affiliation, and the flying switch is checked, run this func to immediately change the outline
+    flyingSwitch.checked ? enableFlyingOutline() : null;
   });
 
   key.listen('click', () => {
@@ -411,26 +413,26 @@ class RRSwitches {
 });
 
 
+// *********************************************************************************** //
+// * Flying Switch                                                                   * //
+// *********************************************************************************** //
 function enableFlyingOutline() {
-  this.affiliation = selectAffiliation.value;
-
   const flyingProperty = affiliationOutlineObject[selectAffiliation.value].flying;
-
   function generateFlyingOutline(aff) {
     const propertyToModify = { d: aff };
     const modifiedTarget = Object.assign({}, affiliationOutlineObject[selectAffiliation.value].d, propertyToModify);
     MainMS.affiliation.d = modifiedTarget.d;
     MainMS.placeSymbol();
   }
-
   if (MainMS.flightCapable && flyingSwitch.checked) {
+    disableInputsOnEquipment(true);
     generateFlyingOutline(flyingProperty);
   } else {
+    disableInputsOnEquipment(false);
     MainMS.affiliation.d = affiliationOutlineObject[selectAffiliation.value].d;
     MainMS.placeSymbol();
   }
 }
-
 
 flyingSwitch.listen('change', enableFlyingOutline);
 
