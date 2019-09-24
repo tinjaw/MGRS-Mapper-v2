@@ -7052,5 +7052,1571 @@
         ]
       }
     ]
+  },
+  {
+    "timeStamp": 1569287175151,
+    "time": 10513,
+    "hash": "2dbab397cf60fe39c154",
+    "errors": [],
+    "size": 2598501,
+    "assets": [
+      {
+        "name": "bundle.css",
+        "chunks": [],
+        "size": 149613
+      },
+      {
+        "name": "bundle.js",
+        "chunks": [
+          0
+        ],
+        "size": 2448888,
+        "miniSize": 528062,
+        "minified": false
+      }
+    ],
+    "chunks": [
+      {
+        "size": 1107083,
+        "files": [
+          "bundle.js"
+        ],
+        "modules": [
+          {
+            "name": "./node_modules/tslib/tslib.es6.js",
+            "size": 11622,
+            "id": 0
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 1
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 2
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 3
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 4
+          },
+          {
+            "name": "(webpack)-dev-server/client/clients/SockJSClient.js",
+            "size": 3670,
+            "id": 5
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/constants.js",
+            "size": 3732,
+            "id": 6
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/foundation.js",
+            "size": 23663,
+            "id": 7
+          },
+          {
+            "name": "./node_modules/@material/menu/constants.js",
+            "size": 2172,
+            "id": 8
+          },
+          {
+            "name": "./node_modules/@material/select/constants.js",
+            "size": 2381,
+            "id": 9
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/foundation.js",
+            "size": 4236,
+            "id": 10
+          },
+          {
+            "name": "./node_modules/@material/textfield/constants.js",
+            "size": 2810,
+            "id": 11
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/foundation.js",
+            "size": 6880,
+            "id": 12
+          },
+          {
+            "name": "./node_modules/@material/ripple/util.js",
+            "size": 4155,
+            "id": 13
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 14
+          },
+          {
+            "name": "(webpack)/buildin/global.js",
+            "size": 806,
+            "id": 15
+          },
+          {
+            "name": "./node_modules/html-entities/lib/html5-entities.js",
+            "size": 48968,
+            "id": 16
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/log.js",
+            "size": 964,
+            "id": 17
+          },
+          {
+            "name": "(webpack)/buildin/module.js",
+            "size": 521,
+            "id": 18
+          },
+          {
+            "name": "(webpack)/buildin/amd-options.js",
+            "size": 80,
+            "id": 19
+          },
+          {
+            "name": "./node_modules/querystring-es3/index.js",
+            "size": 126,
+            "id": 20
+          },
+          {
+            "name": "./app.js",
+            "size": 32798,
+            "id": 21
+          },
+          {
+            "name": "./mdcComponents.js",
+            "size": 23129,
+            "id": 22
+          },
+          {
+            "name": "./node_modules/@material/floating-label/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 23
+          },
+          {
+            "name": "./node_modules/@material/floating-label/foundation.js",
+            "size": 6295,
+            "id": 24
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 25
+          },
+          {
+            "name": "./node_modules/@material/menu/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 26
+          },
+          {
+            "name": "./node_modules/@material/list/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 27
+          },
+          {
+            "name": "./node_modules/@material/list/constants.js",
+            "size": 2763,
+            "id": 28
+          },
+          {
+            "name": "./node_modules/@material/list/foundation.js",
+            "size": 21648,
+            "id": 29
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 30
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 31
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/constants.js",
+            "size": 1703,
+            "id": 32
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 33
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/util.js",
+            "size": 3135,
+            "id": 34
+          },
+          {
+            "name": "./node_modules/@material/select/foundation.js",
+            "size": 12487,
+            "id": 35
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/component.js",
+            "size": 4354,
+            "id": 36
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/foundation.js",
+            "size": 6804,
+            "id": 37
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/constants.js",
+            "size": 1533,
+            "id": 38
+          },
+          {
+            "name": "./node_modules/@material/select/icon/component.js",
+            "size": 4544,
+            "id": 39
+          },
+          {
+            "name": "./node_modules/@material/select/icon/foundation.js",
+            "size": 6574,
+            "id": 40
+          },
+          {
+            "name": "./node_modules/@material/select/icon/constants.js",
+            "size": 1342,
+            "id": 41
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/dom/events.js",
+            "size": 2318,
+            "id": 42
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 43
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/floating-label/foundation.js",
+            "size": 6295,
+            "id": 44
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/notched-outline/constants.js",
+            "size": 1703,
+            "id": 45
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 46
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/util.js",
+            "size": 3135,
+            "id": 47
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/component.js",
+            "size": 3643,
+            "id": 48
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/constants.js",
+            "size": 1431,
+            "id": 49
+          },
+          {
+            "name": "./node_modules/@material/textfield/foundation.js",
+            "size": 22304,
+            "id": 50
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/component.js",
+            "size": 4390,
+            "id": 51
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/constants.js",
+            "size": 1623,
+            "id": 52
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/component.js",
+            "size": 4583,
+            "id": 53
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/foundation.js",
+            "size": 6842,
+            "id": 54
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/constants.js",
+            "size": 1439,
+            "id": 55
+          },
+          {
+            "name": "./node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 56
+          },
+          {
+            "name": "./node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 57
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 58
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/dom/events.js",
+            "size": 2318,
+            "id": 59
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 60
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 61
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/util.js",
+            "size": 3300,
+            "id": 62
+          },
+          {
+            "name": "./node_modules/@material/switch/foundation.js",
+            "size": 5347,
+            "id": 63
+          },
+          {
+            "name": "./node_modules/@material/switch/constants.js",
+            "size": 1914,
+            "id": 64
+          },
+          {
+            "name": "./mod1Object.js",
+            "size": 3625,
+            "id": 65
+          },
+          {
+            "name": "./mod2Object.js",
+            "size": 7052,
+            "id": 66
+          },
+          {
+            "name": "./militarySymbolsObject.js",
+            "size": 5620,
+            "id": 67
+          },
+          {
+            "name": "./affiliationOutlineObject.js",
+            "size": 1460,
+            "id": 68
+          },
+          {
+            "name": "multi (webpack)-dev-server/client?http://localhost ./app.scss ./app.js ./mdcComponents.js",
+            "size": 64,
+            "id": 69
+          },
+          {
+            "name": "(webpack)-dev-server/client?http://localhost",
+            "size": 4390,
+            "id": 70
+          },
+          {
+            "name": "./node_modules/strip-ansi/index.js",
+            "size": 161,
+            "id": 71
+          },
+          {
+            "name": "./node_modules/ansi-regex/index.js",
+            "size": 139,
+            "id": 72
+          },
+          {
+            "name": "(webpack)-dev-server/client/socket.js",
+            "size": 1568,
+            "id": 73
+          },
+          {
+            "name": "./node_modules/sockjs-client/dist/sockjs.js",
+            "size": 223085,
+            "id": 74
+          },
+          {
+            "name": "(webpack)-dev-server/client/clients/BaseClient.js",
+            "size": 1071,
+            "id": 75
+          },
+          {
+            "name": "(webpack)-dev-server/client/overlay.js",
+            "size": 3596,
+            "id": 76
+          },
+          {
+            "name": "./node_modules/ansi-html/index.js",
+            "size": 4665,
+            "id": 77
+          },
+          {
+            "name": "./node_modules/html-entities/index.js",
+            "size": 245,
+            "id": 78
+          },
+          {
+            "name": "./node_modules/html-entities/lib/xml-entities.js",
+            "size": 2977,
+            "id": 79
+          },
+          {
+            "name": "./node_modules/html-entities/lib/html4-entities.js",
+            "size": 6578,
+            "id": 80
+          },
+          {
+            "name": "./node_modules/loglevel/lib/loglevel.js",
+            "size": 8657,
+            "id": 81
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/sendMessage.js",
+            "size": 402,
+            "id": 82
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/reloadApp.js",
+            "size": 1673,
+            "id": 83
+          },
+          {
+            "name": "(webpack)/hot/emitter.js",
+            "size": 89,
+            "id": 84
+          },
+          {
+            "name": "./node_modules/events/events.js",
+            "size": 13543,
+            "id": 85
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/createSocketUrl.js",
+            "size": 2838,
+            "id": 86
+          },
+          {
+            "name": "./node_modules/url/url.js",
+            "size": 23118,
+            "id": 87
+          },
+          {
+            "name": "./node_modules/node-libs-browser/node_modules/punycode/punycode.js",
+            "size": 15102,
+            "id": 88
+          },
+          {
+            "name": "./node_modules/url/util.js",
+            "size": 672,
+            "id": 89
+          },
+          {
+            "name": "./node_modules/querystring-es3/decode.js",
+            "size": 2535,
+            "id": 90
+          },
+          {
+            "name": "./node_modules/querystring-es3/encode.js",
+            "size": 2915,
+            "id": 91
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/getCurrentScriptSource.js",
+            "size": 658,
+            "id": 92
+          },
+          {
+            "name": "(webpack)/hot sync nonrecursive ^\\.\\/log$",
+            "size": 170,
+            "id": 93
+          },
+          {
+            "name": "(webpack)/hot/log.js",
+            "size": 1378,
+            "id": 94
+          },
+          {
+            "name": "./app.scss",
+            "size": 56,
+            "id": 95
+          },
+          {
+            "name": "./node_modules/@material/select/index.js",
+            "size": 1486,
+            "id": 96
+          },
+          {
+            "name": "./node_modules/@material/select/component.js",
+            "size": 29433,
+            "id": 97
+          },
+          {
+            "name": "./node_modules/@material/floating-label/component.js",
+            "size": 4758,
+            "id": 98
+          },
+          {
+            "name": "./node_modules/@material/floating-label/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 99
+          },
+          {
+            "name": "./node_modules/@material/floating-label/constants.js",
+            "size": 1414,
+            "id": 100
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/component.js",
+            "size": 4753,
+            "id": 101
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 102
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/foundation.js",
+            "size": 5929,
+            "id": 103
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/constants.js",
+            "size": 1406,
+            "id": 104
+          },
+          {
+            "name": "./node_modules/@material/menu/component.js",
+            "size": 11672,
+            "id": 105
+          },
+          {
+            "name": "./node_modules/@material/menu/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 106
+          },
+          {
+            "name": "./node_modules/@material/menu/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 107
+          },
+          {
+            "name": "./node_modules/@material/list/component.js",
+            "size": 13415,
+            "id": 108
+          },
+          {
+            "name": "./node_modules/@material/list/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 109
+          },
+          {
+            "name": "./node_modules/@material/list/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 110
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/component.js",
+            "size": 10558,
+            "id": 111
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 112
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/util.js",
+            "size": 1822,
+            "id": 113
+          },
+          {
+            "name": "./node_modules/@material/menu/foundation.js",
+            "size": 8682,
+            "id": 114
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/component.js",
+            "size": 5144,
+            "id": 115
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 116
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/foundation.js",
+            "size": 5492,
+            "id": 117
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/component.js",
+            "size": 6743,
+            "id": 118
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/dom/events.js",
+            "size": 2318,
+            "id": 119
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 120
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 121
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/index.js",
+            "size": 972,
+            "id": 122
+          },
+          {
+            "name": "./node_modules/@material/select/icon/index.js",
+            "size": 823,
+            "id": 123
+          },
+          {
+            "name": "./node_modules/@material/textfield/index.js",
+            "size": 1774,
+            "id": 124
+          },
+          {
+            "name": "./node_modules/@material/textfield/component.js",
+            "size": 22123,
+            "id": 125
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/floating-label/component.js",
+            "size": 4758,
+            "id": 126
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/floating-label/constants.js",
+            "size": 1414,
+            "id": 127
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/line-ripple/component.js",
+            "size": 4753,
+            "id": 128
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/line-ripple/foundation.js",
+            "size": 5929,
+            "id": 129
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/line-ripple/constants.js",
+            "size": 1406,
+            "id": 130
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/notched-outline/component.js",
+            "size": 5144,
+            "id": 131
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/notched-outline/foundation.js",
+            "size": 5492,
+            "id": 132
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/component.js",
+            "size": 6743,
+            "id": 133
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 134
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/index.js",
+            "size": 980,
+            "id": 135
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/index.js",
+            "size": 972,
+            "id": 136
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/index.js",
+            "size": 960,
+            "id": 137
+          },
+          {
+            "name": "./node_modules/@material/ripple/index.js",
+            "size": 2644,
+            "id": 138
+          },
+          {
+            "name": "./node_modules/@material/ripple/component.js",
+            "size": 7246,
+            "id": 139
+          },
+          {
+            "name": "./node_modules/@material/base/component.js",
+            "size": 5776,
+            "id": 140
+          },
+          {
+            "name": "./node_modules/@material/dom/index.js",
+            "size": 1661,
+            "id": 141
+          },
+          {
+            "name": "./node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 142
+          },
+          {
+            "name": "./node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 143
+          },
+          {
+            "name": "./node_modules/@material/switch/index.js",
+            "size": 932,
+            "id": 144
+          },
+          {
+            "name": "./node_modules/@material/switch/component.js",
+            "size": 7950,
+            "id": 145
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/component.js",
+            "size": 6743,
+            "id": 146
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 147
+          },
+          {
+            "name": "./node_modules/fuse.js/dist/fuse.js",
+            "size": 17731,
+            "id": 148
+          },
+          {
+            "name": "./unitSizeObject.js",
+            "size": 10006,
+            "id": 149
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "timeStamp": 1569287479802,
+    "time": 11968,
+    "hash": "aed7522276e11c8a600f",
+    "errors": [],
+    "size": 2598505,
+    "assets": [
+      {
+        "name": "bundle.css",
+        "chunks": [],
+        "size": 149613
+      },
+      {
+        "name": "bundle.js",
+        "chunks": [
+          0
+        ],
+        "size": 2448892,
+        "miniSize": 528062,
+        "minified": false
+      }
+    ],
+    "chunks": [
+      {
+        "size": 1107084,
+        "files": [
+          "bundle.js"
+        ],
+        "modules": [
+          {
+            "name": "./node_modules/tslib/tslib.es6.js",
+            "size": 11622,
+            "id": 0
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 1
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 2
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 3
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 4
+          },
+          {
+            "name": "(webpack)-dev-server/client/clients/SockJSClient.js",
+            "size": 3670,
+            "id": 5
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/constants.js",
+            "size": 3732,
+            "id": 6
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/foundation.js",
+            "size": 23663,
+            "id": 7
+          },
+          {
+            "name": "./node_modules/@material/menu/constants.js",
+            "size": 2172,
+            "id": 8
+          },
+          {
+            "name": "./node_modules/@material/select/constants.js",
+            "size": 2381,
+            "id": 9
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/foundation.js",
+            "size": 4236,
+            "id": 10
+          },
+          {
+            "name": "./node_modules/@material/textfield/constants.js",
+            "size": 2810,
+            "id": 11
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/foundation.js",
+            "size": 6880,
+            "id": 12
+          },
+          {
+            "name": "./node_modules/@material/ripple/util.js",
+            "size": 4155,
+            "id": 13
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 14
+          },
+          {
+            "name": "(webpack)/buildin/global.js",
+            "size": 806,
+            "id": 15
+          },
+          {
+            "name": "./node_modules/html-entities/lib/html5-entities.js",
+            "size": 48968,
+            "id": 16
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/log.js",
+            "size": 964,
+            "id": 17
+          },
+          {
+            "name": "(webpack)/buildin/module.js",
+            "size": 521,
+            "id": 18
+          },
+          {
+            "name": "(webpack)/buildin/amd-options.js",
+            "size": 80,
+            "id": 19
+          },
+          {
+            "name": "./node_modules/querystring-es3/index.js",
+            "size": 126,
+            "id": 20
+          },
+          {
+            "name": "./app.js",
+            "size": 32798,
+            "id": 21
+          },
+          {
+            "name": "./mdcComponents.js",
+            "size": 23130,
+            "id": 22
+          },
+          {
+            "name": "./node_modules/@material/floating-label/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 23
+          },
+          {
+            "name": "./node_modules/@material/floating-label/foundation.js",
+            "size": 6295,
+            "id": 24
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 25
+          },
+          {
+            "name": "./node_modules/@material/menu/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 26
+          },
+          {
+            "name": "./node_modules/@material/list/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 27
+          },
+          {
+            "name": "./node_modules/@material/list/constants.js",
+            "size": 2763,
+            "id": 28
+          },
+          {
+            "name": "./node_modules/@material/list/foundation.js",
+            "size": 21648,
+            "id": 29
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 30
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 31
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/constants.js",
+            "size": 1703,
+            "id": 32
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 33
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/util.js",
+            "size": 3135,
+            "id": 34
+          },
+          {
+            "name": "./node_modules/@material/select/foundation.js",
+            "size": 12487,
+            "id": 35
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/component.js",
+            "size": 4354,
+            "id": 36
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/foundation.js",
+            "size": 6804,
+            "id": 37
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/constants.js",
+            "size": 1533,
+            "id": 38
+          },
+          {
+            "name": "./node_modules/@material/select/icon/component.js",
+            "size": 4544,
+            "id": 39
+          },
+          {
+            "name": "./node_modules/@material/select/icon/foundation.js",
+            "size": 6574,
+            "id": 40
+          },
+          {
+            "name": "./node_modules/@material/select/icon/constants.js",
+            "size": 1342,
+            "id": 41
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/dom/events.js",
+            "size": 2318,
+            "id": 42
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 43
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/floating-label/foundation.js",
+            "size": 6295,
+            "id": 44
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/notched-outline/constants.js",
+            "size": 1703,
+            "id": 45
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 46
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/util.js",
+            "size": 3135,
+            "id": 47
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/component.js",
+            "size": 3643,
+            "id": 48
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/constants.js",
+            "size": 1431,
+            "id": 49
+          },
+          {
+            "name": "./node_modules/@material/textfield/foundation.js",
+            "size": 22304,
+            "id": 50
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/component.js",
+            "size": 4390,
+            "id": 51
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/constants.js",
+            "size": 1623,
+            "id": 52
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/component.js",
+            "size": 4583,
+            "id": 53
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/foundation.js",
+            "size": 6842,
+            "id": 54
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/constants.js",
+            "size": 1439,
+            "id": 55
+          },
+          {
+            "name": "./node_modules/@material/base/foundation.js",
+            "size": 3597,
+            "id": 56
+          },
+          {
+            "name": "./node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 57
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 58
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/dom/events.js",
+            "size": 2318,
+            "id": 59
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 60
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/foundation.js",
+            "size": 24845,
+            "id": 61
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/util.js",
+            "size": 3300,
+            "id": 62
+          },
+          {
+            "name": "./node_modules/@material/switch/foundation.js",
+            "size": 5347,
+            "id": 63
+          },
+          {
+            "name": "./node_modules/@material/switch/constants.js",
+            "size": 1914,
+            "id": 64
+          },
+          {
+            "name": "./mod1Object.js",
+            "size": 3625,
+            "id": 65
+          },
+          {
+            "name": "./mod2Object.js",
+            "size": 7052,
+            "id": 66
+          },
+          {
+            "name": "./militarySymbolsObject.js",
+            "size": 5620,
+            "id": 67
+          },
+          {
+            "name": "./affiliationOutlineObject.js",
+            "size": 1460,
+            "id": 68
+          },
+          {
+            "name": "multi (webpack)-dev-server/client?http://localhost ./app.scss ./app.js ./mdcComponents.js",
+            "size": 64,
+            "id": 69
+          },
+          {
+            "name": "(webpack)-dev-server/client?http://localhost",
+            "size": 4390,
+            "id": 70
+          },
+          {
+            "name": "./node_modules/strip-ansi/index.js",
+            "size": 161,
+            "id": 71
+          },
+          {
+            "name": "./node_modules/ansi-regex/index.js",
+            "size": 139,
+            "id": 72
+          },
+          {
+            "name": "(webpack)-dev-server/client/socket.js",
+            "size": 1568,
+            "id": 73
+          },
+          {
+            "name": "./node_modules/sockjs-client/dist/sockjs.js",
+            "size": 223085,
+            "id": 74
+          },
+          {
+            "name": "(webpack)-dev-server/client/clients/BaseClient.js",
+            "size": 1071,
+            "id": 75
+          },
+          {
+            "name": "(webpack)-dev-server/client/overlay.js",
+            "size": 3596,
+            "id": 76
+          },
+          {
+            "name": "./node_modules/ansi-html/index.js",
+            "size": 4665,
+            "id": 77
+          },
+          {
+            "name": "./node_modules/html-entities/index.js",
+            "size": 245,
+            "id": 78
+          },
+          {
+            "name": "./node_modules/html-entities/lib/xml-entities.js",
+            "size": 2977,
+            "id": 79
+          },
+          {
+            "name": "./node_modules/html-entities/lib/html4-entities.js",
+            "size": 6578,
+            "id": 80
+          },
+          {
+            "name": "./node_modules/loglevel/lib/loglevel.js",
+            "size": 8657,
+            "id": 81
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/sendMessage.js",
+            "size": 402,
+            "id": 82
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/reloadApp.js",
+            "size": 1673,
+            "id": 83
+          },
+          {
+            "name": "(webpack)/hot/emitter.js",
+            "size": 89,
+            "id": 84
+          },
+          {
+            "name": "./node_modules/events/events.js",
+            "size": 13543,
+            "id": 85
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/createSocketUrl.js",
+            "size": 2838,
+            "id": 86
+          },
+          {
+            "name": "./node_modules/url/url.js",
+            "size": 23118,
+            "id": 87
+          },
+          {
+            "name": "./node_modules/node-libs-browser/node_modules/punycode/punycode.js",
+            "size": 15102,
+            "id": 88
+          },
+          {
+            "name": "./node_modules/url/util.js",
+            "size": 672,
+            "id": 89
+          },
+          {
+            "name": "./node_modules/querystring-es3/decode.js",
+            "size": 2535,
+            "id": 90
+          },
+          {
+            "name": "./node_modules/querystring-es3/encode.js",
+            "size": 2915,
+            "id": 91
+          },
+          {
+            "name": "(webpack)-dev-server/client/utils/getCurrentScriptSource.js",
+            "size": 658,
+            "id": 92
+          },
+          {
+            "name": "(webpack)/hot sync nonrecursive ^\\.\\/log$",
+            "size": 170,
+            "id": 93
+          },
+          {
+            "name": "(webpack)/hot/log.js",
+            "size": 1378,
+            "id": 94
+          },
+          {
+            "name": "./app.scss",
+            "size": 56,
+            "id": 95
+          },
+          {
+            "name": "./node_modules/@material/select/index.js",
+            "size": 1486,
+            "id": 96
+          },
+          {
+            "name": "./node_modules/@material/select/component.js",
+            "size": 29433,
+            "id": 97
+          },
+          {
+            "name": "./node_modules/@material/floating-label/component.js",
+            "size": 4758,
+            "id": 98
+          },
+          {
+            "name": "./node_modules/@material/floating-label/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 99
+          },
+          {
+            "name": "./node_modules/@material/floating-label/constants.js",
+            "size": 1414,
+            "id": 100
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/component.js",
+            "size": 4753,
+            "id": 101
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 102
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/foundation.js",
+            "size": 5929,
+            "id": 103
+          },
+          {
+            "name": "./node_modules/@material/line-ripple/constants.js",
+            "size": 1406,
+            "id": 104
+          },
+          {
+            "name": "./node_modules/@material/menu/component.js",
+            "size": 11672,
+            "id": 105
+          },
+          {
+            "name": "./node_modules/@material/menu/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 106
+          },
+          {
+            "name": "./node_modules/@material/menu/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 107
+          },
+          {
+            "name": "./node_modules/@material/list/component.js",
+            "size": 13415,
+            "id": 108
+          },
+          {
+            "name": "./node_modules/@material/list/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 109
+          },
+          {
+            "name": "./node_modules/@material/list/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 110
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/component.js",
+            "size": 10558,
+            "id": 111
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 112
+          },
+          {
+            "name": "./node_modules/@material/menu-surface/util.js",
+            "size": 1822,
+            "id": 113
+          },
+          {
+            "name": "./node_modules/@material/menu/foundation.js",
+            "size": 8682,
+            "id": 114
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/component.js",
+            "size": 5144,
+            "id": 115
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/node_modules/@material/base/component.js",
+            "size": 5812,
+            "id": 116
+          },
+          {
+            "name": "./node_modules/@material/notched-outline/foundation.js",
+            "size": 5492,
+            "id": 117
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/component.js",
+            "size": 6743,
+            "id": 118
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/dom/events.js",
+            "size": 2318,
+            "id": 119
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 120
+          },
+          {
+            "name": "./node_modules/@material/select/node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 121
+          },
+          {
+            "name": "./node_modules/@material/select/helper-text/index.js",
+            "size": 972,
+            "id": 122
+          },
+          {
+            "name": "./node_modules/@material/select/icon/index.js",
+            "size": 823,
+            "id": 123
+          },
+          {
+            "name": "./node_modules/@material/textfield/index.js",
+            "size": 1774,
+            "id": 124
+          },
+          {
+            "name": "./node_modules/@material/textfield/component.js",
+            "size": 22123,
+            "id": 125
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/floating-label/component.js",
+            "size": 4758,
+            "id": 126
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/floating-label/constants.js",
+            "size": 1414,
+            "id": 127
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/line-ripple/component.js",
+            "size": 4753,
+            "id": 128
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/line-ripple/foundation.js",
+            "size": 5929,
+            "id": 129
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/line-ripple/constants.js",
+            "size": 1406,
+            "id": 130
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/notched-outline/component.js",
+            "size": 5144,
+            "id": 131
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/notched-outline/foundation.js",
+            "size": 5492,
+            "id": 132
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/component.js",
+            "size": 6743,
+            "id": 133
+          },
+          {
+            "name": "./node_modules/@material/textfield/node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 134
+          },
+          {
+            "name": "./node_modules/@material/textfield/character-counter/index.js",
+            "size": 980,
+            "id": 135
+          },
+          {
+            "name": "./node_modules/@material/textfield/helper-text/index.js",
+            "size": 972,
+            "id": 136
+          },
+          {
+            "name": "./node_modules/@material/textfield/icon/index.js",
+            "size": 960,
+            "id": 137
+          },
+          {
+            "name": "./node_modules/@material/ripple/index.js",
+            "size": 2644,
+            "id": 138
+          },
+          {
+            "name": "./node_modules/@material/ripple/component.js",
+            "size": 7246,
+            "id": 139
+          },
+          {
+            "name": "./node_modules/@material/base/component.js",
+            "size": 5776,
+            "id": 140
+          },
+          {
+            "name": "./node_modules/@material/dom/index.js",
+            "size": 1661,
+            "id": 141
+          },
+          {
+            "name": "./node_modules/@material/dom/ponyfill.js",
+            "size": 1961,
+            "id": 142
+          },
+          {
+            "name": "./node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 143
+          },
+          {
+            "name": "./node_modules/@material/switch/index.js",
+            "size": 932,
+            "id": 144
+          },
+          {
+            "name": "./node_modules/@material/switch/component.js",
+            "size": 7950,
+            "id": 145
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/component.js",
+            "size": 6743,
+            "id": 146
+          },
+          {
+            "name": "./node_modules/@material/switch/node_modules/@material/ripple/constants.js",
+            "size": 2280,
+            "id": 147
+          },
+          {
+            "name": "./node_modules/fuse.js/dist/fuse.js",
+            "size": 17731,
+            "id": 148
+          },
+          {
+            "name": "./unitSizeObject.js",
+            "size": 10006,
+            "id": 149
+          }
+        ]
+      }
+    ]
   }
 ]

@@ -15,12 +15,13 @@
 - [ ] "In Flight" outline modifiers for aviation symbols
 - [ ] Symbol text for Unique Designation and Higher formation
 - [ ] Task Force amplifier
-- [ ] Reinforced/Reduced modifier
+- [x] Reinforced/Reduced modifier
 - [ ] Activity conversion (would require some logic, eg- a grenade launcher cannot be an activity)
 - [ ] Installation conversion (would require some logic, eg- a grenade launcher cannot be an installation)
 - [ ] Command Post amplifier
 - [ ] Tactical Mission Tasks
 - [ ] Graphic Control Measures
+- [ ] Skeleton Screen preloader (Should be done right before launch)
 
 ### DEFAULT VALUES
 

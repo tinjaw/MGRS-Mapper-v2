@@ -7,7 +7,6 @@
 // TODO: Global vars need cleaning up. Use imports
 // TODO: Helper info-window on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
 // TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
-// TODO: Equipment cannot be reinforced/reduced. So disable it out when selected
 // TODO: Select a hostile symbol and add any unit size. Notice how the symbol gets clipped. Need to fix that css issue
 // TODO: Mod1 helper text has word wrap. Fix it to 1 line
 import { MDCSelect } from '@material/select';
@@ -169,6 +168,7 @@ searchField.input_.addEventListener('input', searchResults);
 // *********************************************************************************** //
 // * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2 * //
 // *********************************************************************************** //
+
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
     // Set all other select boxes text content otherwise it fills them with nonsense

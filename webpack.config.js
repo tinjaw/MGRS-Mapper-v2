@@ -1,4 +1,4 @@
-const WebpackMonitor = require('webpack-monitor');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = [{
   entry: ['./app.scss', './app.js', './mdcComponents.js'],
@@ -41,11 +41,7 @@ module.exports = [{
     hints: false,
   },
   devtool: 'inline-source-map',
-  // plugins: [
-  //   new WebpackMonitor({
-  //     capture: true,
-  //     launch: true,
-  //     port: 39875,
-  //   }),
-  // ],
+  plugins: [
+    new BundleAnalyzerPlugin(),
+  ],
 }];
