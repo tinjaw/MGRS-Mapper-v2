@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
-//! 22SEPT2019 -- Calling it here
 // TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
 // TODO: Global vars need cleaning up. Use imports
 // TODO: Helper info-window on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
 // TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
 // TODO: Select a hostile symbol and add any unit size. Notice how the symbol gets clipped. Need to fix that css issue
 // TODO: Mod1 helper text has word wrap. Fix it to 1 line
+// TODO: Notice in the HTML that there are several "undefined" divs in the object. This is due to some switches not being turned on. Need a better way to append data to the symbols
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -258,7 +258,7 @@ class DisableInputs {
     if (this.taskforce) {
       taskForceSwitch.disabled = true;
       taskForceSwitch.checked = false;
-      // MainMS.isTaskForce = false;
+      MainMS.isTaskForce = false;
     } else {
       taskForceSwitch.disabled = false;
     }
@@ -283,7 +283,7 @@ class DisableInputs {
     selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
 
     // Find all the selected values and place the symbol in the symbol panel
-    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity(), enableInstallation());
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity(), enableInstallation(), enableTaskForce());
     window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
     MainMS.placeSymbol();
 
@@ -555,6 +555,28 @@ function enableInstallation() {
 }
 
 installationSwitch.listen('change', enableInstallation);
+
+// *********************************************************************************** //
+// * Task Force Switch                                                               * //
+// *********************************************************************************** //
+function enableTaskForce() {
+  if (taskForceSwitch.checked) {
+    MainMS.isTaskForce = true;
+    MainMS.placeSymbol();
+    return true;
+  } if (window.hasOwnProperty('MainMS')) {
+    MainMS.isTaskForce = false;
+    MainMS.placeSymbol();
+    return false;
+  }
+  setTimeout(() => {
+    MainMS.isTaskForce = false;
+    MainMS.placeSymbol();
+    return false;
+  }, 30);
+}
+
+taskForceSwitch.listen('change', enableTaskForce);
 
 // ! GLOBAL VARS - remove on production
 window.searchField = searchField;

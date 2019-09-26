@@ -10,6 +10,7 @@
 - Refactored enableFlyingOutline switch
 - Added Activity modifier
 - Added DisableInputs class
+- Added Task Force Object and functions
 
 ---
 
