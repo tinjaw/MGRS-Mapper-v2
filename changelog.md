@@ -2,6 +2,12 @@
 
 ---
 
+## 26SEPT19
+
+- Removed RRSwitches class in favor of reinforcedReducedSwitchTest()
+
+---
+
 ## 23SEPT19
 
 - Moved eslint, eslint-config-airbnb-base and eslint-plugin-import from dependencies to devDependencies

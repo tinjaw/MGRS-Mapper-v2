@@ -396,7 +396,7 @@ class MilSym {
 }
 
 // * Add Symbols and Modifiers to the Dropdown lists
-// ex- test(mod1Object, 'mod1', selectMod1);
+// ex- addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
 const addSymbolsAndModsToList = (obj, abv, menu = null) => {
   Object.keys(obj).forEach((key) => {
     const mdcList = document.querySelector(`.mdc-list.${abv}-list`);

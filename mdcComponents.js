@@ -20,8 +20,6 @@ import {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, MilSym,
 } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
-// import affiliationOutlineObject from './affiliationOutlineObject';
-
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -43,7 +41,7 @@ const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.roo
 
 const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinforcedSwitch'));
 const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
-const reinforcedReducedValue = () => new RRSwitches().value;
+
 
 const flyingSwitch = new MDCSwitch(document.querySelector('.mdc-switch.flightSwitch'));
 
@@ -306,7 +304,6 @@ const inputDesignationFields = debounce(() => {
     deleteUniqueDesignationButton.root_.style.top = '10px';
     // Setting z-index on trash icon makes it clickable
     deleteUniqueDesignationButton.root_.style.zIndex = '10';
-    // new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value).placeSymbol();
     // * Directly edit the MainMS class instance instead of creating a whole new class * //
     MainMS.uniqueDesignation = uniqueDesignationField.value;
     MainMS.higherFormation = higherFormationField.value;
@@ -354,68 +351,55 @@ const inputDesignationFields = debounce(() => {
 // *********************************************************************************** //
 // * Reinforced and Reduced Switches                                                 * //
 // *********************************************************************************** //
-class RRSwitches {
-  constructor() {
-    this.reinforced = reinforcedSwitch.checked;
-    this.reduced = reducedSwitch.checked;
-    this.reinforcedAndReduced = this.reinforced && this.reduced;
-    this.value = '';
-    return this.checkSwitches();
+function reinforcedReducedSwitchTest() {
+  // Reinforced AND Reduced
+  if (reinforcedSwitch.checked === true && reducedSwitch.checked === true) {
+    console.log('this is reinforced and reduced!');
+    reducedSwitch.root_.dataset.value = '±';
+    reinforcedSwitch.root_.dataset.value = '';
+    MainMS.reinforcedReduced = '±';
+    MainMS.placeSymbol();
+    bounceInAnimation('g.reinforcedReduced');
   }
-
-  checkSwitches() {
-    switch (true) {
-      case this.reinforcedAndReduced:
-        reducedSwitch.root_.dataset.value = '±';
-        reinforcedSwitch.root_.dataset.value = '';
-        MainMS.reinforcedReduced = '±';
-        MainMS.placeSymbol();
-        this.value = '±';
-        bounceInAnimation('g.reinforcedReduced');
-        break;
-      case this.reinforced:
-        reinforcedSwitch.root_.dataset.value = '+';
-        reducedSwitch.root_.dataset.value = '';
-        MainMS.reinforcedReduced = '+';
-        MainMS.placeSymbol();
-        this.value = '+';
-        bounceInAnimation('g.reinforcedReduced');
-        break;
-      case this.reduced:
-        reducedSwitch.root_.dataset.value = '–';
-        reinforcedSwitch.root_.dataset.value = '';
-        MainMS.reinforcedReduced = '–';
-        MainMS.placeSymbol();
-        this.value = '–';
-        bounceInAnimation('g.reinforcedReduced');
-        break;
-      default:
-        reducedSwitch.root_.dataset.value = '';
-        reinforcedSwitch.root_.dataset.value = '';
-        // Check if the MainMS variable is in the global window. If not wait 30 ms
-        if (window.hasOwnProperty('MainMS')) {
-          MainMS.reinforcedReduced = '';
-          MainMS.placeSymbol();
-        } else {
-          setTimeout(() => {
-            MainMS.reinforcedReduced = '';
-            MainMS.placeSymbol();
-          }, 30);
-        }
-        this.value = '';
-        break;
-    }
+  // Reinforced
+  if (reinforcedSwitch.checked === true && reducedSwitch.checked === false) {
+    console.log('this is reinforced');
+    reinforcedSwitch.root_.dataset.value = '+';
+    reducedSwitch.root_.dataset.value = '';
+    MainMS.reinforcedReduced = '+';
+    MainMS.placeSymbol();
+    bounceInAnimation('g.reinforcedReduced');
+  }
+  // Reduced
+  if (reinforcedSwitch.checked === false && reducedSwitch.checked === true) {
+    console.log('this is reduced');
+    reducedSwitch.root_.dataset.value = '–';
+    reinforcedSwitch.root_.dataset.value = '';
+    MainMS.reinforcedReduced = '–';
+    MainMS.placeSymbol();
+    bounceInAnimation('g.reinforcedReduced');
+  }
+  // All Switches Off
+  if (reinforcedSwitch.checked === false && reducedSwitch.checked === false) {
+    console.log('this is nothing');
+    reducedSwitch.root_.dataset.value = '';
+    reinforcedSwitch.root_.dataset.value = '';
+    MainMS.reinforcedReduced = '';
+    MainMS.placeSymbol();
   }
 }
 
 [reducedSwitch, reinforcedSwitch].forEach((key) => {
-  key.listen('change', reinforcedReducedValue);
+  key.listen('change', reinforcedReducedSwitchTest);
 });
 
 
 // *********************************************************************************** //
 // * Flying Switch                                                                   * //
 // *********************************************************************************** //
+//! This should probably go in the MilSym class...
+//! Need to clear any data that is written on the symbol. For instance, if I write some higher formation data and switch the symbol to flying, it will still be there
+//! I think this symbol decorator would benefit from the TransformModifiersOnEquipment
 function enableFlyingOutline() {
   const flyingProperty = affiliationOutlineObject[selectAffiliation.value].flying;
   function generateFlyingOutline(aff) {
