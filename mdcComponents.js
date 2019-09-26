@@ -9,6 +9,8 @@
 // TODO: Mod1 helper text has word wrap. Fix it to 1 line
 // TODO: Notice in the HTML that there are several "undefined" divs in the object. This is due to some switches not being turned on. Need a better way to append data to the symbols
 // TODO: GETTERS AND SETTERS!!!!! Look at the setter for isFlyingData(). Copy that logic to all the other switches. It cleans up your code
+// TODO: Final objects to add: Command Post, Tactical Mission Tasks & Graphic Control Measures.
+// TODO: taskForceObject is 7.59kb, this can be reduced due to the unit sizes from None to Division (and Command) all having the same data
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';

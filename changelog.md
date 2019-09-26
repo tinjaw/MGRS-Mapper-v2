@@ -11,6 +11,8 @@
 - Added Activity modifier
 - Added DisableInputs class
 - Added Task Force Object and functions
+- Added Getter/Setter logic to MilSym and removed the old code.
+- File Sizes: (app - 36.29kb), (mdcComponents - 28.41kb), (unitSizeObject - 9.77kb), (taskForceObject - 7.59kb), (mod2Object - 6.89kb), (militarySymbolsObject - 5.51kb), (affiliationOutlineObject - 4.44kb), (mod1Object - 3.54kb)
 
 ---
 
