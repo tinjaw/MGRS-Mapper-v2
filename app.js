@@ -11,9 +11,9 @@ import mod2Object from './mod2Object';
 
 
 // * The star of the show * //
-// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID', '+').placeSymbol();
+// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID', '+', false, false, false).placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '', reinforcedReduced = '', isFlying = false, isActivity = false) {
+  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '', reinforcedReduced = '', isFlying = false, isActivity = false, isInstallation = false) {
     this.location = document.querySelector(location);
     this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
     this.affiliation = affiliationOutlineObject[affiliation];
@@ -27,6 +27,7 @@ class MilSym {
     this.isFlying = isFlying;
     this.flightCapable = militarySymbolsObject[symbol].flightCapable;
     this.isActivity = isActivity;
+    this.isInstallation = isInstallation;
     this.data = {
       location,
       symbol,
@@ -57,7 +58,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData, this.isFlyingData, this.activityData);
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData, this.activityData, this.installationData);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -437,6 +438,20 @@ class MilSym {
       activityModifier.setAttribute('stroke-width', '4');
       activityGroup.append(activityModifier);
       return activityGroup;
+    }
+  }
+
+  get installationData() {
+    if (this.isInstallation) {
+      const installationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      installationGroup.classList.add('activity');
+      const installationModifier = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      installationModifier.setAttribute('d', this.affiliation.installation);
+      installationModifier.setAttribute('fill', 'black');
+      installationModifier.setAttribute('stroke', 'black');
+      installationModifier.setAttribute('stroke-width', '4');
+      installationGroup.append(installationModifier);
+      return installationGroup;
     }
   }
 }

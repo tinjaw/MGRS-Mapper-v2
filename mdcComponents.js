@@ -3,7 +3,6 @@
 /* eslint-disable no-underscore-dangle */
 //! 22SEPT2019 -- Calling it here
 // TODO: When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
-// TODO: Reduced/Reinforced switches panel should be 6 columns wide and the "Convert to Activity" and "Convert to Installation" and "Task Force Amplifier" should take up the remaining 6 cols
 // TODO: Global vars need cleaning up. Use imports
 // TODO: Helper info-window on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
 // TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
@@ -46,6 +45,10 @@ const reinforcedReducedValue = () => new RRSwitches().value;
 const flyingSwitch = new MDCSwitch(document.querySelector('.mdc-switch.flightSwitch'));
 
 const activitySwitch = new MDCSwitch(document.querySelector('.mdc-switch.activitySwitch'));
+
+const installationSwitch = new MDCSwitch(document.querySelector('.mdc-switch.installationSwitch'));
+
+const taskForceSwitch = new MDCSwitch(document.querySelector('.mdc-switch.taskForceSwitch'));
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -169,39 +172,107 @@ searchField.input_.addEventListener('input', searchResults);
 // *********************************************************************************** //
 // * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2 * //
 // *********************************************************************************** //
-function disableInputsOnEquipment(option) {
-  switch (option) {
-    case true:
-      // Disable these fields if the selected symbol is a piece of equipment
-      // While this just disables these buttons, in "get affiliationOutlineData()"" in the MilSym class I am removing the data
-      // Disable unit size dropdown and reset it to "None"
+// ex- new DisableInputs(selectUnitSize, uniqueDesignationField, higherFormationField, reinforcedSwitch, reducedSwitch, flyingSwitch, activitySwitch, installationSwitch, taskForceSwitch)
+class DisableInputs {
+  constructor(size, unique, higher, reinforced, reduced, flying, activity, installation, taskforce) {
+    this.size = size;
+    this.unique = unique;
+    this.higher = higher;
+    this.reinforced = reinforced;
+    this.reduced = reduced;
+    this.flying = flying;
+    this.activity = activity;
+    this.installation = installation;
+    this.taskforce = taskforce;
+    return this.disableInputs();
+  }
+
+  disableInputs() {
+    if (this.size) {
       selectUnitSize.disabled = true;
       selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
-      // Disable Unique Designation field, delete any text content inside and remove the trashcan icon
+      MainMS.data.echelon = 'none';
+      MainMS.echelon.d = '';
+    } else {
+      selectUnitSize.disabled = false;
+    }
+
+    if (this.unique) {
+      MainMS.uniqueDesignation = '';
       uniqueDesignationField.disabled = true;
       uniqueDesignationField.value = '';
       deleteUniqueDesignationButton.root_.style.display = 'none';
-      // Disable Higher Formation field, delete any text content inside and remove the trashcan icon
+    } else {
+      uniqueDesignationField.disabled = false;
+    }
+
+    if (this.higher) {
+      MainMS.higherFormation = '';
       higherFormationField.disabled = true;
       higherFormationField.value = '';
       deleteHigherFormationButton.root_.style.display = 'none';
-      // Disable Reinforced and Reduced switches and uncheck them
+    } else {
+      higherFormationField.disabled = false;
+    }
+
+    if (this.reinforced) {
       reinforcedSwitch.disabled = true;
       reinforcedSwitch.checked = false;
+      MainMS.reinforcedReduced = '';
+    } else {
+      reinforcedSwitch.disabled = false;
+    }
+
+    if (this.reduced) {
       reducedSwitch.disabled = true;
       reducedSwitch.checked = false;
-      break;
-    case false:
-      selectUnitSize.disabled = false;
-      uniqueDesignationField.disabled = false;
-      higherFormationField.disabled = false;
-      reinforcedSwitch.disabled = false;
+      MainMS.reinforcedReduced = '';
+    } else {
       reducedSwitch.disabled = false;
-      break;
-    default:
-      break;
+    }
+
+    if (this.flying) {
+      flyingSwitch.disabled = true;
+      flyingSwitch.checked = false;
+      MainMS.isFlying = false;
+    } else {
+      flyingSwitch.disabled = false;
+    }
+
+    if (this.activity) {
+      activitySwitch.disabled = true;
+      activitySwitch.checked = false;
+      MainMS.isActivity = false;
+    } else {
+      activitySwitch.disabled = false;
+    }
+
+    if (this.installation) {
+      installationSwitch.disabled = true;
+      installationSwitch.checked = false;
+      MainMS.isInstallation = false;
+    } else {
+      installationSwitch.disabled = false;
+    }
+
+    if (this.taskforce) {
+      taskForceSwitch.disabled = true;
+      taskForceSwitch.checked = false;
+      // MainMS.isTaskForce = false;
+    } else {
+      taskForceSwitch.disabled = false;
+    }
+
+    if (window.hasOwnProperty('MainMS')) {
+      MainMS.placeSymbol();
+    } else {
+      setTimeout(() => {
+        MainMS.placeSymbol();
+      }, 100);
+    }
   }
 }
+
 
 [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
@@ -212,18 +283,9 @@ function disableInputsOnEquipment(option) {
     selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
 
     // Find all the selected values and place the symbol in the symbol panel
-    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity());
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity(), enableInstallation());
     window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
     MainMS.placeSymbol();
-
-    // If the selected symbol cannot fly, then disable the switch
-    if (MainMS.flightCapable) {
-      flyingSwitch.disabled = false;
-    } else {
-      flyingSwitch.disabled = true;
-      flyingSwitch.checked = false;
-    }
-
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
@@ -251,19 +313,25 @@ function disableInputsOnEquipment(option) {
 
     // Since Equipment symbols are different than Land Unit symbols, we need to disable some options
     if (MainMS.type === 'Equipment') {
-      // If the icon is a piece of equipment, then disable the activity switch, uncheck it, and re-run enableActivity()
-      if (activitySwitch.checked) {
-        activitySwitch.disabled = true;
-        activitySwitch.checked = false;
-        enableActivity();
+      // If the icon is a piece of equipment, then disable the activity switch
+      if (!window.hasOwnProperty('MainMS')) {
+        new DisableInputs(true, true, true, true, true, true, true, true, true);
+      } else {
+        setTimeout(() => {
+          new DisableInputs(true, true, true, true, true, true, true, true, true);
+        }, 30);
       }
+
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
       selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-      disableInputsOnEquipment(true);
+    }
+
+    // If the selected symbol cannot fly, then disable the switch
+    if (MainMS.flightCapable) {
+      flyingSwitch.disabled = false;
     } else {
-      activitySwitch.disabled = false;
-      disableInputsOnEquipment(false);
+      new DisableInputs(false, false, false, false, false, true, false, false, false);
     }
 
     // If a user changes unit affiliation, and the flying switch is checked, run this func to immediately change the outline
@@ -424,26 +492,18 @@ class RRSwitches {
 // *********************************************************************************** //
 function enableFlyingOutline() {
   //! Bug: bounceInAnimation() does not work when a unit is in flight
-  // If the icon flying, then disable the activity switch, uncheck it, and re-run enableActivity()
-  if (activitySwitch.checked) {
-    activitySwitch.disabled = true;
-    activitySwitch.checked = false;
-    enableActivity();
-  } else {
-    activitySwitch.disabled = false;
-  }
   if (flyingSwitch.checked) {
     MainMS.isFlying = true;
-    disableInputsOnEquipment(true);
+    new DisableInputs(selectUnitSize, uniqueDesignationField, higherFormationField, reinforcedSwitch, reducedSwitch, false, activitySwitch, installationSwitch, taskForceSwitch);
     MainMS.placeSymbol();
   } else if (window.hasOwnProperty('MainMS')) {
     MainMS.isFlying = false;
-    disableInputsOnEquipment(false);
+    new DisableInputs(false, false, false, false, false, false, false, false, false);
     MainMS.placeSymbol();
   } else {
     setTimeout(() => {
       MainMS.isFlying = false;
-      disableInputsOnEquipment(false);
+      new DisableInputs(false, false, false, false, false, false, false, false, false);
       MainMS.placeSymbol();
     }, 30);
   }
@@ -473,6 +533,29 @@ function enableActivity() {
 
 activitySwitch.listen('change', enableActivity);
 
+
+// *********************************************************************************** //
+// * Installation Switch                                                             * //
+// *********************************************************************************** //
+function enableInstallation() {
+  if (installationSwitch.checked) {
+    MainMS.isInstallation = true;
+    MainMS.placeSymbol();
+    return true;
+  } if (window.hasOwnProperty('MainMS')) {
+    MainMS.isInstallation = false;
+    MainMS.placeSymbol();
+    return false;
+  }
+  setTimeout(() => {
+    MainMS.isInstallation = false;
+    MainMS.placeSymbol();
+    return false;
+  }, 30);
+}
+
+installationSwitch.listen('change', enableInstallation);
+
 // ! GLOBAL VARS - remove on production
 window.searchField = searchField;
 window.selectSymbol = selectSymbol;
@@ -488,6 +571,10 @@ window.reinforcedSwitch = reinforcedSwitch;
 window.reducedSwitch = reducedSwitch;
 window.flyingSwitch = flyingSwitch;
 window.activitySwitch = activitySwitch;
+window.installationSwitch = installationSwitch;
+window.taskForceSwitch = taskForceSwitch;
+window.deleteUniqueDesignationButton = deleteUniqueDesignationButton;
+window.deleteHigherFormationButton = deleteHigherFormationButton;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {
@@ -497,6 +584,7 @@ window.onload = () => {
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
+  flyingSwitch.disabled = true;
   console.log('%c MGRS-Mapper by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 };
 

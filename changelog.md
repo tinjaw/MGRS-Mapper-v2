@@ -9,6 +9,7 @@
 - Moved enableFlyingOutline logic to MilSym class under "get affiliationOutlineData()"
 - Refactored enableFlyingOutline switch
 - Added Activity modifier
+- Added DisableInputs class
 
 ---
 
