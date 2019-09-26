@@ -400,7 +400,10 @@ class MilSym {
   }
 
   get isFlyingData() {
-    return this.affiliation.flying;
+    // Wrapping this in an if statement prevents some random path code from being appended to the SVG.
+    if (this.isFlying) {
+      return this.affiliation.flying;
+    }
   }
 
   // MainMS.isFlyingData = true;
@@ -412,6 +415,8 @@ class MilSym {
       // Reset the path data
       this.affiliation.d = affiliationOutlineObject[this.data.affiliation].d;
     }
+    // Can be written as a ternary operator
+    // value ? this.affiliation.d = this.affiliation.flying : this.affiliation.d = affiliationOutlineObject[this.data.affiliation].d;
   }
 
   get activityData() {
