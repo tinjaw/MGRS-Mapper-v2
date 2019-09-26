@@ -45,6 +45,7 @@ const reinforcedReducedValue = () => new RRSwitches().value;
 
 const flyingSwitch = new MDCSwitch(document.querySelector('.mdc-switch.flightSwitch'));
 
+const activitySwitch = new MDCSwitch(document.querySelector('.mdc-switch.activitySwitch'));
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -211,7 +212,7 @@ function disableInputsOnEquipment(option) {
     selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
 
     // Find all the selected values and place the symbol in the symbol panel
-    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, enableFlyingOutline());
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity());
     window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
     MainMS.placeSymbol();
 
@@ -222,6 +223,7 @@ function disableInputsOnEquipment(option) {
       flyingSwitch.disabled = true;
       flyingSwitch.checked = false;
     }
+
 
     if (event.target.classList.contains('symbol-select')) {
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
@@ -249,12 +251,18 @@ function disableInputsOnEquipment(option) {
 
     // Since Equipment symbols are different than Land Unit symbols, we need to disable some options
     if (MainMS.type === 'Equipment') {
-      console.log('Running Equipment');
+      // If the icon is a piece of equipment, then disable the activity switch, uncheck it, and re-run enableActivity()
+      if (activitySwitch.checked) {
+        activitySwitch.disabled = true;
+        activitySwitch.checked = false;
+        enableActivity();
+      }
       // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
       selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
       disableInputsOnEquipment(true);
     } else {
+      activitySwitch.disabled = false;
       disableInputsOnEquipment(false);
     }
 
@@ -416,6 +424,14 @@ class RRSwitches {
 // *********************************************************************************** //
 function enableFlyingOutline() {
   //! Bug: bounceInAnimation() does not work when a unit is in flight
+  // If the icon flying, then disable the activity switch, uncheck it, and re-run enableActivity()
+  if (activitySwitch.checked) {
+    activitySwitch.disabled = true;
+    activitySwitch.checked = false;
+    enableActivity();
+  } else {
+    activitySwitch.disabled = false;
+  }
   if (flyingSwitch.checked) {
     MainMS.isFlying = true;
     disableInputsOnEquipment(true);
@@ -435,6 +451,27 @@ function enableFlyingOutline() {
 
 flyingSwitch.listen('change', enableFlyingOutline);
 
+// *********************************************************************************** //
+// * Activity Switch                                                                 * //
+// *********************************************************************************** //
+function enableActivity() {
+  if (activitySwitch.checked) {
+    MainMS.isActivity = true;
+    MainMS.placeSymbol();
+    return true;
+  } if (window.hasOwnProperty('MainMS')) {
+    MainMS.isActivity = false;
+    MainMS.placeSymbol();
+    return false;
+  }
+  setTimeout(() => {
+    MainMS.isActivity = false;
+    MainMS.placeSymbol();
+    return false;
+  }, 30);
+}
+
+activitySwitch.listen('change', enableActivity);
 
 // ! GLOBAL VARS - remove on production
 window.searchField = searchField;
@@ -450,6 +487,7 @@ window.higherFormationField = higherFormationField;
 window.reinforcedSwitch = reinforcedSwitch;
 window.reducedSwitch = reducedSwitch;
 window.flyingSwitch = flyingSwitch;
+window.activitySwitch = activitySwitch;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {

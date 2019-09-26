@@ -8,6 +8,7 @@
 - Added RRSwitches class back...
 - Moved enableFlyingOutline logic to MilSym class under "get affiliationOutlineData()"
 - Refactored enableFlyingOutline switch
+- Added Activity modifier
 
 ---
 
