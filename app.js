@@ -59,7 +59,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData, this.activityData, this.installationData, this.taskForceData);
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData, this.isFlyingData, this.activityData, this.installationData, this.taskForceData);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -166,35 +166,6 @@ class MilSym {
         break;
     }
 
-
-    if (this.flightCapable && this.isFlying) {
-      // Removes the echelon data above the Equipment symbol.
-      this.echelon = unitSizeObject.none.affiliation[this.data.affiliation];
-      // Removes the Unique Designation about the Equipment symbol
-      this.uniqueDesignation = '';
-      // Removes the Higher Formation about the Equipment symbol
-      this.higherFormation = '';
-      // Removes the Reinforced/Reduced above the Equipment symbol
-      this.reinforcedReduced = '';
-      switch (this.affiliation.templated) {
-        case true:
-          outline.setAttributeNS(null, 'd', `${this.affiliation.flying}`);
-          outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
-          outlineTemplated.setAttributeNS(null, 'd', `${this.affiliation.flying}`);
-          outlineTemplated.setAttributeNS(null, 'fill', `${this.affiliation.fill_2}`);
-          outlineTemplated.setAttributeNS(null, 'stroke', `${this.affiliation.stroke_2}`);
-          outlineTemplated.setAttributeNS(null, 'stroke-width', `${this.affiliation.strokeWidth_2}`);
-          outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation.strokeDashArray_2}`);
-          outlineGroup.append(outline, outlineTemplated);
-          break;
-
-        default:
-          outline.setAttributeNS(null, 'd', `${this.affiliation.flying}`);
-          outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
-          outlineGroup.append(outline);
-          break;
-      }
-    }
     return outlineGroup;
   }
 
@@ -428,6 +399,21 @@ class MilSym {
     return reinforcedReducedGroup;
   }
 
+  get isFlyingData() {
+    return this.affiliation.flying;
+  }
+
+  // MainMS.isFlyingData = true;
+  set isFlyingData(value) {
+    if (value) {
+      // Mutate the path data
+      this.affiliation.d = this.affiliation.flying;
+    } else {
+      // Reset the path data
+      this.affiliation.d = affiliationOutlineObject[this.data.affiliation].d;
+    }
+  }
+
   get activityData() {
     if (this.isActivity) {
       const activityGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -468,6 +454,10 @@ class MilSym {
       taskForceGroup.append(taskForceModifier);
       return taskForceGroup;
     }
+  }
+
+  set taskForceData(value) {
+    this.isTaskForce = value;
   }
 }
 

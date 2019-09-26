@@ -202,13 +202,13 @@ const taskForceObject = {
   brigade: {
     affiliation: {
       friendly: {
-        d: 'M87.5,40 l25,-25 m0,25 l-25,-25',
+        d: 'M55,50 L55,10 145,10 145,50',
       },
       get friendlyTemplated() {
         return this.friendly;
       },
       hostile: {
-        d: 'M87.5,18 l25,-25 m0,25 l-25,-25',
+        d: 'M55,28 L55,-12 145,-12 145,28',
       },
       get hostileTemplated() {
         return this.hostile;
@@ -220,7 +220,7 @@ const taskForceObject = {
         return this.hostile;
       },
       neutral: {
-        d: 'M87.5,35 l25,-25 m0,25 l-25,-25',
+        d: 'M55,45 L55,5 145,5 145,45',
       },
     },
   },

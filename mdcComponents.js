@@ -8,6 +8,7 @@
 // TODO: Select a hostile symbol and add any unit size. Notice how the symbol gets clipped. Need to fix that css issue
 // TODO: Mod1 helper text has word wrap. Fix it to 1 line
 // TODO: Notice in the HTML that there are several "undefined" divs in the object. This is due to some switches not being turned on. Need a better way to append data to the symbols
+// TODO: GETTERS AND SETTERS!!!!! Look at the setter for isFlyingData(). Copy that logic to all the other switches. It cleans up your code
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -493,16 +494,16 @@ class RRSwitches {
 function enableFlyingOutline() {
   //! Bug: bounceInAnimation() does not work when a unit is in flight
   if (flyingSwitch.checked) {
-    MainMS.isFlying = true;
+    MainMS.isFlyingData = true;
     new DisableInputs(selectUnitSize, uniqueDesignationField, higherFormationField, reinforcedSwitch, reducedSwitch, false, activitySwitch, installationSwitch, taskForceSwitch);
     MainMS.placeSymbol();
   } else if (window.hasOwnProperty('MainMS')) {
-    MainMS.isFlying = false;
+    MainMS.isFlyingData = false;
     new DisableInputs(false, false, false, false, false, false, false, false, false);
     MainMS.placeSymbol();
   } else {
     setTimeout(() => {
-      MainMS.isFlying = false;
+      MainMS.isFlyingData = false;
       new DisableInputs(false, false, false, false, false, false, false, false, false);
       MainMS.placeSymbol();
     }, 30);
