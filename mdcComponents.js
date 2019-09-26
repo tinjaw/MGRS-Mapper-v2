@@ -41,9 +41,10 @@ const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.roo
 
 const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinforcedSwitch'));
 const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
-
+const reinforcedReducedValue = () => new RRSwitches().value;
 
 const flyingSwitch = new MDCSwitch(document.querySelector('.mdc-switch.flightSwitch'));
+
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -210,7 +211,7 @@ function disableInputsOnEquipment(option) {
     selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
 
     // Find all the selected values and place the symbol in the symbol panel
-    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`);
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, enableFlyingOutline());
     window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
     MainMS.placeSymbol();
 
@@ -351,70 +352,84 @@ const inputDesignationFields = debounce(() => {
 // *********************************************************************************** //
 // * Reinforced and Reduced Switches                                                 * //
 // *********************************************************************************** //
-function reinforcedReducedSwitchTest() {
-  // Reinforced AND Reduced
-  if (reinforcedSwitch.checked === true && reducedSwitch.checked === true) {
-    console.log('this is reinforced and reduced!');
-    reducedSwitch.root_.dataset.value = '±';
-    reinforcedSwitch.root_.dataset.value = '';
-    MainMS.reinforcedReduced = '±';
-    MainMS.placeSymbol();
-    bounceInAnimation('g.reinforcedReduced');
+class RRSwitches {
+  constructor() {
+    this.reinforced = reinforcedSwitch.checked;
+    this.reduced = reducedSwitch.checked;
+    this.reinforcedAndReduced = this.reinforced && this.reduced;
+    this.value = '';
+    return this.checkSwitches();
   }
-  // Reinforced
-  if (reinforcedSwitch.checked === true && reducedSwitch.checked === false) {
-    console.log('this is reinforced');
-    reinforcedSwitch.root_.dataset.value = '+';
-    reducedSwitch.root_.dataset.value = '';
-    MainMS.reinforcedReduced = '+';
-    MainMS.placeSymbol();
-    bounceInAnimation('g.reinforcedReduced');
-  }
-  // Reduced
-  if (reinforcedSwitch.checked === false && reducedSwitch.checked === true) {
-    console.log('this is reduced');
-    reducedSwitch.root_.dataset.value = '–';
-    reinforcedSwitch.root_.dataset.value = '';
-    MainMS.reinforcedReduced = '–';
-    MainMS.placeSymbol();
-    bounceInAnimation('g.reinforcedReduced');
-  }
-  // All Switches Off
-  if (reinforcedSwitch.checked === false && reducedSwitch.checked === false) {
-    console.log('this is nothing');
-    reducedSwitch.root_.dataset.value = '';
-    reinforcedSwitch.root_.dataset.value = '';
-    MainMS.reinforcedReduced = '';
-    MainMS.placeSymbol();
+
+  checkSwitches() {
+    switch (true) {
+      case this.reinforcedAndReduced:
+        reducedSwitch.root_.dataset.value = '±';
+        reinforcedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '±';
+        MainMS.placeSymbol();
+        this.value = '±';
+        bounceInAnimation('g.reinforcedReduced');
+        break;
+      case this.reinforced:
+        reinforcedSwitch.root_.dataset.value = '+';
+        reducedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '+';
+        MainMS.placeSymbol();
+        this.value = '+';
+        bounceInAnimation('g.reinforcedReduced');
+        break;
+      case this.reduced:
+        reducedSwitch.root_.dataset.value = '–';
+        reinforcedSwitch.root_.dataset.value = '';
+        MainMS.reinforcedReduced = '–';
+        MainMS.placeSymbol();
+        this.value = '–';
+        bounceInAnimation('g.reinforcedReduced');
+        break;
+      default:
+        reducedSwitch.root_.dataset.value = '';
+        reinforcedSwitch.root_.dataset.value = '';
+        // Check if the MainMS variable is in the global window. If not wait 30 ms
+        if (window.hasOwnProperty('MainMS')) {
+          MainMS.reinforcedReduced = '';
+          MainMS.placeSymbol();
+        } else {
+          setTimeout(() => {
+            MainMS.reinforcedReduced = '';
+            MainMS.placeSymbol();
+          }, 30);
+        }
+        this.value = '';
+        break;
+    }
   }
 }
 
 [reducedSwitch, reinforcedSwitch].forEach((key) => {
-  key.listen('change', reinforcedReducedSwitchTest);
+  key.listen('change', reinforcedReducedValue);
 });
 
 
 // *********************************************************************************** //
 // * Flying Switch                                                                   * //
 // *********************************************************************************** //
-//! This should probably go in the MilSym class...
-//! Need to clear any data that is written on the symbol. For instance, if I write some higher formation data and switch the symbol to flying, it will still be there
-//! I think this symbol decorator would benefit from the TransformModifiersOnEquipment
 function enableFlyingOutline() {
-  const flyingProperty = affiliationOutlineObject[selectAffiliation.value].flying;
-  function generateFlyingOutline(aff) {
-    const propertyToModify = { d: aff };
-    const modifiedTarget = Object.assign({}, affiliationOutlineObject[selectAffiliation.value].d, propertyToModify);
-    MainMS.affiliation.d = modifiedTarget.d;
-    MainMS.placeSymbol();
-  }
-  if (MainMS.flightCapable && flyingSwitch.checked) {
+  //! Bug: bounceInAnimation() does not work when a unit is in flight
+  if (flyingSwitch.checked) {
+    MainMS.isFlying = true;
     disableInputsOnEquipment(true);
-    generateFlyingOutline(flyingProperty);
-  } else {
-    disableInputsOnEquipment(false);
-    MainMS.affiliation.d = affiliationOutlineObject[selectAffiliation.value].d;
     MainMS.placeSymbol();
+  } else if (window.hasOwnProperty('MainMS')) {
+    MainMS.isFlying = false;
+    disableInputsOnEquipment(false);
+    MainMS.placeSymbol();
+  } else {
+    setTimeout(() => {
+      MainMS.isFlying = false;
+      disableInputsOnEquipment(false);
+      MainMS.placeSymbol();
+    }, 30);
   }
 }
 
@@ -434,6 +449,7 @@ window.uniqueDesignationField = uniqueDesignationField;
 window.higherFormationField = higherFormationField;
 window.reinforcedSwitch = reinforcedSwitch;
 window.reducedSwitch = reducedSwitch;
+window.flyingSwitch = flyingSwitch;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {

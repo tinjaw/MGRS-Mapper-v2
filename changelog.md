@@ -5,6 +5,9 @@
 ## 26SEPT19
 
 - Removed RRSwitches class in favor of reinforcedReducedSwitchTest()
+- Added RRSwitches class back...
+- Moved enableFlyingOutline logic to MilSym class under "get affiliationOutlineData()"
+- Refactored enableFlyingOutline switch
 
 ---
 

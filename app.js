@@ -13,7 +13,7 @@ import mod2Object from './mod2Object';
 // * The star of the show * //
 // ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID', '+').placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '', reinforcedReduced = '') {
+  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '', reinforcedReduced = '', isFlying = false) {
     this.location = document.querySelector(location);
     this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
     this.affiliation = affiliationOutlineObject[affiliation];
@@ -24,6 +24,7 @@ class MilSym {
     this.uniqueDesignation = uniqueDesignation;
     this.higherFormation = higherFormation;
     this.reinforcedReduced = reinforcedReduced;
+    this.isFlying = isFlying;
     this.flightCapable = militarySymbolsObject[symbol].flightCapable;
     this.data = {
       location,
@@ -55,7 +56,8 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData);
+
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData, this.isFlyingData);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -160,6 +162,36 @@ class MilSym {
       default:
         generateOutline();
         break;
+    }
+
+
+    if (this.flightCapable && this.isFlying) {
+      // Removes the echelon data above the Equipment symbol.
+      this.echelon = unitSizeObject.none.affiliation[this.data.affiliation];
+      // Removes the Unique Designation about the Equipment symbol
+      this.uniqueDesignation = '';
+      // Removes the Higher Formation about the Equipment symbol
+      this.higherFormation = '';
+      // Removes the Reinforced/Reduced above the Equipment symbol
+      this.reinforcedReduced = '';
+      switch (this.affiliation.templated) {
+        case true:
+          outline.setAttributeNS(null, 'd', `${this.affiliation.flying}`);
+          outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
+          outlineTemplated.setAttributeNS(null, 'd', `${this.affiliation.flying}`);
+          outlineTemplated.setAttributeNS(null, 'fill', `${this.affiliation.fill_2}`);
+          outlineTemplated.setAttributeNS(null, 'stroke', `${this.affiliation.stroke_2}`);
+          outlineTemplated.setAttributeNS(null, 'stroke-width', `${this.affiliation.strokeWidth_2}`);
+          outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${this.affiliation.strokeDashArray_2}`);
+          outlineGroup.append(outline, outlineTemplated);
+          break;
+
+        default:
+          outline.setAttributeNS(null, 'd', `${this.affiliation.flying}`);
+          outline.setAttributeNS(null, 'fill', `${this.affiliation.fill}`);
+          outlineGroup.append(outline);
+          break;
+      }
     }
     return outlineGroup;
   }
