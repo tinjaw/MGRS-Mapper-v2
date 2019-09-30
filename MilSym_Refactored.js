@@ -1,5 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-// ex- var j = new MS('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post')
+// example 1- var j = new MS('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post')
+// Example 2 - var y = new MS('.test', 'Weapon System - Grenade Launcher - Medium', 'friendly' );
+// y.mod1 = 'Armored';
+// y.placeSymbol()
+
+// This is good. It does not spit out empty divs when an element is undefined
+
 class MS {
   constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost) {
     this._location = location;
@@ -118,6 +124,8 @@ class MS {
       const outlineTemplated = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const element = affiliationOutlineObject[this._affiliation];
 
+      //! This adds the flying outline to the symbol... Not sure if this logic is elegant or not...
+      //! TEST THIS THOROUGHLY
       const adjustSymbolOutlineForFlying = () => {
         // Removes the echelon data above the Equipment symbol.
         this.echelon = undefined;
