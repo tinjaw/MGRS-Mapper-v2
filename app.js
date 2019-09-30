@@ -631,6 +631,8 @@ window.selectAffiliation = selectAffiliation;
 window.militarySymbolsObject = militarySymbolsObject;
 window.mod1Object = mod1Object;
 window.mod2Object = mod2Object;
+window.taskForceObject = taskForceObject;
+window.commandPostObject = commandPostObject;
 
 export {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, MilSym,

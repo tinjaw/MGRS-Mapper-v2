@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+// ex- var j = new MS('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post')
 class MS {
   constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost) {
     this._location = location;
@@ -116,6 +118,21 @@ class MS {
       const outlineTemplated = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const element = affiliationOutlineObject[this._affiliation];
 
+      const adjustSymbolOutlineForFlying = () => {
+        // Removes the echelon data above the Equipment symbol.
+        this.echelon = undefined;
+        // Removes the Unique Designation about the Equipment symbol
+        this.uniqueDesignation = undefined;
+        // Removes the Higher Formation about the Equipment symbol
+        this.higherFormation = undefined;
+        // Removes the Reinforced/Reduced above the Equipment symbol
+        this.reinforcedReduced = undefined;
+        outline.setAttributeNS(null, 'd', `${element.flying}`);
+        outline.setAttributeNS(null, 'fill', `${element.fill}`);
+        outlineGroup.append(outline);
+        return outlineGroup;
+      };
+
       const adjustSymbolOutlineForEquipment = () => {
         // Removes the echelon data above the Equipment symbol.
         this.echelon = undefined;
@@ -164,6 +181,9 @@ class MS {
           if (this.type === 'Equipment') {
             return adjustSymbolOutlineForEquipment();
           }
+          if (this._flying) {
+            return adjustSymbolOutlineForFlying();
+          }
           outline.setAttributeNS(null, 'd', `${element.d}`);
           outline.setAttributeNS(null, 'fill', `${element.fill}`);
           outlineTemplated.setAttributeNS(null, 'd', `${element.d}`);
@@ -176,6 +196,9 @@ class MS {
         case false:
           if (this.type === 'Equipment') {
             return adjustSymbolOutlineForEquipment();
+          }
+          if (this._flying) {
+            return adjustSymbolOutlineForFlying();
           }
           outline.setAttributeNS(null, 'd', `${element.d}`);
           outline.setAttributeNS(null, 'fill', `${element.fill}`);
@@ -222,8 +245,6 @@ class MS {
       Object.keys(mod1Object[this._mod1].affiliation[this._affiliation]).forEach((key) => {
         const element = mod1Object[this._mod1].affiliation[this._affiliation][key];
         if (key.indexOf('path') === 0) {
-          // const element = this.mod1[key];
-
           const mod1Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
           mod1Path.setAttributeNS(null, 'd', `${element.d}`);
           // If the default mod1Path fill is missing, default to none
@@ -392,15 +413,10 @@ class MS {
   // FLYING
   get flying() {
     if (this._flying) {
-      setTimeout(() => {
-        const adjustSymbolOutlineForFlying = this.location.querySelectorAll('.outline path');
-        adjustSymbolOutlineForFlying.forEach((key) => {
-          key.setAttribute('d', affiliationOutlineObject[this._affiliation].flying);
-        });
-      }, 0);
-    } else {
-      return undefined;
+      // Logic provided in the adjustSymbolOutlineForFlying() function in "get affiliation"
+      return this._flying;
     }
+    return undefined;
   }
 
   set flying(value) {
@@ -410,7 +426,16 @@ class MS {
   // ACTIVITY
   get activity() {
     if (this._activity) {
-      return this._activity;
+      const activityGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      activityGroup.classList.add('activity');
+      const activityModifier = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      activityModifier.setAttribute('d', affiliationOutlineObject[this._affiliation].activity);
+      activityModifier.setAttribute('fill', 'black');
+      activityModifier.setAttribute('stroke', 'black');
+      activityModifier.setAttribute('stroke-width', '4');
+      activityGroup.append(activityModifier);
+      return activityGroup;
+      // return this._activity;
     }
     return undefined;
   }
@@ -422,7 +447,15 @@ class MS {
   // INSTALLATION
   get installation() {
     if (this._installation) {
-      return this._installation;
+      const installationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      installationGroup.classList.add('installation');
+      const installationModifier = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      installationModifier.setAttribute('d', affiliationOutlineObject[this._affiliation].installation);
+      installationModifier.setAttribute('fill', 'black');
+      installationModifier.setAttribute('stroke', 'black');
+      installationModifier.setAttribute('stroke-width', '4');
+      installationGroup.append(installationModifier);
+      return installationGroup;
     }
     return undefined;
   }
@@ -434,7 +467,15 @@ class MS {
   // TASK FORCE
   get taskForce() {
     if (this._taskForce) {
-      return this._taskForce;
+      const taskForceGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      taskForceGroup.classList.add('taskforce');
+      const taskForceModifier = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      taskForceModifier.setAttribute('d', taskForceObject[this._echelon].affiliation[this._affiliation].d);
+      taskForceModifier.setAttribute('fill', 'none');
+      taskForceModifier.setAttribute('stroke', 'black');
+      taskForceModifier.setAttribute('stroke-width', '4');
+      taskForceGroup.append(taskForceModifier);
+      return taskForceGroup;
     }
     return undefined;
   }
@@ -446,7 +487,45 @@ class MS {
   // COMMAND POST
   get commandPost() {
     if (this._commandPost) {
-      return this._commandPost;
+      const commandPostGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      commandPostGroup.classList.add('commandpost');
+
+      Object.keys(commandPostObject[this._commandPost].affiliation[this._affiliation]).forEach((key) => {
+        const element = commandPostObject[this._commandPost].affiliation[this._affiliation][key];
+        if (key.indexOf('path') === 0) {
+          const commandPostPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          commandPostPath.setAttributeNS(null, 'd', `${element.d}`);
+          // If the default commandPostPath fill is missing, default to none
+          !element.fill ? commandPostPath.setAttributeNS(null, 'fill', 'none') : commandPostPath.setAttributeNS(null, 'fill', `${element.fill}`);
+          // If the default commandPostPath stroke is missing, default to black
+          !element.stroke ? commandPostPath.setAttributeNS(null, 'stroke', 'black') : commandPostPath.setAttributeNS(null, 'stroke', `${element.stroke}`);
+          // If the default commandPostPath stroke-width is missing, default to 4
+          !element.strokeWidth ? commandPostPath.setAttributeNS(null, 'stroke-width', '4') : commandPostPath.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // If the commandPost element is missing a transform property, do nothing, else set the transform value
+          !element.transform ? null : commandPostPath.setAttributeNS(null, 'transform', `${element.transform}`);
+          commandPostGroup.append(commandPostPath);
+        }
+        if (key.indexOf('text') === 0) {
+          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.textContent = element.symbolText;
+          text.setAttributeNS(null, 'x', `${element.x}`);
+          text.setAttributeNS(null, 'y', `${element.y}`);
+          text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
+          text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
+          // Default decorator font family to Arial
+          !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
+          // Default decorator font weight to 30
+          !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
+          // Default decorator font stroke to none
+          !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
+          // Default decorator font stroke width to 4
+          !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // Default decorator font fill to black
+          !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
+          commandPostGroup.append(text);
+        }
+      });
+      return commandPostGroup;
     }
     return undefined;
   }
