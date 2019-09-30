@@ -11,6 +11,7 @@
 // TODO: Final objects to add: Tactical Mission Tasks & Graphic Control Measures.
 // TODO: taskForceObject is 7.59kb, this can be reduced due to the unit sizes from None to Division (and Command) all having the same data
 // TODO: Incorporate the refactored MilSym into the codebase... I'm too burned out to do it tonight.
+//! Very interesting bug: The symbol slide in and bounceIn animations only work for the Unmanned Aerial Surveillance symbol...
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
