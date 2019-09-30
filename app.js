@@ -9,11 +9,13 @@ import unitSizeObject from './unitSizeObject';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import taskForceObject from './taskForceObject';
+import commandPostObject from './commandPostObject';
+
 
 // * The star of the show * //
-// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID', '+', false, false, false).placeSymbol();
+// ex- new MilSym('.test', 'Infantry', 'friendly', 'team', 'Armored', 'Rail', 'A/2-101', '27/42ID', '+', false, false, false, false, 'Tactical Command Post').placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '', reinforcedReduced = '', isFlying = false, isActivity = false, isInstallation = false, isTaskForce = false) {
+  constructor(location, symbol, affiliation = 'friendly', echelon = 'none', mod1 = 'None', mod2 = 'None', uniqueDesignation = '', higherFormation = '', reinforcedReduced = '', isFlying = false, isActivity = false, isInstallation = false, isTaskForce = false, commandPost = 'None') {
     this.location = document.querySelector(location);
     this.symbol = militarySymbolsObject[symbol].affiliation[affiliation];
     this.affiliation = affiliationOutlineObject[affiliation];
@@ -29,6 +31,7 @@ class MilSym {
     this.isActivity = isActivity;
     this.isInstallation = isInstallation;
     this.isTaskForce = isTaskForce;
+    this.commandPost = commandPostObject[commandPost].affiliation[affiliation];
     this.data = {
       location,
       symbol,
@@ -59,7 +62,7 @@ class MilSym {
     // } else {
     //   svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData);
     // }
-    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData, this.isFlyingData, this.activityData, this.installationData, this.taskForceData);
+    svg.append(this.affiliationOutlineData, this.decoratorData, this.echelonData, this.mod1Data, this.mod2Data, this.uniqueDesignationData, this.higherFormationData, this.reinforcedReducedData, this.isFlyingData, this.activityData, this.installationData, this.taskForceData, this.commandPostData);
     this.location.append(svg);
     svg.setAttributeNS(null, 'data-symbol-name', this.data.symbol);
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
@@ -404,6 +407,7 @@ class MilSym {
     if (this.isFlying) {
       return this.affiliation.flying;
     }
+    return 'Flying Data Goes Here';
   }
 
   // MainMS.isFlyingData = true;
@@ -431,7 +435,9 @@ class MilSym {
       activityGroup.append(activityModifier);
       return activityGroup;
     }
+    return 'Activity Data Goes Here';
   }
+
 
   get installationData() {
     if (this.isInstallation) {
@@ -445,6 +451,7 @@ class MilSym {
       installationGroup.append(installationModifier);
       return installationGroup;
     }
+    return 'Installation Data Goes Here';
   }
 
   get taskForceData() {
@@ -459,15 +466,58 @@ class MilSym {
       taskForceGroup.append(taskForceModifier);
       return taskForceGroup;
     }
+    return 'Task Force Data Goes Here';
   }
 
-  set taskForceData(value) {
-    this.isTaskForce = value;
+  get commandPostData() {
+    const commandPostGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    commandPostGroup.classList.add('commandpost');
+
+    Object.keys(this.commandPost).forEach((key) => {
+      if (key.indexOf('path') === 0) {
+        const element = this.commandPost[key];
+        const commandPostPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        commandPostPath.setAttributeNS(null, 'd', `${element.d}`);
+        // If the default commandPostPath fill is missing, default to none
+        !element.fill ? commandPostPath.setAttributeNS(null, 'fill', 'none') : commandPostPath.setAttributeNS(null, 'fill', `${element.fill}`);
+        // If the default commandPostPath stroke is missing, default to black
+        !element.stroke ? commandPostPath.setAttributeNS(null, 'stroke', 'black') : commandPostPath.setAttributeNS(null, 'stroke', `${element.stroke}`);
+        // If the default commandPostPath stroke-width is missing, default to 4
+        !element.strokeWidth ? commandPostPath.setAttributeNS(null, 'stroke-width', '4') : commandPostPath.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+        // If the commandPost element is missing a transform property, do nothing, else set the transform value
+        !element.transform ? null : commandPostPath.setAttributeNS(null, 'transform', `${element.transform}`);
+        commandPostGroup.append(commandPostPath);
+      }
+      if (key.indexOf('text') === 0) {
+        const element = this.commandPost[key];
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.textContent = element.symbolText;
+        text.setAttributeNS(null, 'x', `${element.x}`);
+        text.setAttributeNS(null, 'y', `${element.y}`);
+        text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
+        text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
+        // Default decorator font family to Arial
+        !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
+        // Default decorator font weight to 30
+        !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
+        // Default decorator font stroke to none
+        !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
+        // Default decorator font stroke width to 4
+        !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+        // Default decorator font fill to black
+        !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
+        commandPostGroup.append(text);
+      }
+    });
+    return commandPostGroup;
   }
 }
 
 // * Add Symbols and Modifiers to the Dropdown lists
 // ex- addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
+// obj = the object to iterate over (ex- mod1Object)
+// abv = the abbreviation of the object to match the HTML select lists
+// menu = the MDCSelect menu const in mdcComponents.js
 const addSymbolsAndModsToList = (obj, abv, menu = null) => {
   Object.keys(obj).forEach((key) => {
     const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
@@ -494,6 +544,8 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
       case 'mod2':
         new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', `${key}`).placeSymbol();
         break;
+      case 'commandpost':
+        return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', 'None', '', '', '', false, false, false, false, `${key}`).placeSymbol();
       case 'symbol':
         // Set the selected symbol to "Default Land Unit" on page load
         selectSymbol.foundation_.setSelectedIndex(0);
@@ -577,6 +629,8 @@ window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
 window.selectAffiliation = selectAffiliation;
 window.militarySymbolsObject = militarySymbolsObject;
+window.mod1Object = mod1Object;
+window.mod2Object = mod2Object;
 
 export {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, MilSym,

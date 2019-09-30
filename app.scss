@@ -33,6 +33,14 @@
   width: fit-content;
 }
 
+//! Remove on production
+.test > svg {
+  position: absolute;
+  top: 0;
+  padding-top: 150px;
+  width: 250px;
+}
+
 .mdc-list-item em {
   pointer-events: none;
   // color: var(--mdc-theme-text-icon-on-primary-light);

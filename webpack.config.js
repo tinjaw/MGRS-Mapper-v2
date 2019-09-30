@@ -1,4 +1,6 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const CompressionPlugin = require('compression-webpack-plugin');
+
 
 module.exports = [{
   entry: ['./app.scss', './app.js', './mdcComponents.js'],
@@ -43,5 +45,13 @@ module.exports = [{
   devtool: 'inline-source-map',
   plugins: [
     new BundleAnalyzerPlugin(),
+    // https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a
+    // new CompressionPlugin({
+    //   asset: '[path].gz[query]',
+    //   algorithm: 'gzip',
+    //   test: /\.js$|\.css$|\.html$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8,
+    // }),
   ],
 }];

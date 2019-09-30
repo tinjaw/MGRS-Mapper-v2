@@ -18,6 +18,7 @@ import { MDCSwitch } from '@material/switch';
 import Fuse from 'fuse.js';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
+import commandPostObject from './commandPostObject';
 import {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, MilSym,
 } from './app';
@@ -52,6 +53,9 @@ const activitySwitch = new MDCSwitch(document.querySelector('.mdc-switch.activit
 const installationSwitch = new MDCSwitch(document.querySelector('.mdc-switch.installationSwitch'));
 
 const taskForceSwitch = new MDCSwitch(document.querySelector('.mdc-switch.taskForceSwitch'));
+
+const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-select'));
+
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -277,7 +281,7 @@ class DisableInputs {
 }
 
 
-[selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2].forEach((key) => {
+[selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2, selectCommandPost].forEach((key) => {
   key.listen('MDCSelect:change', (event) => {
     // Set all other select boxes text content otherwise it fills them with nonsense
     key.selectedText_.textContent = key.value;
@@ -286,7 +290,7 @@ class DisableInputs {
     selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
 
     // Find all the selected values and place the symbol in the symbol panel
-    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity(), enableInstallation(), enableTaskForce());
+    const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity(), enableInstallation(), enableTaskForce(), `${selectCommandPost.value || 'None'}`);
     window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
     MainMS.placeSymbol();
 
@@ -299,6 +303,22 @@ class DisableInputs {
       // When an affiliation is selected, change the outlines of all symbols in the dropdown
       selectSymbol.menu_.items.map((key) => {
         new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`, 'none').placeSymbol();
+      });
+
+
+      const myPromise = new Promise((resolve, reject) => {
+        console.log('resolving the promise');
+        resolve(selectCommandPost.menu_.items.forEach(e => e.remove()));
+        reject(new Error('In 10% of the cases, I fail. Miserably.'));
+      });
+
+      myPromise.then((resolvedValue) => {
+        console.log(resolvedValue);
+        addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
+        // Remove the outline of the default/none symbol
+        document.querySelectorAll('.commandpostFigure svg g.outline')[0].remove();
+      }, (error) => {
+        console.log(error);
       });
     }
 
@@ -347,6 +367,7 @@ class DisableInputs {
     selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
     selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
     selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
+    selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
   });
 });
 
@@ -606,11 +627,20 @@ window.onload = () => {
   addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
+  addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
   flyingSwitch.disabled = true;
   console.log('%c MGRS-Mapper by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
+  // const MainMS = new MilSym('.newSVG', selectSymbol.value);
+  // window.MainMS = MainMS; //! Put this class instance in the global scope so it can be referenced and edited
+  // MainMS.placeSymbol();
+
+  // selectSymbol.listen('MDCSelect:change', () => {
+  //   MainMS.symbol = militarySymbolsObject[selectSymbol.value].affiliation[selectAffiliation.value];
+  //   MainMS.placeSymbol();
+  // });
 };
 
 export { selectAffiliation };

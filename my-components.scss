@@ -67,11 +67,22 @@ li.mdc-list-item:hover {
   font-weight: 500;
 }
 
+.mdc-image-list__image:hover {
+  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 25ms);
+  transform: scale(1.1);
+  font-weight: 500;
+}
+
 li.mdc-list-item svg {
   // height: fit-content;
   // width: fit-content;
-  max-height: 64px;
-  max-width: 93px;
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.commandpost-list li.mdc-list-item {
+  /* background: red; */
+  height: 100px;
 }
 
 .animateSymbol {

@@ -1,5 +1,11 @@
 # Change Log Notes
 
+## 29SEPT19
+
+- Decided against using setters on Activity, Installation, and Task Force switches because these switches are not mutating data, they are adding data. The Flying switch is mutating the affiliationOutlineObject data for the symbol so it makes more sense to use it there
+- Added Command Post object and functionality
+- Mostly worked on refactoring MilSym class
+
 ---
 
 ## 26SEPT19
@@ -9,6 +15,7 @@
 - Moved enableFlyingOutline logic to MilSym class under "get affiliationOutlineData()"
 - Refactored enableFlyingOutline switch
 - Added Activity modifier
+- Added Installation modifier
 - Added DisableInputs class
 - Added Task Force Object and functions
 - Added Getter/Setter logic to MilSym and removed the old code.
