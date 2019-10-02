@@ -641,7 +641,7 @@ window.onload = () => {
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
   flyingSwitch.disabled = true;
-  console.log('%c MGRS-Mapper by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
+  console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 
 
   // Sets the textContent of the select boxes to the currently selected item.
@@ -686,6 +686,7 @@ window.onload = () => {
     MainMS.affiliation = selectAffiliation.value;
     MainMS.placeSymbol();
 
+    //! POTENTIAL ISSUE: When the affiliation is changed, ALL the symbols inside the symbol and command post dropdown get changed. There should be a way to only make these changes if the menu is open, otherwise these should be ignored.
     selectSymbol.menu_.items.map((key) => {
       new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`);
     });

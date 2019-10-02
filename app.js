@@ -517,6 +517,7 @@ import commandPostObject from './commandPostObject';
 // Example 2 - const symbol_2 = new MilSym('.test', 'Weapon System - Grenade Launcher - Medium', 'friendly' );
 // symbol_2.mod1 = 'Armored';
 // symbol_2.placeSymbol();
+//! PLEASE TRANSFER YOUR OLD COMMENTS INTO THIS CLASS
 class MilSym {
   constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost) {
     this._location = location;
