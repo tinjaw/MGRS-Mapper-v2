@@ -6,7 +6,7 @@
 
 // This is good. It does not spit out empty divs when an element is undefined
 
-class MS {
+class MilSym {
   constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost) {
     this._location = location;
     this._symbol = symbol;
