@@ -1,5 +1,20 @@
 # Change Log Notes
 
+---
+
+## 1OCT19
+
+- Added the new MilSym class
+- Added setSelectBoxTextContent function on page load
+- Fixed inputDesignationFields()
+- Fixed Equipment Outline for friendly units
+- Fixed Task Force switch
+- Fixed Installation Switch
+- Fixed Activity Switch
+- Fixed equipment outline...again
+
+---
+
 ## 29SEPT19
 
 - Decided against using setters on Activity, Installation, and Task Force switches because these switches are not mutating data, they are adding data. The Flying switch is mutating the affiliationOutlineObject data for the symbol so it makes more sense to use it there

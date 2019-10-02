@@ -10,8 +10,8 @@
 // TODO: Notice in the HTML that there are several "undefined" divs in the object. This is due to some switches not being turned on. Need a better way to append data to the symbols
 // TODO: Final objects to add: Tactical Mission Tasks & Graphic Control Measures.
 // TODO: taskForceObject is 7.59kb, this can be reduced due to the unit sizes from None to Division (and Command) all having the same data
-// TODO: Incorporate the refactored MilSym into the codebase... I'm too burned out to do it tonight.
-//! Very interesting bug: The symbol slide in and bounceIn animations only work for the Unmanned Aerial Surveillance symbol... This has something to do with "flightCapable: true" in militarySymbolsObject...
+// TODO: Check and confirm all settings are true for switches. (ex- if equipment is selected, then unit size dropdown should be disabled)
+
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -673,8 +673,8 @@ window.onload = () => {
     //   }
 
     //   // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
-    //   selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-    //   selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    // selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    // selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
     // } else {
     //   new DisableInputs(false, false, false, false, false, true, false, false, false);
     // }
@@ -724,6 +724,13 @@ window.onload = () => {
     setSelectMenuTextContent(selectMod1);
     MainMS.mod1 = selectMod1.value;
     MainMS.placeSymbol();
+
+    // These two TransformModifiersOnEquipment classes should be put into a mutation observer or something.
+    //! Bug: select any mod1 element on a land unit, then switch to Equipment symbol. The Mod1 does not resize.
+    //! Bug: bounceIn animation does not work on equipment symbols
+    //! Bug: disable inputs and switches on Equipment.
+    selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
     bounceInAnimation('g.mod1');
   });
 
@@ -732,6 +739,8 @@ window.onload = () => {
     MainMS.mod2 = selectMod2.value;
     MainMS.placeSymbol();
     bounceInAnimation('g.mod2');
+    selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
   });
 
   selectCommandPost.listen('MDCSelect:change', () => {
@@ -758,9 +767,6 @@ window.onload = () => {
       // }
     });
   });
-
-
-  //! 
 };
 
 export { selectAffiliation };

@@ -824,11 +824,14 @@ class MilSym {
   get mod2() {
     if (this._mod2) {
       const mod2Group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      const mod2Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       mod2Group.classList.add('mod2');
       Object.keys(mod2Object[this._mod2].affiliation[this._affiliation]).forEach((key) => {
         const element = mod2Object[this._mod2].affiliation[this._affiliation][key];
+
+
         if (key.indexOf('path') === 0) {
-          const mod2Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          // const mod2Path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
           mod2Path.setAttributeNS(null, 'd', `${element.d}`);
           // If the default mod2Path fill is missing, default to none
           !element.fill ? mod2Path.setAttributeNS(null, 'fill', 'none') : mod2Path.setAttributeNS(null, 'fill', `${element.fill}`);
@@ -860,7 +863,39 @@ class MilSym {
           !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
           mod2Group.append(text);
         }
+
+        //! This works but I would advise you to further test it.
+        if (mod2Object[this._mod2].affiliation[this._affiliation].mobility && militarySymbolsObject[this._symbol].type === 'Equipment') {
+          // Now check the affiliation of the symbol and refine the Mod2 translation
+          switch (this._affiliation) {
+            case 'friendly':
+              mod2Path.setAttributeNS(null, 'd', mod2Object[this._mod2].affiliation.mobility.path_1.d);
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,47)');
+              break;
+            case 'friendlyTemplated':
+              mod2Path.setAttributeNS(null, 'd', mod2Object[this._mod2].affiliation.mobility.path_1.d);
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,47)');
+              break;
+            case 'neutral':
+              mod2Path.setAttributeNS(null, 'd', mod2Object[this._mod2].affiliation.mobility.path_1.d);
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,47)');
+              break;
+            default:
+              // This is important. This will remove the path data for the affiliation and set it to the 'mobility' path data. Otherwise the Mod2 will be truncated
+              // For instance: set the symbol to a Land Unit and then to hostile and then Mod2 to "Amphibious". Notice how truncated the Mod2 is?
+              // This removes that truncation and sets it back to 'mobility' so Mod2 will be the full width of the symbol
+              mod2Path.setAttributeNS(null, 'd', mod2Object[this._mod2].affiliation.mobility.path_1.d);
+              // Handles Mod2 translate for hostile, hostileTemplated, unknown & pending
+              mod2Path.setAttributeNS(null, 'transform', 'translate(0,60)');
+              break;
+          }
+        } else {
+          // If the mod2 element is missing a transform property, do nothing, else set the transform value
+          //! Not sure if this is even needed.
+          !element.transform ? null : mod2Path.setAttributeNS(null, 'transform', `${element.transform}`);
+        }
       });
+
       return mod2Group;
     }
     return undefined;
