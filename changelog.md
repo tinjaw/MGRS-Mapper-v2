@@ -8,6 +8,7 @@
 - Refactored DisableInputs class into function IOT abide by ESLint "Disallow new for side effects"
 - Added a boolean switch to compare old and new affiliation values when the selectSymbol dropdown is clicked. If the old value and new value don't match up, then run a "new MilSym" if that dropdown is open IOT change the symbol outlines to the currently selected affiliation. This is a huge performance boost because previously I was creating all new symbols no matter if the dropdown was opened or if the current affiliation was not changed.
 - Bugs Smashed: Pending outline on equipment in the symbol dropdown not showing, Task Force button not working on page load, disableInputs not working, When Task Force amp is selected it was preventing users from searching for equipment (made the symbol panel go blank), Fixed an issue when a symbol is in flight and it was throwing Mod2 off center when a user switched affiliations, fixed a bug where the flying switch was disabled when activated, fixed a bug where if a user checks and unchecks flying they couldn't add a task force.
+- Cleaned up app.js and mdcComponents.js and moved some functions to helperFunctions.js
 
 ---
 

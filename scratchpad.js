@@ -592,3 +592,21 @@ async function bounceInAnimation(location) {
     bounceIn.classList.toggle('bounceIn');
   }
 }
+
+// ! Async functions example
+(async () => {
+  // Don't listen to VS Code, await IS necessary for this
+  await outlineGroup.append(outlineTemplated);
+  outlineGroup.prepend(outline);
+})().catch((err) => {
+  console.error(err);
+  setTimeout(() => {
+    outlineGroup.append(outlineTemplated);
+    outlineGroup.prepend(outline);
+  }, 30);
+});
+// This async function also works
+(async () => {
+  await outlineGroup.append(outline, outlineTemplated);
+  outline.insertAdjacentElement('afterend', outlineTemplated);
+})();
