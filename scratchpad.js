@@ -576,3 +576,19 @@ changeCommandPostOutlines.then(() => {
 }, (error) => {
   console.log(error);
 });
+
+// Bounce in Animation with Equipment logic.. Does not work that well
+async function bounceInAnimation(location) {
+  const bounceIn = document.querySelector(location);
+  if (await MainMS.type === 'Equipment') {
+    bounceIn.style.transform = 'translateY(0%) scale(0.85)';
+    bounceIn.style.transformBox = 'border-box';
+    bounceIn.style.transformOrigin = '100px 0px';
+    bounceIn.classList.toggle('bounceIn');
+  } else {
+    // transformBox is crucial. Without this Mod1 will not scale from the center
+    bounceIn.style.transformBox = 'fill-box';
+    bounceIn.style.transformOrigin = 'center center';
+    bounceIn.classList.toggle('bounceIn');
+  }
+}

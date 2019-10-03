@@ -4,6 +4,9 @@
 
 - Messed around with async/await in MilSym
 - changed TransformModifiersOnEquipment from a class to a async function
+- Attempted to fix the bounceIn animation function for equipment icons but ran into roadblocks. Minor issue, will look again later
+- Refactored DisableInputs class into function IOT abide by ESLint "Disallow new for side effects"
+- Added a boolean switch to compare old and new affiliation values when the selectSymbol dropdown is clicked. If the old value and new value don't match up, then run a "new MilSym" if that dropdown is open IOT change the symbol outlines to the currently selected affiliation. This is a huge performance boost because previously I was creating all new symbols no matter if the dropdown was opened or if the current affiliation was not changed.
 
 ---
 

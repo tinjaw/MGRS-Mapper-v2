@@ -182,104 +182,189 @@ searchField.input_.addEventListener('input', searchResults);
 // * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2 * //
 // *********************************************************************************** //
 // ex- new DisableInputs(selectUnitSize, uniqueDesignationField, higherFormationField, reinforcedSwitch, reducedSwitch, flyingSwitch, activitySwitch, installationSwitch, taskForceSwitch)
-class DisableInputs {
-  constructor(size, unique, higher, reinforced, reduced, flying, activity, installation, taskforce) {
-    this.size = size;
-    this.unique = unique;
-    this.higher = higher;
-    this.reinforced = reinforced;
-    this.reduced = reduced;
-    this.flying = flying;
-    this.activity = activity;
-    this.installation = installation;
-    this.taskforce = taskforce;
-    return this.disableInputs();
+// class DisableInputs {
+//   constructor(size, unique, higher, reinforced, reduced, flying, activity, installation, taskforce) {
+//     this.size = size;
+//     this.unique = unique;
+//     this.higher = higher;
+//     this.reinforced = reinforced;
+//     this.reduced = reduced;
+//     this.flying = flying;
+//     this.activity = activity;
+//     this.installation = installation;
+//     this.taskforce = taskforce;
+//     return this.disableInputs();
+//   }
+
+//   disableInputs() {
+//     if (this.size) {
+//       selectUnitSize.disabled = true;
+//       selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
+//       MainMS.data.echelon = 'none';
+//       // MainMS.echelon.d = '';
+//       MainMS.echelon = undefined;
+//     } else {
+//       selectUnitSize.disabled = false;
+//     }
+
+//     if (this.unique) {
+//       MainMS.uniqueDesignation = '';
+//       uniqueDesignationField.disabled = true;
+//       uniqueDesignationField.value = '';
+//       deleteUniqueDesignationButton.root_.style.display = 'none';
+//     } else {
+//       uniqueDesignationField.disabled = false;
+//     }
+
+//     if (this.higher) {
+//       MainMS.higherFormation = '';
+//       higherFormationField.disabled = true;
+//       higherFormationField.value = '';
+//       deleteHigherFormationButton.root_.style.display = 'none';
+//     } else {
+//       higherFormationField.disabled = false;
+//     }
+
+//     if (this.reinforced) {
+//       reinforcedSwitch.disabled = true;
+//       reinforcedSwitch.checked = false;
+//       MainMS.reinforcedReduced = '';
+//     } else {
+//       reinforcedSwitch.disabled = false;
+//     }
+
+//     if (this.reduced) {
+//       reducedSwitch.disabled = true;
+//       reducedSwitch.checked = false;
+//       MainMS.reinforcedReduced = '';
+//     } else {
+//       reducedSwitch.disabled = false;
+//     }
+
+//     if (this.flying) {
+//       flyingSwitch.disabled = true;
+//       flyingSwitch.checked = false;
+//       MainMS.flying = false;
+//     } else {
+//       flyingSwitch.disabled = false;
+//     }
+
+//     if (this.activity) {
+//       activitySwitch.disabled = true;
+//       activitySwitch.checked = false;
+//       MainMS.activity = false;
+//     } else {
+//       activitySwitch.disabled = false;
+//     }
+
+//     if (this.installation) {
+//       installationSwitch.disabled = true;
+//       installationSwitch.checked = false;
+//       MainMS.installation = false;
+//     } else {
+//       installationSwitch.disabled = false;
+//     }
+
+//     if (this.taskforce) {
+//       taskForceSwitch.disabled = true;
+//       taskForceSwitch.checked = false;
+//       MainMS.taskForce = false;
+//     } else {
+//       taskForceSwitch.disabled = false;
+//     }
+
+//     if (window.hasOwnProperty('MainMS')) {
+//       MainMS.placeSymbol();
+//     } else {
+//       setTimeout(() => {
+//         MainMS.placeSymbol();
+//       }, 100);
+//     }
+//   }
+// }
+async function DisableInputs(size = false, unique = false, higher = false, reinforced = false, reduced = false, flying = false, activity = false, installation = false, taskforce = false) {
+  if (size) {
+    selectUnitSize.disabled = true;
+    selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
+    MainMS.data.echelon = 'none';
+    // MainMS.echelon.d = '';
+    MainMS.echelon = undefined;
+  } else {
+    selectUnitSize.disabled = false;
   }
 
-  disableInputs() {
-    if (this.size) {
-      selectUnitSize.disabled = true;
-      selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
-      MainMS.data.echelon = 'none';
-      // MainMS.echelon.d = '';
-      MainMS.echelon = undefined;
-    } else {
-      selectUnitSize.disabled = false;
-    }
+  if (unique) {
+    MainMS.uniqueDesignation = '';
+    uniqueDesignationField.disabled = true;
+    uniqueDesignationField.value = '';
+    deleteUniqueDesignationButton.root_.style.display = 'none';
+  } else {
+    uniqueDesignationField.disabled = false;
+  }
 
-    if (this.unique) {
-      MainMS.uniqueDesignation = '';
-      uniqueDesignationField.disabled = true;
-      uniqueDesignationField.value = '';
-      deleteUniqueDesignationButton.root_.style.display = 'none';
-    } else {
-      uniqueDesignationField.disabled = false;
-    }
+  if (higher) {
+    MainMS.higherFormation = '';
+    higherFormationField.disabled = true;
+    higherFormationField.value = '';
+    deleteHigherFormationButton.root_.style.display = 'none';
+  } else {
+    higherFormationField.disabled = false;
+  }
 
-    if (this.higher) {
-      MainMS.higherFormation = '';
-      higherFormationField.disabled = true;
-      higherFormationField.value = '';
-      deleteHigherFormationButton.root_.style.display = 'none';
-    } else {
-      higherFormationField.disabled = false;
-    }
+  if (reinforced) {
+    reinforcedSwitch.disabled = true;
+    reinforcedSwitch.checked = false;
+    MainMS.reinforcedReduced = '';
+  } else {
+    reinforcedSwitch.disabled = false;
+  }
 
-    if (this.reinforced) {
-      reinforcedSwitch.disabled = true;
-      reinforcedSwitch.checked = false;
-      MainMS.reinforcedReduced = '';
-    } else {
-      reinforcedSwitch.disabled = false;
-    }
+  if (reduced) {
+    reducedSwitch.disabled = true;
+    reducedSwitch.checked = false;
+    MainMS.reinforcedReduced = '';
+  } else {
+    reducedSwitch.disabled = false;
+  }
 
-    if (this.reduced) {
-      reducedSwitch.disabled = true;
-      reducedSwitch.checked = false;
-      MainMS.reinforcedReduced = '';
-    } else {
-      reducedSwitch.disabled = false;
-    }
+  if (flying) {
+    flyingSwitch.disabled = true;
+    flyingSwitch.checked = false;
+    MainMS.flying = false;
+  } else {
+    flyingSwitch.disabled = false;
+  }
 
-    if (this.flying) {
-      flyingSwitch.disabled = true;
-      flyingSwitch.checked = false;
-      MainMS.flying = false;
-    } else {
-      flyingSwitch.disabled = false;
-    }
+  if (activity) {
+    activitySwitch.disabled = true;
+    activitySwitch.checked = false;
+    MainMS.activity = false;
+  } else {
+    activitySwitch.disabled = false;
+  }
 
-    if (this.activity) {
-      activitySwitch.disabled = true;
-      activitySwitch.checked = false;
-      MainMS.activity = false;
-    } else {
-      activitySwitch.disabled = false;
-    }
+  if (installation) {
+    installationSwitch.disabled = true;
+    installationSwitch.checked = false;
+    MainMS.installation = false;
+  } else {
+    installationSwitch.disabled = false;
+  }
 
-    if (this.installation) {
-      installationSwitch.disabled = true;
-      installationSwitch.checked = false;
-      MainMS.installation = false;
-    } else {
-      installationSwitch.disabled = false;
-    }
+  if (taskforce) {
+    taskForceSwitch.disabled = true;
+    taskForceSwitch.checked = false;
+    MainMS.taskForce = false;
+  } else {
+    taskForceSwitch.disabled = false;
+  }
 
-    if (this.taskforce) {
-      taskForceSwitch.disabled = true;
-      taskForceSwitch.checked = false;
-      MainMS.taskForce = false;
-    } else {
-      taskForceSwitch.disabled = false;
-    }
-
-    if (window.hasOwnProperty('MainMS')) {
+  if (window.hasOwnProperty('MainMS')) {
+    MainMS.placeSymbol();
+  } else {
+    setTimeout(() => {
       MainMS.placeSymbol();
-    } else {
-      setTimeout(() => {
-        MainMS.placeSymbol();
-      }, 100);
-    }
+    }, 100);
   }
 }
 
@@ -523,19 +608,18 @@ class RRSwitches {
 // * Flying Switch                                                                   * //
 // *********************************************************************************** //
 function enableFlyingOutline() {
-  //! Bug: bounceInAnimation() does not work when a unit is in flight
   if (flyingSwitch.checked) {
     MainMS.flying = true;
-    new DisableInputs(selectUnitSize, uniqueDesignationField, higherFormationField, reinforcedSwitch, reducedSwitch, false, activitySwitch, installationSwitch, taskForceSwitch);
     MainMS.placeSymbol();
+    DisableInputs(true, true, true, true, true, false, true, true, true);
   } else if (window.hasOwnProperty('MainMS')) {
     MainMS.flying = false;
-    new DisableInputs(false, false, false, false, false, false, false, false, false);
+    DisableInputs(false, false, false, false, false, false, false, false, false);
     MainMS.placeSymbol();
   } else {
     setTimeout(() => {
       MainMS.flying = false;
-      new DisableInputs(false, false, false, false, false, false, false, false, false);
+      DisableInputs(false, false, false, false, false, false, false, false, false);
       MainMS.placeSymbol();
     }, 30);
   }
@@ -637,10 +721,12 @@ window.onload = () => {
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
+  // Hide the text field trash can buttons on page load
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
-  flyingSwitch.disabled = true;
+
+
   console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 
 
@@ -656,56 +742,36 @@ window.onload = () => {
   const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity(), enableInstallation(), enableTaskForce(), `${selectCommandPost.value || 'None'}`);
   window.MainMS = MainMS;
 
+
   selectSymbol.listen('MDCSelect:change', () => {
     setSelectMenuTextContent(selectSymbol);
     MainMS.symbol = selectSymbol.value;
     MainMS.placeSymbol();
     !searchField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
     // Since Equipment symbols are different than Land Unit symbols, we need to disable some options
-    // if (MainMS.type === 'Equipment') {
-    //   // If the icon is a piece of equipment, then disable the activity switch
-    //   if (!window.hasOwnProperty('MainMS')) {
-    //     new DisableInputs(true, true, true, true, true, true, true, true, true);
-    //   } else {
-    //     setTimeout(() => {
-    //       new DisableInputs(true, true, true, true, true, true, true, true, true);
-    //     }, 30);
-    //   }
-
-    //   // If Mod1/2 value is anything other than none, run the Class that adjusts the equipment decorator and modifier
-    // selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-    // selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-    // } else {
-    //   new DisableInputs(false, false, false, false, false, true, false, false, false);
-    // }
     if (MainMS.type === 'Equipment') {
-      new DisableInputs(true, true, true, true, true, false, true, true, true);
+      DisableInputs(true, true, true, true, true, false, true, true, true);
     } else {
-      new DisableInputs(false, false, false, false, false, true, false, false, false);
+      // This re-enables all buttons except the flying switch
+      DisableInputs(false, false, false, false, false, true, false, false, true);
     }
   });
 
   selectAffiliation.listen('MDCSelect:change', () => {
     selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
-    // setSelectMenuTextContent(selectAffiliation);
     MainMS.affiliation = selectAffiliation.value;
     MainMS.placeSymbol();
 
-    //! POTENTIAL ISSUE: When the affiliation is changed, ALL the symbols inside the symbol and command post dropdown get changed. There should be a way to only make these changes if the menu is open, otherwise these should be ignored.
-    selectSymbol.menu_.items.map((key) => {
-      new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`);
-    });
-
-    selectCommandPost.menu_.items.map((key) => {
-      new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
-    });
+    // selectCommandPost.menu_.items.map((key) => {
+    //   new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
+    // });
     // If a user changes unit affiliation, and the flying switch is checked, run this func to immediately change the outline
+    //! BUG: templated flying outlines do not work
     flyingSwitch.checked ? enableFlyingOutline() : null;
   });
 
   selectUnitSize.listen('MDCSelect:change', () => {
     selectUnitSize.selectedText_.textContent = selectUnitSize.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
-    // setSelectMenuTextContent(selectUnitSize);
     MainMS.echelon = selectUnitSize.value;
     MainMS.placeSymbol();
     bounceInAnimation('g.echelon');
@@ -715,13 +781,6 @@ window.onload = () => {
     setSelectMenuTextContent(selectMod1);
     MainMS.mod1 = selectMod1.value;
     MainMS.placeSymbol();
-
-    // These two TransformModifiersOnEquipment classes should be put into a mutation observer or something.
-    //! Bug: select any mod1 element on a land unit, then switch to Equipment symbol. The Mod1 does not resize.
-    //! Bug: bounceIn animation does not work on equipment symbols
-    //! Bug: disable inputs and switches on Equipment.
-    // selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-    // selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
     bounceInAnimation('g.mod1');
   });
 
@@ -730,8 +789,6 @@ window.onload = () => {
     MainMS.mod2 = selectMod2.value;
     MainMS.placeSymbol();
     bounceInAnimation('g.mod2');
-    // selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-    // selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
   });
 
   selectCommandPost.listen('MDCSelect:change', () => {
@@ -740,14 +797,14 @@ window.onload = () => {
     MainMS.placeSymbol();
   });
 
-  [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2, selectCommandPost].forEach((key) => {
+  [selectUnitSize, selectMod1, selectMod2, selectCommandPost].forEach((key) => {
     key.listen('click', () => {
       // If any of these menus are open, then resize all the symbols
-      selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+      // selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
       selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
       selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
       selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
-      selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
+      // selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
 
 
       // // If the selected symbol cannot fly, then disable the switch
@@ -757,6 +814,40 @@ window.onload = () => {
       //   new DisableInputs(false, false, false, false, false, true, false, false, false);
       // }
     });
+  });
+
+  const oldAffiliationValue = [selectAffiliation.value];
+  selectSymbol.listen('click', () => {
+    if (oldAffiliationValue[0] !== selectAffiliation.value) {
+      // If the previous affiliation and the current affiliation are NOT equal, then pop the last value, push the new value
+      oldAffiliationValue.pop();
+      oldAffiliationValue.push(selectAffiliation.value);
+      // Now create the new symbol outlines only if the selectSymbol menu is open though
+      if (selectSymbol.isMenuOpen_) {
+        selectSymbol.menu_.items.map((key) => {
+          new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`);
+        });
+      }
+    }
+    // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
+    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+  });
+
+  const oldAffiliationValueCP = [selectAffiliation.value];
+  selectCommandPost.listen('click', () => {
+    if (oldAffiliationValueCP[0] !== selectAffiliation.value) {
+      // If the previous affiliation and the current affiliation are NOT equal, then pop the last value, push the new value
+      oldAffiliationValueCP.pop();
+      oldAffiliationValueCP.push(selectAffiliation.value);
+      // Now create the new symbol outlines only if the selectCommandPost menu is open though
+      if (selectCommandPost.isMenuOpen_) {
+        selectCommandPost.menu_.items.map((key) => {
+          new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
+        });
+      }
+    }
+    // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
+    selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
   });
 };
 

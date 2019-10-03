@@ -516,18 +516,27 @@ import commandPostObject from './commandPostObject';
 // ex- TransformModifiersOnEquipment('.newSVG svg');
 // This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
 async function TransformModifiersOnEquipment(location) {
+  // Wait for the MainMS global var to appear
   if (await window.hasOwnProperty('MainMS')) {
-    const equipmentOutline = document.querySelector(location);
-    const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
-    const mod1 = equipmentOutline.querySelector('g.mod1');
-    const mod2 = equipmentOutline.querySelector('g.mod2');
-    equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
-    equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-    // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
-    mod1.style.transformOrigin = '100px 100px';
-    mod1.style.transform = 'translateY(-11%) scale(0.85)';
-    mod2.style.transformOrigin = '100px 140px';
-    mod2.style.transform = 'scale(0.85)';
+    // Modify only on equipment symbols
+    switch (MainMS.type) {
+      case 'Equipment':
+        const equipmentOutline = document.querySelector(location);
+        const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
+        const mod1 = equipmentOutline.querySelector('g.mod1');
+        const mod2 = equipmentOutline.querySelector('g.mod2');
+        equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+        equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+        // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
+        mod1.style.transformOrigin = '100px 100px';
+        mod1.style.transform = 'translateY(-11%) scale(0.85)';
+        mod2.style.transformOrigin = '100px 140px';
+        mod2.style.transform = 'scale(0.85)';
+        break;
+
+      default:
+        break;
+    }
   }
 }
 
@@ -567,6 +576,7 @@ class MilSym {
       installation,
       taskForce,
       commandPost,
+      type: militarySymbolsObject[this._symbol].type,
     };
     return this.placeSymbol();
   }
@@ -654,7 +664,7 @@ class MilSym {
       const outlineTemplated = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const element = affiliationOutlineObject[this._affiliation];
       // Set the symbol type to Equipment or Land Unit
-      this.type = militarySymbolsObject[this._symbol].type;
+      // this.type = militarySymbolsObject[this._symbol].type;
 
       // Check if the symbol has the flightCapable property
       if (militarySymbolsObject[this._symbol].flightCapable) {
@@ -663,8 +673,7 @@ class MilSym {
         flyingSwitch.disabled = true;
       }
 
-      //! This adds the flying outline to the symbol... Not sure if this logic is elegant or not...
-      //! TEST THIS THOROUGHLY
+      // This adds the flying outline to the symbol... Not sure if this logic is elegant or not...
       const adjustSymbolOutlineForFlying = () => {
         // Removes the echelon data above the Equipment symbol.
         this.echelon = undefined;
@@ -674,6 +683,18 @@ class MilSym {
         this.higherFormation = undefined;
         // Removes the Reinforced/Reduced above the Equipment symbol
         this.reinforcedReduced = undefined;
+        // Instead of using the 'd' key in affiliationOutlineObject, we will use the 'flying' key
+        if (affiliationOutlineObject[this._affiliation].templated) {
+          outline.setAttributeNS(null, 'd', `${element.flying}`);
+          outline.setAttributeNS(null, 'fill', `${element.fill}`);
+          outlineTemplated.setAttributeNS(null, 'd', `${element.flying}`);
+          outlineTemplated.setAttributeNS(null, 'fill', `${element.fill_2}`);
+          outlineTemplated.setAttributeNS(null, 'stroke', `${element.stroke_2}`);
+          outlineTemplated.setAttributeNS(null, 'stroke-width', `${element.strokeWidth_2}`);
+          outlineTemplated.setAttributeNS(null, 'stroke-dasharray', `${element.strokeDashArray_2}`);
+          outlineGroup.append(outline, outlineTemplated);
+          return outlineGroup;
+        }
         outline.setAttributeNS(null, 'd', `${element.flying}`);
         outline.setAttributeNS(null, 'fill', `${element.fill}`);
         outlineGroup.append(outline);
@@ -689,11 +710,9 @@ class MilSym {
         this.higherFormation = undefined;
         // Removes the Reinforced/Reduced above the Equipment symbol
         this.reinforcedReduced = undefined;
-        // setTimeout(() => {
+        // This will raise Mod1, scale down the decorator, and lower Mod2
         TransformModifiersOnEquipment('.newSVG svg');
-        // }, 1000);
-
-
+        // For equipment; friendly and friendlyTemplated symbols are circular, whereas all other affiliations do not get special treatment
         if (this._affiliation === 'friendly') {
           const outline0 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
           outline0.setAttributeNS(null, 'cx', '100');
@@ -725,13 +744,30 @@ class MilSym {
           outlineGroup.append(outline1, outline2);
           return outlineGroup;
         }
-        // If the equipment symbol is not friendly, then just use the normal outlines
+
+        // If the equipment icon is hostileTemplated or pending then add the stroke dasharray
+        if (this._affiliation === 'hostileTemplated' || this._affiliation === 'pending') {
+          outline.setAttributeNS(null, 'd', `${affiliationOutlineObject[this._affiliation].d}`);
+          outline.setAttributeNS(null, 'fill', `${affiliationOutlineObject[this._affiliation].fill}`);
+          const outline2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          outline2.setAttributeNS(null, 'd', `${affiliationOutlineObject[this._affiliation].d}`);
+          outline2.setAttributeNS(null, 'fill', 'none');
+          outline2.setAttributeNS(null, 'stroke', 'rgb(239, 239, 239)');
+          outline2.setAttributeNS(null, 'stroke-width', '5');
+          outline2.setAttributeNS(null, 'stroke-dasharray', '4,4');
+          outlineGroup.append(outline, outline2);
+          return outlineGroup;
+        }
+
+        // If the equipment symbol is Hostile, Unknown or Neutral then just use these
         outline.setAttributeNS(null, 'd', `${affiliationOutlineObject[this._affiliation].d}`);
         outline.setAttributeNS(null, 'fill', `${affiliationOutlineObject[this._affiliation].fill}`);
         outlineGroup.append(outline);
         return outlineGroup;
       };
 
+      // Now the logic of it all. First we check if the symbol is templated. If it is then we check if its a piece of equipment or if its flying.
+      // If for example the templated symbol is not a piece of equipment and is not flying then we just use the normal fills and dasharray
       switch (affiliationOutlineObject[this._affiliation].templated) {
         case true:
           if (militarySymbolsObject[this._symbol].type === 'Equipment') {
@@ -756,6 +792,7 @@ class MilSym {
           if (this._flying) {
             return adjustSymbolOutlineForFlying();
           }
+          // Most symbols will NOT be a piece of equipment, will NOT be flying, and will NOT be templated, so these next 4 lines are what the bulk of the symbols use
           outline.setAttributeNS(null, 'd', `${element.d}`);
           outline.setAttributeNS(null, 'fill', `${element.fill}`);
           outlineGroup.append(outline);
@@ -1277,31 +1314,11 @@ class Resizer {
   }
 }
 
-// ex- "new TransformModifiersOnEquipment('.newSVG > svg')"
-// This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
-// class TransformModifiersOnEquipment {
-//   constructor(equipmentOutline) {
-//     if (MainMS.type === 'Equipment') {
-//       this.equipmentOutline = document.querySelector(equipmentOutline); // The equipment SVG you want to readjust
-//       this.equipmentDecorator = this.equipmentOutline.querySelector('g.decorator');
-//       this.mod1 = this.equipmentOutline.querySelector('g.mod1');
-//       this.mod2 = this.equipmentOutline.querySelector('g.mod2');
-//       this.equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
-//       this.equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-//       // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
-//       this.mod1.style.transformOrigin = '100px 100px';
-//       this.mod1.style.transform = 'translateY(-11%) scale(0.85)';
-//       this.mod2.style.transformOrigin = '100px 140px';
-//       this.mod2.style.transform = 'scale(0.85)';
-//     }
-//   }
-// }
-
-
-// Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2. Disabled for Equipment because TransformModifiersOnEquipment throws everything off
+// Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2.
+//! BUG: Animations jerk around when the symbol is a piece of equipment
 function bounceInAnimation(location) {
+  const bounceIn = document.querySelector(location);
   if (MainMS.type !== 'Equipment') {
-    const bounceIn = document.querySelector(location);
     // transformBox is crucial. Without this Mod1 will not scale from the center
     bounceIn.style.transformBox = 'fill-box';
     bounceIn.style.transformOrigin = 'center center';
