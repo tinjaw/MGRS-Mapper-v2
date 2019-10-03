@@ -518,24 +518,23 @@ import commandPostObject from './commandPostObject';
 async function TransformModifiersOnEquipment(location) {
   // Wait for the MainMS global var to appear
   if (await window.hasOwnProperty('MainMS')) {
-    // Modify only on equipment symbols
-    switch (MainMS.type) {
-      case 'Equipment':
-        const equipmentOutline = document.querySelector(location);
-        const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
-        const mod1 = equipmentOutline.querySelector('g.mod1');
-        const mod2 = equipmentOutline.querySelector('g.mod2');
-        equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
-        equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-        // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
-        mod1.style.transformOrigin = '100px 100px';
-        mod1.style.transform = 'translateY(-11%) scale(0.85)';
-        mod2.style.transformOrigin = '100px 140px';
-        mod2.style.transform = 'scale(0.85)';
-        break;
+  // Modify only on equipment symbols
+    const equipmentOutline = document.querySelector(location);
+    const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
+    const mod1 = equipmentOutline.querySelector('g.mod1');
+    const mod2 = equipmentOutline.querySelector('g.mod2');
+    // Since the MainMS object starts out with no Mod1/2 amplifiers, we will check if they exist. If not then there is no need to adjust the symbol decorator
+    if (mod1) {
+      equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+      equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+      // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
+      mod1.style.transformOrigin = '100px 100px';
+      mod1.style.transform = 'translateY(-11%) scale(0.85)';
+    }
 
-      default:
-        break;
+    if (mod2) {
+      mod2.style.transformOrigin = '100px 140px';
+      mod2.style.transform = 'scale(0.85)';
     }
   }
 }
@@ -664,7 +663,7 @@ class MilSym {
       const outlineTemplated = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const element = affiliationOutlineObject[this._affiliation];
       // Set the symbol type to Equipment or Land Unit
-      // this.type = militarySymbolsObject[this._symbol].type;
+      this.type = militarySymbolsObject[this._symbol].type;
 
       // Check if the symbol has the flightCapable property
       if (militarySymbolsObject[this._symbol].flightCapable) {
@@ -711,7 +710,10 @@ class MilSym {
         // Removes the Reinforced/Reduced above the Equipment symbol
         this.reinforcedReduced = undefined;
         // This will raise Mod1, scale down the decorator, and lower Mod2
+
         TransformModifiersOnEquipment('.newSVG svg');
+
+
         // For equipment; friendly and friendlyTemplated symbols are circular, whereas all other affiliations do not get special treatment
         if (this._affiliation === 'friendly') {
           const outline0 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -1257,21 +1259,21 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
     // This will add the Symbols and Modifiers to the dropdown list
     switch (abv) {
       case 'mod1':
-        // new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', `${key}`, 'None').placeSymbol();
-        new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, `${key}`, undefined);
+        // All this does is remove the ESLint error for “Do not use 'new' for side effects”
+        (() => new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, `${key}`))();
         break;
       case 'mod2':
-        // new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', `${key}`).placeSymbol();
         new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, `${key}`);
         break;
       case 'commandpost':
-        // return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, 'none', 'None', 'None', '', '', '', false, false, false, false, `${key}`).placeSymbol();
+        // Set the default command post value to "None" on page load
+        selectCommandPost.value = 'None';
+        // Since we do not want to strip the outline of the command post, return this value
         return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
       case 'symbol':
         // Set the selected symbol to "Default Land Unit" on page load
         selectSymbol.foundation_.setSelectedIndex(0);
         // Returning 'symbol' since we need to keep the symbol affiliation outlines
-        // return new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, 'none').placeSymbol();
         return new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, undefined);
       default:
         break;

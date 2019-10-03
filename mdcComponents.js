@@ -11,7 +11,6 @@
 // TODO: Final objects to add: Tactical Mission Tasks & Graphic Control Measures.
 // TODO: taskForceObject is 7.59kb, this can be reduced due to the unit sizes from None to Division (and Command) all having the same data
 // TODO: Check and confirm all settings are true for switches. (ex- if equipment is selected, then unit size dropdown should be disabled)
-
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -282,7 +281,7 @@ searchField.input_.addEventListener('input', searchResults);
 //     }
 //   }
 // }
-async function DisableInputs(size = false, unique = false, higher = false, reinforced = false, reduced = false, flying = false, activity = false, installation = false, taskforce = false) {
+async function DisableInputs(size = false, unique = false, higher = false, reinforced = false, reduced = false, flying = false, activity = false, installation = false, taskforce = false, commandPost = false) {
   if (size) {
     selectUnitSize.disabled = true;
     selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
@@ -357,6 +356,16 @@ async function DisableInputs(size = false, unique = false, higher = false, reinf
     MainMS.taskForce = false;
   } else {
     taskForceSwitch.disabled = false;
+  }
+
+  if (commandPost) {
+    selectCommandPost.disabled = true;
+    selectCommandPost.foundation_.adapter_.setSelectedIndex(0);
+    MainMS.data.commandPost = 'none';
+    // MainMS.commandPost.d = '';
+    MainMS.commandPost = undefined;
+  } else {
+    selectCommandPost.disabled = false;
   }
 
   if (window.hasOwnProperty('MainMS')) {
@@ -611,15 +620,15 @@ function enableFlyingOutline() {
   if (flyingSwitch.checked) {
     MainMS.flying = true;
     MainMS.placeSymbol();
-    DisableInputs(true, true, true, true, true, false, true, true, true);
+    DisableInputs(true, true, true, true, true, false, true, true, true, true);
   } else if (window.hasOwnProperty('MainMS')) {
     MainMS.flying = false;
-    DisableInputs(false, false, false, false, false, false, false, false, false);
+    DisableInputs(false, false, false, false, false, false, false, false, false, false);
     MainMS.placeSymbol();
   } else {
     setTimeout(() => {
       MainMS.flying = false;
-      DisableInputs(false, false, false, false, false, false, false, false, false);
+      DisableInputs(false, false, false, false, false, false, false, false, false, false);
       MainMS.placeSymbol();
     }, 30);
   }
@@ -714,6 +723,7 @@ window.taskForceSwitch = taskForceSwitch;
 window.deleteUniqueDesignationButton = deleteUniqueDesignationButton;
 window.deleteHigherFormationButton = deleteHigherFormationButton;
 window.DisableInputs = DisableInputs;
+window.selectCommandPost = selectCommandPost;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {
@@ -725,8 +735,6 @@ window.onload = () => {
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
-
-
   console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 
 
@@ -737,11 +745,11 @@ window.onload = () => {
     });
   }
 
-  setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 
-  const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, `${selectMod1.value || 'None'}`, `${selectMod2.value || 'None'}`, uniqueDesignationField.value, higherFormationField.value, `${reinforcedReducedValue() || ''}`, flyingSwitch.checked, enableActivity(), enableInstallation(), enableTaskForce(), `${selectCommandPost.value || 'None'}`);
+  const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
   window.MainMS = MainMS;
 
+  setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 
   selectSymbol.listen('MDCSelect:change', () => {
     setSelectMenuTextContent(selectSymbol);
@@ -749,11 +757,12 @@ window.onload = () => {
     MainMS.placeSymbol();
     !searchField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
     // Since Equipment symbols are different than Land Unit symbols, we need to disable some options
+
     if (MainMS.type === 'Equipment') {
-      DisableInputs(true, true, true, true, true, false, true, true, true);
+      DisableInputs(true, true, true, true, true, false, true, true, true, true);
     } else {
       // This re-enables all buttons except the flying switch
-      DisableInputs(false, false, false, false, false, true, false, false, true);
+      DisableInputs(false, false, false, false, false, true, false, false, false, false);
     }
   });
 
@@ -761,12 +770,7 @@ window.onload = () => {
     selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
     MainMS.affiliation = selectAffiliation.value;
     MainMS.placeSymbol();
-
-    // selectCommandPost.menu_.items.map((key) => {
-    //   new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
-    // });
     // If a user changes unit affiliation, and the flying switch is checked, run this func to immediately change the outline
-    //! BUG: templated flying outlines do not work
     flyingSwitch.checked ? enableFlyingOutline() : null;
   });
 
@@ -797,22 +801,12 @@ window.onload = () => {
     MainMS.placeSymbol();
   });
 
-  [selectUnitSize, selectMod1, selectMod2, selectCommandPost].forEach((key) => {
+  [selectUnitSize, selectMod1, selectMod2].forEach((key) => {
     key.listen('click', () => {
       // If any of these menus are open, then resize all the symbols
-      // selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
       selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
       selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
       selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
-      // selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
-
-
-      // // If the selected symbol cannot fly, then disable the switch
-      // if (MainMS.flightCapable) {
-      //   flyingSwitch.disabled = false;
-      // } else {
-      //   new DisableInputs(false, false, false, false, false, true, false, false, false);
-      // }
     });
   });
 
