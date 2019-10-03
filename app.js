@@ -519,22 +519,24 @@ async function TransformModifiersOnEquipment(location) {
   // Wait for the MainMS global var to appear
   if (await window.hasOwnProperty('MainMS')) {
   // Modify only on equipment symbols
-    const equipmentOutline = document.querySelector(location);
-    const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
-    const mod1 = equipmentOutline.querySelector('g.mod1');
-    const mod2 = equipmentOutline.querySelector('g.mod2');
-    // Since the MainMS object starts out with no Mod1/2 amplifiers, we will check if they exist. If not then there is no need to adjust the symbol decorator
-    if (mod1) {
-      equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
-      equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-      // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
-      mod1.style.transformOrigin = '100px 100px';
-      mod1.style.transform = 'translateY(-11%) scale(0.85)';
-    }
+    if (MainMS.type === 'Equipment') {
+      const equipmentOutline = document.querySelector(location);
+      const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
+      const mod1 = equipmentOutline.querySelector('g.mod1');
+      const mod2 = equipmentOutline.querySelector('g.mod2');
+      // Since the MainMS object starts out with no Mod1/2 amplifiers, we will check if they exist. If not then there is no need to adjust the symbol decorator
+      if (mod1) {
+        equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+        equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+        // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
+        mod1.style.transformOrigin = '100px 100px';
+        mod1.style.transform = 'translateY(-11%) scale(0.85)';
+      }
 
-    if (mod2) {
-      mod2.style.transformOrigin = '100px 140px';
-      mod2.style.transform = 'scale(0.85)';
+      if (mod2) {
+        mod2.style.transformOrigin = '100px 140px';
+        mod2.style.transform = 'scale(0.85)';
+      }
     }
   }
 }
@@ -675,7 +677,7 @@ class MilSym {
       // This adds the flying outline to the symbol... Not sure if this logic is elegant or not...
       const adjustSymbolOutlineForFlying = () => {
         // Removes the echelon data above the Equipment symbol.
-        this.echelon = undefined;
+        this.echelon = 'none';
         // Removes the Unique Designation about the Equipment symbol
         this.uniqueDesignation = undefined;
         // Removes the Higher Formation about the Equipment symbol
@@ -701,16 +703,17 @@ class MilSym {
       };
 
       const adjustSymbolOutlineForEquipment = () => {
-        // Removes the echelon data above the Equipment symbol.
-        this.echelon = undefined;
+        // Set echelon to 'none' for equipment. If set to undefined then it throws weird errors when you search for a piece of equipment, then change symbol to land unit, then enable task force... idk
+        this.echelon = 'none';
         // Removes the Unique Designation about the Equipment symbol
         this.uniqueDesignation = undefined;
         // Removes the Higher Formation about the Equipment symbol
         this.higherFormation = undefined;
         // Removes the Reinforced/Reduced above the Equipment symbol
         this.reinforcedReduced = undefined;
+        // Removes the task force above the Equipment symbol
+        this.taskForce = undefined;
         // This will raise Mod1, scale down the decorator, and lower Mod2
-
         TransformModifiersOnEquipment('.newSVG svg');
 
 
@@ -1097,9 +1100,11 @@ class MilSym {
   // TASK FORCE
   get taskForce() {
     if (this._taskForce) {
+      const ech = this._echelon;
       const taskForceGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       taskForceGroup.classList.add('taskforce');
       const taskForceModifier = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      console.log(ech);
       taskForceModifier.setAttribute('d', taskForceObject[this._echelon].affiliation[this._affiliation].d);
       taskForceModifier.setAttribute('fill', 'none');
       taskForceModifier.setAttribute('stroke', 'black');
