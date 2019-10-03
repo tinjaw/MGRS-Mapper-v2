@@ -1,5 +1,10 @@
 # Change Log Notes
 
+## 3OCT19
+
+- Messed around with async/await in MilSym
+- changed TransformModifiersOnEquipment from a class to a async function
+
 ---
 
 ## 1OCT19

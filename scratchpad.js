@@ -560,3 +560,19 @@ function prop() {
   const modifiedTarget = Object.assign({}, affiliationOutlineObject[selectAffiliation.value].d, propertyToModify);
   return modifiedTarget.d;
 }
+
+
+//Good example of using promises in the selectAffiliation dropdown
+const changeCommandPostOutlines = new Promise((resolve, reject) => {
+  console.log('resolving the commandpost');
+  resolve(selectCommandPost.menu_.items.forEach(e => e.remove()));
+  reject(new Error('In 10% of the cases, I fail. Miserably.'));
+});
+
+changeCommandPostOutlines.then(() => {
+  addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
+  // Remove the outline of the default/none symbol
+  document.querySelectorAll('.commandpostFigure svg g.outline')[0].remove();
+}, (error) => {
+  console.log(error);
+});

@@ -678,6 +678,11 @@ window.onload = () => {
     // } else {
     //   new DisableInputs(false, false, false, false, false, true, false, false, false);
     // }
+    if (MainMS.type === 'Equipment') {
+      new DisableInputs(true, true, true, true, true, false, true, true, true);
+    } else {
+      new DisableInputs(false, false, false, false, false, true, false, false, false);
+    }
   });
 
   selectAffiliation.listen('MDCSelect:change', () => {
@@ -691,24 +696,9 @@ window.onload = () => {
       new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`);
     });
 
-
     selectCommandPost.menu_.items.map((key) => {
       new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
     });
-
-    // const changeCommandPostOutlines = new Promise((resolve, reject) => {
-    //   console.log('resolving the commandpost');
-    //   resolve(selectCommandPost.menu_.items.forEach(e => e.remove()));
-    //   reject(new Error('In 10% of the cases, I fail. Miserably.'));
-    // });
-
-    // changeCommandPostOutlines.then(() => {
-    //   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
-    //   // Remove the outline of the default/none symbol
-    //   // document.querySelectorAll('.commandpostFigure svg g.outline')[0].remove();
-    // }, (error) => {
-    //   console.log(error);
-    // });
     // If a user changes unit affiliation, and the flying switch is checked, run this func to immediately change the outline
     flyingSwitch.checked ? enableFlyingOutline() : null;
   });
@@ -730,8 +720,8 @@ window.onload = () => {
     //! Bug: select any mod1 element on a land unit, then switch to Equipment symbol. The Mod1 does not resize.
     //! Bug: bounceIn animation does not work on equipment symbols
     //! Bug: disable inputs and switches on Equipment.
-    selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-    selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    // selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    // selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
     bounceInAnimation('g.mod1');
   });
 
@@ -740,8 +730,8 @@ window.onload = () => {
     MainMS.mod2 = selectMod2.value;
     MainMS.placeSymbol();
     bounceInAnimation('g.mod2');
-    selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
-    selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    // selectMod1.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
+    // selectMod2.value !== 'None' ? new TransformModifiersOnEquipment('.newSVG > svg') : null;
   });
 
   selectCommandPost.listen('MDCSelect:change', () => {
