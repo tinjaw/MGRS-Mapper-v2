@@ -8,7 +8,6 @@
 // TODO: Select a hostile symbol and add any unit size. Notice how the symbol gets clipped. Need to fix that css issue
 // TODO: Mod1 helper text has word wrap. Fix it to 1 line
 // TODO: Final objects to add: Tactical Mission Tasks & Graphic Control Measures.
-// TODO: taskForceObject is 7.59kb, this can be reduced due to the unit sizes from None to Division (and Command) all having the same data
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -22,6 +21,8 @@ import {
 } from './helperFunctions';
 import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
+import tacticalMissionTasksObject from './tacticalMissionTasksObject';
+import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -54,6 +55,10 @@ const installationSwitch = new MDCSwitch(document.querySelector('.mdc-switch.ins
 const taskForceSwitch = new MDCSwitch(document.querySelector('.mdc-switch.taskForceSwitch'));
 
 const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-select'));
+
+const selectTacticalMissionTasks = new MDCSelect(document.querySelector('.tacticalmissiontask-select'));
+
+const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.graphiccontrolmeasures-select'));
 
 
 // *********************************************************************************** //
@@ -409,7 +414,9 @@ window.deleteUniqueDesignationButton = deleteUniqueDesignationButton;
 window.deleteHigherFormationButton = deleteHigherFormationButton;
 window.DisableInputs = DisableInputs;
 window.selectCommandPost = selectCommandPost;
-
+window.tacticalMissionTasksObject = tacticalMissionTasksObject;
+window.selectTacticalMissionTasks = selectTacticalMissionTasks;
+window.selectGraphicControlMeasures = selectGraphicControlMeasures;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
 window.onload = () => {
@@ -417,13 +424,16 @@ window.onload = () => {
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
+  addSymbolsAndModsToList(tacticalMissionTasksObject, 'tacticalmissiontask', selectTacticalMissionTasks);
+  addSymbolsAndModsToList(graphicControlMeasuresObject, 'graphiccontrolmeasures', selectGraphicControlMeasures);
+
   // Hide the text field trash can buttons on page load
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
   console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 
-  const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
+  const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value, selectTacticalMissionTasks.value);
   window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
   setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
@@ -482,12 +492,44 @@ window.onload = () => {
     MainMS.placeSymbol();
   });
 
-  [selectUnitSize, selectMod1, selectMod2].forEach((key) => {
+  selectTacticalMissionTasks.listen('MDCSelect:change', () => {
+    setSelectMenuTextContent(selectTacticalMissionTasks);
+    MainMS.tacticalMissionTasks = selectTacticalMissionTasks.value;
+    MainMS.placeSymbol();
+  });
+
+  selectGraphicControlMeasures.listen('MDCSelect:change', () => {
+    setSelectMenuTextContent(selectGraphicControlMeasures);
+    if (selectGraphicControlMeasures.value !== 'None') {
+      selectSymbol.selectedText_.textContent = 'None';
+      // selectAffiliation.disabled = true;
+      // selectUnitSize.disabled = true;
+      // selectMod1.disabled = true;
+      // selectMod2.disabled = true;
+      // uniqueDesignationField.disabled = true;
+      // higherFormationField.disabled = true;
+      // reinforcedSwitch.disabled = true;
+      // reducedSwitch.disabled = true;
+      // flyingSwitch.disabled = true;
+      // activitySwitch.disabled = true;
+      // installationSwitch.disabled = true;
+      // taskForceSwitch.disabled = true;
+      // selectCommandPost.disabled = true;
+      // selectTacticalMissionTasks.disabled = true;
+      // TODO: Add more options to DisableInputs. When a GCM is chosen we need to disable everything except the symbolSelect menu
+      DisableInputs(true, true, true, true, true, true, true, true, true, true);
+    }
+    const gcm = new AddGraphicControlMeasure('.newSVG', 'Default Land Unit', 'friendly', undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, selectGraphicControlMeasures.value);
+  });
+
+  [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks, selectGraphicControlMeasures].forEach((key) => {
     key.listen('click', () => {
       // If any of these menus are open, then resize all the symbols
       selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
       selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
       selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
+      selectTacticalMissionTasks.isMenuOpen_ ? new Resizer('.tacticalmissiontaskFigure svg') : null;
+      selectGraphicControlMeasures.isMenuOpen_ ? new Resizer('.graphiccontrolmeasuresFigure svg') : null;
     });
   });
 

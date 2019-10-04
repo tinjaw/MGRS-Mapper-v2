@@ -1,5 +1,6 @@
 import { selectAffiliation } from './mdcComponents';
 
+
 // ex- TransformModifiersOnEquipment('.newSVG svg');
 // This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
 async function TransformModifiersOnEquipment(location) {
@@ -65,6 +66,20 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         selectCommandPost.value = 'None';
         // Since we do not want to strip the outline of the command post, return this value
         return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
+      case 'tacticalmissiontask':
+        setTimeout(() => {
+          //! This is a bit of a hack. I also don't like this because it is using the global vars and I don't feel like importing more shit
+          selectTacticalMissionTasks.value = 'None';
+        }, 30);
+        new MilSym(`.tacticalmissiontaskFigure[data-tacticalmissiontask-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
+        break;
+      case 'graphiccontrolmeasures':
+        setTimeout(() => {
+          //! This is a bit of a hack. I also don't like this because it is using the global vars and I don't feel like importing more shit
+          selectGraphicControlMeasures.value = 'None';
+        }, 30);
+        new MilSym(`.graphiccontrolmeasuresFigure[data-graphiccontrolmeasures-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
+        break;
       case 'symbol':
         // Set the selected symbol to "Default Land Unit" on page load
         selectSymbol.foundation_.setSelectedIndex(0);

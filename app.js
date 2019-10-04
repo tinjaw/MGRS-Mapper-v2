@@ -9,6 +9,9 @@ import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import taskForceObject from './taskForceObject';
 import commandPostObject from './commandPostObject';
+import tacticalMissionTasksObject from './tacticalMissionTasksObject';
+import graphicControlMeasuresObject from './graphicControlMeasuresObject';
+import { selectAffiliation } from './mdcComponents';
 
 // * The star of the show * //
 // Example 1- const symbol_1 = new MilSym('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post');
@@ -16,7 +19,7 @@ import commandPostObject from './commandPostObject';
 // symbol_2.mod1 = 'Armored';
 // symbol_2.placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost) {
+  constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost, tacticalMissionTasks, graphicControlMeasures) {
     this._location = location;
     this._symbol = symbol;
     this._affiliation = affiliation;
@@ -31,6 +34,8 @@ class MilSym {
     this._installation = installation;
     this._taskForce = taskForce;
     this._commandPost = commandPost;
+    this._tacticalMissionTasks = tacticalMissionTasks;
+    this._graphicControlMeasures = graphicControlMeasures;
     this.type = militarySymbolsObject[this._symbol].type;
     this.data = {
       affiliation,
@@ -46,6 +51,8 @@ class MilSym {
       installation,
       taskForce,
       commandPost,
+      tacticalMissionTasks,
+      graphicControlMeasures,
       type: militarySymbolsObject[this._symbol].type,
     };
     return this.placeSymbol();
@@ -565,11 +572,9 @@ class MilSym {
   // TASK FORCE
   get taskForce() {
     if (this._taskForce) {
-      const ech = this._echelon;
       const taskForceGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
       taskForceGroup.classList.add('taskforce');
       const taskForceModifier = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      console.log(ech);
       taskForceModifier.setAttribute('d', taskForceObject[this._echelon].affiliation[this._affiliation].d);
       taskForceModifier.setAttribute('fill', 'none');
       taskForceModifier.setAttribute('stroke', 'black');
@@ -634,6 +639,110 @@ class MilSym {
     this._commandPost = value;
   }
 
+
+  // TACTICAL MISSION TASKS
+  get tacticalMissionTasks() {
+    if (this._tacticalMissionTasks) {
+      const tacticalMissionTasksGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      tacticalMissionTasksGroup.classList.add('tacticalmissiontasks');
+      Object.keys(tacticalMissionTasksObject[this._tacticalMissionTasks].affiliation[this._affiliation]).forEach((key) => {
+        const element = tacticalMissionTasksObject[this._tacticalMissionTasks].affiliation[this._affiliation][key];
+        if (key.indexOf('path') === 0) {
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttributeNS(null, 'd', `${element.d}`);
+          // If the default path fill is missing, default to none
+          !element.fill ? path.setAttributeNS(null, 'fill', 'none') : path.setAttributeNS(null, 'fill', `${element.fill}`);
+          // If the default path stroke is missing, default to black
+          !element.stroke ? path.setAttributeNS(null, 'stroke', 'black') : path.setAttributeNS(null, 'stroke', `${element.stroke}`);
+          // If the default path stroke-width is missing, default to 4
+          !element.strokeWidth ? path.setAttributeNS(null, 'stroke-width', '4') : path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // If the strokeLinejoin property exists, add the attribute, otherwise do nothing
+          element.strokeLinejoin ? path.setAttributeNS(null, 'stroke-linejoin', `${element.strokeLinejoin}`) : null;
+          // If the mod1 element is missing a transform property, do nothing, else set the transform value
+          !element.transform ? null : path.setAttributeNS(null, 'transform', `${element.transform}`);
+          tacticalMissionTasksGroup.append(path);
+        }
+        if (key.indexOf('text') === 0) {
+          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.textContent = element.symbolText;
+          text.setAttributeNS(null, 'x', `${element.x}`);
+          text.setAttributeNS(null, 'y', `${element.y}`);
+          text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
+          text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
+          // Default decorator font family to Arial
+          !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
+          // Default decorator font weight to 30
+          !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
+          // Default decorator font stroke to none
+          !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
+          // Default decorator font stroke width to 4
+          !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // Default decorator font fill to black
+          !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
+          tacticalMissionTasksGroup.append(text);
+        }
+      });
+      return tacticalMissionTasksGroup;
+    }
+    return undefined;
+  }
+
+  set tacticalMissionTasks(value) {
+    this._tacticalMissionTasks = value;
+  }
+
+
+  // TACTICAL MISSION TASKS
+  get graphicControlMeasures() {
+    if (this._graphicControlMeasures) {
+      const graphicControlMeasuresGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      graphicControlMeasuresGroup.classList.add('graphiccontrolmeasures');
+      Object.keys(graphicControlMeasuresObject[this._graphicControlMeasures].affiliation[this._affiliation]).forEach((key) => {
+        const element = graphicControlMeasuresObject[this._graphicControlMeasures].affiliation[this._affiliation][key];
+        if (key.indexOf('path') === 0) {
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttributeNS(null, 'd', `${element.d}`);
+          // If the default path fill is missing, default to none
+          !element.fill ? path.setAttributeNS(null, 'fill', 'none') : path.setAttributeNS(null, 'fill', `${element.fill}`);
+          // If the default path stroke is missing, default to black
+          !element.stroke ? path.setAttributeNS(null, 'stroke', 'black') : path.setAttributeNS(null, 'stroke', `${element.stroke}`);
+          // If the default path stroke-width is missing, default to 4
+          !element.strokeWidth ? path.setAttributeNS(null, 'stroke-width', '4') : path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // If the strokeLinejoin property exists, add the attribute, otherwise do nothing
+          // element.strokeLinejoin ? path.setAttributeNS(null, 'stroke-linejoin', `${element.strokeLinejoin}`) : null;
+          // If the mod1 element is missing a transform property, do nothing, else set the transform value
+          !element.transform ? null : path.setAttributeNS(null, 'transform', `${element.transform}`);
+          graphicControlMeasuresGroup.append(path);
+        }
+        if (key.indexOf('text') === 0) {
+          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.textContent = element.symbolText;
+          text.setAttributeNS(null, 'x', `${element.x}`);
+          text.setAttributeNS(null, 'y', `${element.y}`);
+          text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
+          text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
+          // Default decorator font family to Arial
+          !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
+          // Default decorator font weight to 30
+          !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
+          // Default decorator font stroke to none
+          !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
+          // Default decorator font stroke width to 4
+          !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // Default decorator font fill to black
+          !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
+          graphicControlMeasuresGroup.append(text);
+        }
+      });
+      return graphicControlMeasuresGroup;
+    }
+    return undefined;
+  }
+
+  set graphicControlMeasures(value) {
+    this._graphicControlMeasures = value;
+  }
+
   // PLACE SYMBOL
   placeSymbol() {
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
@@ -676,6 +785,10 @@ class MilSym {
           return this.taskForce;
         case 'commandPost':
           return this.commandPost;
+        case 'tacticalMissionTasks':
+          return this.tacticalMissionTasks;
+        case 'graphicControlMeasures':
+          return this.graphicControlMeasures;
         default:
           break;
       }
@@ -701,6 +814,25 @@ class MilSym {
   }
 }
 
+
+class AddGraphicControlMeasure extends MilSym {
+  placeSymbol() {
+    this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.append(this.graphicControlMeasures);
+    this.location.append(svg);
+    svg.setAttributeNS(null, 'data-symbol-name', this._symbol);
+    svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
+    svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
+    svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
+    svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+    svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
+    // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon. This might not be the best way to do things.
+    // svg.setAttributeNS(null, 'viewBox', '21 46 158 108');
+  }
+}
+
+window.AddGraphicControlMeasure = AddGraphicControlMeasure;
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;

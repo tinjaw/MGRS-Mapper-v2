@@ -24,230 +24,32 @@ const taskForceObject = {
       },
     },
   },
-  team: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get team() {
+    return this.none;
   },
-  squad: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get squad() {
+    return this.none;
   },
-  section: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get section() {
+    return this.none;
   },
-  platoon: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get platoon() {
+    return this.none;
   },
-  companyTroopBattery: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get companyTroopBattery() {
+    return this.none;
   },
-  battalionSquadron: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get battalionSquadron() {
+    return this.none;
   },
-  regimentGroup: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get regimentGroup() {
+    return this.none;
   },
-  brigade: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get brigade() {
+    return this.none;
   },
-  division: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get division() {
+    return this.none;
   },
   corps: {
     affiliation: {
@@ -349,30 +151,8 @@ const taskForceObject = {
       },
     },
   },
-  command: {
-    affiliation: {
-      friendly: {
-        d: 'M55,50 L55,10 145,10 145,50',
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      hostile: {
-        d: 'M55,28 L55,-12 145,-12 145,28',
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      neutral: {
-        d: 'M55,45 L55,5 145,5 145,45',
-      },
-    },
+  get command() {
+    return this.none;
   },
 };
 
