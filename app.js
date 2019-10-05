@@ -814,7 +814,7 @@ class MilSym {
   }
 }
 
-
+//! export this
 class AddGraphicControlMeasure extends MilSym {
   placeSymbol() {
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;

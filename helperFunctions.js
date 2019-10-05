@@ -1,6 +1,7 @@
+/* eslint-disable no-new */
 import { selectAffiliation } from './mdcComponents';
 
-
+// * Make Mod1 & Mod2 fit inside an equipment symbol * //
 // ex- TransformModifiersOnEquipment('.newSVG svg');
 // This should only be called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
 async function TransformModifiersOnEquipment(location) {
@@ -29,7 +30,7 @@ async function TransformModifiersOnEquipment(location) {
   }
 }
 
-// * Add Symbols and Modifiers to the Dropdown lists
+// * Add Symbols and Modifiers to the Dropdown lists * //
 // ex- addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
 // obj = the object to iterate over (ex- mod1Object)
 // abv = the abbreviation of the object to match the HTML select lists
@@ -111,6 +112,7 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
   });
 };
 
+// * Resize symbols (usually called when a select menu is opened) * //
 // ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
 class Resizer {
   constructor(symbolElement, width = 93, height = 64) {
@@ -126,8 +128,8 @@ class Resizer {
   }
 }
 
+// * Bounce In Animation * //
 // Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2.
-//! BUG: Animations jerk around when the symbol is a piece of equipment
 function bounceInAnimation(location) {
   const bounceIn = document.querySelector(location);
   if (MainMS.type !== 'Equipment') {
@@ -138,6 +140,7 @@ function bounceInAnimation(location) {
   }
 }
 
+//* Disabled selected inputs * //
 function DisableInputs(size = false, unique = false, higher = false, reinforced = false, reduced = false, flying = false, activity = false, installation = false, taskforce = false, commandPost = false) {
   if (size) {
     selectUnitSize.disabled = true;
@@ -233,6 +236,7 @@ function DisableInputs(size = false, unique = false, higher = false, reinforced 
   }
 }
 
+//* Debounce function (used in search field) * //
 // Used to debounce the search field
 function debounce(func, interval) {
   let timeout;
@@ -248,6 +252,7 @@ function debounce(func, interval) {
   };
 }
 
+//* Set the textContent of the specified drop down * //
 // Sets the textContent of the select boxes to the currently selected item.
 function setSelectMenuTextContent(...params) {
   params.forEach((key) => {

@@ -7,7 +7,7 @@
 // TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
 // TODO: Select a hostile symbol and add any unit size. Notice how the symbol gets clipped. Need to fix that css issue
 // TODO: Mod1 helper text has word wrap. Fix it to 1 line
-// TODO: Final objects to add: Tactical Mission Tasks & Graphic Control Measures.
+// TODO: Once the skeleton is complete, try adding top-app-bar and mdc-drawer and see if it works out
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -438,9 +438,9 @@ window.onload = () => {
 
   setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 
-  // ******************************************************************************************************** //
-  // * Select Symbol, Select Affiliation, Select Unit Size, Select Mod 1, Select Mod 2, Select Command Post * //
-  // ******************************************************************************************************** //
+  // **************************************************************************************************************** //
+  // * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post, Tactical Mission Tasks, Graphic Control Measures * //
+  // **************************************************************************************************************** //
   selectSymbol.listen('MDCSelect:change', () => {
     setSelectMenuTextContent(selectSymbol);
     MainMS.symbol = selectSymbol.value;
@@ -519,7 +519,7 @@ window.onload = () => {
       // TODO: Add more options to DisableInputs. When a GCM is chosen we need to disable everything except the symbolSelect menu
       DisableInputs(true, true, true, true, true, true, true, true, true, true);
     }
-    const gcm = new AddGraphicControlMeasure('.newSVG', 'Default Land Unit', 'friendly', undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, selectGraphicControlMeasures.value);
+    const GCM = new AddGraphicControlMeasure('.newSVG', 'Default Land Unit', 'friendly', undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, selectGraphicControlMeasures.value);
   });
 
   [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks, selectGraphicControlMeasures].forEach((key) => {
