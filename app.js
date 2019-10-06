@@ -12,6 +12,7 @@ import commandPostObject from './commandPostObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 import { selectAffiliation } from './mdcComponents';
+import { DisableInputs } from './helperFunctions';
 
 // * The star of the show * //
 // Example 1- const symbol_1 = new MilSym('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post');
@@ -148,6 +149,8 @@ class MilSym {
         flyingSwitch.disabled = false;
       } else {
         flyingSwitch.disabled = true;
+        // Uncheck the flying switch if the symbol does not have flight capabilities
+        flyingSwitch.checked = false;
       }
 
       // This adds the flying outline to the symbol... Not sure if this logic is elegant or not...
@@ -181,17 +184,27 @@ class MilSym {
       const adjustSymbolOutlineForEquipment = () => {
         // Set echelon to 'none' for equipment. If set to undefined then it throws weird errors when you search for a piece of equipment, then change symbol to land unit, then enable task force... idk
         this.echelon = 'none';
-        // Removes the Unique Designation about the Equipment symbol
+        // Remove the Unique Designation about the Equipment symbol
         this.uniqueDesignation = undefined;
-        // Removes the Higher Formation about the Equipment symbol
+        // Remove the Higher Formation about the Equipment symbol
         this.higherFormation = undefined;
-        // Removes the Reinforced/Reduced above the Equipment symbol
+        // Remove the Reinforced/Reduced above the Equipment symbol
         this.reinforcedReduced = undefined;
-        // Removes the task force above the Equipment symbol
+        // Remove activity amplifier on Equipment symbol
+        this.activity = undefined;
+        // Remove installation amplifier on Equipment symbol
+        this.installation = undefined;
+        // Remove the task force above the Equipment symbol
         this.taskForce = undefined;
+        // Remove command post amplifier on Equipment symbol
+        this.commandPost = undefined;
+        // Remove tactical mission tasks on the Equipment symbol
+        this.tacticalMissionTasks = undefined;
+        // Remove Graphic control measures if it exists
+        this.graphicControlMeasures = undefined;
+
         // This will raise Mod1, scale down the decorator, and lower Mod2
         TransformModifiersOnEquipment('.newSVG svg');
-
 
         // For equipment: friendly and friendlyTemplated symbols are circular, whereas all other affiliations do not get special treatment
         if (this._affiliation === 'friendly') {
@@ -708,8 +721,6 @@ class MilSym {
           !element.stroke ? path.setAttributeNS(null, 'stroke', 'black') : path.setAttributeNS(null, 'stroke', `${element.stroke}`);
           // If the default path stroke-width is missing, default to 4
           !element.strokeWidth ? path.setAttributeNS(null, 'stroke-width', '4') : path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-          // If the strokeLinejoin property exists, add the attribute, otherwise do nothing
-          // element.strokeLinejoin ? path.setAttributeNS(null, 'stroke-linejoin', `${element.strokeLinejoin}`) : null;
           // If the mod1 element is missing a transform property, do nothing, else set the transform value
           !element.transform ? null : path.setAttributeNS(null, 'transform', `${element.transform}`);
           graphicControlMeasuresGroup.append(path);
@@ -810,13 +821,14 @@ class MilSym {
     // svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
     // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon. This might not be the best way to do things.
     svg.setAttributeNS(null, 'viewBox', '21 46 158 108');
-    console.log('PlaceSymbol Running!');
+    console.count('Running placeSymbol');
   }
 }
 
 //! export this
 class AddGraphicControlMeasure extends MilSym {
   placeSymbol() {
+    this.data.graphicControlMeasures = this._graphicControlMeasures;
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.append(this.graphicControlMeasures);
@@ -827,8 +839,6 @@ class AddGraphicControlMeasure extends MilSym {
     svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
     svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
-    // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon. This might not be the best way to do things.
-    // svg.setAttributeNS(null, 'viewBox', '21 46 158 108');
   }
 }
 

@@ -1,5 +1,14 @@
 # Change Log Notes
 
+---
+
+## 6OCT19
+
+- Refactored DisableInputs
+- Smashed bugs with GCMs overriding DisableInputs (This took like 6 hours)
+
+---
+
 ## 3OCT19
 
 - Messed around with async/await in MilSym

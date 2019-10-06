@@ -1,5 +1,6 @@
 /* eslint-disable no-new */
 import { selectAffiliation } from './mdcComponents';
+import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 
 // * Make Mod1 & Mod2 fit inside an equipment symbol * //
 // ex- TransformModifiersOnEquipment('.newSVG svg');
@@ -141,18 +142,35 @@ function bounceInAnimation(location) {
 }
 
 //* Disabled selected inputs * //
-function DisableInputs(size = false, unique = false, higher = false, reinforced = false, reduced = false, flying = false, activity = false, installation = false, taskforce = false, commandPost = false) {
+function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, flying = false, activity = false, installation = false, taskForce = false, commandPost = false, tacticalMissionTasks = false, graphicControlMeasures = false) {
+  if (affiliation) {
+    selectAffiliation.disabled = true;
+  } else {
+    selectAffiliation.disabled = false;
+  }
+
   if (size) {
     selectUnitSize.disabled = true;
-    selectUnitSize.foundation_.adapter_.setSelectedIndex(0);
-    MainMS.data.echelon = 'none';
-    MainMS.echelon = undefined;
+    selectUnitSize.setSelectedIndex = 0;
   } else {
     selectUnitSize.disabled = false;
   }
 
+  if (mod1) {
+    selectMod1.disabled = true;
+    selectMod1.selectedIndex = 0;
+  } else {
+    selectMod1.disabled = false;
+  }
+
+  if (mod2) {
+    selectMod2.disabled = true;
+    selectMod2.selectedIndex = 0;
+  } else {
+    selectMod2.disabled = false;
+  }
+
   if (unique) {
-    MainMS.uniqueDesignation = '';
     uniqueDesignationField.disabled = true;
     uniqueDesignationField.value = '';
     deleteUniqueDesignationButton.root_.style.display = 'none';
@@ -161,7 +179,6 @@ function DisableInputs(size = false, unique = false, higher = false, reinforced 
   }
 
   if (higher) {
-    MainMS.higherFormation = '';
     higherFormationField.disabled = true;
     higherFormationField.value = '';
     deleteHigherFormationButton.root_.style.display = 'none';
@@ -172,7 +189,6 @@ function DisableInputs(size = false, unique = false, higher = false, reinforced 
   if (reinforced) {
     reinforcedSwitch.disabled = true;
     reinforcedSwitch.checked = false;
-    MainMS.reinforcedReduced = '';
   } else {
     reinforcedSwitch.disabled = false;
   }
@@ -180,7 +196,6 @@ function DisableInputs(size = false, unique = false, higher = false, reinforced 
   if (reduced) {
     reducedSwitch.disabled = true;
     reducedSwitch.checked = false;
-    MainMS.reinforcedReduced = '';
   } else {
     reducedSwitch.disabled = false;
   }
@@ -188,7 +203,6 @@ function DisableInputs(size = false, unique = false, higher = false, reinforced 
   if (flying) {
     flyingSwitch.disabled = true;
     flyingSwitch.checked = false;
-    MainMS.flying = false;
   } else {
     flyingSwitch.disabled = false;
   }
@@ -196,7 +210,7 @@ function DisableInputs(size = false, unique = false, higher = false, reinforced 
   if (activity) {
     activitySwitch.disabled = true;
     activitySwitch.checked = false;
-    MainMS.activity = false;
+    // MainMS.activity = false;
   } else {
     activitySwitch.disabled = false;
   }
@@ -204,35 +218,38 @@ function DisableInputs(size = false, unique = false, higher = false, reinforced 
   if (installation) {
     installationSwitch.disabled = true;
     installationSwitch.checked = false;
-    MainMS.installation = false;
   } else {
     installationSwitch.disabled = false;
   }
 
-  if (taskforce) {
+  if (taskForce) {
     taskForceSwitch.disabled = true;
     taskForceSwitch.checked = false;
-    MainMS.taskForce = false;
   } else {
     taskForceSwitch.disabled = false;
   }
 
   if (commandPost) {
     selectCommandPost.disabled = true;
-    selectCommandPost.foundation_.adapter_.setSelectedIndex(0);
-    MainMS.data.commandPost = 'None';
-    MainMS.commandPost = undefined;
-    selectCommandPost.value = selectCommandPost.value;
+    selectCommandPost.selectedIndex = 0;
   } else {
     selectCommandPost.disabled = false;
   }
 
-  if (window.hasOwnProperty('MainMS')) {
-    MainMS.placeSymbol();
+  if (tacticalMissionTasks) {
+    selectTacticalMissionTasks.disabled = true;
+    selectTacticalMissionTasks.selectedIndex = 0;
   } else {
-    setTimeout(() => {
-      MainMS.placeSymbol();
-    }, 100);
+    selectTacticalMissionTasks.disabled = false;
+  }
+
+  if (graphicControlMeasures) {
+    selectGraphicControlMeasures.disabled = true;
+    // If selectedIndex = 0 then it will override the MainMS symbol panel, so we use the foundation-adapter instead
+    selectGraphicControlMeasures.foundation_.adapter_.setSelectedIndex(0);
+    selectGraphicControlMeasures.selectedText_.textContent = 'None';
+  } else {
+    selectGraphicControlMeasures.disabled = false;
   }
 }
 
