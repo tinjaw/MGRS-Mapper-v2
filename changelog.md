@@ -6,6 +6,8 @@
 
 - Refactored DisableInputs
 - Smashed bugs with GCMs overriding DisableInputs (This took like 6 hours)
+- Refactored enableTaskForce, enableInstallation, enableActivity
+- Fixed bug where if you enabled Activity, Installation, and Task Force and THEN enabled flying, the amplifier switches wouldn't disappear. This was fixed inside adjustSymbolOutlineForFlying()
 
 ---
 

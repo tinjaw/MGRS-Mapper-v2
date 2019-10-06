@@ -163,6 +163,18 @@ class MilSym {
         this.higherFormation = undefined;
         // Removes the Reinforced/Reduced above the Equipment symbol
         this.reinforcedReduced = undefined;
+        // Remove activity amplifier on Equipment symbol
+        this.activity = undefined;
+        // Remove installation amplifier on Equipment symbol
+        this.installation = undefined;
+        // Remove the task force above the Equipment symbol
+        this.taskForce = undefined;
+        // Remove command post amplifier on Equipment symbol
+        this.commandPost = undefined;
+        // Remove tactical mission tasks on the Equipment symbol
+        this.tacticalMissionTasks = undefined;
+        // Remove Graphic control measures if it exists
+        this.graphicControlMeasures = undefined;
         // Instead of using the 'd' key in affiliationOutlineObject, we will use the 'flying' key
         if (affiliationOutlineObject[this._affiliation].templated) {
           outline.setAttributeNS(null, 'd', `${element.flying}`);

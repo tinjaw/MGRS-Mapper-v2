@@ -333,16 +333,10 @@ function enableActivity() {
     MainMS.activity = true;
     MainMS.placeSymbol();
     return true;
-  } if (window.hasOwnProperty('MainMS')) {
-    MainMS.activity = false;
-    MainMS.placeSymbol();
-    return false;
   }
-  setTimeout(() => {
-    MainMS.activity = false;
-    MainMS.placeSymbol();
-    return false;
-  }, 30);
+  MainMS.activity = false;
+  MainMS.placeSymbol();
+  return false;
 }
 
 activitySwitch.listen('change', enableActivity);
@@ -356,16 +350,10 @@ function enableInstallation() {
     MainMS.installation = true;
     MainMS.placeSymbol();
     return true;
-  } if (window.hasOwnProperty('MainMS')) {
-    MainMS.installation = false;
-    MainMS.placeSymbol();
-    return false;
   }
-  setTimeout(() => {
-    MainMS.installation = false;
-    MainMS.placeSymbol();
-    return false;
-  }, 30);
+  MainMS.installation = false;
+  MainMS.placeSymbol();
+  return false;
 }
 
 installationSwitch.listen('change', enableInstallation);
@@ -379,16 +367,10 @@ function enableTaskForce() {
     MainMS.taskForce = true;
     MainMS.placeSymbol();
     return true;
-  } if (window.hasOwnProperty('MainMS')) {
-    MainMS.taskForce = false;
-    MainMS.placeSymbol();
-    return false;
   }
-  setTimeout(() => {
-    MainMS.taskForce = false;
-    MainMS.placeSymbol();
-    return false;
-  }, 30);
+  MainMS.taskForce = false;
+  MainMS.placeSymbol();
+  return false;
 }
 
 taskForceSwitch.listen('change', enableTaskForce);
