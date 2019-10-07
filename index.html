@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sidebar Layout Redux</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- import Material Icons from Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <!-- import the Material stylesheet -->
-    <link rel="stylesheet" href="bundle.css" />
-    <link rel="icon" href="data:," />
-  </head>
-  <body class="mdc-typography">
-    <div class="mdc-layout-grid sidebar500pix">
-      <!-- Symbol Preview -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="newSVG" data-symbol-name="newSVG"></div>
-          </div>
+<head>
+  <title>Sidebar Layout Redux</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- import Material Icons from Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <!-- import the Material stylesheet -->
+  <link rel="stylesheet" href="bundle.css" />
+  <link rel="icon" href="data:," />
+  <style>
+    body {
+      display: flex;
+      height: 100vh;
+      margin: 0px 0px 0px 0px;
+    }
+    .mdc-drawer-app-content {
+      flex: auto;
+      overflow: auto;
+      position: relative;
+    }
+    .main-content {
+      overflow: auto;
+      height: 100%;
+    }
+    .app-bar {
+      position: absolute;
+    }
+    .mdc-top-app-bar {
+      z-index: 7;
+    }
+  </style>
+</head>
+
+<body class="mdc-typography">
+  <div class="mdc-layout-grid__cell pushbar from_right mdc-elevation--z8" data-pushbar-id="rightPushbar">
+    <!-- Symbol Preview -->
+    <div class="mdc-layout-grid mdc-elevation--z8">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell--span-12">
+          <div class="newSVG" data-symbol-name="newSVG"></div>
         </div>
       </div>
-      <!-- Symbol Search Field -->
-      <div class="mdc-layout-grid ">
+    </div>
+    <!-- Symbol Search Field -->
+    <div class="mdc-layout-grid symbolSelectors">
+      <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
+          <div class="mdc-layout-grid__cell--span-12 ">
             <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchSymbols">
               <i class="material-icons mdc-text-field__icon">search</i>
               <button class="mdc-button searchFieldDeleteIcon">
@@ -330,7 +354,8 @@
               </div>
             </div>
             <div class="mdc-text-field-helper-line">
-              <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-uniqueDesignation-helper-text">Example: A/2-101 (A Troop, 2nd Squadron, 101st Cavalry Regiment)</p>
+              <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-uniqueDesignation-helper-text">Example: A/2-101 (A Troop, 2nd Squadron, 101st Cavalry
+                Regiment)</p>
             </div>
           </div>
         </div>
@@ -442,7 +467,6 @@
           </div>
         </div>
       </div>
-
       <!-- Command Post List -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
@@ -463,7 +487,6 @@
           </div>
         </div>
       </div>
-
       <!-- Tactical Mission Tasks List -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
@@ -484,7 +507,6 @@
           </div>
         </div>
       </div>
-
       <!-- Graphic Control Measures List -->
       <div class="mdc-layout-grid ">
         <div class="mdc-layout-grid__inner">
@@ -506,8 +528,33 @@
         </div>
       </div>
     </div>
-    <div class="test"></div>
+  </div>
+  <div class="mdc-drawer-app-content">
+    <!-- Top App Bar -->
+    <header class="mdc-top-app-bar drawer-top-app-bar mdc-elevation--z4" id="app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
+          <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">menu</button>
+        </section>
+      </div>
+    </header>
+    <!-- Main Content (Map) -->
+    <div class="drawer-main-content mdc-elevation--z0">
+      <div class="mdc-top-app-bar--fixed-adjust"></div>
+      <main class="main-content" id="main-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </main>
+    </div>
+  </div>
+  <script src="bundle.js" async></script>
+</body>
 
-    <script src="bundle.js" async></script>
-  </body>
 </html>

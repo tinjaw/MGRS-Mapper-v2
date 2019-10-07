@@ -3,7 +3,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 
 module.exports = [{
-  entry: ['./app.scss', './app.js', './mdcComponents.js'],
+  entry: ['./app.scss', './app.js', './mdcComponents.js', './pushbar.js'],
   output: {
     filename: 'bundle.js',
   },

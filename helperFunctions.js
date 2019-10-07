@@ -142,7 +142,7 @@ function bounceInAnimation(location) {
 }
 
 //* Disabled selected inputs * //
-function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, flying = false, activity = false, installation = false, taskForce = false, commandPost = false, tacticalMissionTasks = false, graphicControlMeasures = false) {
+function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, activity = false, installation = false, taskForce = false, commandPost = false, tacticalMissionTasks = false, graphicControlMeasures = false) {
   if (affiliation) {
     selectAffiliation.disabled = true;
   } else {
@@ -200,12 +200,12 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
     reducedSwitch.disabled = false;
   }
 
-  if (flying) {
-    flyingSwitch.disabled = true;
-    flyingSwitch.checked = false;
-  } else {
-    flyingSwitch.disabled = false;
-  }
+  // if (flying) {
+  //   flyingSwitch.disabled = true;
+  //   flyingSwitch.checked = false;
+  // } else {
+  //   flyingSwitch.disabled = false;
+  // }
 
   if (activity) {
     activitySwitch.disabled = true;

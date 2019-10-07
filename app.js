@@ -11,8 +11,8 @@ import taskForceObject from './taskForceObject';
 import commandPostObject from './commandPostObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 import graphicControlMeasuresObject from './graphicControlMeasuresObject';
-import { selectAffiliation } from './mdcComponents';
-import { DisableInputs } from './helperFunctions';
+// import { selectAffiliation } from './mdcComponents';
+// import { DisableInputs } from './helperFunctions';
 
 // * The star of the show * //
 // Example 1- const symbol_1 = new MilSym('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post');
@@ -148,6 +148,8 @@ class MilSym {
       if (militarySymbolsObject[this._symbol].flightCapable) {
         flyingSwitch.disabled = false;
       } else {
+        // Disable flying specifically otherwise land units will have flight outlines. For instance if you switched from UAV to Infantry
+        this._flying = false;
         flyingSwitch.disabled = true;
         // Uncheck the flying switch if the symbol does not have flight capabilities
         flyingSwitch.checked = false;

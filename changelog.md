@@ -8,6 +8,12 @@
 - Smashed bugs with GCMs overriding DisableInputs (This took like 6 hours)
 - Refactored enableTaskForce, enableInstallation, enableActivity
 - Fixed bug where if you enabled Activity, Installation, and Task Force and THEN enabled flying, the amplifier switches wouldn't disappear. This was fixed inside adjustSymbolOutlineForFlying()
+- Would static methods on MilSym be a more efficient way to go about this? The purpose of static methods is that you can access generic properties on a class without having to create a class instance. Static methods don't have access to the this class instance, and therefore are really only there as utility functions and properties.
+- Added Pushbar.js
+- Added Top App Bar
+- Incorporated old Pushbar logic
+- Smashed bugs with flying switch. Previously if you enabled a flying symbol then switched to a non flying symbol it would keep the flying outline. This was fixed by adding this.\_flying = false in the flightCapable if statement in MilSym
+- Added z-elevation and other styles to elements to complete the skeleton
 
 ---
 

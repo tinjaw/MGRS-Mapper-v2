@@ -30,11 +30,13 @@
   },
   "dependencies": {
     "@material/button": "^1.0.0",
+    "@material/elevation": "^3.1.0",
     "@material/layout-grid": "^3.0.0",
     "@material/ripple": "^1.0.0",
     "@material/select": "^3.0.0",
     "@material/switch": "^3.2.0",
     "@material/textfield": "^3.1.0",
+    "@material/top-app-bar": "^3.2.0",
     "@material/typography": "^1.0.0",
     "fuse.js": "^3.4.5"
   },

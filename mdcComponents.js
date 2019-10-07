@@ -7,12 +7,15 @@
 // TODO: Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
 // TODO: Select a hostile symbol and add any unit size. Notice how the symbol gets clipped. Need to fix that css issue
 // TODO: Mod1 helper text has word wrap. Fix it to 1 line
-// TODO: Once the skeleton is complete, try adding top-app-bar and mdc-drawer and see if it works out
+// TODO: Next big project is fixing the symbol panel. The symbol is set with a fixed viewBox which makes it great for adding amplifiers. A dynamic viewBox would resize the symbol on every addition. A benefit of a dynamic viewBox is that the symbol will never clip outside of the panel. A downside is that things like uniqueDesignation text gets all buggy. There needs to be a way to keep the SVG absolutely centered in the panel.
+// TODO: Bottom App Bar or Infowindow menu like on the Original pushbar site?
+// TODO: The select menus are too similar. Each should have an icon that differentiates them
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
 import { MDCSwitch } from '@material/switch';
 import Fuse from 'fuse.js';
+import { MDCTopAppBar } from '@material/top-app-bar';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import commandPostObject from './commandPostObject';
@@ -23,6 +26,14 @@ import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 import graphicControlMeasuresObject from './graphicControlMeasuresObject';
+import Pushbar from './pushbar';
+
+
+const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
+
+const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-icon-button'));
+toggleSidebarButton.unbounded = true;
+const pushbar = new Pushbar({ blur: false, overlay: false });
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -60,6 +71,13 @@ const selectTacticalMissionTasks = new MDCSelect(document.querySelector('.tactic
 
 const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.graphiccontrolmeasures-select'));
 
+
+// *********************************************************************************** //
+// * Toggle App Bar                                                                  * //
+// *********************************************************************************** //
+toggleSidebarButton.listen('click', () => {
+  pushbar.opened ? pushbar.close() : pushbar.open('rightPushbar');
+});
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -208,7 +226,6 @@ const inputDesignationFields = debounce(() => {
     deleteUniqueDesignationButton.root_.style.display = 'none';
   }
   if (higherFormationField.input_.value !== '') {
-    console.log('Running Higher ');
     // Show the trash icon when there is any text in the search field
     deleteHigherFormationButton.root_.style.display = 'initial';
     deleteHigherFormationButton.root_.style.right = '0';
@@ -307,8 +324,10 @@ class RRSwitches {
 function enableFlyingOutline() {
   if (flyingSwitch.checked) {
     MainMS.flying = true;
+
+    // DisableInputs(false, true, false, false, true, true, true, true, false, true, true, true, true, true, true);
+    DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
     MainMS.placeSymbol();
-    DisableInputs(false, true, false, false, true, true, true, true, false, true, true, true, true, true, true);
   } else if (window.hasOwnProperty('MainMS')) {
     MainMS.flying = false;
     DisableInputs();
@@ -403,8 +422,6 @@ window.selectTacticalMissionTasks = selectTacticalMissionTasks;
 window.selectGraphicControlMeasures = selectGraphicControlMeasures;
 
 // Load the Symbols and Modifiers into the dropdowns on page load
-
-
 window.onload = () => {
   addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
@@ -412,7 +429,8 @@ window.onload = () => {
   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
   addSymbolsAndModsToList(tacticalMissionTasksObject, 'tacticalmissiontask', selectTacticalMissionTasks);
   addSymbolsAndModsToList(graphicControlMeasuresObject, 'graphiccontrolmeasures', selectGraphicControlMeasures);
-
+  // Open the pushbar on page load
+  pushbar.open('rightPushbar');
   // Hide the text field trash can buttons on page load
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
@@ -439,8 +457,10 @@ window.onload = () => {
     changeSymbols.then(() => {
       // Remove the outline of the default/none symbol
       if (MainMS.type === 'Equipment') {
+        console.log('This is equipment');
         // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
-        DisableInputs(false, true, false, false, true, true, true, true, false, true, true, true, true, true, true);
+        DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
+        // DisableInputs(false, true, false, false, true, true, true, true, false, true, true, true, true, true, true);
       } else {
         selectGraphicControlMeasures.selectedText_.textContent = 'None';
         DisableInputs();
@@ -552,7 +572,6 @@ window.onload = () => {
     }
     // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
     selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
-    // Bug fix: if the flyingSwitch is checked and the symbol dropdown menu is opened, it will prevent the switch from being disabled.
     flyingSwitch.checked ? flyingSwitch.disabled = false : null;
   });
 
@@ -573,5 +592,6 @@ window.onload = () => {
     selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
   });
 };
+
 
 export { selectAffiliation };

@@ -13,14 +13,26 @@
 @import '@material/textfield/mdc-text-field';
 @import '@material/elevation/mdc-elevation';
 @import '@material/switch/mdc-switch';
+@import './pushbar.scss';
+@import '@material/top-app-bar/mdc-top-app-bar';
+@import '@material/icon-button/mdc-icon-button';
 
-.sidebar500pix {
-  width: 550px;
+.symbolSelectors {
+  position: absolute;
+  overflow: auto;
+  height: calc(100% - 20em);
+  width: 100%;
+  border-top: 4px midnightblue solid;
 }
+
+// .sidebar500pix {
+//   width: 550px;
+// }
 
 .newSVG {
   // height: 150px;
-  height: 200px;
+  // height: 200px;
+  padding-top: 100px;
   display: flex;
   // align-items: center;
   align-items: flex-start;
