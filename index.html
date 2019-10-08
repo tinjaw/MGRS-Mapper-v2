@@ -1,560 +1,554 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Sidebar Layout Redux</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- import Material Icons from Google Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  <!-- import the Material stylesheet -->
-  <link rel="stylesheet" href="bundle.css" />
-  <link rel="icon" href="data:," />
-  <style>
-    body {
-      display: flex;
-      height: 100vh;
-      margin: 0px 0px 0px 0px;
-    }
-    .mdc-drawer-app-content {
-      flex: auto;
-      overflow: auto;
-      position: relative;
-    }
-    .main-content {
-      overflow: auto;
-      height: 100%;
-    }
-    .app-bar {
-      position: absolute;
-    }
-    .mdc-top-app-bar {
-      z-index: 7;
-    }
-  </style>
-</head>
+  <head>
+    <title>Sidebar Layout Redux</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- import Material Icons from Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- import the Material stylesheet -->
+    <link rel="stylesheet" href="bundle.css" />
+    <link rel="icon" href="data:," />
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        margin: 0px 0px 0px 0px;
+      }
+      .mdc-drawer-app-content {
+        flex: auto;
+        overflow: auto;
+        position: relative;
+      }
+      .main-content {
+        overflow: auto;
+        height: 100%;
+      }
+      .app-bar {
+        position: absolute;
+      }
+      .mdc-top-app-bar {
+        z-index: 7;
+      }
+    </style>
+  </head>
 
-<body class="mdc-typography">
-  <div class="mdc-layout-grid__cell pushbar from_right mdc-elevation--z8" data-pushbar-id="rightPushbar">
-    <!-- Symbol Preview -->
-    <div class="mdc-layout-grid mdc-elevation--z8">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell--span-12">
-          <div class="newSVG" data-symbol-name="newSVG"></div>
+  <body class="mdc-typography">
+    <div class="mdc-layout-grid__cell pushbar from_right mdc-elevation--z8" data-pushbar-id="rightPushbar">
+      <!-- Symbol Preview -->
+      <div class="mdc-layout-grid mdc-elevation--z8">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell--span-12">
+            <div class="newSVG" data-symbol-name="newSVG"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Symbol Search Field -->
+      <div class="mdc-layout-grid symbolSelectors">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12 ">
+              <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchSymbols">
+                <i class="material-icons mdc-text-field__icon">search</i>
+                <button class="mdc-button searchFieldDeleteIcon">
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                </button>
+                <input type="text" id="text-field-outlined-shape-two" class="mdc-text-field__input" aria-describedby="text-field-outlined-shape-two-helper-text" />
+                <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                  <div class="mdc-notched-outline__leading"></div>
+                  <div class="mdc-notched-outline__notch">
+                    <label class="mdc-floating-label" for="text-field-outlined-shape-two">Search Military Symbols</label>
+                  </div>
+                  <div class="mdc-notched-outline__trailing"></div>
+                </div>
+              </div>
+              <div class="mdc-text-field-helper-line">
+                <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-shape-two-helper-text">Type in the symbol you are looking for (e.g. - "Infantry")</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Symbol Select List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-3">
+              <div class="mdc-select  symbol-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list symbol-list"></ul>
+                </div>
+                <span class="mdc-floating-label">Select a Symbol</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Affiliation List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-3">
+              <div class="mdc-select  affiliation-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list affiliation-list">
+                    <li class="mdc-list-item mdc-list-item--selected" data-value="friendly" aria-selected="true">
+                      <figure class="affiliationFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 46 158 108">
+                          <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="5" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                        </svg>
+                      </figure>
+                      Friendly
+                    </li>
+                    <li class="mdc-list-item" data-value="friendlyTemplated">
+                      <figure class="affiliationFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 46 158 108">
+                          <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="8" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                          <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
+                        </svg>
+                      </figure>
+                      Assumed Friendly
+                    </li>
+                    <li class="mdc-list-item" data-value="hostile">
+                      <figure class="affiliationFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="24 24 152 152">
+                          <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="5" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
+                        </svg>
+                      </figure>
+                      Hostile
+                    </li>
+                    <li class="mdc-list-item" data-value="hostileTemplated">
+                      <figure class="affiliationFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="24 24 152 152">
+                          <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="8" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
+                          <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
+                        </svg>
+                      </figure>
+                      Suspect
+                    </li>
+                    <li class="mdc-list-item" data-value="unknown">
+                      <figure class="affiliationFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="26.75 26.75 146.5 146.5">
+                          <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="5" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
+                        </svg>
+                      </figure>
+                      Unknown
+                    </li>
+                    <li class="mdc-list-item" data-value="pending">
+                      <figure class="affiliationFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="26.75 26.75 146.5 146.5">
+                          <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="8" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
+                          <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
+                        </svg>
+                      </figure>
+                      Pending
+                    </li>
+                    <li class="mdc-list-item" data-value="neutral">
+                      <figure class="affiliationFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="41 41 118 118">
+                          <path d="M45,45 l110,0 0,110 -110,0 z" stroke-width="5" stroke="black" fill="rgb(170,255,170)" fill-opacity="1"></path>
+                        </svg>
+                      </figure>
+                      Neutral
+                    </li>
+                  </ul>
+                </div>
+                <span class="mdc-floating-label">Select an Affiliation</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Unit Size List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-3">
+              <div class="mdc-select  unit-size-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list unit-size-list">
+                    <li class="mdc-list-item mdc-list-item--selected" data-value="none" aria-selected="true">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143"></svg>
+                      </figure>
+                      None
+                    </li>
+                    <li class="mdc-list-item" data-value="team" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M85,30a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,40L120,20" fill="none" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Team
+                    </li>
+                    <li class="mdc-list-item" data-value="squad" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Squad
+                    </li>
+                    <li class="mdc-list-item" data-value="section" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M107.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0 M77.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Section
+                    </li>
+                    <li class="mdc-list-item" data-value="platoon" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0 M62.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0 M122.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Platoon
+                    </li>
+                    <li class="mdc-list-item" data-value="companyTroopBattery" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M100,40L100,15" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Company/Troop/Battery
+                    </li>
+                    <li class="mdc-list-item" data-value="battalionSquadron" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M90,40L90,15 M110,40L110,15" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Battalion/Squadron
+                    </li>
+                    <li class="mdc-list-item" data-value="regimentGroup" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M100,40L100,15 M120,40L120,15 M80,40L80,15" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Regiment/Group
+                    </li>
+                    <li class="mdc-list-item" data-value="brigade" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M87.5,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Brigade
+                    </li>
+                    <li class="mdc-list-item" data-value="division" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M70,40 l25,-25 m0,25 l-25,-25 M105,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Division
+                    </li>
+                    <li class="mdc-list-item" data-value="corps" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M52.5,40 l25,-25 m0,25 l-25,-25 M87.5,40 l25,-25 m0,25 l-25,-25 M122.5,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Corps/MEF
+                    </li>
+                    <li class="mdc-list-item" data-value="army" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M35,40 l25,-25 m0,25 l-25,-25 M70,40 l25,-25 m0,25 l-25,-25 M105,40 l25,-25 m0,25 l-25,-25 M140,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Army
+                    </li>
+                    <li class="mdc-list-item" data-value="armyGroup" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M17.5, 40 l25,-25 m0,25 l-25,-25 M52.5, 40 l25,-25 m0,25 l-25,-25 M87.5, 40 l25,-25 m0,25 l-25,-25 M122.5,40 l25,-25 m0,25 l-25,-25 M157.5,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Army Group/Front
+                    </li>
+                    <li class="mdc-list-item" data-value="regionTheatre" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M0,40l25,-25m0,25l-25,-25M35,40l25,-25m0,25l-25,-25M70,40l25,-25m0,25l-25,-25M105,40l25,-25m0,25l-25,-25M140,40l25,-25m0,25l-25,-25M175,40l25,-25m0,25l-25,-25" fill="none" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Region/Theatre
+                    </li>
+                    <li class="mdc-list-item" data-value="command" aria-selected="false">
+                      <figure class="unitSizeFigure">
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
+                          <path d="M70,27.5 l25,0 m-12.5,12.5 l0,-25 M105,27.5 l25,0 m-12.5,12.5 l0,-25" fill="none" stroke="black" stroke-width="4"></path>
+                        </svg>
+                      </figure>
+                      Command
+                    </li>
+                  </ul>
+                </div>
+                <span class="mdc-floating-label">Select a Unit Size</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modifier 1 List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-select mod1-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text "></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list mod1-list"></ul>
+                </div>
+                <span class="mdc-floating-label">Symbol Modifier 1</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+              <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
+                Sector 1 Modifiers reflect the specific capability of a unit (e.g. - Armored, Bridging)
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Modifier 2 List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-select mod2-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text "></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list mod2-list"></ul>
+                </div>
+                <span class="mdc-floating-label">Symbol Modifier 2</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Unique Unit Designation Field -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon uniqueDesignation">
+                <i class="material-icons mdc-text-field__icon">swap_horiz</i>
+                <button class="mdc-button uniqueDesignationDeleteIcon" data-value="uniqueDesignationField">
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                </button>
+                <input type="text" id="text-field-outlined-uniqueDesignation" class="mdc-text-field__input" aria-describedby="text-field-outlined-uniqueDesignation-helper-text" />
+                <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                  <div class="mdc-notched-outline__leading"></div>
+                  <div class="mdc-notched-outline__notch">
+                    <label class="mdc-floating-label" for="text-field-outlined-uniqueDesignation">Unique Unit Designation</label>
+                  </div>
+                  <div class="mdc-notched-outline__trailing"></div>
+                </div>
+              </div>
+              <div class="mdc-text-field-helper-line">
+                <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-uniqueDesignation-helper-text">Example: A/2-101 (A Troop, 2nd Squadron, 101st Cavalry Regiment)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Higher Unit Formation Designation Field -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon higherFormation">
+                <i class="material-icons mdc-text-field__icon" style="transform: rotate(-90deg);">trending_flat</i>
+                <button class="mdc-button higherFormationDeleteIcon" data-value="higherFormationField">
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                </button>
+                <input type="text" id="text-field-outlined-higherFormation" class="mdc-text-field__input" aria-describedby="text-field-outlined-higherFormation-helper-text" />
+                <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                  <div class="mdc-notched-outline__leading"></div>
+                  <div class="mdc-notched-outline__notch">
+                    <label class="mdc-floating-label" for="text-field-outlined-higherFormation">Higher Unit Formation</label>
+                  </div>
+                  <div class="mdc-notched-outline__trailing"></div>
+                </div>
+              </div>
+              <div class="mdc-text-field-helper-line">
+                <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-higherFormation-helper-text">Example: 27/42ID (27th IBCT, 42nd Infantry Division)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Reduced/Reinforced Switches -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-6">
+              <div class="mdc-switch reinforcedSwitch" data-value="">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb">
+                    <input type="checkbox" id="reinforced-switch" class="mdc-switch__native-control" role="switch" />
+                  </div>
+                </div>
+              </div>
+              <label for="reinforced-switch">Reinforced (+)</label>
+            </div>
+            <div class="mdc-layout-grid__cell--span-6">
+              <div class="mdc-switch reducedSwitch" data-value="">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb">
+                    <input type="checkbox" id="reduced-switch" class="mdc-switch__native-control" role="switch" />
+                  </div>
+                </div>
+              </div>
+              <label for="reduced-switch">Reduced (–)</label>
+            </div>
+          </div>
+        </div>
+        <!-- Convert to In-Flight Switch -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-6">
+              <div class="mdc-switch flightSwitch" data-value="">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb">
+                    <input type="checkbox" id="flight-switch" class="mdc-switch__native-control" role="switch" />
+                  </div>
+                </div>
+              </div>
+              <label for="flight-switch">Unit is flying?</label>
+            </div>
+            <!-- Convert to Activity -->
+            <div class="mdc-layout-grid__cell--span-6">
+              <div class="mdc-switch activitySwitch" data-value="">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb">
+                    <input type="checkbox" id="activity-switch" class="mdc-switch__native-control" role="switch" />
+                  </div>
+                </div>
+              </div>
+              <label for="activity-switch">Convert to Activity</label>
+            </div>
+          </div>
+        </div>
+        <!-- Convert to Installation -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-6">
+              <div class="mdc-switch installationSwitch" data-value="">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb">
+                    <input type="checkbox" id="installation-switch" class="mdc-switch__native-control" role="switch" />
+                  </div>
+                </div>
+              </div>
+              <label for="installation-switch">Convert to Installation</label>
+            </div>
+            <!-- Task Force Amplifier -->
+            <div class="mdc-layout-grid__cell--span-6">
+              <div class="mdc-switch taskForceSwitch" data-value="">
+                <div class="mdc-switch__track"></div>
+                <div class="mdc-switch__thumb-underlay">
+                  <div class="mdc-switch__thumb">
+                    <input type="checkbox" id="task-force-switch" class="mdc-switch__native-control" role="switch" />
+                  </div>
+                </div>
+              </div>
+              <label for="task-force-switch">Task Force Amplifier</label>
+            </div>
+          </div>
+        </div>
+        <!-- Command Post List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-select commandpost-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text "></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list commandpost-list"></ul>
+                </div>
+                <span class="mdc-floating-label">Command Post</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+              <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
+                Is this symbol a command post?
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Tactical Mission Tasks List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-select tacticalmissiontask-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text "></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list tacticalmissiontask-list"></ul>
+                </div>
+                <span class="mdc-floating-label">Tactical Mission Tasks</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+              <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
+                Explain Tactical Mission Tasks
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Graphic Control Measures List -->
+        <div class="mdc-layout-grid ">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-select graphiccontrolmeasures-select">
+                <input type="hidden" name="enhanced-select" />
+                <i class="mdc-select__dropdown-icon"></i>
+                <div class="mdc-select__selected-text "></div>
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                  <ul class="mdc-list graphiccontrolmeasures-list"></ul>
+                </div>
+                <span class="mdc-floating-label">Graphic Control Measures</span>
+                <div class="mdc-line-ripple"></div>
+              </div>
+              <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
+                Explain Graphic Control Measures
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Symbol Search Field -->
-    <div class="mdc-layout-grid symbolSelectors">
-      <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12 ">
-            <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchSymbols">
-              <i class="material-icons mdc-text-field__icon">search</i>
-              <button class="mdc-button searchFieldDeleteIcon">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
-              </button>
-              <input type="text" id="text-field-outlined-shape-two" class="mdc-text-field__input" aria-describedby="text-field-outlined-shape-two-helper-text" />
-              <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                  <label class="mdc-floating-label" for="text-field-outlined-shape-two">Search Military Symbols</label>
-                </div>
-                <div class="mdc-notched-outline__trailing"></div>
-              </div>
-            </div>
-            <div class="mdc-text-field-helper-line">
-              <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-shape-two-helper-text">Type in the symbol you are looking for (e.g. - "Infantry")</p>
-            </div>
-          </div>
+    <div class="mdc-drawer-app-content">
+      <!-- Top App Bar -->
+      <header class="mdc-top-app-bar drawer-top-app-bar mdc-elevation--z4" id="app-bar">
+        <div class="mdc-top-app-bar__row">
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+            <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
+            <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">menu_open</button>
+          </section>
         </div>
-      </div>
-      <!-- Symbol Select List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-3">
-            <div class="mdc-select  symbol-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list symbol-list"></ul>
-              </div>
-              <span class="mdc-floating-label">Select a Symbol</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Affiliation List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-3">
-            <div class="mdc-select  affiliation-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list affiliation-list">
-                  <li class="mdc-list-item mdc-list-item--selected" data-value="friendly" aria-selected="true">
-                    <figure class="affiliationFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 46 158 108">
-                        <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="5" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
-                      </svg>
-                    </figure>
-                    Friendly
-                  </li>
-                  <li class="mdc-list-item" data-value="friendlyTemplated">
-                    <figure class="affiliationFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 46 158 108">
-                        <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="8" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
-                        <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
-                      </svg>
-                    </figure>
-                    Assumed Friendly
-                  </li>
-                  <li class="mdc-list-item" data-value="hostile">
-                    <figure class="affiliationFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="24 24 152 152">
-                        <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="5" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
-                      </svg>
-                    </figure>
-                    Hostile
-                  </li>
-                  <li class="mdc-list-item" data-value="hostileTemplated">
-                    <figure class="affiliationFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="24 24 152 152">
-                        <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="8" stroke="black" fill="rgb(255,128,128)" fill-opacity="1"></path>
-                        <path d="M 100,28 L172,100 100,172 28,100 100,28 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
-                      </svg>
-                    </figure>
-                    Suspect
-                  </li>
-                  <li class="mdc-list-item" data-value="unknown">
-                    <figure class="affiliationFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="26.75 26.75 146.5 146.5">
-                        <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="5" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
-                      </svg>
-                    </figure>
-                    Unknown
-                  </li>
-                  <li class="mdc-list-item" data-value="pending">
-                    <figure class="affiliationFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="26.75 26.75 146.5 146.5">
-                        <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="8" stroke="black" fill="rgb(255,255,128)" fill-opacity="1"></path>
-                        <path d="M63,63 C63,20 137,20 137,63 C180,63 180,137 137,137 C137,180 63,180 63,137 C20,137 20,63 63,63 Z" stroke-width="10" stroke-dasharray="8,8" stroke="rgb(239, 239, 239)" fill="none"></path>
-                      </svg>
-                    </figure>
-                    Pending
-                  </li>
-                  <li class="mdc-list-item" data-value="neutral">
-                    <figure class="affiliationFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="41 41 118 118">
-                        <path d="M45,45 l110,0 0,110 -110,0 z" stroke-width="5" stroke="black" fill="rgb(170,255,170)" fill-opacity="1"></path>
-                      </svg>
-                    </figure>
-                    Neutral
-                  </li>
-                </ul>
-              </div>
-              <span class="mdc-floating-label">Select an Affiliation</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Unit Size List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-3">
-            <div class="mdc-select  unit-size-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list unit-size-list">
-                  <li class="mdc-list-item mdc-list-item--selected" data-value="none" aria-selected="true">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143"></svg>
-                    </figure>
-                    None
-                  </li>
-                  <li class="mdc-list-item" data-value="team" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M85,30a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 M80,40L120,20" fill="none" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Team
-                  </li>
-                  <li class="mdc-list-item" data-value="squad" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Squad
-                  </li>
-                  <li class="mdc-list-item" data-value="section" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M107.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0 M77.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Section
-                  </li>
-                  <li class="mdc-list-item" data-value="platoon" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M92.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0 M62.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0 M122.5,30a7.5,7.5 0 1,0 15,0a7.5,7.5 0 1,0 -15,0" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Platoon
-                  </li>
-                  <li class="mdc-list-item" data-value="companyTroopBattery" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M100,40L100,15" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Company/Troop/Battery
-                  </li>
-                  <li class="mdc-list-item" data-value="battalionSquadron" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M90,40L90,15 M110,40L110,15" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Battalion/Squadron
-                  </li>
-                  <li class="mdc-list-item" data-value="regimentGroup" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M100,40L100,15 M120,40L120,15 M80,40L80,15" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Regiment/Group
-                  </li>
-                  <li class="mdc-list-item" data-value="brigade" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M87.5,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Brigade
-                  </li>
-                  <li class="mdc-list-item" data-value="division" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M70,40 l25,-25 m0,25 l-25,-25 M105,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Division
-                  </li>
-                  <li class="mdc-list-item" data-value="corps" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M52.5,40 l25,-25 m0,25 l-25,-25 M87.5,40 l25,-25 m0,25 l-25,-25 M122.5,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Corps/MEF
-                  </li>
-                  <li class="mdc-list-item" data-value="army" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M35,40 l25,-25 m0,25 l-25,-25 M70,40 l25,-25 m0,25 l-25,-25 M105,40 l25,-25 m0,25 l-25,-25 M140,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Army
-                  </li>
-                  <li class="mdc-list-item" data-value="armyGroup" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M17.5, 40 l25,-25 m0,25 l-25,-25 M52.5, 40 l25,-25 m0,25 l-25,-25 M87.5, 40 l25,-25 m0,25 l-25,-25 M122.5,40 l25,-25 m0,25 l-25,-25 M157.5,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Army Group/Front
-                  </li>
-                  <li class="mdc-list-item" data-value="regionTheatre" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M0,40l25,-25m0,25l-25,-25M35,40l25,-25m0,25l-25,-25M70,40l25,-25m0,25l-25,-25M105,40l25,-25m0,25l-25,-25M140,40l25,-25m0,25l-25,-25M175,40l25,-25m0,25l-25,-25" fill="none" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Region/Theatre
-                  </li>
-                  <li class="mdc-list-item" data-value="command" aria-selected="false">
-                    <figure class="unitSizeFigure">
-                      <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="93" height="64" viewBox="21 11 158 143">
-                        <path d="M70,27.5 l25,0 m-12.5,12.5 l0,-25 M105,27.5 l25,0 m-12.5,12.5 l0,-25" fill="none" stroke="black" stroke-width="4"></path>
-                      </svg>
-                    </figure>
-                    Command
-                  </li>
-                </ul>
-              </div>
-              <span class="mdc-floating-label">Select a Unit Size</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modifier 1 List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-select mod1-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text "></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list mod1-list"></ul>
-              </div>
-              <span class="mdc-floating-label">Symbol Modifier 1</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-            <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
-              Sector 1 Modifiers reflect the specific capability of a unit (e.g. - Armored, Bridging)
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- Modifier 2 List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-select mod2-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text "></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list mod2-list"></ul>
-              </div>
-              <span class="mdc-floating-label">Symbol Modifier 2</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Unique Unit Designation Field -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon uniqueDesignation">
-              <i class="material-icons mdc-text-field__icon">swap_horiz</i>
-              <button class="mdc-button uniqueDesignationDeleteIcon" data-value="uniqueDesignationField">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
-              </button>
-              <input type="text" id="text-field-outlined-uniqueDesignation" class="mdc-text-field__input" aria-describedby="text-field-outlined-uniqueDesignation-helper-text" />
-              <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                  <label class="mdc-floating-label" for="text-field-outlined-uniqueDesignation">Unique Unit Designation</label>
-                </div>
-                <div class="mdc-notched-outline__trailing"></div>
-              </div>
-            </div>
-            <div class="mdc-text-field-helper-line">
-              <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-uniqueDesignation-helper-text">Example: A/2-101 (A Troop, 2nd Squadron, 101st Cavalry
-                Regiment)</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Higher Unit Formation Designation Field -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon higherFormation">
-              <i class="material-icons mdc-text-field__icon" style="transform: rotate(-90deg);">trending_flat</i>
-              <button class="mdc-button higherFormationDeleteIcon" data-value="higherFormationField">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
-              </button>
-              <input type="text" id="text-field-outlined-higherFormation" class="mdc-text-field__input" aria-describedby="text-field-outlined-higherFormation-helper-text" />
-              <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch">
-                  <label class="mdc-floating-label" for="text-field-outlined-higherFormation">Higher Unit Formation</label>
-                </div>
-                <div class="mdc-notched-outline__trailing"></div>
-              </div>
-            </div>
-            <div class="mdc-text-field-helper-line">
-              <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-higherFormation-helper-text">Example: 27/42ID (27th IBCT, 42nd Infantry Division)</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Reduced/Reinforced Switches -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-6">
-            <div class="mdc-switch reinforcedSwitch" data-value="">
-              <div class="mdc-switch__track"></div>
-              <div class="mdc-switch__thumb-underlay">
-                <div class="mdc-switch__thumb">
-                  <input type="checkbox" id="reinforced-switch" class="mdc-switch__native-control" role="switch" />
-                </div>
-              </div>
-            </div>
-            <label for="reinforced-switch">Reinforced (+)</label>
-          </div>
-          <div class="mdc-layout-grid__cell--span-6">
-            <div class="mdc-switch reducedSwitch" data-value="">
-              <div class="mdc-switch__track"></div>
-              <div class="mdc-switch__thumb-underlay">
-                <div class="mdc-switch__thumb">
-                  <input type="checkbox" id="reduced-switch" class="mdc-switch__native-control" role="switch" />
-                </div>
-              </div>
-            </div>
-            <label for="reduced-switch">Reduced (–)</label>
-          </div>
-        </div>
-      </div>
-      <!-- Convert to In-Flight Switch -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-6">
-            <div class="mdc-switch flightSwitch" data-value="">
-              <div class="mdc-switch__track"></div>
-              <div class="mdc-switch__thumb-underlay">
-                <div class="mdc-switch__thumb">
-                  <input type="checkbox" id="flight-switch" class="mdc-switch__native-control" role="switch" />
-                </div>
-              </div>
-            </div>
-            <label for="flight-switch">Unit is flying?</label>
-          </div>
-          <!-- Convert to Activity -->
-          <div class="mdc-layout-grid__cell--span-6">
-            <div class="mdc-switch activitySwitch" data-value="">
-              <div class="mdc-switch__track"></div>
-              <div class="mdc-switch__thumb-underlay">
-                <div class="mdc-switch__thumb">
-                  <input type="checkbox" id="activity-switch" class="mdc-switch__native-control" role="switch" />
-                </div>
-              </div>
-            </div>
-            <label for="activity-switch">Convert to Activity</label>
-          </div>
-        </div>
-      </div>
-      <!-- Convert to Installation -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-6">
-            <div class="mdc-switch installationSwitch" data-value="">
-              <div class="mdc-switch__track"></div>
-              <div class="mdc-switch__thumb-underlay">
-                <div class="mdc-switch__thumb">
-                  <input type="checkbox" id="installation-switch" class="mdc-switch__native-control" role="switch" />
-                </div>
-              </div>
-            </div>
-            <label for="installation-switch">Convert to Installation</label>
-          </div>
-          <!-- Task Force Amplifier -->
-          <div class="mdc-layout-grid__cell--span-6">
-            <div class="mdc-switch taskForceSwitch" data-value="">
-              <div class="mdc-switch__track"></div>
-              <div class="mdc-switch__thumb-underlay">
-                <div class="mdc-switch__thumb">
-                  <input type="checkbox" id="task-force-switch" class="mdc-switch__native-control" role="switch" />
-                </div>
-              </div>
-            </div>
-            <label for="task-force-switch">Task Force Amplifier</label>
-          </div>
-        </div>
-      </div>
-      <!-- Command Post List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-select commandpost-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text "></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list commandpost-list"></ul>
-              </div>
-              <span class="mdc-floating-label">Command Post</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-            <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
-              Is this symbol a command post?
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- Tactical Mission Tasks List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-select tacticalmissiontask-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text "></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list tacticalmissiontask-list"></ul>
-              </div>
-              <span class="mdc-floating-label">Tactical Mission Tasks</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-            <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
-              Explain Tactical Mission Tasks
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- Graphic Control Measures List -->
-      <div class="mdc-layout-grid ">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell--span-12">
-            <div class="mdc-select graphiccontrolmeasures-select">
-              <input type="hidden" name="enhanced-select" />
-              <i class="mdc-select__dropdown-icon"></i>
-              <div class="mdc-select__selected-text "></div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
-                <ul class="mdc-list graphiccontrolmeasures-list"></ul>
-              </div>
-              <span class="mdc-floating-label">Graphic Control Measures</span>
-              <div class="mdc-line-ripple"></div>
-            </div>
-            <p class="mdc-select-helper-text mdc-select-helper-text--persistent" aria-hidden="false">
-              Explain Graphic Control Measures
-            </p>
-          </div>
-        </div>
+      </header>
+      <!-- Main Content (Map) -->
+      <div class="drawer-main-content mdc-elevation--z0">
+        <div class="mdc-top-app-bar--fixed-adjust"></div>
+        <main class="main-content" id="main-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </main>
       </div>
     </div>
-  </div>
-  <div class="mdc-drawer-app-content">
-    <!-- Top App Bar -->
-    <header class="mdc-top-app-bar drawer-top-app-bar mdc-elevation--z4" id="app-bar">
-      <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-          <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
-          <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">menu</button>
-        </section>
-      </div>
-    </header>
-    <!-- Main Content (Map) -->
-    <div class="drawer-main-content mdc-elevation--z0">
-      <div class="mdc-top-app-bar--fixed-adjust"></div>
-      <main class="main-content" id="main-content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-          aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </main>
-    </div>
-  </div>
-  <script src="bundle.js" async></script>
-</body>
-
+    <script src="bundle.js" async></script>
+  </body>
 </html>

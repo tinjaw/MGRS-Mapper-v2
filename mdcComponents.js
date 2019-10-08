@@ -31,7 +31,7 @@ import Pushbar from './pushbar';
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
-const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-icon-button'));
+const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
 toggleSidebarButton.unbounded = true;
 const pushbar = new Pushbar({ blur: false, overlay: false });
 
@@ -76,7 +76,15 @@ const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.grap
 // * Toggle App Bar                                                                  * //
 // *********************************************************************************** //
 toggleSidebarButton.listen('click', () => {
-  pushbar.opened ? pushbar.close() : pushbar.open('rightPushbar');
+  if (pushbar.opened) {
+    // If the pushbar is opened, close it and replace the menu_open icon with the regular menu icon
+    toggleSidebarButton.root_.innerText = 'menu';
+    pushbar.close();
+  } else {
+    toggleSidebarButton.root_.innerText = 'menu_open';
+    pushbar.open('rightPushbar');
+  }
+  // pushbar.opened ? pushbar.close() : pushbar.open('rightPushbar');
 });
 
 // *********************************************************************************** //

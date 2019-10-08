@@ -2,6 +2,12 @@
 
 ---
 
+## 8OCT19
+
+- Added menu open and closed icons for top app bar
+
+---
+
 ## 6OCT19
 
 - Refactored DisableInputs
