@@ -22,6 +22,7 @@
 - [x] Tactical Mission Tasks
 - [x] Graphic Control Measures
 - [ ] Skeleton Screen preloader (Should be done right before launch)
+- [ ] Remove files and folders from gitignore in your repo
 
 ### DEFAULT VALUES
 
