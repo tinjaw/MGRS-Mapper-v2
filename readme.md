@@ -9,18 +9,18 @@
 - [x] matchPaths() function and testObj need to be renamed. Come on man
 - [x] The "demo-width-class" class in the html file needs to be changed to something less stupid
 - [x] Code split your symbol object and affiliation object out into their own files
-- [ ] Modifier 1
-- [ ] Modifier 2
-- [ ] Unit Size modifier
-- [ ] "In Flight" outline modifiers for aviation symbols
-- [ ] Symbol text for Unique Designation and Higher formation
-- [ ] Task Force amplifier
+- [x] Modifier 1
+- [x] Modifier 2
+- [x] Unit Size modifier
+- [x] "In Flight" outline modifiers for aviation symbols
+- [x] Symbol text for Unique Designation and Higher formation
+- [x] Task Force amplifier
 - [x] Reinforced/Reduced modifier
-- [ ] Activity conversion (would require some logic, eg- a grenade launcher cannot be an activity)
-- [ ] Installation conversion (would require some logic, eg- a grenade launcher cannot be an installation)
-- [ ] Command Post amplifier
-- [ ] Tactical Mission Tasks
-- [ ] Graphic Control Measures
+- [x] Activity conversion (would require some logic, eg- a grenade launcher cannot be an activity)
+- [x] Installation conversion (would require some logic, eg- a grenade launcher cannot be an installation)
+- [x] Command Post amplifier
+- [x] Tactical Mission Tasks
+- [x] Graphic Control Measures
 - [ ] Skeleton Screen preloader (Should be done right before launch)
 
 ### DEFAULT VALUES
