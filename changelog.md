@@ -5,6 +5,8 @@
 ## 8OCT19
 
 - Added menu open and closed icons for top app bar
+- Added more files to gitignore
+- Separated JS and CSS files into their own folders
 
 ---
 
