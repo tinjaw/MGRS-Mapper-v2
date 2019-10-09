@@ -143,9 +143,10 @@ const searchResults = debounce(() => {
           figureElement.setAttribute('data-symbol-name', `${element}`);
           newli.prepend(figureElement);
           new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-          // Resize symbols in search results so they fit
-          selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+          // selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
         }
+        // Resize symbols in search results so they fit
+        selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
         // set the first result as the symbol value on the "Select a Symbol" dropdown
         selectSymbol.foundation_.setValue(result[0].matches[0].value);
       } else {
@@ -570,8 +571,15 @@ window.onload = () => {
         });
       }
     }
-    // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
-    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+
+    if (selectSymbol.isMenuOpen_) {
+      // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
+      new Resizer('.symbolFigure svg');
+      setTimeout(() => {
+        // Total hack that prevents the selectSymbol dropdown from getting compressed when after a user does a search query.
+        selectSymbol.menu_.root_.attributes.style.value = 'transform-origin: center top; top: 591.625px; max-height: 714.375px; right: 33.3438px;';
+      }, 50);
+    }
     flyingSwitch.checked ? flyingSwitch.disabled = false : null;
   });
 

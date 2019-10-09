@@ -39,6 +39,34 @@ svg {
 }
 
 // *********************************************************************************** //
+// * Dismissible Drawer Icon                                                         * //
+// *********************************************************************************** //
+button.mdc-top-app-bar__navigation-icon {
+  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 75ms, /* $delay: */ 25ms);
+  transform: scale(1);
+  will-change: transform;
+}
+
+button.mdc-top-app-bar__navigation-icon:hover {
+  // Create a gentle scaling animation when the user hovers over the Dismissible Drawer icon
+  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 25ms);
+  transform: scale(1.1);
+}
+
+// *********************************************************************************** //
+// * MDC Grid                                                                        * //
+// *********************************************************************************** //
+.mdc-layout-grid__inner {
+  align-items: center;
+}
+
+.mdc-layout-grid__inner.switches {
+  display: flex;
+  justify-content: space-between;
+  font-size: larger;
+}
+
+// *********************************************************************************** //
 // * Select Boxes                                                                    * //
 // *********************************************************************************** //
 .mdc-select {
@@ -87,21 +115,6 @@ li.mdc-list-item svg {
 .commandpost-list li.mdc-list-item {
   /* background: red; */
   height: 100px;
-}
-
-// *********************************************************************************** //
-// * Dismissible Drawer Icon                                                         * //
-// *********************************************************************************** //
-button.mdc-top-app-bar__navigation-icon {
-  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 75ms, /* $delay: */ 25ms);
-  transform: scale(1);
-  will-change: transform;
-}
-
-button.mdc-top-app-bar__navigation-icon:hover {
-  // Create a gentle scaling animation when the user hovers over the Dismissible Drawer icon
-  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 25ms);
-  transform: scale(1.1);
 }
 
 // *********************************************************************************** //

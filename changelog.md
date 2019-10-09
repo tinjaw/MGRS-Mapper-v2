@@ -20,6 +20,11 @@
       // 24.5 = font size in pixels, 2 = half of the strokeWidth, 0.333 = 1/3rd of the symbol size; which gives you 7.493
 - Cleaned up and organized CSS files
 - Added hover animations to symbol panel and dismissible drawer icon
+- Added select menu icons and adjusted CSS styles
+- Fixed a bug where if a user types in the search field for an icon, the selectSymbol dropdown would compress. It wasn't an elegant fix but it technically works
+  >
+        selectSymbol.menu_.root_.attributes.style.value = 'transform-origin: center top; top: 591.625px; max-height: 714.375px; right: 33.3438px;';
+        // Test this before production
 
 ---
 
