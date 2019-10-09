@@ -1,4 +1,8 @@
-17JUL19 This is a pretty decent refactoring of your code.
+## MGRS-Mapper (development repo)
+
+A development repository for MGRS-Mapper application
+
+---
 
 ### TODO
 
@@ -28,7 +32,7 @@
 - [ ] Helper info-window on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
 - [x] Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
 - [ ] Mod1 helper text has word wrap. Fix it to 1 line
-- [ ] Fix the symbol panel so that amplifiers don't get clipped
+- [x] Fix the symbol panel so that amplifiers don't get clipped
 - [ ] Decide on using Bottom App Bar or Infowindow menu like on the Original pushbar site?
 - [ ] The select menus are too similar. Each should have an icon that differentiates them
 
