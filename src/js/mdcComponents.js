@@ -7,6 +7,7 @@ import { MDCRipple } from '@material/ripple';
 import { MDCSwitch } from '@material/switch';
 import Fuse from 'fuse.js';
 import { MDCTopAppBar } from '@material/top-app-bar';
+import { MDCMenuSurface } from '@material/menu-surface';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import commandPostObject from './commandPostObject';
@@ -22,8 +23,11 @@ import Pushbar from './pushbar';
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
+const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));
+const menuSurfaceButton = new MDCRipple(document.querySelector('.menu-surface-button'));
+
 const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
-toggleSidebarButton.unbounded = true;
+
 const pushbar = new Pushbar({ blur: false, overlay: false });
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
@@ -64,8 +68,16 @@ const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.grap
 
 
 // *********************************************************************************** //
-// * Toggle App Bar                                                                  * //
+// * Top App Bar                                                                     * //
 // *********************************************************************************** //
+menuSurfaceButton.listen('click', () => {
+  menuSurface.isOpen() ? menuSurface.close() : menuSurface.open();
+  menuSurface.setAbsolutePosition(10, 10);
+});
+
+
+toggleSidebarButton.unbounded = true;
+
 toggleSidebarButton.listen('click', () => {
   if (pushbar.opened) {
     // If the pushbar is opened, close it and replace the menu_open icon with the regular menu icon
@@ -77,6 +89,7 @@ toggleSidebarButton.listen('click', () => {
   }
   // pushbar.opened ? pushbar.close() : pushbar.open('rightPushbar');
 });
+
 
 // *********************************************************************************** //
 // * Search Field                                                                    * //
@@ -419,6 +432,7 @@ window.selectCommandPost = selectCommandPost;
 window.tacticalMissionTasksObject = tacticalMissionTasksObject;
 window.selectTacticalMissionTasks = selectTacticalMissionTasks;
 window.selectGraphicControlMeasures = selectGraphicControlMeasures;
+window.menuSurface = menuSurface;
 
 
 // *********************************************************************************** //

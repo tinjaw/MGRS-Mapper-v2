@@ -9,30 +9,7 @@
     <!-- import the Material stylesheet -->
     <link rel="stylesheet" href="bundle.css" />
     <link rel="icon" href="data:," />
-    <style>
-      body {
-        display: flex;
-        height: 100vh;
-        margin: 0px 0px 0px 0px;
-      }
-      .mdc-drawer-app-content {
-        flex: auto;
-        overflow: auto;
-        position: relative;
-      }
-      .main-content {
-        overflow: auto;
-        height: 100%;
-      }
-      .app-bar {
-        position: absolute;
-      }
-      .mdc-top-app-bar {
-        z-index: 7;
-      }
-    </style>
   </head>
-
   <body class="mdc-typography">
     <div class="mdc-layout-grid__cell pushbar from_right mdc-elevation--z8" data-pushbar-id="rightPushbar">
       <!-- Symbol Preview -->
@@ -51,7 +28,7 @@
               <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchSymbols">
                 <i class="material-icons mdc-text-field__icon">search</i>
                 <button class="mdc-button searchFieldDeleteIcon">
-                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
                 </button>
                 <input type="text" id="text-field-outlined-shape-two" class="mdc-text-field__input" aria-describedby="text-field-outlined-shape-two-helper-text" />
                 <div class="mdc-notched-outline mdc-notched-outline--upgraded">
@@ -73,7 +50,6 @@
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
               <svg  viewBox="0 0 53 56">
-
                 <path d="M1,1H25V17H1V1Z" style="fill:none;stroke:#2a286b;stroke-width:2px" />
                 <circle cx="13" cy="9" r="2" style="fill:#2a286b;stroke:#2a286b;stroke-width:2px" />
                 <path d="M28,1H52V17H28V1Z" style="fill:none;stroke:#2a286b;stroke-width:2px" />
@@ -101,13 +77,11 @@
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
               <svg  viewBox="0 0 53 55.91">
-
                 <path d="M37.9,5.6c0-5.5,9.6-5.5,9.6,0,5.5,0,5.5,9.6,0,9.6,0,5.5-9.6,5.5-9.6,0C32.3,15.3,32.3,5.6,37.9,5.6Z" transform="translate(0.06 -0.09)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
                 <path d="M0.9,22.2h51V55h-51V22.2Z" transform="translate(0.06 -0.09)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
                 <path d="M11,1.5l9,9-9,9-9-9Z" transform="translate(0.06 -0.09)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
               </svg>
             </div>
-
             <div class="mdc-layout-grid__cell--span-10">
               <div class="mdc-select  affiliation-select">
                 <input type="hidden" name="enhanced-select" />
@@ -185,18 +159,15 @@
         <!-- Unit Size List -->
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
-
-              <div class="mdc-layout-grid__cell--span-2">
-                  <svg  viewBox="0 0 52.17 52.67">
-
-                    <ellipse cx="13.96" cy="11.5" rx="10.13" ry="10.5" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                    <path d="M1,19.48l27-14" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                    <circle cx="39.46" cy="11.96" r="10.5" style="fill:#2a286b;stroke:#2a286b;stroke-width:2px"/>
-                    <path d="M14.5,53.5V29.13" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                    <path d="M28,52.94l24-24m0,24-24-24" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                  </svg>
-                </div>
-
+            <div class="mdc-layout-grid__cell--span-2">
+              <svg  viewBox="0 0 52.17 52.67">
+                <ellipse cx="13.96" cy="11.5" rx="10.13" ry="10.5" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+                <path d="M1,19.48l27-14" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+                <circle cx="39.46" cy="11.96" r="10.5" style="fill:#2a286b;stroke:#2a286b;stroke-width:2px"/>
+                <path d="M14.5,53.5V29.13" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+                <path d="M28,52.94l24-24m0,24-24-24" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+              </svg>
+            </div>
             <div class="mdc-layout-grid__cell--span-10">
               <div class="mdc-select  unit-size-select">
                 <input type="hidden" name="enhanced-select" />
@@ -333,14 +304,13 @@
         <!-- Modifier 1 List -->
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell--span-2">
-                  <svg  viewBox="0 0 51.97 54.3">
-
-                    <path d="M12.3,32.8H40.7C55,32.8,55,54.2,40.7,54.2H12.3c-14.2,0-14.2-21.3,0-21.3" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                    <path d="M2,3.4c0.08,16.2,9.06,18.7,19.3,19M26,3.4L14.4,12.9V3.4l-11.1,9" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                    <text transform="translate(23.97 18.86)" style="isolation:isolate;font-size:21.98px;fill:#2a286b;font-family:Arial">C2</text>
-                  </svg>
-                </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <svg  viewBox="0 0 51.97 54.3">
+                <path d="M12.3,32.8H40.7C55,32.8,55,54.2,40.7,54.2H12.3c-14.2,0-14.2-21.3,0-21.3" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+                <path d="M2,3.4c0.08,16.2,9.06,18.7,19.3,19M26,3.4L14.4,12.9V3.4l-11.1,9" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+                <text transform="translate(23.97 18.86)" style="isolation:isolate;font-size:21.98px;fill:#2a286b;font-family:Arial">C2</text>
+              </svg>
+            </div>
             <div class="mdc-layout-grid__cell--span-10">
               <div class="mdc-select mod1-select">
                 <input type="hidden" name="enhanced-select" />
@@ -361,20 +331,19 @@
         <!-- Modifier 2 List -->
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell--span-2">
-                  <svg  viewBox="0 0 53 54.75">
-
-                    <path d="M0,54c6.5,0,0-10.1,6.5-10.1s0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,7,10.1" transform="translate(0 -0.81)" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <ellipse cx="5.5" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <ellipse cx="27" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <ellipse cx="47.4" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <path d="M1.524.7h50" transform="translate(0 -0.8)" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <ellipse cx="4.6" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <ellipse cx="14.8" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <ellipse cx="38.1" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                    <ellipse cx="48.3" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                  </svg>
-                </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <svg  viewBox="0 0 53 54.75">
+                <path d="M0,54c6.5,0,0-10.1,6.5-10.1s0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,7,10.1" transform="translate(0 -0.81)" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <ellipse cx="5.5" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <ellipse cx="27" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <ellipse cx="47.4" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <path d="M1.524.7h50" transform="translate(0 -0.8)" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <ellipse cx="4.6" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <ellipse cx="14.8" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <ellipse cx="38.1" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+                <ellipse cx="48.3" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+              </svg>
+            </div>
             <div class="mdc-layout-grid__cell--span-10">
               <div class="mdc-select mod2-select">
                 <input type="hidden" name="enhanced-select" />
@@ -396,7 +365,7 @@
               <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon uniqueDesignation">
                 <i class="material-icons mdc-text-field__icon">swap_horiz</i>
                 <button class="mdc-button uniqueDesignationDeleteIcon" data-value="uniqueDesignationField">
-                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
                 </button>
                 <input type="text" id="text-field-outlined-uniqueDesignation" class="mdc-text-field__input" aria-describedby="text-field-outlined-uniqueDesignation-helper-text" />
                 <div class="mdc-notched-outline mdc-notched-outline--upgraded">
@@ -420,7 +389,7 @@
               <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon higherFormation">
                 <i class="material-icons mdc-text-field__icon" style="transform: rotate(-90deg);">trending_flat</i>
                 <button class="mdc-button higherFormationDeleteIcon" data-value="higherFormationField">
-                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
                 </button>
                 <input type="text" id="text-field-outlined-higherFormation" class="mdc-text-field__input" aria-describedby="text-field-outlined-higherFormation-helper-text" />
                 <div class="mdc-notched-outline mdc-notched-outline--upgraded">
@@ -523,15 +492,16 @@
         <!-- Command Post List -->
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell--span-2">
-                  <svg  viewBox="0 0 41.88 54.43">
-
-                    <text transform="translate(6.97 47.3)" style="isolation:isolate;font-size:21.9px;fill:#2a286b;font-family:Arial">C<tspan x="15.87" y="0">P</tspan>
-                    </text>
-                    <path d="M7.63,1.58H47.5V28.17H7.63V1.58Z" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                    <path d="M7.63,28.17V54.75" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                  </svg>
-                </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <svg  viewBox="0 0 41.88 54.43">
+                <text transform="translate(6.97 47.3)" style="isolation:isolate;font-size:21.9px;fill:#2a286b;font-family:Arial">
+                  C
+                  <tspan x="15.87" y="0">P</tspan>
+                </text>
+                <path d="M7.63,1.58H47.5V28.17H7.63V1.58Z" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+                <path d="M7.63,28.17V54.75" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+              </svg>
+            </div>
             <div class="mdc-layout-grid__cell--span-10">
               <div class="mdc-select commandpost-select">
                 <input type="hidden" name="enhanced-select" />
@@ -552,14 +522,12 @@
         <!-- Tactical Mission Tasks List -->
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell--span-2">
-                  <svg  viewBox="0 0 52.71 55.41">
-
-                    <path d="M11.2,28.08H52L42.82,23M52,28.08l-9.18,5.08M11.2,45V11.16L1,1M11.5,44.3L1,55" transform="translate(-0.29 -0.29)" style="fill:none;stroke:#2a286b;stroke-linejoin:round;stroke-width:2px"/>
-                  </svg>
-
-                  </svg>
-                </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <svg  viewBox="0 0 52.71 55.41">
+                <path d="M11.2,28.08H52L42.82,23M52,28.08l-9.18,5.08M11.2,45V11.16L1,1M11.5,44.3L1,55" transform="translate(-0.29 -0.29)" style="fill:none;stroke:#2a286b;stroke-linejoin:round;stroke-width:2px"/>
+              </svg>
+              </svg>
+            </div>
             <div class="mdc-layout-grid__cell--span-10">
               <div class="mdc-select tacticalmissiontask-select">
                 <input type="hidden" name="enhanced-select" />
@@ -580,16 +548,12 @@
         <!-- Graphic Control Measures List -->
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
-
-              <div class="mdc-layout-grid__cell--span-2">
-                  <svg  viewBox="0 0 41.88 54.43">
-
-                    <path d="M13,36H40M27,54L13,36V2H40V36Z" transform="translate(-12 -1)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                  </svg>
-
-                  </svg>
-                </div>
-
+            <div class="mdc-layout-grid__cell--span-2">
+              <svg  viewBox="0 0 41.88 54.43">
+                <path d="M13,36H40M27,54L13,36V2H40V36Z" transform="translate(-12 -1)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+              </svg>
+              </svg>
+            </div>
             <div class="mdc-layout-grid__cell--span-10">
               <div class="mdc-select graphiccontrolmeasures-select">
                 <input type="hidden" name="enhanced-select" />
@@ -613,7 +577,64 @@
       <!-- Top App Bar -->
       <header class="mdc-top-app-bar drawer-top-app-bar mdc-elevation--z4" id="app-bar">
         <div class="mdc-top-app-bar__row">
-          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          <!-- Menu Surface -->
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <div class="menu-button-container" style="position: relative;">
+              <button class="mdc-button menu-surface-button">Open menu</button>
+              <div class="mdc-menu mdc-menu-surface ms2" tabindex="-1">
+                <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+                  <li>
+                    <ul class="mdc-menu__selection-group">
+                      <li class="mdc-list-item" role="menuitem">
+                        <span class="mdc-menu__selection-group-icon">
+                        <i class="material-icons">check</i>
+                        </span>
+                        <span class="mdc-list-item__text">Single</span>
+                      </li>
+                      <li class="mdc-list-item" role="menuitem">
+                        <span class="mdc-menu__selection-group-icon">
+                        <i class="material-icons">check</i>
+                        </span>
+                        <span class="mdc-list-item__text">1.15</span>
+                      </li>
+                      <li class="mdc-list-item" role="menuitem">
+                        <span class="mdc-list-item__text">About</span>
+                        <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                      </li>
+                      <li class="mdc-list-item" role="menuitem">
+                        <span class="mdc-list-item__text">Download Symbol as SVG</span>
+                        <span class="mdc-list-item__meta material-icons" aria-hidden="true">cloud_download</span>
+                      </li>
+                      <li class="mdc-list-item" role="menuitem">
+                        <span class="mdc-list-item__text">Download Symbol as PNG</span>
+                        <span class="mdc-list-item__meta material-icons" aria-hidden="true">cloud_download</span>
+                      </li>
+                      <li role="separator" class="mdc-list-divider"></li>
+                      <li class="mdc-list-item">
+                        <span class="mdc-list-item__text">English</span>
+                        <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                      </li>
+                      <li class="mdc-list-item">
+                        <span class="mdc-list-item__text">Ukrainian</span>
+                        <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                      </li>
+                      <li class="mdc-list-item">
+                        <button data-pushbar-close class="mdc-button mdc-button--raised">
+                          <span class="mdc-button__label">Close</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="mdc-list-divider" role="separator"></li>
+                  <li class="mdc-list-item" role="menuitem">
+                    <span class="mdc-list-item__text">Add space before paragraph</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end ">
+            <!-- Dismissible Drawer Button -->
             <span class="mdc-top-app-bar__title">Dismissible Drawer</span>
             <button class="mdc-icon-button material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded">menu_open</button>
           </section>

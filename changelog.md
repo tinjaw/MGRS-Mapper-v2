@@ -25,6 +25,8 @@
   >
         selectSymbol.menu_.root_.attributes.style.value = 'transform-origin: center top; top: 591.625px; max-height: 714.375px; right: 33.3438px;';
         // Test this before production
+- Fixed CSS issues on switches
+- Added Surface Menu component to Top App Bar
 
 ---
 

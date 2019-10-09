@@ -38,6 +38,43 @@ svg {
   overflow: visible;
 }
 
+body {
+  display: flex;
+  height: 100vh;
+  margin: 0px 0px 0px 0px;
+}
+
+// *********************************************************************************** //
+// * Top App Bar                                                                     * //
+// *********************************************************************************** //
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+}
+
+.app-bar {
+  position: absolute;
+}
+.mdc-top-app-bar {
+  z-index: 7;
+}
+
+.mdc-button.menu-surface-button {
+  color: midnightblue;
+  color: var(--mdc-theme-primary, midnightblue);
+  background-color: rgb(128, 224, 255);
+  font-size: inherit;
+}
+
+// .mdc-button:not(:disabled) {
+//   color: midnightblue;
+//   color: var(--mdc-theme-primary, midnightblue);
+//   background-color: rgb(128, 224, 255);
+//   font-size: inherit;
+// }
+
 // *********************************************************************************** //
 // * Dismissible Drawer Icon                                                         * //
 // *********************************************************************************** //
@@ -51,6 +88,14 @@ button.mdc-top-app-bar__navigation-icon:hover {
   // Create a gentle scaling animation when the user hovers over the Dismissible Drawer icon
   animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 25ms);
   transform: scale(1.1);
+}
+
+// *********************************************************************************** //
+// * Main Content (Map)                                                              * //
+// *********************************************************************************** //
+.main-content {
+  overflow: auto;
+  height: 100%;
 }
 
 // *********************************************************************************** //
