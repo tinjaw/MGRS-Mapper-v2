@@ -1,10 +1,10 @@
-## MGRS-Mapper (development repo)
+# MGRS-Mapper (development repo)
 
 A development repository for MGRS-Mapper application
 
 ---
 
-### TODO
+## TODO
 
 - [x] Next steps would be integrating the affiliation dropdown and adding a mutation observer to dynamically update the SVG in the panel
 - [x] After that you need to add in the rest of the standard affiliations (hostile, templated, etc). There might be an issue with stroke-dasharray needing to be added to the matchPaths() function
@@ -36,16 +36,16 @@ A development repository for MGRS-Mapper application
 - [ ] Decide on using Bottom App Bar or Infowindow menu like on the Original pushbar site?
 - [ ] The select menus are too similar. Each should have an icon that differentiates them
 
-### DEFAULT VALUES
+## DEFAULT VALUES
 
-# Path:
+### Path:
 
 - d: REQUIRED
 - fill: none
 - stroke: black
 - strokeWidth: 4
 
-# Circle:
+### Circle:
 
 - cx: REQUIRED
 - cy: REQUIRED
@@ -54,7 +54,7 @@ A development repository for MGRS-Mapper application
 - stroke: Black
 - strokeWidth: 4
 
-# Text:
+### Text:
 
 - symbolText: REQUIRED
 - x: REQUIRED
