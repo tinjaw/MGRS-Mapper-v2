@@ -3,3 +3,4 @@ node_modules
 monitor
 .eslintrc.js
 scratchpad.js
+.DS_Store
