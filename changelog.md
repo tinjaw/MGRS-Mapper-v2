@@ -93,6 +93,6 @@
 - Added a Change log to track what I am doing. Commit notes are very sparse sometimes
 - Removed WebpackMonitor as it has not been maintained in 2 years
 - Installed webpack-bundle-analyzer plugin
-- Tried replacing the [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2] forEach loop with something better but got bogged down
-- disableInputsOnEquipment()
+- Tried replacing the **[selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2]** forEach loop with something better but got bogged down
+- Added **disableInputsOnEquipment()**
 - added flight capability modifier

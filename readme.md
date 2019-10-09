@@ -23,6 +23,14 @@
 - [x] Graphic Control Measures
 - [ ] Skeleton Screen preloader (Should be done right before launch)
 - [ ] Remove files and folders from gitignore in your repo
+- [ ] When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
+- [ ] Global vars need cleaning up. Use imports
+- [ ] Helper info-window on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
+- [x] Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
+- [ ] Mod1 helper text has word wrap. Fix it to 1 line
+- [ ] Fix the symbol panel so that amplifiers don't get clipped
+- [ ] Decide on using Bottom App Bar or Infowindow menu like on the Original pushbar site?
+- [ ] The select menus are too similar. Each should have an icon that differentiates them
 
 ### DEFAULT VALUES
 

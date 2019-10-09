@@ -476,9 +476,6 @@ class MilSym {
       uniqueDesignationGroup.classList.add('uniqueUnitDesignation');
       const uniqueDesignationText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       uniqueDesignationText.textContent = this._uniqueDesignation.toUpperCase();
-      // Previous values for viewBox = '21 46 158 108'
-      // uniqueDesignationText.setAttribute('x', '115%');
-      // uniqueDesignationText.setAttribute('y', '100%');
       // x: getBBox().width + getBBox().y + 5 (5 is padding)
       uniqueDesignationText.setAttribute('x', '180');
       // y: getBBox().height + (24.5 - 2 * 0.333)
@@ -506,9 +503,6 @@ class MilSym {
       higherFormationGroup.classList.add('higherUnitFormation');
       const higherFormationText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       higherFormationText.textContent = this._higherFormation.toUpperCase();
-      // Previous values for viewBox = '21 46 158 108'
-      // higherFormationText.setAttribute('x', '115%');
-      // higherFormationText.setAttribute('y', '140%');
       higherFormationText.setAttribute('x', '180');
       higherFormationText.setAttribute('y', '150');
       higherFormationText.setAttribute('fill', 'black');
@@ -841,15 +835,12 @@ class MilSym {
     svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
     svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-    // svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
-    // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon. This might not be the best way to do things.
-    // svg.setAttributeNS(null, 'viewBox', '21 46 158 108');
+    // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
     svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
     // console.count('Running placeSymbol');
   }
 }
 
-//! export this
 class AddGraphicControlMeasure extends MilSym {
   placeSymbol() {
     this.data.graphicControlMeasures = this._graphicControlMeasures;
@@ -862,6 +853,7 @@ class AddGraphicControlMeasure extends MilSym {
     svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
     svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+    // Since GCMs do not take any additional amplifiers, you can set their viewBox values as dynamic
     svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
   }
 }
