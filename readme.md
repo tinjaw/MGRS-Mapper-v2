@@ -34,7 +34,7 @@ A development repository for MGRS-Mapper application
 - [ ] Mod1 helper text has word wrap. Fix it to 1 line
 - [x] Fix the symbol panel so that amplifiers don't get clipped
 - [ ] Decide on using Bottom App Bar or Infowindow menu like on the Original pushbar site?
-- [ ] The select menus are too similar. Each should have an icon that differentiates them
+- [x] The select menus are too similar. Each should have an icon that differentiates them
 
 ## DEFAULT VALUES
 
