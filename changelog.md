@@ -18,6 +18,8 @@
       svg.getBBox().height + (24.5 - 2) * 0.333
       // height = 100
       // 24.5 = font size in pixels, 2 = half of the strokeWidth, 0.333 = 1/3rd of the symbol size; which gives you 7.493
+- Cleaned up and organized CSS files
+- Added hover animations to symbol panel and dismissible drawer icon
 
 ---
 

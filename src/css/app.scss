@@ -1,6 +1,5 @@
 // Import your theme variables
 @import 'my-theme';
-
 // Import MDC Web components
 @import '@material/typography/mdc-typography';
 @import '@material/button/mdc-button';
@@ -16,42 +15,48 @@
 @import './pushbar.scss';
 @import '@material/top-app-bar/mdc-top-app-bar';
 @import '@material/icon-button/mdc-icon-button';
+// Import your components for your application
+@import 'my-components';
 
-.symbolSelectors {
-  position: absolute;
-  overflow: auto;
-  height: calc(100% - 20em);
-  width: 100%;
-  border-top: 4px midnightblue solid;
-}
-
-// .sidebar500pix {
-//   width: 550px;
-// }
-
+// *********************************************************************************** //
+// * Symbol Panel                                                                    * //
+// *********************************************************************************** //
 .newSVG {
   // height: 150px;
   // height: 200px;
   padding-top: 95px;
   padding-bottom: 50px;
   display: flex;
-  // align-items: center;
   align-items: flex-start;
   justify-content: center;
 }
 
-//This makes the SVG in the panel very large.
 .newSVG svg {
-  height: fit-content;
-  width: fit-content;
+  // height: fit-content;
+  // width: fit-content;
+  // Setting height and width explicitly is more accurate for the hover animation
+  height: 10rem;
+  width: 11rem;
+  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 105ms, /* $delay: */ 25ms);
+  transform: scale(1);
+  will-change: transform;
 }
 
-//! Remove on production
-.test > svg {
+.newSVG svg:hover {
+  // Create a gentle scaling animation when the user hovers over the symbol
+  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
+  transform: scale(1.1);
+}
+
+// *********************************************************************************** //
+// * Select Boxes                                                                    * //
+// *********************************************************************************** //
+.symbolSelectors {
   position: absolute;
-  top: 0;
-  padding-top: 150px;
-  width: 250px;
+  overflow: auto;
+  height: calc(100% - 20em);
+  width: 100%;
+  border-top: 4px midnightblue solid;
 }
 
 .mdc-list-item em {
@@ -64,6 +69,9 @@
   // text-overflow: ellipsis;
 }
 
+// *********************************************************************************** //
+// * Text Fields                                                                     * //
+// *********************************************************************************** //
 .mdc-text-field.searchSymbols,
 .mdc-text-field.uniqueDesignation,
 .mdc-text-field.higherFormation {
@@ -71,5 +79,12 @@
   text-transform: uppercase;
 }
 
-// Import your components for your application
-@import 'my-components';
+// *********************************************************************************** //
+// * Remove on Production                                                            * //
+// *********************************************************************************** //
+.test > svg {
+  position: absolute;
+  top: 0;
+  padding-top: 150px;
+  width: 250px;
+}

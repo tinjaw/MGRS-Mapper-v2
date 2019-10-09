@@ -38,6 +38,9 @@ svg {
   overflow: visible;
 }
 
+// *********************************************************************************** //
+// * Select Boxes                                                                    * //
+// *********************************************************************************** //
 .mdc-select {
   // Default width of all the drop down select menus
   width: 450px;
@@ -80,11 +83,30 @@ li.mdc-list-item svg {
   max-width: 100px;
 }
 
+// Increase the height on the Command Post select box items
 .commandpost-list li.mdc-list-item {
   /* background: red; */
   height: 100px;
 }
 
+// *********************************************************************************** //
+// * Dismissible Drawer Icon                                                         * //
+// *********************************************************************************** //
+button.mdc-top-app-bar__navigation-icon {
+  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 75ms, /* $delay: */ 25ms);
+  transform: scale(1);
+  will-change: transform;
+}
+
+button.mdc-top-app-bar__navigation-icon:hover {
+  // Create a gentle scaling animation when the user hovers over the Dismissible Drawer icon
+  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 25ms);
+  transform: scale(1.1);
+}
+
+// *********************************************************************************** //
+// * Animations                                                                      * //
+// *********************************************************************************** //
 .animateSymbol {
   // This will create a drop down animation in the Symbol Panel when a new symbol is selected
   animation: mdc-animation-enter(/* $name: */ fadeInAndSlideOut, /* $duration: */ 300ms);
