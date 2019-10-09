@@ -13,6 +13,11 @@
 - Reduced all command post flag staffs to a max length of 240
 - Fixed bug with Unique and Higher Formation text
 - Mathematically centered the unique identifier text
+  >
+      uniqueDesignationText.setAttribute('y', '107.493');
+      svg.getBBox().height + (24.5 - 2) * 0.333
+      // height = 100
+      // 24.5 = font size in pixels, 2 = half of the strokeWidth, 0.333 = 1/3rd of the symbol size; which gives you 7.493
 
 ---
 
