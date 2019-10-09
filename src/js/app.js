@@ -476,8 +476,14 @@ class MilSym {
       uniqueDesignationGroup.classList.add('uniqueUnitDesignation');
       const uniqueDesignationText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       uniqueDesignationText.textContent = this._uniqueDesignation.toUpperCase();
-      uniqueDesignationText.setAttribute('x', '115%');
-      uniqueDesignationText.setAttribute('y', '100%');
+      // Previous values for viewBox = '21 46 158 108'
+      // uniqueDesignationText.setAttribute('x', '115%');
+      // uniqueDesignationText.setAttribute('y', '100%');
+      // x: getBBox().width + getBBox().y + 5 (5 is padding)
+      uniqueDesignationText.setAttribute('x', '180');
+      // y: getBBox().height + (24.5 - 2 * 0.333)
+      // 24.5 = font size in pixels, 2 = half of the strokeWidth, 0.333 is 1/3rd of the symbol size; which gives you 7.493
+      uniqueDesignationText.setAttribute('y', '107.493');
       uniqueDesignationText.setAttribute('fill', 'black');
       uniqueDesignationText.setAttribute('font-weight', 'bold');
       uniqueDesignationText.setAttribute('font-family', 'Arial');
@@ -500,8 +506,11 @@ class MilSym {
       higherFormationGroup.classList.add('higherUnitFormation');
       const higherFormationText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       higherFormationText.textContent = this._higherFormation.toUpperCase();
-      higherFormationText.setAttribute('x', '115%');
-      higherFormationText.setAttribute('y', '140%');
+      // Previous values for viewBox = '21 46 158 108'
+      // higherFormationText.setAttribute('x', '115%');
+      // higherFormationText.setAttribute('y', '140%');
+      higherFormationText.setAttribute('x', '180');
+      higherFormationText.setAttribute('y', '150');
       higherFormationText.setAttribute('fill', 'black');
       higherFormationText.setAttribute('font-weight', 'bold');
       higherFormationText.setAttribute('font-family', 'Arial');
@@ -834,8 +843,9 @@ class MilSym {
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
     // svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
     // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon. This might not be the best way to do things.
-    svg.setAttributeNS(null, 'viewBox', '21 46 158 108');
-    console.count('Running placeSymbol');
+    // svg.setAttributeNS(null, 'viewBox', '21 46 158 108');
+    svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
+    // console.count('Running placeSymbol');
   }
 }
 

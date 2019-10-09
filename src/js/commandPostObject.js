@@ -1,4 +1,5 @@
 // * COMMAND POST OBJECT * //
+//! NOTE: Set all command posts length to 240 (the last number in the path_1 element)
 const commandPostObject = {
   None: {
     type: 'Default/None',
@@ -33,7 +34,7 @@ const commandPostObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M25,150 L25,250',
+          d: 'M25,150 L25,240',
         },
         text_1: {
           symbolText: 'TAC',
@@ -48,7 +49,7 @@ const commandPostObject = {
       },
       hostile: {
         path_1: {
-          d: 'M28,100 L28,272',
+          d: 'M28,100 L28,240',
         },
         text_1: {
           symbolText: 'TAC',
@@ -63,7 +64,7 @@ const commandPostObject = {
       },
       unknown: {
         path_1: {
-          d: 'M30.75,100 L30.75,269.25',
+          d: 'M30.75,100 L30.75,240',
         },
         text_1: {
           symbolText: 'TAC',
@@ -78,7 +79,7 @@ const commandPostObject = {
       },
       neutral: {
         path_1: {
-          d: 'M45,155 L45,255',
+          d: 'M45,155 L45,240',
         },
         text_1: {
           symbolText: 'TAC',
@@ -95,7 +96,7 @@ const commandPostObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M25,150 L25,250',
+          d: 'M25,150 L25,240',
         },
         text_1: {
           symbolText: 'MAIN',
@@ -110,7 +111,7 @@ const commandPostObject = {
       },
       hostile: {
         path_1: {
-          d: 'M28,100 L28,272',
+          d: 'M28,100 L28,240',
         },
         text_1: {
           symbolText: 'MAIN',
@@ -125,7 +126,7 @@ const commandPostObject = {
       },
       unknown: {
         path_1: {
-          d: 'M30.75,100 L30.75,269.25',
+          d: 'M30.75,100 L30.75,240',
         },
         text_1: {
           symbolText: 'MAIN',
@@ -140,7 +141,7 @@ const commandPostObject = {
       },
       neutral: {
         path_1: {
-          d: 'M45,155 L45,255',
+          d: 'M45,155 L45,240',
         },
         text_1: {
           symbolText: 'MAIN',

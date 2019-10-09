@@ -7,6 +7,12 @@
 - Added menu open and closed icons for top app bar
 - Added more files to gitignore
 - Separated JS and CSS files into their own folders
+- Fixed bug with GCMs not showing up. This was due to an extra parameter in DisableInputs (because I moved the flying param logic to MilSym class)
+- Set symbol viewBox to new fixed attributes which should contain all elements in the panel
+- Added 50px to padding-bottom and reduced padding-top by 5px in the symbol panel
+- Reduced all command post flag staffs to a max length of 240
+- Fixed bug with Unique and Higher Formation text
+- Mathematically centered the unique identifier text
 
 ---
 

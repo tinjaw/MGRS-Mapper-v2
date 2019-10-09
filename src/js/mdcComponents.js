@@ -533,10 +533,8 @@ window.onload = () => {
     });
 
     changeGCM.then(() => {
-      console.log('level 1');
       // Check if the GCM class has this prop
       if (GCM()._graphicControlMeasures !== 'None') {
-        console.log('level 2');
         selectSymbol.selectedText_.textContent = 'None';
         // Disable everything except the symbol select and GCM select
         DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true, false);
@@ -545,7 +543,6 @@ window.onload = () => {
         // Animate the GCM
         document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
       } else {
-        console.log('level 3');
         // If the user selects 'none' on GCM, this will just place the default land unit back
         MainMS.placeSymbol();
         // This re-enables all buttons except the flying switch
