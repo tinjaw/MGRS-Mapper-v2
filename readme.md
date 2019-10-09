@@ -26,7 +26,7 @@ A development repository for MGRS-Mapper application
 - [x] Tactical Mission Tasks
 - [x] Graphic Control Measures
 - [ ] Skeleton Screen preloader (Should be done right before launch)
-- [x] Remove files and folders from gitignore in your repo
+- [x] Remove files and folders from gitignore in your repo [As seen here](http://www.codeblocq.com/2016/01/Untrack-files-already-added-to-git-repository-based-on-gitignore/)
 - [ ] When typing slow in the symbol search field it will display "No Results Found". Find a way to only enable the search dropdown if the char length is at least 3
 - [ ] Global vars need cleaning up. Use imports
 - [ ] Helper info-window on the Mod1/2 dropdowns are needed. Most soldier's don't know this stuff
