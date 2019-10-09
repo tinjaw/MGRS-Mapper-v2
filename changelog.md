@@ -5,9 +5,9 @@
 ## 8OCT19
 
 - Added menu open and closed icons for top app bar
-- Added more files to gitignore
+- Added more files to _gitignore_
 - Separated JS and CSS files into their own folders
-- Fixed bug with GCMs not showing up. This was due to an extra parameter in DisableInputs (because I moved the flying param logic to MilSym class)
+- Fixed bug with GCMs not showing up. This was due to an extra parameter in **DisableInputs** (_because I moved the flying param logic to MilSym class_)
 - Set symbol viewBox to new fixed attributes which should contain all elements in the panel
 - Added 50px to padding-bottom and reduced padding-top by 5px in the symbol panel
 - Reduced all command post flag staffs to a max length of 240
@@ -90,55 +90,9 @@
 ## 23SEPT19
 
 - Moved eslint, eslint-config-airbnb-base and eslint-plugin-import from dependencies to devDependencies
-
-* Added a Change log to track what I am doing. Commit notes are very sparse sometimes
-* Removed WebpackMonitor as it has not been maintained in 2 years
-* Installed webpack-bundle-analyzer plugin
-* Tried replacing the [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2] forEach loop with something better but got bogged down
-* disableInputsOnEquipment()
-* added flight capability modifier
-
-## Format examples
-
-> [Live Preview Here](https://markdownlivepreview.com)
-
----
-
-> Markdown is a lightweight markup language, originally created by John Gruber and Aaron Swartz allowing people "to write using an easy-to-read, easy-to-write plain text format, then convert it to structurally valid XHTML (or HTML)".
-
----
-
-## usage
-
-1. Write markdown text in this textarea.
-2. Click 'HTML Preview' button.
-
----
-
-## markdown quick reference
-
-# headers
-
-_emphasis_
-
-**strong**
-
-- list
-
-> block quote
-
-    code (4 spaces indent)
-
-[links](https://wikipedia.org)
-
----
-
-## changelog
-
-- 17-Feb-2013 re-design
-
----
-
-## thanks
-
-- [markdown-js](https://github.com/evilstreak/markdown-js)
+- Added a Change log to track what I am doing. Commit notes are very sparse sometimes
+- Removed WebpackMonitor as it has not been maintained in 2 years
+- Installed webpack-bundle-analyzer plugin
+- Tried replacing the [selectSymbol, selectAffiliation, selectUnitSize, selectMod1, selectMod2] forEach loop with something better but got bogged down
+- disableInputsOnEquipment()
+- added flight capability modifier
