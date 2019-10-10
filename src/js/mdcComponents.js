@@ -21,7 +21,6 @@ import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 import Pushbar from './pushbar';
 
-
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));

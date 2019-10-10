@@ -88,6 +88,7 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         // Setting floatLabel(true) and setEnhancedSelectedIndex_(0) will avoid the symbol animations from running again.
         // For instance if you had 'selectSymbol.foundation_.setSelectedIndex(0);' the function to remove the animateSymbol class would run x times
         // x = the number of elements in the symbolSelect dropdown.
+        //! This actually might be a better way of doing things that just using "selectSymbol.foundation_.setSelectedIndex(0);"
         selectSymbol.foundation_.adapter_.floatLabel(true);
         selectSymbol.setEnhancedSelectedIndex_(0);
         // Returning 'symbol' since we need to keep the symbol affiliation outlines

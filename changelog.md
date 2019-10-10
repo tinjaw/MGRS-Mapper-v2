@@ -6,9 +6,13 @@
 
 - Fixed a bug with the animateSymbol class. Previously when a user changed a symbol and then hovered over it the zoom in animation would work. But when they hover-out the '.animateSymbol' class would run the drop in animation. This was fixed by adding the addAndRemoveSymbolPanelAnimation function.
 - Fixed a potential performance bug in the addSymbolsAndModsToList function. For some reason 'selectSymbol.foundation\_.setSelectedIndex(0)' was running again and again depending on the number of elements in the selectSymbol dropdown. This was fixed by replacing it with the following following:
+
   >
+
         selectSymbol.foundation_.adapter_.floatLabel(true);
         selectSymbol.setEnhancedSelectedIndex_(0);
+
+- Added a Bottom App Bar in HTML and SCSS. I kind of just copied the CSS for the Top App Bar but added a property of bottom: 0; I made a CodePen of a more intricate bottom app bar [here](https://codepen.io/pistell/pen/YzzyEbw) I am not sure if this is even worth incorporating but it looks nice.
 
 ---
 
