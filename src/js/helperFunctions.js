@@ -83,8 +83,13 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         new MilSym(`.graphiccontrolmeasuresFigure[data-graphiccontrolmeasures-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
         break;
       case 'symbol':
+        // selectSymbol.foundation_.setSelectedIndex(0);
         // Set the selected symbol to "Default Land Unit" on page load
-        selectSymbol.foundation_.setSelectedIndex(0);
+        // Setting floatLabel(true) and setEnhancedSelectedIndex_(0) will avoid the symbol animations from running again.
+        // For instance if you had 'selectSymbol.foundation_.setSelectedIndex(0);' the function to remove the animateSymbol class would run x times
+        // x = the number of elements in the symbolSelect dropdown.
+        selectSymbol.foundation_.adapter_.floatLabel(true);
+        selectSymbol.setEnhancedSelectedIndex_(0);
         // Returning 'symbol' since we need to keep the symbol affiliation outlines
         return new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, undefined);
       default:

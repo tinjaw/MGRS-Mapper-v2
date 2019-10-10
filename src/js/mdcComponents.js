@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
+// TODO: Add bottom app bar next, then add an SVG manipulation library, and finally start on Leaflet
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -480,8 +481,18 @@ window.onload = () => {
         selectGraphicControlMeasures.selectedText_.textContent = 'None';
         DisableInputs();
       }
+
+      const addAndRemoveSymbolPanelAnimation = () => {
+        // Add the animateSymbol class the the symbol in the panel
+        document.querySelector('.newSVG > svg').classList.add('animateSymbol');
+        setTimeout(() => {
+          // Remove the animateSymbol class after 300ms (the length of the animation)
+          document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
+        }, 300);
+      };
+
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
-      !searchField.input_.value ? document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol') : null;
+      !searchField.input_.value ? addAndRemoveSymbolPanelAnimation() : null;
     }, (error) => {
       console.log(error);
     });

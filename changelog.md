@@ -2,6 +2,16 @@
 
 ---
 
+## 10OCT19
+
+- Fixed a bug with the animateSymbol class. Previously when a user changed a symbol and then hovered over it the zoom in animation would work. But when they hover-out the '.animateSymbol' class would run the drop in animation. This was fixed by adding the addAndRemoveSymbolPanelAnimation function.
+- Fixed a potential performance bug in the addSymbolsAndModsToList function. For some reason 'selectSymbol.foundation\_.setSelectedIndex(0)' was running again and again depending on the number of elements in the selectSymbol dropdown. This was fixed by replacing it with the following following:
+  >
+        selectSymbol.foundation_.adapter_.floatLabel(true);
+        selectSymbol.setEnhancedSelectedIndex_(0);
+
+---
+
 ## 8OCT19
 
 - Added menu open and closed icons for top app bar
