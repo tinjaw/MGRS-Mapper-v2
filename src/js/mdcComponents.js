@@ -364,6 +364,7 @@ function enableActivity() {
   if (activitySwitch.checked) {
     MainMS.activity = true;
     MainMS.placeSymbol();
+    bounceInAnimation('g.activity'); // This looks kinda funky
     return true;
   }
   MainMS.activity = false;
@@ -381,6 +382,7 @@ function enableInstallation() {
   if (installationSwitch.checked) {
     MainMS.installation = true;
     MainMS.placeSymbol();
+    bounceInAnimation('g.installation');
     return true;
   }
   MainMS.installation = false;
@@ -398,6 +400,7 @@ function enableTaskForce() {
   if (taskForceSwitch.checked) {
     MainMS.taskForce = true;
     MainMS.placeSymbol();
+    bounceInAnimation('g.taskforce');
     return true;
   }
   MainMS.taskForce = false;
