@@ -22,6 +22,8 @@
   - Only works when I put a setTimeout function on it (total hack)
   - When placing the symbol down, if you minimize the pushbar, the symbol moves along with it (note: this does not happen when I set it to work on the red ball. I think cloning the dom node is what will fix these issues)
   - I think if I clone the symbol in the panel, I won't have to worry about the animations lagging, or the pushbar fucking things up...
+  - https://codepen.io/pistell/pen/ExxPYom is a good resource that shows how to drag and clone an object. However it requires an additional dependency called [Scene.js](https://bundlephobia.com/result?p=scenejs@1.1.4)
+  - At this point you need to start looking into tree-shaking because Moveable+Scene is about 125k in size.
 - Added bounceInAnimation() to Activity, Installation and Task Force
 
 ---
