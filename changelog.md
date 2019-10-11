@@ -13,6 +13,15 @@
         selectSymbol.setEnhancedSelectedIndex_(0);
 
 - Added a Bottom App Bar in HTML and SCSS. I kind of just copied the CSS for the Top App Bar but added a property of bottom: 0; I made a CodePen of a more intricate bottom app bar [here](https://codepen.io/pistell/pen/YzzyEbw) I am not sure if this is even worth incorporating but it looks nice.
+- Added moveable.js. Huge issues with this one:
+  - The hover animation on the symbol panel lags the shit out of the resize/scale/drag/rotate functions. Disabling it is a temporary fix.
+  - The bounding box is off center on the symbol
+  - The symbol should be cloned and then the target is attached to it
+  - When selecting a new symbol the entire functionality fails
+  - 92k file size (wtf)
+  - Only works when I put a setTimeout function on it (total hack)
+  - When placing the symbol down, if you minimize the pushbar, the symbol moves along with it (note: this does not happen when I set it to work on the red ball. I think cloning the dom node is what will fix these issues)
+  - I think if I clone the symbol in the panel, I won't have to worry about the animations lagging, or the pushbar fucking things up...
 
 ---
 

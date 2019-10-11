@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
-// TODO: Add bottom app bar next, then add an SVG manipulation library, and finally start on Leaflet
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -9,6 +8,7 @@ import { MDCSwitch } from '@material/switch';
 import Fuse from 'fuse.js';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { MDCMenuSurface } from '@material/menu-surface';
+// import Moveable from 'moveable';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import commandPostObject from './commandPostObject';
@@ -19,7 +19,10 @@ import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 import graphicControlMeasuresObject from './graphicControlMeasuresObject';
+//! Since I am importing pushbar from webpack, I don't think I need to import it here
 import Pushbar from './pushbar';
+
+//! HUGE ISSUES WITH MOVEABLE.JS. CHECK YOUR NOTES FOR 10OCT19
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
@@ -624,6 +627,5 @@ window.onload = () => {
     selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
   });
 };
-
 
 export { selectAffiliation };
