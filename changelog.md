@@ -24,7 +24,8 @@
   - I think if I clone the symbol in the panel, I won't have to worry about the animations lagging, or the pushbar fucking things up...
   - https://codepen.io/pistell/pen/ExxPYom is a good resource that shows how to drag and clone an object. However it requires an additional dependency called [Scene.js](https://bundlephobia.com/result?p=scenejs@1.1.4)
   - At this point you need to start looking into tree-shaking because Moveable+Scene is about 125k in size.
-- Added bounceInAnimation() to Activity, Installation and Task Force
+- Added bounceInAnimation() to Activity, Installation and Task Force.
+- Also noted that Moveable.js requires SceneJs to run certain tasks like clone-and-drag.
 
 ---
 
