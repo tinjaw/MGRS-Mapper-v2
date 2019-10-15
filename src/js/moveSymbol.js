@@ -41,6 +41,7 @@ setTimeout(() => {
     const viewBox = [bbox.x, bbox.y, bbox.width + 15, bbox.height + 15].join(' ');
     target.setAttribute('viewBox', viewBox);
 
+
     document.querySelector('.newSVG > svg').removeAttributeNS(null, 'class', 'animateSymbol');
 
     moveable.on('dragStart', ({ target, clientX, clientY }) => {
