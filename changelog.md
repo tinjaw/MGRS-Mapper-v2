@@ -8,6 +8,7 @@
 - Added clone to Moveable
 - Added cloneAndDrag.html. You will need to go through it and manually insert what you need into moveSymbol.js. But everything works with it... Thank god
 - Good website for learning about viewBox [here](http://oreillymedia.github.io/svg-essentials-examples/ch03/using_viewbox.html)
+- Check out this old pen you wrote about multiple conditions for switches [here](https://codepen.io/pistell/pen/KLejOg) This is less than 30 lines of JS and could potentially replace the needless complexity of RRSwitches class
 
 ---
 
