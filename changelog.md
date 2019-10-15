@@ -5,6 +5,7 @@
 ## 14OCT19
 
 - Noticed that a lot of search strings in the old MGRS site include things like checkpoints and TRPs. Need a way to search both object files...
+- Added clone to Moveable
 
 ---
 

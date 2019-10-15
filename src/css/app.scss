@@ -48,6 +48,25 @@
   transform: scale(1.1);
 }
 
+.drag {
+  position: absolute;
+  /*   min-width: 150px;
+  min-height: 100px; */
+  width: 150px;
+  height: 100px;
+  max-width: fit-content;
+  max-height: fit-content;
+  /*   background: #f55;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  line-height: 100px; */
+  //! Absolute position: Adjust these next 2 rules
+  top: 42rem;
+  left: 1rem;
+  overflow: visible;
+}
+
 // *********************************************************************************** //
 // * Select Boxes                                                                    * //
 // *********************************************************************************** //
