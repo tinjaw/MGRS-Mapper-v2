@@ -2,6 +2,14 @@
 
 ---
 
+## 16OCT19
+
+- Added MPL 2.0 license.
+- Finally removed the default text in the package.json file... Only took me half a year
+- Potential bug. The dropzone restriction works when you drop the symbol down but once it is dropped it can be moved anywhere outside the yellow background. Need to set the container for the symbol.
+
+---
+
 ## 14OCT19
 
 - Noticed that a lot of search strings in the old MGRS site include things like checkpoints and TRPs. Need a way to search both object files...
@@ -9,7 +17,6 @@
 - Added cloneAndDrag.html. You will need to go through it and manually insert what you need into moveSymbol.js. But everything works with it... Thank god
 - Good website for learning about viewBox [here](http://oreillymedia.github.io/svg-essentials-examples/ch03/using_viewbox.html)
 - Check out this old pen you wrote about multiple conditions for switches [here](https://codepen.io/pistell/pen/KLejOg) This is less than 30 lines of JS and could potentially replace the needless complexity of RRSwitches class
-- Potential bug. The dropzone restriction works when you drop the symbol down but once it is dropped it can be moved anywhere. Need to set the container for the symbol.
 
 ---
 

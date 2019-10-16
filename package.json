@@ -1,16 +1,35 @@
 {
   "name": "MGRS-Mapper",
+  "description": "Drag and drop custom generated NATO military symbols onto Google Maps with an MGRS overlay.",
+  "homepage": "http://mgrs-mapper.com",
   "version": "2.0.0",
   "author": "James Pistell",
-  "license": "MPL 2.0",
-  "main": "index.js",
-  "description": "Drag and drop custom generated NATO military symbols onto Google Maps with an MGRS overlay.",
+  "maintainers": [
+    {
+      "name": "James Pistell",
+      "email": "jamespistell@gmail.com",
+      "web": "http://jamespistell.com/"
+    }
+  ],
+  "licenses": [
+    {
+      "name": "MPL 2.0",
+      "url": "https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt",
+      "local": "./LICENSE"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/pistell/SidebarLayoutRedux.git"
+    }
+  ],
+  "private": true,
   "scripts": {
     "build": "webpack -p",
     "//": "If you are building your app locally, in the following line remove everything after webpack-dev-server",
     "start": "webpack-dev-server --mode=production --watch-content-base"
   },
-  "private": true,
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
