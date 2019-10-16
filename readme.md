@@ -33,10 +33,10 @@ A development repository for MGRS-Mapper application
 - [x] Create a folder for object JS files and rename them. Things are going to get more complicated as we add in Tactical Mission Tasks, Graphic Control Measures and Task Force Amps
 - [ ] Mod1 helper text has word wrap. Fix it to 1 line
 - [x] Fix the symbol panel so that amplifiers don't get clipped
-- [ ] Decide on using Bottom App Bar or Infowindow menu like on the Original pushbar site?
+- [x] Decide on using Bottom App Bar or Infowindow menu like on the Original pushbar site?
 - [x] The select menus are too similar. Each should have an icon that differentiates them
 - [x] Add surface menu
-- [ ] Configure CSS hover state for surface menu
+- [x] Configure CSS hover state for surface menu
 - [ ] Add helper text to select boxes
 - [ ] Add SVG manipulation (drag-n-drop & resize handles)
 - [ ] Begin Leaflet maps implementation...
