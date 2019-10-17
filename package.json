@@ -11,23 +11,11 @@
       "web": "http://jamespistell.com/"
     }
   ],
-  "licenses": [
-    {
-      "name": "MPL 2.0",
-      "url": "https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt",
-      "local": "./LICENSE"
-    }
-  ],
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/pistell/SidebarLayoutRedux.git"
-    }
-  ],
   "private": true,
+  "main": "./src/js/app.js",
   "scripts": {
     "build": "webpack -p",
-    "//": "If you are building your app locally, in the following line remove everything after webpack-dev-server",
+    "local": "webpack-dev-server",
     "start": "webpack-dev-server --mode=production --watch-content-base"
   },
   "devDependencies": {
@@ -63,6 +51,22 @@
     "@material/typography": "^1.0.0",
     "fuse.js": "^3.4.5",
     "moveable": "^0.9.5"
+  },
+  "licenses": [
+    {
+      "name": "MPL-2.0",
+      "url": "https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt",
+      "local": "./LICENSE"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/pistell/SidebarLayoutRedux.git"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/pistell/MGRS-Mapper/issues"
   },
   "engines": {
     "node": "10.x"
