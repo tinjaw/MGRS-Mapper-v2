@@ -1,3 +1,5 @@
+import { toggleSidebarButton } from './mdcComponents';
+
 class Pushbar {
   constructor(config = { overlay: true, blur: false }) {
     this.activeBar = null;
@@ -124,4 +126,24 @@ class Pushbar {
 //   pushbar.open('mypushbar1');
 // }, 100);
 
-export default Pushbar;
+
+const pushbar = new Pushbar({ blur: false, overlay: false });
+
+toggleSidebarButton.unbounded = true;
+
+toggleSidebarButton.listen('click', () => {
+  if (pushbar.opened) {
+    // If the pushbar is opened, close it and replace the menu_open icon with the regular menu icon
+    toggleSidebarButton.root_.innerText = 'menu';
+    pushbar.close();
+  } else {
+    toggleSidebarButton.root_.innerText = 'menu_open';
+    pushbar.open('rightPushbar');
+  }
+  // pushbar.opened ? pushbar.close() : pushbar.open('rightPushbar');
+});
+
+pushbar.open('rightPushbar');
+
+
+// export default Pushbar;

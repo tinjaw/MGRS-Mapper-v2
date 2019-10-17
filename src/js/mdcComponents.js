@@ -19,17 +19,13 @@ import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 import graphicControlMeasuresObject from './graphicControlMeasuresObject';
-//! Since I am importing pushbar from webpack, I don't think I need to import it here
-import Pushbar from './pushbar';
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));
 const menuSurfaceButton = new MDCRipple(document.querySelector('.menu-surface-button'));
 
-const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
-
-const pushbar = new Pushbar({ blur: false, overlay: false });
+export const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
 
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -74,21 +70,6 @@ const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.grap
 menuSurfaceButton.listen('click', () => {
   menuSurface.isOpen() ? menuSurface.close() : menuSurface.open();
   menuSurface.setAbsolutePosition(10, 10);
-});
-
-
-toggleSidebarButton.unbounded = true;
-
-toggleSidebarButton.listen('click', () => {
-  if (pushbar.opened) {
-    // If the pushbar is opened, close it and replace the menu_open icon with the regular menu icon
-    toggleSidebarButton.root_.innerText = 'menu';
-    pushbar.close();
-  } else {
-    toggleSidebarButton.root_.innerText = 'menu_open';
-    pushbar.open('rightPushbar');
-  }
-  // pushbar.opened ? pushbar.close() : pushbar.open('rightPushbar');
 });
 
 
@@ -449,8 +430,6 @@ window.onload = () => {
   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
   addSymbolsAndModsToList(tacticalMissionTasksObject, 'tacticalmissiontask', selectTacticalMissionTasks);
   addSymbolsAndModsToList(graphicControlMeasuresObject, 'graphiccontrolmeasures', selectGraphicControlMeasures);
-  // Open the pushbar on page load
-  pushbar.open('rightPushbar');
   // Hide the text field trash can buttons on page load
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';

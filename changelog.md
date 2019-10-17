@@ -2,6 +2,13 @@
 
 ---
 
+## 17OCT19
+
+- Added extra data to package.json
+- Moved all Pushbar logic to pushbar.js. Since Pushbar is not an Material Design Component, it does not belong in mdcComponents.js
+
+---
+
 ## 16OCT19
 
 - Added MPL 2.0 license.

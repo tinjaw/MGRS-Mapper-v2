@@ -62,7 +62,7 @@
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/pistell/SidebarLayoutRedux.git"
+      "url": "git+https://github.com/pistell/SidebarLayoutRedux.git"
     }
   ],
   "bugs": {
