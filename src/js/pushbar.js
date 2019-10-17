@@ -117,20 +117,10 @@ class Pushbar {
     this.activeBar = null;
   }
 }
-// window.Pushbar = Pushbar;
-// const pushbar = new Pushbar({
-//   blur: false,
-//   overlay: false,
-// });
-// setTimeout(() => {
-//   pushbar.open('mypushbar1');
-// }, 100);
-
 
 const pushbar = new Pushbar({ blur: false, overlay: false });
 
 toggleSidebarButton.unbounded = true;
-
 toggleSidebarButton.listen('click', () => {
   if (pushbar.opened) {
     // If the pushbar is opened, close it and replace the menu_open icon with the regular menu icon
@@ -140,10 +130,8 @@ toggleSidebarButton.listen('click', () => {
     toggleSidebarButton.root_.innerText = 'menu_open';
     pushbar.open('rightPushbar');
   }
-  // pushbar.opened ? pushbar.close() : pushbar.open('rightPushbar');
 });
 
+
+// Open the pushbar on page load
 pushbar.open('rightPushbar');
-
-
-// export default Pushbar;

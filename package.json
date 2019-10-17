@@ -1,18 +1,15 @@
 {
-  "name": "MGRS-Mapper",
+  "name": "mgrs-mapper",
+  "version": "2.0.0",
   "description": "Drag and drop custom generated NATO military symbols onto Google Maps with an MGRS overlay.",
   "homepage": "http://mgrs-mapper.com",
-  "version": "2.0.0",
-  "author": "James Pistell",
-  "maintainers": [
-    {
-      "name": "James Pistell",
-      "email": "jamespistell@gmail.com",
-      "web": "http://jamespistell.com/"
-    }
-  ],
-  "private": true,
   "main": "./src/js/app.js",
+  "private": true,
+  "author": {
+    "name": "James Pistell",
+    "email": "jamespistell@gmail.com",
+    "url": "http://jamespistell.com/"
+  },
   "scripts": {
     "build": "webpack -p",
     "local": "webpack-dev-server",
@@ -52,23 +49,16 @@
     "fuse.js": "^3.4.5",
     "moveable": "^0.9.5"
   },
-  "licenses": [
-    {
-      "name": "MPL-2.0",
-      "url": "https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt",
-      "local": "./LICENSE"
-    }
-  ],
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git+https://github.com/pistell/SidebarLayoutRedux.git"
-    }
-  ],
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pistell/SidebarLayoutRedux.git"
+  },
   "bugs": {
-    "url": "https://github.com/pistell/MGRS-Mapper/issues"
+    "url": "https://github.com/pistell/MGRS-Mapper/issues",
+    "email": "jamespistell@gmail.com"
   },
   "engines": {
-    "node": "10.x"
+    "node": ">=9.4.0"
   }
 }
