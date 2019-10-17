@@ -22,8 +22,6 @@ import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 //! Since I am importing pushbar from webpack, I don't think I need to import it here
 import Pushbar from './pushbar';
 
-//! HUGE ISSUES WITH MOVEABLE.JS. CHECK YOUR NOTES FOR 10OCT19
-
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));

@@ -97,6 +97,7 @@
 
     // MOVEABLE.JS
     const moveableoptions = {
+      // Set the target as null until someone moves and clones it onto the yellow background
       target: null,
       // If the container is null, the position is fixed. (default: parentElement(document.body))
       container: document.body,
@@ -117,12 +118,15 @@
     const moveable = new Moveable(document.body, moveableoptions);
 
     function cloneSymbol(event) {
+      // All "targets" will be symbols with the draggable class
       var tgt = document.querySelectorAll('.draggable');
+      // Create the array for the targets
       var arr = Array.from(tgt);
+      // Now push the targets on the yellow board to an arry
       tgt.forEach(e => {
         arr.push(e);
       });
-      // Get the last item in the array
+      // Get the last item in the array and set it
       moveable.target = arr.slice(-1)[0];
       /* draggable */
       moveable
@@ -195,11 +199,14 @@
         });
     }
 
+    // This toggles the control box on whatever element you click on
     function backgroundTest(event) {
-      document.querySelectorAll('.draggable').forEach(e => {
+      document.querySelectorAll('.draggable').forEach(key => {
         //https://stackoverflow.com/questions/24183286/drag-and-drop-to-div-behind-absolutely-positioned-div
         let elements = document.elementsFromPoint(event.clientX, event.clientY);
-        let chosenTarget = elements.find(e => e.matches('.draggable'));
+        let chosenTarget = elements.find(key => key.matches('.draggable'));
+        // If you click a symbol on the yellow background, it will set it as the Moveable target
+        // If you click the yellow background it will de-select the symbol so you can get that annoying control box out of view
         chosenTarget ? (moveable.target = chosenTarget) : (moveable.target = undefined);
       });
     }
