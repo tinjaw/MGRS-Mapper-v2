@@ -6,6 +6,11 @@
 
 - Added extra data to package.json
 - Moved all Pushbar logic to pushbar.js. Since Pushbar is not an Material Design Component, it does not belong in mdcComponents.js
+- Consider: [Loading Overlays](https://github.com/muhdfaiz/js-loading-overlay)
+- Consider: [How to get mid point of SVG](https://stackoverflow.com/questions/26867641/how-to-get-mid-point-of-g-tag-in-svg-using-javascript)
+- Consider: [Webpack and Lazy Loading](https://medium.com/walkme-engineering/how-and-when-not-to-use-webpack-for-lazy-loading-bef9d37c42c1)
+- Consider: [Material Theming](https://medium.com/google-design/how-to-style-buttons-using-material-theming-ad215f892207)
+- Consider: [33 JS Concepts](https://github.com/leonardomso/33-js-concepts)
 
 ---
 
