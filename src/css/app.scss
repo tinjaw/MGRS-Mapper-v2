@@ -29,6 +29,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  border: 1px red dashed;
 }
 
 .newSVG svg {
@@ -37,35 +38,41 @@
   // Setting height and width explicitly is more accurate for the hover animation
   height: 10rem;
   width: 11rem;
-  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 105ms, /* $delay: */ 25ms);
-  transform: scale(1);
-  will-change: transform;
+  //transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 105ms, /* $delay: */ 25ms);
+  //transform: scale(1);
+  //will-change: transform;
 }
 
 .newSVG svg:hover {
   // Create a gentle scaling animation when the user hovers over the symbol
-  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
-  transform: scale(1.1);
+  //animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
+  //transform: scale(1.1);
+  // cursor: grab;
 }
 
-.drag {
+.hideDataImage {
   position: absolute;
-  /*   min-width: 150px;
-  min-height: 100px; */
-  width: 150px;
-  height: 100px;
-  max-width: fit-content;
-  max-height: fit-content;
-  /*   background: #f55;
-  color: #fff;
-  font-size: 20px;
-  text-align: center;
-  line-height: 100px; */
-  //! Absolute position: Adjust these next 2 rules
-  top: 42rem;
-  left: 1rem;
-  overflow: visible;
+  left: -100%;
 }
+
+// .drag {
+//   position: absolute;
+//   /*   min-width: 150px;
+//   min-height: 100px; */
+//   width: 150px;
+//   height: 100px;
+//   max-width: fit-content;
+//   max-height: fit-content;
+//   /*   background: #f55;
+//   color: #fff;
+//   font-size: 20px;
+//   text-align: center;
+//   line-height: 100px; */
+//   //! Absolute position: Adjust these next 2 rules
+//   top: 42rem;
+//   left: 1rem;
+//   overflow: visible;
+// }
 
 // *********************************************************************************** //
 // * Select Boxes                                                                    * //

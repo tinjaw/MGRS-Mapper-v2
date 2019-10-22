@@ -1,5 +1,9 @@
 # Change Log Notes
 
+## 21OCT19
+
+- in Index.html the newSVG div has a data-symbol-name attribute, I dont think that is necessary
+
 ---
 
 ## 17OCT19
