@@ -45,7 +45,6 @@ function manipulateSymbol() {
     target.style.top = `${top}px`;
   });
 
-
   //* SCALABLE *//
   moveable.on('scale', ({ target, transform }) => {
     target.style.transform = transform;
@@ -115,7 +114,8 @@ const drop = (event) => {
   target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px`);
 };
 
-// This will only enable the draggable attribute if the cursor is hovering over the symbol in the symbol panel. Otherwise the whole .newSVG panel gets dragged
+// Enables draggable attribute if the cursor is hovering over the symbol in the sidebar.
+// Otherwise the whole .newSVG panel gets dragged
 newSVGDiv.addEventListener('mouseover', () => {
   const symbolPanel = document.querySelector('.newSVG svg');
   if (symbolPanel.parentNode.querySelector(':hover') === symbolPanel) {
