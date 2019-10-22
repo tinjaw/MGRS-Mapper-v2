@@ -834,10 +834,12 @@ class MilSym {
     svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
     svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
     svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
+    //! BUG: setting height/width dynamically causes Firefox to fail. Set manually to fix this error
+    // svg.setAttributeNS(null, 'height', '100');
+    // svg.setAttributeNS(null, 'width', '150');
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
     // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
     svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
-
     // console.count('Running placeSymbol');
   }
 }

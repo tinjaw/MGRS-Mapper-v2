@@ -3,6 +3,7 @@
 ## 21OCT19
 
 - Integrated the Drag-and-Drop functionality. (this took 14 hours).
+- Noted bug in Firefox on the placeSymbol() method. For some reason setting the height and width via getBBox() causes the app to fail. Setting the values statically fixes this issue. Although I don't like it.
 
 ---
 
