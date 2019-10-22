@@ -22,14 +22,11 @@
 // * Symbol Panel                                                                    * //
 // *********************************************************************************** //
 .newSVG {
-  // height: 150px;
-  // height: 200px;
   padding-top: 95px;
   padding-bottom: 50px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  border: 1px red dashed;
 }
 
 .newSVG svg {
@@ -38,53 +35,37 @@
   // Setting height and width explicitly is more accurate for the hover animation
   height: 10rem;
   width: 11rem;
-  //transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 105ms, /* $delay: */ 25ms);
-  //transform: scale(1);
-  //will-change: transform;
+  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 105ms, /* $delay: */ 25ms);
+  transform: scale(1);
+  will-change: transform;
 }
 
 .newSVG svg:hover {
   // Create a gentle scaling animation when the user hovers over the symbol
-  //animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
-  //transform: scale(1.1);
-  // cursor: grab;
+  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
+  transform: scale(1.1);
+  cursor: grab;
+}
+
+// *********************************************************************************** //
+// * Main Content (Map) / Draggable Items                                            * //
+// *********************************************************************************** //
+.main-content {
+  overflow: auto;
+  height: calc(100vh - 145px);
+  background-color: antiquewhite;
 }
 
 .hideDataImage {
-  // height: 100px;
-  // width: 150px;
-  // height: fit-content;
-  // width: fit-content;
-  //padding-top: 100px;
+  z-index: -1;
   position: absolute;
   left: -100%;
-  border: 3px green dashed;
-}
-.draggable {
-  //margin: auto;
-  //height: fit-content;
-  //width: fit-content;
-  padding: 10px 10px 10px 10px;
 }
 
-// .drag {
-//   position: absolute;
-//   /*   min-width: 150px;
-//   min-height: 100px; */
-//   width: 150px;
-//   height: 100px;
-//   max-width: fit-content;
-//   max-height: fit-content;
-//   /*   background: #f55;
-//   color: #fff;
-//   font-size: 20px;
-//   text-align: center;
-//   line-height: 100px; */
-//   //! Absolute position: Adjust these next 2 rules
-//   top: 42rem;
-//   left: 1rem;
-//   overflow: visible;
-// }
+.draggable {
+  cursor: move;
+  padding: 10px 10px 10px 10px;
+}
 
 // *********************************************************************************** //
 // * Select Boxes                                                                    * //

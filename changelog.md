@@ -2,7 +2,7 @@
 
 ## 21OCT19
 
-- in Index.html the newSVG div has a data-symbol-name attribute, I dont think that is necessary
+- Integrated the Drag-and-Drop functionality. (this took 14 hours).
 
 ---
 

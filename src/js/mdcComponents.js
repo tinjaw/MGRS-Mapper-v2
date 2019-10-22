@@ -8,7 +8,6 @@ import { MDCSwitch } from '@material/switch';
 import Fuse from 'fuse.js';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { MDCMenuSurface } from '@material/menu-surface';
-// import Moveable from 'moveable';
 import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import commandPostObject from './commandPostObject';
