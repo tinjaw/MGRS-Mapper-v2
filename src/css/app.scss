@@ -51,8 +51,20 @@
 }
 
 .hideDataImage {
+  // height: 100px;
+  // width: 150px;
+  // height: fit-content;
+  // width: fit-content;
+  //padding-top: 100px;
   position: absolute;
   left: -100%;
+  border: 3px green dashed;
+}
+.draggable {
+  //margin: auto;
+  //height: fit-content;
+  //width: fit-content;
+  padding: 10px 10px 10px 10px;
 }
 
 // .drag {

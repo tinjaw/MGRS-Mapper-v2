@@ -1,4 +1,5 @@
 import Moveable from 'moveable';
+import { bounceInAnimation } from './helperFunctions';
 
 
 // img.src = 'http://kryogenix.org/images/hackergotchi-simpler.png';
@@ -15,15 +16,19 @@ const draggy = {
     return modifiedTarget;
   },
   get genImg() {
+    const svgElement = document.querySelector('.newSVG > svg');
     const img = new Image();
-    img.classList.add('hideDataImage');
     // const img = document.createElement('img');
-    const svgString = new XMLSerializer().serializeToString(this.newLocation.location);
+    img.classList.add('hideDataImage');
+
+
+    const svgString = new XMLSerializer().serializeToString(svgElement);
     const decoded = unescape(encodeURIComponent(svgString));
     const base64 = btoa(decoded);
     const imgSource = `data:image/svg+xml;base64,${base64}`;
     img.setAttribute('src', imgSource);
     document.body.append(img);
+    console.log(img);
     return img;
   },
 };
@@ -41,21 +46,9 @@ const draggy = {
 //   return img;
 // };
 
+
 window.draggy = draggy;
 setTimeout(() => {
-  const location = document.querySelectorAll('.newSVG > svg');
-  const arr = Array.from(location);
-  location.forEach((e) => {
-    arr.push(e);
-  });
-  const img = new Image();
-  const svgString = new XMLSerializer().serializeToString(arr.slice(-1)[0]);
-  const decoded = unescape(encodeURIComponent(svgString));
-  const base64 = btoa(decoded);
-  const imgSource = `data:image/svg+xml;base64,${base64}`;
-  img.setAttribute('src', imgSource);
-
-
   const newSVGDiv = document.querySelector('.newSVG');
   const map2 = document.querySelector('#main-content');
 
@@ -95,21 +88,29 @@ setTimeout(() => {
     // var data = event.dataTransfer.getData("text");
     // var copyimg = document.createElement("img");
     const target = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    target.classList.add('draggable');
+
+    // target.classList.remove('bounceIn');
     // var original = document.getElementById(data);
     // copyimg.src = original.src;
     target.innerHTML = document.querySelector('.newSVG >  svg').innerHTML;
     event.target.appendChild(target);
 
     const bbox = target.getBBox();
+
+
+    document.querySelectorAll('.draggable > g').forEach((key) => {
+      key.classList.remove('bounceIn');
+      const bbox = key.parentElement.getBBox();
+      key.parentElement.setAttribute('viewBox', `${bbox.x}, ${bbox.y}, ${bbox.width}, ${bbox.height}`);
+    });
+
+    cloneSymbol(event);
     target.setAttribute('height', `${bbox.height}`);
     target.setAttribute('width', `${bbox.width}`);
-    target.setAttribute(
-      'viewBox',
-      `${bbox.x}, ${bbox.y}, ${bbox.width}, ${bbox.height}`,
-    );
-    target.classList.add('draggable');
+
+    // target.setAttribute('viewBox', `${bbox.x}, ${bbox.y}, ${bbox.width}, ${bbox.height}`);
     target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px;`);
-    cloneSymbol(event);
   };
 
 
@@ -269,15 +270,53 @@ setTimeout(() => {
 
   //! DRAG START
   // newSVGDiv.addEventListener('dragstart', (e) => {
-
+  //   event.dataTransfer.effectAllowed = 'copy';
+  //   event.dataTransfer.clearData();
+  //   event.dataTransfer.setData('text/html', event.target.id);
+  //   event.dataTransfer.setDragImage(draggy.genImg, 10 /* xOffset */, 10 /* yOffset */);
   // }, false);
+  newSVGDiv.addEventListener('dragstart', dragStart, false);
+  // https://stackoverflow.com/questions/29131466/change-ghost-image-in-html5-drag-and-drop
+  function dragStart(event) {
+    MainMS.placeSymbol();
+    const crt = document.querySelector('.newSVG > svg').cloneNode(true);
 
-  newSVGDiv.ondragstart = (event) => {
-    event.dataTransfer.setData('text', event.target.id);
+    crt.classList.remove('newSVG');
+    crt.classList.add('hideDataImage');
+    // crt.style.height = '160px';
+    // crt.style.width = '176px';
+    // crt.style.position = 'absolute';
+    // crt.style.top = '0';
+    // crt.style.left = '50%';
+    crt.style.zIndex = '-1';
+    document.body.appendChild(crt);
+    crt.setAttributeNS(null, 'height', `${crt.getBBox().height}`);
+    crt.setAttributeNS(null, 'width', `${crt.getBBox().width}`);
+    crt.setAttributeNS(null, 'viewBox', `${crt.getBBox().x - 4} ${crt.getBBox().y - 4} ${crt.getBBox().width + 8} ${crt.getBBox().height + 8}`);
+    // crt.setAttribute('height', '150');
+    // crt.setAttribute('width', '100');
+    // crt.setAttribute('viewBox', '25 15 150 135');
+    // crt.style.height = `${document.querySelector('.newSVG > svg').getBBox().height}px`;
+
+    // console.log(event.toElement.outerHTML); //! Works
+    console.log(crt);
     event.dataTransfer.effectAllowed = 'copy';
-    console.log(draggy.genImg);
-    event.dataTransfer.setDragImage(draggy.genImg, 10 /* xOffset */, 10 /* yOffset */);
-  };
+    event.dataTransfer.setData('text/plain', event.target.id);
+    // Set the drag image and center it on the cursor
+    event.dataTransfer.setDragImage(crt, crt.getBoundingClientRect().width / 2, crt.getBoundingClientRect().height / 2);
+
+
+    window.setTimeout(() => {
+      crt.parentNode.removeChild(crt);
+    }, 100);
+  }
+
+  // newSVGDiv.ondragstart = (event) => {
+  // event.dataTransfer.effectAllowed = 'copy';
+  // event.dataTransfer.clearData();
+  // event.dataTransfer.setData('text/plain', event.target.id);
+  //   event.dataTransfer.setDragImage(draggy.genImg, 10 /* xOffset */, 10 /* yOffset */);
+  // };
 
 
   const target = document.querySelector('.newSVG > svg');
@@ -286,7 +325,7 @@ setTimeout(() => {
   const config = {
     // attributes: true,
     // attributeOldValue: true,
-    // characterData: true,
+    characterData: true,
     // characterDataOldValue: true,
     childList: true,
     // subtree: true,

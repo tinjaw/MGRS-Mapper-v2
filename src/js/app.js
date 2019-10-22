@@ -837,6 +837,7 @@ class MilSym {
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
     // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
     svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
+
     // console.count('Running placeSymbol');
   }
 }
