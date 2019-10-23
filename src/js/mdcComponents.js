@@ -418,6 +418,7 @@ window.selectTacticalMissionTasks = selectTacticalMissionTasks;
 window.selectGraphicControlMeasures = selectGraphicControlMeasures;
 window.menuSurface = menuSurface;
 window.graphicControlMeasuresObject = graphicControlMeasuresObject;
+window.bounceInAnimation = bounceInAnimation;
 
 // *********************************************************************************** //
 // * Load the Symbols and Modifiers into the dropdowns on page load                  * //
@@ -455,7 +456,6 @@ window.onload = () => {
     changeSymbols.then(() => {
       // Remove the outline of the default/none symbol
       if (MainMS.type === 'Equipment') {
-        console.log('This is equipment');
         // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
         DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
       } else {

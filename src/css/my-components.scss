@@ -199,3 +199,18 @@ li.mdc-list-item svg {
     transform: scale(1) translate3d(0, 0, 0);
   }
 }
+
+.zoomIn {
+  animation: mdc-animation-enter(/* $name: */ zoom-in, /* $duration: */ 350ms);
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale3d(1.5, 1.5, 1.5);
+  }
+
+  90% {
+    opacity: 1;
+  }
+}

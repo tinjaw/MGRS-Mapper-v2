@@ -18,11 +18,10 @@ async function TransformModifiersOnEquipment(location) {
       if (mod1) {
         equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
         equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-        // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px)`;
+        // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px) scale(0.85)`;
         mod1.style.transformOrigin = '100px 100px';
-        mod1.style.transform = 'translateY(-11%) scale(0.85)';
+        mod1.style.transform = 'translateY(-9%) scale(0.85)';
       }
-
       if (mod2) {
         mod2.style.transformOrigin = '100px 140px';
         mod2.style.transform = 'scale(0.85)';
@@ -145,6 +144,7 @@ function bounceInAnimation(location) {
     bounceIn.style.transformOrigin = 'center center';
     bounceIn.classList.toggle('bounceIn');
   }
+  bounceIn.classList.toggle('zoomIn');
 }
 
 

@@ -1,5 +1,14 @@
 # Change Log Notes
 
+---
+
+## 23OCT19
+
+- TransformModifiersOnEquipment() is being imported into mdcComponents but only being used in app.js
+- Tried fixing the bounceIn animation for equipment modifiers but got stuck. Settled on a zoom in animation that I got from [Animate.css](https://daneden.github.io/animate.css/)
+
+---
+
 ## 21OCT19
 
 - Integrated the Drag-and-Drop functionality. (this took 14 hours).

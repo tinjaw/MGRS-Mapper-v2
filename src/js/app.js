@@ -144,6 +144,20 @@ class MilSym {
       // Set the symbol type to Equipment or Land Unit
       this.type = militarySymbolsObject[this._symbol].type;
 
+      if (this.type === 'Graphic Control Measure') {
+        outline.setAttributeNS(null, 'd', '');
+        outline.setAttributeNS(null, 'fill', '');
+        outlineGroup.append(outline);
+        // setTimeout(() => {
+        //   console.log(outlineGroup.ownerSVGElement);
+        //   const bbox = outlineGroup.ownerSVGElement.getBBox();
+        //   // outlineGroup.ownerSVGElement.setAttributeNS(null, 'viewBox', '60 -60 80 160');
+        //   outlineGroup.ownerSVGElement.setAttributeNS(null, 'viewBox', `${bbox.x} ${bbox.y}  ${bbox.width} ${bbox.height}`);
+        // }, 100);
+
+        return outlineGroup;
+      }
+
       // Check if the symbol has the flightCapable property
       if (militarySymbolsObject[this._symbol].flightCapable) {
         flyingSwitch.disabled = false;
@@ -841,6 +855,41 @@ class MilSym {
     // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
     svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
     // console.count('Running placeSymbol');
+
+
+    // if (window.hasOwnProperty('MainMS')) {
+    //   MainMS.flying = false;
+    //   DisableInputs();
+    //   MainMS.placeSymbol();
+    // } else {
+    //   setTimeout(() => {
+    //     MainMS.flying = false;
+    //     DisableInputs();
+    //     MainMS.placeSymbol();
+    //   }, 30);
+    // }
+    // const { type } = militarySymbolsObject[this._symbol];
+    // function setViewBox() {
+    //   switch (type) {
+    //     case 'Graphic Control Measure':
+    //       return svg.setAttributeNS(null, 'viewBox', '60 -60 80 160');
+    //       // break;
+    //     case 'Land Unit':
+    //       return svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
+    //       // break;
+    //     case 'Equipment':
+    //       return svg.setAttributeNS(null, 'viewBox', '40 40 120 120');
+    //       // break;
+    //     default:
+    //       break;
+    //   }
+    // }
+
+    // setTimeout(() => {
+    //   setViewBox();
+
+    //   // svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x} ${svg.getBBox().y}  ${svg.getBBox().width} ${svg.getBBox().height}`);
+    // }, 600);
   }
 }
 
