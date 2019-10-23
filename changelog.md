@@ -4,6 +4,8 @@
 
 - Integrated the Drag-and-Drop functionality. (this took 14 hours).
 - Noted bug in Firefox on the placeSymbol() method. For some reason setting the height and width via getBBox() causes the app to fail. Setting the values statically fixes this issue. Although I don't like it.
+- BUG: Graphic Control Measures do not work with clone-and-drag. IMO this whole feature needs to be incorporated into the main military symbols object. In the long term this will be more beneficial since people tend to search for GCMs just as much as regular symbols
+- Feature: Need a clear symbol button. I have the feeling if a user has selected a piece of equipment, they won't know how to escape the disabled menus.
 
 ---
 

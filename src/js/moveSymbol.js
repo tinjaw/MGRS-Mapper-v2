@@ -130,7 +130,7 @@ newSVGDiv.addEventListener('mouseover', () => {
 
 newSVGDiv.ondragstart = (event) => {
   // For some reason I had to run this again to get the symbol amplifiers to show up. This seems to be an issue with the bounceInAnimation
-  MainMS.placeSymbol();
+  MainMS.placeSymbol(); //! This causes an error when dragging a GCM
   // Deep clone the symbol panel
   const dragImg = document.querySelector('.newSVG > svg').cloneNode(true);
   dragImg.classList.remove('newSVG');

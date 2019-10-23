@@ -87,7 +87,7 @@ const searchOptions = {
   distance: 100,
   maxPatternLength: 32,
   minMatchCharLength: 3,
-  keys: [Object.keys(militarySymbolsObject)],
+  keys: [Object.keys(militarySymbolsObject), Object.keys(graphicControlMeasuresObject)],
 };
 
 function clearSearchField() {
@@ -417,7 +417,7 @@ window.tacticalMissionTasksObject = tacticalMissionTasksObject;
 window.selectTacticalMissionTasks = selectTacticalMissionTasks;
 window.selectGraphicControlMeasures = selectGraphicControlMeasures;
 window.menuSurface = menuSurface;
-
+window.graphicControlMeasuresObject = graphicControlMeasuresObject;
 
 // *********************************************************************************** //
 // * Load the Symbols and Modifiers into the dropdowns on page load                  * //
