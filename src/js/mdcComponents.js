@@ -162,7 +162,6 @@ const searchResults = debounce(() => {
     // Set the selected item to the one in the symbol panel
     const symbolInfoName = JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo);
     selectSymbol.value = symbolInfoName.Symbol;
-
     // Do not animate the symbol panel if there is no text in the textField
     if (document.querySelector('.newSVG > svg').classList.contains('animateSymbol')) {
       document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
