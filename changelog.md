@@ -14,6 +14,8 @@
 - Added About Section on the bottom of the Pushbar
 - Moved ES Lint rules from top of file to eslintrc
 - BUG: When removing TransformModifiersOnEquipment from the window and into imports it throws an error... No clue.
+- Fully removed graphicControlMeasuresObject and integrated it with militarySymbolsObject. Since users tend to search for GCMs as much as symbols it made more sense to incorporate them into the main symbols object
+- Fixed a bug when clearing the search field. It was looking for dataset-symbol-name, which I removed earlier
 
 ---
 
