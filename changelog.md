@@ -18,6 +18,7 @@
 - Fixed a bug when clearing the search field. It was looking for dataset-symbol-name, which I removed earlier
 - Added bottom-about section on Pushbar
 - Added scroll bar styling in Chrome
+- Fixed scroll bar bug in Firefox by setting the .symbolSelectors height statically to 911px
 - Fixed the fadeInAndSlideOut animation bug on Firefox with an animationend event listener on the window.
 
 ---

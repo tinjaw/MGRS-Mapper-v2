@@ -849,51 +849,51 @@ class MilSym {
     // Do not run this function unless MainMS is in the window
     'MainMS' in window ? setViewBox() : setTimeout(setViewBox, 300);
 
-    // //! REMOVE ON PRODUCTION -- This just displays formatted JSON data for the current data-symbol-info
-    // if ('MainMS' in window) {
-    //   let myJSON = {};
+    //! REMOVE ON PRODUCTION -- This just displays formatted JSON data for the current data-symbol-info
+    if ('MainMS' in window) {
+      let myJSON = {};
 
-    //   const config = {
-    //     // attributes: true,
-    //     childList: true,
-    //     characterData: true,
-    //   };
+      const config = {
+        // attributes: true,
+        childList: true,
+        characterData: true,
+      };
 
-    //   const observer = new MutationObserver(((mutations) => {
-    //     myJSON = JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo);
+      const observer = new MutationObserver(((mutations) => {
+        myJSON = JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo);
 
-    //     const myJSONString = JSON.stringify(myJSON);
-    //     let regexString = '';
-    //     // for tracking matches, in particular the curly braces
-    //     const brace = {
-    //       brace: 0,
-    //     };
+        const myJSONString = JSON.stringify(myJSON);
+        let regexString = '';
+        // for tracking matches, in particular the curly braces
+        const brace = {
+          brace: 0,
+        };
 
-    //     document.querySelector('#pre-myJSONString').innerHTML = myJSONString;
-    //     regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, (m, p1) => {
-    //       const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1.split(':')[0]} : <b>${p1.split(':')[1]}</b></div>`;
-    //       let returnString = 0;
-    //       if (p1.lastIndexOf('{') === p1.length - 1) {
-    //         returnString = returnFunction();
-    //         brace.brace += 1;
-    //       } else if (p1.indexOf('}') === 0) {
-    //         brace.brace -= 1;
-    //         returnString = returnFunction();
-    //       } else {
-    //         returnString = returnFunction();
-    //       }
-    //       return returnString;
-    //     });
-    //     document.querySelector('#pre-regexString').innerHTML = '';
-    //     setTimeout(() => {
-    //       document.querySelector('#pre-regexString').innerHTML = regexString;
-    //       // Remove the "undefined" text in the first and last brackets
-    //       document.querySelector('#pre-regexString').firstChild.innerText = '{';
-    //       document.querySelector('#pre-regexString').lastChild.innerText = '}';
-    //     }, 30);
-    //   }));
-    //   observer.observe(MainMS.location, config);
-    // }
+        document.querySelector('#pre-myJSONString').innerHTML = myJSONString;
+        regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, (m, p1) => {
+          const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1.split(':')[0]} : <b>${p1.split(':')[1]}</b></div>`;
+          let returnString = 0;
+          if (p1.lastIndexOf('{') === p1.length - 1) {
+            returnString = returnFunction();
+            brace.brace += 1;
+          } else if (p1.indexOf('}') === 0) {
+            brace.brace -= 1;
+            returnString = returnFunction();
+          } else {
+            returnString = returnFunction();
+          }
+          return returnString;
+        });
+        document.querySelector('#pre-regexString').innerHTML = '';
+        setTimeout(() => {
+          document.querySelector('#pre-regexString').innerHTML = regexString;
+          // Remove the "undefined" text in the first and last brackets
+          document.querySelector('#pre-regexString').firstChild.innerText = '{';
+          document.querySelector('#pre-regexString').lastChild.innerText = '}';
+        }, 30);
+      }));
+      observer.observe(MainMS.location, config);
+    }
   }
 }
 
