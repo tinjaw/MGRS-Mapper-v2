@@ -88,6 +88,8 @@ class MilSym {
           !element.stroke ? decorator.setAttributeNS(null, 'stroke', 'black') : decorator.setAttributeNS(null, 'stroke', `${element.stroke}`);
           // If the default decorator stroke-width is missing, default to 4
           !element.strokeWidth ? decorator.setAttributeNS(null, 'stroke-width', '4') : decorator.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // If the transform key does not exist, do nothing, otherwise set the transform value
+          !element.transform ? null : decorator.setAttributeNS(null, 'transform', `${element.transform}`);
           decoratorGroup.append(decorator);
         }
         if (key.indexOf('circle') === 0) {

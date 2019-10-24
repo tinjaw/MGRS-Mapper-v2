@@ -459,12 +459,12 @@ window.onload = () => {
         case 'Equipment':
           // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
           DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
-          return;
+          break;
         case 'Graphic Control Measure':
           flyingSwitch.disabled = true;
           flyingSwitch.checked = false;
           DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true, true);
-          return;
+          break;
         default:
           selectGraphicControlMeasures.selectedText_.textContent = 'None';
           DisableInputs();
