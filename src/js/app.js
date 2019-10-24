@@ -155,6 +155,24 @@ class MilSym {
         //   // outlineGroup.ownerSVGElement.setAttributeNS(null, 'viewBox', '60 -60 80 160');
         //   outlineGroup.ownerSVGElement.setAttributeNS(null, 'viewBox', `${bbox.x} ${bbox.y}  ${bbox.width} ${bbox.height}`);
         // }, 100);
+        // Removes the echelon data above the Equipment symbol.
+        this.echelon = 'none';
+        // Removes the Unique Designation about the Equipment symbol
+        this.uniqueDesignation = undefined;
+        // Removes the Higher Formation about the Equipment symbol
+        this.higherFormation = undefined;
+        // Removes the Reinforced/Reduced above the Equipment symbol
+        this.reinforcedReduced = undefined;
+        // Remove activity amplifier on Equipment symbol
+        this.activity = undefined;
+        // Remove installation amplifier on Equipment symbol
+        this.installation = undefined;
+        // Remove the task force above the Equipment symbol
+        this.taskForce = undefined;
+        // Remove command post amplifier on Equipment symbol
+        this.commandPost = undefined;
+        // Remove tactical mission tasks on the Equipment symbol
+        this.tacticalMissionTasks = undefined;
 
         return outlineGroup;
       }

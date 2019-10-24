@@ -454,13 +454,21 @@ window.onload = () => {
     });
 
     changeSymbols.then(() => {
-      // Remove the outline of the default/none symbol
-      if (MainMS.type === 'Equipment') {
-        // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
-        DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
-      } else {
-        selectGraphicControlMeasures.selectedText_.textContent = 'None';
-        DisableInputs();
+      // Disable switches and inputs for Equipment and Graphic Control Measures
+      switch (MainMS.type) {
+        case 'Equipment':
+          // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
+          DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
+          return;
+        case 'Graphic Control Measure':
+          flyingSwitch.disabled = true;
+          flyingSwitch.checked = false;
+          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true, true);
+          return;
+        default:
+          selectGraphicControlMeasures.selectedText_.textContent = 'None';
+          DisableInputs();
+          break;
       }
 
       const addAndRemoveSymbolPanelAnimation = () => {
