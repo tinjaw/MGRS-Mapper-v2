@@ -39,25 +39,26 @@ class MilSym {
     this._graphicControlMeasures = graphicControlMeasures;
     this.type = militarySymbolsObject[this._symbol].type;
     this.data = {
-      affiliation,
-      symbol,
-      echelon,
-      mod1,
-      mod2,
-      uniqueDesignation,
-      higherFormation,
-      reinforcedReduced,
-      flying,
-      activity,
-      installation,
-      taskForce,
-      commandPost,
-      tacticalMissionTasks,
-      graphicControlMeasures,
+      affiliation: this._affiliation,
+      symbol: this._symbol,
+      echelon: this._echelon,
+      mod1: this._mod1,
+      mod2: this._mod2,
+      uniqueDesignation: this._uniqueDesignation,
+      higherFormation: this._higherFormation,
+      reinforcedReduced: this._reinforcedReduced,
+      flying: this._flying,
+      activity: this._activity,
+      installation: this._installation,
+      taskForce: this._taskForce,
+      commandPost: this._commandPost,
+      tacticalMissionTasks: this._tacticalMissionTasks,
+      graphicControlMeasures: this._graphicControlMeasures,
       type: militarySymbolsObject[this._symbol].type,
     };
     return this.placeSymbol();
   }
+
 
   // SVG LOCATION
   get location() {
@@ -806,11 +807,17 @@ class MilSym {
         case 'symbol':
           return this.symbol;
         case 'echelon':
-          return this.echelon;
+          return this._echelon === 'none' ? undefined : this.echelon;
+          // break;
+          // return this.echelon;
         case 'mod1':
-          return this.mod1;
+          return this._mod1 === 'None' ? undefined : this.mod1;
+          // break;
+          // return this.mod1;
         case 'mod2':
-          return this.mod2;
+          return this._mod2 === 'None' ? undefined : this.mod2;
+          // break;
+          // return this.mod2;
         case 'uniqueDesignation':
           return this.uniqueDesignation;
         case 'higherFormation':
@@ -826,9 +833,13 @@ class MilSym {
         case 'taskForce':
           return this.taskForce;
         case 'commandPost':
-          return this.commandPost;
+          return this._commandPost === 'None' ? undefined : this.commandPost;
+          // break;
+          // return this.commandPost;
         case 'tacticalMissionTasks':
-          return this.tacticalMissionTasks;
+          return this._tacticalMissionTasks === 'None' ? undefined : this.tacticalMissionTasks;
+          // break;
+          // return this.tacticalMissionTasks;
         case 'graphicControlMeasures':
           return this.graphicControlMeasures;
         default:
@@ -837,6 +848,7 @@ class MilSym {
     });
 
     symbolValues.forEach((e) => {
+      // console.dir(e);
       if (e !== undefined) {
         svg.append(e);
       }
@@ -844,52 +856,100 @@ class MilSym {
 
     this.location.append(svg);
 
+    const dataObj = {
+      affiliation: this._affiliation,
+      symbol: this._symbol,
+      echelon: this._echelon,
+      mod1: this._mod1,
+      mod2: this._mod2,
+      uniqueDesignation: this._uniqueDesignation,
+      higherFormation: this._higherFormation,
+      reinforcedReduced: this._reinforcedReduced,
+      flying: this._flying,
+      activity: this._activity,
+      installation: this._installation,
+      taskForce: this._taskForce,
+      commandPost: this._commandPost,
+      tacticalMissionTasks: this._tacticalMissionTasks,
+      graphicControlMeasures: this._graphicControlMeasures,
+      type: militarySymbolsObject[this._symbol].type,
+    };
+
     svg.setAttributeNS(null, 'data-symbol-name', this._symbol);
-    svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
+    svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(dataObj)); // this should probably be split into separate data-attrs
+
     //! BUG: setting height/width dynamically causes Firefox to fail. Set manually to fix this error
     // svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
     // svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
     svg.setAttributeNS(null, 'height', '100');
     svg.setAttributeNS(null, 'width', '150');
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-    // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
-    svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
-    // console.count('Running placeSymbol');
 
 
-    // if (window.hasOwnProperty('MainMS')) {
-    //   MainMS.flying = false;
-    //   DisableInputs();
-    //   MainMS.placeSymbol();
-    // } else {
-    //   setTimeout(() => {
-    //     MainMS.flying = false;
-    //     DisableInputs();
-    //     MainMS.placeSymbol();
-    //   }, 30);
-    // }
-    // const { type } = militarySymbolsObject[this._symbol];
-    // function setViewBox() {
-    //   switch (type) {
-    //     case 'Graphic Control Measure':
-    //       return svg.setAttributeNS(null, 'viewBox', '60 -60 80 160');
-    //       // break;
-    //     case 'Land Unit':
-    //       return svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
-    //       // break;
-    //     case 'Equipment':
-    //       return svg.setAttributeNS(null, 'viewBox', '40 40 120 120');
-    //       // break;
-    //     default:
-    //       break;
-    //   }
-    // }
+    // Set the viewBox of the symbols. Without this they will be invisible
+    const setViewBox = () => {
+      // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
+      switch (militarySymbolsObject[this._symbol].type) {
+        case 'Graphic Control Measure':
+          return svg.setAttributeNS(null, 'viewBox', '60 -60 80 160');
+          // break;
+        case 'Land Unit':
+          return svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
+          // break;
+        case 'Equipment':
+          return svg.setAttributeNS(null, 'viewBox', '40 40 120 120');
+          // break;
+        default:
+          break;
+      }
+    };
 
-    // setTimeout(() => {
-    //   setViewBox();
+    // Do not run this function unless MainMS is in the window
+    'MainMS' in window ? setViewBox() : null;
 
-    //   // svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x} ${svg.getBBox().y}  ${svg.getBBox().width} ${svg.getBBox().height}`);
-    // }, 600);
+    //! REMOVE ON PRODUCTION -- This just displays formatted JSON data for the current data-symbol-info
+    if ('MainMS' in window) {
+      let myJSON = {};
+
+      const config = {
+        // attributes: true,
+        childList: true,
+        characterData: true,
+      };
+
+      const observer = new MutationObserver(((mutations) => {
+        myJSON = JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo);
+
+        const myJSONString = JSON.stringify(myJSON);
+        let regexString = '';
+        // for tracking matches, in particular the curly braces
+        const brace = {
+          brace: 0,
+        };
+
+        document.querySelector('#pre-myJSONString').innerHTML = myJSONString;
+        regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g,
+          (m, p1) => {
+            const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1}</div>`;
+            let returnString = 0;
+            if (p1.lastIndexOf('{') === p1.length - 1) {
+              returnString = returnFunction();
+              brace.brace += 1;
+            } else if (p1.indexOf('}') === 0) {
+              brace.brace -= 1;
+              returnString = returnFunction();
+            } else {
+              returnString = returnFunction();
+            }
+            return returnString;
+          });
+        document.querySelector('#pre-regexString').innerHTML = '';
+        setTimeout(() => {
+          document.querySelector('#pre-regexString').innerHTML = regexString;
+        }, 300);
+      }));
+      observer.observe(MainMS.location, config);
+    }
   }
 }
 

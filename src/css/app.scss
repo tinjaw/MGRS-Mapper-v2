@@ -145,3 +145,15 @@
   padding-top: 150px;
   width: 250px;
 }
+
+.pre-container {
+  width: 60%;
+  //margin: 0 auto;
+}
+#pre-myJSONString,
+#pre-regexString {
+  border: 2px dashed #666;
+  margin: 20px;
+  padding: 10px;
+  font-family: helvetica;
+}

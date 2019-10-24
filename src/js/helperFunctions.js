@@ -143,8 +143,9 @@ function bounceInAnimation(location) {
     bounceIn.style.transformBox = 'fill-box';
     bounceIn.style.transformOrigin = 'center center';
     bounceIn.classList.toggle('bounceIn');
+  } else {
+    bounceIn.classList.toggle('zoomIn');
   }
-  bounceIn.classList.toggle('zoomIn');
 }
 
 
