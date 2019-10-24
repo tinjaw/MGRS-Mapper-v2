@@ -12,6 +12,8 @@
 - Fixed bug that appended the wrong information into 'data-symbol-info'.
 - Fixed animation bug that prevented the drop down animation for Equipment and GCMs
 - Added About Section on the bottom of the Pushbar
+- Moved ES Lint rules from top of file to eslintrc
+- BUG: When removing TransformModifiersOnEquipment from the window and into imports it throws an error... No clue.
 
 ---
 

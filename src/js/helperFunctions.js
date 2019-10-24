@@ -1,6 +1,5 @@
 /* eslint-disable no-new */
 import { selectAffiliation } from './mdcComponents';
-// import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 
 // * Make Mod1 & Mod2 fit inside an equipment symbol * //
 // ex- TransformModifiersOnEquipment('.newSVG svg');
@@ -8,7 +7,7 @@ import { selectAffiliation } from './mdcComponents';
 async function TransformModifiersOnEquipment(location) {
   // Wait for the MainMS global var to appear
   if (await window.hasOwnProperty('MainMS')) {
-  // Modify only on equipment symbols
+    // Modify only on equipment symbols
     if (MainMS.type === 'Equipment') {
       const equipmentOutline = document.querySelector(location);
       const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
@@ -18,7 +17,6 @@ async function TransformModifiersOnEquipment(location) {
       if (mod1) {
         equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
         equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
-        // mod1.style.transform = `translateY(-${equipmentOutline.viewBox.baseVal.x / equipmentOutline.viewBox.baseVal.y * 21}px) scale(0.85)`;
         mod1.style.transformOrigin = '100px 100px';
         mod1.style.transform = 'translateY(-9%) scale(0.85)';
       }
@@ -74,15 +72,7 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         }, 30);
         new MilSym(`.tacticalmissiontaskFigure[data-tacticalmissiontask-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
         break;
-      // case 'graphiccontrolmeasures':
-      //   setTimeout(() => {
-      //     //! This is a bit of a hack. I also don't like this because it is using the global vars and I don't feel like importing more shit
-      //     selectGraphicControlMeasures.value = 'None';
-      //   }, 30);
-      //   new MilSym(`.graphiccontrolmeasuresFigure[data-graphiccontrolmeasures-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
-      //   break;
       case 'symbol':
-        // selectSymbol.foundation_.setSelectedIndex(0);
         // Set the selected symbol to "Default Land Unit" on page load
         // Setting floatLabel(true) and setEnhancedSelectedIndex_(0) will avoid the symbol animations from running again.
         // For instance if you had 'selectSymbol.foundation_.setSelectedIndex(0);' the function to remove the animateSymbol class would run x times
@@ -108,8 +98,6 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
       modElement.setAttributeNS(null, 'stroke-width', '0');
       // Set the affiliation outline path to nothing
       modElement.setAttributeNS(null, 'd', '');
-      // Set the SVG container viewBox to this value. (Note: Probably not needed)
-      // modSVGContainer.setAttributeNS(null, 'viewBox', '80 55 40 20');
       // Scale the Modifier element down in the select box so they don't clip
       modSVGContainer.style.transform = 'scale(0.75)';
       // Set the selected index to the first item (usually this is "Default/None")
@@ -208,13 +196,6 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
     reducedSwitch.disabled = false;
   }
 
-  // if (flying) {
-  //   flyingSwitch.disabled = true;
-  //   flyingSwitch.checked = false;
-  // } else {
-  //   flyingSwitch.disabled = false;
-  // }
-
   if (activity) {
     activitySwitch.disabled = true;
     activitySwitch.checked = false;
@@ -250,15 +231,6 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
   } else {
     selectTacticalMissionTasks.disabled = false;
   }
-
-  // if (graphicControlMeasures) {
-  //   selectGraphicControlMeasures.disabled = true;
-  //   // If selectedIndex = 0 then it will override the MainMS symbol panel, so we use the foundation-adapter instead
-  //   selectGraphicControlMeasures.foundation_.adapter_.setSelectedIndex(0);
-  //   selectGraphicControlMeasures.selectedText_.textContent = 'None';
-  // } else {
-  //   selectGraphicControlMeasures.disabled = false;
-  // }
 }
 
 //* Debounce function (used in search field) * //
@@ -279,6 +251,7 @@ function debounce(func, interval) {
 
 //* Set the textContent of the specified drop down * //
 // Sets the textContent of the select boxes to the currently selected item.
+// Example: setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 function setSelectMenuTextContent(...params) {
   params.forEach((key) => {
     key.selectedText_.textContent = key.value;

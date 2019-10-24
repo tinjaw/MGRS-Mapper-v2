@@ -100,14 +100,13 @@ const drop = (event) => {
   event.target.appendChild(target);
   // Get the BBox only after the target has been appended
   const bbox = target.getBBox();
-  // target.setAttribute('viewBox', `${bbox.x}, ${bbox.y}, ${bbox.width}, ${bbox.height}`);
   // The bounceIn animation fucks everything up, remove it and set the BBox of the parent draggable symbol
   document.querySelectorAll('.draggable > g').forEach((key) => {
     key.classList.remove('bounceIn');
     const bbox = key.parentElement.getBBox();
     key.parentElement.setAttribute('viewBox', `${bbox.x}, ${bbox.y}, ${bbox.width}, ${bbox.height}`);
   });
-  // Now call the manipulateSymbol func to switch to Moveable.js
+  // Now call the manipulateSymbol function to switch to Moveable.js
   manipulateSymbol(event);
   target.setAttribute('height', `${bbox.height}`);
   target.setAttribute('width', `${bbox.width}`);
@@ -130,7 +129,7 @@ newSVGDiv.addEventListener('mouseover', () => {
 
 newSVGDiv.ondragstart = (event) => {
   // For some reason I had to run this again to get the symbol amplifiers to show up. This seems to be an issue with the bounceInAnimation
-  MainMS.placeSymbol(); //! This causes an error when dragging a GCM
+  MainMS.placeSymbol();
   // Deep clone the symbol panel
   const dragImg = document.querySelector('.newSVG > svg').cloneNode(true);
   dragImg.classList.remove('newSVG');

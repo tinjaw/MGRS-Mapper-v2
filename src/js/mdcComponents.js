@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-underscore-dangle */
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
@@ -17,7 +14,6 @@ import {
 import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
-// import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
@@ -59,8 +55,6 @@ const taskForceSwitch = new MDCSwitch(document.querySelector('.mdc-switch.taskFo
 const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-select'));
 
 const selectTacticalMissionTasks = new MDCSelect(document.querySelector('.tacticalmissiontask-select'));
-
-// const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.graphiccontrolmeasures-select'));
 
 
 // *********************************************************************************** //
@@ -415,9 +409,7 @@ window.DisableInputs = DisableInputs;
 window.selectCommandPost = selectCommandPost;
 window.tacticalMissionTasksObject = tacticalMissionTasksObject;
 window.selectTacticalMissionTasks = selectTacticalMissionTasks;
-// window.selectGraphicControlMeasures = selectGraphicControlMeasures;
 window.menuSurface = menuSurface;
-// window.graphicControlMeasuresObject = graphicControlMeasuresObject;
 window.bounceInAnimation = bounceInAnimation;
 
 // *********************************************************************************** //
@@ -429,7 +421,6 @@ window.onload = () => {
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
   addSymbolsAndModsToList(tacticalMissionTasksObject, 'tacticalmissiontask', selectTacticalMissionTasks);
-  // addSymbolsAndModsToList(graphicControlMeasuresObject, 'graphiccontrolmeasures', selectGraphicControlMeasures);
   // Hide the text field trash can buttons on page load
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
@@ -466,7 +457,6 @@ window.onload = () => {
           DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true);
           break;
         default:
-          // selectGraphicControlMeasures.selectedText_.textContent = 'None';
           DisableInputs();
           break;
       }
@@ -529,37 +519,6 @@ window.onload = () => {
     MainMS.placeSymbol();
   });
 
-  // selectGraphicControlMeasures.listen('MDCSelect:change', () => {
-  //   setSelectMenuTextContent(selectGraphicControlMeasures);
-  //   // Instantiate the GCM class
-  //   const GCM = () => new AddGraphicControlMeasure('.newSVG', 'Default Land Unit', 'friendly', undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, selectGraphicControlMeasures.value);
-
-  //   const changeGCM = new Promise((resolve, reject) => {
-  //     resolve(GCM);
-  //     reject(new Error('changeGCM Promise Rejected'));
-  //   });
-
-  //   changeGCM.then(() => {
-  //     // Check if the GCM class has this prop
-  //     if (GCM()._graphicControlMeasures !== 'None') {
-  //       selectSymbol.selectedText_.textContent = 'None';
-  //       // Disable everything except the symbol select and GCM select
-  //       DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true, false);
-  //       // Place the GCM symbol in the symbol panel
-  //       GCM().placeSymbol();
-  //       // Animate the GCM
-  //       document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
-  //     } else {
-  //       // If the user selects 'none' on GCM, this will just place the default land unit back
-  //       MainMS.placeSymbol();
-  //       // This re-enables all buttons except the flying switch
-  //       DisableInputs();
-  //     }
-  //   }, (error) => {
-  //     console.log(error);
-  //   });
-  // });
-
 
   [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks].forEach((key) => {
     key.listen('click', () => {
@@ -568,10 +527,10 @@ window.onload = () => {
       selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
       selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
       selectTacticalMissionTasks.isMenuOpen_ ? new Resizer('.tacticalmissiontaskFigure svg') : null;
-      // selectGraphicControlMeasures.isMenuOpen_ ? new Resizer('.graphiccontrolmeasuresFigure svg') : null;
     });
   });
 
+  // This will prevent the symbols from being regenerated if the affiliation hasn't changed. Otherwise every time you open the symbolSelect it would run placeSymbol()
   const oldAffiliationValue = [selectAffiliation.value];
   selectSymbol.listen('click', () => {
     if (oldAffiliationValue[0] !== selectAffiliation.value) {

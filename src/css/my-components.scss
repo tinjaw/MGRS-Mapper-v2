@@ -201,6 +201,7 @@ li.mdc-list-item svg {
 }
 
 .zoomIn {
+  // Used with Mod1/2 amplifiers on Equipment
   animation: mdc-animation-enter(/* $name: */ zoom-in, /* $duration: */ 350ms);
 }
 
