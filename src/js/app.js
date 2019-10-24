@@ -828,18 +828,16 @@ class MilSym {
 
     // Set the viewBox of the symbols. Without this they will be invisible
     const setViewBox = () => {
-      if ('MainMS' in window) {
-        // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
-        switch (militarySymbolsObject[this._symbol].type) {
-          case 'Graphic Control Measure':
-            return svg.setAttributeNS(null, 'viewBox', '60 -60 80 160');
-          case 'Land Unit':
-            return svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
-          case 'Equipment':
-            return svg.setAttributeNS(null, 'viewBox', '40 40 120 120');
-          default:
-            break;
-        }
+      // Manually setting the viewBox prevents the symbol from resizing when adding elements like echelon.
+      switch (militarySymbolsObject[this._symbol].type) {
+        case 'Graphic Control Measure':
+          return svg.setAttributeNS(null, 'viewBox', '60 -60 80 160');
+        case 'Land Unit':
+          return svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
+        case 'Equipment':
+          return svg.setAttributeNS(null, 'viewBox', '40 40 120 120');
+        default:
+          break;
       }
     };
 

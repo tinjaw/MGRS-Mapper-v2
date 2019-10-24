@@ -21,6 +21,7 @@
 - Fixed scroll bar bug in Firefox by setting the .symbolSelectors height statically to 911px
 - Fixed the fadeInAndSlideOut animation bug on Firefox with an 'animationend' event listener on the window.
 - Added bounceInAnimation to Command Post and Tactical Mission Tasks
+- BUG: Choose a GCM, then go back to a normal land unit, now check Mod1 or Mod2 -> The first item is missing???? This is an issue with the Resizer class
 
 ---
 
