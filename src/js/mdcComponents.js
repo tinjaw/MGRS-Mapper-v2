@@ -467,10 +467,11 @@ window.onload = () => {
       const addAndRemoveSymbolPanelAnimation = () => {
         // Add the animateSymbol class the the symbol in the panel
         document.querySelector('.newSVG > svg').classList.add('animateSymbol');
-        setTimeout(() => {
-          // Remove the animateSymbol class after 300ms (the length of the animation)
+        // When the animation ends, remove it from the symbol, otherwise it will keep animating when you mouse over
+        window.addEventListener('animationend', () => {
           document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
-        }, 300);
+          // Set to once to automatically remove the event listener
+        }, { once: true });
       };
 
       // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field

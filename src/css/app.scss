@@ -73,7 +73,9 @@
 .symbolSelectors {
   position: absolute;
   overflow: auto;
-  height: calc(100% - 20em);
+  // Setting the height statically like this fixes an issue with Firefox
+  height: 911px;
+  //height: calc(100% - 20em);
   width: 100%;
   border-top: 4px midnightblue solid;
   padding-right: 30px;
@@ -85,9 +87,6 @@
   // color: var(--mdc-theme-text-icon-on-primary-light);
   color: rgba($color: #000000, $alpha: 0.38);
   font-style: italic;
-  // font-size: x-small;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
 }
 
 // *********************************************************************************** //
@@ -103,13 +102,33 @@
 // *********************************************************************************** //
 // * Pushbar - Bottom About Data                                                     * //
 // *********************************************************************************** //
-.mdc-layout-grid.bottom-about {
+footer.bottom-about {
   border-top: 4px midnightblue solid;
-  width: 100%;
-  position: absolute;
-  left: 0px;
   box-shadow: 0px -5px 5px -3px rgba(0, 0, 0, 0.2), 0px -8px 10px 1px rgba(0, 0, 0, 0.14), 0px -3px 14px 2px rgba(0, 0, 0, 0.12);
-  margin-top: 2rem;
+  height: 80px;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.87);
+  justify-content: flex-end;
+}
+
+.bottom-about > .app-bar-bottom__row > .app-bar-bottom__section {
+  //padding-bottom: 1rem;
+  justify-content: space-evenly;
+  margin-right: 5px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122, 153, 217)), color-stop(0.72, rgb(73, 125, 189)), color-stop(0.86, rgb(25, 25, 112)));
 }
 
 // *********************************************************************************** //
