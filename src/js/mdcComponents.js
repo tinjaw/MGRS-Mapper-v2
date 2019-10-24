@@ -515,12 +515,14 @@ window.onload = () => {
     setSelectMenuTextContent(selectCommandPost);
     MainMS.commandPost = selectCommandPost.value;
     MainMS.placeSymbol();
+    bounceInAnimation('g.commandpost');
   });
 
   selectTacticalMissionTasks.listen('MDCSelect:change', () => {
     setSelectMenuTextContent(selectTacticalMissionTasks);
     MainMS.tacticalMissionTasks = selectTacticalMissionTasks.value;
     MainMS.placeSymbol();
+    bounceInAnimation('g.tacticalmissiontasks');
   });
 
 
