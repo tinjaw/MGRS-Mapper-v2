@@ -833,20 +833,17 @@ class MilSym {
         switch (militarySymbolsObject[this._symbol].type) {
           case 'Graphic Control Measure':
             return svg.setAttributeNS(null, 'viewBox', '60 -60 80 160');
-          // break;
           case 'Land Unit':
             return svg.setAttributeNS(null, 'viewBox', '20 30 160 150');
-          // break;
           case 'Equipment':
             return svg.setAttributeNS(null, 'viewBox', '40 40 120 120');
-          // break;
           default:
             break;
         }
       }
     };
 
-    // Do not run this function unless MainMS is in the window
+    // If MainMS is in the window, then set the viewboxes, otherwise wait 300ms
     'MainMS' in window ? setViewBox() : setTimeout(setViewBox, 300);
 
     //! REMOVE ON PRODUCTION -- This just displays formatted JSON data for the current data-symbol-info
@@ -884,6 +881,7 @@ class MilSym {
           }
           return returnString;
         });
+
         document.querySelector('#pre-regexString').innerHTML = '';
         setTimeout(() => {
           document.querySelector('#pre-regexString').innerHTML = regexString;
@@ -892,6 +890,7 @@ class MilSym {
           document.querySelector('#pre-regexString').lastChild.innerText = '}';
         }, 30);
       }));
+
       observer.observe(MainMS.location, config);
     }
   }

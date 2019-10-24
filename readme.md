@@ -38,7 +38,7 @@ A development repository for MGRS-Mapper application
 - [x] Add surface menu
 - [x] Configure CSS hover state for surface menu
 - [ ] Add helper text to select boxes
-- [ ] Add SVG manipulation (drag-n-drop & resize handles)
+- [x] Add SVG manipulation (drag-n-drop & resize handles)
 - [ ] Begin Leaflet maps implementation...
 - [ ] Update repository key in package.json on production
 
