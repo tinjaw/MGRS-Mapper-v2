@@ -807,17 +807,12 @@ class MilSym {
         case 'symbol':
           return this.symbol;
         case 'echelon':
+          // Select boxes return a value of "None" on page load instead of undefined. This is due to Material Design instantiating
           return this._echelon === 'none' ? undefined : this.echelon;
-          // break;
-          // return this.echelon;
         case 'mod1':
           return this._mod1 === 'None' ? undefined : this.mod1;
-          // break;
-          // return this.mod1;
         case 'mod2':
           return this._mod2 === 'None' ? undefined : this.mod2;
-          // break;
-          // return this.mod2;
         case 'uniqueDesignation':
           return this.uniqueDesignation;
         case 'higherFormation':
@@ -834,12 +829,8 @@ class MilSym {
           return this.taskForce;
         case 'commandPost':
           return this._commandPost === 'None' ? undefined : this.commandPost;
-          // break;
-          // return this.commandPost;
         case 'tacticalMissionTasks':
           return this._tacticalMissionTasks === 'None' ? undefined : this.tacticalMissionTasks;
-          // break;
-          // return this.tacticalMissionTasks;
         case 'graphicControlMeasures':
           return this.graphicControlMeasures;
         default:
@@ -848,7 +839,7 @@ class MilSym {
     });
 
     symbolValues.forEach((e) => {
-      // console.dir(e);
+      // Append all groups to the SVG that are NOT undefined
       if (e !== undefined) {
         svg.append(e);
       }
@@ -857,27 +848,30 @@ class MilSym {
     this.location.append(svg);
 
     const dataObj = {
-      affiliation: this._affiliation,
-      symbol: this._symbol,
-      echelon: this._echelon,
-      mod1: this._mod1,
-      mod2: this._mod2,
-      uniqueDesignation: this._uniqueDesignation,
-      higherFormation: this._higherFormation,
-      reinforcedReduced: this._reinforcedReduced,
-      flying: this._flying,
-      activity: this._activity,
-      installation: this._installation,
-      taskForce: this._taskForce,
-      commandPost: this._commandPost,
-      tacticalMissionTasks: this._tacticalMissionTasks,
-      graphicControlMeasures: this._graphicControlMeasures,
-      type: militarySymbolsObject[this._symbol].type,
+      Symbol: this._symbol,
+      Affiliation: this.type === 'Graphic Control Measure' ? 'None' : this._affiliation.charAt(0).toUpperCase() + this._affiliation.slice(1),
+      Echelon: this._echelon === 'none' ? 'None' : this._echelon,
+      'Modifier 1': this._mod1,
+      'Modifier 2': this._mod2,
+      'Unique Designation': this._uniqueDesignation ? this._uniqueDesignation.toUpperCase() : 'None',
+      'Higher Formation': this._higherFormation ? this._higherFormation.toUpperCase() : 'None',
+      'Reinforced or Reduced': this._reinforcedReduced ? this._reinforcedReduced : 'None',
+      Flying: this._flying ? this._flying : 'None',
+      Activity: this._activity ? this._activity : 'None',
+      Installation: this._installation ? this._installation : 'None',
+      'Task Force': this._taskForce ? this._taskForce : 'None',
+      'Command Post': this._commandPost ? this._commandPost : 'None',
+      'Tactical Mission Tasks': this._tacticalMissionTasks ? this._tacticalMissionTasks : 'None',
+      Type: militarySymbolsObject[this._symbol].type,
     };
 
-    svg.setAttributeNS(null, 'data-symbol-name', this._symbol);
-    svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(dataObj)); // this should probably be split into separate data-attrs
+    // This will go through the dataObj and remove anything that is set to 'None'
+    const currentSymbolData = Object.keys(dataObj).reduce((object, key) => {
+      dataObj[key] !== 'None' ? object[key] = dataObj[key] : null;
+      return object;
+    }, {});
 
+    svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(currentSymbolData));
     //! BUG: setting height/width dynamically causes Firefox to fail. Set manually to fix this error
     // svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
     // svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
@@ -928,25 +922,27 @@ class MilSym {
         };
 
         document.querySelector('#pre-myJSONString').innerHTML = myJSONString;
-        regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g,
-          (m, p1) => {
-            const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1}</div>`;
-            let returnString = 0;
-            if (p1.lastIndexOf('{') === p1.length - 1) {
-              returnString = returnFunction();
-              brace.brace += 1;
-            } else if (p1.indexOf('}') === 0) {
-              brace.brace -= 1;
-              returnString = returnFunction();
-            } else {
-              returnString = returnFunction();
-            }
-            return returnString;
-          });
+        regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, (m, p1) => {
+          const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1.split(':')[0]} : <b>${p1.split(':')[1]}</b></div>`;
+          let returnString = 0;
+          if (p1.lastIndexOf('{') === p1.length - 1) {
+            returnString = returnFunction();
+            brace.brace += 1;
+          } else if (p1.indexOf('}') === 0) {
+            brace.brace -= 1;
+            returnString = returnFunction();
+          } else {
+            returnString = returnFunction();
+          }
+          return returnString;
+        });
         document.querySelector('#pre-regexString').innerHTML = '';
         setTimeout(() => {
           document.querySelector('#pre-regexString').innerHTML = regexString;
-        }, 300);
+          // Remove the "undefined" text in the first and last brackets
+          document.querySelector('#pre-regexString').firstChild.innerText = '{';
+          document.querySelector('#pre-regexString').lastChild.innerText = '}';
+        }, 30);
       }));
       observer.observe(MainMS.location, config);
     }

@@ -8,6 +8,8 @@
 - Tried fixing the bounceIn animation for equipment modifiers but got stuck. Settled on a zoom in animation that I got from [Animate.css](https://daneden.github.io/animate.css/)
 - Added semi-dynamic viewBoxes on symbols via the setViewBox arrow function
 - Fixed a bug that appended empty divs to the symbol. For instance, a select box with generated content would automatically set the value to "None" which caused my placeSymbol method to append that div even though it was empty. I added a ternary operator in the symbolValues function expression that would return the value undefined if it was set to "None"
+- Added a dynamic block of code in a <pre> tag that displayed data-symbol-info in a readable format. More info [here](https://codepen.io/pistell/pen/abbJgRb)
+- Fixed bug that appended the wrong information into 'data-symbol-info'.
 
 ---
 

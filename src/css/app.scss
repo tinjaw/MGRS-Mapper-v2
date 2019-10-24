@@ -139,21 +139,20 @@
 // *********************************************************************************** //
 // * Remove on Production                                                            * //
 // *********************************************************************************** //
-.test > svg {
-  position: absolute;
-  top: 0;
-  padding-top: 150px;
-  width: 250px;
-}
-
 .pre-container {
   width: 60%;
-  //margin: 0 auto;
 }
+
+div#pre-myJSONString {
+  word-break: break-all;
+}
+
 #pre-myJSONString,
 #pre-regexString {
   border: 2px dashed #666;
   margin: 20px;
   padding: 10px;
-  font-family: helvetica;
+  font-family: Roboto;
+  letter-spacing: 1.15px;
+  font-size: larger;
 }
