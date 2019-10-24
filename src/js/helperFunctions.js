@@ -1,6 +1,6 @@
 /* eslint-disable no-new */
 import { selectAffiliation } from './mdcComponents';
-import graphicControlMeasuresObject from './graphicControlMeasuresObject';
+// import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 
 // * Make Mod1 & Mod2 fit inside an equipment symbol * //
 // ex- TransformModifiersOnEquipment('.newSVG svg');
@@ -66,7 +66,7 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         // Set the default command post value to "None" on page load
         selectCommandPost.value = 'None';
         // Since we do not want to strip the outline of the command post, return this value
-        return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
+        return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`, undefined);
       case 'tacticalmissiontask':
         setTimeout(() => {
           //! This is a bit of a hack. I also don't like this because it is using the global vars and I don't feel like importing more shit
@@ -74,13 +74,13 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         }, 30);
         new MilSym(`.tacticalmissiontaskFigure[data-tacticalmissiontask-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
         break;
-      case 'graphiccontrolmeasures':
-        setTimeout(() => {
-          //! This is a bit of a hack. I also don't like this because it is using the global vars and I don't feel like importing more shit
-          selectGraphicControlMeasures.value = 'None';
-        }, 30);
-        new MilSym(`.graphiccontrolmeasuresFigure[data-graphiccontrolmeasures-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
-        break;
+      // case 'graphiccontrolmeasures':
+      //   setTimeout(() => {
+      //     //! This is a bit of a hack. I also don't like this because it is using the global vars and I don't feel like importing more shit
+      //     selectGraphicControlMeasures.value = 'None';
+      //   }, 30);
+      //   new MilSym(`.graphiccontrolmeasuresFigure[data-graphiccontrolmeasures-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
+      //   break;
       case 'symbol':
         // selectSymbol.foundation_.setSelectedIndex(0);
         // Set the selected symbol to "Default Land Unit" on page load
@@ -150,7 +150,7 @@ function bounceInAnimation(location) {
 
 
 //* Disabled selected inputs * //
-function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, activity = false, installation = false, taskForce = false, commandPost = false, tacticalMissionTasks = false, graphicControlMeasures = false) {
+function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, activity = false, installation = false, taskForce = false, commandPost = false, tacticalMissionTasks = false) {
   if (affiliation) {
     selectAffiliation.disabled = true;
   } else {
@@ -251,14 +251,14 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
     selectTacticalMissionTasks.disabled = false;
   }
 
-  if (graphicControlMeasures) {
-    selectGraphicControlMeasures.disabled = true;
-    // If selectedIndex = 0 then it will override the MainMS symbol panel, so we use the foundation-adapter instead
-    selectGraphicControlMeasures.foundation_.adapter_.setSelectedIndex(0);
-    selectGraphicControlMeasures.selectedText_.textContent = 'None';
-  } else {
-    selectGraphicControlMeasures.disabled = false;
-  }
+  // if (graphicControlMeasures) {
+  //   selectGraphicControlMeasures.disabled = true;
+  //   // If selectedIndex = 0 then it will override the MainMS symbol panel, so we use the foundation-adapter instead
+  //   selectGraphicControlMeasures.foundation_.adapter_.setSelectedIndex(0);
+  //   selectGraphicControlMeasures.selectedText_.textContent = 'None';
+  // } else {
+  //   selectGraphicControlMeasures.disabled = false;
+  // }
 }
 
 //* Debounce function (used in search field) * //

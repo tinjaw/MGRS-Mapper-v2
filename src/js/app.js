@@ -10,7 +10,7 @@ import mod2Object from './mod2Object';
 import taskForceObject from './taskForceObject';
 import commandPostObject from './commandPostObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
-import graphicControlMeasuresObject from './graphicControlMeasuresObject';
+// import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 // import { selectAffiliation } from './mdcComponents';
 // import { DisableInputs } from './helperFunctions';
 
@@ -20,7 +20,7 @@ import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 // symbol_2.mod1 = 'Armored';
 // symbol_2.placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost, tacticalMissionTasks, graphicControlMeasures) {
+  constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost, tacticalMissionTasks) {
     this._location = location;
     this._symbol = symbol;
     this._affiliation = affiliation;
@@ -36,7 +36,7 @@ class MilSym {
     this._taskForce = taskForce;
     this._commandPost = commandPost;
     this._tacticalMissionTasks = tacticalMissionTasks;
-    this._graphicControlMeasures = graphicControlMeasures;
+    // this._graphicControlMeasures = graphicControlMeasures;
     this.type = militarySymbolsObject[this._symbol].type;
     this.data = {
       affiliation: this._affiliation,
@@ -53,7 +53,7 @@ class MilSym {
       taskForce: this._taskForce,
       commandPost: this._commandPost,
       tacticalMissionTasks: this._tacticalMissionTasks,
-      graphicControlMeasures: this._graphicControlMeasures,
+      // graphicControlMeasures: this._graphicControlMeasures,
       type: militarySymbolsObject[this._symbol].type,
     };
     return this.placeSymbol();
@@ -147,6 +147,7 @@ class MilSym {
       // Set the symbol type to Equipment or Land Unit
       this.type = militarySymbolsObject[this._symbol].type;
 
+      //! WHY IS THIS IN AFFILIATION? MOVE IT TO SYMBOL
       if (this.type === 'Graphic Control Measure') {
         outline.setAttributeNS(null, 'd', '');
         outline.setAttributeNS(null, 'fill', '');
@@ -211,7 +212,7 @@ class MilSym {
         // Remove tactical mission tasks on the Equipment symbol
         this.tacticalMissionTasks = undefined;
         // Remove Graphic control measures if it exists
-        this.graphicControlMeasures = undefined;
+        // this.graphicControlMeasures = undefined;
         // Instead of using the 'd' key in affiliationOutlineObject, we will use the 'flying' key
         if (affiliationOutlineObject[this._affiliation].templated) {
           outline.setAttributeNS(null, 'd', `${element.flying}`);
@@ -250,7 +251,7 @@ class MilSym {
         // Remove tactical mission tasks on the Equipment symbol
         this.tacticalMissionTasks = undefined;
         // Remove Graphic control measures if it exists
-        this.graphicControlMeasures = undefined;
+        // this.graphicControlMeasures = undefined;
 
         // This will raise Mod1, scale down the decorator, and lower Mod2
         TransformModifiersOnEquipment('.newSVG svg');
@@ -757,54 +758,54 @@ class MilSym {
   }
 
 
-  // TACTICAL MISSION TASKS
-  get graphicControlMeasures() {
-    if (this._graphicControlMeasures) {
-      const graphicControlMeasuresGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      graphicControlMeasuresGroup.classList.add('graphiccontrolmeasures');
-      Object.keys(graphicControlMeasuresObject[this._graphicControlMeasures].affiliation[this._affiliation]).forEach((key) => {
-        const element = graphicControlMeasuresObject[this._graphicControlMeasures].affiliation[this._affiliation][key];
-        if (key.indexOf('path') === 0) {
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          path.setAttributeNS(null, 'd', `${element.d}`);
-          // If the default path fill is missing, default to none
-          !element.fill ? path.setAttributeNS(null, 'fill', 'none') : path.setAttributeNS(null, 'fill', `${element.fill}`);
-          // If the default path stroke is missing, default to black
-          !element.stroke ? path.setAttributeNS(null, 'stroke', 'black') : path.setAttributeNS(null, 'stroke', `${element.stroke}`);
-          // If the default path stroke-width is missing, default to 4
-          !element.strokeWidth ? path.setAttributeNS(null, 'stroke-width', '4') : path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-          // If the mod1 element is missing a transform property, do nothing, else set the transform value
-          !element.transform ? null : path.setAttributeNS(null, 'transform', `${element.transform}`);
-          graphicControlMeasuresGroup.append(path);
-        }
-        if (key.indexOf('text') === 0) {
-          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          text.textContent = element.symbolText;
-          text.setAttributeNS(null, 'x', `${element.x}`);
-          text.setAttributeNS(null, 'y', `${element.y}`);
-          text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
-          text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
-          // Default decorator font family to Arial
-          !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
-          // Default decorator font weight to 30
-          !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
-          // Default decorator font stroke to none
-          !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
-          // Default decorator font stroke width to 4
-          !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-          // Default decorator font fill to black
-          !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
-          graphicControlMeasuresGroup.append(text);
-        }
-      });
-      return graphicControlMeasuresGroup;
-    }
-    return undefined;
-  }
+  // GRAPHIC CONTROL MEASURES
+  // get graphicControlMeasures() {
+  //   if (this._graphicControlMeasures) {
+  //     const graphicControlMeasuresGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  //     graphicControlMeasuresGroup.classList.add('graphiccontrolmeasures');
+  //     Object.keys(graphicControlMeasuresObject[this._graphicControlMeasures].affiliation[this._affiliation]).forEach((key) => {
+  //       const element = graphicControlMeasuresObject[this._graphicControlMeasures].affiliation[this._affiliation][key];
+  //       if (key.indexOf('path') === 0) {
+  //         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  //         path.setAttributeNS(null, 'd', `${element.d}`);
+  //         // If the default path fill is missing, default to none
+  //         !element.fill ? path.setAttributeNS(null, 'fill', 'none') : path.setAttributeNS(null, 'fill', `${element.fill}`);
+  //         // If the default path stroke is missing, default to black
+  //         !element.stroke ? path.setAttributeNS(null, 'stroke', 'black') : path.setAttributeNS(null, 'stroke', `${element.stroke}`);
+  //         // If the default path stroke-width is missing, default to 4
+  //         !element.strokeWidth ? path.setAttributeNS(null, 'stroke-width', '4') : path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+  //         // If the mod1 element is missing a transform property, do nothing, else set the transform value
+  //         !element.transform ? null : path.setAttributeNS(null, 'transform', `${element.transform}`);
+  //         graphicControlMeasuresGroup.append(path);
+  //       }
+  //       if (key.indexOf('text') === 0) {
+  //         const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  //         text.textContent = element.symbolText;
+  //         text.setAttributeNS(null, 'x', `${element.x}`);
+  //         text.setAttributeNS(null, 'y', `${element.y}`);
+  //         text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
+  //         text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
+  //         // Default decorator font family to Arial
+  //         !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
+  //         // Default decorator font weight to 30
+  //         !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
+  //         // Default decorator font stroke to none
+  //         !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
+  //         // Default decorator font stroke width to 4
+  //         !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+  //         // Default decorator font fill to black
+  //         !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
+  //         graphicControlMeasuresGroup.append(text);
+  //       }
+  //     });
+  //     return graphicControlMeasuresGroup;
+  //   }
+  //   return undefined;
+  // }
 
-  set graphicControlMeasures(value) {
-    this._graphicControlMeasures = value;
-  }
+  // set graphicControlMeasures(value) {
+  //   this._graphicControlMeasures = value;
+  // }
 
   // PLACE SYMBOL
   placeSymbol() {
@@ -851,8 +852,8 @@ class MilSym {
           return this._commandPost === 'None' ? undefined : this.commandPost;
         case 'tacticalMissionTasks':
           return this._tacticalMissionTasks === 'None' ? undefined : this.tacticalMissionTasks;
-        case 'graphicControlMeasures':
-          return this.graphicControlMeasures;
+        // case 'graphicControlMeasures':
+        //   return this.graphicControlMeasures;
         default:
           break;
       }
@@ -969,24 +970,24 @@ class MilSym {
   }
 }
 
-class AddGraphicControlMeasure extends MilSym {
-  placeSymbol() {
-    this.data.graphicControlMeasures = this._graphicControlMeasures;
-    this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.append(this.graphicControlMeasures);
-    this.location.append(svg);
-    svg.setAttributeNS(null, 'data-symbol-name', this._graphicControlMeasures);
-    // svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
-    svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
-    svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
-    svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
-    // Since GCMs do not take any additional amplifiers, you can set their viewBox values as dynamic
-    svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
-  }
-}
+// class AddGraphicControlMeasure extends MilSym {
+//   placeSymbol() {
+//     this.data.graphicControlMeasures = this._graphicControlMeasures;
+//     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
+//     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+//     svg.append(this.graphicControlMeasures);
+//     this.location.append(svg);
+//     svg.setAttributeNS(null, 'data-symbol-name', this._graphicControlMeasures);
+//     // svg.setAttributeNS(null, 'data-symbol-info', JSON.stringify(this.data)); // this should probably be split into separate data-attrs
+//     svg.setAttributeNS(null, 'height', `${svg.getBBox().height}`);
+//     svg.setAttributeNS(null, 'width', `${svg.getBBox().width}`);
+//     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+//     // Since GCMs do not take any additional amplifiers, you can set their viewBox values as dynamic
+//     svg.setAttributeNS(null, 'viewBox', `${svg.getBBox().x - 4} ${svg.getBBox().y - 4} ${svg.getBBox().width + 8} ${svg.getBBox().height + 8}`);
+//   }
+// }
 
-window.AddGraphicControlMeasure = AddGraphicControlMeasure;
+// window.AddGraphicControlMeasure = AddGraphicControlMeasure;
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;

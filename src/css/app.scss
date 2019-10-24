@@ -19,7 +19,27 @@
 @import 'my-components';
 
 // *********************************************************************************** //
-// * Symbol Panel                                                                    * //
+// * Main Content (Map) / Draggable Items                                            * //
+// *********************************************************************************** //
+.main-content {
+  overflow: auto;
+  height: calc(100vh - 145px);
+  background-color: antiquewhite;
+}
+
+.hideDataImage {
+  z-index: -1;
+  position: absolute;
+  left: -100%;
+}
+
+.draggable {
+  cursor: move;
+  padding: 10px 10px 10px 10px;
+}
+
+// *********************************************************************************** //
+// * Pusbhar - Symbol Panel                                                          * //
 // *********************************************************************************** //
 .newSVG {
   padding-top: 95px;
@@ -48,27 +68,7 @@
 }
 
 // *********************************************************************************** //
-// * Main Content (Map) / Draggable Items                                            * //
-// *********************************************************************************** //
-.main-content {
-  overflow: auto;
-  height: calc(100vh - 145px);
-  background-color: antiquewhite;
-}
-
-.hideDataImage {
-  z-index: -1;
-  position: absolute;
-  left: -100%;
-}
-
-.draggable {
-  cursor: move;
-  padding: 10px 10px 10px 10px;
-}
-
-// *********************************************************************************** //
-// * Select Boxes                                                                    * //
+// * Pushbar - Select Boxes                                                          * //
 // *********************************************************************************** //
 .symbolSelectors {
   position: absolute;
@@ -91,13 +91,25 @@
 }
 
 // *********************************************************************************** //
-// * Text Fields                                                                     * //
+// * Pushbar - Text Fields                                                           * //
 // *********************************************************************************** //
 .mdc-text-field.searchSymbols,
 .mdc-text-field.uniqueDesignation,
 .mdc-text-field.higherFormation {
   width: 107%;
   text-transform: uppercase;
+}
+
+// *********************************************************************************** //
+// * Pushbar - Bottom About Data                                                     * //
+// *********************************************************************************** //
+.mdc-layout-grid.bottom-about {
+  border-top: 4px midnightblue solid;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  box-shadow: 0px -5px 5px -3px rgba(0, 0, 0, 0.2), 0px -8px 10px 1px rgba(0, 0, 0, 0.14), 0px -3px 14px 2px rgba(0, 0, 0, 0.12);
+  margin-top: 2rem;
 }
 
 // *********************************************************************************** //

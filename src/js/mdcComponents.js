@@ -17,7 +17,7 @@ import {
 import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
-import graphicControlMeasuresObject from './graphicControlMeasuresObject';
+// import graphicControlMeasuresObject from './graphicControlMeasuresObject';
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
@@ -60,7 +60,7 @@ const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-sel
 
 const selectTacticalMissionTasks = new MDCSelect(document.querySelector('.tacticalmissiontask-select'));
 
-const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.graphiccontrolmeasures-select'));
+// const selectGraphicControlMeasures = new MDCSelect(document.querySelector('.graphiccontrolmeasures-select'));
 
 
 // *********************************************************************************** //
@@ -87,7 +87,7 @@ const searchOptions = {
   distance: 100,
   maxPatternLength: 32,
   minMatchCharLength: 3,
-  keys: [Object.keys(militarySymbolsObject), Object.keys(graphicControlMeasuresObject)],
+  keys: [Object.keys(militarySymbolsObject)],
 };
 
 function clearSearchField() {
@@ -317,7 +317,7 @@ class RRSwitches {
 function enableFlyingOutline() {
   if (flyingSwitch.checked) {
     MainMS.flying = true;
-    DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
+    DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true);
     MainMS.placeSymbol();
   } else if (window.hasOwnProperty('MainMS')) {
     MainMS.flying = false;
@@ -415,9 +415,9 @@ window.DisableInputs = DisableInputs;
 window.selectCommandPost = selectCommandPost;
 window.tacticalMissionTasksObject = tacticalMissionTasksObject;
 window.selectTacticalMissionTasks = selectTacticalMissionTasks;
-window.selectGraphicControlMeasures = selectGraphicControlMeasures;
+// window.selectGraphicControlMeasures = selectGraphicControlMeasures;
 window.menuSurface = menuSurface;
-window.graphicControlMeasuresObject = graphicControlMeasuresObject;
+// window.graphicControlMeasuresObject = graphicControlMeasuresObject;
 window.bounceInAnimation = bounceInAnimation;
 
 // *********************************************************************************** //
@@ -429,7 +429,7 @@ window.onload = () => {
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
   addSymbolsAndModsToList(tacticalMissionTasksObject, 'tacticalmissiontask', selectTacticalMissionTasks);
-  addSymbolsAndModsToList(graphicControlMeasuresObject, 'graphiccontrolmeasures', selectGraphicControlMeasures);
+  // addSymbolsAndModsToList(graphicControlMeasuresObject, 'graphiccontrolmeasures', selectGraphicControlMeasures);
   // Hide the text field trash can buttons on page load
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
@@ -458,15 +458,15 @@ window.onload = () => {
       switch (MainMS.type) {
         case 'Equipment':
           // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
-          DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true, true);
+          DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true);
           break;
         case 'Graphic Control Measure':
           flyingSwitch.disabled = true;
           flyingSwitch.checked = false;
-          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true, true);
+          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true);
           break;
         default:
-          selectGraphicControlMeasures.selectedText_.textContent = 'None';
+          // selectGraphicControlMeasures.selectedText_.textContent = 'None';
           DisableInputs();
           break;
       }
@@ -529,46 +529,46 @@ window.onload = () => {
     MainMS.placeSymbol();
   });
 
-  selectGraphicControlMeasures.listen('MDCSelect:change', () => {
-    setSelectMenuTextContent(selectGraphicControlMeasures);
-    // Instantiate the GCM class
-    const GCM = () => new AddGraphicControlMeasure('.newSVG', 'Default Land Unit', 'friendly', undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, selectGraphicControlMeasures.value);
+  // selectGraphicControlMeasures.listen('MDCSelect:change', () => {
+  //   setSelectMenuTextContent(selectGraphicControlMeasures);
+  //   // Instantiate the GCM class
+  //   const GCM = () => new AddGraphicControlMeasure('.newSVG', 'Default Land Unit', 'friendly', undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, selectGraphicControlMeasures.value);
 
-    const changeGCM = new Promise((resolve, reject) => {
-      resolve(GCM);
-      reject(new Error('changeGCM Promise Rejected'));
-    });
+  //   const changeGCM = new Promise((resolve, reject) => {
+  //     resolve(GCM);
+  //     reject(new Error('changeGCM Promise Rejected'));
+  //   });
 
-    changeGCM.then(() => {
-      // Check if the GCM class has this prop
-      if (GCM()._graphicControlMeasures !== 'None') {
-        selectSymbol.selectedText_.textContent = 'None';
-        // Disable everything except the symbol select and GCM select
-        DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true, false);
-        // Place the GCM symbol in the symbol panel
-        GCM().placeSymbol();
-        // Animate the GCM
-        document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
-      } else {
-        // If the user selects 'none' on GCM, this will just place the default land unit back
-        MainMS.placeSymbol();
-        // This re-enables all buttons except the flying switch
-        DisableInputs();
-      }
-    }, (error) => {
-      console.log(error);
-    });
-  });
+  //   changeGCM.then(() => {
+  //     // Check if the GCM class has this prop
+  //     if (GCM()._graphicControlMeasures !== 'None') {
+  //       selectSymbol.selectedText_.textContent = 'None';
+  //       // Disable everything except the symbol select and GCM select
+  //       DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true, false);
+  //       // Place the GCM symbol in the symbol panel
+  //       GCM().placeSymbol();
+  //       // Animate the GCM
+  //       document.querySelector('.newSVG > svg').setAttributeNS(null, 'class', 'animateSymbol');
+  //     } else {
+  //       // If the user selects 'none' on GCM, this will just place the default land unit back
+  //       MainMS.placeSymbol();
+  //       // This re-enables all buttons except the flying switch
+  //       DisableInputs();
+  //     }
+  //   }, (error) => {
+  //     console.log(error);
+  //   });
+  // });
 
 
-  [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks, selectGraphicControlMeasures].forEach((key) => {
+  [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks].forEach((key) => {
     key.listen('click', () => {
       // If any of these menus are open, then resize all the symbols
       selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
       selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
       selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
       selectTacticalMissionTasks.isMenuOpen_ ? new Resizer('.tacticalmissiontaskFigure svg') : null;
-      selectGraphicControlMeasures.isMenuOpen_ ? new Resizer('.graphiccontrolmeasuresFigure svg') : null;
+      // selectGraphicControlMeasures.isMenuOpen_ ? new Resizer('.graphiccontrolmeasuresFigure svg') : null;
     });
   });
 
