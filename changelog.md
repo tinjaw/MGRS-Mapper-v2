@@ -5,6 +5,7 @@
 ## 25COT19
 
 - Created a grid for all the list item elements in the select boxes. Now the symbol description sits on top of the type and everything is aligned properly without having to use that ugly padStart() method. Decided to code my own CSS grid instead of using MDCs built in Layout Grid (didn't feel like generating tons of extra divs).
+- Fixed a bug when selecting a GCM it would remove the first indexed item in the select boxes for Mod1/2, CPs and TMTs. This was an issue with DisableInputs and the way MDC listens for events. I was setting "selectMod1.selectedIndex = 0" which was causing a change event that then triggered placeSymbol(). So when a GCM was selected it would run placeSymbol() 5 separate times. By setting "selectMod1.setEnhancedSelectedIndex\_(0);" this "silently" changes the index of the select box and the event listeners don't pick it up.
 
 ---
 

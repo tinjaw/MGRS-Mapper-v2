@@ -146,6 +146,9 @@ class MilSym {
         outlineGroup.append(outline);
         // Removes the echelon data above the Equipment symbol.
         this.echelon = 'none';
+        // Remove Mod1/2
+        this.mod1 = undefined;
+        this.mod2 = undefined;
         // Removes the Unique Designation about the Equipment symbol
         this.uniqueDesignation = undefined;
         // Removes the Higher Formation about the Equipment symbol

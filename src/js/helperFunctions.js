@@ -1,5 +1,4 @@
 /* eslint-disable no-new */
-// TODO: The list for the select boxes. Have the H6 tag sit on top of the <em> tag. Essentially just stack them on top of each other to save space.
 import { selectAffiliation } from './mdcComponents';
 
 // * Make Mod1 & Mod2 fit inside an equipment symbol * //
@@ -39,7 +38,7 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
     const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
     const newli = document.createElement('li');
     const modTypeInfo = document.createElement('em');
-    modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info symbolTypeGrid`);
+    modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info symbolTypeGrid mdc-typography--overline`);
     // Add the type of the Modifier in the drop down box
     modTypeInfo.textContent = obj[key].type;
     newli.setAttributeNS(null, 'class', 'mdc-list-item listGridParent');
@@ -87,10 +86,9 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         break;
     }
     // This will remove the affiliation containers on the Modifier elements in the dropdown
-    // ! Remember selectMod1 is a global var from mdcComponents.js -- Import it on production
-    menu.menu_.items.map((key2) => {
+    menu.menu_.items.map((element) => {
       // This targets the Modifier element (eg- the moon symbol for "foraging")
-      const modElement = key2.querySelectorAll('li figure svg g.outline path')[0];
+      const modElement = element.querySelectorAll('li figure svg g.outline path')[0];
       // This targets the SVG container for each Modifier element
       const modSVGContainer = modElement.parentElement.parentElement;
       // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
@@ -122,6 +120,7 @@ class Resizer {
     });
   }
 }
+
 
 // * Bounce In Animation * //
 // Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2.
@@ -155,14 +154,19 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
 
   if (mod1) {
     selectMod1.disabled = true;
-    selectMod1.selectedIndex = 0;
+    //! using "selectMod1.selectedIndex = 0;" causes a change event which triggers placeSymbol()
+    //! setEnhancedSelectedIndex_(0) will "silently" change the select box index
+    selectMod1.setEnhancedSelectedIndex_(0);
+    //! Since the index was "silently" changed, we need to reset the text
+    selectMod1.root_.childNodes[5].innerText = 'None';
   } else {
     selectMod1.disabled = false;
   }
 
   if (mod2) {
     selectMod2.disabled = true;
-    selectMod2.selectedIndex = 0;
+    selectMod2.setEnhancedSelectedIndex_(0);
+    selectMod2.root_.childNodes[5].innerText = 'None';
   } else {
     selectMod2.disabled = false;
   }
@@ -200,7 +204,6 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
   if (activity) {
     activitySwitch.disabled = true;
     activitySwitch.checked = false;
-    // MainMS.activity = false;
   } else {
     activitySwitch.disabled = false;
   }
@@ -221,14 +224,16 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
 
   if (commandPost) {
     selectCommandPost.disabled = true;
-    selectCommandPost.selectedIndex = 0;
+    selectCommandPost.setEnhancedSelectedIndex_(0);
+    selectCommandPost.root_.childNodes[5].innerText = 'None';
   } else {
     selectCommandPost.disabled = false;
   }
 
   if (tacticalMissionTasks) {
     selectTacticalMissionTasks.disabled = true;
-    selectTacticalMissionTasks.selectedIndex = 0;
+    selectTacticalMissionTasks.setEnhancedSelectedIndex_(0);
+    selectTacticalMissionTasks.root_.childNodes[5].innerText = 'None';
   } else {
     selectTacticalMissionTasks.disabled = false;
   }

@@ -87,7 +87,8 @@
   display: grid;
   grid-template-columns: 150px 1fr;
   grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 10px;
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
   em {
     pointer-events: none;
     //color: var(--mdc-theme-text-icon-on-primary-light);

@@ -553,8 +553,8 @@ window.onload = () => {
 
     if (selectSymbol.isMenuOpen_) {
       // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
-      new Resizer('.symbolFigure svg');
       setTimeout(() => {
+        new Resizer('.symbolFigure svg');
         // Total hack that prevents the selectSymbol dropdown from getting compressed when after a user does a search query.
         selectSymbol.menu_.root_.attributes.style.value = 'transform-origin: center top; top: 591.625px; max-height: 714.375px; right: 33.3438px;';
       }, 50);
