@@ -1,3 +1,5 @@
+// * Task Force Object * //
+// Since the task force indicator is dependent on the unit size, we put it in its own object
 const taskForceObject = {
   none: {
     affiliation: {
