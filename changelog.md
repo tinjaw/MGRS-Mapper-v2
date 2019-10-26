@@ -9,6 +9,7 @@
 - Added mdc-typography--headline6 to all non-generated list items for uniformity.
 - Got stuck on adding a map. I think I am going to go with MapBox and load in some vector and raster maps. I have a semi-working version on codepen [here](https://codepen.io/pistell/pen/bGGRgaW)
 - TODO: Implement the MGRS overlay!!!!
+- BUG: Scroll down on the pushbar and then select a symbol. Notice how the list does not append to the bottom of the select box? That needs to be fixed. It's also not resizing the selectSymbols items. The symbols in firefox are also jacked up. In Chrome all you need to do is hover over them and they will resize but in Firefox this does not happen. Upon further inspection this looks like the default behavior of MDC. Look into locking the scroll position when a menu is open. Putting a setTimeout on the Resizer class seems to fix the issue on Chrome but it still persists on Firefox... fml
 
 ---
 
