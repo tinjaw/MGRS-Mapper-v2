@@ -15,8 +15,6 @@ import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 
-const demoSelect = new MDCSelect(document.querySelector('.demo-width-class'));
-
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));
