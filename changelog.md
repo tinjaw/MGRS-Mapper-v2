@@ -2,6 +2,12 @@
 
 ---
 
+## 25COT19
+
+- Created a grid for all the list item elements in the select boxes. Now the symbol description sits on top of the type and everything is aligned properly without having to use that ugly padStart() method. Decided to code my own CSS grid instead of using MDCs built in Layout Grid (didn't feel like generating tons of extra divs).
+
+---
+
 ## 23OCT19
 
 - TransformModifiersOnEquipment() is being imported into mdcComponents but only being used in app.js

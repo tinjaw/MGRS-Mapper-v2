@@ -1,4 +1,5 @@
 /* eslint-disable no-new */
+// TODO: The list for the select boxes. Have the H6 tag sit on top of the <em> tag. Essentially just stack them on top of each other to save space.
 import { selectAffiliation } from './mdcComponents';
 
 // * Make Mod1 & Mod2 fit inside an equipment symbol * //
@@ -38,16 +39,16 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
     const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
     const newli = document.createElement('li');
     const modTypeInfo = document.createElement('em');
-    modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info`);
+    modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info symbolTypeGrid`);
     // Add the type of the Modifier in the drop down box
-    modTypeInfo.textContent = obj[key].type.padEnd(15, '.');
-    newli.setAttributeNS(null, 'class', 'mdc-list-item');
+    modTypeInfo.textContent = obj[key].type;
+    newli.setAttributeNS(null, 'class', 'mdc-list-item listGridParent');
     newli.setAttributeNS(null, 'data-value', key);
-    newli.textContent = key.toString();
+    newli.innerHTML = `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`;
     newli.prepend(modTypeInfo);
     mdcList.append(newli);
     const figureElement = document.createElement('figure');
-    figureElement.setAttributeNS(null, 'class', `${abv}Figure`);
+    figureElement.setAttributeNS(null, 'class', `${abv}Figure symbolFigureGrid`);
     // add the symbol key to the data-attr so they can match up with the list item
     figureElement.setAttributeNS(null, `data-${abv}-name`, `${key}`);
     newli.prepend(figureElement);
