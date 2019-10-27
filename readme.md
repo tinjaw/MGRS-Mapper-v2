@@ -41,6 +41,7 @@ A development repository for MGRS-Mapper application
 - [x] Add SVG manipulation (drag-n-drop & resize handles)
 - [ ] Begin Leaflet maps implementation...
 - [ ] Update repository key in package.json on production
+- [ ] Commonly used symbols pane
 
 ## DEFAULT VALUES
 
