@@ -15,6 +15,7 @@ import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
 import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 
+
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));
@@ -133,10 +134,10 @@ const searchResults = debounce(() => {
           figureElement.setAttribute('data-symbol-name', `${element}`);
           newli.prepend(figureElement);
           new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-          // selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+          // selectSymbol.isMenuOpen_ ? Resizer('.symbolFigure svg') : null;
         }
         // Resize symbols in search results so they fit
-        selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+        selectSymbol.isMenuOpen_ ? Resizer('.symbolFigure svg') : null;
         // set the first result as the symbol value on the "Select a Symbol" dropdown
         selectSymbol.foundation_.setValue(result[0].matches[0].value);
       } else {
@@ -167,7 +168,7 @@ const searchResults = debounce(() => {
       document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
     }
     // Resize symbols in search results so they fit
-    selectSymbol.isMenuOpen_ ? new Resizer('.symbolFigure svg') : null;
+    selectSymbol.isMenuOpen_ ? Resizer('.symbolFigure svg') : null;
   }
 }, 200);
 
@@ -211,7 +212,7 @@ const inputDesignationFields = debounce(() => {
     // * Directly edit the MainMS class instance instead of creating a whole new class * //
     MainMS.uniqueDesignation = uniqueDesignationField.value;
     MainMS.higherFormation = higherFormationField.value;
-    new Resizer('.symbolFigure svg');
+    Resizer('.symbolFigure svg');
   } else {
     MainMS.uniqueDesignation = undefined;
     deleteUniqueDesignationButton.root_.style.display = 'none';
@@ -226,7 +227,7 @@ const inputDesignationFields = debounce(() => {
     deleteHigherFormationButton.root_.style.zIndex = '10';
     MainMS.uniqueDesignation = uniqueDesignationField.value;
     MainMS.higherFormation = higherFormationField.value;
-    new Resizer('.symbolFigure svg');
+    Resizer('.symbolFigure svg');
   } else {
     MainMS.higherFormation = undefined;
     deleteHigherFormationButton.root_.style.display = 'none';
@@ -526,26 +527,13 @@ window.onload = () => {
   });
 
 
-  function ResizerFunc2(symbolElement, width = 93, height = 64) {
-    const se = document.querySelectorAll(symbolElement);
-    const w = width;
-    const h = height;
-    se.forEach((key) => {
-      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
-      key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
-      key.setAttributeNS(null, 'width', `${w}`);
-      key.setAttributeNS(null, 'height', `${h}`);
-    });
-  }
-
   [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks].forEach((key) => {
     key.listen('click', () => {
       // If any of these menus are open, then resize all the symbols
-      selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
-      // selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
-      selectMod1.isMenuOpen_ ? ResizerFunc2('.mod1Figure svg') : null;
-      selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
-      selectTacticalMissionTasks.isMenuOpen_ ? new Resizer('.tacticalmissiontaskFigure svg') : null;
+      selectUnitSize.isMenuOpen_ ? Resizer('.unitSizeFigure svg', 93, 33) : null;
+      selectMod1.isMenuOpen_ ? Resizer('.mod1Figure svg') : null;
+      selectMod2.isMenuOpen_ ? Resizer('.mod2Figure svg') : null;
+      selectTacticalMissionTasks.isMenuOpen_ ? Resizer('.tacticalmissiontaskFigure svg') : null;
     });
   });
 
@@ -567,7 +555,7 @@ window.onload = () => {
     if (selectSymbol.isMenuOpen_) {
       // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
       setTimeout(() => {
-        new Resizer('.symbolFigure svg');
+        Resizer('.symbolFigure svg');
         // Total hack that prevents the selectSymbol dropdown from getting compressed when after a user does a search query.
         selectSymbol.menu_.root_.attributes.style.value = 'transform-origin: center top; top: 591.625px; max-height: 714.375px; right: 33.3438px;';
       }, 50);
@@ -589,7 +577,7 @@ window.onload = () => {
       }
     }
     // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
-    selectCommandPost.isMenuOpen_ ? new Resizer('.commandpostFigure svg', 100, 100) : null;
+    selectCommandPost.isMenuOpen_ ? Resizer('.commandpostFigure svg', 100, 100) : null;
   });
 };
 

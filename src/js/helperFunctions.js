@@ -106,19 +106,29 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
 };
 
 // * Resize symbols (usually called when a select menu is opened) * //
-// ex- new Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
-class Resizer {
-  constructor(symbolElement, width = 93, height = 64) {
-    this.symbolElement = document.querySelectorAll(symbolElement);
-    this.width = width;
-    this.height = height;
-    this.symbolElement.forEach((key) => {
-      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
+// Cache: Our client bounding boxes are kept here, we can use this to clear them later.
+const elementsWithBoundingBoxes = [];
+window.elementsWithBoundingBoxes = elementsWithBoundingBoxes; //! Global var - remove on production
+// ex- Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
+function Resizer(symbolElement, width = 93, height = 64) {
+  const se = document.querySelectorAll(symbolElement);
+  const w = width;
+  const h = height;
+
+  se.forEach((key) => {
+    // Check if we already got the client bounding box before.
+    if (!key._boundingBox) {
+      // If not, get it then store it for future use.
+      key._boundingBox = key.getBBox();
+      elementsWithBoundingBoxes.push(key);
+      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
       key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
-      key.setAttributeNS(null, 'width', `${this.width}`);
-      key.setAttributeNS(null, 'height', `${this.height}`);
-    });
-  }
+      key.setAttributeNS(null, 'width', `${w}`);
+      key.setAttributeNS(null, 'height', `${h}`);
+    }
+    // Since we have cached the Bounding Box values, there is no need to compute them again 👍
+    return key._boundingBox;
+  });
 }
 
 
