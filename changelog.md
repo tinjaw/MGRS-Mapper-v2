@@ -2,6 +2,12 @@
 
 ---
 
+## 28OCT19
+
+- Got tied up in JS Perf testing out better implementations of the Resizer class. Found that converting it to a function yields a +20% performance increase. Check the data out [here](https://jsperf.com/svgviewbox-3/1)
+
+---
+
 ## 25COT19
 
 - Created a grid for all the list item elements in the select boxes. Now the symbol description sits on top of the type and everything is aligned properly without having to use that ugly padStart() method. Decided to code my own CSS grid instead of using MDCs built in Layout Grid (didn't feel like generating tons of extra divs).

@@ -42,6 +42,7 @@ A development repository for MGRS-Mapper application
 - [ ] Begin Leaflet maps implementation...
 - [ ] Update repository key in package.json on production
 - [ ] Commonly used symbols pane
+- [ ] Logo in header
 
 ## DEFAULT VALUES
 

@@ -526,11 +526,24 @@ window.onload = () => {
   });
 
 
+  function ResizerFunc2(symbolElement, width = 93, height = 64) {
+    const se = document.querySelectorAll(symbolElement);
+    const w = width;
+    const h = height;
+    se.forEach((key) => {
+      key.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid'); // this is a default value I believe
+      key.setAttributeNS(null, 'viewBox', `${key.getBBox().x - 4} ${key.getBBox().y - 4} ${key.getBBox().width + 8} ${key.getBBox().height + 8}`);
+      key.setAttributeNS(null, 'width', `${w}`);
+      key.setAttributeNS(null, 'height', `${h}`);
+    });
+  }
+
   [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks].forEach((key) => {
     key.listen('click', () => {
       // If any of these menus are open, then resize all the symbols
       selectUnitSize.isMenuOpen_ ? new Resizer('.unitSizeFigure svg', 93, 33) : null;
-      selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
+      // selectMod1.isMenuOpen_ ? new Resizer('.mod1Figure svg') : null;
+      selectMod1.isMenuOpen_ ? ResizerFunc2('.mod1Figure svg') : null;
       selectMod2.isMenuOpen_ ? new Resizer('.mod2Figure svg') : null;
       selectTacticalMissionTasks.isMenuOpen_ ? new Resizer('.tacticalmissiontaskFigure svg') : null;
     });
