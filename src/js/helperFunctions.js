@@ -107,7 +107,7 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
 
 // * Resize symbols (usually called when a select menu is opened) * //
 // Cache: Our client bounding boxes are kept here, we can use this to clear them later.
-const elementsWithBoundingBoxes = [];
+let elementsWithBoundingBoxes = [];
 window.elementsWithBoundingBoxes = elementsWithBoundingBoxes; //! Global var - remove on production
 // ex- Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
 function Resizer(symbolElement, width = 93, height = 64) {
@@ -127,9 +127,21 @@ function Resizer(symbolElement, width = 93, height = 64) {
       key.setAttributeNS(null, 'height', `${h}`);
     }
     // Since we have cached the Bounding Box values, there is no need to compute them again 👍
+    document.querySelectorAll('.symbolFigure svg')[2].focus();
     return key._boundingBox;
   });
 }
+
+// This will clear the elementsWithBoundingBoxes array. Not sure if I need this or not
+const clearClientBoundingBoxes = () => {
+  for (let index = 0; index < elementsWithBoundingBoxes.length; index++) {
+    const element = elementsWithBoundingBoxes[index];
+    if (element) {
+      element._boundingBox = null;
+    }
+    elementsWithBoundingBoxes = [];
+  }
+};
 
 
 // * Bounce In Animation * //

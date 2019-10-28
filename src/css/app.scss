@@ -82,6 +82,10 @@
   padding-left: 5px;
 }
 
+.mdc-menu-surface--open {
+  overflow-x: hidden;
+}
+
 // Put all the list symbols into a grid
 .listGridParent {
   display: grid;

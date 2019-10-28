@@ -557,7 +557,7 @@ window.onload = () => {
       setTimeout(() => {
         Resizer('.symbolFigure svg');
         // Total hack that prevents the selectSymbol dropdown from getting compressed when after a user does a search query.
-        selectSymbol.menu_.root_.attributes.style.value = 'transform-origin: center top; top: 591.625px; max-height: 714.375px; right: 33.3438px;';
+        // selectSymbol.menu_.root_.attributes.style.value = `transform-origin: center top; top: ${selectSymbol.root_.getBoundingClientRect().bottom}px; max-height: 714.375px; right: 33.3438px;`;
       }, 50);
     }
     flyingSwitch.checked ? flyingSwitch.disabled = false : null;

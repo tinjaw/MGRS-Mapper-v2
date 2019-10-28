@@ -117,7 +117,9 @@ ul.mdc-list {
   min-width: 450px;
   // When hovering, remove the horizontal scroll bar from the drop downs
   overflow-x: hidden;
-  align-items: center;
+  //align-items: center;
+  max-width: 620px;
+  width: max-content;
 }
 
 li.mdc-list-item {
@@ -148,6 +150,10 @@ li.mdc-list-item svg {
   // width: fit-content;
   max-height: 100px;
   max-width: 100px;
+}
+
+.testCenter {
+  justify-content: center;
 }
 
 // Increase the height on the Command Post select box items

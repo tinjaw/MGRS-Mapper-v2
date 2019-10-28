@@ -5,6 +5,11 @@
 ## 28OCT19
 
 - Got tied up in JS Perf testing out better implementations of the Resizer class. Found that converting it to a function yields with an array that stores values yields a +4,000% performance increase. Check the data out [here](https://jsperf.com/svgviewbox-3/) and [here](https://pagebuildersandwich.com/increased-plugins-performance-200/)
+- [Online SVG Editor](https://svg-edit.github.io/svgedit/releases/latest/editor/svg-editor.html) this might be useful when adding symbols
+- Fixed the bug where the symbolSelect unordered list wasn't mating to the bottom of it's dropdown select box. This was due to an idiotic mistake on my part by manually setting the style value to this:
+  >     selectSymbol.menu*.root*.attributes.style.value = `transform-origin: center top; top: ${selectSymbol.root_.getBoundingClientRect().bottom}px; max-height: 714.375px; right: 33.3438px;`;
+
+-Fixed overflow-x problem for select boxes in FireFox.
 
 ---
 
