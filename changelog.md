@@ -12,6 +12,7 @@
 
 - Fixed overflow-x problem for select boxes in FireFox.
 - Moved JSON preview to Menu Surface IOT prepare for the map
+- Just lost the fucking webpack.config settings I had for this because fucking git checkout fucked my shit. Fuck mapbox I'm using google maps
 
 ---
 
