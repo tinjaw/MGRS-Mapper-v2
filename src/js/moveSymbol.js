@@ -126,7 +126,6 @@ newSVGDiv.addEventListener('mouseover', () => {
   }
 });
 
-
 newSVGDiv.ondragstart = (event) => {
   // For some reason I had to run this again to get the symbol amplifiers to show up. This seems to be an issue with the bounceInAnimation
   MainMS.placeSymbol();
