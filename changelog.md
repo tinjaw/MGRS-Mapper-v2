@@ -12,6 +12,7 @@
 
 - Fixed overflow-x problem for select boxes in FireFox.
 - Moved JSON preview to Menu Surface IOT prepare for the map
+- MapBox is a bloated piece of shit software that fucks with Moveable.js. Consider going back to Google Maps. Spent over 13 hours on it today and got no where
 
 ---
 

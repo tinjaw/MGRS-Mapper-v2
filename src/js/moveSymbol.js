@@ -26,6 +26,7 @@ const moveableoptions = {
 };
 
 const moveable = new Moveable(document.body, moveableoptions);
+window.moveable = moveable;
 
 function manipulateSymbol() {
   // All "targets" will be symbols with the draggable class
@@ -41,8 +42,8 @@ function manipulateSymbol() {
 
   //* DRAGGABLE *//
   moveable.on('drag', ({ target, left, top }) => {
-    target.style.left = `${left}px`;
-    target.style.top = `${top}px`;
+    // target.style.left = `${left}px`;
+    // target.style.top = `${top}px`;
   });
 
   //* SCALABLE *//
@@ -53,6 +54,7 @@ function manipulateSymbol() {
   //* ROTATABLE *//
   moveable.on('rotate', ({ target, transform }) => {
     target.style.transform = transform;
+    // console.dir(target.style.transform);
   });
 
   //* PINCHABLE *//
@@ -97,7 +99,8 @@ const drop = (event) => {
   const target = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   target.classList.add('draggable');
   target.innerHTML = document.querySelector('.newSVG >  svg').innerHTML;
-  event.target.appendChild(target);
+  // event.target.appendChild(target);
+  event.target.offsetParent.appendChild(target);
   // Get the BBox only after the target has been appended
   const bbox = target.getBBox();
   // The bounceIn animation fucks everything up, remove it and set the BBox of the parent draggable symbol
@@ -110,7 +113,22 @@ const drop = (event) => {
   manipulateSymbol(event);
   target.setAttribute('height', `${bbox.height}`);
   target.setAttribute('width', `${bbox.width}`);
-  target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px`);
+  // target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px; z-index: 1;`);
+  target.setAttribute('style', 'position: absolute; z-index: 1;');
+
+
+  // map.unproject() is a function built into Mapbox GL that accepts pixel coordinates on the window, and outputs a LngLat object
+  const marker = new mapboxgl.Marker({
+    draggable: true,
+    element: target,
+  }).setLngLat(map.unproject([event.clientX, event.clientY - 60])).addTo(map);
+  moveable.target = marker.element;
+  //! important that this is undefined. Otherwise mapbox will apply some retarded css transform on the symbol
+  // marker._anchor = undefined;
+  console.log(marker._lngLat);
+  console.log(marker._pos);
+  console.log(marker._map.transform);
+  window.marker = marker;
 };
 
 // Enables draggable attribute if the cursor is hovering over the symbol in the sidebar.
@@ -150,6 +168,33 @@ newSVGDiv.ondragstart = (event) => {
     dragImg.parentNode.removeChild(dragImg);
   }, 100);
 };
+
+
+//! Mapbox shit
+setTimeout(() => {
+  const tgt = document.querySelector('.draggable');
+  map.on('dragstart', (event) => {
+    // console.dir(event.target._canvasContainer.offsetParent.childNodes[4]);
+    // const features = map.queryRenderedFeatures(event.target._canvasContainer.offsetParent.childNodes[4]);
+    // console.log(JSON.stringify(features, null, 2));
+    moveable.target = undefined;
+
+    // const marker = new mapboxgl.Marker({
+    //   draggable: true,
+    //   element: document.querySelector('.draggable').cloneNode(true),
+    // }).setLngLat([-75.706, 44.137]).addTo(map);
+  });
+
+
+  map.on('mousemove', (e) => {
+    document.getElementById('info').innerHTML =
+    // e.point is the x, y coordinates of the mousemove event relative
+    // to the top-left corner of the map
+    `${JSON.stringify(e.point)}<br />${
+    // e.lngLat is the longitude, latitude geographical position of the event
+      JSON.stringify(e.lngLat.wrap())}`;
+  });
+}, 100);
 
 
 mapArea.ondrop = drop;
