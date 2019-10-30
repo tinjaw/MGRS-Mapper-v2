@@ -92,9 +92,15 @@ const allowDrop = (event) => {
 
 const drop = (event) => {
   event.preventDefault();
-  const x1 = event.clientX - 76; // this.getBoundingClientRect().width / 2
-  const y1 = event.clientY - 51; // this.getBoundingClientRect().height / 2
+  const svg = document.querySelector('.newSVG > svg').getBBox();
+  // When the symbol is dropped, this will center it on your mouse cursor
+  const svgWidth = (svg.width + (svg.x -4)) / 2;
+  const svgHeight = (svg.height + (svg.x -4)) / 2;
+
+  const x1 = event.clientX - svgWidth;
+  const y1 = event.clientY - svgHeight;
   const target = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+
   target.classList.add('draggable');
   target.innerHTML = document.querySelector('.newSVG >  svg').innerHTML;
   event.target.appendChild(target);

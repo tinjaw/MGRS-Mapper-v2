@@ -5,6 +5,7 @@
 ## 30OCT19
 
 - Had way too many issues with MapBox and decided to revert back to where I left off on the 28th. Moved the modified webpack.config and package.json files to the ./old folder and pushed the changes to a new branch "7bitSignedAscii".
+- Centered the dropped symbol on the mouse cursor
 
 ---
 
