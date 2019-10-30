@@ -2,6 +2,12 @@
 
 ---
 
+## 30OCT19
+
+- Had way too many issues with MapBox and decided to revert back to where I left off on the 28th. Moved the modified webpack.config and package.json files to the ./old folder and pushed the changes to a new branch "7bitSignedAscii".
+
+---
+
 ## 28OCT19
 
 - Got tied up in JS Perf testing out better implementations of the Resizer class. Found that converting it to a function yields with an array that stores values yields a +4,000% performance increase. Check the data out [here](https://jsperf.com/svgviewbox-3/) and [here](https://pagebuildersandwich.com/increased-plugins-performance-200/)

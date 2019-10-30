@@ -1,26 +1,16 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // const CompressionPlugin = require('compression-webpack-plugin');
-// require('babel-core').transform('code', {
-//   plugins: ['@babel/plugin-transform-async-to-generator'],
-// });
 
 
 module.exports = [{
-  entry: ['@babel/polyfill', './src/css/app.scss', './src/js/app.js', './src/js/mdcComponents.js', './src/js/pushbar.js', './src/js/moveSymbol.js', './src/js/map.js'],
+  entry: ['./src/css/app.scss', './src/js/app.js', './src/js/mdcComponents.js', './src/js/pushbar.js', './src/js/moveSymbol.js', './src/js/map.js'],
   output: {
     filename: 'bundle.js',
   },
-  // resolve: {
-  //   alias: {
-  //     'mapbox-gl': 'mapbox-gl/dist/mapbox-gl.js',
-  //     '@mapbox/mapbox-gl-draw': '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js',
-  //   },
-  // },
   module: {
-    // noParse: /(mapbox-gl)\.js$/,
     rules: [
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.scss$/,
         use: [
           {
             loader: 'file-loader',
@@ -41,11 +31,9 @@ module.exports = [{
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /mapbox-gl/,
         query: {
-          // presets: ['es2015'],
-          presets: ['@babel/preset-env'],
-          plugins: ['transform-object-assign', '@babel/plugin-transform-async-to-generator'],
+          presets: ['es2015'],
+          plugins: ['transform-object-assign'],
         },
       },
     ],
