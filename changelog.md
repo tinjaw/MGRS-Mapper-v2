@@ -8,6 +8,8 @@
 - Centered the dropped symbol on the mouse cursor
 - Since a user's symbol orientation is unknown I think we need to combine Tactical Mission Tasks into the general militarySymbolsObject file.
 - Created a [Facebook page](https://www.facebook.com/mgrsmapper)
+- DisableInputs should be refactored to accept an object as params. It is unreadable as it stands
+- Added site logo but to be honest I am not happy with it and it should probably be removed.
 
 ---
 
