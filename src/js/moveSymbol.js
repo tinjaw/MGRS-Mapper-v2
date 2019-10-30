@@ -94,8 +94,8 @@ const drop = (event) => {
   event.preventDefault();
   const svg = document.querySelector('.newSVG > svg').getBBox();
   // When the symbol is dropped, this will center it on your mouse cursor
-  const svgWidth = (svg.width + (svg.x -4)) / 2;
-  const svgHeight = (svg.height + (svg.x -4)) / 2;
+  const svgWidth = (svg.width + (svg.x - 4)) / 2;
+  const svgHeight = (svg.height + (svg.x - 4)) / 2;
 
   const x1 = event.clientX - svgWidth;
   const y1 = event.clientY - svgHeight;
@@ -118,7 +118,7 @@ const drop = (event) => {
   target.setAttribute('height', `${bbox.height}`);
   target.setAttribute('width', `${bbox.width}`);
   target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px; z-index: 1;`);
-  //target.setAttribute('style', 'position: absolute; z-index: 1;'); // This worked well in MapBox
+  // target.setAttribute('style', 'position: absolute; z-index: 1;'); // This worked well in MapBox
 };
 
 // Enables draggable attribute if the cursor is hovering over the symbol in the sidebar.

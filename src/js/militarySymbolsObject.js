@@ -39,12 +39,12 @@ const militarySymbolsObject = {
           d: 'M25,150L175,50',
         },
         circle_1: {
-          cx: '75',
+          cx: '74',
           cy: '90',
           r: '6',
         },
         circle_2: {
-          cx: '125',
+          cx: '126',
           cy: '90',
           r: '6',
         },

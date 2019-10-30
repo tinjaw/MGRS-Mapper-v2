@@ -6,6 +6,8 @@
 
 - Had way too many issues with MapBox and decided to revert back to where I left off on the 28th. Moved the modified webpack.config and package.json files to the ./old folder and pushed the changes to a new branch "7bitSignedAscii".
 - Centered the dropped symbol on the mouse cursor
+- Since a user's symbol orientation is unknown I think we need to combine Tactical Mission Tasks into the general militarySymbolsObject file.
+- Created a [Facebook page](https://www.facebook.com/mgrsmapper)
 
 ---
 
