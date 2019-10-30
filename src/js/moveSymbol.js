@@ -29,6 +29,7 @@ const moveable = new Moveable(document.body, moveableoptions);
 window.moveable = moveable;
 
 function manipulateSymbol() {
+  let rotate = 0;
   // All "targets" will be symbols with the draggable class
   const draggableElements = document.querySelectorAll('.draggable');
   // Create the array for the targets
@@ -52,7 +53,7 @@ function manipulateSymbol() {
   });
 
   //* ROTATABLE *//
-  moveable.on('rotate', ({ target, transform }) => {
+  moveable.on('rotate', ({ target, beforeDelta, delta, dist, transform, clientX, clientY  }) => {
     target.style.transform = transform;
     // console.dir(target.style.transform);
   });
