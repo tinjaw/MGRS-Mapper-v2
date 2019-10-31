@@ -43,6 +43,7 @@ A development repository for MGRS-Mapper application
 - [ ] Update repository key in package.json on production
 - [ ] Commonly used symbols pane
 - [ ] Logo in header
+- [ ] Semantic HTML check. (eg- The "Dismissible Drawer" in the top app bar has a class of 'mdc-top-app-bar__title')
 
 ## DEFAULT VALUES
 
