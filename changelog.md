@@ -11,6 +11,7 @@
 - DisableInputs should be refactored to accept an object as params. It is unreadable as it stands
 - Added site logo but to be honest I am not happy with it and it should probably be removed.
 - Tooltip inspiration [Tippy.js](https://github.com/atomiks/tippyjs)
+- Provisions should be procured prior to next session
 
 ---
 
