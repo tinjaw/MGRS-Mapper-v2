@@ -312,16 +312,29 @@ class RRSwitches {
 function enableFlyingOutline() {
   if (flyingSwitch.checked) {
     MainMS.flying = true;
-    DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true);
+    DisableInputs({
+      affiliation: false,
+      size: true,
+      mod1: false,
+      mod2: false,
+      unique: true,
+      higher: true,
+      reinforced: true,
+      reduced: true,
+      activity: true,
+      installation: true,
+      taskForce: true,
+      commandPost: true,
+    });
     MainMS.placeSymbol();
   } else if (window.hasOwnProperty('MainMS')) {
     MainMS.flying = false;
-    DisableInputs();
+    DisableInputs({});
     MainMS.placeSymbol();
   } else {
     setTimeout(() => {
       MainMS.flying = false;
-      DisableInputs();
+      DisableInputs({});
       MainMS.placeSymbol();
     }, 30);
   }
@@ -447,20 +460,60 @@ window.onload = () => {
       switch (MainMS.type) {
         case 'Equipment':
           // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
-          DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true);
+          DisableInputs({
+            affiliation: false,
+            size: true,
+            mod1: false,
+            mod2: false,
+            unique: true,
+            higher: true,
+            reinforced: true,
+            reduced: true,
+            activity: true,
+            installation: true,
+            taskForce: true,
+            commandPost: true,
+          });
           break;
         case 'Graphic Control Measure':
           flyingSwitch.disabled = true;
           flyingSwitch.checked = false;
-          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true);
+          DisableInputs({
+            affiliation: true,
+            size: true,
+            mod1: true,
+            mod2: true,
+            unique: true,
+            higher: true,
+            reinforced: true,
+            reduced: true,
+            activity: true,
+            installation: true,
+            taskForce: true,
+            commandPost: true,
+          });
           break;
         case 'Tactical Mission Task':
           flyingSwitch.disabled = true;
           flyingSwitch.checked = false;
-          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true);
+          DisableInputs({
+            affiliation: true,
+            size: true,
+            mod1: true,
+            mod2: true,
+            unique: true,
+            higher: true,
+            reinforced: true,
+            reduced: true,
+            activity: true,
+            installation: true,
+            taskForce: true,
+            commandPost: true,
+          });
           break;
         default:
-          DisableInputs();
+          // Enable all inputs
+          DisableInputs({});
           break;
       }
 

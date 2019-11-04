@@ -8,6 +8,7 @@
 - Added fusco to the private repo in case I fucking die
 - Added affiliationString() function. This will return a string of 'None' if the symbol is a TMT/GCM. Otherwise it will return the affiliation string by setting the first character to uppercase and adding a space between words. (eg- it will turn 'friendlyTemplated' into 'Friendly Templated')
 - Moved Tactical Mission Tasks into the main militarySymbolsObject file.
+- Modified DisableInputs to accept an object as a parameter. This makes readability so much easier.
 
 ---
 

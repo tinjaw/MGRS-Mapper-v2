@@ -153,7 +153,20 @@ function bounceInAnimation(location) {
 
 
 //* Disabled selected inputs * //
-function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, activity = false, installation = false, taskForce = false, commandPost = false) {
+function DisableInputs({
+  affiliation = false,
+  size = false,
+  mod1 = false,
+  mod2 = false,
+  unique = false,
+  higher = false,
+  reinforced = false,
+  reduced = false,
+  activity = false,
+  installation = false,
+  taskForce = false,
+  commandPost = false,
+}) {
   if (affiliation) {
     selectAffiliation.disabled = true;
   } else {
