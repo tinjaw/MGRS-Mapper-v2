@@ -80,6 +80,8 @@ class MilSym {
           !element.stroke ? decorator.setAttributeNS(null, 'stroke', 'black') : decorator.setAttributeNS(null, 'stroke', `${element.stroke}`);
           // If the default decorator stroke-width is missing, default to 4
           !element.strokeWidth ? decorator.setAttributeNS(null, 'stroke-width', '4') : decorator.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
+          // If the strokelinejoin key does not exist, do nothing, otherwise set the strokeLinejoin value
+          !element.strokeLinejoin ? null : decorator.setAttributeNS(null, 'stroke-linejoin', `${element.strokeLinejoin}`);
           // If the transform key does not exist, do nothing, otherwise set the transform value
           !element.transform ? null : decorator.setAttributeNS(null, 'transform', `${element.transform}`);
           decoratorGroup.append(decorator);
@@ -141,6 +143,35 @@ class MilSym {
 
       // Since GCMs do not have an outline, we check it here and remove it
       if (this.type === 'Graphic Control Measure') {
+        outline.setAttributeNS(null, 'd', '');
+        outline.setAttributeNS(null, 'fill', '');
+        outlineGroup.append(outline);
+        // Removes the echelon data above the Equipment symbol.
+        this.echelon = 'none';
+        // Remove Mod1/2
+        this.mod1 = undefined;
+        this.mod2 = undefined;
+        // Removes the Unique Designation about the Equipment symbol
+        this.uniqueDesignation = undefined;
+        // Removes the Higher Formation about the Equipment symbol
+        this.higherFormation = undefined;
+        // Removes the Reinforced/Reduced above the Equipment symbol
+        this.reinforcedReduced = undefined;
+        // Remove activity amplifier on Equipment symbol
+        this.activity = undefined;
+        // Remove installation amplifier on Equipment symbol
+        this.installation = undefined;
+        // Remove the task force above the Equipment symbol
+        this.taskForce = undefined;
+        // Remove command post amplifier on Equipment symbol
+        this.commandPost = undefined;
+        // Remove tactical mission tasks on the Equipment symbol
+        this.tacticalMissionTasks = undefined;
+        return outlineGroup;
+      }
+
+      // Since TMTs do not have an outline, we check it here and remove it
+      if (this.type === 'Tactical Mission Task') {
         outline.setAttributeNS(null, 'd', '');
         outline.setAttributeNS(null, 'fill', '');
         outlineGroup.append(outline);
@@ -799,9 +830,28 @@ class MilSym {
 
     this.location.append(svg);
 
+
+    const affiliationString = () => {
+      switch (this.type) {
+        case 'Graphic Control Measure':
+          // If the symbol is a GCM, then set the affiliation data to 'None'
+          return 'None';
+        case 'Tactical Mission Task':
+          // If the symbol is a TMT, then set the affiliation data to 'None'
+          return 'None';
+        default:
+          // If the symbol is literally anything other than a GCM/TMT then 'prettify' it
+          // (eg- turns 'friendlyTemplated' into 'Friendly Templated')
+          // Get the first letter of the affiliation string and upper case it, then combine it back to the rest of the string
+          const affiliationString = this._affiliation.charAt(0).toUpperCase() + this._affiliation.slice(1);
+          // Now add a space between the capitalized letters
+          return affiliationString.match(/[A-Z][a-z]+/g).join(' ');
+      }
+    };
+
     const dataObj = {
       Symbol: this._symbol,
-      Affiliation: this.type === 'Graphic Control Measure' ? 'None' : this._affiliation.charAt(0).toUpperCase() + this._affiliation.slice(1),
+      Affiliation: affiliationString(),
       Echelon: this._echelon === 'none' ? 'None' : this._echelon,
       'Modifier 1': this._mod1,
       'Modifier 2': this._mod2,

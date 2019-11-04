@@ -102,7 +102,7 @@ const drop = (event) => {
   const target = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
   target.classList.add('draggable');
-  target.innerHTML = document.querySelector('.newSVG >  svg').innerHTML;
+  target.innerHTML = document.querySelector('.newSVG > svg').innerHTML;
   event.target.appendChild(target);
   // event.target.offsetParent.appendChild(target); // This worked well in MapBox
   // Get the BBox only after the target has been appended

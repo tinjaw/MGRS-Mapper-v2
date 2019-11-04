@@ -2,6 +2,14 @@
 
 ---
 
+## 4NOV19
+
+- Added the facebook page to the production version of MGRS-Mapper. Hopefully I will get a few links between now and when I go live
+- Added fusco to the private repo in case I fucking die
+- Added affiliationString() function. This will return a string of 'None' if the symbol is a TMT/GCM. Otherwise it will return the affiliation string by setting the first character to uppercase and adding a space between words. (eg- it will turn 'friendlyTemplated' into 'Friendly Templated')
+
+---
+
 ## 30OCT19
 
 - Had way too many issues with MapBox and decided to revert back to where I left off on the 28th. Moved the modified webpack.config and package.json files to the ./old folder and pushed the changes to a new branch "7bitSignedAscii".
@@ -11,7 +19,6 @@
 - DisableInputs should be refactored to accept an object as params. It is unreadable as it stands
 - Added site logo but to be honest I am not happy with it and it should probably be removed.
 - Tooltip inspiration [Tippy.js](https://github.com/atomiks/tippyjs)
-- Provisions should be procured prior to next session
 
 ---
 
