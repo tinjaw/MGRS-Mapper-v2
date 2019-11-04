@@ -65,13 +65,6 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         selectCommandPost.value = 'None';
         // Since we do not want to strip the outline of the command post, return this value
         return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`, undefined);
-      case 'tacticalmissiontask':
-        setTimeout(() => {
-          //! This is a bit of a hack. I also don't like this because it is using the global vars and I don't feel like importing more shit
-          selectTacticalMissionTasks.value = 'None';
-        }, 30);
-        new MilSym(`.tacticalmissiontaskFigure[data-tacticalmissiontask-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`);
-        break;
       case 'symbol':
         // Set the selected symbol to "Default Land Unit" on page load
         // Setting floatLabel(true) and setEnhancedSelectedIndex_(0) will avoid the symbol animations from running again.
@@ -160,7 +153,7 @@ function bounceInAnimation(location) {
 
 
 //* Disabled selected inputs * //
-function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, activity = false, installation = false, taskForce = false, commandPost = false, tacticalMissionTasks = false) {
+function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = false, unique = false, higher = false, reinforced = false, reduced = false, activity = false, installation = false, taskForce = false, commandPost = false) {
   if (affiliation) {
     selectAffiliation.disabled = true;
   } else {
@@ -250,14 +243,6 @@ function DisableInputs(affiliation = false, size = false, mod1 = false, mod2 = f
     selectCommandPost.root_.childNodes[5].innerText = 'None';
   } else {
     selectCommandPost.disabled = false;
-  }
-
-  if (tacticalMissionTasks) {
-    selectTacticalMissionTasks.disabled = true;
-    selectTacticalMissionTasks.setEnhancedSelectedIndex_(0);
-    selectTacticalMissionTasks.root_.childNodes[5].innerText = 'None';
-  } else {
-    selectTacticalMissionTasks.disabled = false;
   }
 }
 

@@ -6,7 +6,6 @@ import mod1Object from './mod1Object';
 import mod2Object from './mod2Object';
 import taskForceObject from './taskForceObject';
 import commandPostObject from './commandPostObject';
-import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 
 // * The star of the show * //
 // Example 1: const symbol_1 = new MilSym('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post');
@@ -14,7 +13,7 @@ import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 // symbol_2.mod1 = 'Armored';
 // symbol_2.placeSymbol();
 class MilSym {
-  constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost, tacticalMissionTasks) {
+  constructor(location, symbol, affiliation, echelon, mod1, mod2, uniqueDesignation, higherFormation, reinforcedReduced, flying, activity, installation, taskForce, commandPost) {
     this._location = location;
     this._symbol = symbol;
     this._affiliation = affiliation;
@@ -29,7 +28,6 @@ class MilSym {
     this._installation = installation;
     this._taskForce = taskForce;
     this._commandPost = commandPost;
-    this._tacticalMissionTasks = tacticalMissionTasks;
     this.type = militarySymbolsObject[this._symbol].type;
     this.data = {
       affiliation: this._affiliation,
@@ -45,7 +43,6 @@ class MilSym {
       installation: this._installation,
       taskForce: this._taskForce,
       commandPost: this._commandPost,
-      tacticalMissionTasks: this._tacticalMissionTasks,
       type: militarySymbolsObject[this._symbol].type,
     };
     return this.placeSymbol();
@@ -165,8 +162,6 @@ class MilSym {
         this.taskForce = undefined;
         // Remove command post amplifier on Equipment symbol
         this.commandPost = undefined;
-        // Remove tactical mission tasks on the Equipment symbol
-        this.tacticalMissionTasks = undefined;
         return outlineGroup;
       }
 
@@ -194,8 +189,6 @@ class MilSym {
         this.taskForce = undefined;
         // Remove command post amplifier on Equipment symbol
         this.commandPost = undefined;
-        // Remove tactical mission tasks on the Equipment symbol
-        this.tacticalMissionTasks = undefined;
         return outlineGroup;
       }
 
@@ -228,8 +221,6 @@ class MilSym {
         this.taskForce = undefined;
         // Remove command post amplifier on Equipment symbol
         this.commandPost = undefined;
-        // Remove tactical mission tasks on the Equipment symbol
-        this.tacticalMissionTasks = undefined;
 
         // Instead of using the 'd' key in affiliationOutlineObject, we will use the 'flying' key
         if (affiliationOutlineObject[this._affiliation].templated) {
@@ -266,8 +257,6 @@ class MilSym {
         this.taskForce = undefined;
         // Remove command post amplifier on Equipment symbol
         this.commandPost = undefined;
-        // Remove tactical mission tasks on the Equipment symbol
-        this.tacticalMissionTasks = undefined;
 
         // This will raise Mod1, scale down the decorator, and lower Mod2
         TransformModifiersOnEquipment('.newSVG svg');
@@ -720,57 +709,6 @@ class MilSym {
   }
 
 
-  // TACTICAL MISSION TASKS
-  get tacticalMissionTasks() {
-    if (this._tacticalMissionTasks) {
-      const tacticalMissionTasksGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      tacticalMissionTasksGroup.classList.add('tacticalmissiontasks');
-      Object.keys(tacticalMissionTasksObject[this._tacticalMissionTasks].affiliation[this._affiliation]).forEach((key) => {
-        const element = tacticalMissionTasksObject[this._tacticalMissionTasks].affiliation[this._affiliation][key];
-        if (key.indexOf('path') === 0) {
-          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          path.setAttributeNS(null, 'd', `${element.d}`);
-          // If the default path fill is missing, default to none
-          !element.fill ? path.setAttributeNS(null, 'fill', 'none') : path.setAttributeNS(null, 'fill', `${element.fill}`);
-          // If the default path stroke is missing, default to black
-          !element.stroke ? path.setAttributeNS(null, 'stroke', 'black') : path.setAttributeNS(null, 'stroke', `${element.stroke}`);
-          // If the default path stroke-width is missing, default to 4
-          !element.strokeWidth ? path.setAttributeNS(null, 'stroke-width', '4') : path.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-          // If the strokeLinejoin property exists, add the attribute, otherwise do nothing
-          element.strokeLinejoin ? path.setAttributeNS(null, 'stroke-linejoin', `${element.strokeLinejoin}`) : null;
-          // If the mod1 element is missing a transform property, do nothing, else set the transform value
-          !element.transform ? null : path.setAttributeNS(null, 'transform', `${element.transform}`);
-          tacticalMissionTasksGroup.append(path);
-        }
-        if (key.indexOf('text') === 0) {
-          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          text.textContent = element.symbolText;
-          text.setAttributeNS(null, 'x', `${element.x}`);
-          text.setAttributeNS(null, 'y', `${element.y}`);
-          text.setAttributeNS(null, 'text-anchor', `${element.textAnchor}`);
-          text.setAttributeNS(null, 'font-size', `${element.fontSize}`);
-          // Default decorator font family to Arial
-          !element.fontFamily ? text.setAttributeNS(null, 'font-family', 'Arial') : text.setAttributeNS(null, 'font-family', `${element.fontFamily}`);
-          // Default decorator font weight to 30
-          !element.fontWeight ? text.setAttributeNS(null, 'font-weight', '30') : text.setAttributeNS(null, 'font-weight', `${element.fontWeight}`);
-          // Default decorator font stroke to none
-          !element.stroke ? text.setAttributeNS(null, 'stroke', 'none') : text.setAttributeNS(null, 'stroke', `${element.stroke}`);
-          // Default decorator font stroke width to 4
-          !element.strokeWidth ? text.setAttributeNS(null, 'stroke-width', '4') : text.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-          // Default decorator font fill to black
-          !element.fill ? text.setAttributeNS(null, 'fill', 'black') : text.setAttributeNS(null, 'fill', `${element.fill}`);
-          tacticalMissionTasksGroup.append(text);
-        }
-      });
-      return tacticalMissionTasksGroup;
-    }
-    return undefined;
-  }
-
-  set tacticalMissionTasks(value) {
-    this._tacticalMissionTasks = value;
-  }
-
   // PLACE SYMBOL
   placeSymbol() {
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
@@ -814,8 +752,6 @@ class MilSym {
           return this.taskForce;
         case 'commandPost':
           return this._commandPost === 'None' ? undefined : this.commandPost;
-        case 'tacticalMissionTasks':
-          return this._tacticalMissionTasks === 'None' ? undefined : this.tacticalMissionTasks;
         default:
           break;
       }
@@ -863,7 +799,6 @@ class MilSym {
       Installation: this._installation ? this._installation : 'None',
       'Task Force': this._taskForce ? this._taskForce : 'None',
       'Command Post': this._commandPost ? this._commandPost : 'None',
-      'Tactical Mission Tasks': this._tacticalMissionTasks ? this._tacticalMissionTasks : 'None',
       Type: militarySymbolsObject[this._symbol].type,
     };
 

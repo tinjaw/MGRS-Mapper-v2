@@ -13,7 +13,6 @@ import {
 } from './helperFunctions';
 import { MilSym } from './app';
 import militarySymbolsObject from './militarySymbolsObject';
-import tacticalMissionTasksObject from './tacticalMissionTasksObject';
 
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
@@ -54,8 +53,6 @@ const installationSwitch = new MDCSwitch(document.querySelector('.mdc-switch.ins
 const taskForceSwitch = new MDCSwitch(document.querySelector('.mdc-switch.taskForceSwitch'));
 
 const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-select'));
-
-const selectTacticalMissionTasks = new MDCSelect(document.querySelector('.tacticalmissiontask-select'));
 
 
 // *********************************************************************************** //
@@ -133,7 +130,7 @@ const searchResults = debounce(() => {
           // Add the symbol key to the data-attr so they can match up with the list item
           figureElement.setAttribute('data-symbol-name', `${element}`);
           newli.prepend(figureElement);
-          new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+          new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
           // selectSymbol.isMenuOpen_ ? Resizer('.symbolFigure svg') : null;
         }
         // Resize symbols in search results so they fit
@@ -315,7 +312,7 @@ class RRSwitches {
 function enableFlyingOutline() {
   if (flyingSwitch.checked) {
     MainMS.flying = true;
-    DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true);
+    DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true);
     MainMS.placeSymbol();
   } else if (window.hasOwnProperty('MainMS')) {
     MainMS.flying = false;
@@ -411,8 +408,6 @@ window.deleteUniqueDesignationButton = deleteUniqueDesignationButton;
 window.deleteHigherFormationButton = deleteHigherFormationButton;
 window.DisableInputs = DisableInputs;
 window.selectCommandPost = selectCommandPost;
-window.tacticalMissionTasksObject = tacticalMissionTasksObject;
-window.selectTacticalMissionTasks = selectTacticalMissionTasks;
 window.menuSurface = menuSurface;
 window.bounceInAnimation = bounceInAnimation;
 
@@ -424,20 +419,19 @@ window.onload = () => {
   addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
   addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
   addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
-  addSymbolsAndModsToList(tacticalMissionTasksObject, 'tacticalmissiontask', selectTacticalMissionTasks);
   // Hide the text field trash can buttons on page load
   deleteTextFieldButton.root_.style.display = 'none';
   deleteUniqueDesignationButton.root_.style.display = 'none';
   deleteHigherFormationButton.root_.style.display = 'none';
   console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 
-  const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value, selectTacticalMissionTasks.value);
+  const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
   window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
   setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 
   // **************************************************************************************************************** //
-  // * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post, Tactical Mission Tasks, Graphic Control Measures * //
+  // * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                                                   * //
   // **************************************************************************************************************** //
   selectSymbol.listen('MDCSelect:change', () => {
     const changeSymbols = new Promise((resolve, reject) => {
@@ -453,12 +447,17 @@ window.onload = () => {
       switch (MainMS.type) {
         case 'Equipment':
           // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
-          DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true, true);
+          DisableInputs(false, true, false, false, true, true, true, true, true, true, true, true);
           break;
         case 'Graphic Control Measure':
           flyingSwitch.disabled = true;
           flyingSwitch.checked = false;
-          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true, true);
+          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true);
+          break;
+        case 'Tactical Mission Task':
+          flyingSwitch.disabled = true;
+          flyingSwitch.checked = false;
+          DisableInputs(true, true, true, true, true, true, true, true, true, true, true, true);
           break;
         default:
           DisableInputs();
@@ -519,21 +518,13 @@ window.onload = () => {
     bounceInAnimation('g.commandpost');
   });
 
-  selectTacticalMissionTasks.listen('MDCSelect:change', () => {
-    setSelectMenuTextContent(selectTacticalMissionTasks);
-    MainMS.tacticalMissionTasks = selectTacticalMissionTasks.value;
-    MainMS.placeSymbol();
-    bounceInAnimation('g.tacticalmissiontasks');
-  });
 
-
-  [selectUnitSize, selectMod1, selectMod2, selectTacticalMissionTasks].forEach((key) => {
+  [selectUnitSize, selectMod1, selectMod2].forEach((key) => {
     key.listen('click', () => {
       // If any of these menus are open, then resize all the symbols
       selectUnitSize.isMenuOpen_ ? Resizer('.unitSizeFigure svg', 93, 33) : null;
       selectMod1.isMenuOpen_ ? Resizer('.mod1Figure svg') : null;
       selectMod2.isMenuOpen_ ? Resizer('.mod2Figure svg') : null;
-      selectTacticalMissionTasks.isMenuOpen_ ? Resizer('.tacticalmissiontaskFigure svg') : null;
     });
   });
 
