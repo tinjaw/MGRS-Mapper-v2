@@ -22,9 +22,66 @@
       </div>
       <!-- Right Sidebar Text fields, Select boxes, and Switches -->
       <div class="mdc-layout-grid symbolSelectors">
-        <!-- Symbol Search Field -->
+        <!-- Most Popular Symbols -->
+        <span class='mdc-select-helper-text mdc-select-helper-text--persistent frequentlyUsedSymbolsTitle'>Frequently Used Symbols</span>
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-2">
+              <div class="imageList tooltip">
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Infantry'>
+                  <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1" ></path>
+                  <path d="M25,50 L175,150 M25,150 L175,50" stroke-width="4" stroke="black" fill="black" ></path>
+                </svg>
+                <span class="mdc-typography--subtitle1">Infantry</span>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <div class="imageList tooltip">
+                <svg width="75" height="50" viewBox="60 -60 80 160" data-symbol='Checkpoint'>
+                  <path d="m 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z" stroke-width="4" stroke="black" fill="none"></path>
+                  <text x="100" y="-20" text-anchor="middle" font-size="35" font-family="Arial" font-weight="bold" stroke-width="4" stroke="none" fill="black">CKP</text>
+                </svg>
+                <span class="mdc-typography--subtitle1">Checkpoint</span>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <div class="imageList tooltip">
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Mechanized Infantry'>
+                  <path d="M25 50h150v100H25z" stroke-width="4" stroke="#000" fill="#80E0FF"/>
+                  <path d="M25 50l150 100m-150 0L175 50" stroke-width="4" stroke="#000"/>
+                  <path d="M125 80c25 0 25 40 0 40H75c-25 0-25-40 0-40z" stroke-width="4" stroke="#000" fill="none"/>
+                </svg>
+                <span class="mdc-typography--subtitle1">Mechanized Infantry</span>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <div class="imageList tooltip">
+                <svg width="75" height="50" viewBox="50 50 100 100" data-symbol='Target Reference Point'>
+                  <path d="m 50,100 100,0 m -50,-50 0,100" stroke-width="4" stroke="black" fill="none"></path>
+                  <text x="110" y="90" text-anchor="start" font-size="40" font-family="Arial" stroke-width="4" stroke="none" fill="Silver">T</text>
+                </svg>
+                <span class="mdc-typography--subtitle1">Target Reference Point</span>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <div class="imageList tooltip">
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Mechanized Armor'>
+                  <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                  <path d="M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z" stroke-width="4" stroke="black" fill="none"></path>
+                </svg>
+                <span class="mdc-typography--subtitle1">Mechanized Armor</span>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell--span-2">
+              <div class="imageList tooltip">
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Field Artillery'>
+                  <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                  <circle cx="100" cy="100" r="15" stroke-width="4" stroke="black" fill="black"></circle>
+                </svg>
+                <span class="mdc-typography--subtitle1">Field Artillery</span>
+              </div>
+            </div>
+            <!-- Symbol Search Field -->
             <div class="mdc-layout-grid__cell--span-12 ">
               <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchSymbols">
                 <i class="material-icons mdc-text-field__icon">search</i>

@@ -9,6 +9,33 @@
 - Added affiliationString() function. This will return a string of 'None' if the symbol is a TMT/GCM. Otherwise it will return the affiliation string by setting the first character to uppercase and adding a space between words. (eg- it will turn 'friendlyTemplated' into 'Friendly Templated')
 - Moved Tactical Mission Tasks into the main militarySymbolsObject file.
 - Modified DisableInputs to accept an object as a parameter. This makes readability so much easier.
+- Most Searched for symbols:
+  1. Infantry
+  2. Check point
+  3. Infantry, Mechanized
+  4. Target Reference Point
+  5. Armor, Combat
+  6. Field Artillery, Combat
+  7. Ground Zero, Weapon (nuclear explosion)
+  8. Cavalry
+  9. Military Police
+  10. Infantry, Light
+  11. Engineer
+  12. Observation Post
+- Most emplaced symbols:
+  1. Default unit
+  2. Infantry
+  3. Infantry, Mechanized
+  4. Infantry, Light
+  5. Armor
+  6. Military Police
+  7. Ground Track
+  8. Combat, Unit
+  9. SOF Unit
+  10. Field Artillery
+  11. Infantry, Airborne
+  12. Armor Track
+- Added Most Popular Symbols section
 
 ---
 

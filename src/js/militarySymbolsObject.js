@@ -131,6 +131,103 @@ const militarySymbolsObject = {
       },
     },
   },
+  'Mechanized Infantry': {
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path: {
+          d: 'M25,50 L175,150 M25,150 L175,50 M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      hostile: {
+        path: {
+          d: 'M60,70L140,130M60,130L140,70 M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      unknown: {
+        path: {
+          d: 'M50,65L150,135M50,135L150,65 M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+      get pending() {
+        return this.unknown;
+      },
+      neutral: {
+        path: {
+          d: 'M45,45L155,155M45,155L155,45 M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+    },
+  },
+  'Mechanized Armor': {
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path: {
+          d: 'M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      hostile: {
+        path: {
+          d: 'M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      unknown: {
+        path: {
+          d: 'M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+      get pending() {
+        return this.unknown;
+      },
+      neutral: {
+        path: {
+          d: 'M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z',
+        },
+      },
+    },
+  },
+  'Field Artillery': {
+    type: 'Land Unit',
+    affiliation: {
+      friendly: {
+        path: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   'Unmanned Aerial Surveillance': {
     type: 'Land Unit',
     flightCapable: true,
@@ -297,6 +394,41 @@ const militarySymbolsObject = {
       },
     },
   },
+  Checkpoint: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'CKP',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   'Amnesty Point': {
     type: 'Graphic Control Measure',
     affiliation: {
@@ -310,6 +442,34 @@ const militarySymbolsObject = {
           y: '-20',
           fontSize: '30',
           textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Target Reference Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 100,0 m -50,-50 0,100',
         },
       },
       get friendlyTemplated() {
