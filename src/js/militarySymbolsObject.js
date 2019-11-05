@@ -539,7 +539,7 @@ const militarySymbolsObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'm -140 50 h 120 l -27 -15 m 28 15 l -27 15 m -93 65 c 60 -60 60 -100 0 -160 m 0 20 h 18 z m 0 20 h 33 z m 0 21 h 42 z m 0 40 h 41 z m 0 19 h 33 z m 0 20 h 18 z',
+          d: 'm 0 45 h 120 l -27 -15 m 28 15 l -27 15 m -93 65 c 60 -60 60 -100 0 -160 m 0 20 h 18 z m 0 20 h 33 z m 0 21 h 42 z m 0 40 h 41 z m 0 19 h 33 z m 0 20 h 18 z',
           strokeLinejoin: 'bevel',
           transform: 'translate(20,50)',
         },
@@ -569,7 +569,7 @@ const militarySymbolsObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'm -140 50 h 120 l -27 -15 m 27 15 l -27 15 m -93 35 v -100 l -30 -30 m 30 129.5 l -30 30',
+          d: 'm 0 45 h 120 l -27 -15 m 27 15 l -27 15 m -93 35 v -100 l -30 -30 m 30 129.5 l -30 30',
           strokeLinejoin: 'round',
           transform: 'translate(20,50)',
         },

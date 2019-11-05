@@ -117,7 +117,7 @@ const drop = (event) => {
   manipulateSymbol(event);
   target.setAttribute('height', `${bbox.height}`);
   target.setAttribute('width', `${bbox.width}`);
-  target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px; z-index: 1;`);
+  target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px; z-index: 100000;`);
   // target.setAttribute('style', 'position: absolute; z-index: 1;'); // This worked well in MapBox
   // const ico = L.divIcon({
   //   html: target,

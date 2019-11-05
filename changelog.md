@@ -37,6 +37,7 @@
   12. Armor Track
 - Added Most Popular Symbols section
 - Added Leaflet map
+- Centered TMTs in symbol panel by modifying path data
 
 ---
 
