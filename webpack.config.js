@@ -10,7 +10,7 @@ module.exports = [{
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.(sc|c)ss$/,
         use: [
           {
             loader: 'file-loader',
@@ -35,6 +35,12 @@ module.exports = [{
           presets: ['es2015'],
           plugins: ['transform-object-assign'],
         },
+      },
+      {
+        test: /\.png$/,
+        use: [
+          'file-loader',
+        ],
       },
     ],
   },

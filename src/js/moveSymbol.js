@@ -119,6 +119,17 @@ const drop = (event) => {
   target.setAttribute('width', `${bbox.width}`);
   target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px; z-index: 1;`);
   // target.setAttribute('style', 'position: absolute; z-index: 1;'); // This worked well in MapBox
+  // const ico = L.divIcon({
+  //   html: target,
+  //   iconSize: [100, 100],
+  //   iconAnchor: [10, 10],
+  // });
+
+  // const marker = new L.Marker([38.889269, -77.050176], {
+  //   icon: ico,
+  //   draggable: 'true',
+  // });
+  // marker.addTo(map);
 };
 
 // Enables draggable attribute if the cursor is hovering over the symbol in the sidebar.

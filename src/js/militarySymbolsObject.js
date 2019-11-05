@@ -599,14 +599,14 @@ const militarySymbolsObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'm -140 50 h 40 m 40 0 h 50 m 0 60 v -120',
+          d: 'm 0 45 h 40 m 40 0 h 50 m 0 60 v -120',
           strokeLinejoin: 'round',
           transform: 'translate(20,50)',
         },
         text_1: {
           symbolText: 'B',
-          x: '-60',
-          y: '116',
+          x: '80',
+          y: '112',
           fontSize: '45',
           textAnchor: 'middle',
         },

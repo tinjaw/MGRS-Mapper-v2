@@ -17,6 +17,7 @@
 @import '@material/icon-button/mdc-icon-button';
 // Import your components for your application
 @import 'my-components';
+@import '../../node_modules/leaflet/dist/leaflet.css';
 
 // *********************************************************************************** //
 // * Most Popular Symbols                                                            * //
@@ -72,9 +73,11 @@
 // * Main Content (Map) / Draggable Items                                            * //
 // *********************************************************************************** //
 .main-content {
-  overflow: auto;
+  //overflow: auto;
+  overflow: hidden;
   height: calc(100vh - 145px);
   background-color: antiquewhite;
+  z-index: 0;
 }
 
 .hideDataImage {

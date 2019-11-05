@@ -36,6 +36,7 @@
   11. Infantry, Airborne
   12. Armor Track
 - Added Most Popular Symbols section
+- Added Leaflet map
 
 ---
 
