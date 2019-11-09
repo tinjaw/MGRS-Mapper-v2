@@ -21,6 +21,7 @@ basemap.addTo(map);
 // marker.addTo(map);
 
 setTimeout(() => {
+  //! This causes an error on new page load. Use a try-catch block
   const svg = document.querySelector('.newSVG svg').cloneNode(true);
 
   const ico = L.divIcon({
