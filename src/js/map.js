@@ -1,5 +1,4 @@
 import L from 'leaflet';
-// TODO: Implement marker drag-n-drop
 /* This code is needed to properly load the images in the Leaflet CSS */
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -14,44 +13,15 @@ const defaultCenter = [38.889269, -77.050176];
 const defaultZoom = 15;
 const basemap = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}');
 
-// const marker = L.marker(defaultCenter);
-
 map.setView(defaultCenter, defaultZoom);
 basemap.addTo(map);
-// marker.addTo(map);
 
-setTimeout(() => {
-  //! This causes an error on new page load. Use a try-catch block
-  const svg = document.querySelector('.newSVG svg').cloneNode(true);
-
-  const ico = L.divIcon({
-    html: svg,
-    iconSize: [100, 100],
-    iconAnchor: [100, 100],
-  });
-
-
-  function onMapClick(e) {
-    const marker = new L.Marker(e.latlng, {
-      icon: ico,
-      draggable: 'true',
-    });
-
-    // marker.on('dragend', (event) => {
-    //   const marker = event.target;
-    //   const position = marker.getLatLng();
-    //   marker.setLatLng(new L.LatLng(position.lat, position.lng), { draggable: 'true' });
-    //   map.panTo(new L.LatLng(position.lat, position.lng));
-    // });
-    // map.addLayer(marker);
-    marker.addTo(map);
-    document.querySelectorAll('.leaflet-div-icon').forEach((key) => {
-      key.style.background = 'none';
-      key.style.border = 'none';
-    });
+// When the map is panned, remove the control box on the symbol
+map.addEventListener('movestart', () => {
+  if (moveable.target) {
+    moveable.target = undefined;
   }
+});
 
-  map.on('click', onMapClick);
-}, 150);
 window.map = map;
 window.L = L;

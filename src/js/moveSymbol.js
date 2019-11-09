@@ -27,6 +27,7 @@ const moveableoptions = {
 
 const moveable = new Moveable(document.body, moveableoptions);
 
+
 function manipulateSymbol() {
   // All "targets" will be symbols with the draggable class
   const draggableElements = document.querySelectorAll('.draggable');
@@ -40,10 +41,11 @@ function manipulateSymbol() {
   moveable.target = arr.slice(-1)[0];
 
   //* DRAGGABLE *//
-  moveable.on('drag', ({ target, left, top }) => {
-    target.style.left = `${left}px`;
-    target.style.top = `${top}px`;
-  });
+  // Since the map marker already has a draggable feature, we don't need it in moveable.js
+  // moveable.on('drag', ({ target, left, top }) => {
+  // target.style.left = `${left}px`;
+  // target.style.top = `${top}px`;
+  // });
 
   //* SCALABLE *//
   moveable.on('scale', ({ target, transform }) => {
@@ -92,19 +94,10 @@ const allowDrop = (event) => {
 
 const drop = (event) => {
   event.preventDefault();
-  const svg = document.querySelector('.newSVG > svg').getBBox();
-  // When the symbol is dropped, this will center it on your mouse cursor
-  const svgWidth = (svg.width + (svg.x - 4)) / 2;
-  const svgHeight = (svg.height + (svg.x - 4)) / 2;
-
-  const x1 = event.clientX - svgWidth;
-  const y1 = event.clientY - svgHeight;
   const target = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-
   target.classList.add('draggable');
   target.innerHTML = document.querySelector('.newSVG > svg').innerHTML;
-  event.target.appendChild(target);
-  // event.target.offsetParent.appendChild(target); // This worked well in MapBox
+  event.target.offsetParent.appendChild(target);
   // Get the BBox only after the target has been appended
   const bbox = target.getBBox();
   // The bounceIn animation fucks everything up, remove it and set the BBox of the parent draggable symbol
@@ -115,21 +108,53 @@ const drop = (event) => {
   });
   // Now call the manipulateSymbol function to switch to Moveable.js
   manipulateSymbol(event);
-  target.setAttribute('height', `${bbox.height}`);
-  target.setAttribute('width', `${bbox.width}`);
-  target.setAttribute('style', `position: absolute; top: ${y1}px; left:${x1}px; right: -${x1}px; z-index: 100000;`);
-  // target.setAttribute('style', 'position: absolute; z-index: 1;'); // This worked well in MapBox
-  // const ico = L.divIcon({
-  //   html: target,
-  //   iconSize: [100, 100],
-  //   iconAnchor: [10, 10],
-  // });
+  // Positions the mouse curse directly in the middle of the symbol
+  target.setAttribute('style', 'position: absolute;');
 
-  // const marker = new L.Marker([38.889269, -77.050176], {
-  //   icon: ico,
-  //   draggable: 'true',
-  // });
-  // marker.addTo(map);
+  // Convert dropped symbol to a Leaflet marker
+  const militarySymbolMarker = L.divIcon({
+    html: target,
+    iconSize: [bbox.width, bbox.height],
+    className: 'militarySymbolMarker',
+  });
+
+
+  const marker = new L.Marker(map.mouseEventToLatLng(event), {
+    icon: militarySymbolMarker,
+    draggable: 'true',
+    riseOnHover: true,
+  });
+
+  marker.addTo(map);
+
+  // Since the default DivIcon has a white background and a black border, we need to make it invisible
+  document.querySelectorAll('.leaflet-div-icon').forEach((key) => {
+    key.style.background = 'none';
+    key.style.border = 'none';
+  });
+
+  // IOT push a marker to the front when clicked we need to set the click counter to zero
+  let zIndexCounter = 0;
+  marker.addEventListener('click', () => {
+    // Create the marker popup content
+    const content = L.DomUtil.create('div', 'content');
+    content.innerHTML = `<span class="mdc-typography--headline6">Coords: <strong>${marker.getLatLng(marker).lat.toFixed(4)}, ${marker.getLatLng(marker).lng.toFixed(4)}</strong></span>`;
+    marker.bindPopup(content, {
+      // This will place the popup just above the symbol. 2.5 was arbitrarily chosen
+      offset: new L.Point(0, -`${(marker._icon.clientHeight / 2.5)}`),
+    });
+    // Increment the click counter
+    zIndexCounter += 1;
+    // Reset all markers z-indexes to 100
+    map._container.querySelectorAll('.leaflet-marker-icon').forEach((element) => {
+      const clickedSymbol = element;
+      clickedSymbol.style.zIndex = 100;
+    });
+
+    const newZIndex = marker._icon.style.zIndex + zIndexCounter;
+    // Now set the new z-index of the marker with the click counter added
+    marker._icon.style.zIndex = newZIndex;
+  });
 };
 
 // Enables draggable attribute if the cursor is hovering over the symbol in the sidebar.
@@ -168,9 +193,22 @@ newSVGDiv.ondragstart = (event) => {
   window.setTimeout(() => {
     dragImg.parentNode.removeChild(dragImg);
   }, 100);
+
+  // If the dragged symbol is on top of another symbol, cancel the event.
+  if (document.querySelectorAll('.militarySymbolMarker')) {
+    document.querySelectorAll('.militarySymbolMarker').forEach((key) => {
+      key.addEventListener('dragover', (event) => {
+        // Should probably be debounced
+        event.stopImmediatePropagation();
+      });
+    });
+  }
 };
 
 
 mapArea.ondrop = drop;
 mapArea.ondragover = allowDrop;
 mapArea.onclick = toggleDraggableElement;
+
+
+window.moveable = moveable;

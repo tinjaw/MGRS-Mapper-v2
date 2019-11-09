@@ -2,6 +2,13 @@
 
 ---
 
+## 9NOV19
+
+- First day back from being sick
+- Interesting [leaflet.draw](http://jsfiddle.net/knownasilya/qj6oghsb/2/), and [this one too](http://embed.plnkr.co/dwxdcmieSjnLBqqvADqh/)
+
+---
+
 ## 4NOV19
 
 - Added the facebook page to the production version of MGRS-Mapper. Hopefully I will get a few links between now and when I go live
