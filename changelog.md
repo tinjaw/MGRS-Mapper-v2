@@ -10,6 +10,7 @@
 - Fixed bug where a symbol is dropped onto another symbol and it disappears
 - Added map symbol popup window
 - Fixed bug that caused the symbol control box to disappear when resized to 0
+- Fixed bug when user resizes the marker outside of the browser window or when they resize it too quickly
 
 ---
 

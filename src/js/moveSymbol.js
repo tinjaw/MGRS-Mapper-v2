@@ -23,6 +23,7 @@ const moveableoptions = {
   throttleDrag: 0,
   throttleScale: 0,
   throttleRotate: 0,
+  throttleResize: 0,
 };
 
 const moveable = new Moveable(document.body, moveableoptions);
@@ -65,12 +66,26 @@ function manipulateSymbol() {
   //* RESIZABLE *//
   /* eslint-disable */
   // Disabling es-lint on this method because that fucking piece of shit does a line break when there are >=4 params and I can't figure out how to disable it. FUCK YOU
-  const minimumSymbolWidth = 40;
+  // Set the absolute minimum width of your marker in pixels
+  const minimumMarkerWidth = 40;
   moveable.on('resizeStart', ({target}) => {
-    if (parseInt(target.style.width) <= minimumSymbolWidth) target.style.width = `${minimumSymbolWidth + 1}px`;
+    // If the marker width is less than or equal to minimumMarkerWidth, add 1px to marker width so it will skip the next if statement
+    if (parseInt(target.style.width) <= minimumMarkerWidth) target.style.width = `${minimumMarkerWidth + 1}px`;
   })
   .on('resize', ({target, width, height, delta }) => {
-    if (parseInt(target.style.width) <= minimumSymbolWidth) return;
+    // If the user resizes the marker outside of the browser or resizes too quickly, throw an error and deselect the marker
+    if(event.clientY <= 0 || event.clientX <= 0 || (event.clientX >= window.innerWidth || event.clientY >= window.innerHeight)){
+       console.error("You moved your mouse outside of the browser when resizing the marker");
+       moveable.target = undefined;
+       return;
+    }
+    if (delta[0] <= -60) {
+      console.error("You resized the marker too quickly")
+      moveable.target = undefined;
+      return;
+    }
+    // If the marker width is less than or equal to minimumMarkerWidth, stop all resizing
+    if (parseInt(target.style.width) <= minimumMarkerWidth) return;
     delta[0] && (target.style.width = `${width}px`);
     delta[1] && (target.style.height = `${height}px`);
   });
