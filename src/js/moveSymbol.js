@@ -161,6 +161,7 @@ const drop = (event) => {
   let zIndexCounter = 0;
 
   marker.addEventListener('click', () => {
+    const symbolInfo = JSON.parse(marker._icon.firstElementChild.dataset.symbolInfo);
     // Create the marker popup content
     const content = L.DomUtil.create('div', 'content');
     content.innerHTML = `<span class="mdc-typography--headline6">Coords:
@@ -168,12 +169,14 @@ const drop = (event) => {
                           <br/>
                           <strong>ID: ${marker._leaflet_id}</strong>
                           <br/>
+                          <strong>Symbol: ${symbolInfo.Symbol}</strong>
+                          <br/>
                         </span>`;
 
     marker.bindPopup(content, {
       // This will place the popup just above the symbol. 2.5 was arbitrarily chosen
       offset: new L.Point(0, parseInt(-marker._icon.clientHeight / 2.5)),
-      // maxWidth: '500px',
+      // maxWidth: 'auto',
     });
 
     // Open the popup on click
@@ -182,6 +185,16 @@ const drop = (event) => {
         marker.openPopup();
       }, 10);
     }
+
+    //! These next 3 consts are bad voodoo but worth looking at
+    // Take scrollWidth of popup : 285 / 2 = 142.5
+    // Take scrollWidth of svg: 533 / 2 = 266.5
+    // 266.5 + 142.5 = 409 minus 9 = 400px
+    // const popupContainer = marker._popup._containerWidth / 2;
+    // const markerWidth = marker._icon.scrollWidth / 2;
+    // const newWidthValue = (markerWidth + popupContainer) - 9;
+    // document.querySelector('.leaflet-popup.leaflet-zoom-animated').style.transform = `translate3d(${newWidthValue}px, 422px, 0px)`;
+
     // Increment the click counter
     zIndexCounter += 1;
     // Reset all markers z-indexes to 100
@@ -195,8 +208,8 @@ const drop = (event) => {
     marker._icon.style.zIndex = newZIndex;
   });
 
-  marker.addEventListener('popupopen', (event) => {
-    const btn = L.DomUtil.create('button', 'fuckClass', marker._popup._content);
+  marker.addEventListener('popupopen', () => {
+    const btn = L.DomUtil.create('button', 'deleteMarker', marker._popup._content);
     btn.setAttribute('type', 'button');
     btn.textContent = 'Delete Marker';
     btn.onclick = () => {

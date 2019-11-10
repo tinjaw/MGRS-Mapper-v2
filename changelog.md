@@ -12,6 +12,9 @@
 - Fixed bug that caused the symbol control box to disappear when resized to 0
 - Fixed bug when user resizes the marker outside of the browser window or when they resize it too quickly
 - Fixed bug where JSON data from drag event wasn't transferring over to drop event
+- Added delete button on infowindow
+- Most of today was spent on trying to center the info window when the symbol is resized
+- Since the info window is too difficult to implement via Leaflet, try to create one natively in HTML/CSS. These could use some nice MDC animations
 
 ---
 
