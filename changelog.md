@@ -6,6 +6,10 @@
 
 - First day back from being sick
 - Interesting [leaflet.draw](http://jsfiddle.net/knownasilya/qj6oghsb/2/), and [this one too](http://embed.plnkr.co/dwxdcmieSjnLBqqvADqh/)
+- Added map symbol drag-n-drop
+- Fixed bug where a symbol is dropped onto another symbol and it disappears
+- Added map symbol popup window
+- Fixed bug that caused the symbol control box to disappear when resized to 0
 
 ---
 

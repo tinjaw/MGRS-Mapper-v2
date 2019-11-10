@@ -65,7 +65,12 @@ function manipulateSymbol() {
   //* RESIZABLE *//
   /* eslint-disable */
   // Disabling es-lint on this method because that fucking piece of shit does a line break when there are >=4 params and I can't figure out how to disable it. FUCK YOU
-  moveable.on('resize', ({target, width, height, delta }) => {
+  const minimumSymbolWidth = 40;
+  moveable.on('resizeStart', ({target}) => {
+    if (parseInt(target.style.width) <= minimumSymbolWidth) target.style.width = `${minimumSymbolWidth + 1}px`;
+  })
+  .on('resize', ({target, width, height, delta }) => {
+    if (parseInt(target.style.width) <= minimumSymbolWidth) return;
     delta[0] && (target.style.width = `${width}px`);
     delta[1] && (target.style.height = `${height}px`);
   });
@@ -138,7 +143,9 @@ const drop = (event) => {
   marker.addEventListener('click', () => {
     // Create the marker popup content
     const content = L.DomUtil.create('div', 'content');
-    content.innerHTML = `<span class="mdc-typography--headline6">Coords: <strong>${marker.getLatLng(marker).lat.toFixed(4)}, ${marker.getLatLng(marker).lng.toFixed(4)}</strong></span>`;
+    content.innerHTML = `<span class="mdc-typography--headline6">Coords:
+                          <strong>${marker.getLatLng(marker).lat.toFixed(4)}, ${marker.getLatLng(marker).lng.toFixed(4)}</strong>
+                        </span>`;
     marker.bindPopup(content, {
       // This will place the popup just above the symbol. 2.5 was arbitrarily chosen
       offset: new L.Point(0, -`${(marker._icon.clientHeight / 2.5)}`),
