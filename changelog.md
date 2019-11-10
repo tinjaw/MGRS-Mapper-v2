@@ -11,6 +11,7 @@
 - Added map symbol popup window
 - Fixed bug that caused the symbol control box to disappear when resized to 0
 - Fixed bug when user resizes the marker outside of the browser window or when they resize it too quickly
+- Fixed bug where JSON data from drag event wasn't transferring over to drop event
 
 ---
 

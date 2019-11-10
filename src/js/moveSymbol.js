@@ -114,8 +114,11 @@ const allowDrop = (event) => {
 
 const drop = (event) => {
   event.preventDefault();
+  // Get the JSON data that was transferred over from the drag event
+  const data = event.dataTransfer.getData('text');
   const target = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   target.classList.add('draggable');
+  target.dataset.symbolInfo = data;
   target.innerHTML = document.querySelector('.newSVG > svg').innerHTML;
   event.target.offsetParent.appendChild(target);
   // Get the BBox only after the target has been appended
@@ -144,6 +147,7 @@ const drop = (event) => {
     draggable: 'true',
     riseOnHover: true,
   });
+  window.marker = marker;
 
   marker.addTo(map);
 
@@ -155,16 +159,29 @@ const drop = (event) => {
 
   // IOT push a marker to the front when clicked we need to set the click counter to zero
   let zIndexCounter = 0;
+
   marker.addEventListener('click', () => {
     // Create the marker popup content
     const content = L.DomUtil.create('div', 'content');
     content.innerHTML = `<span class="mdc-typography--headline6">Coords:
                           <strong>${marker.getLatLng(marker).lat.toFixed(4)}, ${marker.getLatLng(marker).lng.toFixed(4)}</strong>
+                          <br/>
+                          <strong>ID: ${marker._leaflet_id}</strong>
+                          <br/>
                         </span>`;
+
     marker.bindPopup(content, {
       // This will place the popup just above the symbol. 2.5 was arbitrarily chosen
-      offset: new L.Point(0, -`${(marker._icon.clientHeight / 2.5)}`),
+      offset: new L.Point(0, parseInt(-marker._icon.clientHeight / 2.5)),
+      // maxWidth: '500px',
     });
+
+    // Open the popup on click
+    if (!marker._popup.isOpen()) {
+      setTimeout(() => {
+        marker.openPopup();
+      }, 10);
+    }
     // Increment the click counter
     zIndexCounter += 1;
     // Reset all markers z-indexes to 100
@@ -177,7 +194,19 @@ const drop = (event) => {
     // Now set the new z-index of the marker with the click counter added
     marker._icon.style.zIndex = newZIndex;
   });
+
+  marker.addEventListener('popupopen', (event) => {
+    const btn = L.DomUtil.create('button', 'fuckClass', marker._popup._content);
+    btn.setAttribute('type', 'button');
+    btn.textContent = 'Delete Marker';
+    btn.onclick = () => {
+      map.removeLayer(marker);
+      moveable.target = undefined;
+    };
+    marker._popup._content.appendChild(btn);
+  });
 };
+
 
 // Enables draggable attribute if the cursor is hovering over the symbol in the sidebar.
 // Otherwise the whole .newSVG panel gets dragged
@@ -208,9 +237,11 @@ newSVGDiv.ondragstart = (event) => {
   dragImg.setAttributeNS(null, 'viewBox', `${dragImg.getBBox().x - 4} ${dragImg.getBBox().y - 4} ${dragImg.getBBox().width + 8} ${dragImg.getBBox().height + 8}`);
   // HTML5 drag-n-drop API
   event.dataTransfer.effectAllowed = 'copy';
-  event.dataTransfer.setData('text/plain', event.target.id);
+  // Copy the JSON data in the symbol panel
+  event.dataTransfer.setData('text/plain', event.target.firstElementChild.dataset.symbolInfo);
   // Set the drag image as the cloned symbol and center it on the cursor
   event.dataTransfer.setDragImage(dragImg, dragImg.getBoundingClientRect().width / 2, dragImg.getBoundingClientRect().height / 2);
+
   // Remove the cloned element
   window.setTimeout(() => {
     dragImg.parentNode.removeChild(dragImg);
