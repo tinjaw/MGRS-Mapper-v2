@@ -2,6 +2,12 @@
 
 ---
 
+## 11NOV19
+
+- Worked on implementing popup as a web component
+
+---
+
 ## 9NOV19
 
 - First day back from being sick
