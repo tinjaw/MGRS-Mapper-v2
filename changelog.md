@@ -6,6 +6,7 @@
 
 - Worked on implementing popup as a web component
 - Utter failure of a day. Wasted on the popup question
+- Total failure of a day. Spent the entire time messing with popup windows for markers and made no progress
 
 ---
 
