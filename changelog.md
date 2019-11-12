@@ -5,6 +5,7 @@
 ## 11NOV19
 
 - Worked on implementing popup as a web component
+- Utter failure of a day. Wasted on the popup question
 
 ---
 
