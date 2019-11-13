@@ -8,7 +8,10 @@
     <!-- <link rel="stylesheet" type="text/css" href="//unpkg.com/dialog-polyfill@0.4.10/dialog-polyfill.css" />
     <script src="https://unpkg.com/dialog-polyfill@0.4.10/dialog-polyfill.js"></script>
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/0.5.0/modern-normalize.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/0.5.0/modern-normalize.min.css"
+    />
     <script src="//daybrush.com/moveable/release/latest/dist/moveable.min.js"></script>
 
     <title>Component Test</title>
@@ -116,7 +119,7 @@
       }
 
       .tooltip:before {
-        content: ' ';
+        content: " ";
         width: 0;
         height: 0;
         border-left: 10px solid transparent;
@@ -129,52 +132,101 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>HTML Component Test</h1>
-      <app-navbar></app-navbar>
-    </div>
-    <form>
-      <div>
-        <label for="cvc"
-          >Enter your CVC
-          <popup-info img="https://placeimg.com/64/64/animals" data-text="Your card validation code (CVC) is an extra security feature — it is the last 3 or 4 numbers on the back of your card."></popup-info>
-        </label>
-        <input type="text" id="cvc" />
-      </div>
-    </form>
-    <div class="my-button">reference</div>
-    <div class="my-popper">popper</div>
-    <br />
-
     <br />
     <div class="container milsymbolContainer">
-      <svg class="draggable" data-symbol-info='{"Symbol":"Infantry","Affiliation":"Friendly","Echelon":"corps","Modifier 1":"Foraging","Modifier 2":"Amphibious","Unique Designation":"A/2-101","Higher Formation":"27/42ID","Reinforced or Reduced":"+","Type":"Land Unit"}' height="100" width="150" preserveAspectRatio="xMidYMid" viewBox="25 4 233.265625 150.5">
+      <svg
+        class="draggable"
+        data-symbol-info='{"Symbol":"Infantry","Affiliation":"Friendly","Echelon":"corps","Modifier 1":"Foraging","Modifier 2":"Amphibious","Unique Designation":"A/2-101","Higher Formation":"27/42ID","Reinforced or Reduced":"+","Type":"Land Unit"}'
+        height="100"
+        width="150"
+        preserveAspectRatio="xMidYMid"
+        viewBox="25 4 233.265625 150.5"
+      >
         <desc>
-          Affiliation: Friendly Echelon: corps Symbol: Infantry Modifier 1: Foraging Modifier 2: Amphibious About: This symbol was created by CPT James Pistell for MGRS-Mapper.com
+          Affiliation: Friendly Echelon: corps Symbol: Infantry Modifier 1:
+          Foraging Modifier 2: Amphibious About: This symbol was created by CPT
+          James Pistell for MGRS-Mapper.com
         </desc>
         <g class="outline">
-          <path stroke="black" stroke-width="4" d="M25,50 l150,0 0,100 -150,0 z" fill="rgb(128,224,255)"></path>
+          <path
+            stroke="black"
+            stroke-width="4"
+            d="M25,50 l150,0 0,100 -150,0 z"
+            fill="rgb(128,224,255)"
+          ></path>
         </g>
         <g class="decorator">
-          <path d="M25,50 L175,150 M25,150 L175,50" fill="none" stroke="black" stroke-width="4"></path>
+          <path
+            d="M25,50 L175,150 M25,150 L175,50"
+            fill="none"
+            stroke="black"
+            stroke-width="4"
+          ></path>
         </g>
         <g class="echelon">
-          <path d="M52.5,40 l25,-25 m0,25 l-25,-25 M87.5,40 l25,-25 m0,25 l-25,-25 M122.5,40 l25,-25 m0,25 l-25,-25" fill="black" stroke="black" stroke-width="4"></path>
+          <path
+            d="M52.5,40 l25,-25 m0,25 l-25,-25 M87.5,40 l25,-25 m0,25 l-25,-25 M122.5,40 l25,-25 m0,25 l-25,-25"
+            fill="black"
+            stroke="black"
+            stroke-width="4"
+          ></path>
         </g>
         <g class="mod1">
-          <path d="M 12.5,3.5 a 22.5,22.5 0 0,1 0,43 a 22.5,22.5 0 1,0 0,-43 z" fill="none" stroke="black" stroke-width="6" transform="translate(110,75) scale(-0.4,-0.4)"></path>
+          <path
+            d="M 12.5,3.5 a 22.5,22.5 0 0,1 0,43 a 22.5,22.5 0 1,0 0,-43 z"
+            fill="none"
+            stroke="black"
+            stroke-width="6"
+            transform="translate(110,75) scale(-0.4,-0.4)"
+          ></path>
         </g>
         <g class="mod2">
-          <path d="m 25,145 c 18.8,0 0,-20 18.8,-20 18.8,0 0,20 18.8,20 18.8,0 0,-20 18.8,-20 18.8,0 0,20 18.8,20 18.8,0 0,-20 18.8,-20 18.8,0 0,20 18.8,20 18.8,0 0,-20 18.8,-20 18.8,0 0,20 20,20" fill="none" stroke="black" stroke-width="4"></path>
+          <path
+            d="m 25,145 c 18.8,0 0,-20 18.8,-20 18.8,0 0,20 18.8,20 18.8,0 0,-20 18.8,-20 18.8,0 0,20 18.8,20 18.8,0 0,-20 18.8,-20 18.8,0 0,20 18.8,20 18.8,0 0,-20 18.8,-20 18.8,0 0,20 20,20"
+            fill="none"
+            stroke="black"
+            stroke-width="4"
+          ></path>
         </g>
         <g class="uniqueUnitDesignation">
-          <text x="180" y="107.493" fill="black" font-weight="bold" font-family="Arial" font-size="22" text-anchor="start">A/2-101</text>
+          <text
+            x="180"
+            y="107.493"
+            fill="black"
+            font-weight="bold"
+            font-family="Arial"
+            font-size="22"
+            text-anchor="start"
+          >
+            A/2-101
+          </text>
         </g>
         <g class="higherUnitFormation">
-          <text x="180" y="150" fill="black" font-weight="bold" font-family="Arial" font-size="22" text-anchor="start">27/42ID</text>
+          <text
+            x="180"
+            y="150"
+            fill="black"
+            font-weight="bold"
+            font-family="Arial"
+            font-size="22"
+            text-anchor="start"
+          >
+            27/42ID
+          </text>
         </g>
         <g class="reinforcedReduced">
-          <text x="195" y="40" text-anchor="start" font-size="40" font-family="Arial" font-weight="bold" stroke-width="4" fill="black">+</text>
+          <text
+            x="195"
+            y="40"
+            text-anchor="start"
+            font-size="40"
+            font-family="Arial"
+            font-weight="bold"
+            stroke-width="4"
+            fill="black"
+          >
+            +
+          </text>
         </g>
       </svg>
     </div>
@@ -192,7 +244,9 @@
         <strong>CY</strong> = <span id="cy"></span>
       </div>
       <div class="div3 leftside">
-        <h6 style="color:green;">Center of Outline Group in Screen Coordinates:</h6>
+        <h6 style="color:green;">
+          Center of Outline Group in Screen Coordinates:
+        </h6>
         <strong>PTX</strong> = <span id="ptx"></span><br />
         <strong>PTY</strong> = <span id="pty"></span>
       </div>
@@ -210,13 +264,13 @@
     </div>
 
     <script defer>
-      const svg = document.querySelector('.milsymbolContainer > svg');
+      const svg = document.querySelector(".milsymbolContainer > svg");
       //https://stackoverflow.com/questions/22183727/how-do-you-convert-screen-coordinates-to-document-space-in-a-scaled-svg
       const getScreenCoordinatesOnScaledSVG = () => {
-        const x = document.querySelector('#x');
-        const y = document.querySelector('#y');
+        const x = document.querySelector("#x");
+        const y = document.querySelector("#y");
 
-        svg.addEventListener('mousemove', event => {
+        svg.addEventListener("mousemove", event => {
           let pt = svg.createSVGPoint();
           pt.x = event.pageX;
           pt.y = event.pageY;
@@ -229,7 +283,7 @@
 
       //https://stackoverflow.com/questions/26867641/how-to-get-mid-point-of-g-tag-in-svg-using-javascript
       const getMidPointOfGTag = () => {
-        const outline = document.querySelector('g.outline');
+        const outline = document.querySelector("g.outline");
         const bbox = outline.getBBox();
         const ctm = outline.getCTM();
 
@@ -237,13 +291,14 @@
         let cx = bbox.x + bbox.width / 2;
         let cy = bbox.y + bbox.height / 2;
 
-        document.querySelector('#cx').innerHTML = cx;
-        document.querySelector('#cy').innerHTML = cy;
+        document.querySelector("#cx").innerHTML = cx;
+        document.querySelector("#cy").innerHTML = cy;
         svg.insertAdjacentHTML(
-          'beforeend',
+          "beforeend",
           `
           <g class="centerPointInfo">
-            <text x=${cx} y=${cy - 50} fill="red" stroke="black" stroke-width="3" text-anchor="middle">Center of Outline Group</text>
+            <text x=${cx} y=${cy -
+            50} fill="red" stroke="black" stroke-width="3" text-anchor="middle">Center of Outline Group</text>
             <circle cx=${cx} cy=${cy} r="6" stroke="black" stroke-width="2" fill="red"/>
           </g>
           `
@@ -254,13 +309,14 @@
         let svgcx = svgbbox.x + svgbbox.width / 2;
         let svgcy = svgbbox.y + svgbbox.height / 2;
 
-        document.querySelector('#svgcx').innerHTML = svgcx.toFixed(4);
-        document.querySelector('#svgcy').innerHTML = svgcy.toFixed(4);
+        document.querySelector("#svgcx").innerHTML = svgcx.toFixed(4);
+        document.querySelector("#svgcy").innerHTML = svgcy.toFixed(4);
         svg.insertAdjacentHTML(
-          'beforeend',
+          "beforeend",
           `
           <g class="centerPointInfo">
-            <text x=${svgcx} y=${svgcy - 50} fill="orange" stroke="black" stroke-width="3" text-anchor="middle">Center of Entire SVG</text>
+            <text x=${svgcx} y=${svgcy -
+            50} fill="orange" stroke="black" stroke-width="3" text-anchor="middle">Center of Entire SVG</text>
             <circle cx=${svgcx} cy=${svgcy} r="6" stroke="black" stroke-width="2" fill="orange"/>
           </g>
           `
@@ -272,10 +328,10 @@
         pt.y = cy;
         pt = pt.matrixTransform(ctm);
 
-        document.querySelector('#ptx').innerHTML = pt.x.toFixed(4);
-        document.querySelector('#pty').innerHTML = pt.y.toFixed(4);
+        document.querySelector("#ptx").innerHTML = pt.x.toFixed(4);
+        document.querySelector("#pty").innerHTML = pt.y.toFixed(4);
         svg.insertAdjacentHTML(
-          'beforeend',
+          "beforeend",
           `
           <g class="centerPointInfo">
             <text x="0" y="15" fill="green" stroke="black" stroke-width="3" text-anchor="middle">Center of Outline Group in Screen Coordinates</text>
@@ -289,20 +345,22 @@
       const getRotationDegrees = element => {
         //const el = document.querySelector('svg');
         const elementComputedStyle = window.getComputedStyle(element, null);
-        const elementPropertyValue = elementComputedStyle.getPropertyValue('transform');
+        const elementPropertyValue = elementComputedStyle.getPropertyValue(
+          "transform"
+        );
 
-        if (elementPropertyValue === 'none') {
+        if (elementPropertyValue === "none") {
           return {
-            angle: 'None',
-            scale: 'None',
-            css: 'None'
+            angle: "None",
+            scale: "None",
+            css: "None"
           };
         }
 
         const elementValues = elementPropertyValue
-          .split('(')[1]
-          .split(')')[0]
-          .split(',');
+          .split("(")[1]
+          .split(")")[0]
+          .split(",");
         const a = elementValues[0];
         const b = elementValues[1];
         const c = elementValues[2];
@@ -314,16 +372,22 @@
         return {
           angle,
           scale,
-          css: `transform: ${elementPropertyValue} rotate(${angle.toFixed(2)}deg);`
+          css: `transform: ${elementPropertyValue} rotate(${angle.toFixed(
+            2
+          )}deg);`
         };
       };
 
       function popupData(event) {
-        'use strict';
-        const elements = document.elementsFromPoint(event.clientX, event.clientY);
-        const chosenTarget = elements.find(key => key.matches('.draggable'));
+        "use strict";
+        const elements = document.elementsFromPoint(
+          event.clientX,
+          event.clientY
+        );
+        const chosenTarget = elements.find(key => key.matches(".draggable"));
 
         const symbolData = {
+          target: chosenTarget,
           bbox: {
             x: chosenTarget.getBBox().x,
             y: chosenTarget.getBBox().y,
@@ -336,48 +400,109 @@
             angle: getRotationDegrees(svg).angle,
             scale: getRotationDegrees(svg).scale
             //css: getRotationDegrees(svg).css
+          },
+          distances: {
+            svgFromTop: chosenTarget.getBoundingClientRect().top,
+            svgFromRight:
+              window.innerWidth - chosenTarget.getBoundingClientRect().right,
+            svgFromBottom:
+              window.innerHeight - chosenTarget.getBoundingClientRect().bottom,
+            svgFromLeft: chosenTarget.getBoundingClientRect().left
           }
         };
         //console.group(symbolData);
-        outputSymbolDatasetToPreTags(JSON.stringify(symbolData));
+        outputSymbolDatasetToPreTags(symbolData);
+        createPopupDivAboveSymbol(symbolData);
       }
+
+      const createPopupDivAboveSymbol = element => {
+        console.log(element.data);
+        element.target.parentElement.childNodes.forEach(key => {
+          if (key.className === "ui-modal") {
+            console.log("We have a popup");
+            key.remove();
+          }
+        });
+        // Creation
+        var div = document.createElement("div");
+        // Addition
+        element.target.parentElement.appendChild(div);
+        // Style Manipulation - Positioning
+
+        div.style.position = "absolute";
+        div.style.background = "white";
+        div.style.border = "2px red solid";
+        // Style Manipulation - Classes
+        div.className = "ui-modal";
+        // Modification - ID
+        div.id = "test";
+        // Modification - Contents using HTML
+        // div.innerHTML =
+        //   '<span class="msg">Hello world.</span> <span class="msg">Hello world.</span>';
+        // Modification - Contents using Text
+        //div.textContent = "Hello world.";
+        // Removal
+        //div.parentNode.removeChild(div);
+        var gay = Object.entries(element.data).forEach(key => {
+          var newDiv = document.createElement("div");
+          div.className = "symbol-info-div";
+          div.appendChild(newDiv);
+          newDiv.innerHTML = `${key[0]}`;
+          return newDiv;
+        });
+
+        var symbolInfoDiv = document.querySelector(".symbol-info-div");
+        // prettier-ignore
+        if ( element.distances.svgFromTop >= symbolInfoDiv.getBoundingClientRect().height + 50) {
+          console.log(`Distances: ${element.distances.svgFromTop} Popup: ${symbolInfoDiv.getBoundingClientRect().height}`);
+          div.style.left = `${element.boundingClientRect.left}px`;
+          div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height - 60}px`;
+          div.style.width = `${element.boundingClientRect.width}px`;
+        }
+      };
 
       // Output symbol info to pre tags
       const outputSymbolDatasetToPreTags = element => {
         let myJSON = {};
-        myJSON = JSON.parse(element);
+        //myJSON = JSON.parse(element);
 
-        const myJSONString = JSON.stringify(myJSON);
-        let regexString = '';
+        const myJSONString = JSON.stringify(element);
+        let regexString = "";
         // for tracking matches, in particular the curly braces
         const brace = {
           brace: 0
         };
 
-        regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, (m, p1) => {
-          const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1.split(':')[0]} : <b>${p1.split(':')[1]}</b></div>`;
-          let returnString = 0;
+        regexString = myJSONString.replace(
+          /({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g,
+          (m, p1) => {
+            const returnFunction = () =>
+              `<div style="text-indent: ${brace.brace * 20}px;">${
+                p1.split(":")[0]
+              } : <b>${p1.split(":")[1]}</b></div>`;
+            let returnString = 0;
 
-          if (p1.lastIndexOf('{') === p1.length - 1) {
-            returnString = returnFunction();
-            brace.brace += 1;
-          } else if (p1.indexOf('}') === 0) {
-            brace.brace = 1;
-            returnString = returnFunction();
-          } else {
-            returnString = returnFunction();
+            if (p1.lastIndexOf("{") === p1.length - 1) {
+              returnString = returnFunction();
+              brace.brace += 1;
+            } else if (p1.indexOf("}") === 0) {
+              brace.brace = 1;
+              returnString = returnFunction();
+            } else {
+              returnString = returnFunction();
+            }
+            return returnString
+              .replace(/}, : /g, "}")
+              .replace(/} : /g, "}")
+              .replace(/undefined/g, "");
           }
-          return returnString
-            .replace(/}, : /g, '}')
-            .replace(/} : /g, '}')
-            .replace(/undefined/g, '');
-        });
+        );
 
-        document.querySelector('#pre-regexString').innerHTML = '';
-        document.querySelector('#pre-regexString').innerHTML = regexString;
+        document.querySelector("#pre-regexString").innerHTML = "";
+        document.querySelector("#pre-regexString").innerHTML = regexString;
         // Remove the "undefined" text in the first and last brackets
-        document.querySelector('#pre-regexString').firstChild.innerText = '{';
-        document.querySelector('#pre-regexString').lastChild.innerText = '}';
+        document.querySelector("#pre-regexString").firstChild.innerText = "{";
+        document.querySelector("#pre-regexString").lastChild.innerText = "}";
       };
 
       const moveable = new Moveable(document.body, {
@@ -402,48 +527,83 @@
         throttleRotate: 0
       });
       /* draggable */
-      moveable.on('drag', ({ target, transform, left, top, right, bottom, beforeDelta, beforeDist, delta, dist, clientX, clientY }) => {
-        //console.log('onDrag left, top', left, top);
-        target.style.left = `${left}px`;
-        target.style.top = `${top}px`;
-      });
-      /* resizable */
-      moveable.on('resize', ({ target, width, height, dist, delta, clientX, clientY }) => {
-        //console.log('onResize', target);
-        delta[0] && (target.style.width = `${width}px`);
-        delta[1] && (target.style.height = `${height}px`);
-      });
-      /* scalable */
-      moveable.on('scale', ({ target, scale, dist, delta, transform, clientX, clientY }) => {
-        //console.log('onScale scale', scale);
-        target.style.transform = transform;
-      });
-      /* rotatable */
-      moveable.on('rotate', ({ target, beforeDelta, delta, dist, transform, clientX, clientY }) => {
-        //console.log('onRotate', transform);
-        target.style.transform = transform;
-      });
+      moveable.on(
+        "drag",
+        ({
+          target,
+          transform,
+          left,
+          top,
+          right,
+          bottom,
+          beforeDelta,
+          beforeDist,
+          delta,
+          dist,
+          clientX,
+          clientY
+        }) => {
+          //console.log('onDrag left, top', left, top);
+          target.style.left = `${left}px`;
+          target.style.top = `${top}px`;
 
-      svg.addEventListener('click', popupData);
-      document.addEventListener('DOMContentLoaded', event => {
+          target.parentElement.childNodes.forEach(key => {
+            if (key.className === "ui-modal") {
+              console.log("Let's move the popup");
+              key.remove();
+              // This will move the popup along with the symbol. However it is probably better to just delete it
+              // target.parentElement.lastChild.style.left = `${left}px`;
+              // target.parentElement.lastChild.style.top = `${top}px`;
+            }
+          });
+        }
+      );
+      /* resizable */
+      moveable.on(
+        "resize",
+        ({ target, width, height, dist, delta, clientX, clientY }) => {
+          //console.log('onResize', target);
+          delta[0] && (target.style.width = `${width}px`);
+          delta[1] && (target.style.height = `${height}px`);
+        }
+      );
+      /* scalable */
+      moveable.on(
+        "scale",
+        ({ target, scale, dist, delta, transform, clientX, clientY }) => {
+          //console.log('onScale scale', scale);
+          target.style.transform = transform;
+        }
+      );
+      /* rotatable */
+      moveable.on(
+        "rotate",
+        ({ target, beforeDelta, delta, dist, transform, clientX, clientY }) => {
+          //console.log('onRotate', transform);
+          target.style.transform = transform;
+        }
+      );
+
+      svg.addEventListener("click", popupData);
+      document.addEventListener("DOMContentLoaded", event => {
         getScreenCoordinatesOnScaledSVG();
         getMidPointOfGTag();
         outputSymbolDatasetToPreTags(svg.dataset.symbolInfo);
         getRotationDegrees(svg);
 
-        const reference = document.querySelector('.my-button');
-        const popper = document.querySelector('.my-popper');
-        new Popper(reference, popper, {
-          placement: 'right',
-          modifiers: {
-            flip: {
-              behavior: ['left', 'bottom', 'top']
-            },
-            preventOverflow: {
-              boundariesElement: document.body
-            }
-          }
-        });
+        // const reference = document.querySelector('.my-button');
+        // const popper = document.querySelector('.my-popper');
+        // new Popper(reference, popper, {
+        //   placement: 'right',
+        //   modifiers: {
+        //     flip: {
+        //       behavior: ['left', 'bottom', 'top']
+        //     },
+        //     preventOverflow: {
+        //       boundariesElement: document.body
+        //     }
+        //   }
+        // });
       });
     </script>
     <script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.min.js"></script>
