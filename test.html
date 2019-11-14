@@ -490,12 +490,12 @@
       }
 
       const createPopupDivAboveSymbol = element => {
-        element.target.parentElement.childNodes.forEach(key => {
-          if (key.className === "arrow-popup") {
-            console.log("We have a popup");
-            key.remove();
-          }
-        });
+        // element.target.parentNode.childNodes.forEach(key => {
+        //   if (key.className === "arrow-popup") {
+        //     console.log("We have a popup");
+        //     //key.remove();
+        //   }
+        // });
 
         var div = document.createElement("div");
 
@@ -552,49 +552,84 @@
         console.table(distancesFromSVGCenterPoint);
 
         // prettier-ignore
+        function gayness(direction) {
+          //this.direction = direction;
+          const outerArrowDiv = document.createElement('div');
+          outerArrowDiv.classList.add("popup-arrow");
+          const popupLeft = symbolInfoDiv.getBoundingClientRect().left;
+          const popupRight = symbolInfoDiv.getBoundingClientRect().right;
+          const popupOffset = element.bbox.x / 2 + element.bbox.y;
+
+          switch (direction) {
+            case "top":
+              console.log("Top Selected");
+              outerArrowDiv.style.transform = 'rotate(180deg)';
+              outerArrowDiv.style.top = `${symbolInfoDiv.getBoundingClientRect().bottom}px`;
+              outerArrowDiv.style.left = `${(popupLeft + popupRight) / 2 - popupOffset}px`;
+              break;
+            case "right":
+              console.log("Right Selected");
+              outerArrowDiv.style.transform = 'rotate(-90deg)';
+              outerArrowDiv.style.top = `${distancesFromSVGCenterPoint.TOP - 8}px`;
+              outerArrowDiv.style.left = `${popupLeft - (element.bbox.x - element.bbox.y)}px`;
+              break;
+            case "bottom":
+              console.log("Bottom Selected");
+              outerArrowDiv.style.transform = 'rotate(0deg)';
+              outerArrowDiv.style.top = `${symbolInfoDiv.getBoundingClientRect().top - popupOffset + 2}px`;
+              outerArrowDiv.style.left = `${(popupLeft + popupRight) / 2 - popupOffset}px`;
+              break;
+            case "left":
+              console.log("Left Selected");
+              outerArrowDiv.style.transform = 'rotate(90deg)';
+              outerArrowDiv.style.top = `${distancesFromSVGCenterPoint.TOP - 8}px`;
+              outerArrowDiv.style.left = `${popupRight - (popupOffset / 2)}px`;
+              break;
+            default:
+              break;
+          }
+          console.log("Running default");
+          outerArrowDiv.style.width = 0;
+          outerArrowDiv.style.height = 0;
+          outerArrowDiv.style.position = "absolute";
+          outerArrowDiv.style.borderStyle = "solid";
+          outerArrowDiv.style.borderWidth = "0 15px 15px";
+          outerArrowDiv.style.borderColor = "transparent transparent #ff0000 transparent";
+
+          symbolInfoDiv.insertAdjacentElement("afterend", outerArrowDiv)
+          const innerArrowDiv = outerArrowDiv.cloneNode(true);
+          innerArrowDiv.style.borderColor = "transparent transparent #ffffff transparent";
+          innerArrowDiv.style.transform = 'rotate(0deg)';
+          innerArrowDiv.style.top = '3px';
+          innerArrowDiv.style.left = '-15px';
+          outerArrowDiv.insertAdjacentElement("beforeend", innerArrowDiv);
+        }
+
+        // prettier-ignore
         switch (maxMinVal(element.distances).max[0]) {
           case "svgFromTop":
             console.log("TOP");
             div.style.left = `${distancesFromSVGCenterPoint.LEFT - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
             div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height - 60}px`;
-
-            var outerArrowDiv = document.createElement('div');
-            outerArrowDiv.classList.add("popup-arrow");
-            var LEFT = symbolInfoDiv.getBoundingClientRect().left;
-            var RIGHT = symbolInfoDiv.getBoundingClientRect().right;
-            var OFFSET = element.bbox.x / 2 + element.bbox.y;
-            outerArrowDiv.style.width = 0;
-            outerArrowDiv.style.height = 0;
-            outerArrowDiv.style.position = "absolute";
-            outerArrowDiv.style.borderStyle = "solid";
-            outerArrowDiv.style.borderWidth = "0 15px 15px";
-            outerArrowDiv.style.borderColor = "transparent transparent #ff0000 transparent";
-            outerArrowDiv.style.transform = 'rotate(180deg)';
-            outerArrowDiv.style.top = `${symbolInfoDiv.getBoundingClientRect().bottom}px`;
-            outerArrowDiv.style.left = `${(LEFT + RIGHT) / 2 - OFFSET}px`;
-            symbolInfoDiv.insertAdjacentElement("afterend", outerArrowDiv)
-
-            var innerArrowDiv = outerArrowDiv.cloneNode(true);
-            innerArrowDiv.style.borderColor = "transparent transparent #ffffff transparent";
-            innerArrowDiv.style.transform = 'rotate(0deg)';
-            innerArrowDiv.style.top = `3px`;
-            innerArrowDiv.style.left = `-15px`;
-            outerArrowDiv.insertAdjacentElement("beforeend", innerArrowDiv);
+            gayness("top");
             break;
           case "svgFromRight":
             console.log("RIGHT");
-            div.style.left = `${element.distances.svgFromLeft + element.boundingClientRect.width + 10}px`;
+            div.style.left = `${element.distances.svgFromLeft + element.boundingClientRect.width + 20}px`;
             div.style.top = `${svgCenterPoint.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
+            gayness("right");
             break;
           case "svgFromBottom":
             console.log("BOTTOM");
             div.style.left = `${svgCenterPoint.matrixTransform(svg.getScreenCTM()).x - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
             div.style.top = `${element.boundingClientRect.bottom + 10}px`;
+            gayness("bottom");
             break;
           case "svgFromLeft":
             console.log("LEFT");
-            div.style.right = `${element.distances.svgFromRight + element.boundingClientRect.width}px`;
+            div.style.right = `${element.distances.svgFromRight + element.boundingClientRect.width + 10}px`;
             div.style.top = `${svgCenterPoint.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
+            gayness("left");
             break;
           default:
             break;
@@ -693,6 +728,9 @@
               // This will move the popup along with the symbol. However it is probably better to just delete it
               // target.parentElement.lastChild.style.left = `${left}px`;
               // target.parentElement.lastChild.style.top = `${top}px`;
+            }
+            if (key.className === "popup-arrow") {
+              key.remove();
             }
           });
         }
