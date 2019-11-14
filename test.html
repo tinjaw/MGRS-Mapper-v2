@@ -314,7 +314,7 @@
         svg.insertAdjacentHTML(
           "beforeend",
           `
-          <g class="centerPointInfo">
+          <g class="centerPointInfo orange">
             <text x=${svgcx} y=${svgcy -
             50} fill="orange" stroke="black" stroke-width="3" text-anchor="middle">Center of Entire SVG</text>
             <circle cx=${svgcx} cy=${svgcy} r="6" stroke="black" stroke-width="2" fill="orange"/>
@@ -372,9 +372,7 @@
         return {
           angle,
           scale,
-          css: `transform: ${elementPropertyValue} rotate(${angle.toFixed(
-            2
-          )}deg);`
+          css: `${elementPropertyValue} rotate(${angle.toFixed(2)}deg)`
         };
       };
 
@@ -416,13 +414,12 @@
       }
 
       const createPopupDivAboveSymbol = element => {
-        console.log(element.data);
-        element.target.parentElement.childNodes.forEach(key => {
-          if (key.className === "ui-modal") {
-            console.log("We have a popup");
-            key.remove();
-          }
-        });
+        // element.target.parentElement.childNodes.forEach(key => {
+        //   if (key.className === "ui-modal") {
+        //     console.log("We have a popup");
+        //     key.remove();
+        //   }
+        // });
         // Creation
         var div = document.createElement("div");
         // Addition
@@ -432,13 +429,16 @@
         div.style.position = "absolute";
         div.style.background = "white";
         div.style.border = "2px red solid";
+        div.style.textAlign = "left";
+        div.style.fontSize = "1.2rem";
+        div.style.padding = "20px";
+        div.style.lineHeight = "1.6rem";
         // Style Manipulation - Classes
-        div.className = "ui-modal";
+        //div.className = "ui-modal";
         // Modification - ID
         div.id = "test";
         // Modification - Contents using HTML
-        // div.innerHTML =
-        //   '<span class="msg">Hello world.</span> <span class="msg">Hello world.</span>';
+        div.innerHTML = "<strong>Location:</strong> 18T VP 12345 67890";
         // Modification - Contents using Text
         //div.textContent = "Hello world.";
         // Removal
@@ -447,18 +447,90 @@
           var newDiv = document.createElement("div");
           div.className = "symbol-info-div";
           div.appendChild(newDiv);
-          newDiv.innerHTML = `${key[0]}`;
+          newDiv.innerHTML += `<strong>${key[0]}:</strong> ${key[1]}`;
           return newDiv;
         });
 
-        var symbolInfoDiv = document.querySelector(".symbol-info-div");
+        // Find the most open space
+        // https://stackoverflow.com/questions/11142884/fast-way-to-get-the-min-max-values-among-properties-of-object
         // prettier-ignore
-        if ( element.distances.svgFromTop >= symbolInfoDiv.getBoundingClientRect().height + 50) {
-          console.log(`Distances: ${element.distances.svgFromTop} Popup: ${symbolInfoDiv.getBoundingClientRect().height}`);
-          div.style.left = `${element.boundingClientRect.left}px`;
-          div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height - 60}px`;
-          div.style.width = `${element.boundingClientRect.width}px`;
+        const maxMinVal = obj => {
+          const sortedEntriesByVal = Object.entries(obj).sort(([, v1], [, v2]) => v1 - v2);
+          return {
+            min: sortedEntriesByVal[0],
+            max: sortedEntriesByVal[sortedEntriesByVal.length - 1],
+            sortedObjByVal: sortedEntriesByVal.reduce((r, [k, v]) => ({ ...r, [k]: v }),{})
+          };
+        };
+        var symbolInfoDiv = document.querySelector(".symbol-info-div");
+        const svgbbox = svg.getBBox();
+        let svgcx = svgbbox.x + svgbbox.width / 2;
+        let svgcy = svgbbox.y + svgbbox.height / 2;
+
+        var x = svg.getBBox().x + svg.getBBox().width / 2;
+        var y = svg.getBBox().y + svg.getBBox().height / 2;
+        var po = svg.createSVGPoint();
+        po.x = x;
+        po.y = y;
+        // This is the distance from the center point to the TOP of the screen
+        po.matrixTransform(svg.getScreenCTM()).y;
+        // This is the distance from the center point to the RIGHT of the screen
+        window.innerWidth - po.matrixTransform(svg.getScreenCTM()).x;
+        // This is the distance from the center point to the BOTTOM of the screen!!
+        window.innerHeight - po.matrixTransform(svg.getScreenCTM()).y;
+        // This is the distance from the center point to the LEFT of the screen
+        po.matrixTransform(svg.getScreenCTM()).x;
+
+        console.log(
+          `   TOP: ${po.matrixTransform(svg.getScreenCTM()).y}
+             RIGHT: ${window.innerWidth -
+               po.matrixTransform(svg.getScreenCTM()).x}
+             BOTTOM: ${window.innerHeight -
+               po.matrixTransform(svg.getScreenCTM()).y}
+             LEFT: ${po.matrixTransform(svg.getScreenCTM()).x}
+                    `
+        );
+        // prettier-ignore
+        switch (maxMinVal(element.distances).max[0]) {
+          case "svgFromTop":
+            console.log("TOP");
+            div.style.left = `${po.matrixTransform(svg.getScreenCTM()).x - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
+            div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height - 60}px`;
+            break;
+          case "svgFromRight":
+            console.log("RIGHT");
+            div.style.left = `${element.distances.svgFromLeft + element.boundingClientRect.width + 10}px`;
+            div.style.top = `${po.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
+            break;
+          case "svgFromBottom":
+            console.log("BOTTOM");
+            div.style.left = `${po.matrixTransform(svg.getScreenCTM()).x - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
+            div.style.top = `${element.boundingClientRect.bottom + 10}px`;
+            break;
+          case "svgFromLeft":
+            console.log("LEFT");
+            div.style.right = `${element.distances.svgFromRight + element.boundingClientRect.width}px`;
+            div.style.top = `${po.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
+            break;
+          default:
+            break;
         }
+
+        // prettier-ignore
+        //if ( element.distances.svgFromTop >= symbolInfoDiv.getBoundingClientRect().height + 60) {
+        //console.log(`TOP: Distances: ${element.distances.svgFromTop} Popup: ${symbolInfoDiv.getBoundingClientRect().height}`);
+        // const svgbbox = svg.getBBox();
+        // let svgcx = svgbbox.x + svgbbox.width / 2;
+        // div.style.left = `${element.boundingClientRect.left - svgcx / 2}px`;
+        // div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height -60}px`;
+        //}
+
+        // } else if (element.distances.svgFromRight >= symbolInfoDiv.getBoundingClientRect().width + 60){
+        //   console.log(`RIGHT: Distances: ${element.distances.svgFromRight} Popup: ${symbolInfoDiv.getBoundingClientRect().width}`);
+        //   div.style.left = `${element.boundingClientRect.width  + symbolInfoDiv.getBoundingClientRect().width}px`;
+        //   div.style.top = `${element.boundingClientRect.top /2}px`;
+        //   div.style.width = `${element.boundingClientRect.width}px`;
+        // }
       };
 
       // Output symbol info to pre tags
@@ -548,8 +620,7 @@
           target.style.top = `${top}px`;
 
           target.parentElement.childNodes.forEach(key => {
-            if (key.className === "ui-modal") {
-              console.log("Let's move the popup");
+            if (key.className === "symbol-info-div") {
               key.remove();
               // This will move the popup along with the symbol. However it is probably better to just delete it
               // target.parentElement.lastChild.style.left = `${left}px`;
@@ -590,14 +661,13 @@
         getMidPointOfGTag();
         outputSymbolDatasetToPreTags(svg.dataset.symbolInfo);
         getRotationDegrees(svg);
-
-        // const reference = document.querySelector('.my-button');
-        // const popper = document.querySelector('.my-popper');
+        // const reference = document.querySelector(".draggable");
+        // const popper = document.querySelector(".symbol-info-div");
         // new Popper(reference, popper, {
-        //   placement: 'right',
+        //   placement: "top",
         //   modifiers: {
         //     flip: {
-        //       behavior: ['left', 'bottom', 'top']
+        //       behavior: ["left", "bottom", "right"]
         //     },
         //     preventOverflow: {
         //       boundariesElement: document.body
