@@ -490,17 +490,16 @@
       }
 
       const createPopupDivAboveSymbol = element => {
-        // element.target.parentElement.childNodes.forEach(key => {
-        //   if (key.className === "ui-modal") {
-        //     console.log("We have a popup");
-        //     key.remove();
-        //   }
-        // });
-        // Creation
+        element.target.parentElement.childNodes.forEach(key => {
+          if (key.className === "arrow-popup") {
+            console.log("We have a popup");
+            key.remove();
+          }
+        });
+
         var div = document.createElement("div");
-        // Addition
+
         element.target.parentElement.appendChild(div);
-        // Style Manipulation - Positioning
 
         div.style.position = "absolute";
         div.style.background = "white";
@@ -509,18 +508,11 @@
         div.style.fontSize = "1.2rem";
         div.style.padding = "20px";
         div.style.lineHeight = "1.6rem";
-
-        // Style Manipulation - Classes
-        //div.className = "ui-modal";
-        // Modification - ID
         div.id = "test";
-        // Modification - Contents using HTML
+
         div.innerHTML = "<strong>Location:</strong> 18T VP 12345 67890";
-        // Modification - Contents using Text
-        //div.textContent = "Hello world.";
-        // Removal
-        //div.parentNode.removeChild(div);
-        var gay = Object.entries(element.data).forEach(key => {
+
+        Object.entries(element.data).forEach(key => {
           var newDiv = document.createElement("div");
           div.className = "symbol-info-div";
           div.appendChild(newDiv);
@@ -539,43 +531,35 @@
             sortedObjByVal: sortedEntriesByVal.reduce((r, [k, v]) => ({ ...r, [k]: v }),{})
           };
         };
-        var symbolInfoDiv = document.querySelector(".symbol-info-div");
-        const svgbbox = svg.getBBox();
-        let svgcx = svgbbox.x + svgbbox.width / 2;
-        let svgcy = svgbbox.y + svgbbox.height / 2;
 
-        var x = svg.getBBox().x + svg.getBBox().width / 2;
-        var y = svg.getBBox().y + svg.getBBox().height / 2;
-        var po = svg.createSVGPoint();
-        po.x = x;
-        po.y = y;
-        // This is the distance from the center point to the TOP of the screen
-        po.matrixTransform(svg.getScreenCTM()).y;
-        // This is the distance from the center point to the RIGHT of the screen
-        window.innerWidth - po.matrixTransform(svg.getScreenCTM()).x;
-        // This is the distance from the center point to the BOTTOM of the screen!!
-        window.innerHeight - po.matrixTransform(svg.getScreenCTM()).y;
-        // This is the distance from the center point to the LEFT of the screen
-        po.matrixTransform(svg.getScreenCTM()).x;
+        const symbolInfoDiv = document.querySelector(".symbol-info-div");
 
-        console.log(
-          `   TOP: ${po.matrixTransform(svg.getScreenCTM()).y}
-             RIGHT: ${window.innerWidth -
-               po.matrixTransform(svg.getScreenCTM()).x}
-             BOTTOM: ${window.innerHeight -
-               po.matrixTransform(svg.getScreenCTM()).y}
-             LEFT: ${po.matrixTransform(svg.getScreenCTM()).x}
-                    `
-        );
+        const x = svg.getBBox().x + svg.getBBox().width / 2;
+        const y = svg.getBBox().y + svg.getBBox().height / 2;
+        const svgCenterPoint = svg.createSVGPoint();
+        svgCenterPoint.x = x;
+        svgCenterPoint.y = y;
+
+        // prettier-ignore
+        // Distances from the center point of the SVG to the Top, right, bottom and left of the window
+        const distancesFromSVGCenterPoint = {
+          TOP: Math.round(svgCenterPoint.matrixTransform(svg.getScreenCTM()).y),
+          RIGHT: Math.round(window.innerWidth - svgCenterPoint.matrixTransform(svg.getScreenCTM()).x),
+          BOTTOM: Math.round(window.innerHeight - svgCenterPoint.matrixTransform(svg.getScreenCTM()).y),
+          LEFT: Math.round(svgCenterPoint.matrixTransform(svg.getScreenCTM()).x),
+        };
+
+        console.table(distancesFromSVGCenterPoint);
+
         // prettier-ignore
         switch (maxMinVal(element.distances).max[0]) {
           case "svgFromTop":
             console.log("TOP");
-            div.style.left = `${po.matrixTransform(svg.getScreenCTM()).x - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
+            div.style.left = `${distancesFromSVGCenterPoint.LEFT - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
             div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height - 60}px`;
 
-
             var outerArrowDiv = document.createElement('div');
+            outerArrowDiv.classList.add("popup-arrow");
             var LEFT = symbolInfoDiv.getBoundingClientRect().left;
             var RIGHT = symbolInfoDiv.getBoundingClientRect().right;
             var OFFSET = element.bbox.x / 2 + element.bbox.y;
@@ -596,42 +580,25 @@
             innerArrowDiv.style.top = `3px`;
             innerArrowDiv.style.left = `-15px`;
             outerArrowDiv.insertAdjacentElement("beforeend", innerArrowDiv);
-
             break;
           case "svgFromRight":
             console.log("RIGHT");
             div.style.left = `${element.distances.svgFromLeft + element.boundingClientRect.width + 10}px`;
-            div.style.top = `${po.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
+            div.style.top = `${svgCenterPoint.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
             break;
           case "svgFromBottom":
             console.log("BOTTOM");
-            div.style.left = `${po.matrixTransform(svg.getScreenCTM()).x - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
+            div.style.left = `${svgCenterPoint.matrixTransform(svg.getScreenCTM()).x - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
             div.style.top = `${element.boundingClientRect.bottom + 10}px`;
             break;
           case "svgFromLeft":
             console.log("LEFT");
             div.style.right = `${element.distances.svgFromRight + element.boundingClientRect.width}px`;
-            div.style.top = `${po.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
+            div.style.top = `${svgCenterPoint.matrixTransform(svg.getScreenCTM()).y - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
             break;
           default:
             break;
         }
-
-        // prettier-ignore
-        //if ( element.distances.svgFromTop >= symbolInfoDiv.getBoundingClientRect().height + 60) {
-        //console.log(`TOP: Distances: ${element.distances.svgFromTop} Popup: ${symbolInfoDiv.getBoundingClientRect().height}`);
-        // const svgbbox = svg.getBBox();
-        // let svgcx = svgbbox.x + svgbbox.width / 2;
-        // div.style.left = `${element.boundingClientRect.left - svgcx / 2}px`;
-        // div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height -60}px`;
-        //}
-
-        // } else if (element.distances.svgFromRight >= symbolInfoDiv.getBoundingClientRect().width + 60){
-        //   console.log(`RIGHT: Distances: ${element.distances.svgFromRight} Popup: ${symbolInfoDiv.getBoundingClientRect().width}`);
-        //   div.style.left = `${element.boundingClientRect.width  + symbolInfoDiv.getBoundingClientRect().width}px`;
-        //   div.style.top = `${element.boundingClientRect.top /2}px`;
-        //   div.style.width = `${element.boundingClientRect.width}px`;
-        // }
       };
 
       // Output symbol info to pre tags
