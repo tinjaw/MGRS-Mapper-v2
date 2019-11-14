@@ -129,6 +129,55 @@
         bottom: -5px;
         left: 5px;
       }
+
+      /* .symbol-info-div {
+        position: relative;
+        background: #88b7d5;
+        border: 4px solid #c2e1f5;
+      }
+      .symbol-info-div:after,
+      .symbol-info-div:before {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .symbol-info-div:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-top-color: #88b7d5;
+        border-width: 30px;
+        margin-left: -30px;
+      }
+      .symbol-info-div:before {
+        border-color: rgba(194, 225, 245, 0);
+        border-top-color: #c2e1f5;
+        border-width: 36px;
+        margin-left: -36px;
+      } */
+
+      /* FOR POPUP BOTTOM */
+      /* .symbol-info-div:before {
+      border-color: rgba(194, 225, 245, 0);
+      border-top-color: #F44336;
+      border-width: 36px;
+      margin-left: -36px;
+      top: -40%;
+      transform: rotate(180deg);
+    }
+
+    .symbol-info-div:after {
+        border-color: rgba(136, 183, 213, 0);
+        border-top-color: rgba(136, 183, 213, 1);
+        border-width: 30px;
+        margin-left: -30px;
+        top: -33%;
+        transform: rotate(180deg);
+    } */
     </style>
   </head>
   <body>
@@ -264,7 +313,34 @@
     </div>
 
     <script defer>
-      const svg = document.querySelector(".milsymbolContainer > svg");
+      //http://mcgivery.com/htmlelement-pseudostyle-settingmodifying-before-and-after-in-javascript/
+      // eg- symbolInfoDiv.pseudoStyle("before", "border-top-color", "red");
+      var UID = {
+        _current: 0,
+        getNew: function() {
+          this._current++;
+          return this._current;
+        }
+      };
+
+      HTMLElement.prototype.pseudoStyle = function(element, prop, value) {
+        var _this = this;
+        var _sheetId = "pseudoStyles";
+        var _head = document.head || document.getElementsByTagName("head")[0];
+        var _sheet =
+          document.getElementById(_sheetId) || document.createElement("style");
+        _sheet.id = _sheetId;
+        var className = "pseudoStyle" + UID.getNew();
+
+        _this.className += " " + className;
+
+        _sheet.innerHTML +=
+          " ." + className + ":" + element + "{" + prop + ":" + value + "}";
+        _head.appendChild(_sheet);
+        return this;
+      };
+
+      const svg = document.querySelector(".milsymbolContainer > svg.draggable");
       //https://stackoverflow.com/questions/22183727/how-do-you-convert-screen-coordinates-to-document-space-in-a-scaled-svg
       const getScreenCoordinatesOnScaledSVG = () => {
         const x = document.querySelector("#x");
@@ -433,6 +509,7 @@
         div.style.fontSize = "1.2rem";
         div.style.padding = "20px";
         div.style.lineHeight = "1.6rem";
+
         // Style Manipulation - Classes
         //div.className = "ui-modal";
         // Modification - ID
@@ -496,6 +573,30 @@
             console.log("TOP");
             div.style.left = `${po.matrixTransform(svg.getScreenCTM()).x - symbolInfoDiv.getBoundingClientRect().width / 2 }px`;
             div.style.top = `${element.boundingClientRect.top - symbolInfoDiv.getBoundingClientRect().height - 60}px`;
+
+
+            var outerArrowDiv = document.createElement('div');
+            var LEFT = symbolInfoDiv.getBoundingClientRect().left;
+            var RIGHT = symbolInfoDiv.getBoundingClientRect().right;
+            var OFFSET = element.bbox.x / 2 + element.bbox.y;
+            outerArrowDiv.style.width = 0;
+            outerArrowDiv.style.height = 0;
+            outerArrowDiv.style.position = "absolute";
+            outerArrowDiv.style.borderStyle = "solid";
+            outerArrowDiv.style.borderWidth = "0 15px 15px";
+            outerArrowDiv.style.borderColor = "transparent transparent #ff0000 transparent";
+            outerArrowDiv.style.transform = 'rotate(180deg)';
+            outerArrowDiv.style.top = `${symbolInfoDiv.getBoundingClientRect().bottom}px`;
+            outerArrowDiv.style.left = `${(LEFT + RIGHT) / 2 - OFFSET}px`;
+            symbolInfoDiv.insertAdjacentElement("afterend", outerArrowDiv)
+
+            var innerArrowDiv = outerArrowDiv.cloneNode(true);
+            innerArrowDiv.style.borderColor = "transparent transparent #ffffff transparent";
+            innerArrowDiv.style.transform = 'rotate(0deg)';
+            innerArrowDiv.style.top = `3px`;
+            innerArrowDiv.style.left = `-15px`;
+            outerArrowDiv.insertAdjacentElement("beforeend", innerArrowDiv);
+
             break;
           case "svgFromRight":
             console.log("RIGHT");
