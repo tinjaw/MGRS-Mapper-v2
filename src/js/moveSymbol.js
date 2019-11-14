@@ -43,10 +43,18 @@ function manipulateSymbol() {
 
   //* DRAGGABLE *//
   // Since the map marker already has a draggable feature, we don't need it in moveable.js
-  // moveable.on('drag', ({ target, left, top }) => {
-  // target.style.left = `${left}px`;
-  // target.style.top = `${top}px`;
-  // });
+  moveable.on('drag', ({ target, left, top }) => {
+    // target.style.left = `${left}px`;
+    // target.style.top = `${top}px`;
+    target.parentElement.childNodes.forEach((key) => {
+      if (key.className === 'symbol-info-div') {
+        key.remove();
+      }
+      if (key.className === 'popup-arrow') {
+        key.remove();
+      }
+    });
+  });
 
   //* SCALABLE *//
   moveable.on('scale', ({ target, transform }) => {
@@ -104,6 +112,157 @@ function toggleDraggableElement(event) {
   });
 }
 
+
+const createPopupDivAboveSymbol = (element) => {
+  const div = document.createElement('div');
+
+  element.target.parentElement.appendChild(div);
+
+  div.style.position = 'absolute';
+  div.style.background = 'white';
+  div.style.border = '2px red solid';
+  div.style.textAlign = 'left';
+  div.style.fontSize = '1.2rem';
+  div.style.padding = '20px';
+  div.style.lineHeight = '1.6rem';
+  div.style.minWidth = '250px';
+  div.style.width = 'max-content';
+  div.style.maxWidth = '350px';
+
+  div.innerHTML = '<strong>Location:</strong> 18T VP 12345 67890';
+
+  Object.entries(element.data).forEach((key) => {
+    const newDiv = document.createElement('div');
+    div.className = 'symbol-info-div';
+    div.appendChild(newDiv);
+    newDiv.innerHTML += `<strong>${key[0]}:</strong> ${key[1]}`;
+    return newDiv;
+  });
+
+  const symbolInfoDiv = document.querySelector('.symbol-info-div');
+
+  const x = element.target.getBBox().x + element.target.getBBox().width / 2;
+  const y = element.target.getBBox().y + element.target.getBBox().height / 2;
+  const svgCenterPoint = element.target.createSVGPoint();
+  svgCenterPoint.x = x;
+  svgCenterPoint.y = y;
+
+
+  // Distances from the center point of the SVG to the Top, right, bottom and left of the window
+  const distancesFromSVGCenterPoint = {
+    TOP: Math.round(svgCenterPoint.matrixTransform(element.target.getScreenCTM()).y),
+    RIGHT: Math.round(window.innerWidth - svgCenterPoint.matrixTransform(element.target.getScreenCTM()).x),
+    BOTTOM: Math.round(window.innerHeight - svgCenterPoint.matrixTransform(element.target.getScreenCTM()).y),
+    LEFT: Math.round(svgCenterPoint.matrixTransform(element.target.getScreenCTM()).x),
+  };
+
+
+  function findTopValueOfPopupOnRight() {
+    const thePOP = window.innerHeight - symbolInfoDiv.getBoundingClientRect().bottom - symbolInfoDiv.getBoundingClientRect().top;
+    const theSVG = window.innerHeight - element.boundingClientRect.bottom - element.boundingClientRect.top;
+    const theVal = (thePOP - theSVG) / 2;
+    return theVal;
+  }
+
+
+  function findCenterPointOfPopup() {
+    const ddd = (symbolInfoDiv.getBoundingClientRect().width - element.target.getBoundingClientRect().width) / -2;
+    return ddd;
+  }
+
+
+  // prettier-ignore
+  function displayPopup(direction) {
+    const outerArrowDiv = document.createElement('div');
+    outerArrowDiv.classList.add('popup-arrow');
+    const popupLeft = symbolInfoDiv.getBoundingClientRect().left;
+    const popupRight = symbolInfoDiv.getBoundingClientRect().right;
+    const popupOffset = element.bbox.x / 2 + element.bbox.y;
+
+    switch (direction) {
+      case 'top':
+        outerArrowDiv.style.transform = 'rotate(180deg)';
+        outerArrowDiv.style.top = `${symbolInfoDiv.offsetTop + symbolInfoDiv.getBoundingClientRect().height}px`;
+        outerArrowDiv.style.left = `${symbolInfoDiv.offsetLeft + (symbolInfoDiv.offsetWidth / 2) - 15}px`;
+        break;
+      case 'right':
+        outerArrowDiv.style.transform = 'rotate(-90deg)';
+        outerArrowDiv.style.top = `${(element.boundingClientRect.height / 2) - 15}px`;
+        outerArrowDiv.style.left = `${element.boundingClientRect.width - 2}px`;
+        break;
+      case 'bottom':
+        outerArrowDiv.style.transform = 'rotate(0deg)';
+        outerArrowDiv.style.top = `${symbolInfoDiv.getBoundingClientRect().top - popupOffset + 2}px`;
+        outerArrowDiv.style.left = `${(popupLeft + popupRight) / 2 - popupOffset}px`;
+        break;
+      case 'left':
+        outerArrowDiv.style.transform = 'rotate(90deg)';
+        outerArrowDiv.style.top = `${distancesFromSVGCenterPoint.TOP - 8}px`;
+        outerArrowDiv.style.left = `${popupRight - (popupOffset / 2)}px`;
+        break;
+      default:
+        break;
+    }
+
+    outerArrowDiv.style.width = 0;
+    outerArrowDiv.style.height = 0;
+    outerArrowDiv.style.position = 'absolute';
+    outerArrowDiv.style.borderStyle = 'solid';
+    outerArrowDiv.style.borderWidth = '0 15px 15px';
+    outerArrowDiv.style.borderColor = 'transparent transparent #ff0000 transparent';
+    symbolInfoDiv.insertAdjacentElement('afterend', outerArrowDiv);
+
+    const innerArrowDiv = outerArrowDiv.cloneNode(true);
+    innerArrowDiv.style.borderColor = 'transparent transparent #ffffff transparent';
+    innerArrowDiv.style.transform = 'rotate(0deg)';
+    innerArrowDiv.style.top = '3px';
+    innerArrowDiv.style.left = '-15px';
+    outerArrowDiv.insertAdjacentElement('beforeend', innerArrowDiv);
+  }
+
+  // Find the most open space
+  // https://stackoverflow.com/questions/11142884/fast-way-to-get-the-min-max-values-among-properties-of-object
+  const maxMinVal = (obj) => {
+    const sortedEntriesByVal = Object.entries(obj).sort(([, v1], [, v2]) => v1 - v2);
+    return {
+      min: sortedEntriesByVal[0],
+      max: sortedEntriesByVal[sortedEntriesByVal.length - 1],
+      sortedObjByVal: sortedEntriesByVal.reduce((r, [k, v]) => ({ r, [k]: v }), {}),
+    };
+  };
+
+  // THIS IS FOR THE POPUP, NOT THE ARROW
+  switch (maxMinVal(element.distances).max[0]) {
+    case 'svgFromTop':
+      div.style.left = `${findCenterPointOfPopup()}px`;
+      div.style.top = `${(symbolInfoDiv.getBoundingClientRect().top - symbolInfoDiv.getBoundingClientRect().bottom) - 60}px`;
+      displayPopup('top');
+      break;
+    case 'svgFromRight':
+      console.log('RIGHT');
+      div.style.left = `${element.boundingClientRect.width + 20}px`;
+      div.style.top = `${findTopValueOfPopupOnRight()}px`;
+      displayPopup('right');
+      break;
+    case 'svgFromBottom':
+      //! I completed the logic for top and bottom (both popup box and arrow)
+      console.log('BOTTOM');
+      console.log(distancesFromSVGCenterPoint, symbolInfoDiv.getBoundingClientRect());
+      div.style.left = `${distancesFromSVGCenterPoint.LEFT - symbolInfoDiv.getBoundingClientRect().width / 2}px`;
+      div.style.top = `${element.boundingClientRect.bottom + 20}px`;
+      displayPopup('bottom');
+      break;
+    case 'svgFromLeft':
+      console.log('LEFT');
+      div.style.right = `${element.distances.svgFromRight + element.boundingClientRect.width + 10}px`;
+      div.style.top = `${distancesFromSVGCenterPoint.TOP - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
+      displayPopup('left');
+      break;
+    default:
+      break;
+  }
+};
+
 // *********************************************************************************** //
 // * HTML5 DRAG AND DROP API                                                         * //
 // *********************************************************************************** //
@@ -158,57 +317,79 @@ const drop = (event) => {
   });
 
   // IOT push a marker to the front when clicked we need to set the click counter to zero
-  let zIndexCounter = 0;
+  const zIndexCounter = 0;
 
-  marker.addEventListener('click', () => {
-    const symbolInfo = JSON.parse(marker._icon.firstElementChild.dataset.symbolInfo);
-    // Create the marker popup content
-    const content = L.DomUtil.create('div', 'content');
-    content.innerHTML = `<span class="mdc-typography--headline6">Coords:
-                          <strong>${marker.getLatLng(marker).lat.toFixed(4)}, ${marker.getLatLng(marker).lng.toFixed(4)}</strong>
-                          <br/>
-                          <strong>ID: ${marker._leaflet_id}</strong>
-                          <br/>
-                          <strong>Symbol: ${symbolInfo.Symbol}</strong>
-                          <br/>
-                        </span>`;
+  marker.addEventListener('click', (event) => {
+    // const symbolInfo = JSON.parse(event.target.getIcon().options.html.dataset.symbolInfo);
+    const chosenTarget = event.target.getIcon().options.html;
+    const symbolData = {
+      target: chosenTarget,
+      bbox: {
+        x: chosenTarget.getBBox().x,
+        y: chosenTarget.getBBox().y,
+        width: chosenTarget.getBBox().width,
+        height: chosenTarget.getBBox().height,
+      },
+      boundingClientRect: chosenTarget.getBoundingClientRect(),
+      data: JSON.parse(chosenTarget.dataset.symbolInfo),
+      distances: {
+        svgFromTop: chosenTarget.getBoundingClientRect().top,
+        svgFromRight: window.innerWidth - chosenTarget.getBoundingClientRect().right,
+        svgFromBottom: window.innerHeight - chosenTarget.getBoundingClientRect().bottom,
+        svgFromLeft: chosenTarget.getBoundingClientRect().left,
+      },
+    };
 
-    marker.bindPopup(content, {
-      // This will place the popup just above the symbol. 2.5 was arbitrarily chosen
-      offset: new L.Point(0, parseInt(-marker._icon.clientHeight / 2.5)),
-      // maxWidth: 'auto',
-    });
+    createPopupDivAboveSymbol(symbolData);
+    // console.log(symbolData);
+    // // Create the marker popup content
+    // const content = L.DomUtil.create('div', 'content');
+    // content.innerHTML = `<span class="mdc-typography--headline6">Coords:
+    //                       <strong>${marker.getLatLng(marker).lat.toFixed(4)}, ${marker.getLatLng(marker).lng.toFixed(4)}</strong>
+    //                       <br/>
+    //                       <strong>ID: ${marker._leaflet_id}</strong>
+    //                       <br/>
+    //                       <strong>Symbol: ${symbolInfo.Symbol}</strong>
+    //                       <br/>
+    //                     </span>`;
 
-    // Open the popup on click
-    if (!marker._popup.isOpen()) {
-      setTimeout(() => {
-        marker.openPopup();
-      }, 10);
-    }
+    // marker.bindPopup(content, {
+    //   // This will place the popup just above the symbol. 2.5 was arbitrarily chosen
+    //   offset: new L.Point(0, parseInt(-marker._icon.clientHeight / 2.5)),
+    //   // maxWidth: 'auto',
+    // });
 
-    //! These next 3 consts are bad voodoo but worth looking at
-    // Take scrollWidth of popup : 285 / 2 = 142.5
-    // Take scrollWidth of svg: 533 / 2 = 266.5
-    // 266.5 + 142.5 = 409 minus 9 = 400px
-    // const popupContainer = marker._popup._containerWidth / 2;
-    // const markerWidth = marker._icon.scrollWidth / 2;
-    // const newWidthValue = (markerWidth + popupContainer) - 9;
-    // document.querySelector('.leaflet-popup.leaflet-zoom-animated').style.transform = `translate3d(${newWidthValue}px, 422px, 0px)`;
+    // // Open the popup on click
+    // if (!marker._popup.isOpen()) {
+    //   setTimeout(() => {
+    //     marker.openPopup();
+    //   }, 10);
+    // }
 
-    // Increment the click counter
-    zIndexCounter += 1;
-    // Reset all markers z-indexes to 100
-    map._container.querySelectorAll('.leaflet-marker-icon').forEach((element) => {
-      const clickedSymbol = element;
-      clickedSymbol.style.zIndex = 100;
-    });
+    // //! These next 3 consts are bad voodoo but worth looking at
+    // // Take scrollWidth of popup : 285 / 2 = 142.5
+    // // Take scrollWidth of svg: 533 / 2 = 266.5
+    // // 266.5 + 142.5 = 409 minus 9 = 400px
+    // // const popupContainer = marker._popup._containerWidth / 2;
+    // // const markerWidth = marker._icon.scrollWidth / 2;
+    // // const newWidthValue = (markerWidth + popupContainer) - 9;
+    // // document.querySelector('.leaflet-popup.leaflet-zoom-animated').style.transform = `translate3d(${newWidthValue}px, 422px, 0px)`;
 
-    const newZIndex = marker._icon.style.zIndex + zIndexCounter;
-    // Now set the new z-index of the marker with the click counter added
-    marker._icon.style.zIndex = newZIndex;
+    // // Increment the click counter
+    // zIndexCounter += 1;
+    // // Reset all markers z-indexes to 100
+    // map._container.querySelectorAll('.leaflet-marker-icon').forEach((element) => {
+    //   const clickedSymbol = element;
+    //   clickedSymbol.style.zIndex = 100;
+    // });
+
+    // const newZIndex = marker._icon.style.zIndex + zIndexCounter;
+    // // Now set the new z-index of the marker with the click counter added
+    // marker._icon.style.zIndex = newZIndex;
   });
 
   marker.addEventListener('popupopen', () => {
+    console.log('popup opened');
     const btn = L.DomUtil.create('button', 'deleteMarker', marker._popup._content);
     btn.setAttribute('type', 'button');
     btn.textContent = 'Delete Marker';

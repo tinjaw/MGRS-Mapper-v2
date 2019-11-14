@@ -2,6 +2,13 @@
 
 ---
 
+## 13NOV19
+
+- Got the dynamic popup box to work in test environment
+- Began integrating the popup into the main project. Major issues with this.
+
+---
+
 ## 11NOV19
 
 - Worked on implementing popup as a web component
