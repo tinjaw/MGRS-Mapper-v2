@@ -246,6 +246,7 @@ const createPopupDivAboveSymbol = (element) => {
       break;
     case 'svgFromBottom':
       //! I completed the logic for top and bottom (both popup box and arrow)
+      //! YOU MUST FINISH THE LOGIC FOR BOTTOM AND LEFT
       console.log('BOTTOM');
       console.log(distancesFromSVGCenterPoint, symbolInfoDiv.getBoundingClientRect());
       div.style.left = `${distancesFromSVGCenterPoint.LEFT - symbolInfoDiv.getBoundingClientRect().width / 2}px`;
