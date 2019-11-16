@@ -3,6 +3,58 @@ import Moveable from 'moveable';
 const newSVGDiv = document.querySelector('.newSVG');
 const mapArea = document.querySelector('#main-content');
 
+// https://stackoverflow.com/questions/46728319/how-to-convert-between-lat-long-and-mgrs-using-javascript-without-dependence-on
+const MGRSString = (Lat, Long) => {
+  if (Lat < -80) return 'Too far South';
+  if (Lat > 84) return 'Too far North';
+  const c = 1 + Math.floor((Long + 180) / 6);
+  const e = c * 6 - 183;
+  const k = Lat * Math.PI / 180;
+  const l = Long * Math.PI / 180;
+  const m = e * Math.PI / 180;
+  const n = Math.cos(k);
+  const o = 0.006739496819936062 * (n ** 2);
+  const p = 40680631590769 / (6356752.314 * Math.sqrt(1 + o));
+  const q = Math.tan(k);
+  const r = q * q;
+  const s = (r * r * r) - q ** 6;
+  const t = l - m;
+  const u = 1.0 - r + o;
+  const v = 5.0 - r + 9 * o + 4.0 * (o * o);
+  const w = 5.0 - 18.0 * r + (r * r) + 14.0 * o - 58.0 * r * o;
+  const x = 61.0 - 58.0 * r + (r * r) + 270.0 * o - 330.0 * r * o;
+  const y = 61.0 - 479.0 * r + 179.0 * (r * r) - (r * r * r);
+  const z = 1385.0 - 3111.0 * r + 543.0 * (r * r) - (r * r * r);
+  let aa = p * n * t + (p / 6.0 * (n ** 3) * u * (t ** 3)) + (p / 120.0 * (n ** 5) * w * (t ** 5)) + (p / 5040.0 * (n ** 7) * y * (t ** 7));
+  let ab = 6367449.14570093 * (k - (0.00251882794504 * Math.sin(2 * k)) + (0.00000264354112 * Math.sin(4 * k)) - (0.00000000345262 * Math.sin(6 * k)) + (0.000000000004892 * Math.sin(8 * k))) + (q / 2.0 * p * (n ** 2) * (t ** 2)) + (q / 24.0 * p * (n ** 4) * v * (t ** 4)) + (q / 720.0 * p * (n ** 6) * x * (t ** 6)) + (q / 40320.0 * p * (n ** 8) * z * (t ** 8));
+  aa = aa * 0.9996 + 500000.0;
+  ab *= 0.9996;
+  if (ab < 0.0) ab += 10000000.0;
+  const ad = 'CDEFGHJKLMNPQRSTUVWXX'.charAt(Math.floor(Lat / 8 + 10));
+  const ae = Math.floor(aa / 100000);
+  const af = ['ABCDEFGH', 'JKLMNPQR', 'STUVWXYZ'][(c - 1) % 3].charAt(ae - 1);
+  const ag = Math.floor(ab / 100000) % 20;
+  const ah = ['ABCDEFGHJKLMNPQRSTUV', 'FGHJKLMNPQRSTUVABCDE'][(c - 1) % 2].charAt(ag);
+
+  function pad(val) {
+    if (val < 10) {
+      val = `0000${val}`;
+    } else if (val < 100) {
+      val = `000${val}`;
+    } else if (val < 1000) {
+      val = `00${val}`;
+    } else if (val < 10000) {
+      val = `0${val}`;
+    }
+    return val;
+  }
+  aa = Math.floor(aa % 100000);
+  aa = pad(aa);
+  ab = Math.floor(ab % 100000);
+  ab = pad(ab);
+  return `${c + ad} ${af}${ah} ${aa} ${ab}`;
+};
+
 
 function removePopups() {
   mapArea.querySelector('.symbol-info-div') ? mapArea.querySelector('.symbol-info-div').remove() : null;
@@ -122,28 +174,31 @@ function toggleDraggableElement(event) {
 
 const createPopupDivAboveSymbol = (element) => {
   const div = document.createElement('div');
-
+  div.className = 'symbol-info-div mdc-elevation--z24';
   element.target.parentElement.appendChild(div);
 
-  div.style.position = 'absolute';
-  div.style.background = 'white';
-  div.style.border = '2px red solid';
-  div.style.textAlign = 'left';
-  div.style.fontSize = '1.2rem';
-  div.style.padding = '20px';
-  div.style.lineHeight = '1.6rem';
-  div.style.minWidth = '250px';
-  div.style.width = 'max-content';
-  div.style.maxWidth = '350px';
-  div.style.borderRadius = '10px';
+  // div.style.position = 'absolute';
+  // div.style.background = 'white';
+  // div.style.border = '2px #191970 solid';
+  // div.style.textAlign = 'left';
+  // div.style.fontSize = '1.2rem';
+  // div.style.padding = '20px';
+  // div.style.lineHeight = '1.6rem';
+  // div.style.minWidth = '250px';
+  // div.style.width = 'max-content';
+  // div.style.maxWidth = '415px';
+  // div.style.borderRadius = '10px';
 
-  const locc = marker.getLatLng().toString();
-  console.log(marker.getLatLng());
-  div.innerHTML = `<strong class="mdc-typography--headline5" style="font-weight:500; text-decoration:underline;">Location:</strong> <span class="mdc-typography--headline6">${locc}</span>`;
+  const currentMarkerLocation = MGRSString(marker.getLatLng().lat, marker.getLatLng().lng);
+
+  div.innerHTML = `<div class="popup-symbol-data">
+        <strong class="mdc-typography--headline5" style="font-weight:500; text-decoration:underline;">Location:</strong>
+        <span class="mdc-typography--headline6">${currentMarkerLocation}</span>
+      </div>`;
 
   Object.entries(element.data).forEach((key) => {
     const newDiv = document.createElement('div');
-    div.className = 'symbol-info-div mdc-elevation--z24';
+    newDiv.className = 'popup-symbol-data';
     div.appendChild(newDiv);
     newDiv.innerHTML += `<strong class="mdc-typography--headline5" style="font-weight:500; text-decoration:underline;">${key[0]}:</strong> <span class="mdc-typography--headline6">${key[1]}</span>`;
     return newDiv;
@@ -214,7 +269,7 @@ const createPopupDivAboveSymbol = (element) => {
     outerArrowDiv.style.position = 'absolute';
     outerArrowDiv.style.borderStyle = 'solid';
     outerArrowDiv.style.borderWidth = '0 15px 15px';
-    outerArrowDiv.style.borderColor = 'transparent transparent #ff0000 transparent';
+    outerArrowDiv.style.borderColor = 'transparent transparent #191970 transparent';
 
     const innerArrowDiv = outerArrowDiv.cloneNode(true);
     innerArrowDiv.style.borderColor = 'transparent transparent #ffffff transparent';

@@ -730,6 +730,7 @@ class MilSym {
         case 'symbol':
           return this.symbol;
         case 'echelon':
+
           // Select boxes return a value of "None" on page load instead of undefined. This is due to Material Design instantiating
           return this._echelon === 'none' ? undefined : this.echelon;
         case 'mod1':
@@ -776,6 +777,7 @@ class MilSym {
           // If the symbol is a TMT, then set the affiliation data to 'None'
           return 'None';
         default:
+
           // If the symbol is literally anything other than a GCM/TMT then 'prettify' it
           // (eg- turns 'friendlyTemplated' into 'Friendly Templated')
           // Get the first letter of the affiliation string and upper case it, then combine it back to the rest of the string
@@ -785,10 +787,18 @@ class MilSym {
       }
     };
 
+    const moreReadableString = (element) => {
+      if (element !== undefined) {
+        return element.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+      }
+    };
+
+
     const dataObj = {
       Symbol: this._symbol,
       Affiliation: affiliationString(),
-      Echelon: this._echelon === 'none' ? 'None' : this._echelon,
+      Echelon: this._echelon === 'none' ? 'None' : moreReadableString(this._echelon),
+      // Echelon: echelonString(),
       'Modifier 1': this._mod1,
       'Modifier 2': this._mod2,
       'Unique Designation': this._uniqueDesignation ? this._uniqueDesignation.toUpperCase() : 'None',
@@ -831,6 +841,7 @@ class MilSym {
 
     // If MainMS is in the window, then set the viewboxes, otherwise wait 300ms
     'MainMS' in window ? setViewBox() : setTimeout(setViewBox, 300);
+
 
     //! REMOVE ON PRODUCTION -- This just displays formatted JSON data for the current data-symbol-info
     if ('MainMS' in window) {

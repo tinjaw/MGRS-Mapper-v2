@@ -269,3 +269,29 @@ div#pre-myJSONString {
   letter-spacing: 1.15px;
   font-size: larger;
 }
+
+// Popup
+.symbol-info-div {
+  position: absolute;
+  background: white;
+  border: 2px midnightblue solid;
+  //text-align: left;
+  // font-size: 1.2rem;
+  padding: 20px;
+  //line-height: 1.6rem;
+  min-width: 250px;
+  width: max-content;
+  max-width: 415px;
+  border-radius: 10px;
+
+  .popup-symbol-data {
+    padding-top: 0.1rem;
+    padding-bottom: 0.6rem;
+  }
+  button {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+  }
+}
