@@ -102,6 +102,10 @@ function manipulateSymbol() {
 
 // This toggles the Moveable.js control box on whatever element you click on
 function toggleDraggableElement(event) {
+  // If the user clicks the map and the popup is visible, remove it
+  document.querySelector('.symbol-info-div') ? document.querySelector('.symbol-info-div').remove() : null;
+  document.querySelector('.popup-arrow') ? document.querySelector('.popup-arrow').remove() : null;
+
   document.querySelectorAll('.draggable').forEach((key) => {
     // https://stackoverflow.com/questions/24183286/drag-and-drop-to-div-behind-absolutely-positioned-div
     const elements = document.elementsFromPoint(event.clientX, event.clientY);
@@ -341,7 +345,13 @@ const drop = (event) => {
       },
     };
 
+    // If the user clicks the map and the popup is visible, remove it
+    document.querySelector('.symbol-info-div') ? document.querySelector('.symbol-info-div').remove() : null;
+    document.querySelector('.popup-arrow') ? document.querySelector('.popup-arrow').remove() : null;
+
+
     createPopupDivAboveSymbol(symbolData);
+
     // console.log(symbolData);
     // // Create the marker popup content
     // const content = L.DomUtil.create('div', 'content');

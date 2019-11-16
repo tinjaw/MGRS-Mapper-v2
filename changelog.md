@@ -2,6 +2,12 @@
 
 ---
 
+## 16NOV19
+
+- Fixed a bug where the popups would stack on top of each other with each click
+
+---
+
 ## 13NOV19
 
 - Got the dynamic popup box to work in test environment
