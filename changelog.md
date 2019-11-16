@@ -5,6 +5,7 @@
 ## 16NOV19
 
 - Fixed a bug where the popups would stack on top of each other with each click
+- Fixed a bug with the popup arrow not aligning to the center of the popup box. I did this by appending the outerArrowDiv and innerArrowDiv to the symbolInfoDiv and then adjusted all the values by using CSS calc()
 
 ---
 
