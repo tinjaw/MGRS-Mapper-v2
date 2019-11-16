@@ -3,6 +3,13 @@ import Moveable from 'moveable';
 const newSVGDiv = document.querySelector('.newSVG');
 const mapArea = document.querySelector('#main-content');
 
+
+function removePopups() {
+  mapArea.querySelector('.symbol-info-div') ? mapArea.querySelector('.symbol-info-div').remove() : null;
+  mapArea.querySelector('.popup-arrow') ? mapArea.querySelector('.popup-arrow').remove() : null;
+}
+
+
 // *********************************************************************************** //
 // * MOVEABLE.JS                                                                     * //
 // *********************************************************************************** //
@@ -41,19 +48,12 @@ function manipulateSymbol() {
   // Get the last target in the array and set it
   moveable.target = arr.slice(-1)[0];
 
+
   //* DRAGGABLE *//
   // Since the map marker already has a draggable feature, we don't need it in moveable.js
-  moveable.on('drag', ({ target, left, top }) => {
-    // target.style.left = `${left}px`;
-    // target.style.top = `${top}px`;
-    target.parentElement.childNodes.forEach((key) => {
-      if (key.className === 'symbol-info-div') {
-        key.remove();
-      }
-      if (key.className === 'popup-arrow') {
-        key.remove();
-      }
-    });
+  moveable.on('drag', () => {
+    // If the user drags the symbol and the popup is visible, remove it
+    removePopups();
   });
 
   //* SCALABLE *//
@@ -62,9 +62,12 @@ function manipulateSymbol() {
   });
 
   //* ROTATABLE *//
-  moveable.on('rotate', ({ target, transform }) => {
-    target.style.transform = transform;
-  });
+  moveable.on('rotateStart', () => {
+    removePopups();
+  })
+    .on('rotate', ({ target, transform }) => {
+      target.style.transform = transform;
+    });
 
   //* PINCHABLE *//
   moveable.on('pinch', ({ target, transform }) => {
@@ -77,6 +80,7 @@ function manipulateSymbol() {
   // Set the absolute minimum width of your marker in pixels
   const minimumMarkerWidth = 40;
   moveable.on('resizeStart', ({target}) => {
+    removePopups();
     // If the marker width is less than or equal to minimumMarkerWidth, add 1px to marker width so it will skip the next if statement
     if (parseInt(target.style.width) <= minimumMarkerWidth) target.style.width = `${minimumMarkerWidth + 1}px`;
   })
@@ -103,8 +107,7 @@ function manipulateSymbol() {
 // This toggles the Moveable.js control box on whatever element you click on
 function toggleDraggableElement(event) {
   // If the user clicks the map and the popup is visible, remove it
-  mapArea.querySelector('.symbol-info-div') ? mapArea.querySelector('.symbol-info-div').remove() : null;
-  mapArea.querySelector('.popup-arrow') ? mapArea.querySelector('.popup-arrow').remove() : null;
+  removePopups();
 
   document.querySelectorAll('.draggable').forEach((key) => {
     // https://stackoverflow.com/questions/24183286/drag-and-drop-to-div-behind-absolutely-positioned-div
@@ -132,36 +135,40 @@ const createPopupDivAboveSymbol = (element) => {
   div.style.minWidth = '250px';
   div.style.width = 'max-content';
   div.style.maxWidth = '350px';
+  div.style.borderRadius = '10px';
 
-  div.innerHTML = '<strong>Location:</strong> 18T VP 12345 67890';
+  const locc = marker.getLatLng().toString();
+  console.log(marker.getLatLng());
+  div.innerHTML = `<strong class="mdc-typography--headline5" style="font-weight:500; text-decoration:underline;">Location:</strong> <span class="mdc-typography--headline6">${locc}</span>`;
 
   Object.entries(element.data).forEach((key) => {
     const newDiv = document.createElement('div');
-    div.className = 'symbol-info-div';
+    div.className = 'symbol-info-div mdc-elevation--z24';
     div.appendChild(newDiv);
-    newDiv.innerHTML += `<strong>${key[0]}:</strong> ${key[1]}`;
+    newDiv.innerHTML += `<strong class="mdc-typography--headline5" style="font-weight:500; text-decoration:underline;">${key[0]}:</strong> <span class="mdc-typography--headline6">${key[1]}</span>`;
     return newDiv;
   });
 
+
   const symbolInfoDiv = document.querySelector('.symbol-info-div');
 
-  const x = element.target.getBBox().x + element.target.getBBox().width / 2;
-  const y = element.target.getBBox().y + element.target.getBBox().height / 2;
-  const svgCenterPoint = element.target.createSVGPoint();
-  svgCenterPoint.x = x;
-  svgCenterPoint.y = y;
+  const deleteMarkerButton = L.DomUtil.create('button', 'deleteMarker mdc-button mdc-button--raised');
 
+  deleteMarkerButton.setAttribute('type', 'button');
+  deleteMarkerButton.insertAdjacentHTML('afterbegin',
+    `<div class="mdc-button__ripple"></div>
+        <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+      <span class="mdc-button__label">Delete Symbol</span>
+    `);
 
-  // Distances from the center point of the SVG to the Top, right, bottom and left of the window
-  const distancesFromSVGCenterPoint = {
-    TOP: Math.round(svgCenterPoint.matrixTransform(element.target.getScreenCTM()).y),
-    RIGHT: Math.round(window.innerWidth - svgCenterPoint.matrixTransform(element.target.getScreenCTM()).x),
-    BOTTOM: Math.round(window.innerHeight - svgCenterPoint.matrixTransform(element.target.getScreenCTM()).y),
-    LEFT: Math.round(svgCenterPoint.matrixTransform(element.target.getScreenCTM()).x),
+  deleteMarkerButton.onclick = () => {
+    map.removeLayer(marker);
+    moveable.target = undefined;
   };
+  symbolInfoDiv.appendChild(deleteMarkerButton);
 
 
-  function findTopValueOfPopupOnRight() {
+  function findTopValueOfPopup() {
     const thePOP = window.innerHeight - symbolInfoDiv.getBoundingClientRect().bottom - symbolInfoDiv.getBoundingClientRect().top;
     const theSVG = window.innerHeight - element.boundingClientRect.bottom - element.boundingClientRect.top;
     const theVal = (thePOP - theSVG) / 2;
@@ -175,40 +182,28 @@ const createPopupDivAboveSymbol = (element) => {
   }
 
 
-  // prettier-ignore
-  function displayPopup(direction) {
+  function displayPopupArrow(direction) {
     const outerArrowDiv = document.createElement('div');
     outerArrowDiv.classList.add('popup-arrow');
-    const popupLeft = symbolInfoDiv.getBoundingClientRect().left;
-    const popupRight = symbolInfoDiv.getBoundingClientRect().right;
-    const popupOffset = element.bbox.x / 2 + element.bbox.y;
 
     switch (direction) {
       case 'top':
         outerArrowDiv.style.transform = 'rotate(180deg)';
-        // outerArrowDiv.style.top = `${symbolInfoDiv.offsetTop + symbolInfoDiv.getBoundingClientRect().height}px`;
-        // outerArrowDiv.style.left = `${symbolInfoDiv.offsetLeft + (symbolInfoDiv.offsetWidth / 2) - 15}px`;
         outerArrowDiv.style.top = '100%';
         outerArrowDiv.style.left = 'calc(50% - 15px)';
         break;
       case 'right':
         outerArrowDiv.style.transform = 'rotate(-90deg)';
-        // outerArrowDiv.style.top = `${(element.boundingClientRect.height / 2) - 15}px`;
-        // outerArrowDiv.style.left = `${element.boundingClientRect.width - 2}px`;
         outerArrowDiv.style.top = 'calc(50% - 7.5px)';
         outerArrowDiv.style.left = 'calc(0% - 24px)';
         break;
       case 'bottom':
         outerArrowDiv.style.transform = 'rotate(0deg)';
-        // outerArrowDiv.style.top = `${symbolInfoDiv.offsetTop - 15}px`;
-        // outerArrowDiv.style.left = `${symbolInfoDiv.offsetLeft + (symbolInfoDiv.offsetWidth / 2) - 15}px`;
         outerArrowDiv.style.top = 'calc(0% - 15px)';
         outerArrowDiv.style.left = 'calc(50% - 15px)';
         break;
       case 'left':
         outerArrowDiv.style.transform = 'rotate(90deg)';
-        // outerArrowDiv.style.left = `${popupRight - (popupOffset / 2)}px`;
-        // outerArrowDiv.style.top = `${((symbolInfoDiv.offsetLeft + symbolInfoDiv.offsetHeight) / -2) - 30}px`;
         outerArrowDiv.style.top = 'calc(50% - 7.5px)';
         outerArrowDiv.style.left = 'calc(100% - 7.5px)';
         break;
@@ -216,25 +211,22 @@ const createPopupDivAboveSymbol = (element) => {
         break;
     }
 
-    outerArrowDiv.style.width = 0;
-    outerArrowDiv.style.height = 0;
     outerArrowDiv.style.position = 'absolute';
     outerArrowDiv.style.borderStyle = 'solid';
     outerArrowDiv.style.borderWidth = '0 15px 15px';
     outerArrowDiv.style.borderColor = 'transparent transparent #ff0000 transparent';
-    // symbolInfoDiv.insertAdjacentElement('afterend', outerArrowDiv);
 
     const innerArrowDiv = outerArrowDiv.cloneNode(true);
     innerArrowDiv.style.borderColor = 'transparent transparent #ffffff transparent';
     innerArrowDiv.style.transform = 'rotate(0deg)';
     innerArrowDiv.style.top = '3px';
     innerArrowDiv.style.left = '-15px';
-    // outerArrowDiv.insertAdjacentElement('beforeend', innerArrowDiv);
+
     outerArrowDiv.appendChild(innerArrowDiv);
     symbolInfoDiv.appendChild(outerArrowDiv);
   }
 
-  // Find the most open space
+  // Find the direction with the most open space on the window
   // https://stackoverflow.com/questions/11142884/fast-way-to-get-the-min-max-values-among-properties-of-object
   const maxMinVal = (obj) => {
     const sortedEntriesByVal = Object.entries(obj).sort(([, v1], [, v2]) => v1 - v2);
@@ -248,31 +240,24 @@ const createPopupDivAboveSymbol = (element) => {
   // THIS IS FOR THE POPUP, NOT THE ARROW
   switch (maxMinVal(element.distances).max[0]) {
     case 'svgFromTop':
-      console.log('TOP');
       div.style.left = `${findCenterPointOfPopup()}px`;
       div.style.top = `${(symbolInfoDiv.getBoundingClientRect().top - symbolInfoDiv.getBoundingClientRect().bottom) - 60}px`;
-      displayPopup('top');
+      displayPopupArrow('top');
       break;
     case 'svgFromRight':
-      console.log('RIGHT');
       div.style.left = `${element.boundingClientRect.width + 20}px`;
-      div.style.top = `${findTopValueOfPopupOnRight()}px`;
-      displayPopup('right');
+      div.style.top = `${findTopValueOfPopup()}px`;
+      displayPopupArrow('right');
       break;
     case 'svgFromBottom':
-      console.log('BOTTOM');
       div.style.left = `${findCenterPointOfPopup()}px`;
       div.style.top = `${element.boundingClientRect.height + 20}px`;
-      displayPopup('bottom');
+      displayPopupArrow('bottom');
       break;
     case 'svgFromLeft':
-      console.log('LEFT');
-      // console.log(findTopValueOfPopupOnRight(), findCenterPointOfPopup());
-      // div.style.right = `${element.distances.svgFromRight + element.boundingClientRect.width + 10}px`;
-      // div.style.top = `${distancesFromSVGCenterPoint.TOP - symbolInfoDiv.getBoundingClientRect().height / 2}px`;
-      div.style.top = `${findTopValueOfPopupOnRight()}px`;
+      div.style.top = `${findTopValueOfPopup()}px`;
       div.style.left = `-${symbolInfoDiv.getBoundingClientRect().width + 20}px`;
-      displayPopup('left');
+      displayPopupArrow('left');
       break;
     default:
       break;
@@ -357,8 +342,7 @@ const drop = (event) => {
     };
 
     // If the user clicks the map and the popup is visible, remove it
-    mapArea.querySelector('.symbol-info-div') ? mapArea.querySelector('.symbol-info-div').remove() : null;
-    mapArea.querySelector('.popup-arrow') ? mapArea.querySelector('.popup-arrow').remove() : null;
+    removePopups();
 
 
     createPopupDivAboveSymbol(symbolData);
