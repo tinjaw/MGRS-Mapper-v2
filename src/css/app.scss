@@ -30,6 +30,35 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
+.drag-and-drop-reminder {
+  position: absolute;
+  top: 7%;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  left: 0%;
+  color: rgba(0, 0, 0, 0.6);
+  animation: pulsate 1.5s infinite;
+  opacity: 0.5;
+  .material-icons {
+    position: absolute;
+    width: 100%;
+    left: -22%;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
 .imageList {
   display: flex;
   flex-direction: column;

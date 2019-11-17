@@ -639,6 +639,13 @@ window.onload = () => {
     // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
     selectCommandPost.isMenuOpen_ ? Resizer('.commandpostFigure svg', 100, 100) : null;
   });
+
+  // Add the pulsating prompt above the symbol in the symbol panel
+  document.querySelector('.newSVG').insertAdjacentHTML('beforebegin',
+    `<span class="mdc-select-helper-text mdc-select-helper-text--persistent drag-and-drop-reminder">
+      <i class="material-icons">format_shapes</i>
+      Click and Drag the Symbol Onto the Map
+    </span>`);
 };
 
 export { selectAffiliation };

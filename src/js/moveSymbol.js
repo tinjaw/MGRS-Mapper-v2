@@ -423,6 +423,8 @@ newSVGDiv.addEventListener('mouseover', () => {
 
 
 newSVGDiv.ondragstart = (event) => {
+  // Remove the pulsating prompt above the symbol when the user begins to drag
+  document.querySelector('.drag-and-drop-reminder') ? document.querySelector('.drag-and-drop-reminder').remove() : null;
   // For some reason I had to run this again to get the symbol amplifiers to show up. This seems to be an issue with the bounceInAnimation
   MainMS.placeSymbol();
   // Deep clone the symbol panel
