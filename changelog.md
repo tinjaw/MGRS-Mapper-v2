@@ -12,6 +12,7 @@
 - added moreReadableString() function in app.js to make Popup data better to read
 - Implemented popup close button
 - Moved JS styles into SCSS file
+- Added an event listener that updates the MGRS coordinates when the mouse moves
 
 ---
 

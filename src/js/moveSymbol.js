@@ -465,3 +465,5 @@ mapArea.onclick = toggleDraggableElement;
 
 
 window.moveable = moveable;
+
+export { removePopups, MGRSString };
