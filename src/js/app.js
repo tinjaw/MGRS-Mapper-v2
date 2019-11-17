@@ -730,7 +730,6 @@ class MilSym {
         case 'symbol':
           return this.symbol;
         case 'echelon':
-
           // Select boxes return a value of "None" on page load instead of undefined. This is due to Material Design instantiating
           return this._echelon === 'none' ? undefined : this.echelon;
         case 'mod1':
@@ -768,7 +767,7 @@ class MilSym {
     this.location.append(svg);
 
 
-    const affiliationString = () => {
+    const moreReadable_Affiliation = () => {
       switch (this.type) {
         case 'Graphic Control Measure':
           // If the symbol is a GCM, then set the affiliation data to 'None'
@@ -777,7 +776,6 @@ class MilSym {
           // If the symbol is a TMT, then set the affiliation data to 'None'
           return 'None';
         default:
-
           // If the symbol is literally anything other than a GCM/TMT then 'prettify' it
           // (eg- turns 'friendlyTemplated' into 'Friendly Templated')
           // Get the first letter of the affiliation string and upper case it, then combine it back to the rest of the string
@@ -787,29 +785,45 @@ class MilSym {
       }
     };
 
-    const moreReadableString = (element) => {
+    // translates camel cased string (eg- "companyTroopBattery" into "Company/Troop/Battery")
+    const moreReadable_Echelon = (element) => {
       if (element !== undefined) {
-        return element.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        const str = element.charAt(0).toUpperCase() + element.slice(1);
+        return str.match(/[A-Z][a-z]+/g).join('/');
+      }
+    };
+
+    const moreReadable_ReinforcedReduced = (element) => {
+      if (element !== undefined) {
+        switch (element) {
+          case '–':
+            return 'Reduced (–)';
+          case '+':
+            return 'Reinforced (+)';
+          case '±':
+            return 'Reinforced & Reduced (±)';
+          default:
+            return 'None';
+        }
       }
     };
 
 
     const dataObj = {
       Symbol: this._symbol,
-      Affiliation: affiliationString(),
-      Echelon: this._echelon === 'none' ? 'None' : moreReadableString(this._echelon),
-      // Echelon: echelonString(),
+      Type: militarySymbolsObject[this._symbol].type,
+      Affiliation: moreReadable_Affiliation(),
+      Echelon: this._echelon === 'none' ? 'None' : moreReadable_Echelon(this._echelon),
       'Modifier 1': this._mod1,
       'Modifier 2': this._mod2,
       'Unique Designation': this._uniqueDesignation ? this._uniqueDesignation.toUpperCase() : 'None',
       'Higher Formation': this._higherFormation ? this._higherFormation.toUpperCase() : 'None',
-      'Reinforced or Reduced': this._reinforcedReduced ? this._reinforcedReduced : 'None',
-      Flying: this._flying ? this._flying : 'None',
-      Activity: this._activity ? this._activity : 'None',
-      Installation: this._installation ? this._installation : 'None',
-      'Task Force': this._taskForce ? this._taskForce : 'None',
+      'Reinforced or Reduced': this._reinforcedReduced ? moreReadable_ReinforcedReduced(this._reinforcedReduced) : 'None',
+      Flying: this._flying ? this._flying.toString().toUpperCase() : 'None',
+      Activity: this._activity ? this._activity.toString().toUpperCase() : 'None',
+      Installation: this._installation ? this._installation.toString().toUpperCase() : 'None',
+      'Task Force': this._taskForce ? this._taskForce.toString().toUpperCase() : 'None',
       'Command Post': this._commandPost ? this._commandPost : 'None',
-      Type: militarySymbolsObject[this._symbol].type,
     };
 
     // This will go through the dataObj and remove anything that is set to 'None'
