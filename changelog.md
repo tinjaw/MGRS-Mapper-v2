@@ -14,6 +14,7 @@
 - Moved JS styles into SCSS file
 - Added an event listener that updates the MGRS coordinates when the mouse moves
 - Added pulsating prompt to remind the user to drag the symbol onto the map
+- Tried and failed implementing the MGRS grid
 
 ---
 
