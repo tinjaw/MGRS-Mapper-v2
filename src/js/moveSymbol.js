@@ -209,6 +209,7 @@ const createPopupDivAboveSymbol = (element) => {
   };
   symbolInfoDiv.appendChild(deletePopupButton);
 
+  //! BUG: This is no longer working. When there are multiple markers on the page the delete button will not work. Try pushing the markers to an array
   // Add a button in the popup window that allows users to delete the selected marker
   const deleteMarkerButton = L.DomUtil.create('button', 'deleteMarker mdc-button mdc-button--raised');
   deleteMarkerButton.setAttribute('type', 'button');
@@ -392,18 +393,6 @@ const drop = (event) => {
     removePopups();
 
     createPopupDivAboveSymbol(symbolData);
-  });
-
-  marker.addEventListener('popupopen', () => {
-    console.log('popup opened');
-    const btn = L.DomUtil.create('button', 'deleteMarker', marker._popup._content);
-    btn.setAttribute('type', 'button');
-    btn.textContent = 'Delete Marker';
-    btn.onclick = () => {
-      map.removeLayer(marker);
-      moveable.target = undefined;
-    };
-    marker._popup._content.appendChild(btn);
   });
 };
 
