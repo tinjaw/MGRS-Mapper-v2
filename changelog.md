@@ -10,6 +10,8 @@
 - Set CSS styles for popup
 - Added function for translating LAT-LNG to MGRS
 - added moreReadableString() function in app.js to make Popup data better to read
+- Implemented popup close button
+- Moved JS styles into SCSS file
 
 ---
 

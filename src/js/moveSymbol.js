@@ -160,8 +160,7 @@ function manipulateSymbol() {
 function toggleDraggableElement(event) {
   // If the user clicks the map and the popup is visible, remove it
   removePopups();
-
-  document.querySelectorAll('.draggable').forEach((key) => {
+  mapArea.querySelectorAll('.draggable').forEach((key) => {
     // https://stackoverflow.com/questions/24183286/drag-and-drop-to-div-behind-absolutely-positioned-div
     const elements = document.elementsFromPoint(event.clientX, event.clientY);
     const chosenTarget = elements.find(key => key.matches('.draggable'));
@@ -171,58 +170,59 @@ function toggleDraggableElement(event) {
   });
 }
 
-
+// Creates the popup and popup arrow. Finds the most open space in the window and automatically positions it
+// *********************************************************************************** //
+// * CUSTOM POPUP AND POPUP ARROW                                                    * //
+// *********************************************************************************** //
 const createPopupDivAboveSymbol = (element) => {
   const div = document.createElement('div');
   div.className = 'symbol-info-div mdc-elevation--z24';
   element.target.parentElement.appendChild(div);
 
-  // div.style.position = 'absolute';
-  // div.style.background = 'white';
-  // div.style.border = '2px #191970 solid';
-  // div.style.textAlign = 'left';
-  // div.style.fontSize = '1.2rem';
-  // div.style.padding = '20px';
-  // div.style.lineHeight = '1.6rem';
-  // div.style.minWidth = '250px';
-  // div.style.width = 'max-content';
-  // div.style.maxWidth = '415px';
-  // div.style.borderRadius = '10px';
-
+  // Translate the current marker postion from Lat-Lon to MGRS
   const currentMarkerLocation = MGRSString(marker.getLatLng().lat, marker.getLatLng().lng);
 
+  // Add the marker location as the first value in the popup
   div.innerHTML = `<div class="popup-symbol-data">
-        <strong class="mdc-typography--headline5" style="font-weight:500; text-decoration:underline;">Location:</strong>
+        <strong class="mdc-typography--headline5">Location:</strong>
         <span class="mdc-typography--headline6">${currentMarkerLocation}</span>
       </div>`;
 
+  // Populate popup with data (element.data gets data from "symbolData")
   Object.entries(element.data).forEach((key) => {
     const newDiv = document.createElement('div');
     newDiv.className = 'popup-symbol-data';
     div.appendChild(newDiv);
-    newDiv.innerHTML += `<strong class="mdc-typography--headline5" style="font-weight:500; text-decoration:underline;">${key[0]}:</strong> <span class="mdc-typography--headline6">${key[1]}</span>`;
+    newDiv.innerHTML += `<strong class="mdc-typography--headline5">${key[0]}:</strong> <span class="mdc-typography--headline6">${key[1]}</span>`;
     return newDiv;
   });
 
-
   const symbolInfoDiv = document.querySelector('.symbol-info-div');
 
-  const deleteMarkerButton = L.DomUtil.create('button', 'deleteMarker mdc-button mdc-button--raised');
+  // Add a button for users to close out of the popup
+  const deletePopupButton = L.DomUtil.create('button', 'deletePopup ');
+  deletePopupButton.setAttribute('type', 'button');
+  deletePopupButton.textContent = 'X';
+  deletePopupButton.onclick = () => {
+    div.remove();
+    moveable.target = undefined;
+  };
+  symbolInfoDiv.appendChild(deletePopupButton);
 
+  // Add a button in the popup window that allows users to delete the selected marker
+  const deleteMarkerButton = L.DomUtil.create('button', 'deleteMarker mdc-button mdc-button--raised');
   deleteMarkerButton.setAttribute('type', 'button');
   deleteMarkerButton.insertAdjacentHTML('afterbegin',
     `<div class="mdc-button__ripple"></div>
         <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
-      <span class="mdc-button__label">Delete Symbol</span>
-    `);
-
+      <span class="mdc-button__label">Delete Symbol</span>`);
   deleteMarkerButton.onclick = () => {
     map.removeLayer(marker);
     moveable.target = undefined;
   };
   symbolInfoDiv.appendChild(deleteMarkerButton);
 
-
+  // Aids in positioning the symbol popup
   function findTopValueOfPopup() {
     const thePOP = window.innerHeight - symbolInfoDiv.getBoundingClientRect().bottom - symbolInfoDiv.getBoundingClientRect().top;
     const theSVG = window.innerHeight - element.boundingClientRect.bottom - element.boundingClientRect.top;
@@ -230,13 +230,13 @@ const createPopupDivAboveSymbol = (element) => {
     return theVal;
   }
 
-
+  // Aids in positioning the symbol popup
   function findCenterPointOfPopup() {
     const ddd = (symbolInfoDiv.getBoundingClientRect().width - element.target.getBoundingClientRect().width) / -2;
     return ddd;
   }
 
-
+  // Sets the position of the arrow div in the popup
   function displayPopupArrow(direction) {
     const outerArrowDiv = document.createElement('div');
     outerArrowDiv.classList.add('popup-arrow');
@@ -266,13 +266,8 @@ const createPopupDivAboveSymbol = (element) => {
         break;
     }
 
-    outerArrowDiv.style.position = 'absolute';
-    outerArrowDiv.style.borderStyle = 'solid';
-    outerArrowDiv.style.borderWidth = '0 15px 15px';
-    outerArrowDiv.style.borderColor = 'transparent transparent #191970 transparent';
-
     const innerArrowDiv = outerArrowDiv.cloneNode(true);
-    innerArrowDiv.style.borderColor = 'transparent transparent #ffffff transparent';
+    innerArrowDiv.classList.add('popup-arrow-inner');
     innerArrowDiv.style.transform = 'rotate(0deg)';
     innerArrowDiv.style.top = '3px';
     innerArrowDiv.style.left = '-15px';
@@ -372,9 +367,6 @@ const drop = (event) => {
     key.style.border = 'none';
   });
 
-  // IOT push a marker to the front when clicked we need to set the click counter to zero
-  const zIndexCounter = 0;
-
   marker.addEventListener('click', (event) => {
     // const symbolInfo = JSON.parse(event.target.getIcon().options.html.dataset.symbolInfo);
     const chosenTarget = event.target.getIcon().options.html;
@@ -399,54 +391,7 @@ const drop = (event) => {
     // If the user clicks the map and the popup is visible, remove it
     removePopups();
 
-
     createPopupDivAboveSymbol(symbolData);
-
-    // console.log(symbolData);
-    // // Create the marker popup content
-    // const content = L.DomUtil.create('div', 'content');
-    // content.innerHTML = `<span class="mdc-typography--headline6">Coords:
-    //                       <strong>${marker.getLatLng(marker).lat.toFixed(4)}, ${marker.getLatLng(marker).lng.toFixed(4)}</strong>
-    //                       <br/>
-    //                       <strong>ID: ${marker._leaflet_id}</strong>
-    //                       <br/>
-    //                       <strong>Symbol: ${symbolInfo.Symbol}</strong>
-    //                       <br/>
-    //                     </span>`;
-
-    // marker.bindPopup(content, {
-    //   // This will place the popup just above the symbol. 2.5 was arbitrarily chosen
-    //   offset: new L.Point(0, parseInt(-marker._icon.clientHeight / 2.5)),
-    //   // maxWidth: 'auto',
-    // });
-
-    // // Open the popup on click
-    // if (!marker._popup.isOpen()) {
-    //   setTimeout(() => {
-    //     marker.openPopup();
-    //   }, 10);
-    // }
-
-    // //! These next 3 consts are bad voodoo but worth looking at
-    // // Take scrollWidth of popup : 285 / 2 = 142.5
-    // // Take scrollWidth of svg: 533 / 2 = 266.5
-    // // 266.5 + 142.5 = 409 minus 9 = 400px
-    // // const popupContainer = marker._popup._containerWidth / 2;
-    // // const markerWidth = marker._icon.scrollWidth / 2;
-    // // const newWidthValue = (markerWidth + popupContainer) - 9;
-    // // document.querySelector('.leaflet-popup.leaflet-zoom-animated').style.transform = `translate3d(${newWidthValue}px, 422px, 0px)`;
-
-    // // Increment the click counter
-    // zIndexCounter += 1;
-    // // Reset all markers z-indexes to 100
-    // map._container.querySelectorAll('.leaflet-marker-icon').forEach((element) => {
-    //   const clickedSymbol = element;
-    //   clickedSymbol.style.zIndex = 100;
-    // });
-
-    // const newZIndex = marker._icon.style.zIndex + zIndexCounter;
-    // // Now set the new z-index of the marker with the click counter added
-    // marker._icon.style.zIndex = newZIndex;
   });
 
   marker.addEventListener('popupopen', () => {

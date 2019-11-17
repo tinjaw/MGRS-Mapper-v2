@@ -1,6 +1,10 @@
 // This sets all <h1>,...,<h6> elements with Material headline1,...,headline6 typography styles
 // Check out the MDC Web documentation for how to use MDC Typography Sass mixins:
 // https://github.com/material-components/material-components-web/tree/master/packages/mdc-typography
+html {
+  overflow: hidden;
+}
+
 h1 {
   @include mdc-typography(headline1);
 }
