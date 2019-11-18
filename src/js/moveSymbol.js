@@ -174,9 +174,10 @@ function toggleDraggableElement(event) {
 // *********************************************************************************** //
 // * CUSTOM POPUP AND POPUP ARROW                                                    * //
 // *********************************************************************************** //
-const createPopupDivAboveSymbol = (element) => {
+const createPopupDiv = (element) => {
   const div = document.createElement('div');
   div.className = 'symbol-info-div mdc-elevation--z24';
+  // "element" is the symbolData object that we created in the marker click event listener below
   element.target.parentElement.appendChild(div);
 
   // Translate the current marker postion from Lat-Lon to MGRS
@@ -218,7 +219,9 @@ const createPopupDivAboveSymbol = (element) => {
         <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
       <span class="mdc-button__label">Delete Symbol</span>`);
   deleteMarkerButton.onclick = () => {
-    map.removeLayer(marker);
+    // Delete the marker by its ID
+    // https://gis.stackexchange.com/questions/201958/remove-leaflet-markers-leaflet-id/201975
+    markerGroup.removeLayer(element.id);
     moveable.target = undefined;
   };
   symbolInfoDiv.appendChild(deleteMarkerButton);
@@ -352,15 +355,14 @@ const drop = (event) => {
     className: 'militarySymbolMarker',
   });
 
-
   const marker = new L.Marker(map.mouseEventToLatLng(event), {
     icon: militarySymbolMarker,
     draggable: 'true',
     riseOnHover: true,
   });
   window.marker = marker;
-
-  marker.addTo(map);
+  // Keep all the markers in a group
+  marker.addTo(markerGroup);
 
   // Since the default DivIcon has a white background and a black border, we need to make it invisible
   document.querySelectorAll('.leaflet-div-icon').forEach((key) => {
@@ -369,30 +371,27 @@ const drop = (event) => {
   });
 
   marker.addEventListener('click', (event) => {
-    // const symbolInfo = JSON.parse(event.target.getIcon().options.html.dataset.symbolInfo);
+    // This is all the data that we are going to pass up into the marker popup window
     const chosenTarget = event.target.getIcon().options.html;
     const symbolData = {
       target: chosenTarget,
-      bbox: {
-        x: chosenTarget.getBBox().x,
-        y: chosenTarget.getBBox().y,
-        width: chosenTarget.getBBox().width,
-        height: chosenTarget.getBBox().height,
-      },
       boundingClientRect: chosenTarget.getBoundingClientRect(),
       data: JSON.parse(chosenTarget.dataset.symbolInfo),
+      // calculate the distances of the chosen symbol to the top, bottom, left and right of the window
+      // This will be used to find the most open space for the popup
       distances: {
         svgFromTop: chosenTarget.getBoundingClientRect().top,
         svgFromRight: window.innerWidth - chosenTarget.getBoundingClientRect().right,
         svgFromBottom: window.innerHeight - chosenTarget.getBoundingClientRect().bottom,
         svgFromLeft: chosenTarget.getBoundingClientRect().left,
       },
+      // IOT delete the markers, we need to pass the unique ID data
+      id: marker._leaflet_id,
     };
 
     // If the user clicks the map and the popup is visible, remove it
     removePopups();
-
-    createPopupDivAboveSymbol(symbolData);
+    createPopupDiv(symbolData);
   });
 };
 

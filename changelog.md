@@ -2,6 +2,12 @@
 
 ---
 
+## 18NOV19
+
+- Fixed a very difficult bug that prevented markers from being deleted if there were more than 2 on the map. This was due to creating my own popup solution. Since I don't know how to bind the popup data to the symbol it caused a lot of problems. This issue was solved by creating a layerGroup and adding all my markers to it. Then in the symbolData object I created a ID key with a unique value of 'marker.\_leaflet_id'. This object was then passed into the createPopupDiv() function and it allowed me to delete each marker by their own unique ID. Solution was found [here](https://gis.stackexchange.com/questions/201958/remove-leaflet-markers-leaflet-id/201975)
+
+---
+
 ## 16NOV19
 
 - Fixed a bug where the popups would stack on top of each other with each click
