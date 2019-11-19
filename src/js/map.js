@@ -1,4 +1,5 @@
 import L from 'leaflet';
+//! Currently not using Geodesy, LatLon or LeafletTextPath
 import geodesy, { LatLon } from 'geodesy/mgrs';
 import * as LeafletTextPath from 'leaflet-textpath';
 import { removePopups, MGRSString } from './moveSymbol';
@@ -47,425 +48,470 @@ const markerGroup = L.layerGroup().addTo(map);
 
 
 //! MGRS GRID TEST
-// https://github.com/eacaps/leaflet-mgrs-layer/tree/gh-pages
-// export default class LeafletMgrsLayer extends L.LayerGroup {
-//   constructor(options) {
-//     super([], options);
-//     this.nw_latlon = new LatLon(1, 1);
-//     this.sw_latlon = new LatLon(1, 1);
-//     this.ne_latlon = new LatLon(1, 1);
-//     this.se_latlon = new LatLon(1, 1);
-//     this.sw_grid_latlon = new LatLon(1, 1);
-//     this.ne_grid_latlon = new LatLon(1, 1);
-
-//     this.westernmost_lon = 0;
-//     this.easternmost_lon = 0;
-//     this.northernmost_lat = 0;
-//     this.southernmost_lat = 0;
-//     this.grid_width = 0;
-//     this.grid_height = 0;
-
-//     this.sw_grid_utm = {};
-//     this.ne_grid_utm = {};
-
-//     this.grid_south_row = [];
-//     this.grid_north_row = [];
-//     this.grid_west_column = [];
-//     this.grid_east_column = [];
-
-//     this.line_style_map = {
-//       // 100m grid
-//       default: {
-//         color: '#F00',
-//         weight: 1,
-//         opacity: 0.5,
-//       },
-//       // 1k grid
-//       1000: {
-//         color: 'green',
-//         weight: 2,
-//         opacity: 0.5,
-//       },
-//       // 10k grid
-//       10000: {
-//         color: 'blue',
-//         weight: 3,
-//         opacity: 0.5,
-//       },
-//       // 100k grid
-//       100000: {
-//         color: 'deeppink',
-//         weight: 4,
-//         opacity: 0.5,
-//       },
-//     };
-//     this.font_style_map = {
-//       default: {
-//         fill: '#F00',
-//         stroke: 'black',
-//         'stroke-width': '1',
-//         'font-size': '18',
-//       },
-//       100000: {
-//         fill: 'midnightblue',
-//         'font-size': '14',
-//       },
-//     };
-//   }
-
-//   getEvents() {
-//     return {
-//       moveend: this._moveEndHandler,
-//     };
-//   }
-
-//   _moveEndHandler() {
-//     this.clearLayers(true);
-//     this._update();
-//   }
-
-//   setBounds(map_bounds) {
-//     this.nw_latlng = map_bounds.getNorthWest();
-//     this.sw_latlng = map_bounds.getSouthWest();
-//     this.ne_latlng = map_bounds.getNorthEast();
-//     this.se_latlng = map_bounds.getSouthEast();
-
-//     // update geodesy LatLon objects from Leaflet LagLng objects
-//     this.nw_latlon.lat = this.nw_latlng.lat;
-//     this.nw_latlon.lon = this.nw_latlng.lng;
-//     this.sw_latlon.lat = this.sw_latlng.lat;
-//     this.sw_latlon.lon = this.sw_latlng.lng;
-//     this.ne_latlon.lat = this.ne_latlng.lat;
-//     this.ne_latlon.lon = this.ne_latlng.lng;
-//     this.se_latlon.lat = this.se_latlng.lat;
-//     this.se_latlon.lon = this.se_latlng.lng;
-
-//     // These comparison protect against warped/rotated map regions.
-//     // The corners are used to identify the extreme eastings/northings.
-//     this.easternmost_lon = this.ne_latlon.lon;
-//     if (this.se_latlon.lon > this.easternmost_lon) {
-//       this.easternmost_lon = this.se_latlon.lon;
-//     }
-//     this.westernmost_lon = this.nw_latlon.lon;
-//     if (this.sw_latlon.lon < this.westernmost_lon) {
-//       this.westernmost_lon = this.sw_latlon.lon;
-//     }
-//     this.southernmost_lat = this.sw_latlon.lat;
-//     if (this.se_latlon.lat < this.southernmost_lat) {
-//       this.southernmost_lat = this.se_latlon.lat;
-//     }
-//     this.northernmost_lat = this.nw_latlon.lat;
-//     if (this.ne_latlon.lat > this.northernmost_lat) {
-//       this.northernmost_lat = this.ne_latlon.lat;
-//     }
-
-//     // Define grid width and height:
-//     this.grid_width = this.easternmost_lon - this.westernmost_lon;
-//     this.grid_height = this.northernmost_lat - this.southernmost_lat;
-
-//     // Define grid overlay extreme southwest and northeast corners as LatLon objects
-//     // with an extra 10% buffer beyond rendered area:
-//     this.sw_grid_latlon.lon = this.westernmost_lon - 0.1 * this.grid_width;
-//     this.sw_grid_latlon.lat = this.southernmost_lat - 0.1 * this.grid_height;
-//     this.ne_grid_latlon.lon = this.easternmost_lon + 0.1 * this.grid_width;
-//     this.ne_grid_latlon.lat = this.northernmost_lat + 0.1 * this.grid_height;
-
-//     // Save results to UTM.  Truncate to establish 1m baseline.
-//     this.sw_grid_utm = this.sw_grid_latlon.toUtm();
-//     this.sw_grid_utm.easting = Math.floor(this.sw_grid_utm.easting);
-//     this.sw_grid_utm.northing = Math.floor(this.sw_grid_utm.northing);
-//     this.sw_grid_latlon = this.sw_grid_utm.toLatLon();
-
-//     this.ne_grid_utm = this.ne_grid_latlon.toUtm();
-//     this.ne_grid_utm.easting = Math.floor(this.ne_grid_utm.easting);
-//     this.ne_grid_utm.northing = Math.floor(this.ne_grid_utm.northing);
-//     this.ne_grid_latlon = this.ne_grid_utm.toLatLon();
-//   }
-
-//   _determineScale(zoom) {
-//     if (this.options.determineScale) {
-//       return this.options.determineScale(zoom);
-//     }
-//     let size = 1000;
-//     if (zoom > 21.5) {
-//       size = 1;
-//     } else if (zoom > 18) {
-//       size = 10;
-//     } else if (zoom > 14.5) {
-//       size = 100;
-//     } else if (zoom > 11) {
-//       size = 1000;
-//     } else if (zoom > 9.5) {
-//       size = 10000;
-//     } else if (zoom > 8.5) {
-//       size = 100000;
-//     } else {
-//       // Setting size to -1 disables the grid lines since this fails at over 100k
-//       size = -1;
-//     }
-//     return size;
-//   }
-
-//   _buildGrids() {
-//     const zoom = this._map.getZoom();
-
-//     const size = this._determineScale(zoom);
-//     if (size < 0) { return; }
-
-//     const temp_utm = this.sw_grid_latlon.toUtm();
-//     let temp = Math.floor(temp_utm.easting);
-//     temp_utm.easting = temp - (temp % size);
-//     temp = Math.floor(temp_utm.northing);
-//     temp_utm.northing = temp - (temp % size);
-
-//     this.grid_south_row = [];
-//     this.grid_south_row.push(temp_utm.toLatLon());
-
-//     let x = 0;
-//     while (this.grid_south_row[x].lon < this.ne_grid_latlon.lon) {
-//       const line = this._nextGridLine(this.grid_south_row[x].toUtm(), 'east', size);
-//       this.grid_south_row.push(line);
-//       x++;
-//     }
-
-//     this.grid_west_column = [];
-//     this.grid_west_column.push(temp_utm.toLatLon());
-//     let y = 0;
-//     while (this.grid_west_column[y].lat < this.ne_grid_latlon.lat) {
-//       const line = this._nextGridLine(this.grid_west_column[y].toUtm(), 'north', size);
-//       this.grid_west_column.push(line);
-//       y++;
-//     }
-
-//     this.grid_north_row = [];
-//     this.grid_north_row.push(this.grid_west_column[y]);
-//     let xx = 0;
-//     while (xx < x) {
-//       const line = this._nextGridLine(this.grid_north_row[xx].toUtm(), 'east', size);
-//       this.grid_north_row.push(line);
-//       xx++;
-//     }
-
-//     this.grid_east_column = [];
-//     this.grid_east_column.push(this.grid_south_row[x]);
-//     let yy = 0;
-//     while (yy < y) {
-//       const line = this._nextGridLine(this.grid_east_column[yy].toUtm(), 'north', size);
-//       this.grid_east_column.push(line);
-//       yy++;
-//     }
-
-//     this._drawLines(size);
-//   }
-
-//   _nextGridLine(start_point_utm, dir, grid_distance) {
-//     const new_point_utm = start_point_utm;
-//     let vertical = false;
-//     // if (start_point_utm.hemisphere == 'S') { hemisphere = -1; }
-//     switch (dir) {
-//       case 'north':
-//         vertical = true;
-//         break;
-//       case 'south':
-//         vertical = true;
-//         grid_distance *= -1;
-//         break;
-//       case 'west':
-//         grid_distance *= -1;
-//     }
-
-//     if (vertical) {
-//       new_point_utm.northing += grid_distance;
-//       if (new_point_utm.northing < 0) {
-//         if (new_point_utm.hemisphere == 'N') { new_point_utm.hemisphere = 'S'; } else { new_point_utm.hemisphere = 'N'; }
-//         new_point_utm.northing *= -1;
-//       }
-//       return new_point_utm.toLatLon();
-//     }
-//     new_point_utm.easting += grid_distance;
-//     return new_point_utm.toLatLon();
-//   }
-
-//   _getStyleForScale(size, style_map) {
-//     const default_style = style_map.default;
-//     const size_style = style_map[size];
-//     return size_style || default_style;
-//   }
-
-//   _drawLines(size) {
-//     let x;
-//     let y;
-//     // we've got some crazy math to determine the text padding using log10!
-//     const text_padding = Math.max(1, Math.ceil(5 - Math.log10(size)));
-//     const line_style = this._getStyleForScale(size, this.line_style_map);
-//     const font_style = this._getStyleForScale(size, this.font_style_map);
-
-//     for (x = 0; x < this.grid_south_row.length; x++) {
-//       const south_point = this.grid_south_row[x];
-//       const north_point = this.grid_north_row[x];
-//       let cur_easting = south_point.toUtm().easting.toFixed(0);
-//       if (size >= 10000) {
-//         cur_easting = parseInt(cur_easting) + 999;
-//         cur_easting -= (cur_easting % size);
-//       }
-//       if (cur_easting % size == 0) {
-//         const grid_line = L.polyline([
-//           south_point, north_point,
-//         ], line_style);
-//         this.addLayer(grid_line);
-//         if (size > 10000) {
-//         } else {
-//           const label = (cur_easting / size) % (100000 / size);
-//           grid_line.setText(
-//           	label.toString().padStart(text_padding, '0'), {
-//           		repeat: false,
-//           		attributes: Object.assign({ dx: (this._map.getSize().y * 0.12) }, font_style),
-//           	},
-//           );
-//         }
-//       }
-//     }
-
-//     for (y = 0; y < this.grid_west_column.length; y++) {
-//       const west_point = this.grid_west_column[y];
-//       const east_point = this.grid_east_column[y];
-//       let cur_northing = west_point.toUtm().northing.toFixed(0);
-//       if (size >= 10000) {
-//         cur_northing = parseInt(cur_northing) + 999;
-//         cur_northing -= (cur_northing % size);
-//       }
-//       if (cur_northing % size == 0) {
-//         // label = (cur_northing / size) % (100000 / size);
-//         const grid_line = L.polyline([west_point, east_point], line_style);
-//         this.addLayer(grid_line);
-//         if (size > 10000) {
-//         } else {
-//           const label = (cur_northing / size) % (100000 / size);
-//           grid_line.setText(
-//           	label.toString().padStart(text_padding, '0'), {
-//           		repeat: false,
-//           		attributes: Object.assign({ dx: (this._map.getSize().x * 0.12) }, font_style),
-//           	},
-//           );
-//         }
-//       }
-//     }
-//   }
-
-//   _update() {
-//     try {
-//       const map_bounds = this._map.getBounds();
-//       this.setBounds(map_bounds);
-//       this._buildGrids();
-//     } catch (e) {
-//       // ignore out of zone grids
-//       console.log(e);
-//     }
-//   }
-
-//   onAdd(map) {
-//     this._update();
-//   }
-// }
-
-
-// const MGRSLayer = new LeafletMgrsLayer();
-// MGRSLayer.addTo(map);
-
-// Grid Zone Designator corners
-const gzd = {
-  '17T': {
-    id: '17T',
-    top: {
-      left: {
-        northing: 48.00000,
-        easting: -84.00000,
-      },
-      right: {
-        northing: 48.00000,
-        easting: -78.00000,
-      },
-    },
-    bottom: {
-      left: {
-        northing: 40.00000,
-        easting: -84.00000,
-      },
-      right: {
-        northing: 40.00000,
-        easting: -78.00000,
-      },
-    },
+//! This works but it's highly inefficient. Utilize a method that only generates these grids that are within map.getBounds()
+//! furthermore the labels need to be toggled on and off or removed on certain zoom values
+//! Adjust for special cases. GZD 31X, 33X, 35X, 37X and 32V have special boundaries
+const northingDict = {
+  X: {
+    letter: 'X',
+    top: 84,
+    bottom: 72,
   },
-  '18T': {
-    id: '18T',
-    top: {
-      left: {
-        northing: 48.00000,
-        easting: -78.00000,
-      },
-      right: {
-        northing: 48.00000,
-        easting: -72.00000,
-      },
-    },
-    bottom: {
-      left: {
-        northing: 40.00000,
-        easting: -78.00000,
-      },
-      right: {
-        northing: 40.00000,
-        easting: -72.00000,
-      },
-    },
+  W: {
+    letter: 'W',
+    top: 72,
+    bottom: 64,
+  },
+  V: {
+    letter: 'V',
+    top: 64,
+    bottom: 56,
+  },
+  U: {
+    letter: 'U',
+    top: 56,
+    bottom: 48,
+  },
+  T: {
+    letter: 'T',
+    top: 48,
+    bottom: 40,
+  },
+  S: {
+    letter: 'S',
+    top: 40,
+    bottom: 32,
+  },
+  R: {
+    letter: 'R',
+    top: 32,
+    bottom: 24,
+  },
+  Q: {
+    letter: 'Q',
+    top: 24,
+    bottom: 16,
+  },
+  P: {
+    letter: 'P',
+    top: 16,
+    bottom: 8,
+  },
+  N: {
+    letter: 'N',
+    top: 8,
+    bottom: 0,
+  },
+  M: {
+    letter: 'M',
+    top: 0,
+    bottom: -8,
+  },
+  L: {
+    letter: 'L',
+    top: -8,
+    bottom: -16,
+  },
+  K: {
+    letter: 'K',
+    top: -16,
+    bottom: -24,
+  },
+  J: {
+    letter: 'J',
+    top: -24,
+    bottom: -32,
+  },
+  H: {
+    letter: 'H',
+    top: -32,
+    bottom: -40,
+  },
+  G: {
+    letter: 'G',
+    top: -40,
+    bottom: -48,
+  },
+  F: {
+    letter: 'F',
+    top: -48,
+    bottom: -56,
+  },
+  E: {
+    letter: 'E',
+    top: -56,
+    bottom: -64,
+  },
+  D: {
+    letter: 'D',
+    top: -64,
+    bottom: -72,
+  },
+  C: {
+    letter: 'C',
+    top: -72,
+    bottom: -80,
   },
 };
 
 
-const createGZDBox = element => Object.values(element).map((key) => {
-  const topLeft = new L.LatLng(key.top.left.northing, key.top.left.easting);
-  const topRight = new L.LatLng(key.top.right.northing, key.top.right.easting);
-  const bottomRight = new L.LatLng(key.bottom.right.northing, key.bottom.right.easting);
-  const bottomLeft = new L.LatLng(key.bottom.left.northing, key.bottom.left.easting);
-  const gzdBox = [topLeft, topRight, bottomRight, bottomLeft, topLeft];
-  const { id } = key;
+const eastingDict = {
+  1: {
+    id: '1',
+    left: -180,
+    right: -174,
+  },
+  2: {
+    id: '2',
+    left: -174,
+    right: -168,
+  },
+  3: {
+    id: '3',
+    left: -168,
+    right: -162,
+  },
+  4: {
+    id: '4',
+    left: -162,
+    right: -156,
+  },
+  5: {
+    id: '5',
+    left: -156,
+    right: -150,
+  },
+  6: {
+    id: '6',
+    left: -150,
+    right: -144,
+  },
+  7: {
+    id: '7',
+    left: -144,
+    right: -138,
+  },
+  8: {
+    id: '8',
+    left: -138,
+    right: -132,
+  },
+  9: {
+    id: '9',
+    left: -132,
+    right: -126,
+  },
+  10: {
+    id: '10',
+    left: -126,
+    right: -120,
+  },
+  11: {
+    id: '11',
+    left: -120,
+    right: -114,
+  },
+  12: {
+    id: '12',
+    left: -114,
+    right: -108,
+  },
+  13: {
+    id: '13',
+    left: -108,
+    right: -102,
+  },
+  14: {
+    id: '14',
+    left: -102,
+    right: -96,
+  },
+  15: {
+    id: '15',
+    left: -96,
+    right: -90,
+  },
+  16: {
+    id: '16',
+    left: -90,
+    right: -84,
+  },
+  17: {
+    id: '17',
+    left: -84,
+    right: -78,
+  },
+  18: {
+    id: '18',
+    left: -78,
+    right: -72,
+  },
+  19: {
+    id: '19',
+    left: -72,
+    right: -66,
+  },
+  20: {
+    id: '20',
+    left: -66,
+    right: -60,
+  },
+  21: {
+    id: '21',
+    left: -60,
+    right: -54,
+  },
+  22: {
+    id: '22',
+    left: -54,
+    right: -48,
+  },
+  23: {
+    id: '23',
+    left: -48,
+    right: -42,
+  },
+  24: {
+    id: '24',
+    left: -42,
+    right: -36,
+  },
+  25: {
+    id: '25',
+    left: -36,
+    right: -30,
+  },
+  26: {
+    id: '26',
+    left: -30,
+    right: -24,
+  },
+  27: {
+    id: '27',
+    left: -24,
+    right: -18,
+  },
+  28: {
+    id: '28',
+    left: -18,
+    right: -12,
+  },
+  29: {
+    id: '29',
+    left: -12,
+    right: -6,
+  },
+  30: {
+    id: '30',
+    left: -6,
+    right: 0,
+  },
+  31: {
+    id: '31',
+    left: 0,
+    right: 6,
+  },
+  32: {
+    id: '32',
+    left: 6,
+    right: 12,
+  },
+  33: {
+    id: '33',
+    left: 12,
+    right: 18,
+  },
+  34: {
+    id: '34',
+    left: 18,
+    right: 24,
+  },
+  35: {
+    id: '35',
+    left: 24,
+    right: 30,
+  },
+  36: {
+    id: '36',
+    left: 30,
+    right: 36,
+  },
+  37: {
+    id: '37',
+    left: 36,
+    right: 42,
+  },
+  38: {
+    id: '38',
+    left: 42,
+    right: 48,
+  },
+  39: {
+    id: '39',
+    left: 48,
+    right: 54,
+  },
+  40: {
+    id: '40',
+    left: 54,
+    right: 60,
+  },
+  41: {
+    id: '41',
+    left: 60,
+    right: 66,
+  },
+  42: {
+    id: '42',
+    left: 66,
+    right: 72,
+  },
+  43: {
+    id: '43',
+    left: 72,
+    right: 78,
+  },
+  44: {
+    id: '44',
+    left: 78,
+    right: 84,
+  },
+  45: {
+    id: '45',
+    left: 84,
+    right: 90,
+  },
+  46: {
+    id: '46',
+    left: 90,
+    right: 96,
+  },
+  47: {
+    id: '47',
+    left: 96,
+    right: 102,
+  },
+  48: {
+    id: '48',
+    left: 102,
+    right: 108,
+  },
+  49: {
+    id: '49',
+    left: 108,
+    right: 114,
+  },
+  50: {
+    id: '50',
+    left: 114,
+    right: 120,
+  },
+  51: {
+    id: '51',
+    left: 120,
+    right: 126,
+  },
+  52: {
+    id: '52',
+    left: 126,
+    right: 132,
+  },
+  53: {
+    id: '53',
+    left: 132,
+    right: 138,
+  },
+  54: {
+    id: '54',
+    left: 138,
+    right: 144,
+  },
+  55: {
+    id: '55',
+    left: 144,
+    right: 150,
+  },
+  56: {
+    id: '56',
+    left: 150,
+    right: 156,
+  },
+  57: {
+    id: '57',
+    left: 156,
+    right: 162,
+  },
+  58: {
+    id: '58',
+    left: 162,
+    right: 168,
+  },
+  59: {
+    id: '59',
+    left: 168,
+    right: 174,
+  },
+  60: {
+    id: '60',
+    left: 174,
+    right: 180,
+  },
+};
 
-  // Now create the polyline box from the returned array value 'gzdBox'
-  const gzdPolylineBox = new L.Polyline(gzdBox, {
-    color: 'red',
-    weight: 5,
-    opacity: 0.75,
-    smoothFactor: 1,
-    lineCap: 'square',
-    lineJoin: 'miter',
+// top = the northern most latitude for the GZD, bottom = southern most latitude for the GZD
+// example- generateGridZoneDesignators(gzd.T, 48, 40);
+function generateGridZoneDesignators(obj, top, bottom, letter) {
+  Object.values(obj).forEach((key) => {
+    const topLeft = new L.LatLng(top, key.left);
+    const topRight = new L.LatLng(top, key.right);
+    const bottomRight = new L.LatLng(bottom, key.right);
+    const bottomLeft = new L.LatLng(bottom, key.left);
+    const gzdBox = [topLeft, topRight, bottomRight, bottomLeft, topLeft];
+    const { id } = key;
+    const letterID = [...letter];
+
+    // Now create the polyline box from the returned array value 'gzdBox'
+    const gzdPolylineBox = new L.Polyline(gzdBox, {
+      color: 'red',
+      weight: 5,
+      opacity: 0.75,
+      smoothFactor: 1,
+      lineCap: 'square',
+      lineJoin: 'miter',
+    });
+
+    gzdPolylineBox.addTo(map);
+
+    const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    // If the Grid Zone ID is divisible by 60, then we start a new line with the Letter ID
+    if (parseInt(id) % 60 !== 0) {
+      // Once the polylines are added to the map we can begin centering the Grid Zone Designator
+      gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      // Put this into an event listener where if the map zoom is <=7, adjust viewbox to '0 0 200 100' or something
+      gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
+      gzdIdSVG.innerHTML = `
+        <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
+        <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${id}${letterID[0]}</text>`;
+    }
+
+    // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
+    const halfLat = (gzdPolylineBox.getBounds()._northEast.lat - gzdPolylineBox.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
+    const halfLng = (gzdPolylineBox.getBounds()._northEast.lng - gzdPolylineBox.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
+    // Now add those values to the southwest latitude/longitude to get the center point of the GZD
+    const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
+    const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
+    // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitmate new latLngBounds
+    // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
+    const centerBounds = new L.latLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
+    // Now add the GZD overlays to the center of the GZD
+    L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
   });
+}
 
-  gzdPolylineBox.addTo(map);
-
-  // Once the polylines are added to the map we can begin centering the Grid Zone Designator
-  const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-  // Put this into an event listener where if the map zoom is <=7, adjust viewbox to '0 0 200 100' or something
-  gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
-  gzdIdSVG.innerHTML = `
-    <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
-    <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${id}</text>
-    `;
-  // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
-  const halfLat = (gzdPolylineBox.getBounds()._northEast.lat - gzdPolylineBox.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
-  const halfLng = (gzdPolylineBox.getBounds()._northEast.lng - gzdPolylineBox.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
-  // Now add those values to the southwest latitude/longitude to get the center point of the GZD
-  const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
-  const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
-  // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitmate new latLngBounds
-  // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
-  const centerBounds = new L.latLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
-  // Now add the GZD overlays to the center of the GZD
-  L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
+// Now generate the entire grid zone designators for the world!
+Object.values(northingDict).forEach((key) => {
+  generateGridZoneDesignators(eastingDict, key.top, key.bottom, key.letter);
 });
-
-createGZDBox(gzd);
 
 
 window.markerGroup = markerGroup;

@@ -8,6 +8,9 @@
 - Interesting [Military Installation Maps](https://www.loc.gov/item/86694460/)
 - Potential web content for MGRS familiarity [here](http://www.citrusham.org/citrusham/grid.pdf) (saved locally as grid.pdf)
 - Began creating the functionality for implementing my own Grid Zone Designators
+- Created a Grid Zone Designator generator
+- Refer to the ES6 version of a working MGRS Grid [here](https://github.com/eacaps/leaflet-mgrs-layer/tree/gh-pages)
+- Created all the Grid Zone Designators for the world. Now we just need to generate them when they are within the map bounds
 
 ---
 
