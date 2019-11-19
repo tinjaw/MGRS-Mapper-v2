@@ -51,6 +51,7 @@ const markerGroup = L.layerGroup().addTo(map);
 //! This works but it's highly inefficient. Utilize a method that only generates these grids that are within map.getBounds()
 //! furthermore the labels need to be toggled on and off or removed on certain zoom values
 //! Adjust for special cases. GZD 31X, 33X, 35X, 37X and 32V have special boundaries
+// letter = a band of latitude
 const northingDict = {
   X: {
     letter: 'X',
@@ -154,7 +155,7 @@ const northingDict = {
   },
 };
 
-
+// id = UTM zone
 const eastingDict = {
   1: {
     id: '1',
@@ -459,7 +460,6 @@ const eastingDict = {
 };
 
 // top = the northern most latitude for the GZD, bottom = southern most latitude for the GZD
-// example- generateGridZoneDesignators(gzd.T, 48, 40);
 function generateGridZoneDesignators(obj, top, bottom, letter) {
   Object.values(obj).forEach((key) => {
     const topLeft = new L.LatLng(top, key.left);

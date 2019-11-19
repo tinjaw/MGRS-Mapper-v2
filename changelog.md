@@ -11,6 +11,8 @@
 - Created a Grid Zone Designator generator
 - Refer to the ES6 version of a working MGRS Grid [here](https://github.com/eacaps/leaflet-mgrs-layer/tree/gh-pages)
 - Created all the Grid Zone Designators for the world. Now we just need to generate them when they are within the map bounds
+- Good source for visualizing Grid Zones [here](http://legallandconverter.com/p50.html)
+- BUG: Symbols cannot be dropped directly on the grid lines. This is an issue with the drop function in moveSymbol
 
 ---
 

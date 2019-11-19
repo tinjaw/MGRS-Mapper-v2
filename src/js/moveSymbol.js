@@ -1,4 +1,5 @@
 import Moveable from 'moveable';
+import { EventEmitter } from 'events';
 
 const newSVGDiv = document.querySelector('.newSVG');
 const mapArea = document.querySelector('#main-content');
@@ -334,7 +335,9 @@ const drop = (event) => {
   target.classList.add('draggable');
   target.dataset.symbolInfo = data;
   target.innerHTML = document.querySelector('.newSVG > svg').innerHTML;
+  //! BUG: Cannot drop symbols on top of grid lines. Try a try-catch block and adjust the symbols coordinates
   event.target.offsetParent.appendChild(target);
+
   // Get the BBox only after the target has been appended
   const bbox = target.getBBox();
   // The bounceIn animation fucks everything up, remove it and set the BBox of the parent draggable symbol
