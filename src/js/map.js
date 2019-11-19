@@ -371,7 +371,32 @@ const markerGroup = L.layerGroup().addTo(map);
 
 // const MGRSLayer = new LeafletMgrsLayer();
 // MGRSLayer.addTo(map);
+
+// Grid Zone Designator corners
 const gzd = {
+  '17T': {
+    id: '17T',
+    top: {
+      left: {
+        northing: 48.00000,
+        easting: -84.00000,
+      },
+      right: {
+        northing: 48.00000,
+        easting: -78.00000,
+      },
+    },
+    bottom: {
+      left: {
+        northing: 40.00000,
+        easting: -84.00000,
+      },
+      right: {
+        northing: 40.00000,
+        easting: -78.00000,
+      },
+    },
+  },
   '18T': {
     id: '18T',
     top: {
@@ -405,29 +430,20 @@ const createGZDBox = element => Object.values(element).map((key) => {
   const bottomLeft = new L.LatLng(key.bottom.left.northing, key.bottom.left.easting);
   const gzdBox = [topLeft, topRight, bottomRight, bottomLeft, topLeft];
   const { id } = key;
-  return {
-    gzdBox,
-    id,
-  };
-});
 
-// Since we are returning multiple values, we will destructure it
-const { gzdBox, id } = createGZDBox(gzd)[0];
+  // Now create the polyline box from the returned array value 'gzdBox'
+  const gzdPolylineBox = new L.Polyline(gzdBox, {
+    color: 'red',
+    weight: 5,
+    opacity: 0.75,
+    smoothFactor: 1,
+    lineCap: 'square',
+    lineJoin: 'miter',
+  });
 
-// Now create the polyline box from the returned array value 'gzdBox'
-const gzdPolylineBox = new L.Polyline(gzdBox, {
-  color: 'red',
-  weight: 5,
-  opacity: 0.75,
-  smoothFactor: 1,
-  lineCap: 'square',
-  lineJoin: 'miter',
-});
+  gzdPolylineBox.addTo(map);
 
-gzdPolylineBox.addTo(map);
-
-// Once the polylines are added to the map we can begin centering the Grid Zone Designator
-const gzdIdOverlay = (element) => {
+  // Once the polylines are added to the map we can begin centering the Grid Zone Designator
   const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
   // Put this into an event listener where if the map zoom is <=7, adjust viewbox to '0 0 200 100' or something
@@ -437,27 +453,21 @@ const gzdIdOverlay = (element) => {
     <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${id}</text>
     `;
   // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
-  const halfLat = (element.getBounds()._northEast.lat - element.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
-  const halfLng = (element.getBounds()._northEast.lng - element.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
+  const halfLat = (gzdPolylineBox.getBounds()._northEast.lat - gzdPolylineBox.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
+  const halfLng = (gzdPolylineBox.getBounds()._northEast.lng - gzdPolylineBox.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
   // Now add those values to the southwest latitude/longitude to get the center point of the GZD
-  const centerLat = element.getBounds()._southWest.lat + halfLat;
-  const centerLng = element.getBounds()._southWest.lng + halfLng;
+  const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
+  const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
   // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitmate new latLngBounds
   // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
   const centerBounds = new L.latLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
-  return {
-    gzdIdSVG,
-    centerBounds,
-  };
-};
+  // Now add the GZD overlays to the center of the GZD
+  L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
+});
 
-const { gzdIdSVG, centerBounds } = gzdIdOverlay(gzdPolylineBox);
+createGZDBox(gzd);
 
 
-L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
-
-
-window.gzdPolylineBox = gzdPolylineBox;
 window.markerGroup = markerGroup;
 window.map = map;
 window.L = L;
