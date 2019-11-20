@@ -6,12 +6,12 @@ import { removePopups, MGRSString } from './moveSymbol';
 
 
 /* This code is needed to properly load the images in the Leaflet CSS */
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});
+// delete L.Icon.Default.prototype._getIconUrl;
+// L.Icon.Default.mergeOptions({
+//   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+//   iconUrl: require('leaflet/dist/images/marker-icon.png'),
+//   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+// });
 
 const map = L.map('main-content', {
   center: [45.12689618126071, -70.62732696533205],
@@ -484,10 +484,10 @@ function generateGridZoneDesignators(obj, top, bottom, letter) {
 
     const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     // If the Grid Zone ID is divisible by 60, then we start a new line with the Letter ID
-    if (parseInt(id) % 60 !== 0) {
+    if (id % 60 !== 0) {
       // Once the polylines are added to the map we can begin centering the Grid Zone Designator
       gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-      // Put this into an event listener where if the map zoom is <=7, adjust viewbox to '0 0 200 100' or something
+      // Put this into an event listener where if the map zoom is <=7, adjust viewBox to '0 0 200 100' or something
       gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
       gzdIdSVG.innerHTML = `
         <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
@@ -500,9 +500,9 @@ function generateGridZoneDesignators(obj, top, bottom, letter) {
     // Now add those values to the southwest latitude/longitude to get the center point of the GZD
     const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
     const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
-    // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitmate new latLngBounds
+    // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitimate new LatLngBounds
     // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
-    const centerBounds = new L.latLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
+    const centerBounds = new L.LatLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
     // Now add the GZD overlays to the center of the GZD
     L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
   });

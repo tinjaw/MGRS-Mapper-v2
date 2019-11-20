@@ -2,7 +2,7 @@
   "name": "mgrs-mapper",
   "version": "2.0.0",
   "description": "Drag and drop custom generated NATO military symbols onto Google Maps with an MGRS overlay.",
-  "homepage": "http://mgrs-mapper.com",
+  "homepage": "https://mgrs-mapper.com",
   "main": "./src/js/app.js",
   "private": true,
   "author": {

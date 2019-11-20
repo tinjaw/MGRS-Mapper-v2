@@ -39,11 +39,13 @@ A development repository for MGRS-Mapper application
 - [x] Configure CSS hover state for surface menu
 - [ ] Add helper text to select boxes
 - [x] Add SVG manipulation (drag-n-drop & resize handles)
-- [ ] Begin Leaflet maps implementation...
+- [x] Begin Leaflet maps implementation...
 - [ ] Update repository key in package.json on production
-- [ ] Commonly used symbols pane
-- [ ] Logo in header
-- [ ] Semantic HTML check. (eg- The "Dismissible Drawer" in the top app bar has a class of 'mdc-top-app-bar__title')
+- [x] Commonly used symbols pane
+- [x] Logo in header
+- [ ] Semantic HTML check. (eg- The "Dismissible Drawer" in the top app bar has a class of 'mdc-top-app-bar\_\_title')
+- [ ] Sitemap file and Humans.txt
+- [ ] SPA to actual website? Need to have multiple pages for this
 
 ## DEFAULT VALUES
 

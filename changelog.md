@@ -13,6 +13,7 @@
 - Created all the Grid Zone Designators for the world. Now we just need to generate them when they are within the map bounds
 - Good source for visualizing Grid Zones [here](http://legallandconverter.com/p50.html)
 - BUG: Symbols cannot be dropped directly on the grid lines. This is an issue with the drop function in moveSymbol
+- BUG: On boot up the map does not load 100%. This could be a future problem on production.
 
 ---
 
