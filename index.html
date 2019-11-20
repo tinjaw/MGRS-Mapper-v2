@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MGRS Mapper</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 'application-name' should only be used if the website is used as an app -->
+    <meta name="application-name" content="MGRS Mapper">
+    <meta name="theme-color" content="#191970">
+    <meta name="description" content="Create maps with NATO & US military symbols with an MGRS overlay grid">
+    <meta name="author" content="James Pistell">
+    <meta name="robots" content="index,follow">
+    <meta name="rating" content="General">
+    <title>MGRS Mapper</title>
+    <!-- Add more meta tags here https://htmlhead.dev/ -->
+    <link rel="author" href="humans.txt">
+    <link rel="license" href="LICENSE">
+    <link rel="me" href="http://jamespistell.com" type="text/html">
+    <link rel="me" href="mailto:jamespistell@gmail.com">
     <!-- import Material Icons from Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <!-- import the Material stylesheet -->
@@ -23,21 +35,21 @@
       <!-- Right Sidebar Text fields, Select boxes, and Switches -->
       <div class="mdc-layout-grid symbolSelectors">
         <!-- Most Popular Symbols -->
-        <span class='mdc-select-helper-text mdc-select-helper-text--persistent frequentlyUsedSymbolsTitle'>Frequently Used Symbols</span>
+        <span class="mdc-select-helper-text mdc-select-helper-text--persistent frequentlyUsedSymbolsTitle">Frequently Used Symbols</span>
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
               <div class="imageList tooltip">
-                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Infantry'>
-                  <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1" ></path>
-                  <path d="M25,50 L175,150 M25,150 L175,50" stroke-width="4" stroke="black" fill="black" ></path>
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol="Infantry">
+                  <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                  <path d="M25,50 L175,150 M25,150 L175,50" stroke-width="4" stroke="black" fill="black"></path>
                 </svg>
                 <span class="mdc-typography--subtitle1">Infantry</span>
               </div>
             </div>
             <div class="mdc-layout-grid__cell--span-2">
               <div class="imageList tooltip">
-                <svg width="75" height="50" viewBox="60 -60 80 160" data-symbol='Checkpoint'>
+                <svg width="75" height="50" viewBox="60 -60 80 160" data-symbol="Checkpoint">
                   <path d="m 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z" stroke-width="4" stroke="black" fill="none"></path>
                   <text x="100" y="-20" text-anchor="middle" font-size="35" font-family="Arial" font-weight="bold" stroke-width="4" stroke="none" fill="black">CKP</text>
                 </svg>
@@ -46,17 +58,17 @@
             </div>
             <div class="mdc-layout-grid__cell--span-2">
               <div class="imageList tooltip">
-                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Mechanized Infantry'>
-                  <path d="M25 50h150v100H25z" stroke-width="4" stroke="#000" fill="#80E0FF"/>
-                  <path d="M25 50l150 100m-150 0L175 50" stroke-width="4" stroke="#000"/>
-                  <path d="M125 80c25 0 25 40 0 40H75c-25 0-25-40 0-40z" stroke-width="4" stroke="#000" fill="none"/>
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol="Mechanized Infantry">
+                  <path d="M25 50h150v100H25z" stroke-width="4" stroke="#000" fill="#80E0FF" />
+                  <path d="M25 50l150 100m-150 0L175 50" stroke-width="4" stroke="#000" />
+                  <path d="M125 80c25 0 25 40 0 40H75c-25 0-25-40 0-40z" stroke-width="4" stroke="#000" fill="none" />
                 </svg>
                 <span class="mdc-typography--subtitle1">Mechanized Infantry</span>
               </div>
             </div>
             <div class="mdc-layout-grid__cell--span-2">
               <div class="imageList tooltip">
-                <svg width="75" height="50" viewBox="50 50 100 100" data-symbol='Target Reference Point'>
+                <svg width="75" height="50" viewBox="50 50 100 100" data-symbol="Target Reference Point">
                   <path d="m 50,100 100,0 m -50,-50 0,100" stroke-width="4" stroke="black" fill="none"></path>
                   <text x="110" y="90" text-anchor="start" font-size="40" font-family="Arial" stroke-width="4" stroke="none" fill="Silver">T</text>
                 </svg>
@@ -65,7 +77,7 @@
             </div>
             <div class="mdc-layout-grid__cell--span-2">
               <div class="imageList tooltip">
-                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Mechanized Armor'>
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol="Mechanized Armor">
                   <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
                   <path d="M125,80 C150,80 150,120 125,120 L75,120 C50,120 50,80 75,80 Z" stroke-width="4" stroke="black" fill="none"></path>
                 </svg>
@@ -74,7 +86,7 @@
             </div>
             <div class="mdc-layout-grid__cell--span-2">
               <div class="imageList tooltip">
-                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol='Field Artillery'>
+                <svg width="75" height="50" viewBox="21 46 158 108" data-symbol="Field Artillery">
                   <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
                   <circle cx="100" cy="100" r="15" stroke-width="4" stroke="black" fill="black"></circle>
                 </svg>
@@ -86,7 +98,7 @@
               <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchSymbols">
                 <i class="material-icons mdc-text-field__icon">search</i>
                 <button class="mdc-button searchFieldDeleteIcon">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
                 </button>
                 <input type="text" id="text-field-outlined-shape-two" class="mdc-text-field__input" aria-describedby="text-field-outlined-shape-two-helper-text" />
                 <div class="mdc-notched-outline mdc-notched-outline--upgraded">
@@ -107,7 +119,7 @@
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
-              <svg  viewBox="0 0 53 56">
+              <svg viewBox="0 0 53 56">
                 <path d="M1,1H25V17H1V1Z" style="fill:none;stroke:#2a286b;stroke-width:2px" />
                 <circle cx="13" cy="9" r="2" style="fill:#2a286b;stroke:#2a286b;stroke-width:2px" />
                 <path d="M28,1H52V17H28V1Z" style="fill:none;stroke:#2a286b;stroke-width:2px" />
@@ -134,7 +146,7 @@
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
-              <svg  viewBox="0 0 53 55.91">
+              <svg viewBox="0 0 53 55.91">
                 <path d="M37.9,5.6c0-5.5,9.6-5.5,9.6,0,5.5,0,5.5,9.6,0,9.6,0,5.5-9.6,5.5-9.6,0C32.3,15.3,32.3,5.6,37.9,5.6Z" transform="translate(0.06 -0.09)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
                 <path d="M0.9,22.2h51V55h-51V22.2Z" transform="translate(0.06 -0.09)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
                 <path d="M11,1.5l9,9-9,9-9-9Z" transform="translate(0.06 -0.09)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
@@ -218,12 +230,12 @@
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
-              <svg  viewBox="0 0 52.17 52.67">
-                <ellipse cx="13.96" cy="11.5" rx="10.13" ry="10.5" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                <path d="M1,19.48l27-14" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                <circle cx="39.46" cy="11.96" r="10.5" style="fill:#2a286b;stroke:#2a286b;stroke-width:2px"/>
-                <path d="M14.5,53.5V29.13" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                <path d="M28,52.94l24-24m0,24-24-24" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+              <svg viewBox="0 0 52.17 52.67">
+                <ellipse cx="13.96" cy="11.5" rx="10.13" ry="10.5" style="fill:none;stroke:#2a286b;stroke-width:2px" />
+                <path d="M1,19.48l27-14" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
+                <circle cx="39.46" cy="11.96" r="10.5" style="fill:#2a286b;stroke:#2a286b;stroke-width:2px" />
+                <path d="M14.5,53.5V29.13" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
+                <path d="M28,52.94l24-24m0,24-24-24" transform="translate(-0.54 -0.97)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
               </svg>
             </div>
             <div class="mdc-layout-grid__cell--span-10">
@@ -363,9 +375,9 @@
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
-              <svg  viewBox="0 0 51.97 54.3">
-                <path d="M12.3,32.8H40.7C55,32.8,55,54.2,40.7,54.2H12.3c-14.2,0-14.2-21.3,0-21.3" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                <path d="M2,3.4c0.08,16.2,9.06,18.7,19.3,19M26,3.4L14.4,12.9V3.4l-11.1,9" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+              <svg viewBox="0 0 51.97 54.3">
+                <path d="M12.3,32.8H40.7C55,32.8,55,54.2,40.7,54.2H12.3c-14.2,0-14.2-21.3,0-21.3" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
+                <path d="M2,3.4c0.08,16.2,9.06,18.7,19.3,19M26,3.4L14.4,12.9V3.4l-11.1,9" transform="translate(-0.62 -0.89)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
                 <text transform="translate(23.97 18.86)" style="isolation:isolate;font-size:21.98px;fill:#2a286b;font-family:Arial">C2</text>
               </svg>
             </div>
@@ -390,16 +402,16 @@
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
-              <svg  viewBox="0 0 53 54.75">
-                <path d="M0,54c6.5,0,0-10.1,6.5-10.1s0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,7,10.1" transform="translate(0 -0.81)" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <ellipse cx="5.5" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <ellipse cx="27" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <ellipse cx="47.4" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <path d="M1.524.7h50" transform="translate(0 -0.8)" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <ellipse cx="4.6" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <ellipse cx="14.8" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <ellipse cx="38.1" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
-                <ellipse cx="48.3" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px"/>
+              <svg viewBox="0 0 53 54.75">
+                <path d="M0,54c6.5,0,0-10.1,6.5-10.1s0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,6.5,10.1,0-10.1,6.5-10.1,0,10.1,7,10.1" transform="translate(0 -0.81)" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <ellipse cx="5.5" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <ellipse cx="27" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <ellipse cx="47.4" cy="5.1" rx="3.5" ry="3.6" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <path d="M1.524.7h50" transform="translate(0 -0.8)" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <ellipse cx="4.6" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <ellipse cx="14.8" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <ellipse cx="38.1" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px" />
+                <ellipse cx="48.3" cy="28.1" rx="3.1" ry="3.2" style="fill:none;stroke:#2a286b;stroke-width:3px" />
               </svg>
             </div>
             <div class="mdc-layout-grid__cell--span-10">
@@ -423,7 +435,7 @@
               <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon uniqueDesignation">
                 <i class="material-icons mdc-text-field__icon">swap_horiz</i>
                 <button class="mdc-button uniqueDesignationDeleteIcon" data-value="uniqueDesignationField">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
                 </button>
                 <input type="text" id="text-field-outlined-uniqueDesignation" class="mdc-text-field__input" aria-describedby="text-field-outlined-uniqueDesignation-helper-text" />
                 <div class="mdc-notched-outline mdc-notched-outline--upgraded">
@@ -447,7 +459,7 @@
               <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon higherFormation">
                 <i class="material-icons mdc-text-field__icon" style="transform: rotate(-90deg);">trending_flat</i>
                 <button class="mdc-button higherFormationDeleteIcon" data-value="higherFormationField">
-                <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                  <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
                 </button>
                 <input type="text" id="text-field-outlined-higherFormation" class="mdc-text-field__input" aria-describedby="text-field-outlined-higherFormation-helper-text" />
                 <div class="mdc-notched-outline mdc-notched-outline--upgraded">
@@ -551,13 +563,13 @@
         <div class="mdc-layout-grid ">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell--span-2">
-              <svg  viewBox="0 0 41.88 54.43">
+              <svg viewBox="0 0 41.88 54.43">
                 <text transform="translate(6.97 47.3)" style="isolation:isolate;font-size:21.9px;fill:#2a286b;font-family:Arial">
                   C
                   <tspan x="15.87" y="0">P</tspan>
                 </text>
-                <path d="M7.63,1.58H47.5V28.17H7.63V1.58Z" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
-                <path d="M7.63,28.17V54.75" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px"/>
+                <path d="M7.63,1.58H47.5V28.17H7.63V1.58Z" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
+                <path d="M7.63,28.17V54.75" transform="translate(-6.63 -0.58)" style="fill:none;stroke:#2a286b;stroke-width:2px" />
               </svg>
             </div>
             <div class="mdc-layout-grid__cell--span-10">
@@ -580,18 +592,18 @@
       </div>
       <!-- Bottom Pushbar About Data -->
       <footer class="app-bar-bottom bottom-about">
-      <div class="app-bar-bottom__row">
-        <section class="app-bar-bottom__section">
-          <h3 class="mdc-typography--headline6">Section 1</h3>
-        </section>
-        <section class="app-bar-bottom__section">
-          <h3 class="mdc-typography--headline6">Section 2</h3>
-        </section>
-        <section class="app-bar-bottom__section">
-          <h3 class="mdc-typography--headline6">Section 3</h3>
-        </section>
-      </div>
-    </footer>
+        <div class="app-bar-bottom__row">
+          <section class="app-bar-bottom__section">
+            <h3 class="mdc-typography--headline6">Section 1</h3>
+          </section>
+          <section class="app-bar-bottom__section">
+            <h3 class="mdc-typography--headline6">Section 2</h3>
+          </section>
+          <section class="app-bar-bottom__section">
+            <h3 class="mdc-typography--headline6">Section 3</h3>
+          </section>
+        </div>
+      </footer>
     </div>
     <div class="mdc-drawer-app-content">
       <!-- Top App Bar -->
@@ -607,13 +619,13 @@
                     <ul class="mdc-menu__selection-group">
                       <li class="mdc-list-item" role="menuitem">
                         <span class="mdc-menu__selection-group-icon">
-                        <i class="material-icons">check</i>
+                          <i class="material-icons">check</i>
                         </span>
                         <span class="mdc-list-item__text">Single</span>
                       </li>
                       <li class="mdc-list-item" role="menuitem">
                         <span class="mdc-menu__selection-group-icon">
-                        <i class="material-icons">check</i>
+                          <i class="material-icons">check</i>
                         </span>
                         <span class="mdc-list-item__text">1.15</span>
                       </li>
@@ -640,7 +652,7 @@
                       </li>
                       <li class="mdc-list-item">
                         <button data-pushbar-close class="mdc-button mdc-button--raised">
-                        <span class="mdc-button__label">Close</span>
+                          <span class="mdc-button__label">Close</span>
                         </button>
                       </li>
                     </ul>
@@ -662,7 +674,13 @@
           <section class="mdc-top-app-bar__section" style="text-align:center; display: block; padding: 5px 0px 10px 0px;">
             <!-- Site Logo -->
             <svg xmlns="http://www.w3.org/2000/svg" height="60" width="400" viewBox="0 0 706 120">
-              <path fill="rgb(128, 224, 255)" stroke="white" stroke-linejoin="round" stroke-width="4" d="M19.9 17.6c8.2 0 16.2-.1 24.2.1.8 0 1.9 1.2 2.2 2l8.3 23.8 1.3 3.4 1.3-2.4 8.9-24.9c.3-.7 1.2-1.8 1.8-1.8l23.2-.1v69.1H70.2l1.1-32.9-.9-.2-1.1 2.8-7.8 22.9c-.5 1.6-1.4 2.4-3.2 2.4-7.5.1-7.5.2-9.9-7L42 55.9l-1-2.4-.8.1 1 33.1H20.1c-.2-22.9-.2-45.9-.2-69.1zM380.9 17.6v69.1h-21l1-32.9-.7-.2c-.3.7-.8 1.5-1 2.3-2.6 7.6-5.3 15.2-7.8 22.9-.7 2.1-1.7 3-4.1 3-6.8-.1-6.8 0-9-6.5l-7.5-21.6-.9.1.9 32.9h-21.1v-69h2.9c6.8 0 13.7.1 20.5-.1 1.9 0 2.6.6 3.1 2.3l8.3 24.1 1.2 3.1 1.3-3 8.8-24.7c.3-.7 1.3-1.6 1.9-1.7l23.2-.1zM226.8 86l-6.5.6-16.2.9c-1.7.1-2.5-.6-3.1-2.1l-7.4-16.6c-.8-1.7-4.6-2.8-5.9-1.6-.5.5-.6 1.5-.6 2.3v17.2h-22.2V17.5l15.9-.6c8.3-.2 16.6-.2 24.7 2.2 2.3.7 4.6 1.5 6.7 2.5 10.7 5 11.4 19.6 5.6 26.9a37 37 0 01-5.5 5.7c-1.5 1.2-1.6 2.2-.7 3.8l13.5 24.8 1.7 3.2zM187 43.5V50c0 .6.5 1.8.7 1.8 2.2 0 4.7.4 6.5-.5 3.8-1.8 5.6-7.6 4.2-11.5-1.2-3.3-5.8-5.6-10-4.8-.6.1-1.4 1.1-1.4 1.8v6.7zM450.5 106.5l-.8-77.6L470 28l1.3 5.7 1.7-1.3c10.3-9.2 25-6.3 30.7 6.4a36 36 0 01-2.4 35.7 31.2 31.2 0 01-23.9 13.6c-5.2.5-4.9-.8-4.9 5.2 0 3.3.1 6.7-.1 10 0 .7-.9 1.9-1.5 1.9l-20.4 1.3zm22-48.9l.1 9c0 .6.3 1.7.8 1.9 4.4 1.8 8.7 1.2 10.4-3.5 1.7-4.6 1.6-9.4-.3-13.9-1.6-4-5.3-5.8-9.1-4.8-1.3.3-2 .9-1.9 2.4v8.9zM513.5 106.6v-3.3l-.1-46c-.1-8.7-.4-17.3-.8-26-.1-2 .6-2.6 2.5-2.6 5.2-.1 10.3-.4 15.5-.6h2.7l1.2 5.4c2.6-1.7 4.7-3.6 7.2-4.8a19 19 0 0125.6 10.9 36.8 36.8 0 01-2.5 34.4 30.2 30.2 0 01-20 13.4 30 30 0 01-6.7.8c-2.1 0-2.5.9-2.5 2.8v12.2c0 .7-.7 1.9-1.2 2l-20.9 1.4zm22.1-49.1l.1 4.5.1 4.5c.1.7.3 1.7.7 1.9 4 1.6 8.3 1.4 10.1-2.8a18 18 0 00-.4-15.5 7.3 7.3 0 00-8.3-4.1c-1.5.3-2.3.9-2.3 2.7v8.8zM136.4 69.8V52.3h19.3v33.5a86.2 86.2 0 01-25.8 1.4c-7-.6-13.7-2.5-19.6-6.7A28.4 28.4 0 0199 59.7c-.8-5.8-.5-11.4 1.1-17A32 32 0 01120.9 21a78.5 78.5 0 0128.4-4.7c1.6 0 2.2.6 2.3 2.2l.9 15.9c.2 2.1-.4 2.7-2.6 2.7-5.6.1-11.3 0-16.9.8-7.4 1-10.4 4.3-10.7 11.8-.2 3.6.5 7.5 1.5 11 1.5 5.2 7.2 9 12.6 9.1zM274.1 36c-3.5-.3-6.5-.7-9.6-.8-2.5-.1-5 .1-7.4.5-1 .2-2.4 1.2-2.5 1.9-.1 1 .7 2.4 1.6 3 2.7 2 5.7 3.5 8.4 5.4 2.9 2.1 5.8 4.5 8.5 6.9 8.2 7.3 7 20.5-2.9 27a42.2 42.2 0 01-17.9 6.5c-7.2 1-14.6 1-21.9 1.5l-1.3-.2V68.5h9.4c3.4-.1 6.8-.2 10.2-.8 1.3-.2 3.1-1.4 3.3-2.5.2-1-1-2.7-2.1-3.5-4.3-3.1-8.9-5.8-13.2-9a18.8 18.8 0 01-7.7-9.8c-2-7 .3-14.5 6.1-19 5.5-4.2 12-6.2 18.7-7 5.7-.7 11.5-.6 17.2-.8.8 0 2.2.7 2.2 1.2l.9 18.7zM596 63c.7 3.1 2.8 4.3 5.1 4.8 4.4 1 8.8 1.7 13.2 2.1 3.5.3 7.2.2 10.7.2 2 0 2.6.6 2.3 2.7-.5 4.1-.7 8.3-1.1 12.4-.1 1.5-.3 2.7-2.3 2.8-9.2.1-18.5.7-27.6-1.2-3.8-.8-7.6-2-11.1-3.6-7.5-3.4-10.7-9.9-11.4-17.8-.7-8.1.3-15.8 4.4-23.1a31.1 31.1 0 0127.9-15.2c5.3.4 10.3 1.5 14.5 5.2 5 4.6 7 10.6 7.7 17.1.4 3.4 0 7 .2 10.4.1 2.2-.6 2.8-2.8 2.8-8.9-.1-17.8.1-26.7.2l-3 .2zm11.4-11c-.1-5.4-2.4-8.2-6.4-8-3.4.1-5.6 3.4-5.3 8h11.7zM421.2 82.1c-3.9 2-7.5 4.4-11.5 5.6a18 18 0 01-13.6-1.2c-4.6-2.4-6.7-6.4-7.2-11.5-1.1-12.5 8-18.7 17.4-20.7 3.8-.8 7.7-.9 11.6-1.3 2.1-.2 2.6-.9 1.4-2.6-2-2.9-5.2-3.1-8.2-3.4-5.9-.5-11.8-.6-17.7-.9l-1.9-.2 1.5-18.3c4.2 0 8.2-.3 12.1.1 6.4.6 12.7 1.3 19 2.5 11 2.1 16.7 8.6 17.4 19.7.8 11.6 1 23.3 1.6 34.9.1 1.3-.4 1.8-1.7 1.8-5.8.2-11.6.6-17.5.7-.6 0-1.6-.9-1.8-1.6-.6-1.2-.7-2.7-.9-3.6zm-.8-13.8c-.1-5.3-.4-5.7-4.1-5.6-4.4.1-6.6 1.8-6.5 5.1.1 2.8 2.2 4.4 6.1 4.3 3.8-.1 4.6-.7 4.5-3.8zM633 86.7c0-4.8-.1-9.6.1-14.4 0-.5 1.1-1.3 1.8-1.4 2.5-.2 5-.1 7.5-.1 1.5 0 2.1-.5 2-2.1l-.4-21c0-2.2-.8-3-3.1-3-2.6 0-5.3-.5-8.1-.7l1-15.3h30.5l1.1 9.3c5.8-6.5 12.2-11 21-12v7.1l-.6 15.7c0 1.6-.6 2.1-2.2 2.2L669 52.4c-1.9.2-2.6.9-2.5 2.8v15.6h11.3c3.2 0 3.1 0 2.8 3.3a461 461 0 00-1 12.6H633z"/>
+              <path
+                fill="rgb(128, 224, 255)"
+                stroke="white"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M19.9 17.6c8.2 0 16.2-.1 24.2.1.8 0 1.9 1.2 2.2 2l8.3 23.8 1.3 3.4 1.3-2.4 8.9-24.9c.3-.7 1.2-1.8 1.8-1.8l23.2-.1v69.1H70.2l1.1-32.9-.9-.2-1.1 2.8-7.8 22.9c-.5 1.6-1.4 2.4-3.2 2.4-7.5.1-7.5.2-9.9-7L42 55.9l-1-2.4-.8.1 1 33.1H20.1c-.2-22.9-.2-45.9-.2-69.1zM380.9 17.6v69.1h-21l1-32.9-.7-.2c-.3.7-.8 1.5-1 2.3-2.6 7.6-5.3 15.2-7.8 22.9-.7 2.1-1.7 3-4.1 3-6.8-.1-6.8 0-9-6.5l-7.5-21.6-.9.1.9 32.9h-21.1v-69h2.9c6.8 0 13.7.1 20.5-.1 1.9 0 2.6.6 3.1 2.3l8.3 24.1 1.2 3.1 1.3-3 8.8-24.7c.3-.7 1.3-1.6 1.9-1.7l23.2-.1zM226.8 86l-6.5.6-16.2.9c-1.7.1-2.5-.6-3.1-2.1l-7.4-16.6c-.8-1.7-4.6-2.8-5.9-1.6-.5.5-.6 1.5-.6 2.3v17.2h-22.2V17.5l15.9-.6c8.3-.2 16.6-.2 24.7 2.2 2.3.7 4.6 1.5 6.7 2.5 10.7 5 11.4 19.6 5.6 26.9a37 37 0 01-5.5 5.7c-1.5 1.2-1.6 2.2-.7 3.8l13.5 24.8 1.7 3.2zM187 43.5V50c0 .6.5 1.8.7 1.8 2.2 0 4.7.4 6.5-.5 3.8-1.8 5.6-7.6 4.2-11.5-1.2-3.3-5.8-5.6-10-4.8-.6.1-1.4 1.1-1.4 1.8v6.7zM450.5 106.5l-.8-77.6L470 28l1.3 5.7 1.7-1.3c10.3-9.2 25-6.3 30.7 6.4a36 36 0 01-2.4 35.7 31.2 31.2 0 01-23.9 13.6c-5.2.5-4.9-.8-4.9 5.2 0 3.3.1 6.7-.1 10 0 .7-.9 1.9-1.5 1.9l-20.4 1.3zm22-48.9l.1 9c0 .6.3 1.7.8 1.9 4.4 1.8 8.7 1.2 10.4-3.5 1.7-4.6 1.6-9.4-.3-13.9-1.6-4-5.3-5.8-9.1-4.8-1.3.3-2 .9-1.9 2.4v8.9zM513.5 106.6v-3.3l-.1-46c-.1-8.7-.4-17.3-.8-26-.1-2 .6-2.6 2.5-2.6 5.2-.1 10.3-.4 15.5-.6h2.7l1.2 5.4c2.6-1.7 4.7-3.6 7.2-4.8a19 19 0 0125.6 10.9 36.8 36.8 0 01-2.5 34.4 30.2 30.2 0 01-20 13.4 30 30 0 01-6.7.8c-2.1 0-2.5.9-2.5 2.8v12.2c0 .7-.7 1.9-1.2 2l-20.9 1.4zm22.1-49.1l.1 4.5.1 4.5c.1.7.3 1.7.7 1.9 4 1.6 8.3 1.4 10.1-2.8a18 18 0 00-.4-15.5 7.3 7.3 0 00-8.3-4.1c-1.5.3-2.3.9-2.3 2.7v8.8zM136.4 69.8V52.3h19.3v33.5a86.2 86.2 0 01-25.8 1.4c-7-.6-13.7-2.5-19.6-6.7A28.4 28.4 0 0199 59.7c-.8-5.8-.5-11.4 1.1-17A32 32 0 01120.9 21a78.5 78.5 0 0128.4-4.7c1.6 0 2.2.6 2.3 2.2l.9 15.9c.2 2.1-.4 2.7-2.6 2.7-5.6.1-11.3 0-16.9.8-7.4 1-10.4 4.3-10.7 11.8-.2 3.6.5 7.5 1.5 11 1.5 5.2 7.2 9 12.6 9.1zM274.1 36c-3.5-.3-6.5-.7-9.6-.8-2.5-.1-5 .1-7.4.5-1 .2-2.4 1.2-2.5 1.9-.1 1 .7 2.4 1.6 3 2.7 2 5.7 3.5 8.4 5.4 2.9 2.1 5.8 4.5 8.5 6.9 8.2 7.3 7 20.5-2.9 27a42.2 42.2 0 01-17.9 6.5c-7.2 1-14.6 1-21.9 1.5l-1.3-.2V68.5h9.4c3.4-.1 6.8-.2 10.2-.8 1.3-.2 3.1-1.4 3.3-2.5.2-1-1-2.7-2.1-3.5-4.3-3.1-8.9-5.8-13.2-9a18.8 18.8 0 01-7.7-9.8c-2-7 .3-14.5 6.1-19 5.5-4.2 12-6.2 18.7-7 5.7-.7 11.5-.6 17.2-.8.8 0 2.2.7 2.2 1.2l.9 18.7zM596 63c.7 3.1 2.8 4.3 5.1 4.8 4.4 1 8.8 1.7 13.2 2.1 3.5.3 7.2.2 10.7.2 2 0 2.6.6 2.3 2.7-.5 4.1-.7 8.3-1.1 12.4-.1 1.5-.3 2.7-2.3 2.8-9.2.1-18.5.7-27.6-1.2-3.8-.8-7.6-2-11.1-3.6-7.5-3.4-10.7-9.9-11.4-17.8-.7-8.1.3-15.8 4.4-23.1a31.1 31.1 0 0127.9-15.2c5.3.4 10.3 1.5 14.5 5.2 5 4.6 7 10.6 7.7 17.1.4 3.4 0 7 .2 10.4.1 2.2-.6 2.8-2.8 2.8-8.9-.1-17.8.1-26.7.2l-3 .2zm11.4-11c-.1-5.4-2.4-8.2-6.4-8-3.4.1-5.6 3.4-5.3 8h11.7zM421.2 82.1c-3.9 2-7.5 4.4-11.5 5.6a18 18 0 01-13.6-1.2c-4.6-2.4-6.7-6.4-7.2-11.5-1.1-12.5 8-18.7 17.4-20.7 3.8-.8 7.7-.9 11.6-1.3 2.1-.2 2.6-.9 1.4-2.6-2-2.9-5.2-3.1-8.2-3.4-5.9-.5-11.8-.6-17.7-.9l-1.9-.2 1.5-18.3c4.2 0 8.2-.3 12.1.1 6.4.6 12.7 1.3 19 2.5 11 2.1 16.7 8.6 17.4 19.7.8 11.6 1 23.3 1.6 34.9.1 1.3-.4 1.8-1.7 1.8-5.8.2-11.6.6-17.5.7-.6 0-1.6-.9-1.8-1.6-.6-1.2-.7-2.7-.9-3.6zm-.8-13.8c-.1-5.3-.4-5.7-4.1-5.6-4.4.1-6.6 1.8-6.5 5.1.1 2.8 2.2 4.4 6.1 4.3 3.8-.1 4.6-.7 4.5-3.8zM633 86.7c0-4.8-.1-9.6.1-14.4 0-.5 1.1-1.3 1.8-1.4 2.5-.2 5-.1 7.5-.1 1.5 0 2.1-.5 2-2.1l-.4-21c0-2.2-.8-3-3.1-3-2.6 0-5.3-.5-8.1-.7l1-15.3h30.5l1.1 9.3c5.8-6.5 12.2-11 21-12v7.1l-.6 15.7c0 1.6-.6 2.1-2.2 2.2L669 52.4c-1.9.2-2.6.9-2.5 2.8v15.6h11.3c3.2 0 3.1 0 2.8 3.3a461 461 0 00-1 12.6H633z"
+              />
             </svg>
           </section>
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end ">
@@ -675,8 +693,7 @@
       <!-- Main Content (Map) -->
       <div class="drawer-main-content mdc-elevation--z0">
         <div class="mdc-top-app-bar--fixed-adjust"></div>
-        <main class="main-content" id="main-content">
-        </main>
+        <main class="main-content" id="main-content"></main>
       </div>
     </div>
     <!-- Bottom App Bar -->

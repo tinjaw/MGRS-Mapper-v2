@@ -1,0 +1,20 @@
+/* TEAM */
+  Title: James Pistell
+  Rank: Captain
+  MOS: 19A
+  Component: ARNG
+  Site: http://jamespistell.com
+  Location: Rochester, New York
+
+/* THANKS */
+  Name: Måns Beckman, (https://spatialillusions.com/)
+  Name: Daybrush, (https://daybrush.com/)
+
+/* SITE */
+  Last Update: 2019/11/20
+  Standards: HTML5, CSS3, JavaScript (ES6+)
+  Components: Material Design
+  Software: JavaScript, ES6+, SCSS, WebPack, Babel, Leaflet, Moveable.js
+
+ /* ABOUT */
+  In January of 2019 I began working on this app in my spare time. By June of that year it became an obsession. I sold my online business that month and quit my job in order to work on this full time. I know that this will never make me any money or bring me popularity but it became a project that I took a lot of pride in. I have lost track of all the late nights at 4am where my body is aching and I am falling out of my chair and I can't figure out what is causing a bug in my software -- oh wait, Jim you dumbass its because you used "new" as a variable name. You idiot, you absolute moron. Go to bed it's 4am (this actually happened). Does anyone ever read these? Shoot me an email if you do.

@@ -5,6 +5,10 @@
 ## 20NOV19
 
 - Worked on fixing the tags in the <head> got a lot of inspiration from [HTML Head](https://htmlhead.dev/)
+- Since this website is primarily an app, I added the "application-name" meta tag
+- Added the "theme-color" meta tag which will just change the toolbar of the app as documented [here](https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android)
+- Added the "rating" meta tag with a value of "General" based on the content of the app
+- Added humans.txt
 
 ---
 
