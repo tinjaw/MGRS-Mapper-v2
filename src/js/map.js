@@ -133,6 +133,9 @@ const LeafletGZDLayer = L.LayerGroup.extend({
       smoothFactor: 1,
       lineCap: 'square',
       lineJoin: 'miter',
+      noClip: true,
+      // Keep interactive false, else the symbols cannot be dropped on polylines
+      interactive: false,
     });
 
     const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -157,6 +160,7 @@ const LeafletGZDLayer = L.LayerGroup.extend({
     // combine the polylines and the grid labels into their own group
     const gzdGroup = new L.LayerGroup([gzdPolylineBox, gzdLabels]).addTo(map);
     // This is a cheap hack and I don't know how to remove the layer from the _reset() func
+    window.gzdGroup = gzdGroup;
     map.addEventListener('moveend', () => {
       map.removeLayer(gzdGroup);
     }, { once: true });

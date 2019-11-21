@@ -10,6 +10,7 @@
 - Added the "rating" meta tag with a value of "General" based on the content of the app
 - Added humans.txt
 - Added a new class that creates dynamic GZDs depending on the map.getBounds()
+- Fixed the bug in the polylines that prevented symbols from being dropped on them. This was a simple options fix by setting "interactive" to false in gzdPolylineBox
 
 ---
 
