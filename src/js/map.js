@@ -40,7 +40,8 @@ map.addEventListener('movestart', () => {
 
 // Update the MGRS coordinates when the mouse cursor moves
 map.addEventListener('mousemove', (event) => {
-  document.querySelector('.cursorCoordinates').innerHTML = `${MGRSString(event.latlng.lat, event.latlng.lng)}`;
+  // document.querySelector('.cursorCoordinates').innerHTML = `${MGRSString(event.latlng.lat, event.latlng.lng)}`;
+  document.querySelector('.cursorCoordinates').innerHTML = `LAT: ${event.latlng.lat.toFixed(4)} LNG: ${event.latlng.lng.toFixed(4)}`;
 });
 
 // Put all markers in their own group
@@ -509,11 +510,164 @@ function generateGridZoneDesignators(obj, top, bottom, letter) {
 }
 
 // Now generate the entire grid zone designators for the world!
-Object.values(northingDict).forEach((key) => {
-  generateGridZoneDesignators(eastingDict, key.top, key.bottom, key.letter);
-});
+// Object.values(northingDict).forEach((key) => {
+//   generateGridZoneDesignators(eastingDict, key.top, key.bottom, key.letter);
+// });
 
 
+class Coordz {
+  constructor(top, bottom, letter, left, right, id) {
+    this._top = top;
+    this._bottom = bottom;
+    this._letter = letter;
+    this._left = left;
+    this._right = right;
+    this._id = id;
+    return this.genGrids();
+  }
+
+  get top() {
+    return this._top;
+  }
+
+  set top(newTop) {
+    this._top = newTop;
+  }
+
+  get bottom() {
+    return this._bottom;
+  }
+
+  set bottom(newBottom) {
+    this._bottom = newBottom;
+  }
+
+  get letter() {
+    return this._letter;
+  }
+
+  set letter(newLetter) {
+    this._letter = newLetter;
+  }
+
+  get left() {
+    return this._left;
+  }
+
+  set left(newLeft) {
+    this._left = newLeft;
+  }
+
+  get right() {
+    return this._right;
+  }
+
+  set right(newRight) {
+    this._right = newRight;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  set id(newId) {
+    this._id = newId;
+  }
+
+  genGrids() {
+    const topLeft2 = new L.LatLng(this._top, this._left);
+    const topRight2 = new L.LatLng(this._top, this._right);
+    const bottomRight2 = new L.LatLng(this._bottom, this._right);
+    const bottomLeft2 = new L.LatLng(this._bottom, this._left);
+    const gzdBox2 = [topLeft2, topRight2, bottomRight2, bottomLeft2, topLeft2];
+    const gzdPolylineBox2 = new L.Polyline(gzdBox2, {
+      color: 'red',
+      weight: 5,
+      opacity: 0.75,
+      smoothFactor: 1,
+      lineCap: 'square',
+      lineJoin: 'miter',
+    });
+
+    gzdPolylineBox2.addTo(map);
+    const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    // If the Grid Zone ID is divisible by 60, then we start a new line with the Letter ID
+    if (this._id % 60 !== 0) {
+      // Once the polylines are added to the map we can begin centering the Grid Zone Designator
+      gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      // Put this into an event listener where if the map zoom is <=7, adjust viewBox to '0 0 200 100' or something
+      gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
+      gzdIdSVG.innerHTML = `
+        <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
+        <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${this._id}${this._letter}</text>`;
+    }
+    // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
+    const halfLat = (gzdPolylineBox2.getBounds()._northEast.lat - gzdPolylineBox2.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
+    const halfLng = (gzdPolylineBox2.getBounds()._northEast.lng - gzdPolylineBox2.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
+    // Now add those values to the southwest latitude/longitude to get the center point of the GZD
+    const centerLat = gzdPolylineBox2.getBounds()._southWest.lat + halfLat;
+    const centerLng = gzdPolylineBox2.getBounds()._southWest.lng + halfLng;
+    // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitimate new LatLngBounds
+    // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
+    const centerBounds = new L.LatLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
+    // Now add the GZD overlays to the center of the GZD
+    L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
+  }
+}
+
+
+const returnInBoundsGridZoneDesignators = (northObj, eastObj) => {
+  const combinedObj = Object.assign({}, northObj, eastObj);
+  const letters = [];
+  const ids = [];
+  const testBounds = map.getBounds();
+
+  Object.values(combinedObj).forEach((key) => {
+    const { top } = key;
+    const { bottom } = key;
+    const { left } = key;
+    const { right } = key;
+    const { id } = key;
+
+    if (testBounds._northEast.lat >= bottom && testBounds._southWest.lat <= top) {
+      letters.push(key);
+    }
+
+    if (testBounds._northEast.lng >= left && testBounds._southWest.lng <= right) {
+      ids.push({ left, right, id });
+    }
+  });
+
+  letters.forEach((e) => {
+    // Object.assign(e, ids);
+    const letterKey = e;
+    Object.defineProperties(letterKey, {
+      id: {
+        value: ids.map(e => e),
+        writable: true,
+      },
+    });
+  });
+
+  Object.values(letters).forEach((key) => {
+    const letterID2 = key.letter;
+    const top2 = key.top;
+    const bottom2 = key.bottom;
+
+    for (let index = 0; index < key.id.length; index += 1) {
+      const element = key.id[index];
+      const ggg = new Coordz(top2, bottom2, letterID2, element.left, element.right, element.id);
+    }
+  });
+
+  // return [letters, ids];
+};
+
+
+returnInBoundsGridZoneDesignators(northingDict, eastingDict);
+window.returnInBoundsGridZoneDesignators = returnInBoundsGridZoneDesignators;
+window.northingDict = northingDict;
+window.eastingDict = eastingDict;
 window.markerGroup = markerGroup;
 window.map = map;
 window.L = L;

@@ -46,6 +46,7 @@ A development repository for MGRS-Mapper application
 - [ ] Semantic HTML check. (eg- The "Dismissible Drawer" in the top app bar has a class of 'mdc-top-app-bar\_\_title')
 - [ ] Sitemap file and Humans.txt
 - [ ] SPA to actual website? Need to have multiple pages for this
+- [ ] Update the "site updated" date in the humans.txt on production
 
 ## DEFAULT VALUES
 
