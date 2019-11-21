@@ -11,6 +11,7 @@
 - Added humans.txt
 - Added a new class that creates dynamic GZDs depending on the map.getBounds()
 - Fixed the bug in the polylines that prevented symbols from being dropped on them. This was a simple options fix by setting "interactive" to false in gzdPolylineBox
+- Added maxZoom to the default map. Prevents those annoying grey tiles
 
 ---
 

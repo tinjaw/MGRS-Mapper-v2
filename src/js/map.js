@@ -18,6 +18,7 @@ const map = L.map('main-content', {
   center: [45.12689618126071, -70.62732696533205],
   zoom: 5,
   cursor: true,
+  maxZoom: 16,
   layers: [
     L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'),
   ],
@@ -47,7 +48,7 @@ map.addEventListener('mousemove', (event) => {
 });
 
 // Put all markers in their own group
-const markerGroup = L.layerGroup().addTo(map);
+const markerGroup = new L.LayerGroup().addTo(map);
 
 
 //! MGRS GRID TEST
@@ -137,7 +138,7 @@ const LeafletGZDLayer = L.LayerGroup.extend({
       // Keep interactive false, else the symbols cannot be dropped on polylines
       interactive: false,
     });
-
+    const gzdPolylineBounds = gzdPolylineBox.getBounds();
     const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     // Once the polylines are added to the map we can begin centering the Grid Zone Designator
     gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
@@ -147,11 +148,11 @@ const LeafletGZDLayer = L.LayerGroup.extend({
         <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
         <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${this._params.id}${this._params.letterID}</text>`;
     // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
-    const halfLat = (gzdPolylineBox.getBounds()._northEast.lat - gzdPolylineBox.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
-    const halfLng = (gzdPolylineBox.getBounds()._northEast.lng - gzdPolylineBox.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
+    const halfLat = (gzdPolylineBounds._northEast.lat - gzdPolylineBounds._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
+    const halfLng = (gzdPolylineBounds._northEast.lng - gzdPolylineBounds._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
     // Now add those values to the southwest latitude/longitude to get the center point of the GZD
-    const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
-    const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
+    const centerLat = gzdPolylineBounds._southWest.lat + halfLat;
+    const centerLng = gzdPolylineBounds._southWest.lng + halfLng;
     // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitimate new LatLngBounds
     // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
     const centerBounds = new L.LatLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
@@ -160,7 +161,6 @@ const LeafletGZDLayer = L.LayerGroup.extend({
     // combine the polylines and the grid labels into their own group
     const gzdGroup = new L.LayerGroup([gzdPolylineBox, gzdLabels]).addTo(map);
     // This is a cheap hack and I don't know how to remove the layer from the _reset() func
-    window.gzdGroup = gzdGroup;
     map.addEventListener('moveend', () => {
       map.removeLayer(gzdGroup);
     }, { once: true });
