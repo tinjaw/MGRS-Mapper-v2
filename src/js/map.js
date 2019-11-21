@@ -15,7 +15,7 @@ import { removePopups, MGRSString } from './moveSymbol';
 
 const map = L.map('main-content', {
   center: [45.12689618126071, -70.62732696533205],
-  zoom: 6,
+  zoom: 5,
   cursor: true,
   layers: [
     L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'),
@@ -460,62 +460,8 @@ const eastingDict = {
   },
 };
 
-// top = the northern most latitude for the GZD, bottom = southern most latitude for the GZD
-function generateGridZoneDesignators(obj, top, bottom, letter) {
-  Object.values(obj).forEach((key) => {
-    const topLeft = new L.LatLng(top, key.left);
-    const topRight = new L.LatLng(top, key.right);
-    const bottomRight = new L.LatLng(bottom, key.right);
-    const bottomLeft = new L.LatLng(bottom, key.left);
-    const gzdBox = [topLeft, topRight, bottomRight, bottomLeft, topLeft];
-    const { id } = key;
-    const letterID = [...letter];
 
-    // Now create the polyline box from the returned array value 'gzdBox'
-    const gzdPolylineBox = new L.Polyline(gzdBox, {
-      color: 'red',
-      weight: 5,
-      opacity: 0.75,
-      smoothFactor: 1,
-      lineCap: 'square',
-      lineJoin: 'miter',
-    });
-
-    gzdPolylineBox.addTo(map);
-
-    const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    // If the Grid Zone ID is divisible by 60, then we start a new line with the Letter ID
-    if (id % 60 !== 0) {
-      // Once the polylines are added to the map we can begin centering the Grid Zone Designator
-      gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-      // Put this into an event listener where if the map zoom is <=7, adjust viewBox to '0 0 200 100' or something
-      gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
-      gzdIdSVG.innerHTML = `
-        <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
-        <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${id}${letterID[0]}</text>`;
-    }
-
-    // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
-    const halfLat = (gzdPolylineBox.getBounds()._northEast.lat - gzdPolylineBox.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
-    const halfLng = (gzdPolylineBox.getBounds()._northEast.lng - gzdPolylineBox.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
-    // Now add those values to the southwest latitude/longitude to get the center point of the GZD
-    const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
-    const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
-    // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitimate new LatLngBounds
-    // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
-    const centerBounds = new L.LatLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
-    // Now add the GZD overlays to the center of the GZD
-    L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
-  });
-}
-
-// Now generate the entire grid zone designators for the world!
-// Object.values(northingDict).forEach((key) => {
-//   generateGridZoneDesignators(eastingDict, key.top, key.bottom, key.letter);
-// });
-
-
-class Coordz {
+class MGRSLeafletLayer {
   constructor(top, bottom, letter, left, right, id) {
     this._top = top;
     this._bottom = bottom;
@@ -574,13 +520,17 @@ class Coordz {
     this._id = newId;
   }
 
+
   genGrids() {
-    const topLeft2 = new L.LatLng(this._top, this._left);
-    const topRight2 = new L.LatLng(this._top, this._right);
-    const bottomRight2 = new L.LatLng(this._bottom, this._right);
-    const bottomLeft2 = new L.LatLng(this._bottom, this._left);
-    const gzdBox2 = [topLeft2, topRight2, bottomRight2, bottomLeft2, topLeft2];
-    const gzdPolylineBox2 = new L.Polyline(gzdBox2, {
+    // this._top = the northern most latitude for the GZD
+    // this._bottom = southern most latitude for the GZD
+    const topLeft = new L.LatLng(this._top, this._left);
+    const topRight = new L.LatLng(this._top, this._right);
+    const bottomRight = new L.LatLng(this._bottom, this._right);
+    const bottomLeft = new L.LatLng(this._bottom, this._left);
+    const gzdBox = [topLeft, topRight, bottomRight, bottomLeft, topLeft];
+    // Now create the polyline box from the returned array value 'gzdBox'
+    const gzdPolylineBox = new L.Polyline(gzdBox, {
       color: 'red',
       weight: 5,
       opacity: 0.75,
@@ -589,38 +539,47 @@ class Coordz {
       lineJoin: 'miter',
     });
 
-    gzdPolylineBox2.addTo(map);
     const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     // If the Grid Zone ID is divisible by 60, then we start a new line with the Letter ID
-    if (this._id % 60 !== 0) {
-      // Once the polylines are added to the map we can begin centering the Grid Zone Designator
-      gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-      // Put this into an event listener where if the map zoom is <=7, adjust viewBox to '0 0 200 100' or something
-      gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
-      gzdIdSVG.innerHTML = `
+    // if (this._id % 60 !== 0) {
+    // Once the polylines are added to the map we can begin centering the Grid Zone Designator
+    gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    // Put this into an event listener where if the map zoom is <=7, adjust viewBox to '0 0 200 100' or something
+    gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
+    gzdIdSVG.innerHTML = `
         <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
         <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${this._id}${this._letter}</text>`;
-    }
+    // }
     // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
-    const halfLat = (gzdPolylineBox2.getBounds()._northEast.lat - gzdPolylineBox2.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
-    const halfLng = (gzdPolylineBox2.getBounds()._northEast.lng - gzdPolylineBox2.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
+    const halfLat = (gzdPolylineBox.getBounds()._northEast.lat - gzdPolylineBox.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
+    const halfLng = (gzdPolylineBox.getBounds()._northEast.lng - gzdPolylineBox.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
     // Now add those values to the southwest latitude/longitude to get the center point of the GZD
-    const centerLat = gzdPolylineBox2.getBounds()._southWest.lat + halfLat;
-    const centerLng = gzdPolylineBox2.getBounds()._southWest.lng + halfLng;
+    const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
+    const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
     // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitimate new LatLngBounds
     // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
     const centerBounds = new L.LatLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
     // Now add the GZD overlays to the center of the GZD
-    L.svgOverlay(gzdIdSVG, centerBounds).addTo(map);
+    const gzdLabels = new L.svgOverlay(gzdIdSVG, centerBounds);
+    // combine the polylines and the grid labels into their own group
+    const gzdGroup = new L.LayerGroup([gzdPolylineBox, gzdLabels]).addTo(map);
+    // map.addEventListener('moveend', () => {
+    //   map.removeLayer(gzdGroup);
+    // });
   }
 }
 
 
 const returnInBoundsGridZoneDesignators = (northObj, eastObj) => {
+  // Do not create GZDs if the map is zoomed out at 4 or below
+  if (map.getZoom() <= 4) { return; }
+  // Combined the northingDict and eastingDict into one object
   const combinedObj = Object.assign({}, northObj, eastObj);
-  const letters = [];
-  const ids = [];
-  const testBounds = map.getBounds();
+  // Create an array to store the inBounds values for letter,top, and bottom
+  const inBoundsLatitudeLetters = [];
+  // Create an array to store the inBounds values for top, right, and id
+  const inBoundsUTMNumbers = [];
+  const currentVisibleBounds = map.getBounds();
 
   Object.values(combinedObj).forEach((key) => {
     const { top } = key;
@@ -629,42 +588,207 @@ const returnInBoundsGridZoneDesignators = (northObj, eastObj) => {
     const { right } = key;
     const { id } = key;
 
-    if (testBounds._northEast.lat >= bottom && testBounds._southWest.lat <= top) {
-      letters.push(key);
+    // Since we don't want to create grids for what we can't see this returns all the valid inBounds properties in the northingDict
+    if (currentVisibleBounds._northEast.lat >= bottom && currentVisibleBounds._southWest.lat <= top) {
+      inBoundsLatitudeLetters.push(key);
     }
-
-    if (testBounds._northEast.lng >= left && testBounds._southWest.lng <= right) {
-      ids.push({ left, right, id });
+    // Same thing here but it returns the valid inBounds properties for the eastingDict
+    if (currentVisibleBounds._northEast.lng >= left && currentVisibleBounds._southWest.lng <= right) {
+      inBoundsUTMNumbers.push({ left, right, id });
     }
   });
 
-  letters.forEach((e) => {
-    // Object.assign(e, ids);
+  // Define the "id" property in this object so we can store all the values returned from inBoundsUTMNumbers
+  inBoundsLatitudeLetters.forEach((e) => {
     const letterKey = e;
     Object.defineProperties(letterKey, {
       id: {
-        value: ids.map(e => e),
+        value: inBoundsUTMNumbers.map(e => e),
         writable: true,
       },
     });
   });
 
-  Object.values(letters).forEach((key) => {
+  // Iterate over all the returned values and instantiate the class to create the grids
+  Object.values(inBoundsLatitudeLetters).forEach((key) => {
     const letterID2 = key.letter;
     const top2 = key.top;
     const bottom2 = key.bottom;
 
     for (let index = 0; index < key.id.length; index += 1) {
       const element = key.id[index];
-      const ggg = new Coordz(top2, bottom2, letterID2, element.left, element.right, element.id);
+      const makeGZD = new MGRSLeafletLayer(top2, bottom2, letterID2, element.left, element.right, element.id);
     }
   });
-
-  // return [letters, ids];
 };
 
 
-returnInBoundsGridZoneDesignators(northingDict, eastingDict);
+// returnInBoundsGridZoneDesignators(northingDict, eastingDict);
+
+
+const MyCustomLayer = L.LayerGroup.extend({
+
+  initialize(northObj, eastObj) {
+    // save position of the layer or any options from the constructor
+    this._northObj = northObj;
+    this._eastObj = eastObj;
+    return this._returnInBoundsGridZoneDesignators();
+  },
+
+  _returnInBoundsGridZoneDesignators() {
+    // Do not create GZDs if the map is zoomed out at 4 or below
+    if (map.getZoom() <= 4) { return; }
+    // Combined the northingDict and eastingDict into one object
+    const combinedObj = Object.assign({}, this._northObj, this._eastObj);
+    // Create an array to store the inBounds values for letter,top, and bottom
+    const inBoundsLatitudeLetters = [];
+    // Create an array to store the inBounds values for top, right, and id
+    const inBoundsUTMNumbers = [];
+    const currentVisibleBounds = map.getBounds();
+
+    Object.values(combinedObj).forEach((key) => {
+      const { top } = key;
+      const { bottom } = key;
+      const { left } = key;
+      const { right } = key;
+      const { id } = key;
+
+      // Since we don't want to create grids for what we can't see this returns all the valid inBounds properties in the northingDict
+      if (currentVisibleBounds._northEast.lat >= bottom && currentVisibleBounds._southWest.lat <= top) {
+        inBoundsLatitudeLetters.push(key);
+      }
+      // Same thing here but it returns the valid inBounds properties for the eastingDict
+      if (currentVisibleBounds._northEast.lng >= left && currentVisibleBounds._southWest.lng <= right) {
+        inBoundsUTMNumbers.push({ left, right, id });
+      }
+    });
+
+    // Define the "id" property in this object so we can store all the values returned from inBoundsUTMNumbers
+    inBoundsLatitudeLetters.forEach((e) => {
+      const letterKey = e;
+      Object.defineProperties(letterKey, {
+        id: {
+          value: inBoundsUTMNumbers.map(e => e),
+          writable: true,
+        },
+      });
+    });
+
+    // Iterate over all the returned values and instantiate the class to create the grids
+    Object.values(inBoundsLatitudeLetters).forEach((key) => {
+      const letterID = key.letter;
+      const { top } = key;
+      const { bottom } = key;
+
+      for (let index = 0; index < key.id.length; index += 1) {
+        const element = key.id[index];
+        const { left } = element;
+        const { right } = element;
+        const { id } = element;
+        // const makeGZD = new MGRSLeafletLayer(top, bottom, letterID, element.left, element.right, element.id);
+
+        this._getVals({
+          top, bottom, letterID, left, right, id,
+        });
+      }
+    });
+  },
+
+  _getVals(params) {
+    this._params = params;
+    const topLeft = new L.LatLng(this._params.top, this._params.left);
+    const topRight = new L.LatLng(this._params.top, this._params.right);
+    const bottomRight = new L.LatLng(this._params.bottom, this._params.right);
+    const bottomLeft = new L.LatLng(this._params.bottom, this._params.left);
+    const gzdBox = [topLeft, topRight, bottomRight, bottomLeft, topLeft];
+    const gzdPolylineBox = new L.Polyline(gzdBox, {
+      color: 'red',
+      weight: 5,
+      opacity: 0.75,
+      smoothFactor: 1,
+      lineCap: 'square',
+      lineJoin: 'miter',
+    });
+
+    const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    // If the Grid Zone ID is divisible by 60, then we start a new line with the Letter ID
+    // if (this._id % 60 !== 0) {
+    // Once the polylines are added to the map we can begin centering the Grid Zone Designator
+    gzdIdSVG.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    // Put this into an event listener where if the map zoom is <=7, adjust viewBox to '0 0 200 100' or something
+    gzdIdSVG.setAttribute('viewBox', '75 50 50 50');
+    gzdIdSVG.innerHTML = `
+        <rect width="200" height="100" fill="salmon" stroke="black" stroke-width="1" fill-opacity="0.5"/>
+        <text x="100" y="50" fill="black" font-weight="bold" font-family="Arial" font-size="80" text-anchor="middle" dominant-baseline="central">${this._params.id}${this._params.letterID}</text>`;
+    // }
+    // Get the difference between the north east and southwest latitudes/longitudes and divide by 2
+    const halfLat = (gzdPolylineBox.getBounds()._northEast.lat - gzdPolylineBox.getBounds()._southWest.lat) / 2; // (eg- 40.000 - 48.000 / 2 = 4)
+    const halfLng = (gzdPolylineBox.getBounds()._northEast.lng - gzdPolylineBox.getBounds()._southWest.lng) / 2; // (eg- -72.000 - -78.000 / 2 = 3)
+    // Now add those values to the southwest latitude/longitude to get the center point of the GZD
+    const centerLat = gzdPolylineBox.getBounds()._southWest.lat + halfLat;
+    const centerLng = gzdPolylineBox.getBounds()._southWest.lng + halfLng;
+    // Add or subtract a small number on the center latitudes/longitudes, this will give us a legitimate new LatLngBounds
+    // Add the pad() method at the end to add padding on all sides of the new boundaries so the GZD ID label can fit
+    const centerBounds = new L.LatLngBounds([centerLat + 0.01, centerLng - 0.01], [centerLat - 0.01, centerLng + 0.01]).pad(10.5);
+    // Now add the GZD overlays to the center of the GZD
+    const gzdLabels = new L.svgOverlay(gzdIdSVG, centerBounds);
+    // combine the polylines and the grid labels into their own group
+    const gzdGroup = new L.LayerGroup([gzdPolylineBox, gzdLabels]);
+    window.gzdGroup = gzdGroup;
+    return this._getLayer(gzdGroup);
+  },
+
+  _getLayer(layer) {
+    this._layer = layer;
+    this._layer.addTo(map);
+  },
+
+  // these events will be added and removed from the map with the layer
+  getEvents() {
+    return {
+      moveend: this._reset,
+    };
+  },
+
+  onAdd(map) {
+    const pane = map.getPane(this.options.pane);
+    this._container = L.DomUtil.create();
+
+    pane.appendChild(this._container);
+    console.log(this._container);
+    // gzdGroup.addTo(map);
+    // create a DOM element and put it into one of the map panes, by default the overlayPane
+    // this._el = L.DomUtil.create('div', 'my-custom-layer leaflet-zoom-hide');
+    // this.getPane().appendChild(this._el);
+
+    // add a viewreset event listener for updating layer's position, do the latter
+    // this._reset();
+    // this.initialize(this._northObj, this._eastObj);
+  },
+
+  onRemove(map) {
+    // remove layer's DOM elements and listeners
+    this.getPane().removeChild(this._el);
+  },
+
+  _reset() {
+    console.log('Running reset');
+
+
+    L.DomUtil.remove(this._container);
+
+
+    // this.initialize(this._northObj, this._eastObj);
+
+
+    // returnInBoundsGridZoneDesignators(northingDict, eastingDict);
+  },
+
+});
+
+const myLayer = new MyCustomLayer(northingDict, eastingDict).addTo(map);
+
+
 window.returnInBoundsGridZoneDesignators = returnInBoundsGridZoneDesignators;
 window.northingDict = northingDict;
 window.eastingDict = eastingDict;
