@@ -336,8 +336,11 @@ const drop = (event) => {
   target.dataset.symbolInfo = data;
   target.innerHTML = document.querySelector('.newSVG > svg').innerHTML;
   //! BUG: Cannot drop symbols on top of grid lines. Try a try-catch block and adjust the symbols coordinates
-  event.target.offsetParent.appendChild(target);
-
+  try {
+    event.target.offsetParent.appendChild(target);
+  } catch (error) {
+    target.setAttribute('viewBox', '25, 50, 150, 100');
+  }
   // Get the BBox only after the target has been appended
   const bbox = target.getBBox();
   // The bounceIn animation fucks everything up, remove it and set the BBox of the parent draggable symbol
@@ -352,7 +355,7 @@ const drop = (event) => {
   target.setAttribute('style', 'position: absolute;');
 
   // Convert dropped symbol to a Leaflet marker
-  const militarySymbolMarker = L.divIcon({
+  const militarySymbolMarker = new L.DivIcon({
     html: target,
     iconSize: [bbox.width, bbox.height],
     className: 'militarySymbolMarker',

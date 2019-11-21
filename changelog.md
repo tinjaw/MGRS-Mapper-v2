@@ -9,6 +9,7 @@
 - Added the "theme-color" meta tag which will just change the toolbar of the app as documented [here](https://developers.google.com/web/updates/2014/11/Support-for-theme-color-in-Chrome-39-for-Android)
 - Added the "rating" meta tag with a value of "General" based on the content of the app
 - Added humans.txt
+- Added a new class that creates dynamic GZDs depending on the map.getBounds()
 
 ---
 
