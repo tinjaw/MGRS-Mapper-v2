@@ -130,13 +130,14 @@ const LeafletGZDLayer = L.LayerGroup.extend({
     const gzdPolylineBox = new L.Polyline(gzdBox, {
       color: 'red',
       weight: 5,
-      opacity: 0.75,
+      opacity: 0.5,
       smoothFactor: 1,
       lineCap: 'square',
       lineJoin: 'miter',
       noClip: true,
       // Keep interactive false, else the symbols cannot be dropped on polylines
       interactive: false,
+      className: `gzd_${this._params.id}${this._params.letterID}`,
     });
     const gzdPolylineBounds = gzdPolylineBox.getBounds();
     const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -160,6 +161,10 @@ const LeafletGZDLayer = L.LayerGroup.extend({
     const gzdLabels = new L.svgOverlay(gzdIdSVG, centerBounds);
     // combine the polylines and the grid labels into their own group
     const gzdGroup = new L.LayerGroup([gzdPolylineBox, gzdLabels]).addTo(map);
+    // if (gzdPolylineBox.options.className === 'gzd_32V') {
+    //   console.log(this._params);
+    //   this._params.left = 3;
+    // }
     // This is a cheap hack and I don't know how to remove the layer from the _reset() func
     map.addEventListener('moveend', () => {
       map.removeLayer(gzdGroup);
