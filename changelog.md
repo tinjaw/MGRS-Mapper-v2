@@ -7,6 +7,7 @@
 - Corrected the GZDs for exception zones (32V, 31X, 33X, & 37X)
 - Removed GZDs for zones 32X, 34X & 36X
 - Removed MGRSString function as it did not take into consideration the exception zones, and replaced it with geodesy import
+- Tried and failed getting the 100k grids to work
 
 ---
 

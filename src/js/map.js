@@ -1,10 +1,12 @@
 import L from 'leaflet';
 //! Currently not using Geodesy, LatLon or LeafletTextPath
-import Mgrs, { Utm, LatLon, Dms } from 'geodesy/mgrs';
+import Mgrs, { Utm, LatLon } from 'geodesy/mgrs';
 import * as LeafletTextPath from 'leaflet-textpath';
 import { removePopups } from './moveSymbol';
 import { northingDict, eastingDict } from './gzdObject';
 
+window.Mgrs = Mgrs;
+window.LatLon = LatLon;
 
 /* This code is needed to properly load the images in the Leaflet CSS */
 // delete L.Icon.Default.prototype._getIconUrl;
@@ -163,6 +165,7 @@ const LeafletGZDLayer = L.LayerGroup.extend({
     const topRight = new L.LatLng(this._params.top, this._params.right);
     const bottomRight = new L.LatLng(this._params.bottom, this._params.right);
     const bottomLeft = new L.LatLng(this._params.bottom, this._params.left);
+    // We do not need bottomLeft and topLeft on the gzdBox, since they just overlap anyways
     const gzdBox = [topLeft, topRight, bottomRight, bottomLeft, topLeft];
     const gzdPolylineBox = new L.Polyline(gzdBox, {
       color: 'red',
@@ -176,6 +179,17 @@ const LeafletGZDLayer = L.LayerGroup.extend({
       interactive: false,
       className: `gzd_${this._params.id}${this._params.letterID}`,
     });
+
+    // function garbage(element) {
+    //   console.log(`${element.id}${element.letterID}`);
+    //   const obj = {
+    //     topLeft: '18T VP 00000 99999',
+    //     topRight: '18T VP 99999 99999',
+    //     bottomRight: '18T VP 99999 00000',
+    //     bottomLeft: '18T VP 00000 00000',
+    //   }
+    // }
+    // garbage(this._params);
     const gzdPolylineBounds = gzdPolylineBox.getBounds();
     const gzdIdSVG = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     // Once the polylines are added to the map we can begin centering the Grid Zone Designator
@@ -198,10 +212,6 @@ const LeafletGZDLayer = L.LayerGroup.extend({
     const gzdLabels = new L.svgOverlay(gzdIdSVG, centerBounds);
     // combine the polylines and the grid labels into their own group
     const gzdGroup = new L.LayerGroup([gzdPolylineBox, gzdLabels]).addTo(map);
-    // if (gzdPolylineBox.options.className === 'gzd_32V') {
-    //   console.log(this._params);
-    //   this._params.left = 3;
-    // }
     // This is a cheap hack and I don't know how to remove the layer from the _reset() func
     map.addEventListener('moveend', () => {
       map.removeLayer(gzdGroup);
