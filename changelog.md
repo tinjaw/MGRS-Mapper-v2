@@ -2,6 +2,14 @@
 
 ---
 
+## 23NOV19
+
+- Corrected the GZDs for exception zones (32V, 31X, 33X, & 37X)
+- Removed GZDs for zones 32X, 34X & 36X
+- Removed MGRSString function as it did not take into consideration the exception zones, and replaced it with geodesy import
+
+---
+
 ## 20NOV19
 
 - Worked on fixing the tags in the <head> got a lot of inspiration from [HTML Head](https://htmlhead.dev/)

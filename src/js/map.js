@@ -1,8 +1,8 @@
 import L from 'leaflet';
 //! Currently not using Geodesy, LatLon or LeafletTextPath
-import geodesy, { LatLon } from 'geodesy/mgrs';
+import Mgrs, { Utm, LatLon, Dms } from 'geodesy/mgrs';
 import * as LeafletTextPath from 'leaflet-textpath';
-import { removePopups, MGRSString } from './moveSymbol';
+import { removePopups } from './moveSymbol';
 import { northingDict, eastingDict } from './gzdObject';
 
 
@@ -32,6 +32,16 @@ const map = L.map('main-content', {
 // map.setView(defaultCenter, defaultZoom);
 // basemap.addTo(map);
 
+// Update the MGRS coordinates when the mouse cursor moves
+map.addEventListener('mousemove', (event) => {
+  const cc = document.querySelector('.cursorCoordinates');
+  const latLong = new LatLon(event.latlng.lat, event.latlng.lng);
+  const latLongParse = LatLon.parse(latLong);
+  cc.innerHTML = `<strong>MGRS: </strong>${latLongParse.toUtm().toMgrs()}`;
+  cc.innerHTML += `<br/><strong>LAT:  </strong>  ${event.latlng.lat.toFixed(4)} <strong>LNG: </strong> ${event.latlng.lng.toFixed(4)}`;
+});
+
+
 // When the map is panned, remove the control box on the symbol
 map.addEventListener('movestart', () => {
   if (moveable.target) {
@@ -40,12 +50,6 @@ map.addEventListener('movestart', () => {
   }
 });
 
-// Update the MGRS coordinates when the mouse cursor moves
-map.addEventListener('mousemove', (event) => {
-  const cc = document.querySelector('.cursorCoordinates');
-  cc.innerHTML = `<strong>MGRS: </strong>${MGRSString(event.latlng.lat, event.latlng.lng)}`;
-  cc.innerHTML += `<br/><strong>LAT: </strong> ${event.latlng.lat.toFixed(4)} <strong>LNG: </strong> ${event.latlng.lng.toFixed(4)}`;
-});
 
 // Put all markers in their own group
 const markerGroup = new L.LayerGroup().addTo(map);
@@ -122,6 +126,39 @@ const LeafletGZDLayer = L.LayerGroup.extend({
 
   _buildGZD(params) {
     this._params = params;
+    // Adjust coordinates for special GZDs around Norway and Svalbard
+    const exceptionZones = `${this._params.id}${this._params.letterID}`;
+    switch (exceptionZones) {
+      case '31X':
+        this._params.right = 9;
+        break;
+      case '32X':
+        return;
+      case '33X':
+        this._params.left = 9;
+        this._params.right = 21;
+        break;
+      case '34X':
+        return;
+      case '35X':
+        this._params.left = 21;
+        this._params.right = 33;
+        break;
+      case '36X':
+        return;
+      case '37X':
+        this._params.left = 33;
+        break;
+      case '31V':
+        this._params.right = 3;
+        break;
+      case '32V':
+        this._params.left = 3;
+        break;
+      default:
+        break;
+    }
+
     const topLeft = new L.LatLng(this._params.top, this._params.left);
     const topRight = new L.LatLng(this._params.top, this._params.right);
     const bottomRight = new L.LatLng(this._params.bottom, this._params.right);
@@ -191,3 +228,5 @@ const addGZD = new LeafletGZDLayer(northingDict, eastingDict).addTo(map);
 window.markerGroup = markerGroup;
 window.map = map;
 window.L = L;
+
+export { map };
