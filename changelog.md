@@ -8,6 +8,16 @@
 - Removed GZDs for zones 32X, 34X & 36X
 - Removed MGRSString function as it did not take into consideration the exception zones, and replaced it with geodesy import
 - Tried and failed getting the 100k grids to work
+- Good progress on extracting bbox values from 100km grid squares
+  - Look in the "100K_MGRS_GRIDS" folder and select the GZD you want to extract data from
+  - Go to [mygeodata.cloud](https://mygeodata.cloud/converter/kml-to-geojson) and convert the KML to GeoJSON
+  - Go to [mapshaper](https://mapshaper.org/) and upload your GZD file
+  - Run this command in terminal:
+  -     `mapshaper 18T.geojson -split 100kmSQ_ID -o bbox-index`
+  - This will extract all the grid layers, delete them and keep "bbox-index.json"
+  - From there run this regex command in a search & replace that will truncate the grid coordinates
+  -     `\d{7}(?=\D)`
+  - Consider using a JSON parser for all of this
 
 ---
 

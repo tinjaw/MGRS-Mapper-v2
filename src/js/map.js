@@ -177,7 +177,7 @@ const LeafletGZDLayer = L.LayerGroup.extend({
       noClip: true,
       // Keep interactive false, else the symbols cannot be dropped on polylines
       interactive: false,
-      className: `gzd_${this._params.id}${this._params.letterID}`,
+      // className: `gzd_${this._params.id}${this._params.letterID}`,
     });
 
     // function garbage(element) {
