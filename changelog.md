@@ -2,6 +2,12 @@
 
 ---
 
+## 25NOV19
+
+- Worked exclusively on getting coordinates from 100k grid squares. Working version can be seen in GETGRIDSQUARECOORDS.js and also on my [codepen](https://codepen.io/pistell/pen/QWWXpEV)
+
+---
+
 ## 23NOV19
 
 - Corrected the GZDs for exception zones (32V, 31X, 33X, & 37X)
