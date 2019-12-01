@@ -2,6 +2,13 @@
 
 ---
 
+## 30NOV19
+
+- Worked on 100K grids. I generated a JSON file for all the 100K grid squares in GZDs that are NOT on a body of water (eg- the fuckin oceans). Adding them to "map-grid-test.zip"
+- The grids get retrieved by a Service Worker and then are stored in IndexedDB. When the user zooms in it will find the GZDs that match the key and will draw the 100K grid squares. This _technically_ works but there are some major inefficiencies with it. For example, I am wondering if I can cut the file size down by removing the bottom left and top left arrays. Also when the user drags the map the 100K grids will draw over each other. Very easy way to crash the browser.
+
+---
+
 ## 25NOV19
 
 - Worked exclusively on getting coordinates from 100k grid squares. Working version can be seen in GETGRIDSQUARECOORDS.js and also on my [codepen](https://codepen.io/pistell/pen/QWWXpEV)
