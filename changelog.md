@@ -2,6 +2,12 @@
 
 ---
 
+## 3DEC19
+
+- Worked all day on fixing the grid generator. I have a working copy now but I'm too exhausted to add it. Look for the gridGeneratorExample.js file
+
+---
+
 ## 30NOV19
 
 - Worked on 100K grids. I generated a JSON file for all the 100K grid squares in GZDs that are NOT on a body of water (eg- the fuckin oceans). Adding them to "map-grid-test.zip"
