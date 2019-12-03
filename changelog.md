@@ -5,6 +5,7 @@
 ## 3DEC19
 
 - Worked all day on fixing the grid generator. I have a working copy now but I'm too exhausted to add it. Look for the gridGeneratorExample.js file
+- Finally got all the corner grids for all 100k grid squares. Putting them in the CORRECTCORNERGRIDS.js file to look at later. It's 4:04am and I'm exhausted
 
 ---
 
