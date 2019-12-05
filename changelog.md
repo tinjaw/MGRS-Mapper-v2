@@ -2,7 +2,17 @@
 
 ---
 
-## 3DEC19
+## 4DEC19
+
+- Fixed missing 100K grid squares in the generator (was missing grids for over 250 GZDs!)
+- Fixed IndexedDB not logging the right data
+- Created a web worker to load the 100K grid square data in the background
+- Web Worker now posts data from IndexedDB
+- Created dynamic 1000 meter grid squares
+
+---
+
+## 2DEC19
 
 - Worked all day on fixing the grid generator. I have a working copy now but I'm too exhausted to add it. Look for the gridGeneratorExample.js file
 - Finally got all the corner grids for all 100k grid squares. Putting them in the CORRECTCORNERGRIDS.js file to look at later. It's 4:04am and I'm exhausted
