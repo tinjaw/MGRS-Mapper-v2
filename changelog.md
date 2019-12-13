@@ -2,6 +2,13 @@
 
 ---
 
+## 13DEC19
+
+- Got a rough copy of the 1000 meter grid square generator. The problem with it is it will not generate grids when the map bounds contain 2 grid square designators. This is due to the eastingIntervals() and northingIntervals() methods. Since adjacent GZDs have vastly different UTM values, the eastingIterator/northingIterator is not always less than `this.endCoordEasting.easting`. It is recommended that you go back into your class function in the leaflet-mgrs-layer-pages-gh project and find out how to incorporate this
+- BUG: The 10k grid squares are not accurate. Scrape that whole idea and work on building the grid generator
+
+---
+
 ## 4DEC19
 
 - Fixed missing 100K grid squares in the generator (was missing grids for over 250 GZDs!)
