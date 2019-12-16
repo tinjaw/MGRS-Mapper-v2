@@ -2,6 +2,12 @@
 
 ---
 
+## 15DEC19
+
+- Got the 1000m grid squares to partially generate on a split GZD. Right now I have it generating for the left side of a GZD, there is a Promise function on the combinedIntervals() class method. I am thinking that I could possibly run the class again to generate the right side. If this works then I can definitely see this becoming an open source plugin.
+
+---
+
 ## 13DEC19
 
 - Got a rough copy of the 1000 meter grid square generator. The problem with it is it will not generate grids when the map bounds contain 2 grid square designators. This is due to the eastingIntervals() and northingIntervals() methods. Since adjacent GZDs have vastly different UTM values, the eastingIterator/northingIterator is not always less than `this.endCoordEasting.easting`. It is recommended that you go back into your class function in the leaflet-mgrs-layer-pages-gh project and find out how to incorporate this
