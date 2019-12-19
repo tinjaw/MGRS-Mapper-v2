@@ -2,6 +2,12 @@
 
 ---
 
+## 18DEC19
+
+- Fixed issues with the 100km grid square not generating when the map bounds contains 2 GZDs. Now I just need to implement this into a proper leaflet plugin
+
+---
+
 ## 15DEC19
 
 - Got the 1000m grid squares to partially generate on a split GZD. Right now I have it generating for the left side of a GZD, there is a Promise function on the combinedIntervals() class method. I am thinking that I could possibly run the class again to generate the right side. If this works then I can definitely see this becoming an open source plugin.
