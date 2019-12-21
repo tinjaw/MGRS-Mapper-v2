@@ -2,6 +2,10 @@
 
 ---
 
+## 21DEC19
+
+- Made very little progress on the fucking grids. I got the 1000m SORT OF working. But this whole plugin is a total embarrassment
+
 ## 18DEC19
 
 - Fixed issues with the 100km grid square not generating when the map bounds contains 2 GZDs. Now I just need to implement this into a proper leaflet plugin
