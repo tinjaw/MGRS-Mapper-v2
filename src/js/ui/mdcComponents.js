@@ -5,14 +5,14 @@ import { MDCSwitch } from '@material/switch';
 import Fuse from 'fuse.js';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { MDCMenuSurface } from '@material/menu-surface';
-import mod1Object from './mod1Object';
-import mod2Object from './mod2Object';
-import commandPostObject from './commandPostObject';
+import mod1Object from '../symbolObjects/mod1';
+import mod2Object from '../symbolObjects/mod2';
+import commandPostObject from '../symbolObjects/commandPost';
 import {
   addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, DisableInputs, debounce, setSelectMenuTextContent,
 } from './helperFunctions';
-import { MilSym } from './app';
-import militarySymbolsObject from './militarySymbolsObject';
+import MilSym from '../app';
+import militarySymbolsObject from '../symbolObjects/militarySymbols';
 
 
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));

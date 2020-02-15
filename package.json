@@ -28,7 +28,7 @@
     "extract-loader": "^3.0.0",
     "file-loader": "^2.0.0",
     "function-performance-test": "^1.0.6",
-    "node-sass": "^4.9.4",
+    "node-sass": "^4.13.1",
     "sass-loader": "^7.1.0",
     "webpack": "^4.0.0",
     "webpack-bundle-analyzer": "^3.5.1",
@@ -49,7 +49,7 @@
     "esm": "^3.2.25",
     "fuse.js": "^3.4.5",
     "geodesy": "^2.2.0",
-    "leaflet": "^1.5.1",
+    "leaflet": "^1.6.0",
     "leaflet-textpath": "^1.2.0",
     "moveable": "^0.9.5"
   },
@@ -63,6 +63,6 @@
     "email": "jamespistell@gmail.com"
   },
   "engines": {
-    "node": ">=9.4.0"
+    "node": ">=13.6.0"
   }
 }

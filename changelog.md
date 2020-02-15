@@ -2,6 +2,18 @@
 
 ---
 
+## 15FEB20
+
+- After 3 months and 340.33 hours I have finished the MGRS overlay plugin.
+- Updated leaflet dependency to 1.6
+- Updated node-sass to 4.13 (4.9 did not support Node version 13)
+- Created folders for JS files based on the theme
+  - map: Deals with Leaflet and its plugins
+  - symbolObjects: Deals with the logic behind creating symbols. Also removed the word "object" from each of their file names.
+  - ui: Deals with Material Design components, pushbar, or generally anything else UI related
+
+---
+
 ## 21DEC19
 
 - Made very little progress on the fucking grids. I got the 1000m SORT OF working. But this whole plugin is a total embarrassment

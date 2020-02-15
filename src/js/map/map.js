@@ -2,7 +2,7 @@ import L from 'leaflet';
 //! Currently not using Geodesy, LatLon or LeafletTextPath
 import Mgrs, { Utm, LatLon } from 'geodesy/mgrs';
 import * as LeafletTextPath from 'leaflet-textpath';
-import { removePopups } from './moveSymbol';
+import { removePopups } from '../ui/moveSymbol';
 import { northingDict, eastingDict } from './gzdObject';
 
 window.Mgrs = Mgrs;

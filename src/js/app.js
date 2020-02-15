@@ -1,11 +1,11 @@
 // * IMPORTS * //
-import affiliationOutlineObject from './affiliationOutlineObject';
-import militarySymbolsObject from './militarySymbolsObject';
-import unitSizeObject from './unitSizeObject';
-import mod1Object from './mod1Object';
-import mod2Object from './mod2Object';
-import taskForceObject from './taskForceObject';
-import commandPostObject from './commandPostObject';
+import affiliationOutlineObject from './symbolObjects/affiliationOutline';
+import militarySymbolsObject from './symbolObjects/militarySymbols';
+import unitSizeObject from './symbolObjects/unitSize';
+import mod1Object from './symbolObjects/mod1';
+import mod2Object from './symbolObjects/mod2';
+import taskForceObject from './symbolObjects/taskForce';
+import commandPostObject from './symbolObjects/commandPost';
 
 // * The star of the show * //
 // Example 1: const symbol_1 = new MilSym('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post');
@@ -916,4 +916,4 @@ window.mod2Object = mod2Object;
 window.taskForceObject = taskForceObject;
 window.commandPostObject = commandPostObject;
 
-export { MilSym };
+export default MilSym;
