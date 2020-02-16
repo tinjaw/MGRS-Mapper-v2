@@ -11,6 +11,9 @@
   - map: Deals with Leaflet and its plugins
   - symbolObjects: Deals with the logic behind creating symbols. Also removed the word "object" from each of their file names.
   - ui: Deals with Material Design components, pushbar, or generally anything else UI related
+- Moved DisableInputs and addSymbolsAndModsToList from helperFunctions into mdcComponents
+- Tweaked the settings for Fuse.js for more accurate searches
+- Moved TransformModifiersOnEquipment from helperFunctions into placeSymbol
 
 ---
 

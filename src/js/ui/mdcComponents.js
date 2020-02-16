@@ -9,7 +9,7 @@ import mod1Object from '../symbolObjects/mod1';
 import mod2Object from '../symbolObjects/mod2';
 import commandPostObject from '../symbolObjects/commandPost';
 import {
-  addSymbolsAndModsToList, Resizer, TransformModifiersOnEquipment, bounceInAnimation, DisableInputs, debounce, setSelectMenuTextContent,
+  Resizer, bounceInAnimation, debounce, setSelectMenuTextContent,
 } from './helperFunctions';
 import MilSym from '../app';
 // import MainMS from '../app';
@@ -47,7 +47,6 @@ const deleteHigherFormationButton = new MDCTextFieldIcon(higherFormationIcon.roo
 // MDC - Switch component - Toggles 4 states, none, reinforced, reduced or reinforced and reduced
 const reinforcedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reinforcedSwitch'));
 const reducedSwitch = new MDCSwitch(document.querySelector('.mdc-switch.reducedSwitch'));
-const reinforcedReducedValue = () => new RRSwitches().value;
 // MDC - Switch component - Toggles flying outline on specific symbols
 const flyingSwitch = new MDCSwitch(document.querySelector('.mdc-switch.flightSwitch'));
 // MDC - Switch component - Toggles activity indicator on symbols
@@ -58,6 +57,187 @@ const installationSwitch = new MDCSwitch(document.querySelector('.mdc-switch.ins
 const taskForceSwitch = new MDCSwitch(document.querySelector('.mdc-switch.taskForceSwitch'));
 // MDC - Select Menu component - Contains various Command Post symbols
 const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-select'));
+
+
+// *********************************************************************************** //
+// * Helper Functions                                                                * //
+// *********************************************************************************** //
+// * Add Symbols and Modifiers to the Dropdown lists * //
+// ex- addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
+// obj = the object to iterate over (ex- mod1Object)
+// abv = the abbreviation of the object to match the HTML select lists
+// menu = the MDCSelect menu const in mdcComponents.js
+const addSymbolsAndModsToList = (obj, abv, menu = null) => {
+  Object.keys(obj).forEach((key) => {
+    const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
+    const newli = document.createElement('li');
+    const modTypeInfo = document.createElement('em');
+    modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info symbolTypeGrid mdc-typography--overline`);
+    // Add the type of the Modifier in the drop down box
+    modTypeInfo.textContent = obj[key].type;
+    newli.setAttributeNS(null, 'class', 'mdc-list-item listGridParent');
+    newli.setAttributeNS(null, 'data-value', key);
+    newli.innerHTML = `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`;
+    newli.prepend(modTypeInfo);
+    mdcList.append(newli);
+    const figureElement = document.createElement('figure');
+    figureElement.setAttributeNS(null, 'class', `${abv}Figure symbolFigureGrid`);
+    // add the symbol key to the data-attr so they can match up with the list item
+    figureElement.setAttributeNS(null, `data-${abv}-name`, `${key}`);
+    newli.prepend(figureElement);
+    // This will add the Symbols and Modifiers to the dropdown list
+    switch (abv) {
+      case 'mod1':
+        // All this does is remove the ESLint error for “Do not use 'new' for side effects”
+        (() => new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, `${key}`))();
+        break;
+      case 'mod2':
+        new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, `${key}`);
+        break;
+      case 'commandpost':
+        // Set the default command post value to "None" on page load
+        selectCommandPost.value = 'None';
+        // Since we do not want to strip the outline of the command post, return this value
+        return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`, undefined);
+      case 'symbol':
+        // Set the selected symbol to "Default Land Unit" on page load
+        // Setting floatLabel(true) and setEnhancedSelectedIndex_(0) will avoid the symbol animations from running again.
+        // For instance if you had 'selectSymbol.foundation_.setSelectedIndex(0);' the function to remove the animateSymbol class would run x times
+        // x = the number of elements in the symbolSelect dropdown.
+        //! This actually might be a better way of doing things that just using "selectSymbol.foundation_.setSelectedIndex(0);"
+        selectSymbol.foundation_.adapter_.floatLabel(true);
+        selectSymbol.setEnhancedSelectedIndex_(0);
+        // Returning 'symbol' since we need to keep the symbol affiliation outlines
+        return new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, undefined);
+      default:
+        break;
+    }
+    // This will remove the affiliation containers on the Modifier elements in the dropdown
+    menu.menu_.items.map((element) => {
+      // This targets the Modifier element (eg- the moon symbol for "foraging")
+      const modElement = element.querySelectorAll('li figure svg g.outline path')[0];
+      // This targets the SVG container for each Modifier element
+      const modSVGContainer = modElement.parentElement.parentElement;
+      // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
+      modElement.setAttributeNS(null, 'fill', 'transparent');
+      // Set the affiliation outline stroke to 0
+      modElement.setAttributeNS(null, 'stroke-width', '0');
+      // Set the affiliation outline path to nothing
+      modElement.setAttributeNS(null, 'd', '');
+      // Scale the Modifier element down in the select box so they don't clip
+      modSVGContainer.style.transform = 'scale(0.75)';
+      // Set the selected index to the first item (usually this is "Default/None")
+      menu.foundation_.setSelectedIndex(0);
+    });
+  });
+};
+
+//* Disabled selected inputs * //
+function DisableInputs({
+  affiliation = false,
+  size = false,
+  mod1 = false,
+  mod2 = false,
+  unique = false,
+  higher = false,
+  reinforced = false,
+  reduced = false,
+  activity = false,
+  installation = false,
+  taskForce = false,
+  commandPost = false,
+}) {
+  if (affiliation) {
+    selectAffiliation.disabled = true;
+  } else {
+    selectAffiliation.disabled = false;
+  }
+
+  if (size) {
+    selectUnitSize.disabled = true;
+    selectUnitSize.setSelectedIndex = 0;
+  } else {
+    selectUnitSize.disabled = false;
+  }
+
+  if (mod1) {
+    selectMod1.disabled = true;
+    //! using "selectMod1.selectedIndex = 0;" causes a change event which triggers placeSymbol()
+    //! setEnhancedSelectedIndex_(0) will "silently" change the select box index
+    selectMod1.setEnhancedSelectedIndex_(0);
+    //! Since the index was "silently" changed, we need to reset the text
+    selectMod1.root_.childNodes[5].innerText = 'None';
+  } else {
+    selectMod1.disabled = false;
+  }
+
+  if (mod2) {
+    selectMod2.disabled = true;
+    selectMod2.setEnhancedSelectedIndex_(0);
+    selectMod2.root_.childNodes[5].innerText = 'None';
+  } else {
+    selectMod2.disabled = false;
+  }
+
+  if (unique) {
+    uniqueDesignationField.disabled = true;
+    uniqueDesignationField.value = '';
+    deleteUniqueDesignationButton.root_.style.display = 'none';
+  } else {
+    uniqueDesignationField.disabled = false;
+  }
+
+  if (higher) {
+    higherFormationField.disabled = true;
+    higherFormationField.value = '';
+    deleteHigherFormationButton.root_.style.display = 'none';
+  } else {
+    higherFormationField.disabled = false;
+  }
+
+  if (reinforced) {
+    reinforcedSwitch.disabled = true;
+    reinforcedSwitch.checked = false;
+  } else {
+    reinforcedSwitch.disabled = false;
+  }
+
+  if (reduced) {
+    reducedSwitch.disabled = true;
+    reducedSwitch.checked = false;
+  } else {
+    reducedSwitch.disabled = false;
+  }
+
+  if (activity) {
+    activitySwitch.disabled = true;
+    activitySwitch.checked = false;
+  } else {
+    activitySwitch.disabled = false;
+  }
+
+  if (installation) {
+    installationSwitch.disabled = true;
+    installationSwitch.checked = false;
+  } else {
+    installationSwitch.disabled = false;
+  }
+
+  if (taskForce) {
+    taskForceSwitch.disabled = true;
+    taskForceSwitch.checked = false;
+  } else {
+    taskForceSwitch.disabled = false;
+  }
+
+  if (commandPost) {
+    selectCommandPost.disabled = true;
+    selectCommandPost.setEnhancedSelectedIndex_(0);
+    selectCommandPost.root_.childNodes[5].innerText = 'None';
+  } else {
+    selectCommandPost.disabled = false;
+  }
+}
 
 
 // *********************************************************************************** //
@@ -74,14 +254,14 @@ menuSurfaceButton.listen('click', () => {
 // *********************************************************************************** //
 const searchOptions = {
   shouldSort: true,
-  // tokenize: true,
-  // matchAllTokens: true,
+  tokenize: true,
+  matchAllTokens: true,
   includeScore: true,
   findAllMatches: true,
   includeMatches: true,
   threshold: 0.6,
   location: 0,
-  distance: 100,
+  distance: 10,
   maxPatternLength: 32,
   minMatchCharLength: 3,
   keys: [Object.keys(militarySymbolsObject)],
@@ -135,12 +315,7 @@ const searchResults = debounce(() => {
           // Add the symbol key to the data-attr so they can match up with the list item
           figureElement.setAttribute('data-symbol-name', `${element}`);
           newli.prepend(figureElement);
-          //! replacer
-          // new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-          MainMS.location = `.symbolFigure[data-symbol-name="${element}"]`;
-          MainMS.symbol = element;
-          MainMS.affiliation = selectAffiliation.value;
-          MainMS.placeSymbol();
+          new MilSym(`.symbolFigure[data-symbol-name="${element}"]`, `${element}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
           // selectSymbol.isMenuOpen_ ? Resizer('.symbolFigure svg') : null;
         }
         // Resize symbols in search results so they fit
@@ -311,6 +486,8 @@ class RRSwitches {
   }
 }
 
+const reinforcedReducedValue = () => new RRSwitches().value;
+
 [reducedSwitch, reinforcedSwitch].forEach((key) => {
   key.listen('change', reinforcedReducedValue);
 });
@@ -418,7 +595,6 @@ window.Resizer = Resizer;
 window.deleteTextFieldButton = deleteTextFieldButton;
 window.selectMod1 = selectMod1;
 window.selectMod2 = selectMod2;
-window.TransformModifiersOnEquipment = TransformModifiersOnEquipment;
 window.uniqueDesignationField = uniqueDesignationField;
 window.higherFormationField = higherFormationField;
 window.reinforcedSwitch = reinforcedSwitch;
@@ -450,24 +626,9 @@ window.onload = () => {
 
   const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
   window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
-  // MainMS.location = '.newSVG';
-  // MainMS.symbol = selectSymbol.value;
-  // MainMS.affiliation = selectAffiliation.value;
-  // MainMS.echelon = selectUnitSize.value;
-  // MainMS.mod1 = selectMod1.value;
-  // MainMS.mod2 = selectMod2.value;
-  // MainMS.uniqueDesignation = uniqueDesignationField.value;
-  // MainMS.higherFormation = higherFormationField.value;
-  // MainMS.reinforcedReduced = reinforcedReducedValue();
-  // MainMS.flying = flyingSwitch.checked;
-  // MainMS.activity = activitySwitch.checked;
-  // MainMS.installation = installationSwitch.checked;
-  // MainMS.taskForce = taskForceSwitch.checked;
-  // MainMS.commandPost = selectCommandPost.value;
-  // MainMS.placeSymbol();
-
 
   setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
+
 
   // **************************************************************************************************************** //
   // * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                                                   * //
@@ -501,7 +662,8 @@ window.onload = () => {
       // Disable switches and inputs for Equipment and Graphic Control Measures
       switch (MainMS.type) {
         case 'Equipment':
-          // Disable all except, symbol, affiliation, mod1, mod2, and flying (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
+          // Disable all except, symbol, affiliation, mod1, mod2, and flying
+          // (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
           DisableInputs({
             affiliation: false,
             size: true,
@@ -633,12 +795,7 @@ window.onload = () => {
       // When an affiliation is selected, change the outlines of all symbols in the dropdown only if the selectSymbol menu is open though
       if (selectSymbol.isMenuOpen_) {
         selectSymbol.menu_.items.map((key) => {
-          //! replacer
-          // new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`);
-          MainMS.location = `.symbolFigure[data-symbol-name="${key.dataset.value}"]`;
-          MainMS.symbol = key.dataset.value;
-          MainMS.affiliation = selectAffiliation.value;
-          MainMS.placeSymbol();
+          new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`);
         });
       }
     }
@@ -663,12 +820,7 @@ window.onload = () => {
       // Now create the new symbol outlines only if the selectCommandPost menu is open though
       if (selectCommandPost.isMenuOpen_) {
         selectCommandPost.menu_.items.map((key) => {
-          //! replacer
-          // new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
-          MainMS.location = `.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`;
-          MainMS.symbol = 'Default Land Unit';
-          MainMS.commandPost = key.dataset.value;
-          MainMS.placeSymbol();
+          new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
         });
       }
     }
@@ -683,5 +835,6 @@ window.onload = () => {
       Click and Drag the Symbol Onto the Map
     </span>`);
 };
+
 
 export { selectAffiliation, flyingSwitch };

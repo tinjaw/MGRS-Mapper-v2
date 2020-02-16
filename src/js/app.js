@@ -77,7 +77,7 @@ class MilSym {
           !element.stroke ? decorator.setAttributeNS(null, 'stroke', 'black') : decorator.setAttributeNS(null, 'stroke', `${element.stroke}`);
           // If the default decorator stroke-width is missing, default to 4
           !element.strokeWidth ? decorator.setAttributeNS(null, 'stroke-width', '4') : decorator.setAttributeNS(null, 'stroke-width', `${element.strokeWidth}`);
-          // If the strokelinejoin key does not exist, do nothing, otherwise set the strokeLinejoin value
+          // If the strokeLineJoin key does not exist, do nothing, otherwise set the strokeLinejoin value
           !element.strokeLinejoin ? null : decorator.setAttributeNS(null, 'stroke-linejoin', `${element.strokeLinejoin}`);
           // If the transform key does not exist, do nothing, otherwise set the transform value
           !element.transform ? null : decorator.setAttributeNS(null, 'transform', `${element.transform}`);
@@ -241,7 +241,9 @@ class MilSym {
       };
 
       const adjustSymbolOutlineForEquipment = () => {
-        // Set echelon to 'none' for equipment. If set to undefined then it throws weird errors when you search for a piece of equipment, then change symbol to land unit, then enable task force... idk
+        // Set echelon to 'none' for equipment.
+        // If set to undefined then it throws weird errors when you search for a piece of equipment.
+        // Then when you change symbol to a land unit and enable a task force it blows up... idk
         this.echelon = 'none';
         // Remove the Unique Designation about the Equipment symbol
         this.uniqueDesignation = undefined;
@@ -257,9 +259,6 @@ class MilSym {
         this.taskForce = undefined;
         // Remove command post amplifier on Equipment symbol
         this.commandPost = undefined;
-
-        // This will raise Mod1, scale down the decorator, and lower Mod2
-        TransformModifiersOnEquipment('.newSVG svg');
 
         // For equipment: friendly and friendlyTemplated symbols are circular, whereas all other affiliations do not get special treatment
         if (this._affiliation === 'friendly') {
@@ -341,7 +340,8 @@ class MilSym {
           if (this._flying) {
             return adjustSymbolOutlineForFlying();
           }
-          // Most symbols will NOT be a piece of equipment, will NOT be flying, and will NOT be templated, so these next 4 lines are what the bulk of the symbols use
+          // Most symbols will NOT be a piece of equipment, will NOT be flying, and will NOT be templated.
+          // So these next 4 lines are what the bulk of the symbols use
           outline.setAttributeNS(null, 'd', `${element.d}`);
           outline.setAttributeNS(null, 'fill', `${element.fill}`);
           outlineGroup.append(outline);
@@ -767,7 +767,7 @@ class MilSym {
     this.location.append(svg);
 
 
-    const moreReadable_Affiliation = () => {
+    const moreReadableAffiliation = () => {
       switch (this.type) {
         case 'Graphic Control Measure':
           // If the symbol is a GCM, then set the affiliation data to 'None'
@@ -786,14 +786,14 @@ class MilSym {
     };
 
     // translates camel cased string (eg- "companyTroopBattery" into "Company/Troop/Battery")
-    const moreReadable_Echelon = (element) => {
+    const moreReadableEchelon = (element) => {
       if (element !== undefined) {
         const str = element.charAt(0).toUpperCase() + element.slice(1);
         return str.match(/[A-Z][a-z]+/g).join('/');
       }
     };
 
-    const moreReadable_ReinforcedReduced = (element) => {
+    const moreReadableReinforcedReduced = (element) => {
       if (element !== undefined) {
         switch (element) {
           case '–':
@@ -808,17 +808,16 @@ class MilSym {
       }
     };
 
-
     const dataObj = {
       Symbol: this._symbol,
       Type: militarySymbolsObject[this._symbol].type,
-      Affiliation: moreReadable_Affiliation(),
-      Echelon: this._echelon === 'none' ? 'None' : moreReadable_Echelon(this._echelon),
+      Affiliation: moreReadableAffiliation(),
+      Echelon: this._echelon === 'none' ? 'None' : moreReadableEchelon(this._echelon),
       'Modifier 1': this._mod1,
       'Modifier 2': this._mod2,
       'Unique Designation': this._uniqueDesignation ? this._uniqueDesignation.toUpperCase() : 'None',
       'Higher Formation': this._higherFormation ? this._higherFormation.toUpperCase() : 'None',
-      'Reinforced or Reduced': this._reinforcedReduced ? moreReadable_ReinforcedReduced(this._reinforcedReduced) : 'None',
+      'Reinforced or Reduced': this._reinforcedReduced ? moreReadableReinforcedReduced(this._reinforcedReduced) : 'None',
       Flying: this._flying ? this._flying.toString().toUpperCase() : 'None',
       Activity: this._activity ? this._activity.toString().toUpperCase() : 'None',
       Installation: this._installation ? this._installation.toString().toUpperCase() : 'None',
@@ -836,6 +835,44 @@ class MilSym {
     svg.setAttributeNS(null, 'height', '100');
     svg.setAttributeNS(null, 'width', '150');
     svg.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
+
+    // This is the old version of TransformModifiersOnEquipment
+    // Only called on equipment symbols. This will scale down the decorator, and move Mod1 up and Mod2 down so they all fit in the circle
+    if (militarySymbolsObject[this._symbol].type === 'Equipment') {
+      try {
+        const equipmentOutline = document.querySelector('.newSVG svg');
+        const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
+        const mod1 = equipmentOutline.querySelector('g.mod1');
+        const mod2 = equipmentOutline.querySelector('g.mod2');
+        if (mod1) {
+          equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+          equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+          mod1.style.transformOrigin = '100px 100px';
+          mod1.style.transform = 'translateY(-9%) scale(0.85)';
+        }
+        if (mod2) {
+          mod2.style.transformOrigin = '100px 140px';
+          mod2.style.transform = 'scale(0.85)';
+        }
+      } catch (error) {
+        setTimeout(() => {
+          const equipmentOutline = document.querySelector('.newSVG svg');
+          const equipmentDecorator = equipmentOutline.querySelector('g.decorator');
+          const mod1 = equipmentOutline.querySelector('g.mod1');
+          const mod2 = equipmentOutline.querySelector('g.mod2');
+          if (mod1) {
+            equipmentDecorator.style.transformOrigin = '100px 100px'; // transform from center of circle (cx, cy)
+            equipmentDecorator.style.transform = 'translateY(2%) scale(0.75)';
+            mod1.style.transformOrigin = '100px 100px';
+            mod1.style.transform = 'translateY(-9%) scale(0.85)';
+          }
+          if (mod2) {
+            mod2.style.transformOrigin = '100px 140px';
+            mod2.style.transform = 'scale(0.85)';
+          }
+        }, 300);
+      }
+    }
 
 
     // Set the viewBox of the symbols. Without this they will be invisible
@@ -907,6 +944,7 @@ class MilSym {
   }
 }
 
+// Global Vars - Remove on Production - These aren't being used in other files
 window.MilSym = MilSym;
 window.unitSizeObject = unitSizeObject;
 window.affiliationOutlineObject = affiliationOutlineObject;
@@ -915,9 +953,5 @@ window.mod1Object = mod1Object;
 window.mod2Object = mod2Object;
 window.taskForceObject = taskForceObject;
 window.commandPostObject = commandPostObject;
-
-
-// const MainMS = new MilSym('.newSVG', 'Infantry', 'friendly');
-// window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
 export default MilSym;
