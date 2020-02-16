@@ -57,6 +57,9 @@ const installationSwitch = new MDCSwitch(document.querySelector('.mdc-switch.ins
 const taskForceSwitch = new MDCSwitch(document.querySelector('.mdc-switch.taskForceSwitch'));
 // MDC - Select Menu component - Contains various Command Post symbols
 const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-select'));
+// MDC - Menu Surface component - The "Toggle Grid Overlays" button in the bottom app bar
+const menuSurfaceToggleGrids = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms1'));
+const menuSurfaceToggleGridsButton = new MDCRipple(document.querySelector('.mdc-button.ms1'));
 
 
 // *********************************************************************************** //
@@ -582,6 +585,19 @@ function enableTaskForce() {
 }
 
 taskForceSwitch.listen('change', enableTaskForce);
+
+
+// *********************************************************************************** //
+// * Bottom App Bar - Toggle Grid Overlays                                           * //
+// *********************************************************************************** //
+menuSurfaceToggleGridsButton.listen('click', () => {
+  menuSurfaceToggleGrids.isOpen() ? menuSurfaceToggleGrids.close() : menuSurfaceToggleGrids.open();
+  menuSurfaceToggleGrids.setAbsolutePosition(0, 50);
+  // This will butt the menu surface up to the left of the button
+  setTimeout(() => {
+    menuSurfaceToggleGrids.root_.style.left = '0px';
+  }, 30);
+});
 
 
 // *********************************************************************************** //

@@ -4,18 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- 'application-name' should only be used if the website is used as an app -->
-    <meta name="application-name" content="MGRS Mapper">
-    <meta name="theme-color" content="#191970">
-    <meta name="description" content="Create maps with NATO & US military symbols with an MGRS overlay grid">
-    <meta name="author" content="James Pistell">
-    <meta name="robots" content="index,follow">
-    <meta name="rating" content="General">
+    <meta name="application-name" content="MGRS Mapper" />
+    <meta name="theme-color" content="#191970" />
+    <meta name="description" content="Create maps with NATO & US military symbols with an MGRS overlay grid" />
+    <meta name="author" content="James Pistell" />
+    <meta name="robots" content="index,follow" />
+    <meta name="rating" content="General" />
     <title>MGRS Mapper</title>
     <!-- Add more meta tags here https://htmlhead.dev/ -->
-    <link rel="author" href="humans.txt">
-    <link rel="license" href="LICENSE">
-    <link rel="me" href="http://jamespistell.com" type="text/html">
-    <link rel="me" href="mailto:jamespistell@gmail.com">
+    <link rel="author" href="humans.txt" />
+    <link rel="license" href="LICENSE" />
+    <link rel="me" href="http://jamespistell.com" type="text/html" />
+    <link rel="me" href="mailto:jamespistell@gmail.com" />
     <!-- import Material Icons from Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <!-- import the Material stylesheet -->
@@ -700,10 +700,26 @@
     <footer class="app-bar-bottom">
       <div class="app-bar-bottom__row">
         <section class="app-bar-bottom__section">
-          <h3 class="mdc-typography--headline6">Bottom App Bar Section 1</h3>
+          <div class="menu-button-container" style="position: relative;">
+            <button class="mdc-button ms1 menu-surface-button">Toggle Grid Overlays</button>
+            <div class="mdc-menu-surface--anchor">
+              <div class="mdc-menu mdc-menu-surface ms1" tabindex="-1">
+                <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
+                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle Grid Zone Designator Grids</li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle Grid Zone Designator Labels</li>
+                  <li class="mdc-list-divider" role="separator"></li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 100K Grids</li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 100K Labels</li>
+                  <li class="mdc-list-divider" role="separator"></li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 1000M Grids</li>
+                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 1000M Labels</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </section>
         <section class="app-bar-bottom__section">
-          <h3 class="mdc-typography--headline6 cursorCoordinates"></h3>
+          <p class="mdc-typography--headline6 cursorCoordinates"></p>
         </section>
         <section class="app-bar-bottom__section">
           <h3 class="mdc-typography--headline6">Bottom App Bar Section 3 (hidden)</h3>

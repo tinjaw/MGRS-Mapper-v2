@@ -19,6 +19,14 @@
 - Added the map.locate method to automatically center the map on the users location
 - Added "transform-object-rest-spread" to webpack plugins because for some dumbass reason it isn't enabled by default
 - Added my Leaflet.DumbMGRS plugin!
+- Added coordinate info box in the bottom app bar
+- Removed geodesy dependency
+- Added Grid Overlay menu surface
+- Spent too much time messing around with imports/exports and global vars. This app is a total mess and I'm at the point where I think I just need to put that on a low priority list and just finish this app.
+- TODO: Add in the grid overlay toggle buttons on the menu
+- TODO: Consider moving easting/northing to bottom app bar section 3 and reduce the bottom app bar back to 80px height.
+- TODO: Convert bottom app bar into an MDC grid? This would probably be a lot nicer to work with
+- TODO: Remove menu surface button in exchange for a series of switches?
 
 ---
 

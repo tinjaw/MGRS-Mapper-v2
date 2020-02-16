@@ -1,6 +1,6 @@
 import Moveable from 'moveable';
-import Mgrs, { Utm, LatLon, Dms } from 'geodesy/mgrs';
-
+// This is causing a dep-cycle but if I import it from Leaflet.DumbMGRS the popups won't show
+import { UTMtoMGRS, LLtoUTM } from './map';
 
 const newSVGDiv = document.querySelector('.newSVG');
 const mapArea = document.querySelector('#main-content');
@@ -127,11 +127,8 @@ const createPopupDiv = (element) => {
   div.className = 'symbol-info-div mdc-elevation--z24';
   // "element" is the symbolData object that we created in the marker click event listener below
   element.target.parentElement.appendChild(div);
-
   // Translate the current marker postion from Lat-Lon to MGRS
-  const latLong = new LatLon(marker.getLatLng().lat, marker.getLatLng().lng);
-  const latLongParse = LatLon.parse(latLong);
-  const currentMarkerLocation = latLongParse.toUtm().toMgrs();
+  const currentMarkerLocation = UTMtoMGRS(LLtoUTM({ lat: marker.getLatLng().lat, lon: marker.getLatLng().lng }), 5, true);
 
   // Add the marker location as the first value in the popup
   div.innerHTML = `<div class="popup-symbol-data">
@@ -309,6 +306,8 @@ const drop = (event) => {
     icon: militarySymbolMarker,
     draggable: 'true',
     riseOnHover: true,
+    // Adjust this number if the symbol Marker is below the 100k grid labels
+    zIndexOffset: 1000,
   });
   window.marker = marker;
   // Keep all the markers in a group
@@ -338,7 +337,6 @@ const drop = (event) => {
       // IOT delete the markers, we need to pass the unique ID data
       id: marker._leaflet_id,
     };
-
     // If the user clicks the map and the popup is visible, remove it
     removePopups();
     createPopupDiv(symbolData);

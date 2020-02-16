@@ -6,6 +6,7 @@
 //* * This took me 340.33 hours to make. I worked on it from 18NOV19 to 14FEB20 */
 import L from 'leaflet';
 
+
 // *********************************************************************************** //
 // * Set initial map view                                                            * //
 // *********************************************************************************** //
@@ -18,6 +19,7 @@ const map = L.map('main-content', {
     L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'),
   ],
 });
+
 
 // *********************************************************************************** //
 // * Leaflet.DumbMGRS - Forked version of mgrs.js (https://github.com/proj4js/mgrs)  * //
@@ -1541,6 +1543,7 @@ const MGRS100K = L.LayerGroup.extend({
         if (labelGrids.lon < this.data[0].right && labelGrids.lon > this.data[0].left) {
           const grid100kLabel = new L.Marker(labelGrids, {
             interactive: false,
+            zIndexOffset: -100,
             icon: new L.DivIcon({
               className: 'leaflet-grid-label',
               iconAnchor: new L.Point(10, 10),
@@ -1564,6 +1567,7 @@ const MGRS100K = L.LayerGroup.extend({
         if (labelGrids.lon < this.data[0].right && labelGrids.lon > this.data[0].left) {
           const grid100kLabel = new L.Marker(labelGrids, {
             interactive: false,
+            zIndexOffset: -100,
             icon: new L.DivIcon({
               className: 'leaflet-grid-label',
               iconAnchor: new L.Point(10, 10),
@@ -1595,6 +1599,7 @@ const MGRS100K = L.LayerGroup.extend({
             if ((Math.round(labelGridsUTM.easting / 10) * 10) % this.gridInterval === this.gridInterval / 2) {
               const grid100kLabel = new L.Marker(labelGrids, {
                 interactive: false,
+                zIndexOffset: -100,
                 icon: new L.DivIcon({
                   className: 'leaflet-grid-label',
                   iconAnchor: new L.Point(10, 10),

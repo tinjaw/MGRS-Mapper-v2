@@ -1,13 +1,8 @@
-// import L from 'leaflet';
-//! Currently not using Geodesy, LatLon or LeafletTextPath
-import Mgrs, { Utm, LatLon } from 'geodesy/mgrs';
 import { removePopups } from './moveSymbol';
 import {
   L, map, generateGZDGrids, generate100kGrids, generate1000meterGrids, LLtoUTM, UTMtoMGRS,
 } from './Leaflet.DumbMGRS';
 
-window.Mgrs = Mgrs;
-window.LatLon = LatLon;
 
 // Automatically adjust the map to the users coordinates
 map.locate({
@@ -16,14 +11,26 @@ map.locate({
   enableHighAccuracy: true,
 });
 
+const cursorCoordinates = document.querySelector('.cursorCoordinates');
+
+// Set the user coordinates on page load
+setTimeout(() => {
+  const utmCoordsOnLoad = LLtoUTM({ lat: map.getCenter().lat, lon: map.getCenter().lng });
+  cursorCoordinates.innerHTML = `<strong>MGRS: </strong>${UTMtoMGRS(LLtoUTM({ lat: map.getCenter().lat, lon: map.getCenter().lng }), 5, true)}`;
+  cursorCoordinates.innerHTML += `<br/><strong>LAT: </strong>${map.getCenter().lat.toFixed(5)} <strong>LNG: </strong>${map.getCenter().lng.toFixed(5)}`;
+  cursorCoordinates.innerHTML += `<br/><strong>Easting: </strong>${utmCoordsOnLoad.easting} <strong>Northing: </strong>${utmCoordsOnLoad.northing}`;
+}, 100);
 
 // Update the MGRS coordinates when the mouse cursor moves
 map.addEventListener('mousemove', (event) => {
-  const cc = document.querySelector('.cursorCoordinates');
-  const latLong = new LatLon(event.latlng.lat, event.latlng.lng);
-  const latLongParse = LatLon.parse(latLong);
-  cc.innerHTML = `<strong>MGRS: </strong>${latLongParse.toUtm().toMgrs()}`;
-  cc.innerHTML += `<br/><strong>LAT:  </strong>  ${event.latlng.lat.toFixed(4)} <strong>LNG: </strong> ${event.latlng.lng.toFixed(4)}`;
+  // const cursorCoordinates = document.querySelector('.cursorCoordinates');
+  const utmCoords = LLtoUTM({ lat: event.latlng.lat, lon: event.latlng.lng });
+  // Display cursor coordinates in MGRS
+  cursorCoordinates.innerHTML = `<strong>MGRS: </strong>${UTMtoMGRS(LLtoUTM({ lat: event.latlng.lat, lon: event.latlng.lng }), 5, true)}`;
+  // Display cursor coordinates in Latitude/Longitude
+  cursorCoordinates.innerHTML += `<br/><strong>LAT: </strong>${event.latlng.lat.toFixed(5)} <strong>LNG: </strong>${event.latlng.lng.toFixed(5)}`;
+  // Display cursor coordinates in Easting/Northing
+  cursorCoordinates.innerHTML += `<br/><strong>Easting: </strong>${utmCoords.easting} <strong>Northing: </strong>${utmCoords.northing}`;
 });
 
 
@@ -51,4 +58,4 @@ window.markerGroup = markerGroup;
 window.map = map;
 window.L = L;
 
-export { map };
+export { map, LLtoUTM, UTMtoMGRS };
