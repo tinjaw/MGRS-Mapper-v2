@@ -4,7 +4,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 
 module.exports = [{
-  entry: ['./src/css/app.scss', './src/js/app.js', './src/js/ui/mdcComponents.js', './src/js/ui/pushbar.js', './src/js/ui/moveSymbol.js', './src/js/map/map.js'],
+  entry: ['./src/css/app.scss', './src/js/app.js', './src/js/ui/mdcComponents.js', './src/js/ui/pushbar.js', './src/js/map/moveSymbol.js', './src/js/map/map.js'],
   output: {
     filename: 'bundle.js',
   },
@@ -34,7 +34,7 @@ module.exports = [{
         loader: 'babel-loader',
         query: {
           presets: ['es2015'],
-          plugins: ['transform-object-assign'],
+          plugins: ['transform-object-assign', 'transform-object-rest-spread'],
           cacheDirectory: true,
         },
       },

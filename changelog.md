@@ -14,6 +14,11 @@
 - Moved DisableInputs and addSymbolsAndModsToList from helperFunctions into mdcComponents
 - Tweaked the settings for Fuse.js for more accurate searches
 - Moved TransformModifiersOnEquipment from helperFunctions into placeSymbol
+- Removed leaflet-textpath dependency
+- Removed the esm dependency. No idea why I even had it in the first place
+- Added the map.locate method to automatically center the map on the users location
+- Added "transform-object-rest-spread" to webpack plugins because for some dumbass reason it isn't enabled by default
+- Added my Leaflet.DumbMGRS plugin!
 
 ---
 

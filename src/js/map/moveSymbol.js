@@ -1,6 +1,6 @@
 import Moveable from 'moveable';
-import { EventEmitter } from 'events';
 import Mgrs, { Utm, LatLon, Dms } from 'geodesy/mgrs';
+
 
 const newSVGDiv = document.querySelector('.newSVG');
 const mapArea = document.querySelector('#main-content');
