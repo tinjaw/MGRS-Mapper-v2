@@ -1,4 +1,4 @@
-// * IMPORTS * //
+// * IMPORT Symbol Objects * //
 import affiliationOutlineObject from './symbolObjects/affiliationOutline';
 import militarySymbolsObject from './symbolObjects/militarySymbols';
 import unitSizeObject from './symbolObjects/unitSize';
@@ -138,7 +138,7 @@ class MilSym {
       // Set the symbol type to Equipment or Land Unit
       this.type = militarySymbolsObject[this._symbol].type;
 
-      // Since GCMs do not have an outline, we check it here and remove it
+      // Since Graphic Control Measures do not have an outline, we check it here and remove it
       if (this.type === 'Graphic Control Measure') {
         outline.setAttributeNS(null, 'd', '');
         outline.setAttributeNS(null, 'fill', '');
@@ -165,7 +165,7 @@ class MilSym {
         return outlineGroup;
       }
 
-      // Since TMTs do not have an outline, we check it here and remove it
+      // Since Tactical Mission Tasks do not have an outline, we check it here and remove it
       if (this.type === 'Tactical Mission Task') {
         outline.setAttributeNS(null, 'd', '');
         outline.setAttributeNS(null, 'fill', '');
@@ -915,5 +915,9 @@ window.mod1Object = mod1Object;
 window.mod2Object = mod2Object;
 window.taskForceObject = taskForceObject;
 window.commandPostObject = commandPostObject;
+
+
+// const MainMS = new MilSym('.newSVG', 'Infantry', 'friendly');
+// window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
 export default MilSym;

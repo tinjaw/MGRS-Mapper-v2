@@ -1,4 +1,5 @@
 /* eslint-disable no-new */
+// import MainMS from '../app';
 import { selectAffiliation } from './mdcComponents';
 
 // * Make Mod1 & Mod2 fit inside an equipment symbol * //
@@ -55,16 +56,33 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
     switch (abv) {
       case 'mod1':
         // All this does is remove the ESLint error for “Do not use 'new' for side effects”
+        //! replacer
         (() => new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, `${key}`))();
+        // MainMS.location = `.mod1Figure[data-mod1-name="${key}"]`;
+        // MainMS.symbol = selectSymbol.value;
+        // MainMS.affiliation = selectAffiliation.value;
+        // MainMS.mod1 = key;
+        // MainMS.placeSymbol();
         break;
       case 'mod2':
+        //! replacer
         new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, `${key}`);
+        // MainMS.location = `.mod1Figure[data-mod2-name="${key}"]`;
+        // MainMS.symbol = selectSymbol.value;
+        // MainMS.affiliation = selectAffiliation.value;
+        // MainMS.mod2 = key;
+        // MainMS.placeSymbol();
         break;
       case 'commandpost':
         // Set the default command post value to "None" on page load
         selectCommandPost.value = 'None';
         // Since we do not want to strip the outline of the command post, return this value
         return new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`, undefined);
+        // MainMS.location = `.commandpostFigure[data-commandpost-name="${key}"]`;
+        // MainMS.symbol = selectSymbol.value;
+        // MainMS.affiliation = selectAffiliation.value;
+        // MainMS.commandPost = selectCommandPost.value;
+        // return MainMS.placeSymbol();
       case 'symbol':
         // Set the selected symbol to "Default Land Unit" on page load
         // Setting floatLabel(true) and setEnhancedSelectedIndex_(0) will avoid the symbol animations from running again.
@@ -75,6 +93,10 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         selectSymbol.setEnhancedSelectedIndex_(0);
         // Returning 'symbol' since we need to keep the symbol affiliation outlines
         return new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, undefined);
+        // MainMS.location = `.symbolFigure[data-symbol-name="${key}"]`;
+        // MainMS.symbol = key;
+        // MainMS.affiliation = selectAffiliation.value;
+        // return MainMS.placeSymbol();
       default:
         break;
     }

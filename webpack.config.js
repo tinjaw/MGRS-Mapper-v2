@@ -48,7 +48,9 @@ module.exports = [{
     // ! This just hides the file size warnings in the console
     hints: false,
   },
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
+  //! eval is the best performance for builds, use inline-source-maps for better debugging
+  devtool: 'eval',
   plugins: [
     new BundleAnalyzerPlugin(),
     // https://medium.com/@rajaraodv/two-quick-ways-to-reduce-react-apps-size-in-production-82226605771a
