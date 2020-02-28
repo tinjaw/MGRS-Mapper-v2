@@ -14,6 +14,9 @@ import {
 import MilSym from '../app';
 // import MainMS from '../app';
 import militarySymbolsObject from '../symbolObjects/militarySymbols';
+import {
+  map, generateGZDGrids, generate100kGrids, generate1000meterGrids,
+} from '../map/Leaflet.DumbMGRS';
 
 
 // *********************************************************************************** //
@@ -60,8 +63,13 @@ const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-sel
 // MDC - Menu Surface component - The "Toggle Grid Overlays" button in the bottom app bar
 const menuSurfaceToggleGrids = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms1'));
 const menuSurfaceToggleGridsButton = new MDCRipple(document.querySelector('.mdc-button.ms1'));
-
-
+// MDC - Switch component -
+const gzdGridsSwitch = new MDCSwitch(document.querySelector('.mdc-switch.gzdGridsSwitch'));
+const gzdLabelsSwitch = new MDCSwitch(document.querySelector('.mdc-switch.gzdLabelsSwitch'));
+const labels100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels100KSwitch'));
+const grids100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids100KSwitch'));
+const labels1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels1000MSwitch'));
+const grids1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1000MSwitch'));
 // *********************************************************************************** //
 // * Helper Functions                                                                * //
 // *********************************************************************************** //
@@ -599,6 +607,106 @@ menuSurfaceToggleGridsButton.listen('click', () => {
   }, 30);
 });
 
+// Toggle GZD labels
+gzdLabelsSwitch.listen('change', (event) => {
+  const checkbox = event.target;
+  if (checkbox.checked) {
+    generateGZDGrids.showLabels();
+  } else {
+    generateGZDGrids.hideLabels();
+  }
+});
+
+// Toggle GZD grids
+gzdGridsSwitch.listen('change', (event) => {
+  const checkbox = event.target;
+  if (checkbox.checked) {
+    generateGZDGrids.hideGrids();
+  } else {
+    generateGZDGrids.showGrids();
+  }
+});
+
+// Toggle 100k labels
+labels100KSwitch.listen('change', (event) => {
+  const checkbox = event.target;
+  if (checkbox.checked) {
+    generate100kGrids.showLabels();
+  } else {
+    generate100kGrids.hideLabels();
+  }
+});
+
+// Toggle 100k grids
+grids100KSwitch.listen('change', (event) => {
+  const checkbox = event.target;
+  if (checkbox.checked) {
+    generate100kGrids.showGrids();
+  } else {
+    generate100kGrids.hideGrids();
+  }
+});
+
+// Toggle 1000m labels
+labels1000MSwitch.listen('change', (event) => {
+  const checkbox = event.target;
+  if (checkbox.checked) {
+    generate1000meterGrids.showLabels();
+  } else {
+    generate1000meterGrids.hideLabels();
+  }
+});
+
+// Toggle 1000m grids
+grids1000MSwitch.listen('change', (event) => {
+  const checkbox = event.target;
+  if (checkbox.checked) {
+    generate1000meterGrids.showGrids();
+  } else {
+    generate1000meterGrids.hideGrids();
+  }
+});
+
+// *********************************************************************************** //
+// * Leaflet.DumbMGRS - Grid Toggle Switches on Zoom Level                           * //
+// *********************************************************************************** //
+// Automatically disabled switches that cannot be used at certain zoom levels
+map.whenReady(() => {
+  const switchValidator = () => {
+    // 1000 meter grids - zoom level 12
+    if (map.getZoom() < generate1000meterGrids.options.minZoom) {
+      labels1000MSwitch.disabled = true;
+      grids1000MSwitch.disabled = true;
+    } else {
+      generate1000meterGrids.options.showGrids ? grids1000MSwitch.checked = true : grids1000MSwitch.checked = false;
+      generate1000meterGrids.options.showLabels ? labels1000MSwitch.checked = true : labels1000MSwitch.checked = false;
+      labels1000MSwitch.disabled = false;
+      grids1000MSwitch.disabled = false;
+    }
+    // 100k grids - zoom level 6
+    if (map.getZoom() < generate100kGrids.options.minZoom) {
+      labels100KSwitch.disabled = true;
+      grids100KSwitch.disabled = true;
+    } else {
+      generate100kGrids.options.showGrids ? grids100KSwitch.checked = true : grids100KSwitch.checked = false;
+      generate100kGrids.options.showLabels ? labels100KSwitch.checked = true : labels100KSwitch.checked = false;
+      labels100KSwitch.disabled = false;
+      grids100KSwitch.disabled = false;
+    }
+    // GZD - zoom level 3
+    if (map.getZoom() < generateGZDGrids.options.minZoom) {
+      gzdLabelsSwitch.disabled = true;
+      gzdGridsSwitch.disabled = true;
+    } else {
+      generateGZDGrids.options.showGrids ? gzdGridsSwitch.checked = true : gzdGridsSwitch.checked = false;
+      generateGZDGrids.options.showLabels ? gzdLabelsSwitch.checked = true : gzdLabelsSwitch.checked = false;
+      gzdLabelsSwitch.disabled = false;
+      gzdGridsSwitch.disabled = false;
+    }
+  };
+  map.on('zoomend', switchValidator);
+  switchValidator();
+});
 
 // *********************************************************************************** //
 // * Global Vars --- USE IMPORTS AND REMOVE ON PRODUCTON!!!!!!!                      * //
@@ -852,6 +960,15 @@ window.onload = () => {
       <i class="material-icons">format_shapes</i>
       Click and Drag the Symbol Onto the Map
     </span>`);
+
+
+  // Enable Map Switches on page load
+  gzdGridsSwitch.checked = true;
+  gzdLabelsSwitch.checked = true;
+  labels100KSwitch.checked = true;
+  grids100KSwitch.checked = true;
+  labels1000MSwitch.checked = true;
+  grids1000MSwitch.checked = true;
 };
 
 

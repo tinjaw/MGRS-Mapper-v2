@@ -5,8 +5,11 @@
 ## 28FEB20
 
 - Tried and failed to move this project over to Parcel
-- Tried and failed to create a new webpack config
+- Tried and failed to create a new webpack config. Some large errors occured because I was updating all of MDC packages and apparently node-sass cannot use the @use module in sass files... Yeah idk
+- Tried and failed to move this project over to Snowpack
 - Fixed error in most popular symbols where if the search field has text in it, it would crash the app. I did this by adding clearSearchField() to the event listener
+- Added toggle switches for GZD, 100K, and 1000M labels and grids
+- Added a switch validator for grids and labels based on map zoom
 
 ---
 

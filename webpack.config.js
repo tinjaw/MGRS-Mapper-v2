@@ -54,7 +54,7 @@ module.exports = [{
   // devtool: 'inline-source-map',
   //! eval is the best performance for builds, use inline-source-maps for better debugging
   // eval load times: 10.02, 18.7, 18.95, 23.92
-  devtool: 'eval',
+  devtool: 'cheap-source-map',
   devServer: {
     open: true,
   },

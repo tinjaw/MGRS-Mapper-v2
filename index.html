@@ -706,14 +706,110 @@
             <div class="mdc-menu-surface--anchor">
               <div class="mdc-menu mdc-menu-surface ms1" tabindex="-1">
                 <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle Grid Zone Designator Grids</li>
-                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle Grid Zone Designator Labels</li>
+                  <div class="mdc-layout-grid toggleLabel">
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell--span-12">
+                        <span class="mdc-typography--headline6">Toggle Grid Zone Designators</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mdc-layout-grid ">
+                    <div class="mdc-layout-grid__inner switches">
+                      <div class="mdc-layout-grid__cell--span-6 rightBorder">
+                        <div class="mdc-switch gzdGridsSwitch" data-value="">
+                          <div class="mdc-switch__track"></div>
+                          <div class="mdc-switch__thumb-underlay">
+                            <div class="mdc-switch__thumb">
+                              <input type="checkbox" id="gzd-grids-switch" class="mdc-switch__native-control" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                        <label for="gzd-grids-switch">GZD Grids</label>
+                      </div>
+                      <div class="mdc-layout-grid__cell--span-6 leftBorder">
+                        <div class="mdc-switch gzdLabelsSwitch" data-value="">
+                          <div class="mdc-switch__track"></div>
+                          <div class="mdc-switch__thumb-underlay">
+                            <div class="mdc-switch__thumb">
+                              <input type="checkbox" id="gzd-labels-switch" class="mdc-switch__native-control" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                        <label for="gzd-labels-switch">GZD Labels</label>
+                      </div>
+                    </div>
+                  </div>
+
                   <li class="mdc-list-divider" role="separator"></li>
-                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 100K Grids</li>
-                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 100K Labels</li>
+
+                  <div class="mdc-layout-grid toggleLabel">
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell--span-12">
+                        <span class="mdc-typography--headline6">Toggle 100,000 Meters</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mdc-layout-grid ">
+                    <div class="mdc-layout-grid__inner switches">
+                      <div class="mdc-layout-grid__cell--span-6 rightBorder">
+                        <div class="mdc-switch grids100KSwitch" data-value="">
+                          <div class="mdc-switch__track"></div>
+                          <div class="mdc-switch__thumb-underlay">
+                            <div class="mdc-switch__thumb">
+                              <input type="checkbox" id="grids-100k-switch" class="mdc-switch__native-control" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                        <label for="grids-100k-switch">100K Grids</label>
+                      </div>
+                      <div class="mdc-layout-grid__cell--span-6 leftBorder">
+                        <div class="mdc-switch labels100KSwitch" data-value="">
+                          <div class="mdc-switch__track"></div>
+                          <div class="mdc-switch__thumb-underlay">
+                            <div class="mdc-switch__thumb">
+                              <input type="checkbox" id="labels-100k-switch" class="mdc-switch__native-control" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                        <label for="labels-100k-switch">100K Labels</label>
+                      </div>
+                    </div>
+                  </div>
+
                   <li class="mdc-list-divider" role="separator"></li>
-                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 1000M Grids</li>
-                  <li class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="-1">Toggle 1000M Labels</li>
+                  <div class="mdc-layout-grid toggleLabel">
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell--span-12">
+                        <span class="mdc-typography--headline6">Toggle 1,000 Meters</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mdc-layout-grid ">
+                    <div class="mdc-layout-grid__inner switches">
+                      <div class="mdc-layout-grid__cell--span-6 rightBorder">
+                        <div class="mdc-switch grids1000MSwitch" data-value="">
+                          <div class="mdc-switch__track"></div>
+                          <div class="mdc-switch__thumb-underlay">
+                            <div class="mdc-switch__thumb">
+                              <input type="checkbox" id="grids-1000m-switch" class="mdc-switch__native-control" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                        <label for="grids-1000m-switch">1000M Grids</label>
+                      </div>
+                      <div class="mdc-layout-grid__cell--span-6 leftBorder">
+                        <div class="mdc-switch labels1000MSwitch" data-value="">
+                          <div class="mdc-switch__track"></div>
+                          <div class="mdc-switch__thumb-underlay">
+                            <div class="mdc-switch__thumb">
+                              <input type="checkbox" id="labels-1000m-switch" class="mdc-switch__native-control" role="switch" />
+                            </div>
+                          </div>
+                        </div>
+                        <label for="labels-1000m-switch">1000M Labels</label>
+                      </div>
+                    </div>
+                  </div>
                 </ul>
               </div>
             </div>

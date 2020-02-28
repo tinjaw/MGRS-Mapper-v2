@@ -390,3 +390,18 @@ div#pre-myJSONString {
   letter-spacing: 1.15px;
   font-size: larger;
 }
+
+// menu surface - grid toggle buttons
+.mdc-layout-grid.toggleLabel {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block;
+  text-align: center;
+}
+
+.rightBorder {
+  border-right: 1px #666 solid;
+}
+.leftBorder {
+  padding-left: 17px;
+}
