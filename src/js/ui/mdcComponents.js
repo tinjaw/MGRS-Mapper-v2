@@ -659,6 +659,8 @@ window.onload = () => {
       key.lastElementChild.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 0px 30px rgba(0, 0, 0, 0.3)';
     });
     key.addEventListener('click', (event) => {
+      // When a user clicks on a popular symbol, clear the search field to prevent errors
+      clearSearchField();
       const elements = document.elementsFromPoint(event.clientX, event.clientY);
       const chosenTarget = elements.find(key => key.matches('svg'));
       selectSymbol.value = chosenTarget.dataset.symbol;

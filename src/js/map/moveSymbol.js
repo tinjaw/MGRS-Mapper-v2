@@ -127,7 +127,7 @@ const createPopupDiv = (element) => {
   div.className = 'symbol-info-div mdc-elevation--z24';
   // "element" is the symbolData object that we created in the marker click event listener below
   element.target.parentElement.appendChild(div);
-  // Translate the current marker postion from Lat-Lon to MGRS
+  // Translate the current marker position from Lat-Lon to MGRS
   const currentMarkerLocation = UTMtoMGRS(LLtoUTM({ lat: marker.getLatLng().lat, lon: marker.getLatLng().lng }), 5, true);
 
   // Add the marker location as the first value in the popup

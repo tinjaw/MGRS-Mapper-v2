@@ -55,6 +55,9 @@ module.exports = [{
   //! eval is the best performance for builds, use inline-source-maps for better debugging
   // eval load times: 10.02, 18.7, 18.95, 23.92
   devtool: 'eval',
+  devServer: {
+    open: true,
+  },
   plugins: [
     new BundleAnalyzerPlugin(),
     // new CircularDependencyPlugin({

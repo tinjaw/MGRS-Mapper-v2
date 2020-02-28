@@ -1,7 +1,6 @@
 node_modules
 .vscode
 monitor
-.eslintrc.js
 scratchpad.js
 .DS_Store
 old

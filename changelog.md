@@ -2,6 +2,14 @@
 
 ---
 
+## 28FEB20
+
+- Tried and failed to move this project over to Parcel
+- Tried and failed to create a new webpack config
+- Fixed error in most popular symbols where if the search field has text in it, it would crash the app. I did this by adding clearSearchField() to the event listener
+
+---
+
 ## 15FEB20
 
 - After 3 months and 340.33 hours I have finished the MGRS overlay plugin.
@@ -27,6 +35,7 @@
 - TODO: Consider moving easting/northing to bottom app bar section 3 and reduce the bottom app bar back to 80px height.
 - TODO: Convert bottom app bar into an MDC grid? This would probably be a lot nicer to work with
 - TODO: Remove menu surface button in exchange for a series of switches?
+- TODO: When the app first loads it asks for your location, when the user agrees the map kind of "hangs" and does not set the view properly
 
 ---
 
