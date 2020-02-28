@@ -16,7 +16,7 @@ import MilSym from '../app';
 import militarySymbolsObject from '../symbolObjects/militarySymbols';
 import {
   map, generateGZDGrids, generate100kGrids, generate1000meterGrids,
-} from '../map/Leaflet.DumbMGRS';
+} from '../map/map';
 
 
 // *********************************************************************************** //
@@ -667,9 +667,6 @@ grids1000MSwitch.listen('change', (event) => {
   }
 });
 
-// *********************************************************************************** //
-// * Leaflet.DumbMGRS - Grid Toggle Switches on Zoom Level                           * //
-// *********************************************************************************** //
 // Automatically disabled switches that cannot be used at certain zoom levels
 map.whenReady(() => {
   const switchValidator = () => {
@@ -707,6 +704,7 @@ map.whenReady(() => {
   map.on('zoomend', switchValidator);
   switchValidator();
 });
+
 
 // *********************************************************************************** //
 // * Global Vars --- USE IMPORTS AND REMOVE ON PRODUCTON!!!!!!!                      * //

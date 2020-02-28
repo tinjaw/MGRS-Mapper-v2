@@ -5,11 +5,11 @@ import {
 
 
 // Automatically adjust the map to the users coordinates
-map.locate({
-  setView: true,
-  maxZoom: 6,
-  enableHighAccuracy: true,
-});
+// map.locate({
+//   setView: true,
+//   maxZoom: 6,
+//   enableHighAccuracy: true,
+// });
 
 const cursorCoordinates = document.querySelector('.cursorCoordinates');
 
@@ -58,4 +58,6 @@ window.markerGroup = markerGroup;
 window.map = map;
 window.L = L;
 
-export { map, LLtoUTM, UTMtoMGRS };
+export {
+  map, LLtoUTM, UTMtoMGRS, generateGZDGrids, generate100kGrids, generate1000meterGrids,
+};
