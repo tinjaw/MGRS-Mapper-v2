@@ -60,8 +60,7 @@ function getLetterDesignator(latitude) {
     const index = Math.floor((latitude - minLatitude) / bandHeight);
     return bandLetters[index];
   } if (latitude > 84 || latitude < -80) {
-    // This is here as an error flag to show that the Latitude is
-    // outside MGRS limits
+    // This is here as an error flag to show that the Latitude is outside MGRS limits
     return 'Z';
   }
 }
@@ -182,10 +181,9 @@ function LLtoUTM(ll) {
     }
   }
 
-  const LongOrigin = (ZoneNumber - 1) * 6 - 180 + 3;
   // +3 puts origin in middle of zone
+  const LongOrigin = (ZoneNumber - 1) * 6 - 180 + 3;
   const LongOriginRad = degToRad(LongOrigin);
-
   const eccPrimeSquared = (eccSquared) / (1 - eccSquared);
 
   const N = a / Math.sqrt(1 - eccSquared * Math.sin(LatRad) * Math.sin(LatRad));
@@ -199,8 +197,8 @@ function LLtoUTM(ll) {
 
   let UTMNorthing = (k0 * (M + N * Math.tan(LatRad) * (A * A / 2 + (5 - T + 9 * C + 4 * C * C) * A * A * A * A / 24 + (61 - 58 * T + T * T + 600 * C - 330 * eccPrimeSquared) * A * A * A * A * A * A / 720)));
   if (Lat < 0) {
-    UTMNorthing += 10000000; // 10000000 meter offset for
-    // southern hemisphere
+    // 10000000 meter offset for southern hemisphere
+    UTMNorthing += 10000000;
   }
 
   return {
@@ -240,14 +238,12 @@ function UTMtoLL(utm) {
   // if the Zone letter isn't exactly correct it should indicate
   // the hemisphere correctly
   if (zoneLetter < 'N') {
-    y -= 10000000; // remove 10,000,000 meter offset used
-    // for southern hemisphere
+    // remove 10,000,000 meter offset used for southern hemisphere
+    y -= 10000000;
   }
 
   // There are 60 zones with zone 1 being at West -180 to -174
   const LongOrigin = (zoneNumber - 1) * 6 - 180 + 3; // +3 puts origin
-  // in middle of
-  // zone
 
   const eccPrimeSquared = (eccSquared) / (1 - eccSquared);
 
@@ -255,7 +251,6 @@ function UTMtoLL(utm) {
   const mu = M / (a * (1 - eccSquared / 4 - 3 * eccSquared * eccSquared / 64 - 5 * eccSquared * eccSquared * eccSquared / 256));
 
   const phi1Rad = mu + (3 * e1 / 2 - 27 * e1 * e1 * e1 / 32) * Math.sin(2 * mu) + (21 * e1 * e1 / 16 - 55 * e1 * e1 * e1 * e1 / 32) * Math.sin(4 * mu) + (151 * e1 * e1 * e1 / 96) * Math.sin(6 * mu);
-  // double phi1 = ProjMath.radToDeg(phi1Rad);
 
   const N1 = a / Math.sqrt(1 - eccSquared * Math.sin(phi1Rad) * Math.sin(phi1Rad));
   const T1 = Math.tan(phi1Rad) * Math.tan(phi1Rad);
@@ -872,7 +867,6 @@ const GZD = L.LayerGroup.extend({
           if (id < 10) {
             id = `0${id}`;
           }
-
           this.buildGZD({
             top,
             bottom,
@@ -1193,7 +1187,6 @@ const MGRS100K = L.LayerGroup.extend({
       }
     });
 
-
     //* Build the northing grid lines *//
     Object.entries(this.northingArray).forEach((na) => {
       const northingGridsArray = [];
@@ -1216,7 +1209,7 @@ const MGRS100K = L.LayerGroup.extend({
             zoneNumber: k[0].zoneNumber,
             zoneLetter: k[0].zoneLetter,
           });
-          //! gen grid labels
+          // Generate grid labels
           if (this.options.showLabels) {
             this.genLabels(k[1].northing, k[0].easting, k[0].zoneNumber, k[0].zoneLetter);
           }
@@ -2134,7 +2127,7 @@ const generate1000meterGrids = new MGRS1000Meters({
   },
 });
 
-// Export Leaflet, the map, GZD grids, 100K grids, 1000M grids
+
 // LLtoUTM/UTMtoMGRS is solely used for the example info boxes
 export {
   L, map, generateGZDGrids, generate100kGrids, generate1000meterGrids, LLtoUTM, UTMtoMGRS,

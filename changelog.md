@@ -2,6 +2,22 @@
 
 ---
 
+## 29FEB20
+
+- Created new project structure
+- Added new webpack configs
+- Merged code from mdcComponents into index.js
+- Fixed bugs with marker popups
+- Updated most Material Design Components to 4.0
+- Updated babel from 6.26.3 to 7.8.4
+- Updated all other babel plugins
+- Updated eslint
+- Updated webpack from 4.0.0 to 4.41.6
+- Look into merging app.js and index.js and go through your eslint errors
+- Clicking on a symbol will sometimes cause the map to zoom in. This is highly annoying
+
+---
+
 ## 28FEB20
 
 - Tried and failed to move this project over to Parcel

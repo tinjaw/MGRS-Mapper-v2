@@ -6,6 +6,8 @@ import mod1Object from './symbolObjects/mod1';
 import mod2Object from './symbolObjects/mod2';
 import taskForceObject from './symbolObjects/taskForce';
 import commandPostObject from './symbolObjects/commandPost';
+import { flyingSwitch } from './index';
+
 
 // * The star of the show * //
 // Example 1: const symbol_1 = new MilSym('.test', 'Unmanned Aerial Surveillance', 'friendlyTemplated', 'team', 'Assault', 'Rail', 'A/2-101', '27/42ID', '+', false, true, true, true, 'Main Command Post');
@@ -715,7 +717,7 @@ class MilSym {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const desc = document.createElementNS('http://www.w3.org/2000/svg', 'desc');
     desc.textContent = `
-      Affiliation: ${this._affiliation.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+      Affiliation: ${this._affiliation.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
       Echelon: ${this._echelon}
       Symbol: ${this._symbol}
       Modifier 1: ${this._mod1}
@@ -944,14 +946,5 @@ class MilSym {
   }
 }
 
-// Global Vars - Remove on Production - These aren't being used in other files
-window.MilSym = MilSym;
-window.unitSizeObject = unitSizeObject;
-window.affiliationOutlineObject = affiliationOutlineObject;
-window.militarySymbolsObject = militarySymbolsObject;
-window.mod1Object = mod1Object;
-window.mod2Object = mod2Object;
-window.taskForceObject = taskForceObject;
-window.commandPostObject = commandPostObject;
 
 export default MilSym;

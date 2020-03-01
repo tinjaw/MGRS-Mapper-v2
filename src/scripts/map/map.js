@@ -1,18 +1,13 @@
-import { removePopups } from './moveSymbol';
+import { removePopups, moveable } from './moveSymbol';
 import {
   L, map, generateGZDGrids, generate100kGrids, generate1000meterGrids, LLtoUTM, UTMtoMGRS,
 } from './Leaflet.DumbMGRS';
 
 
-// Automatically adjust the map to the users coordinates
-// map.locate({
-//   setView: true,
-//   maxZoom: 6,
-//   enableHighAccuracy: true,
-// });
-
+// *********************************************************************************** //
+// * Add cursor coordinates to the bottom app bar                                    * //
+// *********************************************************************************** //
 const cursorCoordinates = document.querySelector('.cursorCoordinates');
-
 // Set the user coordinates on page load
 setTimeout(() => {
   const utmCoordsOnLoad = LLtoUTM({ lat: map.getCenter().lat, lon: map.getCenter().lng });
@@ -54,10 +49,9 @@ generateGZDGrids.addTo(map);
 generate100kGrids.addTo(map);
 generate1000meterGrids.addTo(map);
 
-window.markerGroup = markerGroup;
-window.map = map;
+//! Putting leaflet in the global scope
 window.L = L;
 
 export {
-  map, LLtoUTM, UTMtoMGRS, generateGZDGrids, generate100kGrids, generate1000meterGrids,
+  map, LLtoUTM, UTMtoMGRS, generateGZDGrids, generate100kGrids, generate1000meterGrids, markerGroup,
 };

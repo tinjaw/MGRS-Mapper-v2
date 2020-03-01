@@ -4,3 +4,7 @@ monitor
 scratchpad.js
 .DS_Store
 old
+npm-debug.log
+yarn-error.log
+yarn.lock
+.yarnclean

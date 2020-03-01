@@ -1,19 +1,27 @@
+/* eslint-disable object-curly-newline */
 import Moveable from 'moveable';
 // This is causing a dep-cycle but if I import it from Leaflet.DumbMGRS the popups won't show
-import { UTMtoMGRS, LLtoUTM } from './map';
+import {
+  map, UTMtoMGRS, LLtoUTM, markerGroup,
+} from './map';
 
 const newSVGDiv = document.querySelector('.newSVG');
 const mapArea = document.querySelector('#main-content');
 
 function removePopups() {
-  mapArea.querySelector('.symbol-info-div') ? mapArea.querySelector('.symbol-info-div').remove() : null;
-  mapArea.querySelector('.popup-arrow') ? mapArea.querySelector('.popup-arrow').remove() : null;
+  if (mapArea.querySelector('.symbol-info-div')) {
+    mapArea.querySelector('.symbol-info-div').remove();
+  }
+  if (mapArea.querySelector('.popup-arrow')) {
+    mapArea.querySelector('.popup-arrow').remove();
+  }
 }
+
 
 // *********************************************************************************** //
 // * MOVEABLE.JS                                                                     * //
 // *********************************************************************************** //
-const moveableoptions = {
+const moveableOptions = {
   // Set the target as null until someone moves and clones it onto the yellow background
   target: null,
   // If the container is null, the position is fixed. (default: parentElement(document.body))
@@ -33,8 +41,7 @@ const moveableoptions = {
   throttleResize: 0,
 };
 
-const moveable = new Moveable(document.body, moveableoptions);
-
+const moveable = new Moveable(document.body, moveableOptions);
 
 function manipulateSymbol() {
   // All "targets" will be symbols with the draggable class
@@ -48,7 +55,6 @@ function manipulateSymbol() {
   // Get the last target in the array and set it
   moveable.target = arr.slice(-1)[0];
 
-
   //* DRAGGABLE *//
   // Since the map marker already has a draggable feature, we don't need it in moveable.js
   moveable.on('drag', () => {
@@ -58,7 +64,8 @@ function manipulateSymbol() {
 
   //* SCALABLE *//
   moveable.on('scale', ({ target, transform }) => {
-    target.style.transform = transform;
+    const targetStyle = target.style;
+    targetStyle.transform = transform;
   });
 
   //* ROTATABLE *//
@@ -66,42 +73,38 @@ function manipulateSymbol() {
     removePopups();
   })
     .on('rotate', ({ target, transform }) => {
-      target.style.transform = transform;
+      const targetStyle = target.style;
+      targetStyle.transform = transform;
     });
 
   //* PINCHABLE *//
   moveable.on('pinch', ({ target, transform }) => {
-    target.style.transform = transform;
+    const targetStyle = target.style;
+    targetStyle.transform = transform;
   });
 
   //* RESIZABLE *//
-  /* eslint-disable */
-  // Disabling es-lint on this method because that fucking piece of shit does a line break when there are >=4 params and I can't figure out how to disable it. FUCK YOU
   // Set the absolute minimum width of your marker in pixels
   const minimumMarkerWidth = 40;
-  moveable.on('resizeStart', ({target}) => {
+  moveable.on('resizeStart', ({ target }) => {
     removePopups();
+    const targetStyle = target.style;
     // If the marker width is less than or equal to minimumMarkerWidth, add 1px to marker width so it will skip the next if statement
-    if (parseInt(target.style.width) <= minimumMarkerWidth) target.style.width = `${minimumMarkerWidth + 1}px`;
+    if (parseInt(target.style.width, 0) <= minimumMarkerWidth) targetStyle.width = `${minimumMarkerWidth + 1}px`;
   })
-  .on('resize', ({target, width, height, delta }) => {
-    // If the user resizes the marker outside of the browser or resizes too quickly, throw an error and deselect the marker
-    if(event.clientY <= 0 || event.clientX <= 0 || (event.clientX >= window.innerWidth || event.clientY >= window.innerHeight)){
-       console.error("You moved your mouse outside of the browser when resizing the marker");
-       moveable.target = undefined;
-       return;
-    }
-    if (delta[0] <= -60) {
-      console.error("You resized the marker too quickly")
-      moveable.target = undefined;
-      return;
-    }
-    // If the marker width is less than or equal to minimumMarkerWidth, stop all resizing
-    if (parseInt(target.style.width) <= minimumMarkerWidth) return;
-    delta[0] && (target.style.width = `${width}px`);
-    delta[1] && (target.style.height = `${height}px`);
-  });
-  /* eslint-enable */
+    .on('resize', ({ target, width, height, delta }) => {
+      // If the user resizes the marker outside of the browser or resizes too quickly, throw an error and deselect the marker
+      if (delta[0] <= -60 || delta[0] >= 60) {
+        console.error('You resized the marker too quickly');
+        moveable.target = undefined;
+        return;
+      }
+      // If the marker width is less than or equal to minimumMarkerWidth, stop all resizing
+      if (parseInt(target.style.width, 0) <= minimumMarkerWidth) return;
+      const targetStyle = target.style;
+      targetStyle.width = `${width}px`;
+      targetStyle.height = `${height}px`;
+    });
 }
 
 // This toggles the Moveable.js control box on whatever element you click on
@@ -111,17 +114,18 @@ function toggleDraggableElement(event) {
   mapArea.querySelectorAll('.draggable').forEach((key) => {
     // https://stackoverflow.com/questions/24183286/drag-and-drop-to-div-behind-absolutely-positioned-div
     const elements = document.elementsFromPoint(event.clientX, event.clientY);
-    const chosenTarget = elements.find(key => key.matches('.draggable'));
+    const chosenTarget = elements.find((key) => key.matches('.draggable'));
     // If you click a symbol on the yellow background, it will set it as the Moveable target
     // If you click the yellow background it will de-select the symbol so you can get that annoying control box out of view
     chosenTarget ? (moveable.target = chosenTarget) : (moveable.target = undefined);
   });
 }
 
-// Creates the popup and popup arrow. Finds the most open space in the window and automatically positions it
+
 // *********************************************************************************** //
 // * CUSTOM POPUP AND POPUP ARROW                                                    * //
 // *********************************************************************************** //
+// Creates the popup and popup arrow. Finds the most open space in the window and automatically positions it
 const createPopupDiv = (element) => {
   const div = document.createElement('div');
   div.className = 'symbol-info-div mdc-elevation--z24';
@@ -132,9 +136,9 @@ const createPopupDiv = (element) => {
 
   // Add the marker location as the first value in the popup
   div.innerHTML = `<div class="popup-symbol-data">
-        <strong class="mdc-typography--headline5">Location:</strong>
-        <span class="mdc-typography--headline6">${currentMarkerLocation}</span>
-      </div>`;
+                    <strong class="mdc-typography--headline5">Location:</strong>
+                    <span class="mdc-typography--headline6">${currentMarkerLocation}</span>
+                  </div>`;
 
   // Populate popup with data (element.data gets data from "symbolData")
   Object.entries(element.data).forEach((key) => {
@@ -157,7 +161,6 @@ const createPopupDiv = (element) => {
   };
   symbolInfoDiv.appendChild(deletePopupButton);
 
-  //! BUG: This is no longer working. When there are multiple markers on the page the delete button will not work. Try pushing the markers to an array
   // Add a button in the popup window that allows users to delete the selected marker
   const deleteMarkerButton = L.DomUtil.create('button', 'deleteMarker mdc-button mdc-button--raised');
   deleteMarkerButton.setAttribute('type', 'button');
@@ -265,13 +268,13 @@ const createPopupDiv = (element) => {
   }
 };
 
+
 // *********************************************************************************** //
 // * HTML5 DRAG AND DROP API                                                         * //
 // *********************************************************************************** //
 const allowDrop = (event) => {
   event.preventDefault();
 };
-
 
 const drop = (event) => {
   event.preventDefault();
@@ -287,8 +290,8 @@ const drop = (event) => {
   // The bounceIn animation fucks everything up, remove it and set the BBox of the parent draggable symbol
   document.querySelectorAll('.draggable > g').forEach((key) => {
     key.classList.remove('bounceIn');
-    const bbox = key.parentElement.getBBox();
-    key.parentElement.setAttribute('viewBox', `${bbox.x}, ${bbox.y}, ${bbox.width}, ${bbox.height}`);
+    const newBbox = key.parentElement.getBBox();
+    key.parentElement.setAttribute('viewBox', `${newBbox.x}, ${newBbox.y}, ${newBbox.width}, ${newBbox.height}`);
   });
   // Now call the manipulateSymbol function to switch to Moveable.js
   manipulateSymbol(event);
@@ -309,19 +312,21 @@ const drop = (event) => {
     // Adjust this number if the symbol Marker is below the 100k grid labels
     zIndexOffset: 1000,
   });
+  //! Kinda stupid fix here. Putting the marker in the global scope. Wasted too much time on trying to fix this
   window.marker = marker;
   // Keep all the markers in a group
   marker.addTo(markerGroup);
 
   // Since the default DivIcon has a white background and a black border, we need to make it invisible
   document.querySelectorAll('.leaflet-div-icon').forEach((key) => {
-    key.style.background = 'none';
-    key.style.border = 'none';
+    const iconStyle = key.style;
+    iconStyle.background = 'none';
+    iconStyle.border = 'none';
   });
 
-  marker.addEventListener('click', (event) => {
+  marker.addEventListener('click', (ev) => {
     // This is all the data that we are going to pass up into the marker popup window
-    const chosenTarget = event.target.getIcon().options.html;
+    const chosenTarget = ev.target.getIcon().options.html;
     const symbolData = {
       target: chosenTarget,
       boundingClientRect: chosenTarget.getBoundingClientRect(),
@@ -343,7 +348,6 @@ const drop = (event) => {
   });
 };
 
-
 // Enables draggable attribute if the cursor is hovering over the symbol in the sidebar.
 // Otherwise the whole .newSVG panel gets dragged
 newSVGDiv.addEventListener('mouseover', () => {
@@ -357,10 +361,11 @@ newSVGDiv.addEventListener('mouseover', () => {
   }
 });
 
-
 newSVGDiv.ondragstart = (event) => {
   // Remove the pulsating prompt above the symbol when the user begins to drag
-  document.querySelector('.drag-and-drop-reminder') ? document.querySelector('.drag-and-drop-reminder').remove() : null;
+  if (document.querySelector('.drag-and-drop-reminder')) {
+    document.querySelector('.drag-and-drop-reminder').remove();
+  }
   // For some reason I had to run this again to get the symbol amplifiers to show up. This seems to be an issue with the bounceInAnimation
   MainMS.placeSymbol();
   // Deep clone the symbol panel
@@ -374,11 +379,12 @@ newSVGDiv.ondragstart = (event) => {
   dragImg.setAttributeNS(null, 'width', `${dragImg.getBBox().width}`);
   dragImg.setAttributeNS(null, 'viewBox', `${dragImg.getBBox().x - 4} ${dragImg.getBBox().y - 4} ${dragImg.getBBox().width + 8} ${dragImg.getBBox().height + 8}`);
   // HTML5 drag-n-drop API
-  event.dataTransfer.effectAllowed = 'copy';
+  const eventDataTransfer = event.dataTransfer;
+  eventDataTransfer.effectAllowed = 'copy';
   // Copy the JSON data in the symbol panel
-  event.dataTransfer.setData('text/plain', event.target.firstElementChild.dataset.symbolInfo);
+  eventDataTransfer.setData('text/plain', event.target.firstElementChild.dataset.symbolInfo);
   // Set the drag image as the cloned symbol and center it on the cursor
-  event.dataTransfer.setDragImage(dragImg, dragImg.getBoundingClientRect().width / 2, dragImg.getBoundingClientRect().height / 2);
+  eventDataTransfer.setDragImage(dragImg, dragImg.getBoundingClientRect().width / 2, dragImg.getBoundingClientRect().height / 2);
 
   // Remove the cloned element
   window.setTimeout(() => {
@@ -388,9 +394,9 @@ newSVGDiv.ondragstart = (event) => {
   // If the dragged symbol is on top of another symbol, cancel the event.
   if (document.querySelectorAll('.militarySymbolMarker')) {
     document.querySelectorAll('.militarySymbolMarker').forEach((key) => {
-      key.addEventListener('dragover', (event) => {
+      key.addEventListener('dragover', (ev) => {
         // Should probably be debounced
-        event.stopImmediatePropagation();
+        ev.stopImmediatePropagation();
       });
     });
   }
@@ -401,7 +407,5 @@ mapArea.ondrop = drop;
 mapArea.ondragover = allowDrop;
 mapArea.onclick = toggleDraggableElement;
 
-window.moveable = moveable;
 
-
-export { removePopups };
+export { removePopups, moveable };

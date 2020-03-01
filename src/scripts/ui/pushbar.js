@@ -1,5 +1,3 @@
-import { toggleSidebarButton } from './mdcComponents';
-
 class Pushbar {
   constructor(config = { overlay: true, blur: false }) {
     this.activeBar = null;
@@ -69,13 +67,13 @@ class Pushbar {
     const triggers = document.querySelectorAll('[data-pushbar-target]');
     const closers = document.querySelectorAll('[data-pushbar-close]');
 
-    triggers.forEach(trigger => trigger.addEventListener('click', e => this.handleOpenEvent(e), false));
-    closers.forEach(closer => closer.addEventListener('click', e => this.handleCloseEvent(e), false));
+    triggers.forEach((trigger) => trigger.addEventListener('click', (e) => this.handleOpenEvent(e), false));
+    closers.forEach((closer) => closer.addEventListener('click', (e) => this.handleCloseEvent(e), false));
 
     if (this.overlay) {
-      this.overlay.addEventListener('click', e => this.handleCloseEvent(e), false);
+      this.overlay.addEventListener('click', (e) => this.handleCloseEvent(e), false);
     }
-    document.addEventListener('keyup', e => this.handleKeyEvent(e));
+    document.addEventListener('keyup', (e) => this.handleKeyEvent(e));
   }
 
   open(pushbarId) {
@@ -120,18 +118,4 @@ class Pushbar {
 
 const pushbar = new Pushbar({ blur: false, overlay: false });
 
-toggleSidebarButton.unbounded = true;
-toggleSidebarButton.listen('click', () => {
-  if (pushbar.opened) {
-    // If the pushbar is opened, close it and replace the menu_open icon with the regular menu icon
-    toggleSidebarButton.root_.innerText = 'menu';
-    pushbar.close();
-  } else {
-    toggleSidebarButton.root_.innerText = 'menu_open';
-    pushbar.open('rightPushbar');
-  }
-});
-
-
-// Open the pushbar on page load
-pushbar.open('rightPushbar');
+export default pushbar;

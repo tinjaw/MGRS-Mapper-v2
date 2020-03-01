@@ -1,5 +1,3 @@
-/* eslint-disable no-new */
-
 // * Resize symbols (usually called when a select menu is opened) * //
 // Cache: Our client bounding boxes are kept here, we can use this to clear them later.
 let elementsWithBoundingBoxes = [];
@@ -38,12 +36,11 @@ const clearClientBoundingBoxes = () => {
   }
 };
 
-
 // * Bounce In Animation * //
 // Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2.
 function bounceInAnimation(location) {
   const bounceIn = document.querySelector(location);
-  if (MainMS.type !== 'Equipment') {
+  if (JSON.parse(document.querySelector('.newSVG svg').dataset.symbolInfo).Type !== 'Equipment') {
     // transformBox is crucial. Without this Mod1 will not scale from the center
     bounceIn.style.transformBox = 'fill-box';
     bounceIn.style.transformOrigin = 'center center';
@@ -52,7 +49,6 @@ function bounceInAnimation(location) {
     bounceIn.classList.toggle('zoomIn');
   }
 }
-
 
 //* Debounce function (used in search field) * //
 // Used to debounce the search field

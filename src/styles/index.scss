@@ -12,12 +12,13 @@
 @import '@material/textfield/mdc-text-field';
 @import '@material/elevation/mdc-elevation';
 @import '@material/switch/mdc-switch';
-@import './pushbar.scss';
+@import 'pushbar';
 @import '@material/top-app-bar/mdc-top-app-bar';
 @import '@material/icon-button/mdc-icon-button';
 // Import your components for your application
 @import 'my-components';
 @import '../../node_modules/leaflet/dist/leaflet.css';
+@import 'Leaflet.DumbMGRS';
 
 // *********************************************************************************** //
 // * Most Popular Symbols                                                            * //
@@ -120,36 +121,6 @@
 .draggable {
   cursor: move;
   padding: 10px 10px 10px 10px;
-}
-
-// *********************************************************************************** //
-// * Leaflet.DumbMGRS - Grid Labels                                                  * //
-// *********************************************************************************** //
-.leaflet-grid-label {
-  .grid-label-100k {
-    background-color: yellow;
-    font-size: 13px;
-    //font-weight: bold;
-    opacity: 0.6;
-    color: red;
-    position: relative;
-    display: inline;
-    padding: 1.75px;
-    border: 1px black solid;
-    border-radius: 2px;
-  }
-  .grid-label-1000m {
-    background-color: yellow;
-    font-size: larger;
-    font-weight: bold;
-    opacity: 0.8;
-    color: black;
-    text-align: center;
-    position: relative;
-    display: inline;
-    padding: 5px;
-    border-radius: 50%;
-  }
 }
 
 // *********************************************************************************** //

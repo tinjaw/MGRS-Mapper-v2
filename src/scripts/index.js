@@ -1,22 +1,23 @@
+import '../styles/index.scss';
 import { MDCSelect } from '@material/select';
 import { MDCTextField, MDCTextFieldIcon } from '@material/textfield';
 import { MDCRipple } from '@material/ripple';
 import { MDCSwitch } from '@material/switch';
-import Fuse from 'fuse.js';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { MDCMenuSurface } from '@material/menu-surface';
-import mod1Object from '../symbolObjects/mod1';
-import mod2Object from '../symbolObjects/mod2';
-import commandPostObject from '../symbolObjects/commandPost';
+import Fuse from 'fuse.js';
+import militarySymbolsObject from './symbolObjects/militarySymbols';
+import mod1Object from './symbolObjects/mod1';
+import mod2Object from './symbolObjects/mod2';
+import commandPostObject from './symbolObjects/commandPost';
+import MilSym from './app';
+import pushbar from './ui/pushbar';
 import {
   Resizer, bounceInAnimation, debounce, setSelectMenuTextContent,
-} from './helperFunctions';
-import MilSym from '../app';
-// import MainMS from '../app';
-import militarySymbolsObject from '../symbolObjects/militarySymbols';
+} from './ui/helperFunctions';
 import {
   map, generateGZDGrids, generate100kGrids, generate1000meterGrids,
-} from '../map/map';
+} from './map/map';
 
 
 // *********************************************************************************** //
@@ -28,7 +29,7 @@ const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));
 const menuSurfaceButton = new MDCRipple(document.querySelector('.menu-surface-button'));
 // MDC - Button component - Toggles the Pushbar opened or closed
-export const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
+const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
 // MDC - Text Field component - Search for various symbols by name
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -70,6 +71,32 @@ const labels100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.label
 const grids100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids100KSwitch'));
 const labels1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels1000MSwitch'));
 const grids1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1000MSwitch'));
+
+
+// *********************************************************************************** //
+// * Top App Bar                                                                     * //
+// *********************************************************************************** //
+menuSurfaceButton.listen('click', () => {
+  menuSurface.isOpen() ? menuSurface.close() : menuSurface.open();
+  menuSurface.setAbsolutePosition(10, 10);
+});
+
+toggleSidebarButton.unbounded = true;
+toggleSidebarButton.listen('click', () => {
+  if (pushbar.opened) {
+    // If the pushbar is opened, close it and replace the menu_open icon with the regular menu icon
+    toggleSidebarButton.root_.innerText = 'menu';
+    pushbar.close();
+  } else {
+    toggleSidebarButton.root_.innerText = 'menu_open';
+    pushbar.open('rightPushbar');
+  }
+});
+
+// Initial military symbol on page load
+let MainMS = new MilSym('.newSVG', 'Default Land Unit', 'friendly');
+
+
 // *********************************************************************************** //
 // * Helper Functions                                                                * //
 // *********************************************************************************** //
@@ -103,7 +130,7 @@ const addSymbolsAndModsToList = (obj, abv, menu = null) => {
         (() => new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, `${key}`))();
         break;
       case 'mod2':
-        new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, `${key}`);
+        (() => new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, `${key}`))();
         break;
       case 'commandpost':
         // Set the default command post value to "None" on page load
@@ -252,17 +279,10 @@ function DisableInputs({
 
 
 // *********************************************************************************** //
-// * Top App Bar                                                                     * //
-// *********************************************************************************** //
-menuSurfaceButton.listen('click', () => {
-  menuSurface.isOpen() ? menuSurface.close() : menuSurface.open();
-  menuSurface.setAbsolutePosition(10, 10);
-});
-
-
-// *********************************************************************************** //
 // * Symbol Search Text Field                                                        * //
 // *********************************************************************************** //
+// import fuse, import MSO, import addSymbolsAndModsToList, import MilSym
+// import searchField, deleteTextFieldButton, selectSymbol, searchField,
 const searchOptions = {
   shouldSort: true,
   tokenize: true,
@@ -284,7 +304,9 @@ function clearSearchField() {
   // Hide the trash button
   deleteTextFieldButton.root_.style.display = 'none';
   // Remove all items in the selectSymbol menu
-  selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
+  if (selectSymbol.menu_.items) {
+    selectSymbol.menu_.items.forEach((key) => key.remove());
+  }
   // Re-add them
   addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
   // Set the selectSymbol value to the last matched item
@@ -311,7 +333,9 @@ const searchResults = debounce(() => {
     result.forEach((e) => {
       const matchSet = [...new Set(e.matches)];
       const mdcList = document.querySelector('.mdc-list.symbol-list');
-      selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
+      if (selectSymbol.menu_.items) {
+        selectSymbol.menu_.items.forEach((key) => key.remove());
+      }
       if (matchSet.length >= 1) {
         for (let index = 0; index < matchSet.length; index += 1) {
           const element = matchSet[index].value;
@@ -348,7 +372,7 @@ const searchResults = debounce(() => {
     });
   } else {
     // If there is no text in the search field remove all search results
-    selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach(key => key.remove()) : null;
+    selectSymbol.menu_.items ? selectSymbol.menu_.items.forEach((key) => key.remove()) : null;
     // Hide the trashcan icon
     deleteTextFieldButton.root_.style.display = 'none';
     // Rerun the function to add the symbols to the list
@@ -667,6 +691,7 @@ grids1000MSwitch.listen('change', (event) => {
   }
 });
 
+
 // Automatically disabled switches that cannot be used at certain zoom levels
 map.whenReady(() => {
   const switchValidator = () => {
@@ -707,267 +732,269 @@ map.whenReady(() => {
 
 
 // *********************************************************************************** //
-// * Global Vars --- USE IMPORTS AND REMOVE ON PRODUCTON!!!!!!!                      * //
-// *********************************************************************************** //
-window.searchField = searchField;
-window.selectSymbol = selectSymbol;
-window.selectAffiliation = selectAffiliation;
-window.selectUnitSize = selectUnitSize;
-window.Resizer = Resizer;
-window.deleteTextFieldButton = deleteTextFieldButton;
-window.selectMod1 = selectMod1;
-window.selectMod2 = selectMod2;
-window.uniqueDesignationField = uniqueDesignationField;
-window.higherFormationField = higherFormationField;
-window.reinforcedSwitch = reinforcedSwitch;
-window.reducedSwitch = reducedSwitch;
-window.flyingSwitch = flyingSwitch;
-window.activitySwitch = activitySwitch;
-window.installationSwitch = installationSwitch;
-window.taskForceSwitch = taskForceSwitch;
-window.deleteUniqueDesignationButton = deleteUniqueDesignationButton;
-window.deleteHigherFormationButton = deleteHigherFormationButton;
-window.DisableInputs = DisableInputs;
-window.selectCommandPost = selectCommandPost;
-window.menuSurface = menuSurface;
-window.bounceInAnimation = bounceInAnimation;
-
-// *********************************************************************************** //
 // * Load the Symbols and Modifiers into the dropdowns on page load                  * //
 // *********************************************************************************** //
-window.onload = () => {
-  addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
-  addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
-  addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
-  addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
-  // Hide the text field trash can buttons on page load
-  deleteTextFieldButton.root_.style.display = 'none';
-  deleteUniqueDesignationButton.root_.style.display = 'none';
-  deleteHigherFormationButton.root_.style.display = 'none';
-  console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
+addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
+addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
+addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
+addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
+setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 
-  const MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
-  window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
-
-  setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
+MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
+window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
 
-  // **************************************************************************************************************** //
-  // * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                                                   * //
-  // **************************************************************************************************************** //
-  // This will automatically center the tooltip on the Most Popular Symbols section
-  document.querySelectorAll('.tooltip').forEach((key) => {
-    key.addEventListener('mouseover', () => {
-      const container = key.offsetWidth;
-      const tooltip = key.lastElementChild.offsetWidth;
-      // Add 5 pixels to adjust for padding
-      key.lastElementChild.style.left = `${(container / 2) - (tooltip / 2) + 5}px`;
-      key.lastElementChild.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 0px 30px rgba(0, 0, 0, 0.3)';
-    });
-    key.addEventListener('click', (event) => {
-      // When a user clicks on a popular symbol, clear the search field to prevent errors
-      clearSearchField();
-      const elements = document.elementsFromPoint(event.clientX, event.clientY);
-      const chosenTarget = elements.find(key => key.matches('svg'));
-      selectSymbol.value = chosenTarget.dataset.symbol;
-    });
+// Hide the text field trash can buttons on page load
+deleteTextFieldButton.root_.style.display = 'none';
+deleteUniqueDesignationButton.root_.style.display = 'none';
+deleteHigherFormationButton.root_.style.display = 'none';
+
+// This will automatically center the tooltip on the Most Popular Symbols section
+document.querySelectorAll('.tooltip').forEach((key) => {
+  key.addEventListener('mouseover', () => {
+    const container = key.offsetWidth;
+    const tooltip = key.lastElementChild.offsetWidth;
+    // Add 5 pixels to adjust for padding
+    key.lastElementChild.style.left = `${(container / 2) - (tooltip / 2) + 5}px`;
+    key.lastElementChild.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 0px 30px rgba(0, 0, 0, 0.3)';
   });
-
-  selectSymbol.listen('MDCSelect:change', () => {
-    const changeSymbols = new Promise((resolve, reject) => {
-      setSelectMenuTextContent(selectSymbol);
-      MainMS.symbol = selectSymbol.value;
-      MainMS.placeSymbol();
-      resolve(MainMS);
-      reject(new Error('changeSymbols Promise Rejected'));
-    });
-
-    changeSymbols.then(() => {
-      // Disable switches and inputs for Equipment and Graphic Control Measures
-      switch (MainMS.type) {
-        case 'Equipment':
-          // Disable all except, symbol, affiliation, mod1, mod2, and flying
-          // (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
-          DisableInputs({
-            affiliation: false,
-            size: true,
-            mod1: false,
-            mod2: false,
-            unique: true,
-            higher: true,
-            reinforced: true,
-            reduced: true,
-            activity: true,
-            installation: true,
-            taskForce: true,
-            commandPost: true,
-          });
-          break;
-        case 'Graphic Control Measure':
-          flyingSwitch.disabled = true;
-          flyingSwitch.checked = false;
-          DisableInputs({
-            affiliation: true,
-            size: true,
-            mod1: true,
-            mod2: true,
-            unique: true,
-            higher: true,
-            reinforced: true,
-            reduced: true,
-            activity: true,
-            installation: true,
-            taskForce: true,
-            commandPost: true,
-          });
-          break;
-        case 'Tactical Mission Task':
-          flyingSwitch.disabled = true;
-          flyingSwitch.checked = false;
-          DisableInputs({
-            affiliation: true,
-            size: true,
-            mod1: true,
-            mod2: true,
-            unique: true,
-            higher: true,
-            reinforced: true,
-            reduced: true,
-            activity: true,
-            installation: true,
-            taskForce: true,
-            commandPost: true,
-          });
-          break;
-        default:
-          // Enable all inputs
-          DisableInputs({});
-          break;
-      }
-
-      const addAndRemoveSymbolPanelAnimation = () => {
-        // Add the animateSymbol class the the symbol in the panel
-        document.querySelector('.newSVG > svg').classList.add('animateSymbol');
-        // When the animation ends, remove it from the symbol, otherwise it will keep animating when you mouse over
-        window.addEventListener('animationend', () => {
-          document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
-          // Set to once to automatically remove the event listener
-        }, { once: true });
-      };
-
-      // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
-      !searchField.input_.value ? addAndRemoveSymbolPanelAnimation() : null;
-    }, (error) => {
-      console.log(error);
-    });
+  key.addEventListener('click', (event) => {
+    // When a user clicks on a popular symbol, clear the search field to prevent errors
+    clearSearchField();
+    const elements = document.elementsFromPoint(event.clientX, event.clientY);
+    const chosenTarget = elements.find((key) => key.matches('svg'));
+    selectSymbol.value = chosenTarget.dataset.symbol;
   });
+});
 
-  selectAffiliation.listen('MDCSelect:change', () => {
-    // This replaces camel case for things like "friendlyTemplated" into "Friendly / Templated"
-    selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
-    MainMS.affiliation = selectAffiliation.value;
+// **************************************************************************************************************** //
+// * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                                                   * //
+// **************************************************************************************************************** //
+// This will automatically center the tooltip on the Most Popular Symbols section
+document.querySelectorAll('.tooltip').forEach((key) => {
+  key.addEventListener('mouseover', () => {
+    const container = key.offsetWidth;
+    const tooltip = key.lastElementChild.offsetWidth;
+    // Add 5 pixels to adjust for padding
+    key.lastElementChild.style.left = `${(container / 2) - (tooltip / 2) + 5}px`;
+    key.lastElementChild.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 0px 30px rgba(0, 0, 0, 0.3)';
+  });
+  key.addEventListener('click', (event) => {
+    // When a user clicks on a popular symbol, clear the search field to prevent errors
+    clearSearchField();
+    const elements = document.elementsFromPoint(event.clientX, event.clientY);
+    const chosenTarget = elements.find((key2) => key2.matches('svg'));
+    selectSymbol.value = chosenTarget.dataset.symbol;
+  });
+});
+
+selectSymbol.listen('MDCSelect:change', () => {
+  const changeSymbols = new Promise((resolve, reject) => {
+    setSelectMenuTextContent(selectSymbol);
+    MainMS.symbol = selectSymbol.value;
     MainMS.placeSymbol();
-    // If a user changes unit affiliation, and the flying switch is checked, run this func to immediately change the outline
-    flyingSwitch.checked ? enableFlyingOutline() : null;
+    resolve(MainMS);
+    reject(new Error('changeSymbols Promise Rejected'));
   });
 
-  selectUnitSize.listen('MDCSelect:change', () => {
-    selectUnitSize.selectedText_.textContent = selectUnitSize.value.replace(/([A-Z])/g, ' / $1').replace(/^./, str => str.toUpperCase());
-    MainMS.echelon = selectUnitSize.value;
-    MainMS.placeSymbol();
-    bounceInAnimation('g.echelon');
-  });
-
-  selectMod1.listen('MDCSelect:change', () => {
-    setSelectMenuTextContent(selectMod1);
-    MainMS.mod1 = selectMod1.value;
-    MainMS.placeSymbol();
-    bounceInAnimation('g.mod1');
-  });
-
-  selectMod2.listen('MDCSelect:change', () => {
-    setSelectMenuTextContent(selectMod2);
-    MainMS.mod2 = selectMod2.value;
-    MainMS.placeSymbol();
-    bounceInAnimation('g.mod2');
-  });
-
-  selectCommandPost.listen('MDCSelect:change', () => {
-    setSelectMenuTextContent(selectCommandPost);
-    MainMS.commandPost = selectCommandPost.value;
-    MainMS.placeSymbol();
-    bounceInAnimation('g.commandpost');
-  });
-
-
-  [selectUnitSize, selectMod1, selectMod2].forEach((key) => {
-    key.listen('click', () => {
-      // If any of these menus are open, then resize all the symbols
-      selectUnitSize.isMenuOpen_ ? Resizer('.unitSizeFigure svg', 93, 33) : null;
-      selectMod1.isMenuOpen_ ? Resizer('.mod1Figure svg') : null;
-      selectMod2.isMenuOpen_ ? Resizer('.mod2Figure svg') : null;
-    });
-  });
-
-  // This will prevent the symbols from being regenerated if the affiliation hasn't changed. Otherwise every time you open the symbolSelect it would run placeSymbol()
-  const oldAffiliationValue = [selectAffiliation.value];
-  selectSymbol.listen('click', () => {
-    if (oldAffiliationValue[0] !== selectAffiliation.value) {
-      // If the previous affiliation and the current affiliation are NOT equal, then pop the last value, push the new value
-      oldAffiliationValue.pop();
-      oldAffiliationValue.push(selectAffiliation.value);
-      // When an affiliation is selected, change the outlines of all symbols in the dropdown only if the selectSymbol menu is open though
-      if (selectSymbol.isMenuOpen_) {
-        selectSymbol.menu_.items.map((key) => {
-          new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`);
+  changeSymbols.then(() => {
+    // Disable switches and inputs for Equipment and Graphic Control Measures
+    switch (MainMS.type) {
+      case 'Equipment':
+        // Disable all except, symbol, affiliation, mod1, mod2, and flying
+        // (note: flying is automatically disabled unless the symbol has a 'flightCapable: true' property)
+        DisableInputs({
+          affiliation: false,
+          size: true,
+          mod1: false,
+          mod2: false,
+          unique: true,
+          higher: true,
+          reinforced: true,
+          reduced: true,
+          activity: true,
+          installation: true,
+          taskForce: true,
+          commandPost: true,
         });
-      }
+        break;
+      case 'Graphic Control Measure':
+        flyingSwitch.disabled = true;
+        flyingSwitch.checked = false;
+        DisableInputs({
+          affiliation: true,
+          size: true,
+          mod1: true,
+          mod2: true,
+          unique: true,
+          higher: true,
+          reinforced: true,
+          reduced: true,
+          activity: true,
+          installation: true,
+          taskForce: true,
+          commandPost: true,
+        });
+        break;
+      case 'Tactical Mission Task':
+        flyingSwitch.disabled = true;
+        flyingSwitch.checked = false;
+        DisableInputs({
+          affiliation: true,
+          size: true,
+          mod1: true,
+          mod2: true,
+          unique: true,
+          higher: true,
+          reinforced: true,
+          reduced: true,
+          activity: true,
+          installation: true,
+          taskForce: true,
+          commandPost: true,
+        });
+        break;
+      default:
+        // Enable all inputs
+        DisableInputs({});
+        break;
     }
 
+    const addAndRemoveSymbolPanelAnimation = () => {
+      // Add the animateSymbol class the the symbol in the panel
+      document.querySelector('.newSVG > svg').classList.add('animateSymbol');
+      // When the animation ends, remove it from the symbol, otherwise it will keep animating when you mouse over
+      window.addEventListener('animationend', () => {
+        document.querySelector('.newSVG > svg').classList.remove('animateSymbol');
+        // Set to once to automatically remove the event listener
+      }, { once: true });
+    };
+    // Only animate the symbol when a new symbol is clicked. This prevents the animation occurring on every single keyup in search field
+    if (!searchField.input_.value) {
+      addAndRemoveSymbolPanelAnimation();
+    }
+  }, (error) => {
+    console.log(error);
+  });
+});
+
+selectAffiliation.listen('MDCSelect:change', () => {
+  // This replaces camel case for things like "friendlyTemplated" into "Friendly / Templated"
+  selectAffiliation.selectedText_.textContent = selectAffiliation.value.replace(/([A-Z])/g, ' / $1').replace(/^./, (str) => str.toUpperCase());
+  MainMS.affiliation = selectAffiliation.value;
+  MainMS.placeSymbol();
+  // If a user changes unit affiliation, and the flying switch is checked, run this func to immediately change the outline
+  if (flyingSwitch.checked) {
+    enableFlyingOutline();
+  }
+});
+
+selectUnitSize.listen('MDCSelect:change', () => {
+  selectUnitSize.selectedText_.textContent = selectUnitSize.value.replace(/([A-Z])/g, ' / $1').replace(/^./, (str) => str.toUpperCase());
+  MainMS.echelon = selectUnitSize.value;
+  MainMS.placeSymbol();
+  bounceInAnimation('g.echelon');
+});
+
+selectMod1.listen('MDCSelect:change', () => {
+  setSelectMenuTextContent(selectMod1);
+  MainMS.mod1 = selectMod1.value;
+  MainMS.placeSymbol();
+  bounceInAnimation('g.mod1');
+});
+
+selectMod2.listen('MDCSelect:change', () => {
+  setSelectMenuTextContent(selectMod2);
+  MainMS.mod2 = selectMod2.value;
+  MainMS.placeSymbol();
+  bounceInAnimation('g.mod2');
+});
+
+selectCommandPost.listen('MDCSelect:change', () => {
+  setSelectMenuTextContent(selectCommandPost);
+  MainMS.commandPost = selectCommandPost.value;
+  MainMS.placeSymbol();
+  bounceInAnimation('g.commandpost');
+});
+
+
+[selectUnitSize, selectMod1, selectMod2].forEach((key) => {
+  key.listen('click', () => {
+    // If any of these menus are open, then resize all the symbols
+    if (selectUnitSize.isMenuOpen_) {
+      Resizer('.unitSizeFigure svg', 93, 33);
+    }
+    if (selectMod1.isMenuOpen_) {
+      Resizer('.mod1Figure svg');
+    }
+    if (selectMod2.isMenuOpen_) {
+      Resizer('.mod2Figure svg');
+    }
+  });
+});
+
+// This will prevent the symbols from being regenerated if the affiliation hasn't changed. Otherwise every time you open the symbolSelect it would run placeSymbol()
+const oldAffiliationValue = [selectAffiliation.value];
+selectSymbol.listen('click', () => {
+  if (oldAffiliationValue[0] !== selectAffiliation.value) {
+    // If the previous affiliation and the current affiliation are NOT equal, then pop the last value, push the new value
+    oldAffiliationValue.pop();
+    oldAffiliationValue.push(selectAffiliation.value);
+    // When an affiliation is selected, change the outlines of all symbols in the dropdown only if the selectSymbol menu is open though
     if (selectSymbol.isMenuOpen_) {
-      // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
-      setTimeout(() => {
-        Resizer('.symbolFigure svg');
-        // Total hack that prevents the selectSymbol dropdown from getting compressed when after a user does a search query.
-        // selectSymbol.menu_.root_.attributes.style.value = `transform-origin: center top; top: ${selectSymbol.root_.getBoundingClientRect().bottom}px; max-height: 714.375px; right: 33.3438px;`;
-      }, 50);
+      selectSymbol.menu_.items.map((key) => {
+        (() => new MilSym(`.symbolFigure[data-symbol-name="${key.dataset.value}"]`, `${key.dataset.value}`, `${selectAffiliation.value}`))();
+      });
     }
-    flyingSwitch.checked ? flyingSwitch.disabled = false : null;
-  });
+  }
 
-  const oldAffiliationValueCP = [selectAffiliation.value];
-  selectCommandPost.listen('click', () => {
-    if (oldAffiliationValueCP[0] !== selectAffiliation.value) {
-      // If the previous affiliation and the current affiliation are NOT equal, then pop the last value, push the new value
-      oldAffiliationValueCP.pop();
-      oldAffiliationValueCP.push(selectAffiliation.value);
-      // Now create the new symbol outlines only if the selectCommandPost menu is open though
-      if (selectCommandPost.isMenuOpen_) {
-        selectCommandPost.menu_.items.map((key) => {
-          new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`);
-        });
-      }
-    }
+  if (selectSymbol.isMenuOpen_) {
     // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
-    selectCommandPost.isMenuOpen_ ? Resizer('.commandpostFigure svg', 100, 100) : null;
-  });
+    setTimeout(() => {
+      Resizer('.symbolFigure svg');
+    }, 50);
+  }
+  if (flyingSwitch.checked) {
+    flyingSwitch.disabled = false;
+  }
+});
 
-  // Add the pulsating prompt above the symbol in the symbol panel
-  document.querySelector('.newSVG').insertAdjacentHTML('beforebegin',
-    `<span class="mdc-select-helper-text mdc-select-helper-text--persistent drag-and-drop-reminder">
+const oldAffiliationValueCP = [selectAffiliation.value];
+selectCommandPost.listen('click', () => {
+  if (oldAffiliationValueCP[0] !== selectAffiliation.value) {
+    // If the previous affiliation and the current affiliation are NOT equal, then pop the last value, push the new value
+    oldAffiliationValueCP.pop();
+    oldAffiliationValueCP.push(selectAffiliation.value);
+    // Now create the new symbol outlines only if the selectCommandPost menu is open though
+    if (selectCommandPost.isMenuOpen_) {
+      selectCommandPost.menu_.items.map((key) => {
+        (() => new MilSym(`.commandpostFigure[data-commandpost-name="${key.dataset.value}"]`, 'Default Land Unit', `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key.dataset.value}`))();
+      });
+    }
+  }
+  // If the previous affiliation and the current affiliation are equal, then do not change the symbol outlines, just resize them only if the menu is open
+  if (selectCommandPost.isMenuOpen_) {
+    Resizer('.commandpostFigure svg', 100, 100);
+  }
+});
+
+// Add the pulsating prompt above the symbol in the symbol panel
+document.querySelector('.newSVG').insertAdjacentHTML('beforebegin',
+  `<span class="mdc-select-helper-text mdc-select-helper-text--persistent drag-and-drop-reminder">
       <i class="material-icons">format_shapes</i>
       Click and Drag the Symbol Onto the Map
     </span>`);
 
 
-  // Enable Map Switches on page load
-  gzdGridsSwitch.checked = true;
-  gzdLabelsSwitch.checked = true;
-  labels100KSwitch.checked = true;
-  grids100KSwitch.checked = true;
-  labels1000MSwitch.checked = true;
-  grids1000MSwitch.checked = true;
-};
+// Enable Map Switches on page load
+gzdGridsSwitch.checked = true;
+gzdLabelsSwitch.checked = true;
+labels100KSwitch.checked = true;
+grids100KSwitch.checked = true;
+labels1000MSwitch.checked = true;
+grids1000MSwitch.checked = true;
+// Open the pushbar on page load
+pushbar.open('rightPushbar');
 
 
-export { selectAffiliation, flyingSwitch };
+export { flyingSwitch, MainMS };
