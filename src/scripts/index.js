@@ -40,6 +40,8 @@ const deleteSearchMGRSButton = new MDCTextFieldIcon(searchMGRSIcon.root_);
 const searchAddress = new MDCTextField(document.querySelector('.mdc-text-field.searchAddress'));
 const searchAddressIcon = new MDCRipple(document.querySelector('.mdc-button.searchAddressDeleteIcon'));
 const deleteSearchAddressButton = new MDCTextFieldIcon(searchAddressIcon.root_);
+// MDC - Select Menu component - Contains base maps
+// const selectBaseMap = new MDCSelect(document.querySelector('.base-map-select'));
 // MDC - Text Field component - Search for various symbols by name
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -567,6 +569,10 @@ searchAddressResult.addEventListener('click', () => {
   }, 300);
 });
 
+
+// selectBaseMap.listen('MDCSelect:change', () => {
+//   console.log(`Selected option at index ${selectBaseMap.selectedIndex} with value "${selectBaseMap.value}"`);
+// });
 
 // *********************************************************************************** //
 // * Reinforced and Reduced Switches                                                 * //

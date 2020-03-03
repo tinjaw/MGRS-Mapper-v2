@@ -240,11 +240,11 @@
               </svg>
             </div>
             <div class="mdc-layout-grid__cell--span-10">
-              <div class="mdc-select  unit-size-select">
+              <div class="mdc-select unit-size-select">
                 <input type="hidden" name="enhanced-select" />
                 <i class="mdc-select__dropdown-icon"></i>
                 <div class="mdc-select__selected-text mainSymbolSelectedText"></div>
-                <div class="mdc-select__menu mdc-menu mdc-menu-surface ">
+                <div class="mdc-select__menu mdc-menu mdc-menu-surface">
                   <ul class="mdc-list unit-size-list">
                     <li class="mdc-list-item mdc-list-item--selected" data-value="none" aria-selected="true">
                       <figure class="unitSizeFigure">
@@ -662,6 +662,28 @@
                         <div class="mdc-text-field-helper-line">
                           <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-searchAddress-helper-text">Search for an address (Example: Fort Drum, NY)</p>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <li role="separator" class="mdc-list-divider"></li>
+                  <!-- Base map layer select boxes -->
+                  <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right">
+                        <img src="https://via.placeholder.com/124x84.png?text=Map+1" alt="" />
+                      </div>
+                      <div class="mdc-layout-grid__cell--span-9">
+                        <ul class="mdc-list mdc-list--two-line">
+                          <li class="mdc-list-item" tabindex="0">
+                            <span class="mdc-list-item__text baseMapListPadding">
+                              <span class="mdc-list-item__primary-text">Default Base Map</span>
+                              <span class="mdc-list-item__secondary-text">Standard map, data provided by National Geographic</span>
+                            </span>
+                            <svg class="mdc-list-item__meta currentEnabledMapIcon" style="width:24px;height:24px" viewBox="0 0 24 24">
+                              <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+                            </svg>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>

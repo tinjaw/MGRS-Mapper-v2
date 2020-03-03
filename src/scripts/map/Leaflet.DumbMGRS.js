@@ -4,19 +4,62 @@
 import L from 'leaflet';
 
 
+const mapLayers = {
+  // Default map, national geographic
+  get natGeo() {
+    return L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+      cursor: true,
+      maxZoom: 16,
+    });
+  },
+  // Another decent default map
+  get openStreetMap() {
+    return L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    });
+  },
+  // Black and white
+  get tonerLite() {
+    return L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png',
+    });
+  },
+  // Topographic
+  get worldTopo() {
+    return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+    });
+  },
+  // Satellite
+  get worldSatellite() {
+    return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    });
+  },
+};
+
 // *********************************************************************************** //
 // * Set initial map view                                                            * //
 // *********************************************************************************** //
-const map = L.map('main-content', {
-  center: [45.12689618126071, -70.62732696533205],
-  zoom: 6,
-  cursor: true,
-  maxZoom: 16,
-  layers: [
-    L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'),
-  ],
-});
+const map = L.map('main-content').setView([45.12689618126071, -70.62732696533205], 6);
+map.addLayer(mapLayers.natGeo);
+// const map = L.map('main-content', {
+//   center: [45.12689618126071, -70.62732696533205],
+//   zoom: 6,
+//   cursor: true,
+//   maxZoom: 16,
+//   layers: [
+//     L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'),
+//   ],
+// });
 
+window.map = map;
+window.L = L;
 
 // *********************************************************************************** //
 // * Leaflet.DumbMGRS - Forked version of mgrs.js (https://github.com/proj4js/mgrs)  * //
