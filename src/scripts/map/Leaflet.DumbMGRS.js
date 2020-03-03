@@ -2228,5 +2228,5 @@ const generate1000meterGrids = new MGRS1000Meters({
 
 // LLtoUTM/UTMtoMGRS is solely used for the example info boxes
 export {
-  L, map, generateGZDGrids, generate100kGrids, generate1000meterGrids, LLtoUTM, UTMtoMGRS, latLngFromMGRS,
+  L, map, generateGZDGrids, generate100kGrids, generate1000meterGrids, LLtoUTM, UTMtoMGRS, latLngFromMGRS, mapLayers,
 };

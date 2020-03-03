@@ -113,6 +113,18 @@ p#text-field-outlined-searchMGRS-helper-text[error] {
   padding-left: 15px;
 }
 
+.mapList > .mdc-layout-grid__cell--span-3 img {
+  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 75ms, /* $delay: */ 25ms);
+  transform: scale(1);
+}
+
+.mapList > .mdc-layout-grid__cell--span-3 img:hover {
+  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
+  transform: scale(1.21);
+  cursor: pointer;
+  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.65));
+}
+
 // .mdc-button:not(:disabled) {
 //   color: midnightblue;
 //   color: var(--mdc-theme-primary, midnightblue);
