@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable max-len */
 //* * Leaflet.DumbMGRS made by CPT James Pistell, 2020 */
 //* * Complaints, comments, concerns send to jamespistell@gmail.com */
 //* * This took me 340.33 hours to make. I worked on it from 18NOV19 to 14FEB20 */
@@ -844,7 +841,7 @@ const GZD = L.LayerGroup.extend({
         const letterKey = e;
         Object.defineProperties(letterKey, {
           id: {
-            value: inBoundsUTMNumbers.map(j => j),
+            value: inBoundsUTMNumbers.map((j) => j),
             writable: true,
           },
         });
@@ -1088,7 +1085,7 @@ const MGRS100K = L.LayerGroup.extend({
 
     // Not sure how useful this promise is. It works fine with just a forEach loop
     //! use async/await or just a forEach loop?
-    const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     visibleGridsIterator.forEach((grid) => {
       delay(20)

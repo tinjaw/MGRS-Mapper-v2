@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const Path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');

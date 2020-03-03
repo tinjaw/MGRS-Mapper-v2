@@ -24,6 +24,7 @@ import {
 // * Initialize Various Material Design Components                                   * //
 // *********************************************************************************** //
 // MDC - Top App Bar component
+// eslint-disable-next-line no-unused-vars
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 // MDC - Menu Surface component - The "Open Menu" button on the Top App Bar
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));
@@ -64,7 +65,7 @@ const selectCommandPost = new MDCSelect(document.querySelector('.commandpost-sel
 // MDC - Menu Surface component - The "Toggle Grid Overlays" button in the bottom app bar
 const menuSurfaceToggleGrids = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms1'));
 const menuSurfaceToggleGridsButton = new MDCRipple(document.querySelector('.mdc-button.ms1'));
-// MDC - Switch component -
+// MDC - Switch component - Toggle switches for the MGRS grid overlay
 const gzdGridsSwitch = new MDCSwitch(document.querySelector('.mdc-switch.gzdGridsSwitch'));
 const gzdLabelsSwitch = new MDCSwitch(document.querySelector('.mdc-switch.gzdLabelsSwitch'));
 const labels100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels100KSwitch'));
@@ -281,8 +282,6 @@ function DisableInputs({
 // *********************************************************************************** //
 // * Symbol Search Text Field                                                        * //
 // *********************************************************************************** //
-// import fuse, import MSO, import addSymbolsAndModsToList, import MilSym
-// import searchField, deleteTextFieldButton, selectSymbol, searchField,
 const searchOptions = {
   shouldSort: true,
   tokenize: true,

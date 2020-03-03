@@ -29,6 +29,9 @@ class Pushbar {
     return activeBar instanceof HTMLElement && activeBar.getAttribute('data-pushbar-id');
   }
 
+  // The purpose of static methods is that you can access generic properties on a class without having to create a class instance.
+  // Static methods don't have access to the this class instance, and therefore are really only there as utility functions and properties.
+  // We do this so that we don't have to needlessly bind the class instance to dispatchClose() if it isn't utilizing any class instance variables.
   static dispatchOpen(pushbar) {
     const event = new CustomEvent('pushbar_opening', { bubbles: true, detail: { pushbar } });
     pushbar.dispatchEvent(event);

@@ -2,6 +2,20 @@
 
 ---
 
+## 2MAR20
+
+- Working on eslint errors
+  - app.js (20 errors)
+  - index.js (18 errors)
+  - Leaflet.DumbMGRS.js (1 error)
+  - map.js (2 errors)
+  - moveSymbol.js (11 errors)
+  - militarySymbols.js (3 errors)
+  - mod2.js (1 error)
+  - helperFunctions.js (4 errors)
+
+---
+
 ## 29FEB20
 
 - Created new project structure

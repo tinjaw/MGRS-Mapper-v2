@@ -12,12 +12,15 @@
 @import '@material/textfield/mdc-text-field';
 @import '@material/elevation/mdc-elevation';
 @import '@material/switch/mdc-switch';
-@import 'pushbar';
 @import '@material/top-app-bar/mdc-top-app-bar';
 @import '@material/icon-button/mdc-icon-button';
-// Import your components for your application
+// Import default styles for pushbar (sidebar)
+@import 'pushbar';
+// Import my styled Material Design Components
 @import 'my-components';
+// Import default Leaflet styles
 @import '../../node_modules/leaflet/dist/leaflet.css';
+// Import styles for your grid overlay plugin
 @import 'Leaflet.DumbMGRS';
 
 // *********************************************************************************** //

@@ -5,7 +5,7 @@
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "rules": {
@@ -22,7 +22,9 @@
     "no-underscore-dangle": "off",
     "no-unused-expressions": ["error", { "allowTernary": true }],
     "new-cap": "off",
-    "func-names": "off"
+    "func-names": "off",
+    // disable this because of Leaflet.DumbMGRS
+    "no-mixed-operators": "off"
     // "object-curly-newline": ["error", { "multiline": true, "minProperties": 5 }]
   },
   "globals": {
