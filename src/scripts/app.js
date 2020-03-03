@@ -50,8 +50,9 @@ class MilSym {
     return this.placeSymbol();
   }
 
-
-  // SVG LOCATION
+  // *********************************************************************************** //
+  // * SVG Location (which DOM element to stick the symbol in)                         * //
+  // *********************************************************************************** //
   get location() {
     if (this._location) {
       return document.querySelector(this._location);
@@ -63,7 +64,9 @@ class MilSym {
     this._location = value;
   }
 
-  // SYMBOL
+  // *********************************************************************************** //
+  // * Base symbol (infantry, cavalry, etc)                                            * //
+  // *********************************************************************************** //
   get symbol() {
     if (this._symbol) {
       const decoratorGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -127,7 +130,9 @@ class MilSym {
     this._symbol = value;
   }
 
-  // AFFILIATION
+  // *********************************************************************************** //
+  // * Affiliation (friendly,hostile, etc)                                             * //
+  // *********************************************************************************** //
   get affiliation() {
     if (this._affiliation) {
       const outlineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -360,7 +365,9 @@ class MilSym {
     this._affiliation = value;
   }
 
-  // ECHELON
+  // *********************************************************************************** //
+  // * Echelon (unit size)                                                             * //
+  // *********************************************************************************** //
   get echelon() {
     if (this._echelon) {
       const echelonGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -381,7 +388,9 @@ class MilSym {
     this._echelon = value;
   }
 
-  // MODIFIER 1
+  // *********************************************************************************** //
+  // * Modifier 1 (top of symbol)                                                      * //
+  // *********************************************************************************** //
   get mod1() {
     if (this._mod1) {
       const mod1Group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -430,7 +439,9 @@ class MilSym {
     this._mod1 = value;
   }
 
-  // MODIFIER 2
+  // *********************************************************************************** //
+  // * Modifier 2 (Bottom of symbol)                                                   * //
+  // *********************************************************************************** //
   get mod2() {
     if (this._mod2) {
       const mod2Group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -512,7 +523,9 @@ class MilSym {
     this._mod2 = value;
   }
 
-  // UNIQUE DESIGNATION
+  // *********************************************************************************** //
+  // * Unique Designation Text                                                         * //
+  // *********************************************************************************** //
   get uniqueDesignation() {
     if (this._uniqueDesignation) {
       const uniqueDesignationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -539,7 +552,9 @@ class MilSym {
     this._uniqueDesignation = value;
   }
 
-  // HIGHER FORMATION
+  // *********************************************************************************** //
+  // * Higher Formation Text                                                           * //
+  // *********************************************************************************** //
   get higherFormation() {
     if (this._higherFormation) {
       const higherFormationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -563,7 +578,9 @@ class MilSym {
     this._higherFormation = value;
   }
 
-  // REINFORCED AND REDUCED
+  // *********************************************************************************** //
+  // * Reinforced/Reduced Modifier                                                     * //
+  // *********************************************************************************** //
   get reinforcedReduced() {
     if (this._reinforcedReduced) {
       const reinforcedReducedGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -588,7 +605,9 @@ class MilSym {
     this._reinforcedReduced = value;
   }
 
-  // FLYING
+  // *********************************************************************************** //
+  // * Flying Modifier                                                                 * //
+  // *********************************************************************************** //
   get flying() {
     if (this._flying) {
       // Logic provided in the adjustSymbolOutlineForFlying() function in "get affiliation"
@@ -601,7 +620,9 @@ class MilSym {
     this._flying = value;
   }
 
-  // ACTIVITY
+  // *********************************************************************************** //
+  // * Activity Modifier                                                               * //
+  // *********************************************************************************** //
   get activity() {
     if (this._activity) {
       const activityGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -621,7 +642,9 @@ class MilSym {
     this._activity = value;
   }
 
-  // INSTALLATION
+  // *********************************************************************************** //
+  // * Installation Modifier                                                           * //
+  // *********************************************************************************** //
   get installation() {
     if (this._installation) {
       const installationGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -641,7 +664,9 @@ class MilSym {
     this._installation = value;
   }
 
-  // TASK FORCE
+  // *********************************************************************************** //
+  // * Task Force Modifier                                                             * //
+  // *********************************************************************************** //
   get taskForce() {
     if (this._taskForce) {
       const taskForceGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -661,7 +686,9 @@ class MilSym {
     this._taskForce = value;
   }
 
-  // COMMAND POST
+  // *********************************************************************************** //
+  // * Command Post Modifier                                                           * //
+  // *********************************************************************************** //
   get commandPost() {
     if (this._commandPost) {
       const commandPostGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -710,8 +737,9 @@ class MilSym {
     this._commandPost = value;
   }
 
-
-  // PLACE SYMBOL
+  // *********************************************************************************** //
+  // * Puts the symbol into the DOM with dataset attribute                             * //
+  // *********************************************************************************** //
   placeSymbol() {
     this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -767,7 +795,6 @@ class MilSym {
     });
 
     this.location.append(svg);
-
 
     const moreReadableAffiliation = () => {
       switch (this.type) {
@@ -892,7 +919,7 @@ class MilSym {
       }
     };
 
-    // If MainMS is in the window, then set the viewboxes, otherwise wait 300ms
+    // If MainMS is in the window, then set the viewbox, otherwise wait 300ms
     'MainMS' in window ? setViewBox() : setTimeout(setViewBox, 300);
 
 

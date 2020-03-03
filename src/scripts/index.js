@@ -767,9 +767,9 @@ document.querySelectorAll('.tooltip').forEach((key) => {
   });
 });
 
-// **************************************************************************************************************** //
-// * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                                                   * //
-// **************************************************************************************************************** //
+// *********************************************************************************** //
+// * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                      * //
+// *********************************************************************************** //
 // This will automatically center the tooltip on the Most Popular Symbols section
 document.querySelectorAll('.tooltip').forEach((key) => {
   key.addEventListener('mouseover', () => {
