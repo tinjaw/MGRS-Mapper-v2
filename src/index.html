@@ -669,9 +669,8 @@
                   <!-- Base map layer select boxes -->
                   <div class="mdc-layout-grid">
                     <div class="mdc-layout-grid__inner">
-                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right">
-                        <img src="https://via.placeholder.com/124x84.png?text=Map+1" alt="" />
-                      </div>
+                      <!-- National Geographic -->
+                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-natGeo"></div>
                       <div class="mdc-layout-grid__cell--span-9">
                         <ul class="mdc-list mdc-list--two-line">
                           <li class="mdc-list-item" tabindex="0">
@@ -679,9 +678,65 @@
                               <span class="mdc-list-item__primary-text">Default Base Map</span>
                               <span class="mdc-list-item__secondary-text">Standard map, data provided by National Geographic</span>
                             </span>
-                            <svg class="mdc-list-item__meta currentEnabledMapIcon" style="width:24px;height:24px" viewBox="0 0 24 24">
-                              <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
-                            </svg>
+                            <div class="currentEnabledMapIcon">
+                              <svg class="mdc-list-item__meta" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+                              </svg>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Open Street Maps -->
+                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-OSM"></div>
+                      <div class="mdc-layout-grid__cell--span-9">
+                        <ul class="mdc-list mdc-list--two-line">
+                          <li class="mdc-list-item" tabindex="0">
+                            <span class="mdc-list-item__text baseMapListPadding">
+                              <span class="mdc-list-item__primary-text">Secondary Base Map</span>
+                              <span class="mdc-list-item__secondary-text">Standard map, data provided by Open Street Maps</span>
+                            </span>
+                            <div class="currentEnabledMapIcon"></div>
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- Toner Lite Map -->
+                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-tonerLite"></div>
+                      <div class="mdc-layout-grid__cell--span-9">
+                        <ul class="mdc-list mdc-list--two-line">
+                          <li class="mdc-list-item" tabindex="0">
+                            <span class="mdc-list-item__text baseMapListPadding">
+                              <span class="mdc-list-item__primary-text">Ink Toner Map</span>
+                              <span class="mdc-list-item__secondary-text">Black and white map, data provided by Stamen</span>
+                            </span>
+                            <div class="currentEnabledMapIcon"></div>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- World Topographic Map -->
+                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-worldTopo"></div>
+                      <div class="mdc-layout-grid__cell--span-9">
+                        <ul class="mdc-list mdc-list--two-line">
+                          <li class="mdc-list-item" tabindex="0">
+                            <span class="mdc-list-item__text baseMapListPadding">
+                              <span class="mdc-list-item__primary-text">Topographic Map</span>
+                              <span class="mdc-list-item__secondary-text">Enhanced topographic map, data provided by ArcGIS</span>
+                            </span>
+                            <div class="currentEnabledMapIcon"></div>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <!-- World Satellite Map -->
+                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-satellite"></div>
+                      <div class="mdc-layout-grid__cell--span-9">
+                        <ul class="mdc-list mdc-list--two-line">
+                          <li class="mdc-list-item" tabindex="0">
+                            <span class="mdc-list-item__text baseMapListPadding">
+                              <span class="mdc-list-item__primary-text">Satellite Map</span>
+                              <span class="mdc-list-item__secondary-text">World satellite map, data provided by ArcGIS</span>
+                            </span>
+                            <div class="currentEnabledMapIcon"></div>
                           </li>
                         </ul>
                       </div>
@@ -744,7 +799,7 @@
               </div>
             </div>
           </section>
-          <section class="mdc-top-app-bar__section" style="text-align:center; display: block; padding: 5px 0px 10px 0px;">
+          <section class="mdc-top-app-bar__section" style="text-align:center; display: block; padding: 5px 0px 10px 0px; z-index: 0;">
             <!-- Site Logo -->
             <svg xmlns="http://www.w3.org/2000/svg" height="60" width="400" viewBox="0 0 706 120">
               <path
@@ -895,6 +950,5 @@
         </section>
       </div>
     </footer>
-    <!-- <script src="bundle.js" async></script> -->
   </body>
 </html>

@@ -19,8 +19,18 @@ import {
   map, generateGZDGrids, generate100kGrids, generate1000meterGrids,
 } from './map/map';
 import { latLngFromMGRS } from './map/Leaflet.DumbMGRS';
+// Import images for base map selection
+import mapIconNatGeo from '../img/map_natGeo_2.jpg';
+import mapIconOpenStreetMap from '../img/map_OSM_2.jpg';
+import mapIconTonerLite from '../img/map_tonerLite_2.jpg';
+import mapIconWorldTopo from '../img/map_worldTopo_2.jpg';
+import mapIconSatellite from '../img/map_worldSatellite_2.jpg';
 
-
+document.querySelector('.mapIcon-natGeo').innerHTML = `<img src=${mapIconNatGeo} alt="National Geographic Map Layer" width="100px" loading="lazy" />`;
+document.querySelector('.mapIcon-OSM').innerHTML = `<img src=${mapIconOpenStreetMap} alt="Open Street Maps Layer" width="100px" loading="lazy" />`;
+document.querySelector('.mapIcon-tonerLite').innerHTML = `<img src=${mapIconTonerLite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
+document.querySelector('.mapIcon-worldTopo').innerHTML = `<img src=${mapIconWorldTopo} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
+document.querySelector('.mapIcon-satellite').innerHTML = `<img src=${mapIconSatellite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
 // *********************************************************************************** //
 // * Initialize Various Material Design Components                                   * //
 // *********************************************************************************** //

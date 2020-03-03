@@ -43,13 +43,14 @@ const mapLayers = {
   },
 };
 
+// https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/13/2978/2371
 // *********************************************************************************** //
 // * Set initial map view                                                            * //
 // *********************************************************************************** //
 const fdny = [44.066126862405575, -75.76463699340822];
 const defaultView = [45.12689618126071, -70.62732696533205];
 const map = L.map('main-content').setView(defaultView, 6);
-map.addLayer(mapLayers.natGeo);
+map.addLayer(mapLayers.tonerLite);
 // const map = L.map('main-content', {
 //   center: [45.12689618126071, -70.62732696533205],
 //   zoom: 6,
