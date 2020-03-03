@@ -13,6 +13,11 @@
   - militarySymbols.js (3 errors)
   - mod2.js (1 error)
   - helperFunctions.js (4 errors)
+- Gave up on eslint errors. I need to finish this project and I would be here for another month trying to resolve them.
+- Added MGRS coordinates search bar
+- Added Address search bar and integrated it with Google Geocoder API
+- Added more base maps to the config.
+- Began implementing the base maps into the menu surface for quick switching
 
 ---
 
