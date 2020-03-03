@@ -36,6 +36,10 @@ const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-b
 const searchMGRS = new MDCTextField(document.querySelector('.mdc-text-field.searchMGRS'));
 const searchMGRSIcon = new MDCRipple(document.querySelector('.mdc-button.searchMGRSDeleteIcon'));
 const deleteSearchMGRSButton = new MDCTextFieldIcon(searchMGRSIcon.root_);
+// MDC - Text Field component - Zoom to Address
+const searchAddress = new MDCTextField(document.querySelector('.mdc-text-field.searchAddress'));
+const searchAddressIcon = new MDCRipple(document.querySelector('.mdc-button.searchAddressDeleteIcon'));
+const deleteSearchAddressButton = new MDCTextFieldIcon(searchAddressIcon.root_);
 // MDC - Text Field component - Search for various symbols by name
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -78,6 +82,10 @@ const grids100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1
 const labels1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels1000MSwitch'));
 const grids1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1000MSwitch'));
 
+// Initial military symbol on page load
+// eslint-disable-next-line import/no-mutable-exports
+let MainMS = new MilSym('.newSVG', 'Default Land Unit', 'friendly');
+
 
 // *********************************************************************************** //
 // * Top App Bar                                                                     * //
@@ -98,9 +106,6 @@ toggleSidebarButton.listen('click', () => {
     pushbar.open('rightPushbar');
   }
 });
-
-// Initial military symbol on page load
-let MainMS = new MilSym('.newSVG', 'Default Land Unit', 'friendly');
 
 
 // *********************************************************************************** //
@@ -419,6 +424,11 @@ const clearDesignationFields = (event) => {
       searchMGRS.value = '';
       deleteSearchMGRSButton.root_.style.display = 'none';
       break;
+    case 'searchAddressField':
+      searchAddress.value = '';
+      deleteSearchAddressButton.root_.style.display = 'none';
+      document.querySelector('.addressResults').style.display = 'none';
+      break;
     default:
       break;
   }
@@ -467,10 +477,14 @@ const inputDesignationFields = debounce(() => {
 });
 
 
-[deleteHigherFormationButton, deleteUniqueDesignationButton, deleteSearchMGRSButton].forEach((key) => {
+[deleteHigherFormationButton, deleteUniqueDesignationButton, deleteSearchMGRSButton, deleteSearchAddressButton].forEach((key) => {
   key.root_.addEventListener('click', clearDesignationFields);
 });
 
+
+// *********************************************************************************** //
+// * MGRS Coordinates Search Field and Address Search Field                          * //
+// *********************************************************************************** //
 // Pan and zoom the map into a valid MGRS coordinate
 searchMGRS.listen('input', () => {
   // Get the length of the string inside the input box
@@ -491,7 +505,6 @@ searchMGRS.listen('input', () => {
         helpInfo.toggleAttribute('error');
         helpInfo.textContent = 'Must be 10 digits! (Example: 18T UN 37780 47969)';
       }
-      // Set the map view to the MGRS coords inputted
       map.setView(llCoords, 14);
     }
   }
@@ -510,6 +523,50 @@ searchMGRS.listen('input', () => {
     deleteSearchMGRSButton.root_.style.zIndex = '10';
   }
 });
+
+// Pan and zoom the map into a valid address
+const searchAddressResult = document.querySelector('.addressResults');
+searchAddress.listen('input', () => {
+  if (searchAddress.value.length >= 2) {
+    //! THIS API KEY IS PUBLICLY AVAILABLE
+    const apiKey = '&key=AIzaSyBApNoKPUg8e15B_ML72tOjn3HiKg-j6NU';
+    const searchQuery = searchAddress.value.toString().split(' ').join('+');
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchQuery}${apiKey}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const formattedAddress = data.results[0].formatted_address;
+        const searchResultLatLng = data.results[0].geometry.location;
+        searchAddressResult.style.display = 'block';
+        document.querySelector('.addressResults > span').textContent = formattedAddress;
+        searchAddressResult.setAttribute('latlng', JSON.stringify(searchResultLatLng));
+      });
+  }
+
+  if (searchAddress.value.length === 0) {
+    deleteSearchAddressButton.root_.style.display = 'none';
+    searchAddressResult.style.display = 'none';
+  } else {
+    // Show the trash icon when there is any text in the search field
+    deleteSearchAddressButton.root_.style.display = 'initial';
+    deleteSearchAddressButton.root_.style.right = '0';
+    deleteSearchAddressButton.root_.style.position = 'fixed';
+    deleteSearchAddressButton.root_.style.top = '10px';
+    // Setting z-index on trash icon makes it clickable
+    deleteSearchAddressButton.root_.style.zIndex = '10';
+  }
+});
+
+searchAddressResult.addEventListener('click', () => {
+  map.flyTo(JSON.parse(searchAddressResult.getAttribute('latlng')), 14, {
+    duration: 0.3,
+    easeLinearity: 1,
+    animate: true,
+  });
+  setTimeout(() => {
+    menuSurface.close();
+  }, 300);
+});
+
 
 // *********************************************************************************** //
 // * Reinforced and Reduced Switches                                                 * //
@@ -796,6 +853,7 @@ deleteTextFieldButton.root_.style.display = 'none';
 deleteUniqueDesignationButton.root_.style.display = 'none';
 deleteHigherFormationButton.root_.style.display = 'none';
 deleteSearchMGRSButton.root_.style.display = 'none';
+deleteSearchAddressButton.root_.style.display = 'none';
 
 // This will automatically center the tooltip on the Most Popular Symbols section
 document.querySelectorAll('.tooltip').forEach((key) => {

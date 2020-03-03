@@ -616,9 +616,9 @@
               <button class="mdc-button menu-surface-button">Open menu</button>
               <div class="mdc-menu mdc-menu-surface ms2" tabindex="-1">
                 <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-                  <!-- Zoom to MGRS Coordinates -->
                   <div class="mdc-layout-grid ">
                     <div class="mdc-layout-grid__inner switches">
+                      <!-- Zoom to MGRS Coordinates -->
                       <div class="mdc-layout-grid__cell--span-12">
                         <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchMGRS">
                           <i class="material-icons mdc-text-field__icon">my_location</i>
@@ -636,6 +636,31 @@
                         </div>
                         <div class="mdc-text-field-helper-line">
                           <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-searchMGRS-helper-text">Must be 10 digits! (Example: 18T UN 37780 47969)</p>
+                        </div>
+                      </div>
+                      <!-- Zoom to Address  -->
+                      <div class="mdc-layout-grid__cell--span-12">
+                        <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchAddress">
+                          <i class="material-icons mdc-text-field__icon">place</i>
+                          <button class="mdc-button searchAddressDeleteIcon" data-value="searchAddressField">
+                            <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                          </button>
+                          <input type="text" id="text-field-outlined-searchAddress" class="mdc-text-field__input" aria-describedby="text-field-outlined-searchAddress-helper-text" />
+                          <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                              <label class="mdc-floating-label" for="text-field-outlined-searchAddress">Find an address</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                          </div>
+                        </div>
+                        <div class="mdc-layout-grid__cell--span-12">
+                          <div class="mdc-elevation--z10 addressResults">
+                            <span></span>
+                          </div>
+                        </div>
+                        <div class="mdc-text-field-helper-line">
+                          <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-searchAddress-helper-text">Search for an address (Example: Fort Drum, NY)</p>
                         </div>
                       </div>
                     </div>
