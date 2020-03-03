@@ -3,9 +3,10 @@ import {
   L, map, generateGZDGrids, generate100kGrids, generate1000meterGrids, LLtoUTM, UTMtoMGRS,
 } from './Leaflet.DumbMGRS';
 
+//* * Initial map view is set in Leaflet.DumbMGRS.js */
 
 // *********************************************************************************** //
-// * Add cursor coordinates to the bottom app bar                                    * //
+// * Update cursor coordinates to the bottom app bar                                 * //
 // *********************************************************************************** //
 const cursorCoordinates = document.querySelector('.cursorCoordinates');
 // Set the user coordinates on page load
@@ -50,7 +51,7 @@ generate100kGrids.addTo(map);
 generate1000meterGrids.addTo(map);
 
 //! Putting leaflet in the global scope
-window.L = L;
+// window.L = L;
 
 export {
   map, LLtoUTM, UTMtoMGRS, generateGZDGrids, generate100kGrids, generate1000meterGrids, markerGroup,

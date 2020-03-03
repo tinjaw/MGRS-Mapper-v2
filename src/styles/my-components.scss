@@ -71,6 +71,14 @@ body {
   font-size: inherit;
 }
 
+.mdc-text-field.searchMGRS {
+  width: 100%;
+}
+
+p#text-field-outlined-searchMGRS-helper-text[error] {
+  color: red;
+}
+
 // .mdc-button:not(:disabled) {
 //   color: midnightblue;
 //   color: var(--mdc-theme-primary, midnightblue);

@@ -18,6 +18,7 @@ import {
 import {
   map, generateGZDGrids, generate100kGrids, generate1000meterGrids,
 } from './map/map';
+import { latLngFromMGRS } from './map/Leaflet.DumbMGRS';
 
 
 // *********************************************************************************** //
@@ -31,6 +32,10 @@ const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface
 const menuSurfaceButton = new MDCRipple(document.querySelector('.menu-surface-button'));
 // MDC - Button component - Toggles the Pushbar opened or closed
 const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
+// MDC - Text Field component - Zoom to MGRS Coordinates
+const searchMGRS = new MDCTextField(document.querySelector('.mdc-text-field.searchMGRS'));
+const searchMGRSIcon = new MDCRipple(document.querySelector('.mdc-button.searchMGRSDeleteIcon'));
+const deleteSearchMGRSButton = new MDCTextFieldIcon(searchMGRSIcon.root_);
 // MDC - Text Field component - Search for various symbols by name
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -393,7 +398,7 @@ searchField.input_.addEventListener('input', searchResults);
 
 
 // *********************************************************************************** //
-// * Unique Unit Designation Field and Higher Unit Formation Field                   * //
+// * Unique Unit Designation Field, Higher Unit Formation Field, MGRS Coords Field   * //
 // *********************************************************************************** //
 // This removes the unique/higher formation text from the symbol and text field
 const clearDesignationFields = (event) => {
@@ -409,6 +414,10 @@ const clearDesignationFields = (event) => {
       deleteHigherFormationButton.root_.style.display = 'none';
       document.querySelector('g.higherUnitFormation').textContent = '';
       MainMS.higherFormation = '';
+      break;
+    case 'searchMGRSField':
+      searchMGRS.value = '';
+      deleteSearchMGRSButton.root_.style.display = 'none';
       break;
     default:
       break;
@@ -458,10 +467,49 @@ const inputDesignationFields = debounce(() => {
 });
 
 
-[deleteHigherFormationButton, deleteUniqueDesignationButton].forEach((key) => {
+[deleteHigherFormationButton, deleteUniqueDesignationButton, deleteSearchMGRSButton].forEach((key) => {
   key.root_.addEventListener('click', clearDesignationFields);
 });
 
+// Pan and zoom the map into a valid MGRS coordinate
+searchMGRS.listen('input', () => {
+  // Get the length of the string inside the input box
+  const mgrsCoords = searchMGRS.value.toString().split(' ').join('');
+  const helpInfo = document.querySelector('#text-field-outlined-searchMGRS-helper-text');
+  if (mgrsCoords.length >= 15) {
+    const llCoords = latLngFromMGRS(searchMGRS.value);
+    // if latLngFromMGRS is false it will output false as first item in array
+    if (llCoords[0] === false) {
+      // If there is no error message, then toggle it
+      if (!helpInfo.hasAttribute('error')) {
+        helpInfo.toggleAttribute('error');
+      }
+      helpInfo.textContent = 'Error: Please input valid MGRS coordinates';
+    } else {
+      // Turn off the error message
+      if (helpInfo.hasAttribute('error')) {
+        helpInfo.toggleAttribute('error');
+        helpInfo.textContent = 'Must be 10 digits! (Example: 18T UN 37780 47969)';
+      }
+      // Set the map view to the MGRS coords inputted
+      map.setView(llCoords, 14);
+    }
+  }
+  // When the field is blank, remove error message and reset text content
+  if (mgrsCoords.length === 0) {
+    helpInfo.removeAttribute('error');
+    helpInfo.textContent = 'Must be 10 digits! (Example: 18T UN 37780 47969)';
+    deleteSearchMGRSButton.root_.style.display = 'none';
+  } else {
+    // Show the trash icon when there is any text in the search field
+    deleteSearchMGRSButton.root_.style.display = 'initial';
+    deleteSearchMGRSButton.root_.style.right = '0';
+    deleteSearchMGRSButton.root_.style.position = 'fixed';
+    deleteSearchMGRSButton.root_.style.top = '10px';
+    // Setting z-index on trash icon makes it clickable
+    deleteSearchMGRSButton.root_.style.zIndex = '10';
+  }
+});
 
 // *********************************************************************************** //
 // * Reinforced and Reduced Switches                                                 * //
@@ -747,6 +795,7 @@ window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference
 deleteTextFieldButton.root_.style.display = 'none';
 deleteUniqueDesignationButton.root_.style.display = 'none';
 deleteHigherFormationButton.root_.style.display = 'none';
+deleteSearchMGRSButton.root_.style.display = 'none';
 
 // This will automatically center the tooltip on the Most Popular Symbols section
 document.querySelectorAll('.tooltip').forEach((key) => {

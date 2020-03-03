@@ -51,7 +51,7 @@ class MilSym {
   }
 
   // *********************************************************************************** //
-  // * SVG Location (which DOM element to stick the symbol in)                         * //
+  // * SVG Location (which DOM element to put symbol in)                               * //
   // *********************************************************************************** //
   get location() {
     if (this._location) {
