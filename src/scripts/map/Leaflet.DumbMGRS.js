@@ -46,7 +46,9 @@ const mapLayers = {
 // *********************************************************************************** //
 // * Set initial map view                                                            * //
 // *********************************************************************************** //
-const map = L.map('main-content').setView([45.12689618126071, -70.62732696533205], 6);
+const fdny = [44.066126862405575, -75.76463699340822];
+const defaultView = [45.12689618126071, -70.62732696533205];
+const map = L.map('main-content').setView(defaultView, 6);
 map.addLayer(mapLayers.natGeo);
 // const map = L.map('main-content', {
 //   center: [45.12689618126071, -70.62732696533205],
