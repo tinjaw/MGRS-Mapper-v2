@@ -424,6 +424,14 @@ function latLngFromMGRS(a) {
   let lng = e + x * m + z * ag * Math.pow(m, 3) + ab * ai * Math.pow(m, 5) + ad * ak * Math.pow(m, 7);
   lat = lat * 180 / Math.PI;
   lng = lng * 180 / Math.PI;
+
+
+  try {
+    (() => new L.latLng(lat, lng))();
+  } catch (error) {
+    return [false, null, null];
+  }
+
   const newLatLngFromMGRS = new L.latLng(lat, lng);
   return newLatLngFromMGRS;
   // return [true, lat, lng];

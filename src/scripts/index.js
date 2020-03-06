@@ -481,6 +481,8 @@ const clearDesignationFields = (event) => {
     case 'searchMGRSField':
       searchMGRS.value = '';
       deleteSearchMGRSButton.root_.style.display = 'none';
+      document.querySelector('#text-field-outlined-searchMGRS-helper-text').removeAttribute('error');
+      document.querySelector('#text-field-outlined-searchMGRS-helper-text').textContent = 'Must be 10 digits! (Example: 18T UN 37780 47969)';
       break;
     case 'searchAddressField':
       searchAddress.value = '';
@@ -550,7 +552,7 @@ searchMGRS.listen('input', () => {
   const helpInfo = document.querySelector('#text-field-outlined-searchMGRS-helper-text');
   if (mgrsCoords.length >= 15) {
     const llCoords = latLngFromMGRS(searchMGRS.value);
-    // if latLngFromMGRS is false it will output false as first item in array
+    // if latLngFromMGRS is false or invalid it will output false as first item in array
     if (llCoords[0] === false) {
       // If there is no error message, then toggle it
       if (!helpInfo.hasAttribute('error')) {

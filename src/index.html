@@ -613,66 +613,64 @@
             <div class="menu-button-container" style="position: relative;">
               <button class="mdc-button menu-surface-button">Open menu</button>
               <div class="mdc-menu mdc-menu-surface ms2" tabindex="-1">
-                <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">
-                  <div class="mdc-layout-grid ">
-                    <div class="mdc-layout-grid__inner switches">
-                      <!-- Zoom to MGRS Coordinates -->
-                      <div class="mdc-layout-grid__cell--span-12">
-                        <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchMGRS">
-                          <i class="material-icons mdc-text-field__icon">my_location</i>
-                          <button class="mdc-button searchMGRSDeleteIcon" data-value="searchMGRSField">
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
-                          </button>
-                          <input type="text" id="text-field-outlined-searchMGRS" class="mdc-text-field__input" aria-describedby="text-field-outlined-searchMGRS-helper-text" />
-                          <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                              <label class="mdc-floating-label" for="text-field-outlined-searchMGRS">Zoom to MGRS Coordinates</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
+                <div class="menuSurfaceHeadline">
+                  <p class="mdc-typography--headline6">Search Address or MGRS Coordinates</p>
+                </div>
+                <div class="mdc-layout-grid ">
+                  <div class="mdc-layout-grid__inner switches">
+                    <!-- Zoom to MGRS Coordinates -->
+                    <div class="mdc-layout-grid__cell--span-12">
+                      <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchMGRS">
+                        <i class="material-icons mdc-text-field__icon">my_location</i>
+                        <button class="mdc-button searchMGRSDeleteIcon" data-value="searchMGRSField">
+                          <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                        </button>
+                        <input type="text" id="text-field-outlined-searchMGRS" class="mdc-text-field__input" aria-describedby="text-field-outlined-searchMGRS-helper-text" />
+                        <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                          <div class="mdc-notched-outline__leading"></div>
+                          <div class="mdc-notched-outline__notch">
+                            <label class="mdc-floating-label" for="text-field-outlined-searchMGRS">Zoom to MGRS Coordinates</label>
                           </div>
-                        </div>
-                        <div class="mdc-text-field-helper-line">
-                          <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-searchMGRS-helper-text">Must be 10 digits! (Example: 18T UN 37780 47969)</p>
+                          <div class="mdc-notched-outline__trailing"></div>
                         </div>
                       </div>
-                      <!-- Zoom to Address  -->
+                      <div class="mdc-text-field-helper-line">
+                        <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-searchMGRS-helper-text">Must be 10 digits! (Example: 18T UN 37780 47969)</p>
+                      </div>
+                    </div>
+                    <!-- Zoom to Address  -->
+                    <div class="mdc-layout-grid__cell--span-12">
+                      <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchAddress">
+                        <i class="material-icons mdc-text-field__icon">place</i>
+                        <button class="mdc-button searchAddressDeleteIcon" data-value="searchAddressField">
+                          <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
+                        </button>
+                        <input type="text" id="text-field-outlined-searchAddress" class="mdc-text-field__input" aria-describedby="text-field-outlined-searchAddress-helper-text" />
+                        <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                          <div class="mdc-notched-outline__leading"></div>
+                          <div class="mdc-notched-outline__notch">
+                            <label class="mdc-floating-label" for="text-field-outlined-searchAddress">Find an Address</label>
+                          </div>
+                          <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                      </div>
                       <div class="mdc-layout-grid__cell--span-12">
-                        <div class="mdc-text-field text-field  mdc-text-field--outlined mdc-text-field--with-leading-icon searchAddress">
-                          <i class="material-icons mdc-text-field__icon">place</i>
-                          <button class="mdc-button searchAddressDeleteIcon" data-value="searchAddressField">
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">delete</i>
-                          </button>
-                          <input type="text" id="text-field-outlined-searchAddress" class="mdc-text-field__input" aria-describedby="text-field-outlined-searchAddress-helper-text" />
-                          <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                              <label class="mdc-floating-label" for="text-field-outlined-searchAddress">Find an address</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                          </div>
+                        <div class="mdc-elevation--z10 addressResults">
+                          <span></span>
                         </div>
-                        <div class="mdc-layout-grid__cell--span-12">
-                          <div class="mdc-elevation--z10 addressResults">
-                            <span></span>
-                          </div>
-                        </div>
-                        <div class="mdc-text-field-helper-line">
-                          <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-searchAddress-helper-text">Search for an address (Example: Fort Drum, NY)</p>
-                        </div>
+                      </div>
+                      <div class="mdc-text-field-helper-line">
+                        <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="text-field-outlined-searchAddress-helper-text">Search for an address (Example: Fort Drum, NY)</p>
                       </div>
                     </div>
                   </div>
-                  <li role="separator" class="mdc-list-divider"></li>
+                </div>
 
-                  <li class="mdc-list-divider" role="separator"></li>
-                  <li class="mdc-list-item" role="menuitem">
-                    <span class="mdc-list-item__text">Add space before paragraph</span>
-                  </li>
-                  <li role="separator" class="mdc-list-divider"></li>
-                </ul>
                 <!-- Base map layer select boxes -->
-
+                <hr />
+                <div class="menuSurfaceHeadline">
+                  <p class="mdc-typography--headline6">Select a Map</p>
+                </div>
                 <ul id="map-list" class="mdc-list mdc-list--two-line mdc-list--avatar-list">
                   <li class="mdc-list-item map-item mdc-list-item--selected" tabindex="0" aria-selected="true">
                     <span class="mdc-list-item__graphic mapIcon mapIcon-natGeo" aria-hidden="true"></span>

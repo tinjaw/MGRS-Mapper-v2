@@ -105,6 +105,12 @@ p#text-field-outlined-searchMGRS-helper-text[error] {
   color: red;
 }
 
+p#text-field-outlined-searchAddress-helper-text {
+  color: rgba(0, 0, 0, 0.6);
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
 .baseMapListPadding {
   padding-left: 20px;
 }
@@ -148,6 +154,11 @@ li.mdc-list-item.map-item {
 
 .mdc-list-item__primary-text::before {
   height: 46px;
+}
+
+.menuSurfaceHeadline {
+  text-align: center;
+  margin-bottom: -20px;
 }
 
 // *********************************************************************************** //
