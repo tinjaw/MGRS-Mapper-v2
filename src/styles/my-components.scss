@@ -71,6 +71,10 @@ body {
   font-size: inherit;
 }
 
+// *********************************************************************************** //
+// * Top App Bar - Surface Menu                                                      * //
+// *********************************************************************************** //
+// Search for an address or by MGRS Coords
 .mdc-text-field.searchMGRS {
   width: 100%;
 }
@@ -111,33 +115,7 @@ p#text-field-outlined-searchAddress-helper-text {
   padding-left: 16px;
 }
 
-.baseMapListPadding {
-  padding-left: 20px;
-}
-
-.currentEnabledMapIcon {
-  padding-left: 15px;
-}
-
-.mapList > .mdc-layout-grid__cell--span-3 img {
-  transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 75ms, /* $delay: */ 25ms);
-  transform: scale(1);
-}
-
-.mapList > .mdc-layout-grid__cell--span-3 img:hover {
-  animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
-  transform: scale(1.21);
-  cursor: pointer;
-  filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.65));
-}
-
-// .mdc-button:not(:disabled) {
-//   color: midnightblue;
-//   color: var(--mdc-theme-primary, midnightblue);
-//   background-color: rgb(128, 224, 255);
-//   font-size: inherit;
-// }
-
+// Map selection
 ul.mdc-list--two-line .mdc-list-item {
   height: 100px;
 }

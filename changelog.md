@@ -9,6 +9,8 @@
 - Fixed the map selector list
 - Fixed an error with the latLngFromMGRS() function. Now it will throw an error on an invalid LatLng
 - Added Viewport Biasing on Google Geocoder API to retrieve better results
+- Removed attributionControl from maps as they are distracting
+- Fixed zoom bug in in Leaflet.DumbMGRS. This bug was preventing maps from going beyond their default zoom levels. Some grids are still not drawing but I will worry about that later
 
 ---
 

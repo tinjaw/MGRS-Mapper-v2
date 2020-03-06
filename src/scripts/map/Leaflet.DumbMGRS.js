@@ -4,45 +4,6 @@
 import L from 'leaflet';
 
 
-// const mapLayers = {
-//   // Default map, national geographic
-//   get natGeo() {
-//     return L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
-//       cursor: true,
-//       maxZoom: 16,
-//     });
-//   },
-//   // Another decent default map
-//   get openStreetMap() {
-//     return L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//       maxZoom: 19,
-//       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//     });
-//   },
-//   // Black and white
-//   get tonerLite() {
-//     return L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
-//       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//       subdomains: 'abcd',
-//       minZoom: 0,
-//       maxZoom: 20,
-//       ext: 'png',
-//     });
-//   },
-//   // Topographic
-//   get worldTopo() {
-//     return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-//       attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
-//     });
-//   },
-//   // Satellite
-//   get worldSatellite() {
-//     return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-//       attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-//     });
-//   },
-// };
-
 const natGeoMap = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
   cursor: true,
   maxZoom: 16,
@@ -50,11 +11,11 @@ const natGeoMap = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/ser
 
 const OSMMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors',
 });
 
 const tonerLiteMap = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
-  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  attribution: 'Map tiles by <a href="https://stamen.com" target="_blank">Stamen Design</a>',
   subdomains: 'abcd',
   minZoom: 0,
   maxZoom: 20,
@@ -62,31 +23,27 @@ const tonerLiteMap = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/tone
 });
 
 const worldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community',
+  attribution: 'Map tiles by &copy; Esri and the GIS User Community',
 });
 
 const worldSatelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+  attribution: 'Map tiles by &copy; Esri and the GIS User Community',
 });
 
 
-// https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/13/2978/2371
 // *********************************************************************************** //
 // * Set initial map view                                                            * //
 // *********************************************************************************** //
-const fdny = [44.066126862405575, -75.76463699340822];
 const easternSeaboard = [45.12689618126071, -70.62732696533205];
-const map = L.map('main-content').setView(easternSeaboard, 6);
+const map = L.map('main-content', {
+  center: easternSeaboard,
+  zoom: 6,
+  cursor: true,
+  attributionControl: false,
+});
+
+// Add the first layer to the map on page load
 map.addLayer(natGeoMap);
-// const map = L.map('main-content', {
-//   center: [45.12689618126071, -70.62732696533205],
-//   zoom: 6,
-//   cursor: true,
-//   maxZoom: 16,
-//   layers: [
-//     L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}'),
-//   ],
-// });
 
 window.map = map;
 window.L = L;
@@ -379,7 +336,7 @@ function UTMtoMGRS(utm, accuracy, prettyPrint = false) {
 function latLngFromMGRS(a) {
   let b = a.trim();
   b = b.match(/\S+/g);
-  if (b == null || b.length != 4) return [false, null, null];
+  if (b == null || b.length !== 4) return [false, null, null];
   const c = (b[0].length < 3) ? b[0][0] : b[0].slice(0, 2);
   const d = (b[0].length < 3) ? b[0][1] : b[0][2];
   const e = (c * 6 - 183) * Math.PI / 180;
@@ -424,7 +381,6 @@ function latLngFromMGRS(a) {
   let lng = e + x * m + z * ag * Math.pow(m, 3) + ab * ai * Math.pow(m, 5) + ad * ak * Math.pow(m, 7);
   lat = lat * 180 / Math.PI;
   lng = lng * 180 / Math.PI;
-
 
   try {
     (() => new L.latLng(lat, lng))();
@@ -858,7 +814,7 @@ const GZD = L.LayerGroup.extend({
   options: {
     showLabels: false,
     showGrids: false,
-    maxZoom: 18,
+    maxZoom: 20,
     minZoom: 4,
     redraw: 'moveend',
     // default line style for 100K grids
@@ -1111,7 +1067,7 @@ const MGRS100K = L.LayerGroup.extend({
   options: {
     showLabels: false,
     showGrids: false,
-    maxZoom: 18,
+    maxZoom: 20,
     minZoom: 6,
     redraw: 'moveend',
     gridLetterStyle: 'color: #216fff; font-size:12px;',
@@ -1797,7 +1753,7 @@ const MGRS1000Meters = L.LayerGroup.extend({
     showLabels: false,
     showGrids: false,
     redraw: 'move',
-    maxZoom: 18,
+    maxZoom: 20,
     minZoom: 12,
     gridLetterStyle: 'color: black; font-size:12px;',
     lineStyle: {
@@ -2169,7 +2125,7 @@ const MGRS1000Meters = L.LayerGroup.extend({
   getPaddingOnZoomLevel1000Meters() {
     const zoom = this._map.getZoom();
     if (zoom >= this.options.maxZoom) {
-      return 4;
+      return 14;
     }
     switch (zoom) {
       case 17:
@@ -2201,7 +2157,7 @@ const generateGZDGrids = new GZD({
   // Example of initial options for GZD grids
   showLabels: true,
   showGrids: true,
-  maxZoom: 18,
+  maxZoom: 20,
   minZoom: 4,
   redraw: 'moveend',
   lineStyle: {
@@ -2221,7 +2177,7 @@ const generate100kGrids = new MGRS100K({
   // Example of initial options for 100K grids
   showLabels: true,
   showGrids: true,
-  maxZoom: 18,
+  maxZoom: 20,
   minZoom: 6,
   redraw: 'moveend',
   gridLetterStyle: 'color: #216fff; font-size:12px;',
@@ -2244,7 +2200,7 @@ const generate1000meterGrids = new MGRS1000Meters({
   showLabels: true,
   showGrids: true,
   redraw: 'move',
-  maxZoom: 18,
+  maxZoom: 20,
   minZoom: 12,
   gridLetterStyle: 'color: black; font-size:12px;',
   lineStyle: {

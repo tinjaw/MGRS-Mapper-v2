@@ -591,6 +591,7 @@ searchAddress.listen('input', () => {
     //! THIS API KEY IS PUBLICLY AVAILABLE
     const apiKey = '&key=AIzaSyBApNoKPUg8e15B_ML72tOjn3HiKg-j6NU';
     const searchQuery = searchAddress.value.toString().split(' ').join('+');
+    // These bounds are for Viewport Biasing. This will help retrieve more accurate results
     const swLat = map.getBounds().getSouthWest().lat;
     const swLng = map.getBounds().getSouthWest().lng;
     const neLat = map.getBounds().getNorthEast().lat;
