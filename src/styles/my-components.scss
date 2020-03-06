@@ -132,6 +132,24 @@ p#text-field-outlined-searchMGRS-helper-text[error] {
 //   font-size: inherit;
 // }
 
+ul.mdc-list--two-line .mdc-list-item {
+  height: 100px;
+}
+
+li.mdc-list-item.map-item {
+  padding: 0.2rem 3.1rem 0.2rem 0.2rem;
+  margin-bottom: 6px;
+}
+
+.mdc-list--avatar-list .mdc-list-item__graphic.mapIcon {
+  margin-right: 0px;
+  width: 136px;
+}
+
+.mdc-list-item__primary-text::before {
+  height: 46px;
+}
+
 // *********************************************************************************** //
 // * Dismissible Drawer Icon                                                         * //
 // *********************************************************************************** //

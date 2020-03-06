@@ -673,41 +673,54 @@
                 </ul>
                 <!-- Base map layer select boxes -->
 
-                <ul id="my-list" class="mdc-list demo-list mdc-list--two-line mdc-list--avatar-list">
-                  <li class="mdc-list-item mdc-list-item--selected" tabindex="0" aria-selected="true">
-                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+                <ul id="map-list" class="mdc-list mdc-list--two-line mdc-list--avatar-list">
+                  <li class="mdc-list-item map-item mdc-list-item--selected" tabindex="0" aria-selected="true">
+                    <span class="mdc-list-item__graphic mapIcon mapIcon-natGeo" aria-hidden="true"></span>
                     <span class="mdc-list-item__text">
-                      <span class="mdc-list-item__primary-text">Dog Photos</span>
-                      <span class="mdc-list-item__secondary-text">9 Jan 2018</span>
+                      <span class="mdc-list-item__primary-text">Default Base Map</span>
+                      <span class="mdc-list-item__secondary-text">Standard map, data provided by National Geographic</span>
                     </span>
-                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                    <span class="mdc-list-item__meta" aria-hidden="true">
+                      <svg class="mdc-list-item__meta" style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+                      </svg>
+                    </span>
                   </li>
-                  <li class="mdc-list-item" tabindex="-1">
-                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+                  <li class="mdc-list-item map-item" tabindex="-1">
+                    <span class="mdc-list-item__graphic mapIcon mapIcon-OSM" aria-hidden="true">folder</span>
                     <span class="mdc-list-item__text">
-                      <span class="mdc-list-item__primary-text">Cat Photos</span>
-                      <span class="mdc-list-item__secondary-text">22 Dec 2017</span>
+                      <span class="mdc-list-item__primary-text">Secondary Base Map</span>
+                      <span class="mdc-list-item__secondary-text">Standard map, data provided by Open Street Maps</span>
                     </span>
-                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                    <span class="mdc-list-item__meta" aria-hidden="true"></span>
                   </li>
-                  <li class="mdc-list-divider" role="separator"></li>
-                  <li class="mdc-list-item" tabindex="-1">
-                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+
+                  <li class="mdc-list-item map-item" tabindex="-1">
+                    <span class="mdc-list-item__graphic mapIcon mapIcon-tonerLite" aria-hidden="true">folder</span>
                     <span class="mdc-list-item__text">
-                      <span class="mdc-list-item__primary-text">Potatoes</span>
-                      <span class="mdc-list-item__secondary-text">30 Noc 2017</span>
+                      <span class="mdc-list-item__primary-text">Ink Toner Map</span>
+                      <span class="mdc-list-item__secondary-text">Black and white map, data provided by Stamen</span>
                     </span>
-                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                    <span class="mdc-list-item__meta" aria-hidden="true"></span>
                   </li>
-                  <li class="mdc-list-item" tabindex="-1">
-                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+                  <li class="mdc-list-item map-item" tabindex="-1">
+                    <span class="mdc-list-item__graphic mapIcon mapIcon-worldTopo" aria-hidden="true">folder</span>
                     <span class="mdc-list-item__text">
-                      <span class="mdc-list-item__primary-text">Carrots</span>
-                      <span class="mdc-list-item__secondary-text">17 Oct 2017</span>
+                      <span class="mdc-list-item__primary-text">Topographic Map</span>
+                      <span class="mdc-list-item__secondary-text">Enhanced topographic map, data provided by ArcGIS</span>
                     </span>
-                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                    <span class="mdc-list-item__meta" aria-hidden="true"></span>
+                  </li>
+                  <li class="mdc-list-item map-item" tabindex="-1">
+                    <span class="mdc-list-item__graphic mapIcon mapIcon-satellite" aria-hidden="true">folder</span>
+                    <span class="mdc-list-item__text">
+                      <span class="mdc-list-item__primary-text">Satellite Map</span>
+                      <span class="mdc-list-item__secondary-text">World satellite map, data provided by ArcGIS</span>
+                    </span>
+                    <span class="mdc-list-item__meta" aria-hidden="true"></span>
                   </li>
                 </ul>
+
                 <div class="pre-container">
                   <h3 class="mdc-typography--headline6">Unformatted JSON</h3>
                   <div id="pre-myJSONString"></div>
