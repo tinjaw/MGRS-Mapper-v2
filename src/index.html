@@ -10,7 +10,7 @@
     <meta name="author" content="James Pistell" />
     <meta name="robots" content="index,follow" />
     <meta name="rating" content="General" />
-    <title>MGRS Mapper</title>
+    <title>MGRS Mapper | MGRS Grid Overlays with Google Maps and Military Symbols</title>
     <!-- Add more meta tags here https://htmlhead.dev/ -->
     <link rel="author" href="humans.txt" />
     <link rel="license" href="LICENSE" />
@@ -592,15 +592,51 @@
       <!-- Bottom Pushbar About Data -->
       <footer class="app-bar-bottom bottom-about">
         <div class="app-bar-bottom__row">
-          <section class="app-bar-bottom__section">
-            <h3 class="mdc-typography--headline6">Section 1</h3>
-          </section>
-          <section class="app-bar-bottom__section">
-            <h3 class="mdc-typography--headline6">Section 2</h3>
-          </section>
-          <section class="app-bar-bottom__section">
-            <h3 class="mdc-typography--headline6">Section 3</h3>
-          </section>
+          <div class="bottomContainer">
+            <div class="item">
+              <span class="mdc-typography--headline6">
+                <a href="http://jamespistell.com" target="_blank">Application by CPT James Pistell</a>
+              </span>
+            </div>
+            <div class="socialIcons">
+              <a href="https://www.facebook.com/mgrsmapper/" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 510 510">
+                  <title>Follow MGRS Mapper on Facebook for updates</title>
+                  <path d="M459 0H51C23 0 0 23 0 51v408c0 28 23 51 51 51h408c28 0 51-23 51-51V51c0-28-23-51-51-51zm-25.5 51v76.5h-51c-15.3 0-25.5 10.2-25.5 25.5v51h76.5v76.5H357V459h-76.5V280.5h-51V204h51v-63.8A90.3 90.3 0 01369.8 51h63.7z"></path>
+                </svg>
+              </a>
+              <a href="mailto:jamespistell@gmail.com">
+                <svg viewBox="0 0 40 32" aria-labelledby="akfsi-material-email-title" id="si-material-email" width="40px" height="40px">
+                  <title id="akfsi-material-email-title">Email Me</title>
+                  <path d="M36 0H4C1.79 0 .02 1.79.02 4L0 28c0 2.21 1.79 4 4 4h32c2.21 0 4-1.79 4-4V4c0-2.21-1.79-4-4-4zm0 8L20 18 4 8V4l16 10L36 4v4z"></path>
+                </svg>
+              </a>
+              <a href="https://github.com/pistell/MGRS-Mapper" target="_blank">
+                <svg viewBox="0 0 22.436996459960938 21.97500228881836" aria-labelledby="ctsi-dev-github_badge-title" id="si-dev-github_badge" width="40px" height="40px">
+                  <title id="ctsi-dev-github_badge-title">Fork me on GitHub</title>
+                  <path
+                    d="M11.219 0C5.023 0 0 5.023 0 11.219c0 4.957 3.214 9.162 7.673 10.645.561.103.766-.244.766-.54 0-.267-.01-1.152-.016-2.088-3.12.678-3.779-1.323-3.779-1.323-.511-1.296-1.246-1.641-1.246-1.641-1.02-.696.077-.682.077-.682 1.126.078 1.72 1.156 1.72 1.156 1.001 1.715 2.627 1.219 3.265.931.102-.723.392-1.219.712-1.498-2.49-.283-5.11-1.246-5.11-5.545 0-1.226.438-2.225 1.154-3.011-.114-.285-.501-1.426.111-2.97 0 0 .941-.301 3.085 1.15.894-.25 1.854-.373 2.807-.377.953.004 1.913.129 2.809.379 2.14-1.453 3.083-1.15 3.083-1.15.613 1.545.227 2.685.112 2.969.719.785 1.153 1.785 1.153 3.011 0 4.31-2.624 5.259-5.123 5.537.404.348.761 1.03.761 2.076 0 1.5-.015 2.709-.015 3.079 0 .299.204.648.772.538 4.455-1.486 7.666-5.69 7.666-10.645 0-6.195-5.023-11.219-11.219-11.219z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/jamespistell/" target="_blank">
+                <svg viewBox="0 0 514.3589477539062 491.5210266113281" aria-labelledby="cdsi-zocial-linkedin-title" id="si-zocial-linkedin" width="40px" height="40px">
+                  <title id="cdsi-zocial-linkedin-title">Follow me on LinkedIn</title>
+                  <path
+                    d="M0 57.096c0-16.55 5.793-30.203 17.377-40.96C28.962 5.379 44.022 0 62.557 0c18.204 0 32.934 5.296 44.187 15.888 11.585 10.922 17.377 25.155 17.377 42.698 0 15.888-5.626 29.127-16.88 39.719-11.585 10.922-26.81 16.384-45.676 16.384h-.497c-18.205 0-32.934-5.461-44.187-16.384C5.627 87.382.001 73.645.001 57.096zm6.454 434.425V159.869h110.22v331.652H6.454zm171.288 0c.662-99.959.993-177.576.993-232.852s-.331-88.209-.993-98.8h110.22v47.165l-.496.993h.496v-.993c23.831-36.74 57.096-55.11 99.794-55.11 38.063 0 68.68 12.661 91.85 37.982 23.168 25.32 34.753 62.474 34.753 111.46V491.52h-110.22V314.275c0-49.98-18.535-74.97-55.606-74.97-14.233 0-26.065 3.89-35.498 11.668-9.434 7.778-16.468 17.294-21.102 28.548-2.648 6.289-3.972 15.226-3.972 26.81V491.52h-110.22z"
+                  ></path>
+                </svg>
+              </a>
+              <a href="http://jamespistell.com" target="_blank">
+                <svg viewBox="0 0 75 75" aria-labelledby="kosi-foundation-web-title" id="si-foundation-web" width="40px" height="40px">
+                  <title id="kosi-foundation-web-title">My Portfolio</title>
+                  <path
+                    d="M37.5 0C16.788 0 0 16.793 0 37.502 0 58.212 16.788 75 37.5 75S75 58.212 75 37.502C75 16.793 58.212 0 37.5 0zM10.397 42.469h5.752a37.328 37.328 0 0 0 8.826 19.569c-7.501-3.844-13.015-11.022-14.578-19.569zm5.752-9.939h-5.752c1.564-8.546 7.078-15.724 14.579-19.568a37.33 37.33 0 0 0-8.827 19.568zM32.53 55.559a27.468 27.468 0 0 1-6.313-13.089h6.313v13.089zm0-23.029h-6.313a27.474 27.474 0 0 1 6.313-13.088V32.53zm32.072 0h-5.751a37.328 37.328 0 0 0-8.825-19.567c7.499 3.845 13.013 11.023 14.576 19.567zM42.47 55.557V42.469h6.313a27.487 27.487 0 0 1-6.313 13.088zm0-23.027V19.441a27.468 27.468 0 0 1 6.313 13.089H42.47zm7.553 29.509a37.33 37.33 0 0 0 8.828-19.57h5.752c-1.563 8.548-7.078 15.726-14.58 19.57z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
@@ -691,7 +727,6 @@
                     </span>
                     <span class="mdc-list-item__meta" aria-hidden="true"></span>
                   </li>
-
                   <li class="mdc-list-item map-item" tabindex="-1">
                     <span class="mdc-list-item__graphic mapIcon mapIcon-tonerLite" aria-hidden="true">folder</span>
                     <span class="mdc-list-item__text">
@@ -717,7 +752,15 @@
                     <span class="mdc-list-item__meta" aria-hidden="true"></span>
                   </li>
                 </ul>
-
+                <hr />
+                <!-- About -->
+                <div class="menuSurfaceHeadline">
+                  <p class="mdc-typography--headline6">About</p>
+                </div>
+                <div class="bottomSurfaceMenuMessage">
+                  <p class="mdc-typography--body1">I'm a Cav Scout, and an amateur programmer. This app is under continual development. If you experience any errors, would like a feature added, or just want to say hello please email me at JamesPistell@gmail.com 👍</p>
+                </div>
+                <hr />
                 <div class="pre-container">
                   <h3 class="mdc-typography--headline6">Unformatted JSON</h3>
                   <div id="pre-myJSONString"></div>
@@ -755,7 +798,7 @@
     <!-- Bottom App Bar -->
     <footer class="app-bar-bottom">
       <div class="app-bar-bottom__row">
-        <section class="app-bar-bottom__section">
+        <section class="app-bar-bottom__section app-bar-bottom__section--align-start">
           <div class="menu-button-container" style="position: relative;">
             <button class="mdc-button ms1 menu-surface-button">Toggle Grid Overlays</button>
             <div class="mdc-menu-surface--anchor">
@@ -764,7 +807,7 @@
                   <div class="mdc-layout-grid toggleLabel">
                     <div class="mdc-layout-grid__inner">
                       <div class="mdc-layout-grid__cell--span-12">
-                        <span class="mdc-typography--headline6">Toggle Grid Zone Designators</span>
+                        <span class="mdc-typography--headline6">Grid Zone Designators</span>
                       </div>
                     </div>
                   </div>
@@ -800,7 +843,7 @@
                   <div class="mdc-layout-grid toggleLabel">
                     <div class="mdc-layout-grid__inner">
                       <div class="mdc-layout-grid__cell--span-12">
-                        <span class="mdc-typography--headline6">Toggle 100,000 Meters</span>
+                        <span class="mdc-typography--headline6">100,000 Meter Grids</span>
                       </div>
                     </div>
                   </div>
@@ -835,7 +878,7 @@
                   <div class="mdc-layout-grid toggleLabel">
                     <div class="mdc-layout-grid__inner">
                       <div class="mdc-layout-grid__cell--span-12">
-                        <span class="mdc-typography--headline6">Toggle 1,000 Meters</span>
+                        <span class="mdc-typography--headline6">1,000 Meter Grids</span>
                       </div>
                     </div>
                   </div>
@@ -873,8 +916,8 @@
         <section class="app-bar-bottom__section">
           <p class="mdc-typography--headline6 cursorCoordinates"></p>
         </section>
-        <section class="app-bar-bottom__section">
-          <h3 class="mdc-typography--headline6">Bottom App Bar Section 3 (hidden)</h3>
+        <section class="app-bar-bottom__section app-bar-bottom__section--align-end">
+          <p class="mdc-typography--body1">Create any military map symbol (ADRP 1-02) and add custom presets if you choose. Drag the symbol onto Google/Leaflet Maps and enable the MGRS overlay for operations planning. Furthermore, you can download the symbols individually for use in other applications.</p>
         </section>
       </div>
     </footer>

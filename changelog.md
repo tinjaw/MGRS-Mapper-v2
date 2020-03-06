@@ -11,6 +11,9 @@
 - Added Viewport Biasing on Google Geocoder API to retrieve better results
 - Removed attributionControl from maps as they are distracting
 - Fixed zoom bug in in Leaflet.DumbMGRS. This bug was preventing maps from going beyond their default zoom levels. Some grids are still not drawing but I will worry about that later
+- Added content and styles to the bottom app bar (section 3)
+- Added content and styles to the bottom pushbar
+- Added About section on surface menu
 
 ---
 

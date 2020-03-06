@@ -634,10 +634,6 @@ searchAddressResult.addEventListener('click', () => {
 });
 
 
-// selectBaseMap.listen('MDCSelect:change', () => {
-//   console.log(`Selected option at index ${selectBaseMap.selectedIndex} with value "${selectBaseMap.value}"`);
-// });
-
 // *********************************************************************************** //
 // * Reinforced and Reduced Switches                                                 * //
 // *********************************************************************************** //
@@ -924,6 +920,8 @@ deleteUniqueDesignationButton.root_.style.display = 'none';
 deleteHigherFormationButton.root_.style.display = 'none';
 deleteSearchMGRSButton.root_.style.display = 'none';
 deleteSearchAddressButton.root_.style.display = 'none';
+
+console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 
 // This will automatically center the tooltip on the Most Popular Symbols section
 document.querySelectorAll('.tooltip').forEach((key) => {
