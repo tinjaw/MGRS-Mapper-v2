@@ -17,8 +17,11 @@
 - Fixed a webpack error where images cannot be loaded (https://github.com/webpack/webpack/issues/1336)
 - Added a favicon
 - Began adding symbols to list (BIG MOMENT HERE)
-- Starting number of symbols: 18
+- fixed Fuse.js search threshold from 0.6 to 0.2
 - Added logic to modify decorators on flying symbols
+- You should add a hover effect on the social media icons
+- Starting number of symbols: 18
+- Ending number of symbols: 154
 
 ---
 

@@ -28,18 +28,1733 @@ const militarySymbolsObject = {
       },
     },
   },
-  Pirates: {
-    type: 'Civilian Authorities',
+  'Firearms Retailer': {
+    type: 'Installation - Commercial',
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M474.2,64.7c-0.2,5.8,2.3,17.7-19.8,54.5-24.6,41.1-62.6,75.3-99.9,103a462.7,462.7,0,0,1-69.4,42.2c-6.2-2-13.9-4.7-22.4-8h-0.2c5.9-3,12.4-6.2,19.4-10,68.8-36.6,81.6-58.7,81-59.3s-17.9,19.6-77.2,54.1q-13,7.5-26.5,13.7c-6.7-2.8-13.2-5.8-18.8-8.6,28.8-12.5,59.5-28,84.7-44.7C363.7,176,400.1,146,429,112.4c26.4-30.8,37.3-46.6,38.9-49.7C470.6,57.7,474.8,51,474.2,64.7ZM456.6,98.6c-0.8-.3-6.7,15-27.5,40.5s-39.4,40.8-38.6,41.6,16.8-10.5,41.1-40.8C453.5,112.6,457.5,98.8,456.6,98.6Zm-123,183.8s0.3,4.3-9.4,7.9c-5.7,2.1-6.8,3.2-37.3-7.7-9.2-3.3-59.2-17.6-99.8-41.4-58.9-34.5-75.6-54.9-76.6-54.1s12.1,22.7,80.4,59.3c54.1,29,72.9,32.3,95.2,40.2,27.4,9.7,30.2,9.9,33.9,14.4s2.5,15.4,2.5,15.4-49.6-14.1-86.8-29.8c-41.5-17.5-79.9-36.6-116.9-64.3s-74.7-61.9-99.2-103C-2.2,82.4.3,70.5,0.1,64.7c-0.6-13.7,3.6-7,6.2-2.1,1.7,3.1,12.4,19,38.6,49.7C73.6,146,109.7,176,148.2,201.6c35.3,23.5,73.7,40.6,110.8,55.7A613.3,613.3,0,0,0,333.7,282.3ZM49.2,293.8c8.8,0,14.2,6.9,14.2,15.2,0,14-12.4,13.2-12.7,15.6s3.6,4.1,9.8,3.1c4.2-.7,8-7.1,9.6-5.2s-8.7,14.6-18.5,14.6-20.8-9.2-20.8-22.3C30.6,299.8,38.8,293.8,49.2,293.8Zm22.5-.2c7.2,0,8.3,2.5,10.4,9.4s6.3,8,7.3,7.9-2.7-2.8-4.6-8.1-4.1-10,5.2-10,8.9,3.8,10.2,7.3c2.1,5.6,7.7,9.8,8.5,9.8s-4.4-5.4-5.6-10.2-0.8-6.7,4.4-6.7,7.1,5,10.8,11.7,6.6,19,.2,19.6c-9.5.9-37.6,1.7-41.4-.6-6.7-4.1-9.2-9.4-11-17.1C63.8,297.1,64,293.6,71.6,293.6Zm32.3-15.2c-1,1.3-1.2,8.1-9.4,8.1s-13.9-5.8-13.9-16.2,7.3-15.8,17.1-15.8,17.7,4.4,25.4,13.3,10.3,19.6,14.2,22.9c5.6,4.7,13.1,3.5,13.7,4.6s-7,4.6-6.9,14.7,0.7,18.2,3.4,22.8,5.8,7.9,6.9,7.7,1.2-7.3,7.9-7.3,11,4.8,11,14.8-7.9,12.7-18.1,12.7-18.9-6.2-22.3-17.5-6.5-26.4-10.6-37.5-11.4-23.3-13.5-25.4S105,277.1,103.9,278.4Zm46.3,12.1c-10.4-.6-11.4-8.2-11.4-8.2s20.1-5.9,48.1-15.6a147.6,147.6,0,0,0,17.9,9l-19.8,6.8C161,290.3,156.5,290.9,150.2,290.5Zm82.1-2.5c-37.7,15.4-83.1,28.2-83.1,28.2s-1.6-10.5,2.5-15.4,11.7-6.4,34.1-14.4l24.7-8.5C221,283.3,225.9,285.3,232.4,288Zm77.3,45.1c6.6,0,6.8,7.1,7.9,7.3s4.1-3.1,6.8-7.7,4.1-15,3.7-23.7-5.7-11.1-5.3-12.7,6.7-2.5,11.5-6.6,6.7-13,14.2-21.9,15.5-13.3,25.2-13.3,16.9,5.4,16.9,15.8-5.8,16.2-13.8,16.2-8.3-6.9-9.3-8.1-2.7-.2-4.7,1.9-9.3,14.4-13.4,25.4-7.2,26.2-10.5,37.5-12,17.5-22.1,17.5-18-2.7-18-12.7S302.5,333.1,309.7,333.1ZM364,292.9c5.2,0,5.3,3,4.3,6.7s-5.6,10.2-5.6,10.2,6.4-4.2,8.5-9.8c1.3-3.5,1.2-7.3,10.1-7.3s6.8,5.4,5.2,10a25.5,25.5,0,0,1-4.5,8.1,11.7,11.7,0,0,0,7.2-7.9c2.1-6.8,3.1-9.4,10.3-9.4s7.8,3.5,5.6,12.9c-1.9,7.7-4.3,13-11,17.1-3.8,2.3-31.7,1.5-41.1.6-6.4-.6-3-13.7.2-19.6S359.7,292.9,364,292.9Zm46.7,34.7c6.2,0.5,9.9-1.3,9.7-3.1s-12.6-1.7-12.6-15.6c0-8.3,5.4-15.2,14-15.2,10.3,0,18.4,6,18.4,21,0,13.1-10.1,22.5-20.7,22.3-15.7-.4-20.4-13-18.4-14.6S405.2,327.2,410.7,327.7Z',
+          d: 'M85.1 123H84v-3.2a9 9 0 01-2.3-.3l-2.3-.7v-1.9c.7.5 1.5.8 2.2 1l2.3.4v-4.9a8.3 8.3 0 01-3.5-1.3 3.3 3.3 0 01-1.1-2.5c0-1.2.4-2.1 1.2-2.8.8-.7 1.9-1.1 3.4-1.2v-2.5H85v2.5l1.9.2 1.8.5v1.9l-1.8-.7c-.6-.2-1.3-.3-1.9-.3v4.6c1.6.3 2.8.7 3.6 1.3.8.6 1.1 1.5 1.1 2.6 0 1.2-.4 2.2-1.2 2.9-.8.7-2 1.1-3.5 1.2v3.3m-1.1-11.5v-4.4c-.8.1-1.5.3-1.9.7-.4.4-.7.9-.7 1.5s.2 1.1.6 1.4c.4.3 1.1.6 2 .7m1.1 2.1v4.7a4 4 0 002.1-.8c.5-.4.7-.9.7-1.6 0-.6-.2-1.1-.7-1.5-.4-.4-1.1-.6-2.1-.8m22.6-21.9l-8 20.8.8.3 8-20.8-.8-.3zm-43 6.5v.8l.3 26v.8h.8l32.2-.2h.4l.2-.3 7.3-8.7.2-.2v-.3l-.2-10.1v-.4l-.3-.2-8.4-6.6-.2-.2h-.3l-31.3-.4h-.8zm1.6 1.6l30.2.3 7.9 6.2.2 9.4-6.9 8.2-31 .2-.3-24.3zm31.1-14.4h14.4v7.7c-2.1 0-6.2 1.4-7.8.9-1.6-.5-5-2.1-6.6-2.2v-6.4zm-25.5 0h22.1v7.9c0 .8 4 1.9 4.8 2.2l5.2 2 9.6-1.2 1 3.6 1.4 4.9c.3.5 1.3 3.2 1.3 4.1v.2c0 1.5-.9 2.5-.9 4.7h18l-1.1-3.9-.8-2.4-4-13.4c-.3-.5-.6-.9-.6-1.7 0-1.7 5.2-5.5 6.2-7.1l-3.6-11.1H71.8v11.1z',
+          stroke: 'none',
           fill: 'black',
-          stroke: 1,
         },
         path_2: {
-          d: 'M239.1,2.5c71.2,0,129,49.2,129,110s-57.8,110-129,110-129-49.2-129-110S167.9,2.5,239.1,2.5Z',
-          strokeWidth: 12,
+          d: 'M85.1 113.6v4.7a4 4 0 002.1-.8c.5-.4.7-.9.7-1.6 0-.6-.2-1.1-.7-1.5-.4-.4-1.1-.6-2.1-.8m-1.1-2.1v-4.4c-.8.1-1.5.3-1.9.7-.4.4-.7.9-.7 1.5s.2 1.1.6 1.4c.4.3 1.1.6 2 .7M66.4 99.8l.3 24.3 31-.2 6.9-8.2-.2-9.4-7.9-6.2-30.2-.3zm17.7 3.3h1.1v2.5l1.9.2 1.8.4v1.9l-1.8-.7c-.6-.2-1.3-.3-1.9-.3v4.6c1.6.3 2.8.7 3.6 1.3.8.6 1.2 1.5 1.2 2.7 0 1.2-.4 2.2-1.2 2.9-.8.7-2 1.1-3.5 1.2v3.3h-1.1v-3.2a10.5 10.5 0 01-4.6-1.1v-1.9c.7.5 1.5.8 2.2 1.1a9 9 0 002.3.3v-4.9a8.3 8.3 0 01-3.5-1.3 3.3 3.3 0 01-1.1-2.5c0-1.2.4-2.1 1.2-2.8.8-.7 1.9-1.1 3.4-1.2v-2.5z',
+          fill: 'rgb(236,236,236)',
+          stroke: 'none',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Hazardous Materials Production': {
+    type: 'Installation - Commercial',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 104.7,71.8 h 5 v 15 h 11.1 v -15 h 5 v 15 h 7.5 v 41.4 h -67.4 V 86.8 h 38.8 v -15 z m -40,57.9 h 69.8 V 85.5 h -7.1 v -15.2 h -8 v 15.2 h -8 v -15.2 h -8 v 15.2 h -38.6 v 44.1 l 0,0 z m 15.5,-21.8 h 38.6 l -19.3,18.6 -19.3,-18.6 z m 21.8,-16.8 c 0.5,0.4 4.3,3.8 4.3,4.3 v 12 h -4.3 V 91.1 z m -5,-0 0,16.3 h -4.3 l 0.1,-12.2 4.1,-4.1 0,0 z m -12.1,12 c 0,-0.4 3.1,-3.2 3.6,-3.6 v 7.8 h -3.6 v -4.3 z m 25.7,-3.6 3.7,3.4 c -0.2,0.4 -0.2,-0.2 -0.2,0.5 v 4 h -3.6 v -7.9 z m 9.4,8.2 -20.5,-20 -20.4,20 20.4,19.9 20.5,-19.9 z',
+          stroke: 'none',
+          fill: 'black',
+        },
+        path_2: {
+          d: 'm 99.5,126.5 19.3,-18.6 -38.6,0 z m 0,1 -20.4,-19.9 20.4,-20 20.5,20 -20.5,19.8 z m 5.2,-40.8 h -38.8 v 41.4 h 67.4 V 86.8 h -7.5 v -15 h -5 v 15 h -11.1 v -15 h -5 v 15 z m 5.9,20.6 h 3.6 v -4 c 0,-0.7 -0,-0.1 0.2,-0.5 l -3.7,-3.4 v 7.9 z m -8.6,0 h 4.3 v -12 c 0,-0.4 -3.8,-3.9 -4.3,-4.3 v 16.3 z m -9.3,0 4.3,0 -0,-16.3 -4.1,4.1 z m -7.8,-4.3 v 4.3 h 3.6 v -7.9 c -0.5,0.3 -3.6,3.2 -3.6,3.6 z',
+          fill: 'rgb(236,236,236)',
+          stroke: 'none',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Warehouse/Storage Facility/Building': {
+    type: 'Installation - Facility',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 104.1,74.8 h 4.5 v 13.4 h 9.9 V 74.8 h 4.5 v 13.4 h 6.7 v 37 H 69.6 V 88.2 h 34.6 l 4e-4,-13.4 0,0 z',
+          strokeWidth: 3,
+          fill: 'rgb(236,236,236)',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Water Treatment Facility': {
+    type: 'Installation - Water',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 65,90 50,0 c 10,0 20,10 20,20 m -40,-30 20,0 m -10,0 0,10',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  School: {
+    type: 'Installation - Civilian',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M 98.4,96.4 H 83.7 v 31.7 h 32 V 96.4 H 100.9 V 84.6 c 0,-0.6 6.5,-3 7.5,-3.4 1.3,-0.5 6.9,-3 7.9,-3 -0.3,-0.4 -14.7,-6.3 -15.7,-6.3 H 98.4 V 96.4 z',
+          fill: 'black',
+          strokeWidth: 3,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Telecommunications: {
+    type: 'Installation - Signal',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 90,105 20,0 0,0 m -25,15 15,-30 15,30 m -55,-40 25,10 0,-10 15,10 15,-10 0,10 25,-10',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Raw Material Mine': {
+    type: 'Installation - Raw Material',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 105,85 10,10 5,-5 c -5,-5 -10,-5 -15,-5 z M 95,85 85,95 80,90 c 5,-5 10,-5 15,-5 z m -5,5 30,30 m -40,0 30,-30',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Mass Grave': {
+    type: 'Installation - Other',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M73 95h10m-5-5v15m8-20v30H71V85zm30 10h10m-5-5v15m-8-20v30h15V85zM94 95h10m-5-5v15m-7-20h15v30H92z',
+          strokeWidth: 3,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Food Cache (Class I)': {
+    type: 'Sustainment - Supply',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M 12.5,3.5 a 22.5,22.5 0 0,1 0,43 a 22.5,22.5 0 1,0 0,-43 z',
+          transform: 'translate(120,115) scale(-0.8,-0.8)',
+        },
+        path_2: {
+          d: 'M25,120 l150,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Printed Media': {
+    type: 'Installation - Media',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 65,100 75,0 M90,90a10,10 0 1,0 20,0a10,10 0 1,0 -20,0 M90,110a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Nuclear Power Plant': {
+    type: 'Installation - Energy Facility Infrastructure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M87 124c-8-4-13-13-13-22h14c0 4 3 8 6 10l-7 12zm39-22c0 9-5 18-13 23l-7-13c3-2 6-6 6-10h14zM87 79c8-5 18-5 26 0l-7 12c-3-2-9-2-12 0l-7-12zm21 23c0 4-4 8-8 8s-8-4-8-8c0-5 4-8 8-8s8 3 8 8z',
+          fill: 'black',
+          strokeWidth: 1,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Electric Power Plant': {
+    type: 'Installation - Energy Facility Infrastructure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 150 150 l 20 -50 l 20 50 l 20 -50 l 20 50',
+          transform: 'translate(43,55) scale(0.3)',
+          strokeWidth: 6,
+        },
+        path_2: {
+          d: 'm 100,60.5 c -16.4,0 -29.6,13.2 -29.6,29.6 0,12.8 8.3,23.9 19.7,27.8 l 0,19.7 c 3.2,1.2 6.3,1.8 9.9,1.8 3.6,0 6.7,-0.6 9.9,-1.8 l 0,-19.8 c 11.5,-3.9 19.8,-15 19.7,-27.8 0,-16.4 -13.2,-29.6 -29.6,-29.6 z',
+          transform: 'translate(40,40) scale(0.6)',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Broadcast Transmitter Antennae': {
+    type: 'Installation',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 80,60 20,20 20,-20 m -20,0 0,80',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Economic: {
+    type: 'Installation',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'ECON',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '35',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Safe House': {
+    type: 'Installation',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'SAFE',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '35',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Blacklist Location': {
+    type: 'Installation',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'BLK',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '42',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Gray List Location': {
+    type: 'Installation',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'GRAY',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '35',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'White List Location': {
+    type: 'Installation',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'WHT',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '42',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Aircraft Production and Assembly': {
+    type: 'Installation - Aircraft',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 95.1,109.3 c 0,0 -20.8,4.9 -30.1,6.7 -2.2,0.4 -5.7,0.2 -6.5,-2 -0.4,-1.1 3.3,-6.6 6.5,-7.3 8.7,-1.9 25.7,-5.5 25.7,-5.5 l 3.1,-16.1 4,-0.8 0.3,15.9 25.6,-5.8 6.5,-13.2 5.3,-1.4 -3.3,16.1 14,4.8 -4.3,1.2 -13.7,-2.8 -23.6,6.7 31.6,11.8 -5.5,2.5 z',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Terrorist Leader': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        text_1: {
+          symbolText: 'T',
+          x: '75',
+          y: '90',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'E',
+          x: '75',
+          y: '110',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_3: {
+          symbolText: 'R',
+          x: '75',
+          y: '130',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_4: {
+          symbolText: 'L',
+          x: '125',
+          y: '90',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_5: {
+          symbolText: 'D',
+          x: '125',
+          y: '110',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_6: {
+          symbolText: 'R',
+          x: '125',
+          y: '130',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Terrorist Group': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        text_1: {
+          symbolText: 'TER',
+          x: '100',
+          y: '73',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Targeted Group': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        text_1: {
+          symbolText: 'TGT',
+          x: '100',
+          y: '73',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Religious Group': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        text_1: {
+          symbolText: 'REL',
+          x: '100',
+          y: '73',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Speaker: {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        text_1: {
+          symbolText: 'S',
+          x: '75',
+          y: '90',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'P',
+          x: '75',
+          y: '110',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_3: {
+          symbolText: 'K',
+          x: '75',
+          y: '130',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Leader: {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        text_1: {
+          symbolText: 'L',
+          x: '75',
+          y: '90',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'D',
+          x: '75',
+          y: '110',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_3: {
+          symbolText: 'R',
+          x: '75',
+          y: '130',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Gang: {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        text_1: {
+          symbolText: 'GANG',
+          x: '100',
+          y: '73',
+          textAnchor: 'middle',
+          fontSize: '20',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Foreign Fighters': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        text_1: {
+          symbolText: 'FF',
+          x: '100',
+          y: '73',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Displaced Persons/Refugees/Evacuees': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        text_1: {
+          symbolText: 'DPRE',
+          x: '100',
+          y: '73',
+          textAnchor: 'middle',
+          fontSize: '20',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rape Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        path_2: {
+          d: 'm 79 74 l 45 54',
+        },
+        text_1: {
+          symbolText: 'R',
+          x: '75',
+          y: '100',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'A',
+          x: '75',
+          y: '120',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Piracy Victims (Multiple)': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        text_1: {
+          symbolText: 'PI',
+          x: '100',
+          y: '73',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Kidnap Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        path_2: {
+          d: 'm 79 74 l 45 54',
+        },
+        text_1: {
+          symbolText: 'K',
+          x: '75',
+          y: '110',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Hijack Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        path_2: {
+          d: 'm 79 74 l 45 54',
+        },
+        text_1: {
+          symbolText: 'H',
+          x: '75',
+          y: '110',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Murder Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        path_2: {
+          d: 'm 79 74 l 45 54',
+        },
+        text_1: {
+          symbolText: 'M',
+          x: '75',
+          y: '100',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'U',
+          x: '75',
+          y: '120',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Execution Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        path_2: {
+          d: 'm 79 74 l 45 54',
+        },
+        text_1: {
+          symbolText: 'E',
+          x: '75',
+          y: '100',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'X',
+          x: '75',
+          y: '120',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Assassination Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        path_2: {
+          d: 'm 79 74 l 45 54',
+        },
+        text_1: {
+          symbolText: 'A',
+          x: '75',
+          y: '100',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'S',
+          x: '75',
+          y: '120',
+          textAnchor: 'middle',
+          fontSize: '22',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Attempted Criminal Activities Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z',
+        },
+        path_2: {
+          d: 'm 52 74 l 96 51',
+          strokeDashArray: '10,6',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Attempted Criminal Activities Multiple Victims': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_4: {
+          d: 'm 52 74 l 96 51',
+          strokeDashArray: '10,6',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Criminal Activities Multiple Victims': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_4: {
+          d: 'm 52 74 l 96 51',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Criminal Activities Victim': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10 z m -19 -40 l 40 45',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Unspecified Organization': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_2: {
+          d: 'm 80 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+        path_3: {
+          d: 'm 135 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Unspecified Individual': {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 108 85 c 0 10 -15 10 -15 0 c 0 -10 15 -10 15 0 z m -8 7.3 l 0 25 m -10 -20 l 20 0 m -10 20 l -8 10 m 8 -10 l 8 10',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'U.S. Marshals Service': {
+    type: 'Civilian Authorities - Law Enforcement',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M100 70l7 20 22 1-18 13 7 20-18-12-18 12 7-20-17-13 21-1zm0-5a35 35 0 100 70 35 35 0 000-70zm0 5a30 30 0 110 60 30 30 0 010-60z',
+          strokeWidth: 2,
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'U.S. Secret Service (USSS)': {
+    type: 'Civilian Authorities - Law Enforcement',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'USSS',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '35',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Transportation Security Agency (TSA)': {
+    type: 'Civilian Authorities - Law Enforcement',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'TSA',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '42',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Spy: {
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
+    affiliation: {
+      friendly: {
+        text: {
+          symbolText: 'SPY',
+          x: '100',
+          y: '115',
+          textAnchor: 'middle',
+          fontSize: '42',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Prison: {
+    type: 'Civilian Authorities - Law Enforcement',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M63 68v5h7v33c-3 1-6 4-6 7s2 4 2 5v9h-3v5h75v-5h-2v-9c2-5 0-11-4-12V73h6v-5H63zm12 5h12v35l-3 3-2 3-3 7-3-4 1-3v-2l-2-5V73zm17 0h18v18l-3-5c-2-2-3-3-6-3h-1l-5 2-2 1-1 2V73zm22 0h13v34l-3 4 1 6-2 3-3-6c-2-3-3-5-6-5V73zm-14 12h1c4 0 8 5 8 10v1c0 4-4 10-8 10h-2c-4 0-8-6-7-10 0-5 3-11 8-11zm10 16v6l-3-1 3-5zm-18 3l2 3h-2v-3zm-21 4c2 0 4 2 4 5 0 5-5 7-7 4s-1-9 3-9zm60 0c2 0 3 3 3 5 0 4-1 4-2 5h-3l-2-3v-2c-1-2 1-5 4-5zm-25 0l4 1v18H92v-17l6-1 8-1zm8 3c3 1 3 2 5 5 1 3 3 5 3 8l1 1 4-6v8h-13v-16zm-27 0v16H75v-8c1 0 2 6 4 6s2-5 3-7c1-3 2-6 5-7zm47 9v7h-2v-7h2zm-66 0l2 1v6h-2v-7z',
+          stroke: 'none',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Police Department': {
+    type: 'Civilian Authorities - Law Enforcement',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M 100,118 C 76,109 85,95 82,82 c 6,7 12,7 18,0 6,7 12,7 18,0 -3,13 6,27 -18,36 z',
+          strokeWidth: 3,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Pirates: {
+    type: 'Civilian Authorities - Pirates',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M143 80c0 1 1 3-3 9-5 8-11 14-18 19a83 83 0 01-13 8l-4-2h0l4-2c12-6 14-10 14-10s-3 3-14 9l-4 3-4-2a102 102 0 0034-24l7-9c1-1 1-2 1 1zm-3 6l-5 7-7 8 8-8 4-7zm-22 33l-2 1c-1 1-1 1-6-1-2-1-11-3-18-8l-14-9s2 4 14 10c10 6 13 6 17 8l7 2v3l-16-5-21-12c-7-5-13-11-17-19-4-6-4-8-4-9 0-3 1-2 1-1l7 9a90 90 0 0039 26 110 110 0 0013 5zm-51 2c1 0 2 1 2 3s-2 2-2 2l2 1 2-1c1 0-2 3-4 3s-3-2-3-4c0-3 1-4 3-4zm4 0l2 2 1 1-1-1 1-2 2 1 2 2-1-2v-1l2 2v3h-7c-1 0-2-1-2-3-1-2 0-2 1-2zm6-3s0 2-2 2-2-1-2-3 1-3 3-3l4 2 3 4 2 1-1 3 1 4 1 1 1-1c1 0 2 1 2 3s-1 2-3 2-3-1-4-3l-2-7-2-5h-1zm8 2l-2-1 9-3a27 27 0 003 2l-4 1-6 1zm15 0l-15 5v-3l6-2 5-2 4 2zm14 8l1 1 1-1 1-4-1-3 2-1 3-4 4-2c1 0 3 1 3 3s-1 3-2 3l-2-2h-1l-2 5-2 7c-1 2-2 3-4 3s-3-1-3-2 0-3 2-3zm10-7v1l-1 2 2-2 2-1c2 0 1 1 1 1a5 5 0 01-1 2 2 2 0 001-1c0-2 1-2 2-2s1 0 1 2-1 2-2 3h-7c-2 0-1-2 0-3l2-2zm8 6l2-1c0-1-3 0-3-2s1-3 3-3 3 1 3 4c0 2-2 4-3 4-3 0-4-3-4-3l2 1z',
+          fill: 'black',
+          stroke: 'none',
+        },
+        path_2: {
+          d: 'M101 68c13 0 23 9 23 20s-10 20-23 20-23-9-23-20 10-20 23-20z',
+          strokeWidth: 2,
         },
       },
       get friendlyTemplated() {
@@ -63,14 +1778,13 @@ const militarySymbolsObject = {
     },
   },
   'Law Enforcement Agency': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         path_1: {
-          d: 'm 99.6,51 c -2.8,0 -5,2.3 -5,5.3 0,2.1 1.2,3.9 2.8,4.7 L 87.8,78.3 69.5,78.4 c -0.1,-2.8 -2.3,-5.1 -5,-5.1 -2.8,0 -5,2.3 -5,5.3 0,2.9 2.2,5.3 5,5.3 0.7,0 1.4,-0.2 2,-0.4 l 9.2,16.8 -9.4,17.2 c -0.6,-0.2 -1.2,-0.4 -1.8,-0.4 -2.8,0 -5,2.4 -5,5.3 0,2.9 2.2,5.3 5,5.3 2.8,0 5,-2.3 5,-5.3 0,-0.1 -0,-0.2 -0,-0.3 l 18.3,0.1 9.5,17.1 c -1.6,0.9 -2.7,2.6 -2.7,4.6 0,2.9 2.3,5.3 5,5.3 2.8,0 5,-2.3 5,-5.3 0,-1.9 -0.9,-3.5 -2.3,-4.4 l 9.6,-17.3 18.7,-0.1 c -0,0.1 -0,0.2 -0,0.3 0,2.9 2.3,5.3 5,5.3 2.8,0 5,-2.3 5,-5.3 0,-2.9 -2.2,-5.3 -5,-5.3 -0.8,0 -1.5,0.2 -2.1,0.5 l -9.5,-17.4 9.5,-17.4 c 0.6,0.3 1.4,0.5 2.1,0.5 2.8,0 5,-2.4 5,-5.3 0,-2.9 -2.2,-5.3 -5,-5.3 -2.8,0 -5,2.3 -5,5.3 0,0.1 0,0.2 0,0.3 L 111.8,78.3 102.1,60.8 c 1.5,-0.9 2.5,-2.6 2.5,-4.5 0,-2.9 -2.2,-5.3 -5,-5.3 z',
+          d: 'M100 61c-3 0-4 2-4 4l2 4-8 14H76c0-3-2-4-4-4-3 0-4 1-4 4 0 2 1 4 4 4h1l8 13-8 14h-1c-3 0-4 2-4 4s1 4 4 4c2 0 4-2 4-4 0 0 0 0 0 0h14l8 13-2 4c0 2 2 4 4 4s4-1 4-4l-2-3 8-14h14s0 0 0 0c0 2 2 4 4 4 3 0 4-2 4-4s-1-4-4-4h-1l-8-14 8-14 1 1c3 0 4-2 4-5 0-2-1-4-4-4-2 0-4 2-4 4v1h-15l-7-14 2-4c0-2-2-4-4-4z',
+          strokeWidth: 1,
           fill: 'black',
-          transform: 'translate(20,20) scale(0.8)',
-          stroke: 3,
         },
       },
       get friendlyTemplated() {
@@ -94,7 +1808,7 @@ const militarySymbolsObject = {
     },
   },
   'Nongovernmental Agency (NGO)': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
     affiliation: {
       friendly: {
         text: {
@@ -127,7 +1841,7 @@ const militarySymbolsObject = {
     },
   },
   'Internal Security Force': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         text: {
@@ -160,7 +1874,7 @@ const militarySymbolsObject = {
     },
   },
   'Governmental Agency': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
     affiliation: {
       friendly: {
         text: {
@@ -193,7 +1907,7 @@ const militarySymbolsObject = {
     },
   },
   'Fire Fighting/Fire Protection': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Protection',
     affiliation: {
       friendly: {
         path_1: {
@@ -222,7 +1936,7 @@ const militarySymbolsObject = {
     },
   },
   'Federal Bureau of Investigation (FBI)': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
     affiliation: {
       friendly: {
         text: {
@@ -255,7 +1969,7 @@ const militarySymbolsObject = {
     },
   },
   'Environmental Protection': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
     affiliation: {
       friendly: {
         path_1: {
@@ -284,15 +1998,15 @@ const militarySymbolsObject = {
     },
   },
   'Emergency Operations (Management)': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Persons/Groups/Orgs',
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M 100 65 L 115.2 91.3 L 130.3 117.5 C 133.3 112.4 135 106.4 135 100 C 135 80.7 119.3 65 100 65 z M 100 65 C 80.7 65 65 80.7 65 100 C 65 106.4 66.7 112.4 69.7 117.5 L 84.8 91.3 L 100 65 z M 69.7 117.5 C 75.7 128 87 135 100 135 C 113 135 124.3 128 130.3 117.5 L 100 117.5 L 69.7 117.5 z',
+          d: 'M100 65l15 26 15 27c3-6 5-12 5-18 0-19-16-35-35-35zm0 0a35 35 0 00-30 53l15-27 15-26zm-30 53c6 10 17 17 30 17s24-7 30-17H70z',
           fill: 'black',
         },
         path_2: {
-          d: 'M 69.7,117.5 100,65 l 30.3,52.5 z',
+          d: 'M70 118l30-53 30 53z',
           fill: 'rgb(236,236,236)',
           stroke: 'none',
         },
@@ -318,7 +2032,7 @@ const militarySymbolsObject = {
     },
   },
   'Drug Enforcement Agency (DEA)': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         text: {
@@ -351,11 +2065,11 @@ const militarySymbolsObject = {
     },
   },
   'Department of Justice': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M 100.2 62.3 C 100.1 63.2 99 66.3 98.7 67.4 C 97.8 69.9 99.4 70 99.4 72.3 L 99.4 73 C 99.4 73.7 98.9 73.5 98.3 73.8 C 96.6 72.4 94.2 71 91.3 71 L 90 71 C 84.2 71 80 75.5 74.6 75.5 L 73.9 75.5 C 72.3 75.5 71.5 74.1 71.3 75.8 L 74.3 77.2 C 71.8 82.4 69.9 89.7 67.5 95.5 C 66.3 98.6 65.3 101.6 64.1 104.7 C 63.5 106.3 63.1 107.7 62.5 109.3 C 62 110.5 61.8 113.1 60.2 113.2 C 62.4 116.4 68 120.5 73.3 120.5 L 76 120.5 C 81.6 120.5 87.3 116.6 89.5 113.2 L 88.2 113.2 L 75.4 77.2 L 74.5 77.2 L 74.5 77 L 75.4 77.2 L 78.6 77.7 L 79.3 77.7 L 89.3 76.2 L 90.4 76.3 C 93.7 76.3 93.8 80.2 94.7 80.2 L 97.7 80.2 L 97.7 129.2 L 86.1 129.2 L 86.1 131.5 L 81.4 131.5 L 81.4 134.1 L 77.5 134.1 L 77.5 138.2 L 123.3 138.2 L 123.3 133.9 L 119.3 133.9 L 119.3 131.6 L 114.5 131.6 L 114.5 129.2 L 102.6 129.2 L 102.6 80.2 L 106 80.2 C 107 80.2 106.6 76.4 110.7 76.4 L 111.3 76.4 L 121.2 77.7 L 122.2 77.7 L 125.4 77.3 C 124.3 79.7 123.1 83.8 122.1 86.4 C 120.9 89.6 119.9 92.6 118.7 95.8 C 117.5 98.9 116.6 101.9 115.4 105 C 114.9 106.4 114.2 108.1 113.7 109.6 C 113.4 110.4 113.1 111.1 112.9 111.9 C 112.5 113.2 112.8 113.2 111.2 113.2 C 113.3 116.4 119.2 120.5 124.6 120.5 L 127.2 120.5 C 132.6 120.5 138.8 116.4 140.9 113.2 L 139.8 113.2 L 126.4 77.1 C 127.4 76.9 129.3 76.2 129.3 75.3 C 129.3 74.5 127.8 75.5 126.7 75.5 L 126.3 75.5 C 120.8 75.5 116.6 71 110.9 71 L 109.6 71 C 106.7 71 104.2 72.4 102.6 73.8 C 101.8 73.4 101.3 73.6 101.3 72.3 C 101.3 71.9 102.4 68.8 102.5 68.5 L 100.6 62.3 L 100.2 62.3 z M 126.1 80.8 L 137.8 113.2 L 114.1 113.2 L 126.1 80.8 z M 74.8 80.8 L 86.5 113.2 L 63.1 113.1 L 74.8 80.8 z',
+          d: 'M100 62l-1 5v6l-1 1c-1-2-4-3-7-3h-1c-6 0-10 5-15 5h-1c-2 0-2-2-3 0l3 1-6 19-4 9-1 4c-1 2-1 4-3 4 2 3 8 8 13 8h3c6 0 11-4 14-8h-2L75 77l4 1 10-2h1c4 0 4 4 5 4h3v49H86v3h-5v2h-3v4h45v-4h-4v-2h-4v-3h-12V80h3c1 0 1-4 5-4l10 2h1l3-1-3 9-3 10-4 9-1 5-1 2-2 1c2 3 8 8 14 8h2c6 0 12-5 14-8h-1l-14-36 3-2-2 1h-1c-5 0-9-5-15-5h-1c-3 0-6 1-7 3-1-1-2 0-2-2l2-3-2-7h-1zm26 19l12 32h-24l12-32zm-51 0l12 32H63l12-32z',
           fill: 'black',
           stroke: 'none',
         },
@@ -381,16 +2095,16 @@ const militarySymbolsObject = {
     },
   },
   'Customs Service': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M 115.5 69.8 C 115.8 70.4 116.9 72.9 117.5 72.9 L 128.3 72.9 L 128.3 69.8 L 115.5 69.8 z M 117.3 74.7 C 116.8 74.7 116 75.7 115.8 76.1 L 117.2 76.1 L 117.2 76.8 C 117.2 79.6 119.8 81.8 122.8 81.8 C 126.5 81.8 128.3 78.6 128.3 74.7 L 117.3 74.7 z M 111.3 83.6 C 110.5 83.6 99.4 91.8 97.8 92.9 C 95.6 94.4 93 96.1 91 97.7 C 89.1 99.2 85.4 100.5 85.4 103.6 L 85.4 104 C 85.4 104.7 87.1 106.7 88.2 106.7 L 88.8 106.7 C 90.2 106.7 108 93.4 111.3 91.7 L 111.3 105.3 L 126 83.6 L 111.3 83.6 z M 75.3 83.6 C 74.5 83.6 73.4 84.4 73.4 85 L 73.4 108.9 C 73.4 109.8 73.9 110.2 74.4 110.5 L 78.5 110.5 L 78.5 83.6 L 75.3 83.6 z M 78.5 110.5 L 78.5 135.2 L 105.6 135.2 L 105.6 110.5 L 78.5 110.5 z M 130.5 83.6 C 129.6 83.6 123.8 92.9 122.9 94.2 C 121.9 95.7 115.7 104.5 115.5 105.3 L 127.6 105.3 L 127.6 110.3 L 111.5 110.3 L 111.5 134.8 L 119.6 134.8 C 120.6 134.8 121.1 127.9 121.3 126.6 C 121.7 123.9 122.4 120.4 122.6 117.8 L 122.9 117.8 L 125.4 134.8 L 133.9 134.8 L 133.9 86.7 C 133.9 85.6 131.9 83.6 130.7 83.6 L 130.5 83.6',
+          d: 'M116 70l2 3h10v-3h-12zm1 5l-1 1h1v1c0 3 3 5 6 5 4 0 5-3 5-7h-11zm-6 9l-13 9-7 5c-2 1-6 3-6 6l3 3h1l22-15v13l15-21h-15zm-36 0l-2 1v24l1 2h5V84h-4zm4 27v24h27v-24H79zm52-27l-8 10-7 11h12v5h-16v25h8l1-8 2-9 2 17h9V87l-3-3',
           fill: 'black',
           stroke: 'none',
         },
         path_2: {
-          d: 'M 117.5 72.9 L 117.3 74.7 L 128.3 74.7 L 128.3 72.9 L 117.5 72.9 z M 126 83.7 L 111.3 105.3 L 111.5 110.3 L 127.7 110.3 L 127.7 105.3 L 115.5 105.3 C 115.7 104.5 121.9 95.7 122.9 94.3 C 123.8 92.9 129.6 83.7 130.5 83.7 L 126 83.7 z',
+          d: 'M118 73l-1 2h11v-2h-10zm8 11l-15 21 1 5h16v-5h-12l7-11 8-10h-5z',
           fill: 'rgb(236,236,236)',
           stroke: 'none',
         },
@@ -416,7 +2130,7 @@ const militarySymbolsObject = {
     },
   },
   'Coast Guard': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         path_1: {
@@ -448,7 +2162,7 @@ const militarySymbolsObject = {
     },
   },
   'Bureau of Alcohol, Tobacco & Firearms (ATF)': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         text: {
@@ -481,16 +2195,16 @@ const militarySymbolsObject = {
     },
   },
   'Border Patrol': {
-    type: 'Civilian Authorities',
+    type: 'Civilian Authorities - Law Enforcement',
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M 122.8 66.8 C 119.9 66.8 117.4 68.6 117.4 71.6 L 117.4 73.1 L 128.7 73.1 L 128.7 72.4 C 128.7 68.8 126.5 66.8 122.8 66.8 z M 108.6 74.8 L 108.6 76 L 117.6 76 L 117.5 77.5 L 118 80.8 C 119.1 81.5 118.9 82.5 120.8 83.5 C 122.1 84.1 124 84 125.2 83.4 C 127.5 82.4 129 79.2 128.3 76 L 137.5 76 L 137.5 74.8 L 108.6 74.8 z M 94.8 82.1 C 93.3 82.1 92 83.5 92 85 L 92 85.2 C 92 86.6 96 91.3 97 92.6 C 98.2 94.3 100.8 98.8 103.2 98.8 C 104.5 98.8 111.1 93.7 112.6 92.8 L 112.6 106.2 L 126.4 85.6 C 123 85.6 114.9 85.2 112.2 85.9 C 110.2 86.4 105 91.6 103.6 91.7 C 103.4 91 100.6 87.5 100 86.5 C 99.2 85.4 97.2 82.1 95.6 82.1 L 94.8 82.1 z M 130.4 85.6 C 129.6 85.6 117.5 104.1 116.3 106.2 L 128.1 106.2 L 128.1 110.6 L 112.5 110.6 L 112.5 133.2 L 120.7 133.2 L 122 117.5 L 124.3 117.5 L 125.6 133.2 L 133.5 133.2 L 133.5 87.9 C 133.5 87.2 131.2 85.6 130.4 85.6 z M 66.9 90.7 C 66.5 91.4 62.5 96.9 62.5 96.9 C 62.5 97.8 76.7 107.2 78.5 108.3 C 81.4 110.2 83.9 112.1 86.7 114 C 88.2 115 89.4 115.9 90.8 116.8 C 92.1 117.7 94.1 118.5 94.1 120.4 L 94.1 133.2 L 105.5 133.2 L 105.5 121.7 C 105.5 120.6 107.2 119 107.2 118.8 C 107.2 117.6 106.1 118.6 105.6 116.9 C 105.2 115.4 105.4 115.6 104.5 114.5 C 103.5 113.1 101.9 112 99.8 112 C 96.8 112 97.6 111.8 95.3 110.3 C 93.9 109.3 92.5 108.4 91.2 107.4 C 88.7 105.5 85.8 103.5 83.2 101.8 C 80.9 100.3 68.2 91 66.9 90.7 z M 67.9 92.6 L 72.7 95.7 L 72.8 103 L 67.9 99.9 L 67.9 92.6 z M 77.8 99.3 L 82.6 102.6 L 82.6 110 L 77.8 106.6 L 77.8 99.3 z M 87.4 106.2 L 92.5 109.5 L 92.4 116.9 L 87.4 113.5 L 87.4 106.2 z',
+          d: 'M123 67c-3 0-6 2-6 5v1h12v-1c0-3-2-5-6-5zm-14 8v1h9v5l3 3 4-1c3-1 4-4 3-7h10v-1h-29zm-14 7c-2 0-3 2-3 3 0 2 4 6 5 8 1 1 4 6 6 6s8-5 10-6v13l13-20h-14c-2 0-7 6-8 6l-4-5-4-5h-1zm35 4l-14 20h12v5h-15v22h8l1-15h2l2 15h8V88l-4-2zm-63 5l-4 6 16 11 8 6 4 3 3 3v13h12v-11l1-3-1-2-1-2c-1-2-3-3-5-3-3 0-2 0-5-2l-4-3-8-5-16-11zm1 2l5 3v7l-5-3v-7zm10 6l5 4v7l-5-3v-8zm9 7l6 4-1 7-5-3v-8z',
           fill: 'black',
           stroke: 'none',
         },
         path_2: {
-          d: 'M 117.4 73.1 L 117.4 74.8 L 128.7 74.8 L 128.7 73.1 L 117.4 73.1 z M 126.4 85.6 L 112.6 106.2 L 112.6 110.6 L 128.1 110.6 L 128.1 106.2 L 116.4 106.2 C 117.5 104.1 129.6 85.6 130.4 85.6 L 126.4 85.6 z M 67.9 92.6 L 67.9 99.9 L 72.8 103 L 72.7 95.7 L 67.9 92.6 z M 77.8 99.3 L 77.8 106.6 L 82.6 110 L 82.6 102.6 L 77.8 99.3 z M 87.4 106.2 L 87.4 113.5 L 92.4 116.9 L 92.5 109.5 L 87.4 106.2 z',
+          d: 'M117 73v2h12v-2h-12zm9 13l-13 20v5h15v-5h-12l14-20h-4zm-58 7v7l5 3v-7l-5-3zm10 6v8l5 3v-7l-5-4zm9 7v8l5 3 1-7-6-4z',
           fill: 'rgb(236,236,236)',
           stroke: 'none',
         },
@@ -1711,12 +3425,12 @@ const militarySymbolsObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M 82.3 102.6 C 82.3 113.9 84.2 115.9 84.2 115.9 L 86.5 114.1 C 90.2 117.8 94.8 120.8 99.9 120.9 L 100.5 120.9 L 101 120.9 C 106.2 120.8 110.8 117.8 114.4 114.1 L 116.7 115.9 C 116.7 115.9 118.6 113.9 118.7 102.6 C 113.9 106.8 108.9 109 108.9 109 L 110.9 110.7 C 110.9 110.7 106.8 115.2 100.5 115.2 L 100.5 115.2 C 100.5 115.2 100.4 115.2 100.4 115.2 C 94.2 115.2 90 110.7 90 110.7 L 92 109 C 92 109 87 106.8 82.3 102.6 z',
+          d: 'M 82 103c0 11 2 13 2 13l3-2c3 4 8 7 13 7h1c5 0 10-3 13-7l3 2s2-2 2-13l-10 6 2 2s-4 4-10 4h-1c-6 0-10-4-10-4l2-2-10-6z',
           fill: 'black',
-          strokeWidth: 1,
+          stroke: 'none',
         },
         path_2: {
-          d: 'm 105,85 c 0,2.8 -2.2,5 -5,5 -2.8,0 -5,-2.2 -5,-5 0,-2.8 2.2,-5 5,-5 2.8,0 5,2.2 5,5 z m -20,5 30,0 m -15,0 0,30',
+          d: 'M105 85c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5zm-20 5h30m-15 0v30',
           fill: 'none',
         },
       },
@@ -2157,14 +3871,13 @@ const militarySymbolsObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M25,150L175,50 M102.6 59a3 3 0 0 1-6 0A3 3 0 0 1 102.6 59ZM90.6 62h18m-9 0V80 M60,85 l40,15 40,-15 0,30 -40,-15 -40,15 z',
+          d: 'M25 150L175 50m-72 9a3 3 0 01-6 0 3 3 0 016 0zm-12 3h18m-9 0v18m-40 5l40 15 40-15v30l-40-15-40 15z',
           fill: 'black',
         },
         path_2: {
-          d: 'M90.6 62h18m-9 0V80M89 69.6c0 6.8 1.1 8 1.1 8l1.4-1.1c2.2 2.2 5 4 8 4.1h.7c3.1-.1 5.9-1.9 8-4.1l1.4 1.1s1.1-1.2 1.2-8A25.8 25.8 0 0 1 105 73.4l1.2 1a9.1 9.1 0 0 1-6.2 2.7H99.9a9.3 9.3 0 0 1-6.2-2.7l1.2-1A24.8 24.8 0 0 1 89 69.6Z M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0',
-          stroke: 'black',
+          d: 'M91 62h18m-9 0v18M89 70l1 8 1-2c3 3 6 5 9 5h0c3-1 6-2 8-5l2 2 1-8a26 26 0 01-6 3l1 1a9 9 0 01-6 3h0a9 9 0 01-6-3l1-1a25 25 0 01-6-3zm-4 30a15 15 0 1030 0 15 15 0 10-30 0',
+          stroke: 'none',
           fill: 'black',
-          strokeWidth: 1,
         },
       },
       get friendlyTemplated() {
@@ -2172,11 +3885,11 @@ const militarySymbolsObject = {
       },
       hostile: {
         path_1: {
-          d: 'M65, 137 L137, 65 Z M61,86 l40,15 l40-15 v30 l-40-15l-40,15 V90 Z m 44,-41 c 0,2.8 -2.2,5 -5,5 -2.8,0 -5,-2.2 -5,-5 0,-2.8 2.2,-5 5,-5 2.8,0 5,2.2 5,5 z m -20,5 30,0 m -15,0 0,30',
+          d: 'M65 137l72-72zm-4-51l40 15 40-15v30l-40-15-40 15V90zm44-41c0 3-2 5-5 5s-5-2-5-5 2-5 5-5 5 2 5 5zm-20 5h30m-15 0v30',
           fill: 'black',
         },
         path_2: {
-          d: 'M81 62C81 73 83 75 83 75L86 73C89 77 94 80 99 80H100C105 80 110 77 113 73L116 75C116 75 118 73 118 62 113 66 108 68 108 68L110 70C110 70 106 74 100 74V74C100 74 99 74 99 74 93 74 89 70 89 70L91 68C91 68 86 66 81 62z M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 Z',
+          d: 'M81 62c0 11 2 13 2 13l3-2c3 4 8 7 13 7h1c5 0 10-3 13-7l3 2s2-2 2-13l-10 6 2 2s-4 4-10 4v0h-1c-6 0-10-4-10-4l2-2-10-6zm4 38a15 15 0 1030 0 15 15 0 10-30 0z',
           stroke: 'black',
           fill: 'black',
           strokeWidth: 1,
@@ -2193,11 +3906,11 @@ const militarySymbolsObject = {
       },
       neutral: {
         path_1: {
-          d: 'M45,155L155,45 M102.6 59a3 3 0 0 1-6 0A3 3 0 0 1 102.6 59ZM90.6 62h18m-9 0V80 M60,85 l40,15 40,-15 0,30 -40,-15 -40,15 z',
+          d: 'M45 155L155 45m-52 14a3 3 0 01-6 0 3 3 0 016 0zm-12 3h18m-9 0v18m-40 5l40 15 40-15v30l-40-15-40 15z',
           fill: 'black',
         },
         path_2: {
-          d: 'M90.6 62h18m-9 0V80M89 69.6c0 6.8 1.1 8 1.1 8l1.4-1.1c2.2 2.2 5 4 8 4.1h.7c3.1-.1 5.9-1.9 8-4.1l1.4 1.1s1.1-1.2 1.2-8A25.8 25.8 0 0 1 105 73.4l1.2 1a9.1 9.1 0 0 1-6.2 2.7H99.9a9.3 9.3 0 0 1-6.2-2.7l1.2-1A24.8 24.8 0 0 1 89 69.6Z M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0',
+          d: 'M91 62h18m-9 0v18M89 70l1 8 1-2c3 3 6 5 9 5h0c3-1 6-2 8-5l2 2 1-8a26 26 0 01-6 3l1 1a9 9 0 01-6 3h0a9 9 0 01-6-3l1-1a25 25 0 01-6-3zm-4 30a15 15 0 1030 0 15 15 0 10-30 0',
           stroke: 'black',
           fill: 'black',
           strokeWidth: 1,
@@ -2357,7 +4070,7 @@ const militarySymbolsObject = {
       },
     },
   },
-  Hospital: {
+  'Medical Treatment Facility (Hospital)': {
     type: 'Sustainment - Medical',
     affiliation: {
       friendly: {

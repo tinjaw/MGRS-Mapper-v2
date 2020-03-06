@@ -84,7 +84,6 @@ class MilSym {
             // If the unit is not flying:
             decorator.setAttributeNS(null, 'd', `${element.d}`);
           }
-
           // If the default decorator fill is missing, default to none
           !element.fill ? decorator.setAttributeNS(null, 'fill', 'none') : decorator.setAttributeNS(null, 'fill', `${element.fill}`);
           // If the default decorator stroke is missing, default to black
@@ -95,6 +94,8 @@ class MilSym {
           !element.strokeLinejoin ? null : decorator.setAttributeNS(null, 'stroke-linejoin', `${element.strokeLinejoin}`);
           // If the transform key does not exist, do nothing, otherwise set the transform value
           !element.transform ? null : decorator.setAttributeNS(null, 'transform', `${element.transform}`);
+          // If the stroke dash array key does not exist, do nothing, otherwise set the stroke dasharray value
+          !element.strokeDashArray ? null : decorator.setAttributeNS(null, 'stroke-dasharray', `${element.strokeDashArray}`);
           decoratorGroup.append(decorator);
         }
         if (key.indexOf('circle') === 0) {
