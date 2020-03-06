@@ -664,86 +664,48 @@
                     </div>
                   </div>
                   <li role="separator" class="mdc-list-divider"></li>
-                  <!-- Base map layer select boxes -->
-                  <div class="mdc-layout-grid">
-                    <div class="mdc-layout-grid__inner mapList">
-                      <!-- National Geographic -->
-                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-natGeo "></div>
-                      <div class="mdc-layout-grid__cell--span-9" data-enabled-map="natGeo">
-                        <ul class="mdc-list mdc-list--two-line">
-                          <li class="mdc-list-item" tabindex="0">
-                            <span class="mdc-list-item__text baseMapListPadding">
-                              <span class="mdc-list-item__primary-text">Default Base Map</span>
-                              <span class="mdc-list-item__secondary-text">Standard map, data provided by National Geographic</span>
-                            </span>
-                            <div class="currentEnabledMapIcon natGeo" data-enabled-checkMark="false"></div>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- Open Street Maps -->
-                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-OSM"></div>
-                      <div class="mdc-layout-grid__cell--span-9" data-enabled-map="openStreetMap">
-                        <ul class="mdc-list mdc-list--two-line">
-                          <li class="mdc-list-item" tabindex="0">
-                            <span class="mdc-list-item__text baseMapListPadding">
-                              <span class="mdc-list-item__primary-text">Secondary Base Map</span>
-                              <span class="mdc-list-item__secondary-text">Standard map, data provided by Open Street Maps</span>
-                            </span>
-                            <div class="currentEnabledMapIcon osm" data-enabled-checkMark="false"></div>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- Toner Lite Map -->
-                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-tonerLite"></div>
-                      <div class="mdc-layout-grid__cell--span-9" data-enabled-map="tonerLite">
-                        <ul class="mdc-list mdc-list--two-line">
-                          <li class="mdc-list-item" tabindex="0">
-                            <span class="mdc-list-item__text baseMapListPadding">
-                              <span class="mdc-list-item__primary-text">Ink Toner Map</span>
-                              <span class="mdc-list-item__secondary-text">Black and white map, data provided by Stamen</span>
-                            </span>
-                            <div class="currentEnabledMapIcon toner" data-enabled-checkMark="true">
-                              <svg class="mdc-list-item__meta" style="width:24px;height:24px" viewBox="0 0 24 24">
-                                <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
-                              </svg>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
 
-                      <!-- World Topographic Map -->
-                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-worldTopo"></div>
-                      <div class="mdc-layout-grid__cell--span-9" data-enabled-map="worldTopo">
-                        <ul class="mdc-list mdc-list--two-line">
-                          <li class="mdc-list-item" tabindex="0">
-                            <span class="mdc-list-item__text baseMapListPadding">
-                              <span class="mdc-list-item__primary-text">Topographic Map</span>
-                              <span class="mdc-list-item__secondary-text">Enhanced topographic map, data provided by ArcGIS</span>
-                            </span>
-                            <div class="currentEnabledMapIcon topo" data-enabled-checkMark="false"></div>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <!-- World Satellite Map -->
-                      <div class="mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--align-bottom mdc-layout-grid--align-right mapIcon-satellite"></div>
-                      <div class="mdc-layout-grid__cell--span-9" data-enabled-map="worldSatellite">
-                        <ul class="mdc-list mdc-list--two-line">
-                          <li class="mdc-list-item" tabindex="0">
-                            <span class="mdc-list-item__text baseMapListPadding">
-                              <span class="mdc-list-item__primary-text">Satellite Map</span>
-                              <span class="mdc-list-item__secondary-text">World satellite map, data provided by ArcGIS</span>
-                            </span>
-                            <div class="currentEnabledMapIcon satellite" data-enabled-checkMark="false"></div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <li role="separator" class="mdc-list-divider"></li>
                   <li class="mdc-list-divider" role="separator"></li>
                   <li class="mdc-list-item" role="menuitem">
                     <span class="mdc-list-item__text">Add space before paragraph</span>
+                  </li>
+                  <li role="separator" class="mdc-list-divider"></li>
+                </ul>
+                <!-- Base map layer select boxes -->
+
+                <ul id="my-list" class="mdc-list demo-list mdc-list--two-line mdc-list--avatar-list">
+                  <li class="mdc-list-item mdc-list-item--selected" tabindex="0" aria-selected="true">
+                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+                    <span class="mdc-list-item__text">
+                      <span class="mdc-list-item__primary-text">Dog Photos</span>
+                      <span class="mdc-list-item__secondary-text">9 Jan 2018</span>
+                    </span>
+                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                  </li>
+                  <li class="mdc-list-item" tabindex="-1">
+                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+                    <span class="mdc-list-item__text">
+                      <span class="mdc-list-item__primary-text">Cat Photos</span>
+                      <span class="mdc-list-item__secondary-text">22 Dec 2017</span>
+                    </span>
+                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                  </li>
+                  <li class="mdc-list-divider" role="separator"></li>
+                  <li class="mdc-list-item" tabindex="-1">
+                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+                    <span class="mdc-list-item__text">
+                      <span class="mdc-list-item__primary-text">Potatoes</span>
+                      <span class="mdc-list-item__secondary-text">30 Noc 2017</span>
+                    </span>
+                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+                  </li>
+                  <li class="mdc-list-item" tabindex="-1">
+                    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+                    <span class="mdc-list-item__text">
+                      <span class="mdc-list-item__primary-text">Carrots</span>
+                      <span class="mdc-list-item__secondary-text">17 Oct 2017</span>
+                    </span>
+                    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
                   </li>
                 </ul>
                 <div class="pre-container">

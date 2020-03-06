@@ -57,6 +57,7 @@
     "@material/button": "^4.0.0",
     "@material/elevation": "^4.0.0",
     "@material/layout-grid": "^4.0.0",
+    "@material/list": "^4.0.0",
     "@material/menu-surface": "^4.0.0",
     "@material/ripple": "^4.0.0",
     "@material/select": "^3.0.0",

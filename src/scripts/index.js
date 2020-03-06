@@ -5,6 +5,7 @@ import { MDCRipple } from '@material/ripple';
 import { MDCSwitch } from '@material/switch';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { MDCMenuSurface } from '@material/menu-surface';
+import { MDCList } from '@material/list';
 import Fuse from 'fuse.js';
 import militarySymbolsObject from './symbolObjects/militarySymbols';
 import mod1Object from './symbolObjects/mod1';
@@ -18,7 +19,9 @@ import {
 import {
   map, generateGZDGrids, generate100kGrids, generate1000meterGrids,
 } from './map/map';
-import { latLngFromMGRS, mapLayers } from './map/Leaflet.DumbMGRS';
+import {
+  latLngFromMGRS, natGeoMap, OSMMap, tonerLiteMap, worldSatelliteMap, worldTopoMap,
+} from './map/Leaflet.DumbMGRS';
 // Import images for base map selection
 import mapIconNatGeo from '../img/map_natGeo_2.jpg';
 import mapIconOpenStreetMap from '../img/map_OSM_2.jpg';
@@ -26,60 +29,74 @@ import mapIconTonerLite from '../img/map_tonerLite_2.jpg';
 import mapIconWorldTopo from '../img/map_worldTopo_2.jpg';
 import mapIconSatellite from '../img/map_worldSatellite_2.jpg';
 
-const mapList = document.querySelectorAll('.mdc-layout-grid__inner.mapList > .mdc-layout-grid__cell--span-3');
-mapList.forEach((item) => {
-  item.addEventListener('click', () => {
-    // item.querySelector('img').setAttribute('width', '124px');
-    // item.querySelector('img').setAttribute('style', 'position:absolute;');
-    // map.addLayer(mapLayers[item.nextElementSibling.dataset.enabledMap]);
-    map.addLayer(mapLayers[item.nextElementSibling.dataset.enabledMap]);
-    item.parentElement.querySelectorAll('.currentEnabledMapIcon').forEach((e) => {
-    //   if (e.dataset.enabledCheckmark === 'true') {
-    //     const clickedMap = item.nextElementSibling.dataset.enabledMap;
-    //     const currentlyEnabledMap = e.parentElement.parentElement.parentElement.dataset.enabledMap;
-    //     map.eachLayer((layer) => {
-    //       if (layer._url) {
-    //         map.removeLayer(layer);
-    //       }
-    //     });
-    //     map.addLayer(mapLayers[clickedMap]);
 
-      item.nextElementSibling.setAttribute('data-enabled-map', 'true');
-      e.parentElement.parentElement.parentElement.setAttribute('data-enabled-map', 'false');
-      item.nextElementSibling.querySelector('.currentEnabledMapIcon').setAttribute('data-enabled-checkmark', 'true');
-      item.nextElementSibling.querySelector('.currentEnabledMapIcon').innerHTML = ` <svg class="mdc-list-item__meta" style="width:24px;height:24px" viewBox="0 0 24 24">
-          <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
-        </svg>`;
-      e.setAttribute('data-enabled-checkmark', 'false');
-      e.innerHTML = '';
-    //     console.log(e);
-      // }
-    });
-  });
-  item.nextElementSibling.addEventListener('click', () => {
-    if (item._url) {
-      // console.log(item);
-    }
-  });
+const list = new MDCList(document.getElementById('my-list'));
+const listItemRipples = list.listElements.map((listItemEl) => new MDCRipple(listItemEl));
+list.singleSelection = true;
+
+list.listen('MDCList:action', (event) => {
+  list.foundation_.adapter_.setAttributeForElementIndex(event.detail.index, 'data-enabled-map', 'true');
+  console.log(list);
 });
 
-// map.on('baselayerchange', (e) => {
-//   console.log(map.removeLayer(e.layer._leaflet_id));
+// const mapList = document.querySelectorAll('.mdc-layout-grid__inner.mapList > .mdc-layout-grid__cell--span-3');
+// mapList.forEach((item) => {
+//   item.addEventListener('click', () => {
+//     // item.querySelector('img').setAttribute('width', '124px');
+//     // item.querySelector('img').setAttribute('style', 'position:absolute;');
+//     // map.addLayer(mapLayers[item.nextElementSibling.dataset.enabledMap]);
+//     // map.removeLayer(natGeoMap);
+//     // map.addLayer(OSMMap);
+//     //! An issue you might be having here is you are exporting all the maps inside an object. So you cant use map.removeLayer(xxx) on them
+//     //! unrestrict your Google API key next time you start again
+//     item.parentElement.querySelectorAll('.currentEnabledMapIcon').forEach((e) => {
+//     //   if (e.dataset.enabledCheckmark === 'true') {
+//     //     const clickedMap = item.nextElementSibling.dataset.enabledMap;
+//     //     const currentlyEnabledMap = e.parentElement.parentElement.parentElement.dataset.enabledMap;
+//     //     map.eachLayer((layer) => {
+//     //       if (layer._url) {
+//     //         map.removeLayer(layer);
+//     //       }
+//     //     });
+//     //     map.addLayer(mapLayers[clickedMap]);
+//       console.log(e.parentElement.parentElement.parentElement);
+
+//       item.nextElementSibling.setAttribute('data-enabled-map', 'true');
+//       e.parentElement.parentElement.parentElement.setAttribute('data-enabled-map', 'false');
+//       item.nextElementSibling.querySelector('.currentEnabledMapIcon').setAttribute('data-enabled-checkmark', 'true');
+//       item.nextElementSibling.querySelector('.currentEnabledMapIcon').innerHTML = `<svg class="mdc-list-item__meta" style="width:24px;height:24px" viewBox="0 0 24 24">
+//           <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+//         </svg>`;
+//       e.setAttribute('data-enabled-checkmark', 'false');
+//       e.innerHTML = '';
+//     //     console.log(e);
+//       // }
+//     });
+//   });
+//   item.nextElementSibling.addEventListener('click', () => {
+//     if (item._url) {
+//       // console.log(item);
+//     }
+//   });
 // });
 
-const natGeo = document.querySelector('.mapIcon-natGeo');
-const osm = document.querySelector('.mapIcon-OSM');
-const tonerLite = document.querySelector('.mapIcon-tonerLite');
-const topo = document.querySelector('.mapIcon-worldTopo');
-const satellite = document.querySelector('.mapIcon-satellite');
+// // map.on('baselayerchange', (e) => {
+// //   console.log(map.removeLayer(e.layer._leaflet_id));
+// // });
+
+// const natGeo = document.querySelector('.mapIcon-natGeo');
+// const osm = document.querySelector('.mapIcon-OSM');
+// const tonerLite = document.querySelector('.mapIcon-tonerLite');
+// const topo = document.querySelector('.mapIcon-worldTopo');
+// const satellite = document.querySelector('.mapIcon-satellite');
 
 
-natGeo.innerHTML = `<img src=${mapIconNatGeo} alt="National Geographic Map Layer" width="100px" loading="lazy" />`;
-osm.innerHTML = `<img src=${mapIconOpenStreetMap} alt="Open Street Maps Layer" width="100px" loading="lazy" />`;
-tonerLite.innerHTML = `<img src=${mapIconTonerLite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
-topo.innerHTML = `<img src=${mapIconWorldTopo} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
-satellite.innerHTML = `<img src=${mapIconSatellite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
-// expand image on hover?
+// natGeo.innerHTML = `<img src=${mapIconNatGeo} alt="National Geographic Map Layer" width="100px" loading="lazy" />`;
+// osm.innerHTML = `<img src=${mapIconOpenStreetMap} alt="Open Street Maps Layer" width="100px" loading="lazy" />`;
+// tonerLite.innerHTML = `<img src=${mapIconTonerLite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
+// topo.innerHTML = `<img src=${mapIconWorldTopo} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
+// satellite.innerHTML = `<img src=${mapIconSatellite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
+// // expand image on hover?
 // link up enabled icon
 // highlight enabled map row
 // hook maps up to the map object
