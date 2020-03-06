@@ -591,7 +591,12 @@ searchAddress.listen('input', () => {
     //! THIS API KEY IS PUBLICLY AVAILABLE
     const apiKey = '&key=AIzaSyBApNoKPUg8e15B_ML72tOjn3HiKg-j6NU';
     const searchQuery = searchAddress.value.toString().split(' ').join('+');
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchQuery}${apiKey}`)
+    const swLat = map.getBounds().getSouthWest().lat;
+    const swLng = map.getBounds().getSouthWest().lng;
+    const neLat = map.getBounds().getNorthEast().lat;
+    const neLng = map.getBounds().getNorthEast().lng;
+
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${searchQuery}${apiKey}&bounds=${swLat},${swLng}|${neLat},${neLng}`)
       .then((response) => response.json())
       .then((data) => {
         const formattedAddress = data.results[0].formatted_address;

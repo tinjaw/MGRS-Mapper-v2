@@ -2,6 +2,16 @@
 
 ---
 
+## 5MAR20
+
+- Removed the mdc-grid on the map selectors and converted it to a list
+- Added the MDCList package
+- Fixed the map selector list
+- Fixed an error with the latLngFromMGRS() function. Now it will throw an error on an invalid LatLng
+- Added Viewport Biasing on Google Geocoder API to retrieve better results
+
+---
+
 ## 2MAR20
 
 - Working on eslint errors
