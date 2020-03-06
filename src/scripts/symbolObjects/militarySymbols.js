@@ -66,7 +66,7 @@ const militarySymbolsObject = {
           },
         };
         // There has to be a better way to do this instead of spamming this const in every affiliation...
-        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        const modifiedTarget = { ...this.friendly, ...propertyToModify };
         return modifiedTarget;
       },
       get hostileTemplated() {
@@ -78,7 +78,7 @@ const militarySymbolsObject = {
             d: 'M50,135L150,65',
           },
         };
-        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        const modifiedTarget = { ...this.friendly, ...propertyToModify };
         return modifiedTarget;
       },
       get pending() {
@@ -92,7 +92,7 @@ const militarySymbolsObject = {
           },
         };
         // So basically all modifiedTarget does is copy the properties of the friendly key. propertyToModify then edits the path_2 key with new data
-        const modifiedTarget = Object.assign({}, this.friendly, propertyToModify);
+        const modifiedTarget = { ...this.friendly, ...propertyToModify };
         return modifiedTarget;
       },
     },
@@ -255,6 +255,69 @@ const militarySymbolsObject = {
       },
       get neutral() {
         return this.friendly;
+      },
+    },
+  },
+  'Air Reconnaissance (Cavalry)': {
+    type: 'Land Unit',
+    flightCapable: true,
+    affiliation: {
+      friendly: {
+        path: {
+          d: 'm 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M25,150L175,50',
+          fill: 'black',
+        },
+        flying: {
+          path: {
+            d: 'm 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M45,150 L139,60',
+            fill: 'black',
+          },
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      hostile: {
+        path: {
+          d: 'm 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M65, 137 L137, 65 Z',
+          fill: 'black',
+        },
+        flying: {
+          path: {
+            d: 'M 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M45,150 L145,60',
+            fill: 'black',
+          },
+        },
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      unknown: {
+        path: {
+          d: 'm 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M65, 137 L137, 65 Z',
+          fill: 'black',
+        },
+        flying: {
+          path: {
+            d: 'M 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M65,150 L135,55',
+            fill: 'black',
+          },
+        },
+      },
+      get pending() {
+        return this.unknown;
+      },
+      neutral: {
+        path: {
+          d: 'm 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M45,155L155,45',
+          fill: 'black',
+        },
+        flying: {
+          path: {
+            d: 'M 60 85 l 40 15 l 40 -15 l 0 30 l -40 -15 l -40 15 l 0 -30 l 27 10 M45,150 L156,50',
+            fill: 'black',
+          },
+        },
       },
     },
   },

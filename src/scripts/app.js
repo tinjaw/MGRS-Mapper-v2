@@ -75,7 +75,16 @@ class MilSym {
         const element = militarySymbolsObject[this._symbol].affiliation[this._affiliation][key];
         if (key.indexOf('path') === 0) {
           const decorator = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          decorator.setAttributeNS(null, 'd', `${element.d}`);
+          //! FLYING DECORATOR ADJUSTMENT
+          // This will adjust the DECORATOR of the symbol if its flying
+          if (this._flying) {
+            const flyingDecorator = militarySymbolsObject[this._symbol].affiliation[this._affiliation].flying[key];
+            decorator.setAttributeNS(null, 'd', `${flyingDecorator.d}`);
+          } else {
+            // If the unit is not flying:
+            decorator.setAttributeNS(null, 'd', `${element.d}`);
+          }
+
           // If the default decorator fill is missing, default to none
           !element.fill ? decorator.setAttributeNS(null, 'fill', 'none') : decorator.setAttributeNS(null, 'fill', `${element.fill}`);
           // If the default decorator stroke is missing, default to black
