@@ -22,13 +22,6 @@ import {
 import {
   latLngFromMGRS, natGeoMap, OSMMap, tonerLiteMap, worldSatelliteMap, worldTopoMap,
 } from './map/Leaflet.DumbMGRS';
-// Import images for base map selection
-import mapIconNatGeo from '../img/map_natGeo_2.jpg';
-import mapIconOpenStreetMap from '../img/map_OSM_2.jpg';
-import mapIconTonerLite from '../img/map_tonerLite_2.jpg';
-import mapIconWorldTopo from '../img/map_worldTopo_2.jpg';
-import mapIconSatellite from '../img/map_worldSatellite_2.jpg';
-
 // This will make all the images in your folder available to webpack
 require.context('../img', true, /^\.\//);
 
@@ -125,7 +118,6 @@ toggleSidebarButton.listen('click', () => {
 // *********************************************************************************** //
 // * Base Map Selection List                                                         * //
 // *********************************************************************************** //
-// add a header above map selector and search bars
 baseMapList.listElements.map((listItemEl) => new MDCRipple(listItemEl));
 baseMapList.singleSelection = true;
 const natGeo = document.querySelector('.mapIcon-natGeo');
@@ -134,11 +126,11 @@ const tonerLite = document.querySelector('.mapIcon-tonerLite');
 const topo = document.querySelector('.mapIcon-worldTopo');
 const satellite = document.querySelector('.mapIcon-satellite');
 
-natGeo.innerHTML = `<img src=${mapIconNatGeo} alt="National Geographic Map Layer" width="100px" loading="lazy" />`;
-osm.innerHTML = `<img src=${mapIconOpenStreetMap} alt="Open Street Maps Layer" width="100px" loading="lazy" />`;
-tonerLite.innerHTML = `<img src=${mapIconTonerLite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
-topo.innerHTML = `<img src=${mapIconWorldTopo} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
-satellite.innerHTML = `<img src=${mapIconSatellite} alt="Toner Lite Map Layer" width="100px" loading="lazy" />`;
+natGeo.innerHTML = '<img src="../img/map_natGeo_2.jpg" alt="National Geographic Map Layer" width="100px" loading="lazy" />';
+osm.innerHTML = '<img src="../img/map_OSM_2.jpg" alt="Open Street Maps Layer" width="100px" loading="lazy" />';
+tonerLite.innerHTML = '<img src="../img/map_tonerLite_2.jpg" alt="Toner Lite Map Layer" width="100px" loading="lazy" />';
+topo.innerHTML = '<img src="../img/map_worldTopo_2.jpg" alt="Toner Lite Map Layer" width="100px" loading="lazy" />';
+satellite.innerHTML = '<img src="../img/map_worldSatellite_2.jpg" alt="Toner Lite Map Layer" width="100px" loading="lazy" />';
 
 baseMapList.listen('MDCList:action', (event) => {
   const mapLayers = [natGeoMap, OSMMap, tonerLiteMap, worldTopoMap, worldSatelliteMap];
@@ -917,7 +909,6 @@ setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost
 MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
 window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
-
 // Hide the text field trash can buttons on page load
 deleteTextFieldButton.root_.style.display = 'none';
 deleteUniqueDesignationButton.root_.style.display = 'none';
@@ -944,6 +935,7 @@ document.querySelectorAll('.tooltip').forEach((key) => {
     selectSymbol.value = chosenTarget.dataset.symbol;
   });
 });
+
 
 // *********************************************************************************** //
 // * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                      * //
@@ -1095,7 +1087,6 @@ selectCommandPost.listen('MDCSelect:change', () => {
   bounceInAnimation('g.commandpost');
 });
 
-
 [selectUnitSize, selectMod1, selectMod2].forEach((key) => {
   key.listen('click', () => {
     // If any of these menus are open, then resize all the symbols
@@ -1163,7 +1154,6 @@ document.querySelector('.newSVG').insertAdjacentHTML('beforebegin',
       Click and Drag the Symbol Onto the Map
     </span>`);
 
-
 // Enable Map Switches on page load
 gzdGridsSwitch.checked = true;
 gzdLabelsSwitch.checked = true;
@@ -1171,6 +1161,7 @@ labels100KSwitch.checked = true;
 grids100KSwitch.checked = true;
 labels1000MSwitch.checked = true;
 grids1000MSwitch.checked = true;
+
 // Open the pushbar on page load
 pushbar.open('rightPushbar');
 
