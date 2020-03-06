@@ -29,6 +29,9 @@ import mapIconTonerLite from '../img/map_tonerLite_2.jpg';
 import mapIconWorldTopo from '../img/map_worldTopo_2.jpg';
 import mapIconSatellite from '../img/map_worldSatellite_2.jpg';
 
+// This will make all the images in your folder available to webpack
+require.context('../img', true, /^\.\//);
+
 
 // *********************************************************************************** //
 // * Initialize Various Material Design Components                                   * //

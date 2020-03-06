@@ -14,6 +14,8 @@
 - Added content and styles to the bottom app bar (section 3)
 - Added content and styles to the bottom pushbar
 - Added About section on surface menu
+- Fixed a webpack error where images cannot be loaded (https://github.com/webpack/webpack/issues/1336)
+- Added a favicon
 
 ---
 
