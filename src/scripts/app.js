@@ -76,8 +76,8 @@ class MilSym {
         if (key.indexOf('path') === 0) {
           const decorator = document.createElementNS('http://www.w3.org/2000/svg', 'path');
           //! FLYING DECORATOR ADJUSTMENT
-          // This will adjust the DECORATOR of the symbol if its flying
-          if (this._flying) {
+          // This will adjust the DECORATOR of the symbol if its flying AND if it has a 'flying' object property
+          if (this._flying && militarySymbolsObject[this._symbol].affiliation[this._affiliation].flying) {
             const flyingDecorator = militarySymbolsObject[this._symbol].affiliation[this._affiliation].flying[key];
             decorator.setAttributeNS(null, 'd', `${flyingDecorator.d}`);
           } else {
