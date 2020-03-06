@@ -8,5 +8,6 @@ npm-debug.log
 yarn-error.log
 yarn.lock
 .yarnclean
+webpack-stats.json
 # remove build before production!!
 build

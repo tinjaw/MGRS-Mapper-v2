@@ -41,7 +41,7 @@ require.context('../img', true, /^\.\//);
 const topAppBar = new MDCTopAppBar(document.querySelector('.mdc-top-app-bar'));
 // MDC - Menu Surface component - The "Open Menu" button on the Top App Bar
 const menuSurface = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.ms2'));
-const menuSurfaceButton = new MDCRipple(document.querySelector('.menu-surface-button'));
+const menuSurfaceButton = new MDCRipple(document.querySelector('.mdc-button.menu-surface-button'));
 // MDC - Button component - Toggles the Pushbar opened or closed
 const toggleSidebarButton = new MDCRipple(document.querySelector('.mdc-top-app-bar__navigation-icon'));
 // MDC - Text Field component - Zoom to MGRS Coordinates

@@ -648,7 +648,13 @@
           <!-- Menu Surface -->
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <div class="menu-button-container" style="position: relative;">
-              <button class="mdc-button menu-surface-button">Open menu</button>
+              <div class="mdc-touch-target-wrapper">
+                <button class="mdc-button menu-surface-button mdc-button--touch">
+                  <div class="mdc-button__ripple"></div>
+                  <span class="mdc-button__label">Open Menu</span>
+                  <div class="mdc-button__touch"></div>
+                </button>
+              </div>
               <div class="mdc-menu mdc-menu-surface ms2" tabindex="-1">
                 <div class="menuSurfaceHeadline">
                   <p class="mdc-typography--headline6">Search Address or MGRS Coordinates</p>
@@ -801,7 +807,13 @@
       <div class="app-bar-bottom__row">
         <section class="app-bar-bottom__section app-bar-bottom__section--align-start">
           <div class="menu-button-container" style="position: relative;">
-            <button class="mdc-button ms1 menu-surface-button">Toggle Grid Overlays</button>
+            <div class="mdc-touch-target-wrapper">
+              <button class="mdc-button ms1 menu-surface-button mdc-button--touch">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">Toggle Grid Overlays</span>
+                <div class="mdc-button__touch"></div>
+              </button>
+            </div>
             <div class="mdc-menu-surface--anchor">
               <div class="mdc-menu mdc-menu-surface ms1" tabindex="-1">
                 <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical">

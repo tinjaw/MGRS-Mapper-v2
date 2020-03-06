@@ -19,9 +19,12 @@
 - Began adding symbols to list (BIG MOMENT HERE)
 - fixed Fuse.js search threshold from 0.6 to 0.2
 - Added logic to modify decorators on flying symbols
-- You should add a hover effect on the social media icons
+- Added hover effect on the social media icons
 - Starting number of symbols: 18
 - Ending number of symbols: 154
+- Index.scss is a gigantic file, this needs to be broken down or tree shook
+- militarySymbols object file should be loaded via webworkers. This project is about to get massive
+- Fixed MDCRipple effect on surface menu buttons
 
 ---
 

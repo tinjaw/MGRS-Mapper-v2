@@ -351,6 +351,14 @@ footer.bottom-about {
       display: flex;
       width: inherit;
     }
+    .socialIcons a {
+      transition: mdc-animation-exit-permanent(/* $name: */ transform, /* $duration: */ 105ms, /* $delay: */ 25ms);
+      transform: scale(1);
+    }
+    .socialIcons a:hover {
+      animation: mdc-animation-enter(/* $name: */ transform, /* $duration: */ 55ms);
+      transform: scale(1.2);
+    }
   }
 }
 
