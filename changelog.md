@@ -2,6 +2,14 @@
 
 ---
 
+## 7MAR202
+
+- Flying equipment symbols need to be able to morphed into flying outlines
+- Starting number of symbols: 154
+- Ending number of symbols: 278
+
+---
+
 ## 5MAR20
 
 - Removed the mdc-grid on the map selectors and converted it to a list

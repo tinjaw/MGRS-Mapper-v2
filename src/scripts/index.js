@@ -393,7 +393,6 @@ const searchResults = debounce(() => {
     // Setting z-index on trash icon makes it clickable
     deleteTextFieldButton.root_.style.zIndex = '10';
     result.forEach((e) => {
-      console.log(e);
       const matchSet = [...new Set(e.matches)];
       const mdcList = document.querySelector('.mdc-list.symbol-list');
       if (selectSymbol.menu_.items) {
