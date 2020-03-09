@@ -47,6 +47,9 @@ const searchAddressIcon = new MDCRipple(document.querySelector('.mdc-button.sear
 const deleteSearchAddressButton = new MDCTextFieldIcon(searchAddressIcon.root_);
 // MDC - Select Menu component - Contains base maps
 const baseMapList = new MDCList(document.getElementById('map-list'));
+// MDC - Button Component - Download Symbol Buttons
+const dlSymbolAsSVG = new MDCRipple(document.querySelector('.mdc-button.dlSymbolAsSVG'));
+const dlSymbolAsPNG = new MDCRipple(document.querySelector('.mdc-button.dlSymbolAsPNG'));
 // MDC - Text Field component - Search for various symbols by name
 const searchField = new MDCTextField(document.querySelector('.searchSymbols'));
 const searchFieldIcon = new MDCRipple(document.querySelector('.mdc-button.searchFieldDeleteIcon'));
@@ -116,7 +119,7 @@ toggleSidebarButton.listen('click', () => {
 
 
 // *********************************************************************************** //
-// * Base Map Selection List                                                         * //
+// * Top App Bar - Menu Surface - Base Map Selection List                            * //
 // *********************************************************************************** //
 baseMapList.listElements.map((listItemEl) => new MDCRipple(listItemEl));
 baseMapList.singleSelection = true;
@@ -139,25 +142,70 @@ baseMapList.listen('MDCList:action', (event) => {
   const greenCheckmark = `<svg class="mdc-list-item__meta" style="width:24px;height:24px" viewBox="0 0 24 24">
     <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
   </svg>`;
-
   // Enable the green checkmark on the selected map
   selectedMap.querySelector('.mdc-list-item__meta').innerHTML = greenCheckmark;
-
   // Remove the green check mark from all other maps
   notSelectedMaps.forEach((nsm) => {
     const checkboxIndicator = nsm.lastElementChild;
     checkboxIndicator.innerHTML = '';
   });
-
   // Remove the currently enabled map
   mapLayers.forEach((m) => {
     if (map.hasLayer(m)) {
       map.removeLayer(m);
     }
   });
-
   // Add the newly selected map
   map.addLayer(mapLayers[event.detail.index]);
+});
+
+
+// *********************************************************************************** //
+// * Top App Bar - Menu Surface - Download Symbol Buttons                            * //
+// *********************************************************************************** //
+// Download the symbol as SVG
+dlSymbolAsSVG.listen('click', () => {
+  const symbol = document.querySelector('.newSVG > svg');
+  // Remove spaces in symbol name
+  const symbolName = JSON.parse(symbol.dataset.symbolInfo).Symbol.replace(/\s/g, '-');
+  symbol.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  const svgData = symbol.outerHTML;
+  const preface = '<?xml version="1.0" standalone="no"?>\r\n';
+  const svgBlob = new Blob([preface, svgData], { type: 'image/svg+xml;charset=utf-8' });
+  const svgUrl = URL.createObjectURL(svgBlob);
+  const downloadLink = document.createElement('a');
+  downloadLink.href = svgUrl;
+  downloadLink.download = `${symbolName}_MGRS-Mapper.svg`;
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+});
+
+// Download the symbol as PNG
+dlSymbolAsPNG.listen('click', () => {
+  const symbol = document.querySelector('.newSVG > svg');
+  const symbolName = JSON.parse(symbol.dataset.symbolInfo).Symbol.replace(/\s/g, '-');
+  const svgData = new XMLSerializer().serializeToString(symbol);
+  const canvas = document.createElement('canvas');
+  const svgSize = symbol.getBoundingClientRect();
+  canvas.width = svgSize.width * 3;
+  canvas.height = svgSize.height * 3;
+  canvas.style.width = svgSize.width;
+  canvas.style.height = svgSize.height;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(3, 3);
+  const img = document.createElement('img');
+  img.setAttribute('src', `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgData)))}`);
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0);
+    const canvasData = canvas.toDataURL('image/png', 1);
+    const downloadLink = document.createElement('a');
+    downloadLink.href = canvasData;
+    downloadLink.download = `${symbolName}_MGRS-Mapper.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
 });
 
 

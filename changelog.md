@@ -2,7 +2,13 @@
 
 ---
 
-## 7MAR202
+## 9MAR20
+
+- Added download symbol buttons for SVG and PNG symbols. Incorporated them into the Menu Surface and added a tooltip for people who don't know what the difference is between an SVG and PNG file... Which is pretty much everyone
+
+---
+
+## 7MAR20
 
 - Flying equipment symbols need to be able to morphed into flying outlines
 - Starting number of symbols: 154

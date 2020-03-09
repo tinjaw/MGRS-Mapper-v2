@@ -143,6 +143,40 @@ li.mdc-list-item.map-item {
   padding: 0.2rem 1.4rem 0.2rem 1.4rem;
 }
 
+// Download Buttons
+.tooltipDL {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  p > i.material-icons {
+    display: inline-block;
+    vertical-align: sub;
+  }
+}
+
+.tooltipDL .tooltipDLText {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+  width: 300px;
+  color: black;
+  background: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 105%;
+  left: 50%;
+  margin-left: -150px;
+}
+
+.tooltipDL:hover .tooltipDLText {
+  visibility: visible;
+  opacity: 1;
+  border: 1px solid black;
+}
+
 // *********************************************************************************** //
 // * Dismissible Drawer Icon                                                         * //
 // *********************************************************************************** //
