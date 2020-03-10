@@ -29,6 +29,417 @@ const militarySymbolsObject = {
     },
   },
   //! EQUIPMENT
+  'Unspecified Weapon': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Flamethrower: {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 90,135 0,-70 c 0,-15 20,-15 20,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Grenade Launcher': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 M85,90a15,15 0 1,0 30,0a15,15 0 1,0 -30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Grenade Launcher - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 M85,90a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 0,30 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Grenade Launcher - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '90',
+          r: '15',
+          fill: 'none',
+        },
+        path_2: {
+          d: 'm 85,125 30,0 m -30,-10 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Grenade Launcher - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '90',
+          r: '15',
+          fill: 'none',
+        },
+        path_2: {
+          d: 'm 85,110 30,0 m -30,-20 30,0 m -30,10 30,0',
+          transform: 'translate(0,20)',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Gun': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-80 0,65 m 15,-45 0,40 m -30,-40 0,40z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Gun - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-80 0,65 m 15,-45 0,40 m -30,-40 0,40z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Gun - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-80 0,65 m 15,-45 0,40 m -30,-40 0,40z m 0,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Gun - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-80 0,65 m 15,-45 0,40 m -30,-40 0,40z m 0,10 30,0z m 0,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antitank Gun': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 m -15,-80 0,65 m -15,-45 0,40 m 30,-40 0,40z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antitank Gun - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 m -15,-80 0,65 m -15,-45 0,40 m 30,-40 0,40z m -30,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antitank Gun - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 m -15,-80 0,65 m -15,-45 0,40 m 30,-40 0,40z m -30,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antitank Gun - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 m -15,-80 0,65 m -15,-45 0,40 m 30,-40 0,40z m -30,10 30,0z m 0,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   'Direct Fire Gun': {
     type: 'Equipment',
     affiliation: {
@@ -2451,43 +2862,6 @@ const militarySymbolsObject = {
       friendly: {
         path_1: {
           d: 'm 100,132 0,-10 -35,0 0,-50 70,0 0,50 -35,0 m -25,10 50,0',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  'Grenade Launcher - Medium': {
-    type: 'Equipment',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 100,60 0,80 M 85,75 100,60 115,75',
-        },
-        circle_2: {
-          cx: '100',
-          cy: '90',
-          r: '15',
-          fill: 'none',
-        },
-        path_2: {
-          d: 'm 85,125 30,0 m -30,-10 30,0',
         },
       },
       get friendlyTemplated() {
