@@ -5,6 +5,8 @@
 ## 9MAR20
 
 - Added download symbol buttons for SVG and PNG symbols. Incorporated them into the Menu Surface and added a tooltip for people who don't know what the difference is between an SVG and PNG file... Which is pretty much everyone
+- Tried and failed to incorporate a Drawing toolbar for Leaflet. All the plugins that are available are heavy and don't allow you to include text. This will be a project for later.
+- Consider Leaflet Google Mutant https://www.npmjs.com/package/leaflet.gridlayer.googlemutant
 
 ---
 

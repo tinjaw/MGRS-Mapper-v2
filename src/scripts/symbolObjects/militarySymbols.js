@@ -29,6 +29,1490 @@ const militarySymbolsObject = {
     },
   },
   //! EQUIPMENT
+  'Direct Fire Gun': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 m 15,-60 0,40 m -30,-40 0,40z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Direct Fire Gun - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 m 15,-60 0,40 m -30,-40 0,40z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Direct Fire Gun - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 m 15,-60 0,40 m -30,-40 0,40z m 0,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Direct Fire Gun - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 m 15,-60 0,40 m -30,-40 0,40z m 0,10 30,0z m 0,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Recoiless Gun': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m 0,5 0,40 m -30,-40 0,40 m 15,-60 0,80z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Recoiless Gun - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m 0,5 0,40 m -30,-40 0,40 m 15,-60 0,80z m -15,30 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Recoiless Gun - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m 0,5 0,40 m -30,-40 0,40 m 15,-60 0,80z m -15,30 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Recoiless Gun - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m 0,5 0,40 m -30,-40 0,40 m 15,-60 0,80z m -15,30 30,0z m 0,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Howitzer: {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,80 0,40 m -30,-40 0,40 m 15,-60 0,60 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Howitzer (Less than 120mm)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,80 0,40 m -30,-40 0,40 m 15,-60 0,60 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0z m -5,-25 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Howitzer (Between 120mm & 160mm)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,80 0,40 m -30,-40 0,40 m 15,-60 0,60 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0z m -5,-25 30,0z m 0,-10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Howitzer (Between 160mm & 210mm)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,80 0,40 m -30,-40 0,40 m 15,-60 0,60 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0z m -5,-20 30,0z m 0,-10 30,0z m 0,-10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Howitzer (>210mm & very heavy)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,80 0,40 m -30,-40 0,40 m 15,-60 0,60 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0z m -5,-15 30,0z m 0,-10 30,0z m 0,-10 30,0z m 0,-10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Machine Gun': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 m -30,65 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Machine Gun - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 m -30,65 30,0 m -30,-20 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Machine Gun - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 m -30,65 30,0 m -30,-20 30,0z m 0,-15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Machine Gun - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 m -30,65 30,0 m -30,-20 30,0z m 0,-15 30,0z m 0,-15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,140 0,-80 m -15,80 0,-65 c 0,-20 30,-20 30,0 l 0,65',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,140 0,-80 m -15,80 0,-65 c 0,-20 30,-20 30,0 l 0,65 m -30,-27 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,140 0,-80 m -15,80 0,-65 c 0,-20 30,-20 30,0 l 0,65 m -30,-27 30,0 m -30,-10 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,140 0,-80 m -15,80 0,-65 c 0,-20 30,-20 30,0 l 0,65 m -30,-27 30,0 m -30,-10 30,0 m -30,-10 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Missile Launcher (AD)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-15 0,-65 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Missile Launcher (AD) - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-15 0,-65 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50 m -30,-30 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Missile Launcher (AD) - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-15 0,-65 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50 m -30,-25 30,0 m -30,-10 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Defense Missile Launcher (AD) - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0 c 0,-20 -30,-20 -30,0 z m 15,-15 0,-65 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50 m -30,-20 30,0 m -30,-10 30,0 m -30,-10 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher Anti-Tank (AT)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 M 85,120 85,75 c 0,-20 30,-20 30,0 l 0,45 m -15,5 0,-65',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher Anti-Tank (AT) - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 M 85,120 85,75 c 0,-20 30,-20 30,0 l 0,45 m -15,5 0,-65 m -15,33 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher Anti-Tank (AT) - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 M 85,120 85,75 c 0,-20 30,-20 30,0 l 0,45 m -15,5 0,-65 m -15,27 30,0z m 0,10 30,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Missile Launcher Anti-Tank (AT) - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 15,-15 15,15 M 85,120 85,75 c 0,-20 30,-20 30,0 l 0,45 m -15,5 0,-65 m -15,22 30,0z m 0,10 30,0z m 0,10 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Surface to Surface Missile Launcher': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0  z m 15,0 0,-85 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Surface to Surface Missile Launcher - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0  z m 15,0 0,-85 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50 m -30,-27 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Surface to Surface Missile Launcher - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0  z m 15,0 0,-85 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50 m -30,-22 30,0z m 0,-15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Surface to Surface Missile Launcher - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,140 30,0  z m 15,0 0,-85 m -15,65 0,-50 c 0,-20 30,-20 30,0 l 0,50 m -30,-15 30,0z m 0,-15 30,0z m 0,-15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Mortar: {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,60 M 85,75 100,60 115,75 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Mortar (60mm or Less)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,60 M 85,75 100,60 115,75 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0 m -5,-30 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Mortar (Between 60mm & 107mm)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,60 M 85,75 100,60 115,75 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0 m -5,-25 30,0z m 0,-15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Mortar (Greater than 107mm)': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,60 M 85,75 100,60 115,75 M90,130a10,10 0 1,0 20,0a10,10 0 1,0 -20,0 m -5,-21 30,0z m 0,-12 30,0z m 0,-12 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Rifle: {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rifle - Single Shot': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 m -30,25 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rifle - Semi-Automatic': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 m -30,20 30,0z m 0,15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rifle - Automatic': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,60 0,80 M 85,75 100,60 115,75 m -30,15 30,0z m 0,15 30,0z m 0,15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Single Rocket Launcher': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Single Rocket Launcher - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85 m -30,22 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Single Rocket Launcher - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85 m -30,18 30,0z m 0,15 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Single Rocket Launcher - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,75 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85 m -30,15 30,0z m 0,12 30,0z m 0,12 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Multiple Rocket Launcher': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,90 0,40 m -30,-40 0,40 m 0,-55 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Multiple Rocket Launcher - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,90 0,40 m -30,-40 0,40 m 0,-55 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85 m -30,25 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Multiple Rocket Launcher - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,90 0,40 m -30,-40 0,40 m 0,-55 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85 m -30,19 30,0z m 0,12 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Multiple Rocket Launcher - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 115,90 0,40 m -30,-40 0,40 m 0,-55 15,-15 15,15 m -15,-5 0,70 M 85,85 100,70 115,85 m -30,13 30,0z m 0,12 30,0z m 0,12 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Anti-tank Rocket Launcher': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,70 15,-15 15,15 m -15,-15 0,70 M 85,80 100,65 115,80 m -30,60 15,-15 15,15',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Anti-tank Rocket Launcher - Light': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,70 15,-15 15,15 m -15,-15 0,70 M 85,80 100,65 115,80 m -30,60 15,-15 15,15 m -30,-37 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Anti-tank Rocket Launcher - Medium': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,70 15,-15 15,15 m -15,-15 0,70 M 85,80 100,65 115,80 m -30,60 15,-15 15,15 m -30,-45 30,0z m 0,12 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Anti-tank Rocket Launcher - Heavy': {
+    type: 'Equipment',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 85,70 15,-15 15,15 m -15,-15 0,70 M 85,80 100,65 115,80 m -30,60 15,-15 15,15 m -30,-50 30,0z m 0,12 30,0z m 0,12 30,0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   'Nonlethal Weapon': {
     type: 'Equipment',
     affiliation: {
@@ -989,7 +2473,7 @@ const militarySymbolsObject = {
       },
     },
   },
-  'Weapon System - Grenade Launcher - Medium': {
+  'Grenade Launcher - Medium': {
     type: 'Equipment',
     affiliation: {
       friendly: {

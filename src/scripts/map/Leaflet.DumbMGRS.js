@@ -3,7 +3,6 @@
 //* * This took me 340.33 hours to make. I worked on it from 18NOV19 to 14FEB20 */
 import L from 'leaflet';
 
-
 const natGeoMap = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
   cursor: true,
   maxZoom: 16,
