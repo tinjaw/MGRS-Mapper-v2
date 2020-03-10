@@ -33,6 +33,82 @@ const mod2Object = {
       },
     },
   },
+  'Test Facility': {
+    type: 'Installation',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'TEST',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.fontSize = '19';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Premature IED': {
+    type: 'Activity',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'P',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.fontSize = '19';
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.fontSize = '19';
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
   Rail: {
     type: 'Mobility',
     affiliation: {

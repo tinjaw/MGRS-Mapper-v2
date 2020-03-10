@@ -11449,6 +11449,52 @@ const militarySymbolsObject = {
       },
     },
   },
+  Screen: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 220 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+        },
+        path_2: {
+          d: 'm 20 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+          transform: 'scale(-1,1)',
+        },
+        text_1: {
+          symbolText: 'S',
+          x: '200',
+          y: '115',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+        text_2: {
+          symbolText: 'S',
+          x: '0',
+          y: '115',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
 };
 
 export default militarySymbolsObject;

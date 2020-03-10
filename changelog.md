@@ -8,9 +8,10 @@
 - Tried and failed to incorporate a Drawing toolbar for Leaflet. All the plugins that are available are heavy and don't allow you to include text. This will be a project for later.
 - Consider Leaflet Google Mutant https://www.npmjs.com/package/leaflet.gridlayer.googlemutant
 - Added all of the base symbols
-- Added all of the Mod 1 symbols
+- Added all of the Mod 1 symbols and made adjustments on affiliation type
 - Starting number of symbols: 278
-- Ending number of symbols: 457
+- Ending number of symbols: 460
+- TODO: When dropping a symbol on a map it remains selected. So when you try and drag another symbol on the map you can't drop it on the map
 
 ---
 

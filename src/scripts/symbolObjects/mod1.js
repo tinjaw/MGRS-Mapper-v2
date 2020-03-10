@@ -64,7 +64,7 @@ const mod1Object = {
       },
     },
   },
-  'Air Assault': {
+  'Aerial Assault': {
     type: 'Aviation',
     affiliation: {
       friendly: {
