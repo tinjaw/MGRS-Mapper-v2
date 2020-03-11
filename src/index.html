@@ -955,13 +955,13 @@
         </section>
       </div>
     </footer>
-    <!-- EXPERIMENTAL FIELD -->
+    <!-- Leaflet Control - This will allow users to add text to the map -->
     <div class="mdc-menu-surface addTextToMap--Menu mdc-elevation--z24">
       <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
           <div class="mdc-layout-grid__cell--span-7">
             <label class="mdc-text-field mdc-text-field--outlined addTextToMap--TextField">
-              <input type="text" class="mdc-text-field__input" aria-labelledby="addTextToMapInputLabel" aria-controls="addTextToMapID" aria-describedby="addTextToMapID" />
+              <input type="text" class="mdc-text-field__input" aria-labelledby="addTextToMapInputLabel" aria-controls="addTextToMapID" aria-describedby="addTextToMapID" data-color="black" />
               <div class="mdc-notched-outline">
                 <div class="mdc-notched-outline__leading"></div>
                 <div class="mdc-notched-outline__notch">
@@ -977,6 +977,87 @@
               <i class="material-icons mdc-button__icon" aria-hidden="true">text_rotation_none</i>
               <span class="mdc-button__label" style="margin:-2px;">Add to Map</span>
             </button>
+          </div>
+          <div class="mdc-layout-grid__cell--span-12">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell--span-2">
+                <button class="mdc-icon-button userTextColorSelection black mdc-icon-button--on" data-color="black" aria-label="Black Text">
+                  <svg class="mdc-icon-button__icon">
+                    <circle cx="12" cy="12" r="10" fill="black" opacity="0.2" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                  <svg class="mdc-icon-button__icon mdc-icon-button__icon--on" height="24" viewBox="0 0 24 24" width="24" aria-pressed="true">
+                    <circle cx="12" cy="12" r="10" fill="black" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="mdc-layout-grid__cell--span-2">
+                <button class="mdc-icon-button userTextColorSelection red mdc-icon-button--on" data-color="red" aria-label="Red Text">
+                  <svg class="mdc-icon-button__icon">
+                    <circle cx="12" cy="12" r="10" fill="red" opacity="0.2" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                  <svg class="mdc-icon-button__icon mdc-icon-button__icon--on" height="24" viewBox="0 0 24 24" width="24" aria-pressed="true">
+                    <circle cx="12" cy="12" r="10" fill="red" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="mdc-layout-grid__cell--span-2">
+                <button class="mdc-icon-button userTextColorSelection purple mdc-icon-button--on" data-color="purple" aria-label="Purple Text">
+                  <svg class="mdc-icon-button__icon">
+                    <circle cx="12" cy="12" r="10" fill="purple" opacity="0.2" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                  <svg class="mdc-icon-button__icon mdc-icon-button__icon--on" height="24" viewBox="0 0 24 24" width="24" aria-pressed="true">
+                    <circle cx="12" cy="12" r="10" fill="purple" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="mdc-layout-grid__cell--span-2">
+                <button class="mdc-icon-button userTextColorSelection green mdc-icon-button--on" data-color="green" aria-label="Green Text">
+                  <svg class="mdc-icon-button__icon">
+                    <circle cx="12" cy="12" r="10" fill="green" opacity="0.2" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                  <svg class="mdc-icon-button__icon mdc-icon-button__icon--on" height="24" viewBox="0 0 24 24" width="24" aria-pressed="true">
+                    <circle cx="12" cy="12" r="10" fill="green" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="mdc-layout-grid__cell--span-2">
+                <button class="mdc-icon-button userTextColorSelection blue mdc-icon-button--on" data-color="blue" aria-label="Blue Text">
+                  <svg class="mdc-icon-button__icon">
+                    <circle cx="12" cy="12" r="10" fill="#74DCFF" opacity="0.2" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                  <svg class="mdc-icon-button__icon mdc-icon-button__icon--on" height="24" viewBox="0 0 24 24" width="24" aria-pressed="true">
+                    <circle cx="12" cy="12" r="10" fill="#74DCFF" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="mdc-layout-grid__cell--span-2">
+                <button class="mdc-icon-button userTextColorSelection yellow mdc-icon-button--on" data-color="yellow" aria-label="Yellow Text">
+                  <svg class="mdc-icon-button__icon">
+                    <circle cx="12" cy="12" r="10" fill="yellow" opacity="0.2" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                  <svg class="mdc-icon-button__icon mdc-icon-button__icon--on" height="24" viewBox="0 0 24 24" width="24" aria-pressed="true">
+                    <circle cx="12" cy="12" r="10" fill="yellow" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

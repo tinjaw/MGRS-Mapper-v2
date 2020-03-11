@@ -6,6 +6,7 @@ import { MDCSwitch } from '@material/switch';
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { MDCMenuSurface } from '@material/menu-surface';
 import { MDCList } from '@material/list';
+import { MDCIconButtonToggle } from '@material/icon-button';
 import Fuse from 'fuse.js';
 import militarySymbolsObject from './symbolObjects/militarySymbols';
 import mod1Object from './symbolObjects/mod1';
@@ -92,6 +93,14 @@ const grids100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1
 const labels1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels1000MSwitch'));
 const grids1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1000MSwitch'));
 //! control
+const colorSelectionBlack = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.black'));
+const colorSelectionRed = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.red'));
+
+const colorSelectionPurple = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.purple'));
+const colorSelectionGreen = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.green'));
+const colorSelectionBlue = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.blue'));
+const colorSelectionYellow = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.yellow'));
+
 
 const addTextToMapControl = new MDCRipple(document.querySelector('.mdc-icon.addTextToMap'));
 const addTextToMapMenu = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.addTextToMap--Menu'));
@@ -107,6 +116,55 @@ addTextToMapControl.listen('click', (event) => {
   addTextToMapMenu.setAbsolutePosition(10, 163);
   addTextToMapMenu.open();
 });
+
+colorSelectionBlack.on = true;
+colorSelectionRed.on = false;
+colorSelectionPurple.on = false;
+colorSelectionGreen.on = false;
+colorSelectionBlue.on = false;
+colorSelectionYellow.on = false;
+const colorSelection = [colorSelectionBlack, colorSelectionRed, colorSelectionPurple, colorSelectionGreen, colorSelectionBlue, colorSelectionYellow];
+
+colorSelection.forEach((color) => {
+  color.listen('MDCIconButtonToggle:change', (event) => {
+    const chosenColor = event.target.dataset.color;
+    colorSelection.forEach((c) => c.on = false);
+
+    switch (chosenColor) {
+      case 'black':
+        addTextToMapInput.root_.control.dataset.color = 'black';
+        colorSelectionBlack.on = true;
+        break;
+      case 'red':
+        addTextToMapInput.root_.control.dataset.color = 'red';
+        colorSelectionRed.on = true;
+        break;
+      case 'purple':
+        addTextToMapInput.root_.control.dataset.color = 'purple';
+        colorSelectionPurple.on = true;
+        break;
+      case 'green':
+        addTextToMapInput.root_.control.dataset.color = 'green';
+        colorSelectionGreen.on = true;
+        break;
+      case 'blue':
+        addTextToMapInput.root_.control.dataset.color = 'blue';
+        colorSelectionBlue.on = true;
+        break;
+      case 'yellow':
+        addTextToMapInput.root_.control.dataset.color = 'yellow';
+        colorSelectionYellow.on = true;
+        break;
+      default:
+        break;
+    }
+
+    colorSelection.forEach((c) => c.root_.classList.remove('mdc-elevation--z4'));
+    color.root_.classList.add('mdc-elevation--z4');
+  });
+});
+
+
 // *********************************************************************************** //
 // * Top App Bar                                                                     * //
 // *********************************************************************************** //
