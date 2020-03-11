@@ -47,8 +47,9 @@ map.addLayer(natGeoMap);
 window.map = map;
 window.L = L;
 
+
 // *********************************************************************************** //
-// * Leaflet Text Marker Controll                                                    * //
+// * Leaflet Control - User Text Input                                               * //
 // *********************************************************************************** //
 L.Control.TextMarker = L.Control.extend({
   onAdd(map) {
@@ -74,6 +75,7 @@ L.control.textMarker = function (opts) {
 
 // Instantiate this control on page load. Logic for this is used in moveSymbol.js
 L.control.textMarker({ position: 'topleft' }).addTo(map);
+
 
 // *********************************************************************************** //
 // * Leaflet.DumbMGRS - Forked version of mgrs.js (https://github.com/proj4js/mgrs)  * //

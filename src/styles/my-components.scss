@@ -48,9 +48,16 @@ body {
   margin: 0px 0px 0px 0px;
 }
 
-//! control
+// *********************************************************************************** //
+// * Leaflet Control - User Text Add                                                 * //
+// *********************************************************************************** //
+.userTextColorSelection {
+  background-color: '';
+}
+
 .userTextColorSelection[aria-pressed='true'] {
   border-radius: 50%;
+  transition: mdc-animation-exit-permanent(/* $name: */ background-color, /* $duration: */ 175ms, /* $delay: */ 25ms);
 }
 
 // *********************************************************************************** //

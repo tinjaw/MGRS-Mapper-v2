@@ -92,43 +92,46 @@ const labels100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.label
 const grids100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids100KSwitch'));
 const labels1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels1000MSwitch'));
 const grids1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1000MSwitch'));
-//! control
+// MDC - Icon Button - Colored Icon buttons for the User Text Leaflet Control
 const colorSelectionBlack = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.black'));
 const colorSelectionRed = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.red'));
-
 const colorSelectionPurple = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.purple'));
 const colorSelectionGreen = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.green'));
 const colorSelectionBlue = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.blue'));
 const colorSelectionYellow = new MDCIconButtonToggle(document.querySelector('.mdc-icon-button.userTextColorSelection.yellow'));
-
-
+// MDC - Surface Menu/Button/TextField - Components for the User Text Leaflet Control Surface Menu
 const addTextToMapControl = new MDCRipple(document.querySelector('.mdc-icon.addTextToMap'));
 const addTextToMapMenu = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.addTextToMap--Menu'));
 const addTextToMapSubmit = new MDCRipple(document.querySelector('.mdc-button.addTextToMap--Button'));
 const addTextToMapInput = new MDCTextField(document.querySelector('.mdc-text-field.addTextToMap--TextField'));
+
 // Initial military symbol on page load
 // eslint-disable-next-line import/no-mutable-exports
 let MainMS = new MilSym('.newSVG', 'Default Land Unit', 'friendly');
-window.addTextToMapMenu = addTextToMapMenu;
 
+
+// *********************************************************************************** //
+// * Leaflet Control - User Text Input Surface Menu                                  * //
+// *********************************************************************************** //
+// Set the User Text Input menu position when the Leaflet Control is clicked
 addTextToMapControl.listen('click', (event) => {
   event.target.classList.add('mdc-menu-surface--anchor');
   addTextToMapMenu.setAbsolutePosition(10, 163);
   addTextToMapMenu.open();
 });
 
-colorSelectionBlack.on = true;
-colorSelectionRed.on = false;
-colorSelectionPurple.on = false;
-colorSelectionGreen.on = false;
-colorSelectionBlue.on = false;
-colorSelectionYellow.on = false;
 const colorSelection = [colorSelectionBlack, colorSelectionRed, colorSelectionPurple, colorSelectionGreen, colorSelectionBlue, colorSelectionYellow];
 
 colorSelection.forEach((color) => {
   color.listen('MDCIconButtonToggle:change', (event) => {
     const chosenColor = event.target.dataset.color;
-    colorSelection.forEach((c) => c.on = false);
+    // on change, turn off all colors, remove elevation and background colors
+    colorSelection.forEach((c) => {
+      const colorRemove = c;
+      colorRemove.on = false;
+      colorRemove.root_.classList.remove('mdc-elevation--z8');
+      colorRemove.root_.style.backgroundColor = '';
+    });
 
     switch (chosenColor) {
       case 'black':
@@ -159,9 +162,25 @@ colorSelection.forEach((color) => {
         break;
     }
 
-    colorSelection.forEach((c) => c.root_.classList.remove('mdc-elevation--z4'));
-    color.root_.classList.add('mdc-elevation--z4');
+    color.root_.classList.add('mdc-elevation--z8');
+    // Adjust result for blue, since I am using a light blue
+    const bgColorStyle = color.root_.style;
+    chosenColor === 'blue' ? bgColorStyle.backgroundColor = '#74DCFF' : bgColorStyle.backgroundColor = chosenColor;
   });
+});
+
+// When a user adds text to a map, close the user text menu
+addTextToMapSubmit.listen('click', () => {
+  addTextToMapMenu.close();
+});
+
+// Disable the user text input button if there is no text in the text box, enable it if there is
+addTextToMapInput.listen('keyup', () => {
+  if (addTextToMapInput.value.length >= 1) {
+    addTextToMapSubmit.root_.disabled = false;
+  } else {
+    addTextToMapSubmit.root_.disabled = true;
+  }
 });
 
 

@@ -297,7 +297,7 @@ function symbolDataExport(chosenTarget, markerElement) {
 
 
 // *********************************************************************************** //
-// * Leaflet Control - Text Marker                                                   * //
+// * Leaflet Control - User Text Input Surface Menu                                  * //
 // *********************************************************************************** //
 const addTextToMapSubmitButton = document.querySelector('.mdc-button.addTextToMap--Button');
 const addTextToMapUserInput = document.querySelector('.mdc-text-field.addTextToMap--TextField > input');
@@ -317,6 +317,7 @@ addTextToMapSubmitButton.addEventListener('click', () => {
     userInputText.setAttributeNS(null, 'y', '50%');
     userInputText.setAttributeNS(null, 'dominant-baseline', 'middle');
     userInputText.setAttributeNS(null, 'text-anchor', 'middle');
+    userInputText.setAttributeNS(null, 'fill', addTextToMapUserInput.dataset.color);
     userInputText.textContent = addTextToMapUserInput.value;
     userTextSVGSymbol.appendChild(userInputText);
 
@@ -336,6 +337,7 @@ addTextToMapSubmitButton.addEventListener('click', () => {
 
     textMarker.addTo(markerGroup);
 
+    L.DomEvent.disableClickPropagation(textMarker);
     // Select the currently added text marker
     const currentTextMarker = document.querySelector(`.text-count-${count} > .draggable`);
     const newBB = currentTextMarker.getBBox();
