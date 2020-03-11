@@ -69,6 +69,7 @@
     "core-js": "^3.6.4",
     "fuse.js": "^3.4.5",
     "leaflet": "^1.6.0",
+    "leaflet-draw": "^1.0.4",
     "moveable": "^0.9.5"
   }
 }

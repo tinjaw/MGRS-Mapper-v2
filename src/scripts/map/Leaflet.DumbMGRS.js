@@ -2,7 +2,13 @@
 //* * Complaints, comments, concerns send to jamespistell@gmail.com */
 //* * This took me 340.33 hours to make. I worked on it from 18NOV19 to 14FEB20 */
 import L from 'leaflet';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import 'leaflet-draw';
 
+
+// *********************************************************************************** //
+// * Base Maps                                                                       * //
+// *********************************************************************************** //
 const natGeoMap = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
   cursor: true,
   maxZoom: 16,
@@ -51,6 +57,7 @@ window.L = L;
 // *********************************************************************************** //
 // * Leaflet Control - User Text Input                                               * //
 // *********************************************************************************** //
+// Since no one has made a fuckin leaflet control plugin that allows you to add custom text to a map I went ahead and made my own
 L.Control.TextMarker = L.Control.extend({
   onAdd(map) {
     this.map = map;
@@ -63,6 +70,7 @@ L.Control.TextMarker = L.Control.extend({
     btn.style.display = 'flex';
     btn.style.alignItems = 'center';
     btn.style.justifyContent = 'center';
+    btn.setAttribute('title', 'Add Text to the Map');
     // Disable the map from being zoomed in when the user clicks the text marker control button
     L.DomEvent.disableClickPropagation(btn);
     return btn;
@@ -75,6 +83,43 @@ L.control.textMarker = function (opts) {
 
 // Instantiate this control on page load. Logic for this is used in moveSymbol.js
 L.control.textMarker({ position: 'topleft' }).addTo(map);
+
+
+// *********************************************************************************** //
+// * Leaflet Control - Leaflet.Draw                                                  * //
+// *********************************************************************************** //
+function clearResults() {
+  map.eachLayer((layer) => {
+    if (!(layer instanceof L.TileLayer)) {
+      map.removeLayer(layer);
+    }
+  });
+}
+
+const drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
+const drawControl = new L.Control.Draw({
+  // Disable the default marker and that dumbass circleMarker.
+  draw: {
+    marker: false,
+    circlemarker: false,
+  },
+  edit: {
+    featureGroup: drawnItems,
+  },
+});
+
+map.addControl(drawControl);
+
+map.on('draw:created', (e) => {
+  const { layer } = e;
+  drawnItems.addLayer(layer);
+});
+
+map.on('draw:started', () => {
+  clearResults();
+});
 
 
 // *********************************************************************************** //
@@ -2244,7 +2289,6 @@ const generate1000meterGrids = new MGRS1000Meters({
     lineJoin: 'miter-clip',
   },
 });
-
 
 // LLtoUTM/UTMtoMGRS is solely used for the example info boxes
 export {

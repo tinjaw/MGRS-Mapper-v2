@@ -6,6 +6,7 @@
 - Added a Leaflet control that allows the user to add text markers to the map
 - Implemented the popup feature for text markers, so now they can be deleted!
 - Added colored text selector for the User Text Input Leaflet Control
+- Added the Leaflet.Draw plugin for more user interaction
 
 ---
 
