@@ -4,6 +4,7 @@
 
 - Disabled click propagation on symbols. Now when a user clicks on a symbol the map won't zoom in.
 - Added a Leaflet control that allows the user to add text markers to the map
+- Implemented the popup feature for text markers, so now they can be deleted!
 
 ---
 

@@ -126,14 +126,14 @@ function toggleDraggableElement(event) {
 // *********************************************************************************** //
 // * CUSTOM POPUP AND POPUP ARROW                                                    * //
 // *********************************************************************************** //
-// Creates the popup and popup arrow. Finds the most open space in the window and automatically positions it
+// Creates the popup, delete button and popup arrow. Finds the most open space in the window and automatically positions it
 const createPopupDiv = (element) => {
   const div = document.createElement('div');
   div.className = 'symbol-info-div mdc-elevation--z24';
   // "element" is the symbolData object that we created in the marker click event listener below
   element.target.parentElement.appendChild(div);
   // Translate the current marker position from Lat-Lon to MGRS
-  const currentMarkerLocation = UTMtoMGRS(LLtoUTM({ lat: marker.getLatLng().lat, lon: marker.getLatLng().lng }), 5, true);
+  const currentMarkerLocation = UTMtoMGRS(LLtoUTM({ lat: element.latLng.lat, lon: element.latLng.lng }), 5, true);
 
   // Add the marker location as the first value in the popup
   div.innerHTML = `<div class="popup-symbol-data">
@@ -271,6 +271,32 @@ const createPopupDiv = (element) => {
 
 
 // *********************************************************************************** //
+// * Passes Data into createPopupDiv()                                               * //
+// *********************************************************************************** //
+function symbolDataExport(chosenTarget, markerElement) {
+  const symbolData = {
+    target: chosenTarget,
+    boundingClientRect: chosenTarget.getBoundingClientRect(),
+    data: JSON.parse(chosenTarget.dataset.symbolInfo),
+    // calculate the distances of the chosen symbol to the top, bottom, left and right of the window
+    // This will be used to find the most open space for the popup
+    distances: {
+      svgFromTop: chosenTarget.getBoundingClientRect().top,
+      svgFromRight: window.innerWidth - chosenTarget.getBoundingClientRect().right,
+      svgFromBottom: window.innerHeight - chosenTarget.getBoundingClientRect().bottom,
+      svgFromLeft: chosenTarget.getBoundingClientRect().left,
+    },
+    // IOT delete the markers, we need to pass the unique ID data
+    id: markerElement._leaflet_id,
+    latLng: markerElement.getLatLng(),
+  };
+  // If the user clicks the map and the popup is visible, remove it
+  removePopups();
+  createPopupDiv(symbolData);
+}
+
+
+// *********************************************************************************** //
 // * Leaflet Control - Text Marker                                                   * //
 // *********************************************************************************** //
 const addTextToMapSubmitButton = document.querySelector('.mdc-button.addTextToMap--Button');
@@ -278,18 +304,37 @@ const addTextToMapUserInput = document.querySelector('.mdc-text-field.addTextToM
 let count = 0;
 addTextToMapSubmitButton.addEventListener('click', () => {
   if (addTextToMapUserInput.value) {
-    const textMarker = L.marker(map.getCenter(), {
+    // Create the SVG element that will contain the text the user input
+    const userTextSVGSymbol = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    userTextSVGSymbol.setAttributeNS(null, 'xlink', 'http://www.w3.org/1999/xlink');
+    userTextSVGSymbol.setAttributeNS(null, 'height', '60');
+    userTextSVGSymbol.setAttributeNS(null, 'width', '100');
+    userTextSVGSymbol.setAttributeNS(null, 'class', 'draggable');
+    userTextSVGSymbol.setAttributeNS(null, 'viewBox', '0 0 1 10');
+    userTextSVGSymbol.setAttributeNS(null, 'data-symbol-info', `{"Symbol": "Text", "Data": "${addTextToMapUserInput.value}"}`);
+    const userInputText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    userInputText.setAttributeNS(null, 'x', '50%');
+    userInputText.setAttributeNS(null, 'y', '50%');
+    userInputText.setAttributeNS(null, 'dominant-baseline', 'middle');
+    userInputText.setAttributeNS(null, 'text-anchor', 'middle');
+    userInputText.textContent = addTextToMapUserInput.value;
+    userTextSVGSymbol.appendChild(userInputText);
+
+    const textIcon = new L.DivIcon({
+      // increment the count # on each text icon added
+      className: `text-labels text-count-${count += 1}`,
+      html: userTextSVGSymbol,
+    });
+
+    // Place the text icon in the center of the map
+    const textMarker = new L.Marker(map.getCenter(), {
       interactive: true,
       draggable: 'true',
-      icon: new L.DivIcon({
-        className: `text-labels text-count-${count += 1}`,
-        html: `<svg xmlns="http://www.w3.org/2000/svg" class="draggable" height="60" width="100" viewBox="0 0 1 10">
-                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">${addTextToMapUserInput.value}</text>
-              </svg>`,
-      }),
+      icon: textIcon,
       zIndexOffset: 1000, // Make this appear above other map features
     });
-    textMarker.addTo(map);
+
+    textMarker.addTo(markerGroup);
 
     // Select the currently added text marker
     const currentTextMarker = document.querySelector(`.text-count-${count} > .draggable`);
@@ -301,8 +346,15 @@ addTextToMapSubmitButton.addEventListener('click', () => {
     }
     // Adjust the viewbox so all text markers are the same size regardless of number of characters
     currentTextMarker.setAttribute('viewBox', `0 0 ${newBB.width / 2} 10`);
+
     // Enable Moveable to manipulate the text marker
     manipulateSymbol(document.querySelector('.text-labels > svg '));
+
+    textMarker.on('click', (ev) => {
+      // This is all the data that we are going to pass up into the marker popup window
+      const chosenTarget = ev.target.getIcon().options.html;
+      symbolDataExport(chosenTarget, textMarker);
+    });
   }
 });
 
@@ -352,9 +404,8 @@ const drop = (event) => {
   });
   // Disable the user from zooming in on the map when the symbol is clicked
   L.DomEvent.disableClickPropagation(marker);
-  //! Kinda stupid fix here. Putting the marker in the global scope. Wasted too much time on trying to fix this
-  window.marker = marker;
-  // Keep all the markers in a group
+
+  // Keep all the markers in a group, they will automatically be added to the map
   marker.addTo(markerGroup);
 
   // Since the default DivIcon has a white background and a black border, we need to make it invisible
@@ -367,24 +418,8 @@ const drop = (event) => {
   marker.addEventListener('click', (ev) => {
     // This is all the data that we are going to pass up into the marker popup window
     const chosenTarget = ev.target.getIcon().options.html;
-    const symbolData = {
-      target: chosenTarget,
-      boundingClientRect: chosenTarget.getBoundingClientRect(),
-      data: JSON.parse(chosenTarget.dataset.symbolInfo),
-      // calculate the distances of the chosen symbol to the top, bottom, left and right of the window
-      // This will be used to find the most open space for the popup
-      distances: {
-        svgFromTop: chosenTarget.getBoundingClientRect().top,
-        svgFromRight: window.innerWidth - chosenTarget.getBoundingClientRect().right,
-        svgFromBottom: window.innerHeight - chosenTarget.getBoundingClientRect().bottom,
-        svgFromLeft: chosenTarget.getBoundingClientRect().left,
-      },
-      // IOT delete the markers, we need to pass the unique ID data
-      id: marker._leaflet_id,
-    };
-    // If the user clicks the map and the popup is visible, remove it
-    removePopups();
-    createPopupDiv(symbolData);
+    // Passing parameters to this function will generate the symbol popup
+    symbolDataExport(chosenTarget, marker);
   });
 };
 
