@@ -5,6 +5,7 @@ import {
   map, UTMtoMGRS, LLtoUTM, markerGroup,
 } from './map';
 
+
 const newSVGDiv = document.querySelector('.newSVG');
 const mapArea = document.querySelector('#main-content');
 
@@ -42,7 +43,7 @@ const moveableOptions = {
 };
 
 const moveable = new Moveable(document.body, moveableOptions);
-
+window.moveable = moveable;
 function manipulateSymbol() {
   // All "targets" will be symbols with the draggable class
   const draggableElements = document.querySelectorAll('.draggable');
@@ -115,8 +116,8 @@ function toggleDraggableElement(event) {
     // https://stackoverflow.com/questions/24183286/drag-and-drop-to-div-behind-absolutely-positioned-div
     const elements = document.elementsFromPoint(event.clientX, event.clientY);
     const chosenTarget = elements.find((key) => key.matches('.draggable'));
-    // If you click a symbol on the yellow background, it will set it as the Moveable target
-    // If you click the yellow background it will de-select the symbol so you can get that annoying control box out of view
+    // If you click a symbol it will set it as the Moveable target
+    // If you click the map it will de-select the symbol so you can get that annoying control box out of view
     chosenTarget ? (moveable.target = chosenTarget) : (moveable.target = undefined);
   });
 }
@@ -270,6 +271,43 @@ const createPopupDiv = (element) => {
 
 
 // *********************************************************************************** //
+// * Leaflet Control - Text Marker                                                   * //
+// *********************************************************************************** //
+const addTextToMapSubmitButton = document.querySelector('.mdc-button.addTextToMap--Button');
+const addTextToMapUserInput = document.querySelector('.mdc-text-field.addTextToMap--TextField > input');
+let count = 0;
+addTextToMapSubmitButton.addEventListener('click', () => {
+  if (addTextToMapUserInput.value) {
+    const textMarker = L.marker(map.getCenter(), {
+      interactive: true,
+      draggable: 'true',
+      icon: new L.DivIcon({
+        className: `text-labels text-count-${count += 1}`,
+        html: `<svg xmlns="http://www.w3.org/2000/svg" class="draggable" height="60" width="100" viewBox="0 0 1 10">
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">${addTextToMapUserInput.value}</text>
+              </svg>`,
+      }),
+      zIndexOffset: 1000, // Make this appear above other map features
+    });
+    textMarker.addTo(map);
+
+    // Select the currently added text marker
+    const currentTextMarker = document.querySelector(`.text-count-${count} > .draggable`);
+    const newBB = currentTextMarker.getBBox();
+    // This is some dumbass math that I made up.
+    // Basically this will try and adjust the width of the SVG so the moveable control box will fit around it
+    if (addTextToMapUserInput.value.length > 3) {
+      currentTextMarker.setAttribute('width', currentTextMarker.getBoundingClientRect().width + (newBB.width * (addTextToMapUserInput.value.length / 2)));
+    }
+    // Adjust the viewbox so all text markers are the same size regardless of number of characters
+    currentTextMarker.setAttribute('viewBox', `0 0 ${newBB.width / 2} 10`);
+    // Enable Moveable to manipulate the text marker
+    manipulateSymbol(document.querySelector('.text-labels > svg '));
+  }
+});
+
+
+// *********************************************************************************** //
 // * HTML5 DRAG AND DROP API                                                         * //
 // *********************************************************************************** //
 const allowDrop = (event) => {
@@ -312,6 +350,8 @@ const drop = (event) => {
     // Adjust this number if the symbol Marker is below the 100k grid labels
     zIndexOffset: 1000,
   });
+  // Disable the user from zooming in on the map when the symbol is clicked
+  L.DomEvent.disableClickPropagation(marker);
   //! Kinda stupid fix here. Putting the marker in the global scope. Wasted too much time on trying to fix this
   window.marker = marker;
   // Keep all the markers in a group

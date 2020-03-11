@@ -2,6 +2,11 @@
 
 ---
 
+- Disabled click propagation on symbols. Now when a user clicks on a symbol the map won't zoom in.
+- Added a Leaflet control that allows the user to add text markers to the map
+
+---
+
 ## 9MAR20
 
 - Added download symbol buttons for SVG and PNG symbols. Incorporated them into the Menu Surface and added a tooltip for people who don't know what the difference is between an SVG and PNG file... Which is pretty much everyone
@@ -12,6 +17,7 @@
 - Starting number of symbols: 278
 - Ending number of symbols: 460
 - TODO: When dropping a symbol on a map it remains selected. So when you try and drag another symbol on the map you can't drop it on the map
+- TODO: GCMs and TMTs still need to be added to militarySymbols object
 
 ---
 

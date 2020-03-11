@@ -48,6 +48,34 @@ window.map = map;
 window.L = L;
 
 // *********************************************************************************** //
+// * Leaflet Text Marker Controll                                                    * //
+// *********************************************************************************** //
+L.Control.TextMarker = L.Control.extend({
+  onAdd(map) {
+    this.map = map;
+    const btn = L.DomUtil.create('button');
+    btn.classList.add('mdc-icon', 'material-icons', 'addTextToMap');
+    btn.innerText = 'text_rotation_none';
+    btn.style.width = '26px';
+    btn.style.height = '26px';
+    btn.style.borderRadius = '4px';
+    btn.style.display = 'flex';
+    btn.style.alignItems = 'center';
+    btn.style.justifyContent = 'center';
+    // Disable the map from being zoomed in when the user clicks the text marker control button
+    L.DomEvent.disableClickPropagation(btn);
+    return btn;
+  },
+});
+
+L.control.textMarker = function (opts) {
+  return new L.Control.TextMarker(opts);
+};
+
+// Instantiate this control on page load. Logic for this is used in moveSymbol.js
+L.control.textMarker({ position: 'topleft' }).addTo(map);
+
+// *********************************************************************************** //
 // * Leaflet.DumbMGRS - Forked version of mgrs.js (https://github.com/proj4js/mgrs)  * //
 // *********************************************************************************** //
 // UTM zones are grouped, and assigned to one of a group of 6 sets

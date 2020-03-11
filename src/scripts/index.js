@@ -91,12 +91,22 @@ const labels100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.label
 const grids100KSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids100KSwitch'));
 const labels1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.labels1000MSwitch'));
 const grids1000MSwitch = new MDCSwitch(document.querySelector('.mdc-switch.grids1000MSwitch'));
+//! control
 
+const addTextToMapControl = new MDCRipple(document.querySelector('.mdc-icon.addTextToMap'));
+const addTextToMapMenu = new MDCMenuSurface(document.querySelector('.mdc-menu-surface.addTextToMap--Menu'));
+const addTextToMapSubmit = new MDCRipple(document.querySelector('.mdc-button.addTextToMap--Button'));
+const addTextToMapInput = new MDCTextField(document.querySelector('.mdc-text-field.addTextToMap--TextField'));
 // Initial military symbol on page load
 // eslint-disable-next-line import/no-mutable-exports
 let MainMS = new MilSym('.newSVG', 'Default Land Unit', 'friendly');
+window.addTextToMapMenu = addTextToMapMenu;
 
-
+addTextToMapControl.listen('click', (event) => {
+  event.target.classList.add('mdc-menu-surface--anchor');
+  addTextToMapMenu.setAbsolutePosition(10, 163);
+  addTextToMapMenu.open();
+});
 // *********************************************************************************** //
 // * Top App Bar                                                                     * //
 // *********************************************************************************** //
@@ -1213,4 +1223,6 @@ grids1000MSwitch.checked = true;
 pushbar.open('rightPushbar');
 
 
-export { flyingSwitch, MainMS };
+export {
+  flyingSwitch, MainMS,
+};
