@@ -325,6 +325,8 @@ addTextToMapSubmitButton.addEventListener('click', () => {
       // increment the count # on each text icon added
       className: `text-labels text-count-${count += 1}`,
       html: userTextSVGSymbol,
+      iconSize: [100, 60],
+      iconAnchor: [50, 30],
     });
 
     // Place the text icon in the center of the map
@@ -394,6 +396,7 @@ const drop = (event) => {
   const militarySymbolMarker = new L.DivIcon({
     html: target,
     iconSize: [bbox.width, bbox.height],
+    iconAnchor: [bbox.width / 2, bbox.height / 2],
     className: 'militarySymbolMarker',
   });
 

@@ -2,6 +2,8 @@
 
 ---
 
+## 11MAR20
+
 - Disabled click propagation on symbols. Now when a user clicks on a symbol the map won't zoom in.
 - Added a Leaflet control that allows the user to add text markers to the map
 - Implemented the popup feature for text markers, so now they can be deleted!
@@ -20,7 +22,12 @@
   - DOM Size: 7,502 elements
   - chunk.js: 5.2MB
   - app.js: 2.7MB
+- For some reason the most popular symbols event listener was duplicated verbatim... right below each other and I didn't catch it.
 - Disabling the 100K grids on page load will bring the Dev build Lighthouse score from 0 to 20 and lowers the First Contentful Paint from 45 seconds to 1.7 seconds
+- TODO: Combine Leaflet.DumbMGRS.js + map.js + moveSymbol.js
+- TODO: Combine app.js + index.js
+- I'm sick of these dependency cycle warnings. I have no idea how to fix them.
+- WebPack dev build isn't minifying one of the CSS bundle files and I don't know why. I'm at the point where I think I should hire some help
 
 ---
 
