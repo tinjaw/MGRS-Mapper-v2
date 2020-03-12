@@ -1052,27 +1052,9 @@ deleteSearchAddressButton.root_.style.display = 'none';
 
 console.log('%c MGRS-Mapper.com by CPT James Pistell... Scouts Out! ', 'background: #222; color: #bada55; font-size: 22px;');
 
-// This will automatically center the tooltip on the Most Popular Symbols section
-document.querySelectorAll('.tooltip').forEach((key) => {
-  key.addEventListener('mouseover', () => {
-    const container = key.offsetWidth;
-    const tooltip = key.lastElementChild.offsetWidth;
-    // Add 5 pixels to adjust for padding
-    key.lastElementChild.style.left = `${(container / 2) - (tooltip / 2) + 5}px`;
-    key.lastElementChild.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 2px rgba(0, 0, 0, 0.14), 0px 0px 30px rgba(0, 0, 0, 0.3)';
-  });
-  key.addEventListener('click', (event) => {
-    // When a user clicks on a popular symbol, clear the search field to prevent errors
-    clearSearchField();
-    const elements = document.elementsFromPoint(event.clientX, event.clientY);
-    const chosenTarget = elements.find((key) => key.matches('svg'));
-    selectSymbol.value = chosenTarget.dataset.symbol;
-  });
-});
-
 
 // *********************************************************************************** //
-// * Symbol, Affiliation, Unit Size, Mod 1, Mod 2, Command Post                      * //
+// * Most Popular, Symbols, Affiliation, Unit Size, Mod 1, Mod 2, Command Post       * //
 // *********************************************************************************** //
 // This will automatically center the tooltip on the Most Popular Symbols section
 document.querySelectorAll('.tooltip').forEach((key) => {

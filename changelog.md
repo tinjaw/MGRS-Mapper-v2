@@ -7,6 +7,20 @@
 - Implemented the popup feature for text markers, so now they can be deleted!
 - Added colored text selector for the User Text Input Leaflet Control
 - Added the Leaflet.Draw plugin for more user interaction
+- Ran into issues with getting a printing plugin for leaflet. I think I'll just roll my own. Leaflet.EasyPrint would work but when the print job is done all the markers would disappear. Look into [Print.js](https://printjs.crabbly.com/)
+- Lighthouse Prod build:
+  - Score: 8
+  - First Contentful Paint: 11.4s
+  - DOM Size: 7,501 elements
+  - chunk.js: 569KB
+  - app.js: 352KB
+- Lighthouse Dev Build:
+  - Score: 0
+  - First Contentful Paint: 45.3s
+  - DOM Size: 7,502 elements
+  - chunk.js: 5.2MB
+  - app.js: 2.7MB
+- Disabling the 100K grids on page load will bring the Dev build Lighthouse score from 0 to 20 and lowers the First Contentful Paint from 45 seconds to 1.7 seconds
 
 ---
 

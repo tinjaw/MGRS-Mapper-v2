@@ -50,8 +50,6 @@ generateGZDGrids.addTo(map);
 generate100kGrids.addTo(map);
 generate1000meterGrids.addTo(map);
 
-//! Putting leaflet in the global scope
-// window.L = L;
 
 export {
   map, LLtoUTM, UTMtoMGRS, generateGZDGrids, generate100kGrids, generate1000meterGrids, markerGroup,
