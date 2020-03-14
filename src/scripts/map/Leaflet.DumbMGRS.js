@@ -388,7 +388,7 @@ function UTMtoLL(utm) {
   return result;
 }
 
-// Modified version of encode(),
+//! I created this function from a modified version of encode()
 // If prettyPrint is set to true, it prints out the MGRS grids in USNG format (basically adds spaces between GZD, 100k, and northing/easting)
 // example: UTMtoMGRS(LLtoUTM({ lat: event.latlng.lat, lon: event.latlng.lng }), 5, true)
 function UTMtoMGRS(utm, accuracy, prettyPrint = false) {

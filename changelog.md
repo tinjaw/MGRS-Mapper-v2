@@ -2,6 +2,22 @@
 
 ---
 
+## 14MAR20
+
+- Added an async/await chain inside addSymbolsAndModsToList(). This has a great impact on reducing the page load times on the dev site
+
+|             Metric              | Before | After  |
+| :-----------------------------: | ------ | ------ |
+|        Lighthouse Score         | 0      | 19     |
+|     First Contentful Paint      | 45.2s  | 2.1s   |
+|           Speed Index           | 45.2s  | 13.4s  |
+|       Time to Interactive       | 46.9s  | 52.6s  |
+|     First Meaningful Paint      | 45.7s  | 47.2s  |
+|         First CPU Idle          | 45.7s  | 47.2s  |
+| Max Potential First Input Delay | 2990ms | 2030ms |
+
+---
+
 ## 11MAR20
 
 - Disabled click propagation on symbols. Now when a user clicks on a symbol the map won't zoom in.
