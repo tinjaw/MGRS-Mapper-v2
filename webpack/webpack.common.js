@@ -29,7 +29,8 @@ module.exports = {
     }),
     new PreloadWebpackPlugin({
       rel: 'preload',
-      include: 'initial', // 'initial' or 'allChunks'
+      // include: 'initial', // 'initial' or 'allChunks'
+      include: 'allChunks',
     }),
   ],
   resolve: {

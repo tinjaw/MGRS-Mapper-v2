@@ -7,8 +7,11 @@
 - Greatly optimized Resizer() function. Previously when the user would click on the symbolSelect menu, this function would resize ALL the symbols. This took nearly 700ms and there was a noticeable lag between clicking the menu and when it would appear. I added the functionality to check whether the symbol is visible on the screen and then only resize those symbols. When the user scrolls down it will continually check if the position of the menu and attempt to run the resize function when the scrollTop threshold is broken. This new functionality now takes 53ms to run.
 - Added async/await to bounceInAnimation() and setSelectMenuTextContent() which greatly increased the speed of addSymbolsAndModsToList(). Bringing the time down from 450ms to 96ms
 - Added PreloadWebpackPlugin to webpack.common.js. Max Potential First Input Delay lowered from ~2500ms to 230ms
+  - On further inspection this does not always work. Might be an issue with running lighthouse on the dev build
 - Added preconnect rel attribute on google fonts stylesheet
 - Fixed bug preventing 100K grids from drawing on zoom levels less than 6. This was due to instantiating leaflet bounds in the initialize method
+- Centered map on United States and brought the zoom level out so the 100K grids are not drawing on the map during page load
+- Moved Roboto to head so I could add the preload attribute
 
 ---
 
