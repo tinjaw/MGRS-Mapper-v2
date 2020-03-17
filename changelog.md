@@ -21,6 +21,7 @@
 - Fixed bug where the symbol list would not show up if a user had any text inputted into the uniqueDesignation and higherFormation fields
 - Fixed bbox bug on the 2nd element in the command post list
 - Fixed bug where User Text control was outputting dark blue instead of light blue
+- Fixed bug where Grid Overlay toggle for 100K labels were showing up as enabled despite being on zoom level 6. I have them disabled for that zoom level due to performance issues.
 
 ---
 

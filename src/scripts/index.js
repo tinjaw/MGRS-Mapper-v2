@@ -1103,6 +1103,11 @@ map.whenReady(() => {
       labels100KSwitch.disabled = false;
       grids100KSwitch.disabled = false;
     }
+    // Special case - the 100K labels do not appear on my layer plugin at zoom level 6. This is to improve performance
+    if (map.getZoom() === 6) {
+      labels100KSwitch.checked = false;
+      labels100KSwitch.disabled = true;
+    }
     // GZD - zoom level 3
     if (map.getZoom() < generateGZDGrids.options.minZoom) {
       gzdLabelsSwitch.disabled = true;
@@ -1128,7 +1133,6 @@ addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
 addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
 setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 
-// MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
 window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
 // Hide the text field trash can buttons on page load
@@ -1360,14 +1364,6 @@ document.querySelector('.newSVG').insertAdjacentHTML('beforebegin',
       <i class="material-icons">format_shapes</i>
       Click and Drag the Symbol Onto the Map
     </span>`);
-
-// Enable Map Switches on page load
-// gzdGridsSwitch.checked = false;
-// gzdLabelsSwitch.checked = false;
-// labels100KSwitch.checked = false;
-// grids100KSwitch.checked = false;
-// labels1000MSwitch.checked = false;
-// grids1000MSwitch.checked = false;
 
 // Open the pushbar on page load
 pushbar.open('rightPushbar');

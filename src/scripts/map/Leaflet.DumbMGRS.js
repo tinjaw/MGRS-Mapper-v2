@@ -46,7 +46,6 @@ const map = new L.Map('main-content', {
   attributionControl: false,
 });
 
-
 // Add the first layer to the map on page load
 map.addLayer(natGeoMap);
 

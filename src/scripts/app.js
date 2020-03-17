@@ -761,7 +761,10 @@ class MilSym {
   // * Puts the symbol into the DOM with dataset attribute                             * //
   // *********************************************************************************** //
   placeSymbol() {
-    this.location.querySelector('svg') ? this.location.querySelector('svg').remove() : null;
+    // Remove the old symbol from the DOM
+    if (this.location.querySelector('svg')) {
+      this.location.querySelector('svg').remove();
+    }
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     const desc = document.createElementNS('http://www.w3.org/2000/svg', 'desc');
     desc.textContent = `
@@ -857,6 +860,7 @@ class MilSym {
       }
     };
 
+    // Contains all the nicely formatted data for the MainMS dataset attribute
     const dataObj = {
       Symbol: this._symbol,
       Type: militarySymbolsObject[this._symbol].type,
@@ -941,55 +945,6 @@ class MilSym {
 
     // If MainMS is in the window, then set the viewbox, otherwise wait 300ms
     'MainMS' in window ? setViewBox() : setTimeout(setViewBox, 300);
-
-
-    //! REMOVE ON PRODUCTION -- This just displays formatted JSON data for the current data-symbol-info
-    // if ('MainMS' in window) {
-    //   let myJSON = {};
-
-    //   const config = {
-    //     // attributes: true,
-    //     childList: true,
-    //     characterData: true,
-    //   };
-
-    //   const observer = new MutationObserver(((mutations) => {
-    //     myJSON = JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo);
-
-    //     const myJSONString = JSON.stringify(myJSON);
-    //     let regexString = '';
-    //     // for tracking matches, in particular the curly braces
-    //     const brace = {
-    //       brace: 0,
-    //     };
-
-    //     document.querySelector('#pre-myJSONString').innerHTML = myJSONString;
-    //     regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, (m, p1) => {
-    //       const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1.split(':')[0]} : <b>${p1.split(':')[1]}</b></div>`;
-    //       let returnString = 0;
-    //       if (p1.lastIndexOf('{') === p1.length - 1) {
-    //         returnString = returnFunction();
-    //         brace.brace += 1;
-    //       } else if (p1.indexOf('}') === 0) {
-    //         brace.brace -= 1;
-    //         returnString = returnFunction();
-    //       } else {
-    //         returnString = returnFunction();
-    //       }
-    //       return returnString;
-    //     });
-
-    //     document.querySelector('#pre-regexString').innerHTML = '';
-    //     setTimeout(() => {
-    //       document.querySelector('#pre-regexString').innerHTML = regexString;
-    //       // Remove the "undefined" text in the first and last brackets
-    //       document.querySelector('#pre-regexString').firstChild.innerText = '{';
-    //       document.querySelector('#pre-regexString').lastChild.innerText = '}';
-    //     }, 30);
-    //   }));
-
-    //   observer.observe(MainMS.location, config);
-    // }
   }
 }
 

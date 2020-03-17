@@ -1,6 +1,4 @@
 // * Resize symbols (usually called when a select menu is opened) * //
-// Cache: Our client bounding boxes are kept here, we can use this to clear them later.
-let elementsWithBoundingBoxes = [];
 // ex- Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
 function Resizer(symbolElement, width = 93, height = 64) {
   const se = document.querySelectorAll(symbolElement);
@@ -18,12 +16,7 @@ function Resizer(symbolElement, width = 93, height = 64) {
     if (rect.bottom >= 0 && rect.bottom <= 2000) {
       // Check if we already got the client bounding box before. No need to resize the element again
       if (!elem._boundingBox) {
-        // console.log({
-        //   Symbol: JSON.parse(elem.dataset.symbolInfo).Symbol, RB: rect.bottom,
-        // });
         elem._boundingBox = elem.getBBox();
-        // Push all the visible symbols so we can keep track of them.
-        elementsWithBoundingBoxes.push(elem);
         elem.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
         elem.setAttributeNS(null, 'viewBox', `${elem.getBBox().x - 4} ${elem.getBBox().y - 4} ${elem.getBBox().width + 8} ${elem.getBBox().height + 8}`);
         elem.setAttributeNS(null, 'width', `${w}`);
@@ -56,17 +49,6 @@ selectBoxesToResize.forEach((selectBox) => {
   });
 });
 
-
-// This will clear the elementsWithBoundingBoxes array. Not sure if I need this or not
-const clearClientBoundingBoxes = () => {
-  for (let index = 0; index < elementsWithBoundingBoxes.length; index += 1) {
-    const element = elementsWithBoundingBoxes[index];
-    if (element) {
-      element._boundingBox = null;
-    }
-    elementsWithBoundingBoxes = [];
-  }
-};
 
 // * Bounce In Animation * //
 // Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2.
