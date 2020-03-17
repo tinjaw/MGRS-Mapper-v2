@@ -3,6 +3,7 @@ const Path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -25,6 +26,10 @@ module.exports = {
     ]),
     new HtmlWebpackPlugin({
       template: Path.resolve(__dirname, '../src/index.html'),
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      include: 'initial', // 'initial' or 'allChunks'
     }),
   ],
   resolve: {

@@ -2,7 +2,6 @@
 //* * Complaints, comments, concerns send to jamespistell@gmail.com */
 //* * This took me 340.33 hours to make. I worked on it from 18NOV19 to 14FEB20 */
 import L from 'leaflet';
-import 'leaflet-draw/dist/leaflet.draw.css';
 import 'leaflet-draw';
 
 
@@ -39,13 +38,14 @@ const worldSatelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/re
 // *********************************************************************************** //
 // * Set initial map view                                                            * //
 // *********************************************************************************** //
-const easternSeaboard = [45.12689618126071, -70.62732696533205];
-const map = L.map('main-content', {
-  center: easternSeaboard,
-  zoom: 6,
+const centerOfUnitedStates = [42.45588764197166, -95.82275390625001];
+const map = new L.Map('main-content', {
+  center: centerOfUnitedStates,
+  zoom: 5,
   cursor: true,
   attributionControl: false,
 });
+
 
 // Add the first layer to the map on page load
 map.addLayer(natGeoMap);
@@ -1167,11 +1167,6 @@ const MGRS100K = L.LayerGroup.extend({
     L.LayerGroup.prototype.initialize.call(this);
     // Merge the provided options with the default options of the class.
     L.Util.setOptions(this, options);
-    // Get the North/South/East/West visible bounds and add padding
-    this.north = new L.latLngBounds(this._map.getBounds()).pad(this.getPaddingOnZoomLevel(this._map)).getNorth();
-    this.south = new L.latLngBounds(this._map.getBounds()).pad(this.getPaddingOnZoomLevel(this._map)).getSouth();
-    this.east = new L.latLngBounds(this._map.getBounds()).pad(this.getPaddingOnZoomLevel(this._map)).getEast();
-    this.west = new L.latLngBounds(this._map.getBounds()).pad(this.getPaddingOnZoomLevel(this._map)).getWest();
     // The eastingArray and northingArray will hold the latlngs for our grids
     this.eastingArray = [];
     this.northingArray = [];
@@ -1224,6 +1219,7 @@ const MGRS100K = L.LayerGroup.extend({
       this.empty = [];
       this.eastingArray = [];
       this.northingArray = [];
+      // Get the North/South/East/West visible bounds and add padding
       this.north = new L.latLngBounds(this._map.getBounds()).pad(this.getPaddingOnZoomLevel(this._map)).getNorth();
       this.south = new L.latLngBounds(this._map.getBounds()).pad(this.getPaddingOnZoomLevel(this._map)).getSouth();
       this.east = new L.latLngBounds(this._map.getBounds()).pad(this.getPaddingOnZoomLevel(this._map)).getEast();

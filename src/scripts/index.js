@@ -113,7 +113,7 @@ const addTextToMapInput = new MDCTextField(document.querySelector('.mdc-text-fie
 // }, false);
 
 // worker.postMessage('Hello World'); // Send data to our worker.
-const worker = new Worker();
+// const worker = new Worker();
 // addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
 // worker.postMessage([JSON.stringify(mod2Object), 'mod2', JSON.stringify(selectMod2)]);
 // worker.postMessage('militarySymbolsObject');
@@ -243,7 +243,7 @@ baseMapList.listen('MDCList:action', (event) => {
   const selectedMap = event.target.children[event.detail.index];
   const notSelectedMaps = event.target.querySelectorAll('ul > li:not(.mdc-list-item--selected)');
   const greenCheckmark = `<svg class="mdc-list-item__meta" style="width:24px;height:24px" viewBox="0 0 24 24">
-    <path fill="green" d="M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+    <path fill="green" d="M12 2C7 2 2 7 2 12s5 10 10 10 10-4 10-10S18 2 12 2m-2 15l-5-5 1-1 4 3 8-7 1 1-9 9z"/>
   </svg>`;
   // Enable the green checkmark on the selected map
   selectedMap.querySelector('.mdc-list-item__meta').innerHTML = greenCheckmark;
@@ -331,7 +331,8 @@ async function addSymbolsAndModsToList(obj, abv, menu = null) {
     modTypeInfo.textContent = obj[key].type;
     newli.setAttributeNS(null, 'class', 'mdc-list-item listGridParent');
     newli.setAttributeNS(null, 'data-value', key);
-    newli.innerHTML = `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`;
+    // newli.innerHTML = `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`;
+    await newli.insertAdjacentHTML('beforeend', `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`);
     newli.prepend(modTypeInfo);
     mdcList.append(newli);
     const figureElement = document.createElement('figure');
@@ -1393,12 +1394,12 @@ document.querySelector('.newSVG').insertAdjacentHTML('beforebegin',
     </span>`);
 
 // Enable Map Switches on page load
-gzdGridsSwitch.checked = true;
-gzdLabelsSwitch.checked = true;
-labels100KSwitch.checked = true;
-grids100KSwitch.checked = true;
-labels1000MSwitch.checked = true;
-grids1000MSwitch.checked = true;
+// gzdGridsSwitch.checked = false;
+// gzdLabelsSwitch.checked = false;
+// labels100KSwitch.checked = false;
+// grids100KSwitch.checked = false;
+// labels1000MSwitch.checked = false;
+// grids1000MSwitch.checked = false;
 
 // Open the pushbar on page load
 pushbar.open('rightPushbar');

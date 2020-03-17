@@ -86,8 +86,8 @@ const clearClientBoundingBoxes = () => {
 
 // * Bounce In Animation * //
 // Toggle the bounceIn animation on the Unit Size, Mod 1 and Mod 2.
-function bounceInAnimation(location) {
-  const bounceIn = document.querySelector(location);
+async function bounceInAnimation(location) {
+  const bounceIn = document.querySelector(await location);
   if (JSON.parse(document.querySelector('.newSVG svg').dataset.symbolInfo).Type !== 'Equipment') {
     // transformBox is crucial. Without this Mod1 will not scale from the center
     bounceIn.style.transformBox = 'fill-box';
@@ -117,9 +117,10 @@ function debounce(func, interval) {
 //* Set the textContent of the specified drop down * //
 // Sets the textContent of the select boxes to the currently selected item.
 // Example: setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
-function setSelectMenuTextContent(...params) {
-  params.forEach((key) => {
-    key.selectedText_.textContent = key.value;
+async function setSelectMenuTextContent(...params) {
+  params.forEach(async (key) => {
+    const { value } = await key;
+    key.selectedText_.textContent = value;
   });
 }
 
