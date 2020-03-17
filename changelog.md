@@ -2,6 +2,12 @@
 
 ---
 
+## 16MAR20
+
+- Greatly optimized Resizer() function. Previously when the user would click on the symbolSelect menu, this function would resize ALL the symbols. This took nearly 700ms and there was a noticeable lag between clicking the menu and when it would appear. I added the functionality to check whether the symbol is visible on the screen and then only resize those symbols. When the user scrolls down it will continually check if the position of the menu and attempt to run the resize function when the scrollTop threshold is broken. This new functionality now takes 53ms to run.
+
+---
+
 ## 14MAR20
 
 - Added an async/await chain inside addSymbolsAndModsToList(). This has a great impact on reducing the page load times on the dev site
@@ -15,6 +21,9 @@
 |     First Meaningful Paint      | 45.7s  | 47.2s  |
 |         First CPU Idle          | 45.7s  | 47.2s  |
 | Max Potential First Input Delay | 2990ms | 2030ms |
+
+- Had to call it quits early, got called over to Randy's for St Paddy's day celebration (despite the fucking coronavirus apocalypse).
+- Since Web Workers don't interact with the DOM I can't use it with addSymbolsAndModsToList() but I could potentially load all those symbol object files?
 
 ---
 

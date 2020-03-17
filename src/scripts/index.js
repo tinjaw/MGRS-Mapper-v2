@@ -115,14 +115,15 @@ const addTextToMapInput = new MDCTextField(document.querySelector('.mdc-text-fie
 // worker.postMessage('Hello World'); // Send data to our worker.
 const worker = new Worker();
 // addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
-worker.postMessage([JSON.stringify(mod2Object), 'mod2', JSON.stringify(selectMod2)]);
-worker.onmessage = (e) => {
-  console.log('main.js: Message received from worker:', e.data);
-};
+// worker.postMessage([JSON.stringify(mod2Object), 'mod2', JSON.stringify(selectMod2)]);
+// worker.postMessage('militarySymbolsObject');
+// worker.onmessage = (e) => {
+//   console.log('main.js: Message received from worker:', e.data);
+// };
 
 // Initial military symbol on page load
 // eslint-disable-next-line import/no-mutable-exports
-let MainMS = new MilSym('.newSVG', 'Default Land Unit', 'friendly');
+const MainMS = new MilSym('.newSVG', 'Default Land Unit', 'friendly');
 
 
 // *********************************************************************************** //
@@ -401,6 +402,7 @@ async function addSymbolsAndModsToList(obj, abv, menu = null) {
   // const data = await Promise.all(promises);
   // return data;
 }
+
 // const addSymbolsAndModsToList = (obj, abv, menu = null) => {
 //   Object.keys(obj).forEach((key) => {
 //     const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
@@ -1131,13 +1133,35 @@ map.whenReady(() => {
 // *********************************************************************************** //
 // * Load the Symbols and Modifiers into the dropdowns on page load                  * //
 // *********************************************************************************** //
+
+// worker.postMessage(JSON.stringify(objectList));
+// worker.onmessage = (e) => {
+//   switch (e.data[1]) {
+//     case 'symbol':
+//       addSymbolsAndModsToList(e.data[0], e.data[1], null);
+//       break;
+//     case 'mod1':
+//       addSymbolsAndModsToList(e.data[0], e.data[1], selectMod1);
+//       break;
+//     case 'mod2':
+//       addSymbolsAndModsToList(e.data[0], e.data[1], selectMod2);
+//       break;
+//     case 'commandpost':
+//       addSymbolsAndModsToList(e.data[0], e.data[1], selectCommandPost);
+//       break;
+//     default:
+//       break;
+//   }
+// };
+
+
 addSymbolsAndModsToList(militarySymbolsObject, 'symbol');
 addSymbolsAndModsToList(mod1Object, 'mod1', selectMod1);
 addSymbolsAndModsToList(mod2Object, 'mod2', selectMod2);
 addSymbolsAndModsToList(commandPostObject, 'commandpost', selectCommandPost);
 setSelectMenuTextContent(selectSymbol, selectMod1, selectMod2, selectCommandPost);
 
-MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
+// MainMS = new MilSym('.newSVG', selectSymbol.value, selectAffiliation.value, selectUnitSize.value, selectMod1.value, selectMod2.value, uniqueDesignationField.value, higherFormationField.value, reinforcedReducedValue(), flyingSwitch.checked, activitySwitch.checked, installationSwitch.checked, taskForceSwitch.checked, selectCommandPost.value);
 window.MainMS = MainMS; //! MainMS is in the global scope so it can be reference and edited
 
 // Hide the text field trash can buttons on page load
@@ -1260,6 +1284,7 @@ selectSymbol.listen('MDCSelect:change', () => {
     console.log(error);
   });
 });
+
 
 selectAffiliation.listen('MDCSelect:change', () => {
   // This replaces camel case for things like "friendlyTemplated" into "Friendly / Templated"
