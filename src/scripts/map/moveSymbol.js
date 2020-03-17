@@ -317,7 +317,12 @@ addTextToMapSubmitButton.addEventListener('click', () => {
     userInputText.setAttributeNS(null, 'y', '50%');
     userInputText.setAttributeNS(null, 'dominant-baseline', 'middle');
     userInputText.setAttributeNS(null, 'text-anchor', 'middle');
-    userInputText.setAttributeNS(null, 'fill', addTextToMapUserInput.dataset.color);
+    // Adust the color blue to light blue (matches the friendly outline color)
+    if (addTextToMapUserInput.dataset.color === 'blue') {
+      userInputText.setAttributeNS(null, 'fill', '#74DCFF');
+    } else {
+      userInputText.setAttributeNS(null, 'fill', addTextToMapUserInput.dataset.color);
+    }
     userInputText.textContent = addTextToMapUserInput.value;
     userTextSVGSymbol.appendChild(userInputText);
 

@@ -29,41 +29,6 @@ const mod1Object = {
       },
     },
   },
-  'Border Security': {
-    type: 'Security',
-    affiliation: {
-      friendly: {
-        text_1: {
-          symbolText: 'BOR',
-          x: '100',
-          y: '72',
-          fontSize: '22',
-          textAnchor: 'middle',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
-        propertyToModify.text_1.fontSize = '19';
-        propertyToModify.text_1.y = '69';
-        return propertyToModify;
-      },
-      get hostileTemplated() {
-        return this.hostile;
-      },
-      get unknown() {
-        return this.hostile;
-      },
-      get pending() {
-        return this.hostile;
-      },
-      get neutral() {
-        return this.hostile;
-      },
-    },
-  },
   'Aerial Assault': {
     type: 'Aviation',
     affiliation: {
@@ -93,6 +58,41 @@ const mod1Object = {
       },
       get pending() {
         return this.friendly;
+      },
+      get neutral() {
+        return this.hostile;
+      },
+    },
+  },
+  'Border Security': {
+    type: 'Security',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'BOR',
+          x: '100',
+          y: '72',
+          fontSize: '22',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.fontSize = '19';
+        propertyToModify.text_1.y = '69';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
       },
       get neutral() {
         return this.hostile;

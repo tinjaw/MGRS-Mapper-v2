@@ -335,6 +335,10 @@ class MilSym {
       // If for example the templated symbol is not a piece of equipment and is not flying then we just use the normal fills and dasharray
       switch (affiliationOutlineObject[this._affiliation].templated) {
         case true:
+          // equipment PLUS flight enabled
+          if (militarySymbolsObject[this._symbol].type === 'Equipment' && this._flying) {
+            return adjustSymbolOutlineForFlying();
+          }
           if (militarySymbolsObject[this._symbol].type === 'Equipment') {
             return adjustSymbolOutlineForEquipment();
           }
@@ -351,9 +355,15 @@ class MilSym {
           outlineGroup.append(outline, outlineTemplated);
           return outlineGroup;
         case false:
+          // equipment PLUS flight enabled
+          if (militarySymbolsObject[this._symbol].type === 'Equipment' && this._flying) {
+            return adjustSymbolOutlineForFlying();
+          }
+          // normal equipment outline, not in flight
           if (militarySymbolsObject[this._symbol].type === 'Equipment') {
             return adjustSymbolOutlineForEquipment();
           }
+          // NOT equipment, land unit in flight
           if (this._flying) {
             return adjustSymbolOutlineForFlying();
           }
@@ -934,52 +944,52 @@ class MilSym {
 
 
     //! REMOVE ON PRODUCTION -- This just displays formatted JSON data for the current data-symbol-info
-    if ('MainMS' in window) {
-      let myJSON = {};
+    // if ('MainMS' in window) {
+    //   let myJSON = {};
 
-      const config = {
-        // attributes: true,
-        childList: true,
-        characterData: true,
-      };
+    //   const config = {
+    //     // attributes: true,
+    //     childList: true,
+    //     characterData: true,
+    //   };
 
-      const observer = new MutationObserver(((mutations) => {
-        myJSON = JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo);
+    //   const observer = new MutationObserver(((mutations) => {
+    //     myJSON = JSON.parse(document.querySelector('.newSVG > svg').dataset.symbolInfo);
 
-        const myJSONString = JSON.stringify(myJSON);
-        let regexString = '';
-        // for tracking matches, in particular the curly braces
-        const brace = {
-          brace: 0,
-        };
+    //     const myJSONString = JSON.stringify(myJSON);
+    //     let regexString = '';
+    //     // for tracking matches, in particular the curly braces
+    //     const brace = {
+    //       brace: 0,
+    //     };
 
-        document.querySelector('#pre-myJSONString').innerHTML = myJSONString;
-        regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, (m, p1) => {
-          const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1.split(':')[0]} : <b>${p1.split(':')[1]}</b></div>`;
-          let returnString = 0;
-          if (p1.lastIndexOf('{') === p1.length - 1) {
-            returnString = returnFunction();
-            brace.brace += 1;
-          } else if (p1.indexOf('}') === 0) {
-            brace.brace -= 1;
-            returnString = returnFunction();
-          } else {
-            returnString = returnFunction();
-          }
-          return returnString;
-        });
+    //     document.querySelector('#pre-myJSONString').innerHTML = myJSONString;
+    //     regexString = myJSONString.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, (m, p1) => {
+    //       const returnFunction = () => `<div style="text-indent: ${brace.brace * 20}px;">${p1.split(':')[0]} : <b>${p1.split(':')[1]}</b></div>`;
+    //       let returnString = 0;
+    //       if (p1.lastIndexOf('{') === p1.length - 1) {
+    //         returnString = returnFunction();
+    //         brace.brace += 1;
+    //       } else if (p1.indexOf('}') === 0) {
+    //         brace.brace -= 1;
+    //         returnString = returnFunction();
+    //       } else {
+    //         returnString = returnFunction();
+    //       }
+    //       return returnString;
+    //     });
 
-        document.querySelector('#pre-regexString').innerHTML = '';
-        setTimeout(() => {
-          document.querySelector('#pre-regexString').innerHTML = regexString;
-          // Remove the "undefined" text in the first and last brackets
-          document.querySelector('#pre-regexString').firstChild.innerText = '{';
-          document.querySelector('#pre-regexString').lastChild.innerText = '}';
-        }, 30);
-      }));
+    //     document.querySelector('#pre-regexString').innerHTML = '';
+    //     setTimeout(() => {
+    //       document.querySelector('#pre-regexString').innerHTML = regexString;
+    //       // Remove the "undefined" text in the first and last brackets
+    //       document.querySelector('#pre-regexString').firstChild.innerText = '{';
+    //       document.querySelector('#pre-regexString').lastChild.innerText = '}';
+    //     }, 30);
+    //   }));
 
-      observer.observe(MainMS.location, config);
-    }
+    //   observer.observe(MainMS.location, config);
+    // }
   }
 }
 

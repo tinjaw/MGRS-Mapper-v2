@@ -471,6 +471,7 @@ function latLngFromMGRS(a) {
 // *********************************************************************************** //
 // * Leaflet.DumbMGRS - Easting and Northing Grid Zone Designator boundaries         * //
 // *********************************************************************************** //
+// I made this plugin motherfuckers! - JP
 // letter = a band of latitude
 const northingDict = {
   X: {

@@ -12,6 +12,15 @@
 - Fixed bug preventing 100K grids from drawing on zoom levels less than 6. This was due to instantiating leaflet bounds in the initialize method
 - Centered map on United States and brought the zoom level out so the 100K grids are not drawing on the map during page load
 - Moved Roboto to head so I could add the preload attribute
+- Fixed async bug where if the user searches for a symbol and clicks the delete button the app would crash
+- Fixed async bug where if the user clears out a search field it would crash the app
+- Fixed bug in Resizer function which caused FireFox to shit out.
+- Fixed async bug where a user clicks a popular icon but there is text in the search field, so the app would explode.
+- Fixed bug where the task force amplifier would cause the app the explode. Apparently MainMS was missing an echelon setting when I instantiated it
+- Fixed bug where Aviation Equipment did NOT convert into flying outline
+- Fixed bug where the symbol list would not show up if a user had any text inputted into the uniqueDesignation and higherFormation fields
+- Fixed bbox bug on the 2nd element in the command post list
+- Fixed bug where User Text control was outputting dark blue instead of light blue
 
 ---
 

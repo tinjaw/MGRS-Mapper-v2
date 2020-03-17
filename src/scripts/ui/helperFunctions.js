@@ -1,27 +1,28 @@
 // * Resize symbols (usually called when a select menu is opened) * //
 // Cache: Our client bounding boxes are kept here, we can use this to clear them later.
 let elementsWithBoundingBoxes = [];
-// Stores the bottom rect value for the visible symbols. Used in conjunction with scrollTop to decide whether to resize a symbol if it is in view or not
-const rectBottom = [];
 // ex- Resizer('.symbolFigure svg');  (default parameters set for thumbnails)
 function Resizer(symbolElement, width = 93, height = 64) {
   const se = document.querySelectorAll(symbolElement);
   const w = width;
   const h = height;
 
+  // All this does is fix the Bbox on the 2nd element in Mod1/Command Post. The BBox does not get set due to some async bullshit
+  document.querySelectorAll('.mod1-list > li > figure > svg > g.mod1')[0].classList.remove('bounceIn');
+  document.querySelectorAll('.commandpost-list > li > figure > svg > g.commandpost')[0].classList.remove('bounceIn');
+
   se.forEach((elem) => {
-    // https://stackoverflow.com/questions/5353934/check-if-element-is-visible-on-screen
     const rect = elem.getBoundingClientRect();
-    const viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-    const isTheElementVisible = !(rect.bottom < 0 || rect.top - viewHeight >= 0);
-    if (isTheElementVisible) {
-      // rect.bottom is the scrollTop value we need to store so we know where the user is scrolled at in the menu
-      rectBottom.push(rect.bottom);
+    // When the menu is open, find the bottom value of all the symbols and from there we can figure out which symbols are in view
+    // Choosing a value of 2k because of other issues I was having with fucking Firefox
+    if (rect.bottom >= 0 && rect.bottom <= 2000) {
       // Check if we already got the client bounding box before. No need to resize the element again
       if (!elem._boundingBox) {
-        // console.log(JSON.parse(elem.dataset.symbolInfo).Symbol);
-        // If not, get it then store it for future use.
+        // console.log({
+        //   Symbol: JSON.parse(elem.dataset.symbolInfo).Symbol, RB: rect.bottom,
+        // });
         elem._boundingBox = elem.getBBox();
+        // Push all the visible symbols so we can keep track of them.
         elementsWithBoundingBoxes.push(elem);
         elem.setAttributeNS(null, 'preserveAspectRatio', 'xMidYMid');
         elem.setAttributeNS(null, 'viewBox', `${elem.getBBox().x - 4} ${elem.getBBox().y - 4} ${elem.getBBox().width + 8} ${elem.getBBox().height + 8}`);
@@ -38,40 +39,23 @@ const selectBoxesToResize = ['.symbol-list', '.mod1-list', '.mod2-list'];
 // Listen to the user scrolling in the symbols menu list, then resize the symbols that are just out of view
 selectBoxesToResize.forEach((selectBox) => {
   document.querySelectorAll(selectBox).forEach((element) => {
-    element.parentElement.addEventListener('mousewheel', () => {
-      const { scrollTop } = element.parentElement;
-      const { clientHeight } = element.parentElement;
-      const bottomScrollPosition = scrollTop + clientHeight;
+    // element.style.scrollBehavior = 'smooth';
+    element.parentElement.addEventListener('scroll', () => {
       // If the user is about to scroll near the bottom of the LAST resized symbol, then run the resizer again
       // This will typically only resize 1 symbol that is about 11 symbols down the list (out of view)
-      if (bottomScrollPosition >= rectBottom.slice(-1)[0]) {
-        if (element.classList.contains('symbol-list')) {
-          Resizer('.symbolFigure svg');
-        }
-        if (element.classList.contains('mod1-list')) {
-          Resizer('.mod1Figure svg');
-        }
-        if (element.classList.contains('mod2-list')) {
-          Resizer('.mod2Figure svg');
-        }
+      if (element.classList.contains('symbol-list')) {
+        Resizer('.symbolFigure svg');
+      }
+      if (element.classList.contains('mod1-list')) {
+        Resizer('.mod1Figure svg');
+      }
+      if (element.classList.contains('mod2-list')) {
+        Resizer('.mod2Figure svg');
       }
     });
   });
 });
 
-
-// Listen to the user scrolling in the symbols menu list, then resize the symbols that are just out of view
-// document.querySelector('.searchResults').addEventListener('mousewheel', () => {
-//   // scrollTop + clientHeight will get the bottom position of the menu list
-//   const { scrollTop } = document.querySelector('.searchResults');
-//   const { clientHeight } = document.querySelector('.searchResults');
-//   const bottomScrollPosition = scrollTop + clientHeight;
-//  // If the user is about to scroll near the bottom of the LAST resized symbol, then run the resizer again
-//  // This will typically only resize 1 symbol that is about 11 symbols down the list (out of view)
-//   if (bottomScrollPosition >= rectBottom.slice(-1)[0]) {
-//     Resizer('.symbolFigure svg');
-//   }
-// });
 
 // This will clear the elementsWithBoundingBoxes array. Not sure if I need this or not
 const clearClientBoundingBoxes = () => {
