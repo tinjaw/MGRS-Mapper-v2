@@ -387,39 +387,3 @@ footer.bottom-about {
   max-width: 39%;
   padding: 15px;
 }
-
-// *********************************************************************************** //
-// * Remove on Production                                                            * //
-// *********************************************************************************** //
-.pre-container {
-  width: 100%;
-}
-
-div#pre-myJSONString {
-  word-break: break-all;
-}
-
-#pre-myJSONString,
-#pre-regexString {
-  border: 2px dashed #666;
-  margin: 20px;
-  padding: 10px;
-  font-family: Roboto;
-  letter-spacing: 1.15px;
-  font-size: larger;
-}
-
-// menu surface - grid toggle buttons
-.mdc-layout-grid.toggleLabel {
-  padding-top: 0;
-  padding-bottom: 0;
-  display: block;
-  text-align: center;
-}
-
-.rightBorder {
-  border-right: 1px #666 solid;
-}
-.leftBorder {
-  padding-left: 17px;
-}

@@ -4,6 +4,7 @@
 // ! MOBILITY INDICATORS: These are only used for equipment and depicts the mobility feature that is NOT intrinsic to the piece of equipment itself. For example; a self propelled howitzer moving by train would get the "Rail" mobility indicator because the railway is not a part of a self propelled howitzer. These mobility indicators are put at the bottom of equipment symbols. An object like a heavy truck would have the wheeled indicator but since it is intrinsic to a truck it will not be placed below the symbol.
 // ! The following are the only mobility indicators: Wheeled (limited cross country), Wheeled (cross country), Tracked, Wheeled and Tracked Combination, Towed, Railway, Over-snow, Sled, Pack Animals, Barge and Amphibious.
 // ! Refer to 5-17 in ADRP 1-02 (AUG 2018)
+//! Refer to "Amphibious" if you need to learn how to reconstruct a mobility indicator
 const mod2Object = {
   None: {
     type: 'Default',
@@ -30,6 +31,370 @@ const mod2Object = {
       },
       get neutral() {
         return this.friendly;
+      },
+    },
+  },
+  Veterinary: {
+    type: 'Veterinary',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'V',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Analysis: {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,120 0,-35 m 0,60 -30,-25 60,0 z',
+          transform: 'translate(55,77) scale(0.45)',
+          fill: 'none',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(55,86) scale(0.45)';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        return this.hostile;
+      },
+    },
+  },
+  'Direction Finding': {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 120,120 0,-60 m 0,58 -30,-25 z m0,0 30, -25z',
+          transform: 'translate(154,171) scale(0.45) rotate(180)',
+          strokeWidth: 6,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(154,180) scale(0.45) rotate(180)';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        return this.hostile;
+      },
+    },
+  },
+  'Electric Ranging': {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M120,130 c-40,20 -80,-45 -40,-70 z M100,95 L140,75',
+          transform: 'translate(70,103) scale(0.3)',
+          strokeWidth: 6,
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(70,110) scale(0.3)';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        return this.hostile;
+      },
+    },
+  },
+  Intercept: {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,120 0,-35 m 0,60 -30,-25 60,0 z',
+          transform: 'translate(55,77) scale(0.45)',
+          strokeWidth: 6,
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(55,86) scale(0.45)';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        return this.hostile;
+      },
+    },
+  },
+  Jamming: {
+    type: 'Military Intelligence',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M25 120c10 0 0 10 10 10s0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10m-150 5c10 0 0 10 10 10s0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10',
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M126 146c-8 0 0-8-8-8s0 8-8 8 0-8-8-8 0 8-8 8 0-8-8-8 0 8-8 8 0-8-10-8m70-4c-8 0 0-8-8-8s0 8-8 8 0-8-8-8 0 8-8 8 0-8-8-8 0 8-8 8 0-8-8-8 0 8-8 8 0-8-8-8 0 8-5 8',
+          },
+        };
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M133 150c-9 0 0-10-9-10-10 0 0 10-10 10-9 0 0-10-9-10-10 0 0 10-10 10-9 0 0-10-9-10s0 10-9 10c-10 0 0-10-13-10m83-4c-9 0 0-10-9-10-10 0 0 10-10 10-9 0 0-10-9-10s0 10-9 10c-10 0 0-10-10-10-9 0 0 10-9 10-10 0 0-10-10-10-9 0 0 10-9 10s0-10-9-10c-10 0 0 10-7 10',
+          },
+        };
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M45 45l110 110m-110 0L155 45M45 124c10 0 0 10 10 10s0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10m-110 5c10 0 0 10 10 10s0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10 0-10 10-10 0 10 10 10',
+          },
+        };
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  Search: {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 120,120 0,-60 m 0,58 -30,-25 z m0,0 30, -25z',
+          transform: 'translate(46,92) scale(0.45)',
+          strokeWidth: 6,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(46,101) scale(0.45)';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(46,97) scale(0.45)';
+        return propertyToModify;
+      },
+    },
+  },
+  Tactical: {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'TAC',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.fontSize = '19';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Support: {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'SPT',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.fontSize = '19';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Strategic: {
+    type: 'Military Intelligence',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'STR',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.fontSize = '19';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
       },
     },
   },
@@ -126,6 +491,9 @@ const mod2Object = {
         return this.friendly;
       },
       get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
         return this.friendly;
       },
     },
