@@ -29,6 +29,1974 @@ const militarySymbolsObject = {
     },
   },
   //! Graphic Control Measures
+  'Raft Site': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M175 20l-25 25 25 25m-25-25H50L25 20m25 25L25 70',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Lane: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M70-25L95 0l25-25M95 0v100l-25 25m25-25l25 25',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Ford (Difficult)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-30 30h50m50 0h50m50 0h50M-30 80h50m50 0h50m50 0h50M75 105l25-25-25-25 25-25L75 5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Ford (Easy)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-30 30h50m50 0h50m50 0h50M-30 80h50m50 0h50m50 0h50',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Ferry: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-70 50l20-20v40l-20-20zm20 0h310V30l20 20-20 20V50z',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Bridge of Gap Crossing': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 0 100 l 30 -30 h 90 l 30 30 m 0 -100 l -30 30 h -90 l -30 -30',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Triple Strand Concertina)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-70 65h364M-49 25c-7 0-13 9-13 19s6 20 14 20 13-9 13-20-7-19-14-19zm46 1c-7 0-13 8-13 19s6 19 14 19 13-8 13-19S5 25-3 25zm47 0c-8 0-13 8-13 19s6 19 13 19 13-8 13-19-6-19-13-19zm45 0c-7 0-13 9-13 20s6 19 14 19 13-9 13-19-6-20-14-20zm46 0c-7 0-13 9-13 19s6 20 13 20 14-9 14-20-7-19-14-19zm46 0c-7 0-13 8-13 19s6 19 13 19 14-8 14-19-6-19-14-19zm47 0c-7 0-13 9-13 19s6 20 13 20 14-9 14-20-7-19-14-19zm46 0c-7 0-13 8-13 19s6 19 14 19 12-8 12-19-6-19-13-19z',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm -70 24 h 364',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Double Strand Concertina)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-70 65h364M-49 25c-7 0-13 9-13 19s6 20 14 20 13-9 13-20-7-19-14-19zm46 1c-7 0-13 8-13 19s6 19 14 19 13-8 13-19S5 25-3 25zm47 0c-8 0-13 8-13 19s6 19 13 19 13-8 13-19-6-19-13-19zm45 0c-7 0-13 9-13 20s6 19 14 19 13-9 13-19-6-20-14-20zm46 0c-7 0-13 9-13 19s6 20 13 20 14-9 14-20-7-19-14-19zm46 0c-7 0-13 8-13 19s6 19 13 19 14-8 14-19-6-19-14-19zm47 0c-7 0-13 9-13 19s6 20 13 20 14-9 14-20-7-19-14-19zm46 0c-7 0-13 8-13 19s6 19 14 19 12-8 12-19-6-19-13-19z',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm -70 45 h 364',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Single Strand Concertina)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-70 65h364M-49 25c-7 0-13 9-13 19s6 20 14 20 13-9 13-20-7-19-14-19zm46 1c-7 0-13 8-13 19s6 19 14 19 13-8 13-19S5 25-3 25zm47 0c-8 0-13 8-13 19s6 19 13 19 13-8 13-19-6-19-13-19zm45 0c-7 0-13 9-13 20s6 19 14 19 13-9 13-19-6-20-14-20zm46 0c-7 0-13 9-13 19s6 20 13 20 14-9 14-20-7-19-14-19zm46 0c-7 0-13 8-13 19s6 19 13 19 14-8 14-19-6-19-14-19zm47 0c-7 0-13 9-13 19s6 20 13 20 14-9 14-20-7-19-14-19zm46 0c-7 0-13 8-13 19s6 19 14 19 12-8 12-19-6-19-13-19z',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (High Wire Fence)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-90 15l40 40m-40 0l40-40m10 0L0 55m-40 0L0 15m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m-400 40h410m0-40H-90',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Low Wire Fence)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-90 15l40 40m-40 0l40-40m10 0L0 55m-40 0L0 15m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m-400 40h410',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Double Apron Fence)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-90 15l40 40m-40 0l40-40m10 0L0 55m-40 0L0 15m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m-400 20h410',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Double Fence)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-90 15l40 40m-40 0l40-40m10 0L0 55m-40 0L0 15m50 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m50 0l40 40m-40 0l40-40m20 0l40 40m-40 0l40-40m-390 20h400',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Single Fence)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-90 15l40 40m-40 0l40-40m130 0l40 40m-40 0l40-40m130 0l40 40m-40 0l40-40m-390 20h400',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wire Obstacle (Unspecified)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-90 15l40 40m-40 0l40-40m10 0L0 55m-40 0L0 15m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40m10 0l40 40m-40 0l40-40',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Boobytrap Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M77 88l23-38 23 38m7 12c0 10-13 19-30 19s-30-9-30-19 13-19 30-19 30 9 30 19z',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & WA AT Mine & Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0Z m -5,15 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 168,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & AT Mine w/AH & Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 16,15 0,13 6,-6 m -6,7',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 168,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & AT Mine w/AH & WA AT': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 16,15 0,13 6,-6 m -6,7',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 125,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & AT Mine & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 168,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & AT Mine & WA AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 125,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & AT Mine & AT Mine w/AH': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 145,115 0,13 6,-6',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & Wide Area AT Mine & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0Z m -5,15 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 168,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AP Mine w/AH Dev. & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 16,15 0,13 6,-6 m -6,7',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 168,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AP Mine w/AH Dev. & WA AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 16,15 0,13 6,-6 m -6,7',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 125,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AT Mine & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 168,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AT Mine & Wide Area AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 125,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AT Mine & AT Mine w/AH Device': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 145,115 0,13 6,-6',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AP Mine w/Dir FX & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 168,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AP Mine w/Dir FX & WA AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 125,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AP Mine w/Dir FX & AT Mine w/AH': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 145,115 0,13 6,-6',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine & AP Mine w/Dir FX & AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wide Area AT Mines & AT Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm 35,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 118,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+        path_4: {
+          d: 'm 125,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AT Mines w/AH Device & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm 55,115 0,13 6,-6',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 118,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+        path_4: {
+          d: 'm 145,115 0,13 6,-6',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AT Mines w/AH Device & Wide Area AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm 55,115 0,13 6,-6',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0Z m -5,15 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 145,115 0,13 6,-6',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AT Mines & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 118,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AT Mines & Wide Area AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0Z m -5,15 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AT Mines & AT Mine w/Antihandling Device': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 16,15 0,13 6,-6 m -6,7',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 118,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+        path_4: {
+          d: 'M 154,88.3 165,75 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mine w/Dir FX & Wide Area AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0Z m -5,15 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'M 154,88.3 165,75 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP/AT Mines w/Dir FX & Antihandling device': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 16,15 0,13 6,-6 m -6,7',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'M 154,88.3 165,75 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mines w/Directional Effects & AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'M 154,88.3 165,75 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   'AP Mines & Mine Cluster': {
     type: 'Graphic Control Measure',
     affiliation: {
@@ -15193,6 +17161,34 @@ const militarySymbolsObject = {
       },
     },
   },
+  Abatis: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M20 110l20-50 20 50h100',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   Bypass: {
     type: 'Tactical Mission Task',
     affiliation: {
@@ -15208,6 +17204,96 @@ const militarySymbolsObject = {
           fontSize: '45',
           textAnchor: 'middle',
           fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Bypass (Easy)': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 80zV50h140m-20 15l20-15-20-15M25 120v30h140l-20-15m20 15l-20 15 M25 120 v-40',
+          strokeLinejoin: 'round',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Bypass (Difficult)': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 80zV50h140m-20 15l20-15-20-15M25 120v30h140l-20-15m20 15l-20 15',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'M23 120 l20 -5 l-40 -5 l40 -5 l-40 -5 l40 -5 l-40 -5 l40 -5 l-20 -5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Bypass (Impossible)': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 80zV50h140m-20 15l20-15-20-15M25 120v30h140l-20-15m20 15l-20 15 M0 120 h50 M0 80 h50',
+          strokeLinejoin: 'round',
         },
       },
       get friendlyTemplated() {

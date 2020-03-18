@@ -8,8 +8,10 @@
 - Finished Mod2 symbols
 - Added 5 Command Post symbols
 - Finished Command Post symbols
-- Added 44 Tactical Mission Tasks
+- Added 48 Tactical Mission Tasks
 - Finished Tactical Mission Tasks symbols
+- Added 144 Graphic Control Measures
+- Finished Graphic Control Measures
 
 ---
 
