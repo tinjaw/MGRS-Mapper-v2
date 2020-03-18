@@ -6,6 +6,8 @@
 
 - Added 31 Mod2 symbols
 - Finished Mod2 symbols
+- Added 5 command post symbols
+- Finished command post symbols
 
 ---
 
