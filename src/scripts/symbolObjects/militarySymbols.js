@@ -11449,15 +11449,1325 @@ const militarySymbolsObject = {
       },
     },
   },
+  Breach: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm -155 20 z v -60 h 300 m -15 -20 l 30 40 m -315 98 v 60 h 300 m -15 20 l 30 -40',
+          strokeLinejoin: 'round',
+          transform: 'translate(20,50)',
+        },
+        text_1: {
+          symbolText: 'B',
+          x: '-135',
+          y: '116',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Bypass: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 80zV50h140m-20 15l20-15-20-15M25 120v30h140l-20-15m20 15l-20 15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'B',
+          x: '25',
+          y: '116',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Canalize: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 80zV50h140m-10 15l20-30M25 120v30h140m-10-15l20 30',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'C',
+          x: '25',
+          y: '116',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Clear: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-35 100h75m40 0h30L95 85m15 15l-15 15m-129 35h144l-15 15m15-15l-15-15M-34 50h144L95 35m15 15L95 65m18-40v150',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'C',
+          x: '60',
+          y: '116',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Contain: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 75 -75 v 30 z c 0 0 -150 -30 -150 115 m 15 15 h 20 m -28 -63 l 28 13 m 27 -72 l 15 26 m -77 120 c 0 0 0 130 150 100 v -30 m -90 25 l 14 -26 m -66 -30 l 24 -17',
+          transform: 'translate(120,50)',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'C',
+          x: '45',
+          y: '125',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Control: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-10 80c0-115 210-115 210 0m0 30c0 115-210 115-210 0l-20 20m20-20l20 20m-20-50l-20-20m19 20L9 60',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'C',
+          x: '200',
+          y: '107',
+          fontSize: '33',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Cordon and Knock': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-10 80c0-115 210-115 210 0m0 30c0 115-210 115-210 0l20 20m-20-20l-15 20zm30-92l25 20V3m30-8l15 30 15-30m45 10l-15 30 37-15m-29 167l-15-30-15 38m-54-4l-2-30-22 22',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'C/K',
+          x: '205',
+          y: '107',
+          fontSize: '33',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Counterattack (Right)': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-40 110s0-150 300-150v-30l60 60-60 60V20C160 10 160 80 120 220',
+          strokeDashArray: '18 5',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'CATK',
+          x: '100',
+          y: '50',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Counterattack (Left)': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-40 110s0-150 300-150v-30l60 60-60 60V20C160 10 160 80 120 220',
+          transform: 'translate(200,0) scale(-1 1)',
+          strokeDashArray: '18 5',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'CATK',
+          x: '100',
+          y: '50',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Counterattack by Fire': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-120 132s0-120 240-120v-24l48 48-48 48V60C40 52 40 108 8 220M128-28l48 24v80l-48 24m48-64h48m0 0l-22 22m22-22l-22-22',
+          strokeDashArray: '18 6',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'CATK',
+          x: '-20',
+          y: '100',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Cover: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 220 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'm 20 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+          transform: 'scale(-1,1)',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'C',
+          x: '200',
+          y: '115',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+        text_2: {
+          symbolText: 'C',
+          x: '0',
+          y: '115',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Delay: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 150 -30 c 100 10 100 158 0 158 h -55 m -40 0 h -130 l 27 -15 m -27 15 l 27 15',
+          transform: 'translate(20,50)',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'D',
+          x: '95',
+          y: '193',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Demonstration: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M20 50h90c88 0 88 100 0 100m-50 0H20l27-15m-27 15l27 15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'DEM',
+          x: '85',
+          y: '158',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Destroy: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M 115,108.25 200,155 M 0,45 85,91.75',
+        },
+        path_2: {
+          d: 'M 115,91.75 200,45 M 0,155 85,108.25',
+        },
+        text_1: {
+          symbolText: 'D',
+          x: '100',
+          y: '115',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Disengage: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M106 50c85 0 85 100 0 100m-48 0H-42l30-15m-30 15l30 15',
+        },
+        text_1: {
+          symbolText: 'DIS',
+          x: '80',
+          y: '158',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Disrupt: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M20 100h65m40 0h25m-90 0V30m0 70v70h60M59 31h114',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'M173 30V15l15 15-15 15V30m-24 70V85l15 15-15 15v-15m-30 70v-15l15 15-15 15v-15',
+          strokeLinejoin: 'miter',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'D',
+          x: '105',
+          y: '117',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Envelopment: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-110 140h35m40 0H0c15-166 235-129 235 0l-27-15m27 15l15-27',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'E',
+          x: '-55',
+          y: '155',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Exfiltrate: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M145 100h-30m-40 0c-81 0 0 30-100 25l25 15m-25-15l25-15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'EX',
+          x: '98',
+          y: '111',
+          fontSize: '33',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Exploit: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 76l10 10m5 5l10 10-10 10m-5 5l-10 10m-5 5l-10 10m-5 5L0 156M0 47l10 10m5 5l10 10m30 29h100l-27 15m27-15l-27-15',
+          strokeLinejoin: 'round',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Feint: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 66c20 15 20 15 100 25V71l30 30-30 30v-20M30 136c20-15 20-15 100-25m0-50l10 10m5 5l10 10m5 5l10 10-10 10m-5 5l-10 10m-5 5l-10 10',
+          strokeLinejoin: 'round',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Fix: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm -185 50 h 20 m 40 0 h 15 l 20 -20 l 20 50 l 20 -50 l 20 20 h 20',
+          transform: 'translate(180,50)',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'm 0 0 l -15 -15 v 30 l 15 -15z',
+          transform: 'translate(185,100)',
+          fill: 'black',
+          strokeLinejoin: 'miter',
+        },
+        text_1: {
+          symbolText: 'F',
+          x: '35',
+          y: '113',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Follow and Assume': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-50 100l-30-75m30 75l-30 75h255l30-75-30-75H-80m285 75h11m11 0h11m11 0h11m11 0h11m11 0h11l-30-15V70l60 30-60 30v-15l30-15',
+          strokeLinejoin: 'round',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Follow and Support': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-50 100l-30-75m30 75l-30 75h255l30-75-30-75H-80m285 75h100l-55 55m55-55l-55-55',
+          strokeLinejoin: 'round',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Forward Passage of Lines': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M74 50c-85 0-85 100 0 100m48 0h100l-30-15m30 15l-30 15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'P(F)',
+          x: '100',
+          y: '158',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Guard: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 220 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'm 20 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+          strokeLinejoin: 'round',
+          transform: 'scale(-1,1)',
+        },
+        text_1: {
+          symbolText: 'G',
+          x: '200',
+          y: '115',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+        text_2: {
+          symbolText: 'G',
+          x: '0',
+          y: '115',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Infiltrate: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-5 100h30m40 0c81 0 0 30 100 25l-25 15m25-15l-25-15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'IN',
+          x: '45',
+          y: '111',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Interdict: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 194.203,65.6674 5.49,-20.4904 -20.49,-5.4904 M 115,91.75 200,45 M 0,155 85,108.25 M 185,85 l 15,15 -15,15 m -70,-15 85,0 m -200,0 85,0',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'I',
+          x: '100',
+          y: '115',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Isolate: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-30 80c0-115 210-115 210 0m0 30c0 115-210 115-210 0l20 20m-20-20l-15 20zM0 18l25 20V3m30-8l15 30L85-5m45 10l-15 30 37-15m-29 167l-15-30-15 38m-54-4l-2-30-22 22',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'I',
+          x: '180',
+          y: '107',
+          fontSize: '33',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+          fontFamily: 'Georgia',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Neutralize: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M 115,108.25 200,155 M 0,45 85,91.75',
+        },
+        path_2: {
+          d: 'M 115,91.75 200,45 M 0,155 85,108.25',
+          strokeDashArray: '12,5',
+        },
+        text_1: {
+          symbolText: 'N',
+          x: '100',
+          y: '115',
+          fontSize: '45',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Occupy: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-30 80c0-115 210-115 210 0m0 30c0 115-210 115-210 0l-20 20m20-20l20 20',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'O',
+          x: '180',
+          y: '107',
+          fontSize: '33',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Penetration: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 100h60m40 0h30l-20 20m20-20l-20-20m30-50v150',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'P',
+          x: '110',
+          y: '112',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rearward Passage of Lines': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M74 50c-85 0-85 100 0 100m48 0h100l-30-15m30 15l-30 15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'P(R)',
+          x: '100',
+          y: '158',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Relief in Place': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M10 50h20m40 0h30L80 70m20-20L80 30m20 20h10c90 0 100 100 0 100H-10l20-20m-20 20l20 20',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'RIP',
+          x: '50',
+          y: '56',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Retain: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-12 78c0-104 189-104 189 0m0 27c0 103-189 103-189 0l18 18m-18-18l-14 18m20-75l-33-20M5-16l27 27m51-49v37m78-15l-27 27m36 36l33-19m1 126l-33-19m-12 63l-27-27m-50 49v-37M4 198l27-27m-36-35l-33 19',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'R',
+          x: '177',
+          y: '100',
+          fontSize: '25',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Retirement: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M106 50c85 0 85 100 0 100m-40 0H-34l30-15m-30 15l30 15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'R',
+          x: '86',
+          y: '160',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   Screen: {
     type: 'Tactical Mission Task',
     affiliation: {
       friendly: {
         path_1: {
           d: 'm 220 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+          strokeLinejoin: 'round',
         },
         path_2: {
           d: 'm 20 100 l 100 0 l -25 25 l 100 0 l -25 -15 m 27 15 l -27 15',
+          strokeLinejoin: 'round',
           transform: 'scale(-1,1)',
         },
         text_1: {
@@ -11473,6 +12783,299 @@ const militarySymbolsObject = {
           y: '115',
           fontSize: '35',
           textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Secure: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-30 80c0-115 210-115 210 0m0 30c0 115-210 115-210 0l20 20m-20-20l-15 20',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'S',
+          x: '180',
+          y: '107',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Seize: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-35 46a80 80 0 10160 0 80 80 0 10-160 0',
+          transform: 'translate(25,0) scale(0.8)',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'M110,17a92.022284,92.022284,0,0,1,109,67',
+          transform: 'translate(38,20) scale(0.8)',
+          strokeLinejoin: 'round',
+        },
+        path_3: {
+          d: 'M186,192a427.3232,427.3232,0,0,1,7,114 l50 -50 m-50 50 l-50 -50',
+          transform: 'translate(75,-25) scale(0.8)',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'S',
+          x: '217',
+          y: '120',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Support by Fire': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm -50 160 l 30 -30 l -30 -150',
+          transform: 'translate(25,50)',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'm -30 15 l 30 15 l -45 15 l 15 -30 z',
+          transform: 'rotate(2)',
+          strokeLinejoin: 'miter',
+          fill: 'black',
+        },
+        path_3: {
+          d: 'm 5 180 h 190 m 30 30 l -30 -30 l 30 -150',
+        },
+        path_4: {
+          d: 'm 205 -100 l 30 15 l -45 15 l 15 -30 z',
+          transform: 'rotate(30)',
+          strokeLinejoin: 'miter',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Suppress: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M 115,108.25 200,155 M 0,45 85,91.75',
+          strokeDashArray: '12,5',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'M 115,91.75 200,45 M 0,155 85,108.25',
+          strokeDashArray: '12,5',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'S',
+          x: '100',
+          y: '115',
+          fontSize: '45',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Turn: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M110,17a92.022284,92.022284,0,0,1,109,67',
+          transform: 'translate(-110,10) scale(0.8)',
+          strokeLinejoin: 'round',
+        },
+        path_2: {
+          d: 'M186,192a427.3232,427.3232,0,0,1,7,114',
+          transform: 'translate(-75,-35) scale(0.8)',
+          strokeLinejoin: 'round',
+        },
+        path_3: {
+          d: 'm100 0 l50 -50 m-50 50 l-50 -50 l100 0z',
+          transform: 'translate(20,220) scale(0.6)',
+          strokeLinejoin: 'round',
+          fill: 'black',
+          strokeWidth: 1,
+        },
+        text_1: {
+          symbolText: 'T',
+          x: '70',
+          y: '110',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Withdraw: {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M106 50c85 0 85 100 0 100m-40 0H-34l30-15m-30 15l30 15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'W',
+          x: '86',
+          y: '160',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Withdraw Under Pressure': {
+    type: 'Tactical Mission Task',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M106 50c85 0 85 100 0 100m-60 0H-34l30-15m-30 15l30 15',
+          strokeLinejoin: 'round',
+        },
+        text_1: {
+          symbolText: 'WP',
+          x: '78',
+          y: '160',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {

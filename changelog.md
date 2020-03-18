@@ -6,8 +6,10 @@
 
 - Added 31 Mod2 symbols
 - Finished Mod2 symbols
-- Added 5 command post symbols
-- Finished command post symbols
+- Added 5 Command Post symbols
+- Finished Command Post symbols
+- Added 44 Tactical Mission Tasks
+- Finished Tactical Mission Tasks symbols
 
 ---
 
