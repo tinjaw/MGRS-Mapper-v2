@@ -28,6 +28,3918 @@ const militarySymbolsObject = {
       },
     },
   },
+  //! Graphic Control Measures
+  'AP Mines & Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M40,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 118,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+        path_4: {
+          d: 'M130,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mines & Wide Area AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M40,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0Z m -5,15 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'M130,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mines & AT Mine w/Antihandling Effects': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M40,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m 16,15 0,13 6,-6 m -6,7',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'M130,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mines & AT Mine': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'AP Mines & AP Mine w/Directional Effects': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M40,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M85,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'M130,100a15,15 0 1,0 30,0a15,15 0 1,0 -30,0 m -5,-25 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Mine Cluster': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm 73,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+        path_3: {
+          d: 'm 118,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+        path_4: {
+          d: 'm 163,110 -36,0 c 0,-10 3,-20 18,-20 15,0 18,10 18,20 z',
+          fill: 'white',
+          stroke: 'green',
+          strokeDashArray: '7.5,5',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Wide Area Antitank Mines': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm 35,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 80,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 125,115 8,10 5.5,-11 m 13,0 5.5,11 8,-10',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antitank Mines w/Antihandling Device': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm 55,115 0,13 6,-6',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 100,115 0,13 6,-6',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 145,115 0,13 6,-6',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antitank Mines': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antipersonnel Mines w/Directional Effects': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'M 64.4,88.3 75,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3.3,0',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'M 109,88.3 120,75 m -40,0 10.6,13.3 m 32.4,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'M 154,88.3 165,75 m -40,0 11,13.3 m 32,10 2,1.7 -2,2 z m -8,1.7 3,0',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Antipersonnel Mines': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'green',
+          stroke: 'green',
+        },
+        path_2: {
+          d: 'm 80,75 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+        path_3: {
+          d: 'm 125,75 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+        path_4: {
+          d: 'm 35,75 10.6,13.3 m 18.8,0 10.6,-13.3',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Unspecified Planned Mines': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          strokeDashArray: '10,5',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'white',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'white',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'white',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Unspecified Mines': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M25 65v70h150V65z',
+          stroke: 'green',
+        },
+        circle_1: {
+          cx: '55',
+          cy: '100',
+          r: '15',
+          fill: 'white',
+          stroke: 'green',
+        },
+        circle_2: {
+          cx: '100',
+          cy: '100',
+          r: '15',
+          fill: 'white',
+          stroke: 'green',
+        },
+        circle_3: {
+          cx: '145',
+          cy: '100',
+          r: '15',
+          fill: 'white',
+          stroke: 'green',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Airfield: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M80,70 l40,0 M80,80 l25,-25',
+          transform: 'translate(-300,-240) scale(4)',
+          strokeWidth: '2',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Action Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'A',
+          x: '100',
+          y: '-20',
+          fontSize: '35',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+
+  'Amnesty Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'AMN',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Center of Main Effort': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 155,100 0,-35 M 45,100 45,65 m 88,0 0,35 m -22,-35 0,35 m -22,-35 0,35 m -22,0 0,-35 m -37,70 0,-35 140,0 0,40',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Checkpoint: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'CKP',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Contact Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M50-10h100V90H50z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Coordination Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M65 75l70-70M65 5l70 70M50 40a50 50 0 10100 0 50 50 0 10-100 0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Decision Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M100-24l17 51h54l-43 32 16 51-44-31-44 31 16-51-43-32h54z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Distress Call Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'SOS',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Entry Control Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'EC',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Fly to Point (Weapon)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'FTP',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Fly to Point (Normal)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'FTP',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+        text_2: {
+          symbolText: 'NRM',
+          x: '100',
+          y: '30',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Linkup Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'LU',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Passage Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'PP',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Point of Interest': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M129 42a40 40 0 01-58 0l29 58z',
+          fill: 'black',
+        },
+        path_2: {
+          d: 'M60 15a40 40 0 1080 0 40 40 0 10-80 0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Point of Interest (Launch Event)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M129 42a40 40 0 01-58 0l29 58z',
+          fill: 'black',
+        },
+        path_2: {
+          d: 'M60 15a40 40 0 1080 0 40 40 0 10-80 0',
+        },
+        text_1: {
+          symbolText: 'LE',
+          x: '100',
+          y: '-30',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Special Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M85 40a15 15 0 1030 0 15 15 0 10-30 0m75 60L40-20m0 120L160-20',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Waypoint: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M160 100L40-20m0 120L160-20',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Target Handover': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M100-52L78 8 18 30l60 23 22 60 23-60 60-23-60-22z',
+          strokeDashArray: '10,5',
+        },
+        text_1: {
+          symbolText: 'TH',
+          x: '100',
+          y: '40',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Target Reference Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 100,0 m -50,-50 0,100',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Key Terrain': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M50 40a50 50 0 10100 0 50 50 0 10-100 0',
+          stroke: 'purple',
+          strokeWidth: 6,
+        },
+        text_1: {
+          symbolText: 'K',
+          x: '100',
+          y: '50',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rally Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'RLY',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Release Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'RP',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Start Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'SP',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Point of Departure': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        text_1: {
+          symbolText: 'PD',
+          x: '100',
+          y: '-20',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Observation Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,-15 47.6,82.5 -95.2,0 z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Reconnaissance Outpost': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,-15 47.6,82.5 -95.2,0 Z m-47.6 82.5 72.5,-40z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Forward Observer Outpost': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 100,-15 47.6,82.5 -95.2,0 Z',
+        },
+        path_2: {
+          d: 'M85,38a15,15 0 1,0 30,0a15,15 0 1,0 -30,0',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'CBRN Outpost': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M100-15l48 83H52zM52 68l73-40z',
+        },
+        path_2: {
+          d: 'M88 59c2-13 8-24 22-29m2 29c-2-13-8-24-22-29',
+        },
+        path_3: {
+          d: 'M91 32a5 5 0 11-10 0 5 5 0 0110 0zm28 0a5 5 0 11-10 0 5 5 0 0110 0z',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Sensor Outpost': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M100-15l48 83H52z',
+        },
+        path_2: {
+          d: 'M100 20c0 8 13 20 20 20-7 0-20 13-20 20 0-7-12-20-20-20 8 0 20-12 20-20z',
+          fill: 'black',
+          strokeWidth: 2,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Combat Outpost': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 90V78m-16 12V78m-16 12V78M60 90V78m16 12V77m16 13V78M46 65l10 6m-2-20l10 6m-2-20l10 7M86-4l10 6m-18 8l10 6m-18 7l10 7m34-34l-10 6m18 8l-10 6m18 7l-10 7m34 35l-10 6m2-20l-10 6m2-20l-10 7M100-5l48 82H52z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Airspace Control Points': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 140,125 0,-130 m -80,0 0,130 M85,60a15,15 0 1,0 30,0a15,15 0 1,0 -30,0',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Control Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M50 60a50 50 0 10100 0 50 50 0 10-100 0',
+        },
+        text_1: {
+          symbolText: 'ACP',
+          x: '100',
+          y: '45',
+          fontSize: '30',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Communications Checkpoint': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M50 60a50 50 0 10100 0 50 50 0 10-100 0',
+        },
+        text_1: {
+          symbolText: 'CCP',
+          x: '100',
+          y: '45',
+          fontSize: '30',
+          textAnchor: 'middle',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Downed Aircraft Pickup Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
+        },
+        circle_1: {
+          cx: '100',
+          cy: '-35',
+          r: '12',
+          fill: 'black',
+        },
+        path_2: {
+          d: 'm 75,35 50,0 m -25,-45 0,45 m -30,-75 30,30 30,-30',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Popup Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M65 40v40l70-40v40z',
+        },
+        circle_1: {
+          cx: '100',
+          cy: '60',
+          r: '50',
+          fill: 'none',
+        },
+        text_1: {
+          symbolText: 'PUP',
+          x: '200',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Air Control Rendezvous': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        text_1: {
+          symbolText: 'RZ',
+          x: '100',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Tactical Air Navigation (TACAN)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        text_1: {
+          symbolText: 'T',
+          x: '100',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Combat Air Patrol (CAP) Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        text_1: {
+          symbolText: 'C',
+          x: '100',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Airborne Early Warning (AEW) Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        text_1: {
+          symbolText: 'W',
+          x: '100',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'ASW (HELO and F/W) Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        path_2: {
+          d: 'M100 41c-2 0-3 3-3 3v14L69 88v5l29-19-1 24-6 6v4l8-3 1 3h0l1-3 8 3v-4l-6-6-1-24 29 19v-5l-28-30V44s-1-3-3-3z',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'ASW',
+          x: '100',
+          y: '35',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Surface Combat Air Patrol (SUCAP)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        path_2: {
+          d: 'M100 41c-2 0-3 3-3 3v14L69 88v5l29-19-1 24-6 6v4l8-3 1 3h0l1-3 8 3v-4l-6-6-1-24 29 19v-5l-28-30V44s-1-3-3-3z',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'SUW',
+          x: '100',
+          y: '35',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'MIW - Fixed Wing': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        path_2: {
+          d: 'M100 41c-2 0-3 3-3 3v14L69 88v5l29-19-1 24-6 6v4l8-3 1 3h0l1-3 8 3v-4l-6-6-1-24 29 19v-5l-28-30V44s-1-3-3-3z',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'MIW',
+          x: '100',
+          y: '35',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'MIW - Rotary Wing': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        path_2: {
+          d: 'm 65,50 0,40 70,-40 0,40 -70,-40z',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'MIW',
+          x: '100',
+          y: '35',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Strike Initial Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        text_1: {
+          symbolText: 'S',
+          x: '100',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Replenishment Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        text_1: {
+          symbolText: 'RP',
+          x: '100',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rescue Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        text_1: {
+          symbolText: 'RP',
+          x: '100',
+          y: '75',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Unmanned Aerial System (UAS/UAV)': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        path_2: {
+          d: 'm 70,50 30,15 30,-15 0,15 -30,15 -30,-15 z',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'VTOL/VTUA': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 125V-5M60-5v130',
+        },
+        path_2: {
+          d: 'M70 50l30 15 30-15v30l-30-15-30 15zm0-25l30 15 30-15v15l-30 15-30-15z',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Optical Fix': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 50c0 7-22 13-50 13s-50-6-50-13 22-12 50-12 50 5 50 12zM40 100L140 0M40 0l100 100M90 0v100',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Acoustic Fix': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M40 100L140 0M40 0l100 100M90 0v100',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Electromagnetic Fix': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 40,40 15,20 5,-20 15,20 5,-20 20,20 5,-20 15,20 5,-20 15,20 M40 100L140 0M40 0l100 100M90 0v100',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Electromagnetic - MAD': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 40,40 15,20 5,-20 15,20 5,-20 20,20 5,-20 15,20 5,-20 15,20 M40 100L140 0M40 0l100 100M90 0v100',
+        },
+        text_1: {
+          symbolText: 'MAD',
+          x: '90',
+          y: '130',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Formation: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 50,60 100,0 m -50,-50 0,100',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Harbor: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M 80,140 50,60 150,60 120,140',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Reference Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120z',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '15',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Special Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120zM140 120L20 0m0 120L140 0',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '15',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Navigation Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120zM140 120L20 0m0 120L140 0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Data Link Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120zM140 120L20 0m0 120L140 0',
+        },
+        text_1: {
+          symbolText: 'D',
+          x: '80',
+          y: '115',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Corridor Tab Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120z',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '15',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'C',
+          x: '80',
+          y: '115',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Marshall Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120z',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '15',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'M',
+          x: '80',
+          y: '115',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Position & Intended Movement': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120z',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '15',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'P',
+          x: '80',
+          y: '115',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Pre-Landfall Waypoint': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120z',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '15',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'PL',
+          x: '80',
+          y: '115',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Waypoint': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120z',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '15',
+          fill: 'black',
+        },
+        text_1: {
+          symbolText: 'W',
+          x: '80',
+          y: '115',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Maritime Estimated Position': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M140 120H20V0h120z',
+          strokeDashArray: '12,5',
+        },
+        circle_1: {
+          cx: '80',
+          cy: '60',
+          r: '40',
+        },
+        text_1: {
+          symbolText: 'EP',
+          x: '82',
+          y: '73',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'General Sea Surface Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 20h140M30 100h140',
+        },
+        circle_1: {
+          cx: '100',
+          cy: '60',
+          r: '15',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'General Sea Subsurface Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 20h140',
+          strokeDashArray: '12,4',
+        },
+        circle_1: {
+          cx: '100',
+          cy: '60',
+          r: '15',
+        },
+        path_2: {
+          d: 'M30 100h140',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Non-Combatant Sea Surface Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 20h140M30 100h140',
+        },
+        text_1: {
+          symbolText: 'NC',
+          x: '100',
+          y: '73',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rendezvous Sea Surface Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 20h140M30 100h140',
+        },
+        text_1: {
+          symbolText: 'RZ',
+          x: '100',
+          y: '73',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Replenishment Sea Surface Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 20h140M30 100h140',
+        },
+        text_1: {
+          symbolText: 'RAS',
+          x: '100',
+          y: '73',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Rescue Sea Surface Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 20h140M30 100h140',
+        },
+        text_1: {
+          symbolText: 'RS',
+          x: '100',
+          y: '73',
+          fontSize: '35',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Shore Control Station': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 115h140m-27-20l2-10-10 5m-78 5l-2-10 10 5m35-55v68m8-76a8 8 0 01-8 8 8 8 0 01-7-8 8 8 0 017-7 8 8 0 018 7zm-53 8h90M55 85c15 25 75 25 90 0M40 5l10 10L60 5l10 10L80 5l10 10 10-10 10 10 10-10 10 10 10-10 10 10 10-10',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Distressed Vessel': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M120-30L80 10l40-40M110 80L40 10v-40l90 90zm-60 0L20 50m-30 30l30-30m90 30l30-30m30 30l-30-30M50 80l30-30z',
+          fill: 'black',
+          strokeLinejoin: 'round',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Downed Aircraft': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M190 90l-30-30m-30 30l30-30M10 90l30-30m30 30L40 60m20 20l50-60L90 0l20-20 40 40-20 70-30-30-30 30z',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Person in Water': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M90 70l20-20V20h10v40l-20 20zm-20 0L50 50V20H40v40l20 20zm10-10V40H70L60 30V10L70 0h20l10 10v20L90 40H80M50 90l30-30m90 30l-30-30m-30 30l30-30M-10 90l30-30m30 30L20 60m90 30L80 60',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Iceberg: {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 50l50-60 50 60-10 30-10-10-30 40-30-40-10 10zM0 50h160',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Oil Rig': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M-10 50V-50M140 50v80m40-80v80m-230 0V50h260',
+          strokeWidth: 8,
+        },
+        path_2: {
+          d: 'M-10 50V20h50v30z',
+          strokeWidth: 8,
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Sea mine-like': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M30 0l-40-40m90-30v50m50 20l40-40M10 80V20l40-40h60l40 40v60l-40 40H50z',
+          strokeWidth: 8,
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class I Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45zm15-150c-45 5-45 65 0 70-20-25-20-50 0-70z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class II Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        text_1: {
+          symbolText: 'II',
+          x: '100',
+          y: '0',
+          fontSize: '60',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+          fontFamily: 'Georgia',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class III Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        path_2: {
+          d: 'M100 20v-30L80-50h40l-20 40',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class IV Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        path_2: {
+          d: 'M100-40v20M75-10v-30h50v30',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class V Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        path_2: {
+          d: 'M80 15v-50c0-20 40-20 40 0v50m-50 0h60',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class VI Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        path_2: {
+          d: 'M75-20h50M100-5l15 25m-15-50v25L80 20m30-60a10 10 0 11-20 0 10 10 0 0120 0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class VII Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        path_2: {
+          d: 'M130-20a10 10 0 11-20 0 10 10 0 0120 0zm-41 0a9 9 0 11-18 0 9 9 0 0118 0z',
+          fill: 'black',
+        },
+        path_3: {
+          d: 'M85-25c10-10 20-10 30 0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class VIII Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45zM60-15h80m-40-45v90',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class IX Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        path_2: {
+          d: 'M121-36l-7 7M86-1l-7 7m0-42l7 7m28 28l7 7m-21-51v10m0 40v10M70-15h10m40 0h10m-10 0a20 20 0 11-40 0 20 20 0 0140 0z',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Class X Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        text_1: {
+          symbolText: 'CA',
+          x: '100',
+          y: '-10',
+          fontSize: '40',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Traffic Control Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        text_1: {
+          symbolText: 'TCP',
+          x: '100',
+          y: '-10',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Casualty Collection Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        text_1: {
+          symbolText: 'CCP',
+          x: '100',
+          y: '-10',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Enemy Prison of War Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        text_1: {
+          symbolText: 'EPW',
+          x: '100',
+          y: '-10',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Ammunition Supply Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        text_1: {
+          symbolText: 'ASP',
+          x: '100',
+          y: '-10',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Ambulance Exchange Point': {
+    type: 'Graphic Control Measure',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M60 30h80M60 45h80m-40 55L60 45V-60h80V45z',
+        },
+        text_1: {
+          symbolText: 'AXP',
+          x: '100',
+          y: '-10',
+          fontSize: '30',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
   //! EQUIPMENT
   'Unspecified Weapon': {
     type: 'Equipment',
@@ -11142,212 +15054,6 @@ const militarySymbolsObject = {
         path: {
           d: 'M45,150 C45,110 155,110 155,150',
         },
-      },
-    },
-  },
-  //! Graphic Control Measures
-  Airfield: {
-    type: 'Graphic Control Measure',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'M80,70 l40,0 M80,80 l25,-25',
-          transform: 'translate(-300,-240) scale(4)',
-          strokeWidth: '2',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  'Action Point': {
-    type: 'Graphic Control Measure',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
-        },
-        text_1: {
-          symbolText: 'A',
-          x: '100',
-          y: '-20',
-          fontSize: '35',
-          textAnchor: 'middle',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  Checkpoint: {
-    type: 'Graphic Control Measure',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
-        },
-        text_1: {
-          symbolText: 'CKP',
-          x: '100',
-          y: '-20',
-          fontSize: '30',
-          textAnchor: 'middle',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  'Amnesty Point': {
-    type: 'Graphic Control Measure',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
-        },
-        text_1: {
-          symbolText: 'AMN',
-          x: '100',
-          y: '-20',
-          fontSize: '30',
-          textAnchor: 'middle',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  'Target Reference Point': {
-    type: 'Graphic Control Measure',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 60,45 100,0 m -50,-50 0,100',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
-    },
-  },
-  'Fly to Point (Normal)': {
-    type: 'Graphic Control Measure',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 60,45 80,0 m -40,55 -40,-55 0,-105 80,0 0,105 z',
-        },
-        text_1: {
-          symbolText: 'FTP',
-          x: '100',
-          y: '-20',
-          fontSize: '30',
-          textAnchor: 'middle',
-        },
-        text_2: {
-          symbolText: 'NRM',
-          x: '100',
-          y: '30',
-          fontSize: '30',
-          textAnchor: 'middle',
-        },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
       },
     },
   },
