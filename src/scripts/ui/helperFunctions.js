@@ -6,7 +6,9 @@ function Resizer(symbolElement, width = 93, height = 64) {
   const h = height;
 
   // All this does is fix the Bbox on the 2nd element in Mod1/Command Post. The BBox does not get set due to some async bullshit
+  // If this isn't done then the 2nd symbol in the list does not show up. I have no idea why but this works
   document.querySelectorAll('.mod1-list > li > figure > svg > g.mod1')[0].classList.remove('bounceIn');
+  document.querySelectorAll('.mod2-list > li > figure > svg > g.mod2')[0].classList.remove('bounceIn');
   document.querySelectorAll('.commandpost-list > li > figure > svg > g.commandpost')[0].classList.remove('bounceIn');
 
   se.forEach((elem) => {

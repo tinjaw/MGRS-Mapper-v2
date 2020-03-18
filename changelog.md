@@ -2,6 +2,13 @@
 
 ---
 
+## 18MAR20
+
+- Added 31 Mod2 symbols
+- Finished Mod2 symbols
+
+---
+
 ## 16MAR20
 
 - Greatly optimized Resizer() function. Previously when the user would click on the symbolSelect menu, this function would resize ALL the symbols. This took nearly 700ms and there was a noticeable lag between clicking the menu and when it would appear. I added the functionality to check whether the symbol is visible on the screen and then only resize those symbols. When the user scrolls down it will continually check if the position of the menu and attempt to run the resize function when the scrollTop threshold is broken. This new functionality now takes 53ms to run.

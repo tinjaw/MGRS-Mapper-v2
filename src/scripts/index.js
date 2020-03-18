@@ -306,90 +306,81 @@ dlSymbolAsPNG.listen('click', () => {
 // menu = the MDCSelect menu const in mdcComponents.js
 // https://stackoverflow.com/questions/40185880/making-a-promise-work-inside-a-javascript-switch-case
 async function addSymbolsAndModsToList(obj, abv, menu = null) {
-  try {
-    const promises = await Object.keys(obj).forEach(async (key) => {
-      const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
-      const newli = document.createElement('li');
-      const modTypeInfo = document.createElement('em');
-      modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info symbolTypeGrid mdc-typography--overline`);
-      // Add the type of the Modifier in the drop down box
-      modTypeInfo.textContent = obj[key].type;
-      newli.setAttributeNS(null, 'class', 'mdc-list-item listGridParent');
-      newli.setAttributeNS(null, 'data-value', key);
-      // newli.innerHTML = `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`;
-      await newli.insertAdjacentHTML('beforeend', `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`);
-      newli.prepend(modTypeInfo);
-      mdcList.append(newli);
-      const figureElement = document.createElement('figure');
-      figureElement.setAttributeNS(null, 'class', `${abv}Figure symbolFigureGrid`);
-      // add the symbol key to the data-attr so they can match up with the list item
-      figureElement.setAttributeNS(null, `data-${abv}-name`, `${key}`);
-      newli.prepend(figureElement);
-      // This will add the Symbols and Modifiers to the dropdown list
-      switch (abv) {
-        case 'mod1': {
+  const promises = await Object.keys(obj).forEach(async (key) => {
+    const mdcList = document.querySelector(`.mdc-list.${abv}-list`);
+    const newli = document.createElement('li');
+    const modTypeInfo = document.createElement('em');
+    modTypeInfo.setAttributeNS(null, 'class', `${abv}-type-info symbolTypeGrid mdc-typography--overline`);
+    // Add the type of the Modifier in the drop down box
+    modTypeInfo.textContent = obj[key].type;
+    newli.setAttributeNS(null, 'class', 'mdc-list-item listGridParent');
+    newli.setAttributeNS(null, 'data-value', key);
+    // newli.innerHTML = `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`;
+    await newli.insertAdjacentHTML('beforeend', `<span class="mdc-typography--headline6 symbolDescriptionGrid">${key}</span>`);
+    newli.prepend(modTypeInfo);
+    mdcList.append(newli);
+    const figureElement = document.createElement('figure');
+    figureElement.setAttributeNS(null, 'class', `${abv}Figure symbolFigureGrid`);
+    // add the symbol key to the data-attr so they can match up with the list item
+    figureElement.setAttributeNS(null, `data-${abv}-name`, `${key}`);
+    newli.prepend(figureElement);
+    // This will add the Symbols and Modifiers to the dropdown list
+    switch (abv) {
+      case 'mod1': {
         // All this does is remove the ESLint error for “Do not use 'new' for side effects”
-          const mod1Promise = await new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, `${key}`);
-          return mod1Promise;
-        }
-        case 'mod2': {
-          const mod2Promise = await new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, `${key}`);
-          return mod2Promise;
-        }
-        case 'commandpost': {
+        const mod1Promise = await new MilSym(`.mod1Figure[data-mod1-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, `${key}`);
+        return mod1Promise;
+      }
+      case 'mod2': {
+        const mod2Promise = await new MilSym(`.mod2Figure[data-mod2-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, `${key}`);
+        return mod2Promise;
+      }
+      case 'commandpost': {
         // Set the default command post value to "None" on page load
-          selectCommandPost.value = 'None';
-          // Since we do not want to strip the outline of the command post, return this value
-          const cpPromise = await new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`, undefined);
-          return cpPromise;
-        }
-        case 'symbol': {
+        selectCommandPost.value = 'None';
+        // Since we do not want to strip the outline of the command post, return this value
+        const cpPromise = await new MilSym(`.commandpostFigure[data-commandpost-name="${key}"]`, `${selectSymbol.value}`, `${selectAffiliation.value}`, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, `${key}`, undefined);
+        return cpPromise;
+      }
+      case 'symbol': {
         // Set the selected symbol to "Default Land Unit" on page load
         // Setting floatLabel(true) and setEnhancedSelectedIndex_(0) will avoid the symbol animations from running again.
         // For instance if you had 'selectSymbol.foundation_.setSelectedIndex(0);' the function to remove the animateSymbol class would run x times
         // x = the number of elements in the symbolSelect dropdown.
-        //! This actually might be a better way of doing things that just using "selectSymbol.foundation_.setSelectedIndex(0);"
-          selectSymbol.foundation_.adapter_.floatLabel(true);
-          selectSymbol.setEnhancedSelectedIndex_(0);
-          // Returning 'symbol' since we need to keep the symbol affiliation outlines
-          const symbolPromise = await new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, undefined);
-          return symbolPromise;
-        }
-        default:
-          break;
+        // This actually might be a better way of doing things that just using "selectSymbol.foundation_.setSelectedIndex(0);"
+        selectSymbol.foundation_.adapter_.floatLabel(true);
+        selectSymbol.setEnhancedSelectedIndex_(0);
+        // Returning 'symbol' since we need to keep the symbol affiliation outlines
+        const symbolPromise = await new MilSym(`.symbolFigure[data-symbol-name="${key}"]`, `${key}`, `${selectAffiliation.value}`, undefined);
+        return symbolPromise;
       }
-    });
-
-    // Exclude the command post from being parsed
-    if (menu !== null && abv !== 'commandpost') {
-    // This will remove the affiliation containers on the Modifier elements in the dropdown
-      const removeOutlineFromModifiers = await menu.menu_.items.map(async (element) => {
-        // This targets the Modifier element (eg- the moon symbol for "foraging")
-        const modElement = element.querySelectorAll('li figure svg g.outline path')[0];
-        // This targets the SVG container for each Modifier element
-        const modSVGContainer = modElement.parentElement.parentElement;
-        // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
-        modElement.setAttributeNS(null, 'fill', 'transparent');
-        // Set the affiliation outline stroke to 0
-        modElement.setAttributeNS(null, 'stroke-width', '0');
-        // Set the affiliation outline path to nothing
-        modElement.setAttributeNS(null, 'd', '');
-        // Scale the Modifier element down in the select box so they don't clip
-        modSVGContainer.style.transform = 'scale(0.75)';
-        // Set the selected index to the first item (usually this is "Default/None")
-        menu.foundation_.setSelectedIndex(0);
-      });
-
-      // const mods = await Promise.resolve(removeOutlineFromModifiers);
-      // return mods;
-      const data = await Promise.all([promises, removeOutlineFromModifiers]);
-      return data;
+      default:
+        break;
     }
-  } catch (error) {
-    console.log('fuck you');
+  });
+
+  // Exclude the command post from being parsed
+  if (menu !== null && abv !== 'commandpost') {
+    // This will remove the affiliation containers on the Modifier elements in the dropdown
+    const removeOutlineFromModifiers = await menu.menu_.items.map(async (element) => {
+      // This targets the Modifier element (eg- the moon symbol for "foraging")
+      const modElement = element.querySelectorAll('li figure svg g.outline path')[0];
+      // This targets the SVG container for each Modifier element
+      const modSVGContainer = modElement.parentElement.parentElement;
+      // Set the affiliation outline background color to transparent, otherwise this will show a default land unit
+      modElement.setAttributeNS(null, 'fill', 'transparent');
+      // Set the affiliation outline stroke to 0
+      modElement.setAttributeNS(null, 'stroke-width', '0');
+      // Set the affiliation outline path to nothing
+      modElement.setAttributeNS(null, 'd', '');
+      // Scale the Modifier element down in the select box so they don't clip
+      modSVGContainer.style.transform = 'scale(0.75)';
+      // Set the selected index to the first item (usually this is "Default/None")
+      menu.foundation_.setSelectedIndex(0);
+    });
+    const data = await Promise.all([promises, removeOutlineFromModifiers]);
+    return data;
   }
-
-
   // const data = await Promise.all(promises);
   // return data;
 }

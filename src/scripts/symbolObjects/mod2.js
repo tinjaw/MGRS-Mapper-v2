@@ -34,6 +34,1108 @@ const mod2Object = {
       },
     },
   },
+  Bicycle: {
+    type: 'Infantry',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M89,132a11,11 0 1,0 22,0a11,11 0 1,0 -22,0',
+          transform: 'translate(0,3)',
+          strokeWidth: 3,
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(0,10)';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(0,7)';
+        return propertyToModify;
+      },
+    },
+  },
+  Mountain: {
+    type: 'Infantry',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M90,140 L100,120 110,140z',
+          transform: 'translate(0,6)',
+          fill: 'black',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Motorized (Outdated)': {
+    type: 'Mobility',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M100,50L100,150',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.d = 'M100,30L100,170';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.d = 'M100,43L100,156';
+        return propertyToModify;
+      },
+    },
+  },
+  'Over Snow (Prime Mover)': {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M122 143H87 M88 123a10 10 0 000 20',
+            strokeWidth: 3,
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  'Pack Animal': {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'm 84,143 9,-15 7,15 7,-15 9,15',
+            strokeWidth: 3,
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  Railroad: {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M60,120 l80,0 M60,125a5,5 0 1,0 10,0a5,5 0 1,0 -10,0 M74,125a5,5 0 1,0 10,0a5,5 0 1,0 -10,0 M116,125a5,5 0 1,0 10,0a5,5 0 1,0 -10,0 M130,125a5,5 0 1,0 10,0a5,5 0 1,0 -10,0',
+            transform: 'translate(0,14)',
+            strokeWidth: 3,
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(20,33) scale(0.8)';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.path_1.transform = 'translate(20,43) scale(0.8)';
+        return propertyToModify;
+      },
+      get pending() {
+        return this.unknown;
+      },
+      get neutral() {
+        return this.unknown;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  Riverine: {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'm 70,125 c0,20 60,20 60,0z',
+            strokeWidth: 3,
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  Ski: {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'm 95,147 -9,-8 m 28,0 -9,8 m -15,-24 20,20 m 0,-20 -20,20',
+            strokeWidth: 3,
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  Towed: {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M85 134h30m-40 0a5 5 0 1010 0 5 5 0 10-10 0m40 0a5 5 0 1010 0 5 5 0 10-10 0',
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  'Tracked or Self-Propelled': {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'm 85,127 30,0 c 10,0 10,15 0,15 l -30,0 c -10,0 -10,-15 0,-15',
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  Wheeled: {
+    type: 'Mobility',
+    affiliation: {
+      get friendly() {
+        return {
+          mobility: true,
+          path_1: {
+            d: 'M76,135a5,5 0 1,0 10,0a5,5 0 1,0 -10,0 M96,135a5,5 0 1,0 10,0a5,5 0 1,0 -10,0 M116,135a5,5 0 1,0 10,0a5,5 0 1,0 -10,0',
+          },
+        };
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+      get mobility() {
+        return this.friendly;
+      },
+    },
+  },
+  'VTOL (Vertical Take-off and Landing)': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'VTOL',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '143';
+        propertyToModify.text_1.fontSize = '19';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Close Range': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'CR',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Very Heavy': {
+    type: 'Unit Modifier',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'VH',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Heavy: {
+    type: 'Unit Modifier',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'H',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Medium: {
+    type: 'Unit Modifier',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'M',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Light: {
+    type: 'Unit Modifier',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'L',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Long Range': {
+    type: 'Distance Modifier',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'LR',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Short Range': {
+    type: 'Distance Modifier',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'SR',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Low to Medium Altitude': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'LMA',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'High Altitude': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'HA',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Medium to High Altitude': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'MHA',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Medium Altitude': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'MA',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Medium Range': {
+    type: 'Distance Modifier',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'MR',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Launcher (Unmanned Aerial System)': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'M80,140 L115,120 120,140',
+          transform: 'translate(0,6)',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  'Recovery (Unmanned Aerial System)': {
+    type: 'Aerial',
+    affiliation: {
+      friendly: {
+        path_1: {
+          d: 'm 70,125 c0,20 60,20 60,0',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        return this.friendly;
+      },
+      get hostileTemplated() {
+        return this.friendly;
+      },
+      get unknown() {
+        return this.friendly;
+      },
+      get pending() {
+        return this.friendly;
+      },
+      get neutral() {
+        return this.friendly;
+      },
+    },
+  },
+  Decontamination: {
+    type: 'CBRN',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'DCN',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Laboratory: {
+    type: 'CBRN',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'LAB',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '145';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Casualty Staging': {
+    type: 'Medical',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'CS',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  Dental: {
+    type: 'Medical',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'D',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
+  'Psychological Medical Unit': {
+    type: 'Medical',
+    affiliation: {
+      friendly: {
+        text_1: {
+          symbolText: 'P',
+          x: '100',
+          y: '145',
+          fontSize: '22',
+          textAnchor: 'middle',
+          fontWeight: 'bold',
+        },
+      },
+      get friendlyTemplated() {
+        return this.friendly;
+      },
+      get hostile() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
+        propertyToModify.text_1.y = '155';
+        return propertyToModify;
+      },
+      get hostileTemplated() {
+        return this.hostile;
+      },
+      get unknown() {
+        return this.hostile;
+      },
+      get pending() {
+        return this.hostile;
+      },
+      get neutral() {
+        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        propertyToModify.text_1.y = '150';
+        return propertyToModify;
+      },
+    },
+  },
   Veterinary: {
     type: 'Veterinary',
     affiliation: {
@@ -51,7 +1153,7 @@ const mod2Object = {
         return this.friendly;
       },
       get hostile() {
-        const propertyToModify = JSON.parse(JSON.stringify(this.hostile));
+        const propertyToModify = JSON.parse(JSON.stringify(this.friendly));
         propertyToModify.text_1.y = '155';
         return propertyToModify;
       },
@@ -78,7 +1180,7 @@ const mod2Object = {
         path_1: {
           d: 'm 100,120 0,-35 m 0,60 -30,-25 60,0 z',
           transform: 'translate(55,77) scale(0.45)',
-          fill: 'none',
+
         },
       },
       get friendlyTemplated() {
@@ -294,6 +1396,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -332,6 +1435,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -370,6 +1474,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -655,6 +1760,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -693,6 +1799,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -731,6 +1838,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -769,6 +1877,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -807,6 +1916,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -845,6 +1955,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
@@ -883,6 +1994,7 @@ const mod2Object = {
           y: '145',
           fontSize: '22',
           textAnchor: 'middle',
+          fontWeight: 'bold',
         },
       },
       get friendlyTemplated() {
