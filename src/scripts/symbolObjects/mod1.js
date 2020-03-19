@@ -1,3 +1,15 @@
+import { selectAffiliation } from '../index';
+
+//! what if we just exported this function and not selectAffiliation? Would that solve our cycle dependency issue????
+const selectedAffiliation = () => {
+  try {
+    return selectAffiliation.value;
+  } catch (error) {
+    console.log(error);
+    return 'friendly';
+  }
+};
+
 // * MODIFIER 1 OBJECT * //
 // * Sector 1 Modifiers reflect the specific capability of a unit (Armored, Bridging, Sniper, etc) * //
 const mod1Object = {
@@ -171,31 +183,15 @@ const mod1Object = {
   },
   'Unmanned Aerial System (UAS)': {
     type: 'Aviation',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 80,60 20,13 20,-13 0,-5 -20,10 -20,-10 z',
-          fill: 'black',
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'm 80,60 20,13 20,-13 0,-5 -20,10 -20,-10 z',
+            fill: 'black',
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   'Aerial Utility': {
@@ -445,30 +441,14 @@ const mod1Object = {
   },
   Bridging: {
     type: 'Engineer',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 80,75 5,-5 30,0 5,5 m -40,-20 5,5 30,0 5,-5',
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'm 80,75 5,-5 30,0 5,5 m -40,-20 5,5 30,0 5,-5',
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   'Engineer - Combat': {
@@ -978,31 +958,15 @@ const mod1Object = {
   },
   Sniper: {
     type: 'Infantry',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'M75,60 l20,0 M100,76 l0,-18 M125,60 l-20,0',
-          strokeWidth: 3,
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'M75,60 l20,0 M100,76 l0,-18 M125,60 l-20,0',
+            strokeWidth: 3,
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   Weapons: {
@@ -1896,31 +1860,15 @@ const mod1Object = {
   },
   'Combat Camera': {
     type: 'Signal',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 120,60 -11,0 m 11,10 -14,0 m 4,-14 -30,0 0,18 25,0 z m 10,1 0,16z',
-          strokeWidth: 3,
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'm 120,60 -11,0 m 11,10 -14,0 m 4,-14 -30,0 0,18 25,0 z m 10,1 0,16z',
+            strokeWidth: 3,
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   'Command Post Node': {
@@ -2102,32 +2050,16 @@ const mod1Object = {
   },
   Watercraft: {
     type: 'Capability',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'M0.1,0.1l16.5,0 M0.1,0c0,2.5,3.7,4.5,8.2,4.5 s8.2-2,8.2-4.5 z',
-          strokeWidth: 1,
-          transform: 'translate(76, 58) scale(2.8)',
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'M0.1,0.1l16.5,0 M0.1,0c0,2.5,3.7,4.5,8.2,4.5 s8.2-2,8.2-4.5 z',
+            strokeWidth: 1,
+            transform: 'translate(76, 58) scale(2.8)',
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   Area: {
@@ -2586,31 +2518,15 @@ const mod1Object = {
   },
   Maintenance: {
     type: 'Capability',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 84,62 32,0 m 4,-5 c -5,0 -5,10 0,10 M 80,57 c 5,0 5,10 0,10',
-          strokeWidth: 3,
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'm 84,62 32,0 m 4,-5 c -5,0 -5,10 0,10 M 80,57 c 5,0 5,10 0,10',
+            strokeWidth: 3,
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   Medevac: {
@@ -3675,32 +3591,16 @@ const mod1Object = {
   },
   Mine: {
     type: 'Capability',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 120,100 c 0,5.5 -9,10 -20,10 -11,0 -20,-4.5 -20,-10 0,-5.5 9,-10 20,-10 11,0 20,4.5 20,10 z m -5,-20 -30,40 m 0,-40 30,40 m -15,-40 0,40',
-          fill: 'black',
-          transform: 'translate(64,28) scale(0.36)',
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'm 120,100 c 0,5.5 -9,10 -20,10 -11,0 -20,-4.5 -20,-10 0,-5.5 9,-10 20,-10 11,0 20,4.5 20,10 z m -5,-20 -30,40 m 0,-40 30,40 m -15,-40 0,40',
+            fill: 'black',
+            transform: 'translate(64,28) scale(0.36)',
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   'Emergency Collection Evacuation Point': {
@@ -3740,94 +3640,46 @@ const mod1Object = {
   },
   Eviction: {
     type: 'Activity',
-    affiliation: {
-      friendly: {
-        text_1: {
-          symbolText: 'EV',
-          x: '100',
-          y: '72',
-          fontSize: '22',
-          textAnchor: 'middle',
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          text_1: {
+            symbolText: 'EV',
+            x: '100',
+            y: '72',
+            fontSize: '22',
+            textAnchor: 'middle',
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   'Suspicious Activity': {
     type: 'Activity',
-    affiliation: {
-      friendly: {
-        text_1: {
-          symbolText: '?',
-          x: '100',
-          y: '72',
-          fontSize: '22',
-          textAnchor: 'middle',
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          text_1: {
+            symbolText: '?',
+            x: '100',
+            y: '72',
+            fontSize: '22',
+            textAnchor: 'middle',
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   Armored: {
     type: 'Armor',
-    affiliation: {
-      friendly: {
-        path_1: {
-          d: 'm 90,60 20,0 c 10,0 10,15 0,15 L 90,75 C 80,75 80,60 90,60',
+    get affiliation() {
+      return {
+        [selectedAffiliation()]: {
+          path_1: {
+            d: 'm 90,60 20,0 c 10,0 10,15 0,15 L 90,75 C 80,75 80,60 90,60',
+          },
         },
-      },
-      get friendlyTemplated() {
-        return this.friendly;
-      },
-      get hostile() {
-        return this.friendly;
-      },
-      get hostileTemplated() {
-        return this.friendly;
-      },
-      get unknown() {
-        return this.friendly;
-      },
-      get pending() {
-        return this.friendly;
-      },
-      get neutral() {
-        return this.friendly;
-      },
+      };
     },
   },
   Foraging: {

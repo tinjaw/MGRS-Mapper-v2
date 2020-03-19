@@ -15,6 +15,13 @@
 - Refactoring militarySymbols.js
   - Starting lines: 18,891
   - Starting Size: 445.01KB
+  - Ending lines: 10,986
+  - Ending Size: 279.48KB
+- Refactoring mod1.js
+  - Starting lines: 3867
+  - Starting Size: 90.8KB
+  - Ending lines: 3718
+  - Ending Size: 89.23KB
 
 ---
 
