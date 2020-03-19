@@ -12,6 +12,9 @@
 - Finished Tactical Mission Tasks symbols
 - Added 144 Graphic Control Measures
 - Finished Graphic Control Measures
+- Refactoring militarySymbols.js
+  - Starting lines: 18,891
+  - Starting Size: 445.01KB
 
 ---
 

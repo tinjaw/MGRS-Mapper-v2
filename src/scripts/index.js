@@ -1301,5 +1301,5 @@ pushbar.open('rightPushbar');
 
 window.enableFlyingOutline = enableFlyingOutline;
 export {
-  flyingSwitch, MainMS,
+  flyingSwitch, MainMS, selectAffiliation,
 };
