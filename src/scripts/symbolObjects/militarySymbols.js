@@ -6619,47 +6619,32 @@ const militarySymbolsObject = {
     affiliation: {
       friendly: {
         path_1: {
-          d: 'M100,120 l0,-70 M175,85 l-150,0',
-        },
-        path_2: {
-          d: 'M25 120h150',
+          d: 'M100 120V50m75 35H25M25 120h150',
         },
       },
       get friendlyTemplated() {
         return this.friendly;
       },
-      get hostile() {
-        const propertyToModify = {
-          path_2: {
-            d: 'M49,120 l102,0',
-          },
-        };
-        const modifiedTarget = { ...this.friendly, ...propertyToModify };
-        return modifiedTarget;
+      hostile: {
+        path_1: {
+          d: 'M100 120V30m55 55H45M49 120h102',
+        },
       },
       get hostileTemplated() {
         return this.hostile;
       },
-      get unknown() {
-        const propertyToModify = {
-          path_2: {
-            d: 'M35,120 l128,0',
-          },
-        };
-        const modifiedTarget = { ...this.friendly, ...propertyToModify };
-        return modifiedTarget;
+      unknown: {
+        path_1: {
+          d: 'M100 120V30m65 55H35M35 120h128',
+        },
       },
       get pending() {
         return this.unknown;
       },
-      get neutral() {
-        const propertyToModify = {
-          path_2: {
-            d: 'M45,120 l112,0',
-          },
-        };
-        const modifiedTarget = { ...this.friendly, ...propertyToModify };
-        return modifiedTarget;
+      neutral: {
+        path_1: {
+          d: 'M100 120V45m55 40H45M45 120h112',
+        },
       },
     },
   },

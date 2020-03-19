@@ -21,7 +21,7 @@
   - Starting lines: 3867
   - Starting Size: 90.8KB
   - Ending lines: 3718
-  - Ending Size: 89.23KB
+  - Ending Size: 87.9KB
 
 ---
 
